@@ -1,8 +1,15 @@
-import App from './app'
+import { sequelize } from "./models/index";
+import app from "./app";
+import apolloServer from "./apollo";
 
-function main(){
-    const app = new App();
-    app.listen();
-}
+require("dotenv").config();
+const { PORT } = process.env;
 
-main();
+const alter = true;
+const force = false;
+sequelize.sync({ alter, force }).then(() => {
+  apolloServer.applyMiddleware({ app });
+  app.listen(PORT, () => {
+    console.log(`\nRunning Playground on ${PORT}/graphql`);
+  });
+});
