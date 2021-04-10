@@ -21,11 +21,20 @@ export const typeDefs = gql`
 
   type Mutation {
     createProduct(input: CreateProductInput): Product
+    deleteProduct(id: String!): Product!
+    editProduct(id: String, input: EditProductInput): Product!
   }
 
   input CreateProductInput {
     id: Int
     name: String!
+    image: String
+    brand: String
+    price: Int
+    details: String
+  }
+  input EditProductInput {
+    name: String
     image: String
     brand: String
     price: Int

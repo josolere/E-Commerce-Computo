@@ -1,5 +1,5 @@
 // Types
-import { User } from "./types";
+import { User, Product } from "./types";
 
 // User
 export interface iUser extends User {
@@ -9,22 +9,15 @@ export interface iUser extends User {
   updatedAt?: Date;
 }
 
-//////////////////////////////////////////////////////
-
 //Product
-type Product = {
-  image: string;
-  brand: string;
-  price: number;
-  details: number;
-};
-
 export interface iProduct extends Product {
   id: number;
   createdAt: Date;
   updatedAt: Date;
 }
 export interface iCreateProductInput extends Product {}
+export interface iEditProductInput extends Product {}
+
 //Models
 export interface iModels {
   Product: any;

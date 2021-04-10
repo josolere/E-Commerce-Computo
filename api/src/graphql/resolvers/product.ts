@@ -1,5 +1,10 @@
-import { iCreateProductInput, iModels, iProduct } from "../../interfaces";
-const Sequelize = require("sequelize");
+import {
+  iCreateProductInput,
+  iEditProductInput,
+  iModels,
+  iProduct,
+} from "../../interfaces";
+import Sequelize from "sequelize";
 
 export default {
   Query: {
@@ -10,7 +15,6 @@ export default {
     ): iProduct[] => {
       return models.Product.findAll();
     },
-    /*
     getProductById: async (
       _parent: object,
       { id }: { id: string },
@@ -19,17 +23,14 @@ export default {
       const data = await models.Product.findByPk(id);
       return data;
     },
- */
     getProductByName: async (
       _parent: object,
       { name }: { name: string },
       { models }: { models: iModels }
-    ): Promise<iProduct[]> => {
+    ): Promise<iProduct> => {
       const data = await models.Product.findAll({
         where: {
-          // name : {[Op.iLike] : %${name}% }
           name: { [Sequelize.Op.iLike]: `%${name}%` },
-          // name,
         },
       });
       return data;
@@ -41,5 +42,38 @@ export default {
       { input }: { input: iCreateProductInput },
       { models }: { models: iModels }
     ): iProduct => models.Product.create({ ...input }),
+
+    deleteProduct: async (
+      _parent: object,
+      { id }: { id: string },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const productToRemove = await models.Product.findByPk(id);
+
+      if (productToRemove) {
+        await productToRemove.destroy({ where: { id } });
+        return productToRemove;
+      }
+
+      return null;
+    },
+    editProduct: async (
+      _parent: object,
+      { id, input }: { id: string; input: iEditProductInput },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const productToEdit = await models.Product.findByPk(id);
+
+      if (productToEdit) {
+        const updatedProduct = await productToEdit.update(
+          { ...input },
+          { where: { id } }
+        );
+
+        return updatedProduct;
+      }
+
+      return null;
+    },
   },
 };
