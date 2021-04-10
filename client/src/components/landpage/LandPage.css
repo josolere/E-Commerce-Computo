@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Audio';
+    src: local('Audio'),
+     url( '../fonts/audiowide.regular.ttf') format("truetype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Bauman';
+    src: local('Bauman'),
+     url('../fonts/Baumans-Regular.ttf' ) format("truetype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Revalia';
+    src: local('Revalia'),
+     url('../fonts/Baumans-Regular.ttf' ) format("truetype");
+    font-weight: bold;
+}
+
+
+.LandPage {
+    background-color: black;
+    background-image: url('C:\ecommerce-FT10-G5\client\src\components\images\Land.jpg');
+    background-repeat:repeat;
+    background-size:cover;    
+}
+
+.alignlandpage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.titleland {
+    color: #FFFFFF;     
+    font-family: 'Audio';
+    font-size: 70px;                
+    margin-bottom: 2px;           
+    text-shadow: 0 0 8px #d43f3a, 0 0 2px 
+    #d43f3a, 0 0 10px
+     #d43f3a, 0 0 6px 
+     #d43f3a, 0 0 20px 
+     #d43f3a, 0 0 20px 
+     #d43f3a, 0 0 1px 
+     #d43f3a, 0 0 12px 
+     #d43f3a;
+    padding-bottom: 5px;
+}                            
+
+.henrycavill{
+    border-radius: 10px;
+    color: #FFFFFF;     
+    font-family: 'Revalia';
+    font-size: 50px;                           
+    text-shadow: 0 0 8px #d43f3a, 0 0 2px 
+    #d43f3a, 0 0 10px
+    #d43f3a, 0 0 6px 
+    #d43f3a, 0 0 20px 
+    #d43f3a, 0 0 20px 
+    #d43f3a, 0 0 1px 
+    #d43f3a, 0 0 12px 
+    #d43f3a;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border:none;
+}
+
+.iconlanding {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    width: 400px;
+
+}
+
+.iconlanding:hover {
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+}
+
+.buttonvideo {
+    border-radius: 10px;
+    font-family: 'Bauman';
+    font-size: 25px;
+    border-color: #d43f3a;
+    color: #fff;
+    box-shadow: 0 0 40px 40px #d43f3a inset, 0 0 0 0 #d43f3a;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+    padding-top: 0px;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.buttonvideo:hover {
+    box-shadow: 0 0 10px 0 #d43f3a inset, 0 0 10px 4px #d43f3a;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar{
+    width:20px;
+    }
+
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: red;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.5);
+    }
+
+::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color:black;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.4);
+    }
