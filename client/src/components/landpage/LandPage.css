@@ -94,6 +94,7 @@
     -webkit-transition: all 150ms ease-in-out;
     transition: all 150ms ease-in-out;
     padding-top: 0px;
+    margin-top: 15px;
     margin-left: 10px;
     margin-right: 10px;
 }

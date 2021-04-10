@@ -1,15 +1,43 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
-import './LandPage.css'
+import './LandPage.css';
 import '../fonts/audiowide.regular.ttf';
 import '../fonts/Baumans-Regular.ttf';
 import '../fonts/Revalia-Regular.ttf';
-import { Link } from 'react-router-dom'
-import start from '../images/Landstart.png'
+import { Link } from 'react-router-dom';
+import start from '../images/Landstart.png';
+import { useQuery, gql } from '@apollo/client';
+
+
+interface DetailsProduct {
+    id: number,
+    brand: string,
+    image: string,
+    name: string,
+    price: number,
+    details: string,
+}
+
+interface DetailsData {
+    getProducts: DetailsProduct[]
+}
+
+const Pepe = gql` 
+    query Pepe {
+        getProducts {
+            id
+            name
+        }
+    }
+`;
 
 const VideoLand = () => {
 
-    let urltest = 'video/LandingVideo2.mp4'
+    const { loading, error, data } = useQuery<DetailsData>(Pepe);
+
+    const products = data?.getProducts
+
+    let url = 'https://youtu.be/fslpPpjhRAk'
 
     const [play, setPlay] = useState(false)
 
@@ -47,11 +75,12 @@ const VideoLand = () => {
                 <h1 className='titleland' >Hexabyte</h1>
                 <div className='video'>
                     <ReactPlayer
-                        url={urltest}
+                        url={url}
+                        loop={true}
                         playing={play}
                         volume={audio}
-                        width={1200}
-                        height={800}
+                        width={1280}
+                        height={575}
                     />
                 </div>
                 <div className='setbuttonvideos'>
@@ -61,6 +90,20 @@ const VideoLand = () => {
                     <button className='buttonvideo' onClick={mute} >Mute</button>
                 </div >
                 <h4 className='henrycavill'>Find the computer of your dreams, be like Henry Cavill</h4>
+                <h4>Aca irian los productos</h4>
+                {products && products.map((item) => {
+                <div>
+                    <p>{item.name}</p>
+                    <Link to={{
+                        pathname: '/Details',
+                        state: {
+                            id: item.id
+                        }
+                    }}>
+                    <img src={item.image} alt=''/>
+                    </Link>
+                </div>
+            })}
                 <Link to='/Home' >
                     <img className='iconlanding' src={start} alt='' />
                 </Link>

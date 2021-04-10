@@ -6,6 +6,7 @@ import Details from './components/Details/ProductsDetails'
 import StarRating from './components/rating/Rating'
 import LandPage from './components/landpage/LandPage'
 import TestProducts from './components/testserver/test'
+import Payment from './components/payment/Payment'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route exact path='/Rating' component={StarRating} />
       <Route exact path='/' component={LandPage} />
       <Route exact path='/Test' component={TestProducts} /> 
+      <Route exact path= '/Payment' component={Payment} />
     </Fragment>
   );
 }
