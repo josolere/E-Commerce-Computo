@@ -21,7 +21,7 @@
 
 .LandPage {
     background-color: black;
-    background-image: url('C:\ecommerce-FT10-G5\client\src\components\images\Land.jpg');
+    /* background-image: url('C:\ecommerce-FT10-G5\client\src\components\images\Land.jpg'); */
     background-repeat:repeat;
     background-size:cover;    
 }

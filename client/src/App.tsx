@@ -6,10 +6,14 @@ import StarRating from './components/rating/Rating'
 import LandPage from './components/landpage/LandPage'
 import TestProducts from './components/testserver/test'
 import Payment from './components/payment/Payment'
+import CreateProduct from './components/CreateProduct/CreateProduct';
+import CreateCategory from './components/CreateCategory/CreateCategory';
 
 function App() {
   return (
     <Fragment>
+      <Route exact path= '/createC' component={CreateCategory} />
+      <Route exact path= '/createP' component={CreateProduct} />
       <Route exact path= '/Details' component={Details} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/Rating' component={StarRating} />
