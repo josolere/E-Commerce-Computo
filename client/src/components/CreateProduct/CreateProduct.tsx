@@ -1,6 +1,6 @@
 import {gql, useMutation } from '@apollo/client';
 import React, { useState } from 'react'
-import styles from './CreateProduct.module.scss'
+/* import styles from './CreateProduct.module.scss' */
 
 interface productInventary {
     id:number
@@ -58,10 +58,10 @@ export default function CreateProduct(){
    }
 
     return(
-        <div className={styles.container}>
+        <div>
         {error ? alert(`Oh no! ${error.message}`) : null}
         {data && data.createNewProduct ? alert(`Saved!`) : null}
-         <form onSubmit={handleSubmit} className={styles.form} >
+         <form onSubmit={handleSubmit} >
              <h1>Create Product</h1>
              <hr/>
              <label>Product Name</label>
@@ -74,7 +74,7 @@ export default function CreateProduct(){
              <input type='text' name='image' value={state.image} onChange={handleChange}/>
              <label>Details</label>
              <input type='text' name='details' value={state.details} onChange={handleChange}/>
-             <input type='submit' className={styles.button} value='CREATE' />
+             <input type='submit' value='CREATE' />
          </form>
         </div>
     )

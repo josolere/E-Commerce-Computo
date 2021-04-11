@@ -5,8 +5,9 @@ import '../fonts/audiowide.regular.ttf';
 import '../fonts/Baumans-Regular.ttf';
 import '../fonts/Revalia-Regular.ttf';
 import { Link } from 'react-router-dom';
-import start from '../images/Landstart.png';
+//import start from '../images/Landstart.png';
 import { useQuery, gql } from '@apollo/client';
+import { start } from 'node:repl';
 
 
 interface DetailsProduct {
@@ -104,9 +105,9 @@ const VideoLand = () => {
                     </Link>
                 </div>
             })}
-                <Link to='/Home' >
+               {/*  <Link to='/Home' >
                     <img className='iconlanding' src={start} alt='' />
-                </Link>
+                </Link> */}
             </div>
         </div>
     )
