@@ -1,12 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import './Payment.scss'
-import { usePaymentInputs } from 'react-payment-inputs';
-
+import './Payment.scss';
 
 interface PropsDetails {
     history: {
         location: {
             state: {
+                image: string,
                 price: number
             }
         }
@@ -33,6 +32,8 @@ const Payment = (props: PropsDetails): JSX.Element => {
         CCV: ''
     })
 
+    let regexword = /^.{0}[a-zA-Z]+$/i
+
     const Onchangecard = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDatacard({
             ...datacard,
@@ -51,7 +52,7 @@ const Payment = (props: PropsDetails): JSX.Element => {
                         <div className="callout credit">
                             <div className="row">
                                 <div className="small-6 columns">
-                                    <h1 className="credit__bank">Your Bank</h1>
+                                    <h1 className="credit__bank">Su Banco</h1>
                                 </div>
                                 <div className="small-6 columns">
                                     <img className="credit__mc" src="https://cdn4.iconfinder.com/data/icons/payment-method/160/payment_method_master_card-512.png" alt="" />
@@ -63,12 +64,12 @@ const Payment = (props: PropsDetails): JSX.Element => {
                                     <span className="credit__ccv">{datacard.CCV}</span>
                                 </div>
                                 <div className="small-9 columns">
-                                    <label>Card Holder
+                                    <label>Nombre del Usuario:
                                     <span className="credit__name">{datacard.Name}</span>
                                     </label>
                                 </div>
                                 <div className="small-3 columns">
-                                    <label>Expires
+                                    <label>Fecha de Vencimiento: 
                                     <span className="credit__date">{datacard.Month} / {datacard.Year}</span>
                                     </label>
                                 </div>
@@ -78,36 +79,39 @@ const Payment = (props: PropsDetails): JSX.Element => {
                     </div>
                     <div className="small-5 columns end">
                         <div className="callout margin-top50">
-                            <label>Name
+                            <label>Nombre: 
                             <input
                                     name='Name'
                                     type='text'
                                     onChange={Onchangecard}
-                                    placeholder='Name'
+                                    placeholder='Nombre del usuario'
                                     maxLength={25}
                                     value={datacard.Name}
                                 />
                             </label>
-                            <label>Number
+                            <label>Numero de tarjeta:
                              <input
                                     type="text"
                                     name='Number'
-                                    placeholder='Number Card'
+                                    placeholder='Numero de tarjeta'
                                     value={datacard.Number}
                                     onChange={Onchangecard}
+                                    minLength={19}
                                     maxLength={19}
                                     required={true}
                                 />
                             </label>
                             <div className="row">
-                                <label className="column">Expiration Date</label>
+                                <label className="column">Fecha de Vencimiento:</label>
                                 <div className="small-4 columns">
                                     <input
                                         type="text"
                                         name='Month'
-                                        placeholder='Month'
+                                        placeholder='Mes'
                                         value={datacard.Month}
                                         onChange={Onchangecard}
+                                        
+                                        minLength={2}
                                         maxLength={2}
                                         required={true}
                                         />
@@ -116,8 +120,9 @@ const Payment = (props: PropsDetails): JSX.Element => {
                                     <input
                                         type="text"
                                         name='Year'
-                                        placeholder='Year'
+                                        placeholder='Año'
                                         value={datacard.Year}
+                                        minLength={2}
                                         maxLength={2}
                                         required={true}
                                         onChange={Onchangecard} />
@@ -125,12 +130,13 @@ const Payment = (props: PropsDetails): JSX.Element => {
                             </div>
                             <div className="row">
                                 <div className="small-4 column">
-                                    <label>CCV
+                                    <label>CVC:
                                 <input
                                             type="text"
                                             name='CCV'
+                                            minLength={2}
                                             maxLength={3}
-                                            placeholder='CCV'
+                                            placeholder='CVC'
                                             value={datacard.CCV}
                                             onChange={Onchangecard}
                                             required={true}

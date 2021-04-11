@@ -88,15 +88,15 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     return (
         <Fragment>
-            <h1>Details of the product</h1>
+            <h1>Detalles del Producto</h1>
             <h3>{title}</h3>
             <div>{filtred && filtred.map((item, index: number) => (
                 <div>
                     <img src={item.image} alt='' />
-                    <p> Brand: {item.brand} </p>
-                    <p> Name: {item.name} </p>
-                    <p> Price: {item.price}</p>
-                    <p>Details: {item.details}</p>
+                    <p> Marca: {item.brand} </p>
+                    <p> Nombre: {item.name} </p>
+                    <p> Precio: {item.price}</p>
+                    <p>Detalles: {item.details}</p>
                     <div>
                         {[...Array(5)].map((star, index: number) => {
                             const ratingvalue = index + 1;
@@ -120,9 +120,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                 />
                             </label>
                         })}
-                        <p>The rating value is {showtotal}</p>
+                        <p>El rating de este producto es {showtotal}</p>
                     </div>
-                    <h4>Write a review</h4>
+                    <h4>Escribe una review</h4>
                     <textarea
                         name='review'
                         value={reviewuser}
@@ -143,10 +143,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     <Link to={{
                         pathname: '/payment',
                         state: {
+                            image: item.image,
                             price: item.price
                         }
                     }}>
-                        <button>Buy</button>
+                        <button>Comprar</button>
                     </Link>
 
                 </div>

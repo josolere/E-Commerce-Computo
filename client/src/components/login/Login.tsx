@@ -82,7 +82,7 @@ const Login = () => {
     return (
         <div>
             <h4>
-                {logform.login ? 'Login' : 'Sign Up'}
+                {logform.login ? 'Loguearse' : 'Unirse'}
             </h4>
             <div>
                 {logform.login && (
@@ -96,7 +96,7 @@ const Login = () => {
                         }
                         type="text"
                         required={true}
-                        placeholder="Your name"
+                        placeholder="Su Nombre"
                     />
                 )}
                 <input
@@ -109,7 +109,7 @@ const Login = () => {
                     }
                     type="text"
                     required={true}
-                    placeholder="Your email address"
+                    placeholder="Su dirección de E-Mail"
                 />
                 <input
                     value={logform.password}
@@ -121,13 +121,13 @@ const Login = () => {
                     }
                     type="password"
                     required={true}
-                    placeholder="Choose a safe password"
+                    placeholder="Elija un password seguro"
                 />
             </div>
             <div>
                 <button
                     onClick={() => logform.login ? login : signup}>
-                    {logform.login ? 'Login' : 'Create account'}
+                    {logform.login ? 'Loguearse' : 'Crear una cuenta'}
                 </button>
                 <button
                     onClick={() =>
@@ -138,8 +138,8 @@ const Login = () => {
                     }
                 >
                     {logform.login
-                        ? 'Need to create an account?'
-                        : 'Already have an account?'}
+                        ? 'Necesita crear una cuenta?'
+                        : 'Ya tiene una cuenta?'}
                 </button>
             </div>
         </div>
