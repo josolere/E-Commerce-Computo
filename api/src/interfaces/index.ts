@@ -24,3 +24,11 @@ export interface iModels {
   Category: any;
   sequelize: any;
 }
+
+
+export interface iFilterProducts{
+  name?:String, 
+  offset?:number, 
+  limit?: number, 
+  categoriesId?:[number]
+}
