@@ -7,7 +7,8 @@ const { PORT } = process.env;
 
 const alter = true;
 const force = false;
-sequelize.sync({ alter, force }).then(() => {
+const logging = true;
+sequelize.sync({ alter, force, logging }).then(() => {
   apolloServer.applyMiddleware({ app });
   app.listen(PORT, () => {
     console.log(`\nRunning Playground on ${PORT}/graphql`);

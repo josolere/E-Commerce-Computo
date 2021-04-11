@@ -14,8 +14,8 @@ export const typeDefs = gql`
   }
 
   type Query {
-    getProducts: [Product!]
-    getProductById(id: String!): Product
+    getProducts(filter:FilterProducts): [Product!]
+    getProductById(id: ID!): Product
     getProductByName(name: String): [Product]
   }
 
@@ -40,4 +40,12 @@ export const typeDefs = gql`
     price: Int
     details: String
   }
+
+  input FilterProducts {
+    name:String = "", 
+    offset:Int = 0, 
+    limit:Int = 10, 
+    categoriesId:[Int]
+  }
+
 `;
