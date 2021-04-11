@@ -8,10 +8,12 @@ import TestProducts from './components/testserver/test'
 import Payment from './components/payment/Payment'
 import CreateProduct from './components/CreateProduct/CreateProduct';
 import CreateCategory from './components/CreateCategory/CreateCategory';
+import NavCategories from './components/categories/Categories';
 
 function App() {
   return (
     <Fragment>
+      <Route exact path= '/categories' component={NavCategories} />
       <Route exact path= '/createC' component={CreateCategory} />
       <Route exact path= '/createP' component={CreateProduct} />
       <Route exact path= '/Details' component={Details} />

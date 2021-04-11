@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Categories.css";
+import styles from './SubMenu.module.scss'
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
 
@@ -15,20 +15,20 @@ const SubMenu = ({item}:IProps): JSX.Element => {
   const showSubNav = () => setSubnav(!subnav);
 
   return (
-    <div className="containerCategories">
-      <div>
-        <button className="buttonItem" onClick={showSubNav} value={item.title}>
+    <div className={styles.container}>
+      <div >
+        <button className={styles.pri} onClick={showSubNav} value={item.title}>
           {item.title}
           <div className="iconT">
             {subnav ? <AiOutlineUp /> : <AiOutlineDown />}
           </div>
         </button>
       </div>
-      <div>
+      <div >
         {subnav &&
           item.subNav.map((item: { title: string }, i: number) => {
             return (
-              <button key={i} className="claseItem">
+              <button key={i} className={styles.subs}>
                 {item.title}
               </button>
             );

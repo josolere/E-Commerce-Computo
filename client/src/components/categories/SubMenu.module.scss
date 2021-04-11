@@ -1,0 +1,22 @@
+button{
+    border: none;
+    width: 100%;
+    background-color: none;
+    outline: none;
+    padding: 1rem;
+    &:hover{
+        cursor: pointer;
+    }
+}
+div{
+    width: 100%;
+}
+
+.pri{
+    color: whitesmoke;
+    background-color: #1A1A1A;
+}
+.subs{
+    color: whitesmoke;
+    background-color: #F21B42
+}
