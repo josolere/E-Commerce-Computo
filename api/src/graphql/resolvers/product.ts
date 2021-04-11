@@ -37,12 +37,22 @@ export default {
     },
   },
   Mutation: {
-    createProduct: (
+    createProduct: async (
       _parent: object,
       { input }: { input: iCreateProductInput },
       { models }: { models: iModels }
-    ): iProduct => models.Product.create({ ...input }),
+    ): Promise<any> => {
+      console.log(input.categories)
+      let categoryArray = input.categories;  //para que tome que hay categorias hay que agregarlas en la interfaz del create product input
 
+      let createdProduct = await models.Product.create({ ...input })
+      categoryArray.forEach((item: any) => {
+        //let currentCategory = await models.Category.findByPk(item)
+
+        createdProduct.addCategory(item)
+      })
+      return createdProduct;
+    },
     deleteProduct: async (
       _parent: object,
       { id }: { id: string },

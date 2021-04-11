@@ -32,6 +32,7 @@ export const typeDefs = gql`
     brand: String
     price: Int
     details: String
+    categories: [Int]
   }
   input EditProductInput {
     name: String

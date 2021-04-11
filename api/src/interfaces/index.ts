@@ -15,7 +15,9 @@ export interface iProduct extends Product {
   createdAt: Date;
   updatedAt: Date;
 }
-export interface iCreateProductInput extends Product {}
+export interface iCreateProductInput extends Product {
+  categories: Array<number>
+}
 export interface iEditProductInput extends Product {}
 
 //Models
