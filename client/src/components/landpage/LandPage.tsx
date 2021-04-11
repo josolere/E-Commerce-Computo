@@ -5,8 +5,9 @@ import '../fonts/audiowide.regular.ttf';
 import '../fonts/Baumans-Regular.ttf';
 import '../fonts/Revalia-Regular.ttf';
 import { Link } from 'react-router-dom';
-//import start from '../images/Landstart.png';
 import { useQuery, gql } from '@apollo/client';
+import SearchBar from "../SearchBar/SearchBar"
+import NavBar from "../NavBar/NavBar"
 import { start } from 'node:repl';
 
 
@@ -38,60 +39,31 @@ const VideoLand = () => {
 
     const products = data?.getProducts
 
-    let url = 'https://youtu.be/fslpPpjhRAk'
+    let url = 'https://www.youtube.com/watch?v=2jpGbR9Dpl8&ab_channel=SantiRosales'
 
-    const [play, setPlay] = useState(false)
-
-    const [audio, setAudio] = useState(0.5)
-
-    const playstop = () => {
-        play ? setPlay(false) : setPlay(true);
-    }
-
-    const addaudio = () => {
-        if (audio >= 0.9) {
-            setAudio(0.9)
-        }
-        else {
-            setAudio(audio + 0.1)
-        }
-    }
-
-    const lessaudio = () => {
-        if (audio <= 0.1) {
-            setAudio(0.1)
-        }
-        else {
-            setAudio(audio - 0.1)
-        }
-    }
-
-    const mute = () => {
-        setAudio(0.0)
-    }
-
+ 
     return (
-        <div className='LandPage' >
-            <div className='alignlandpage' >
-                <h1 className='titleland' >Hexabyte</h1>
-                <div className='video'>
-                    <ReactPlayer
+        <div>
+            <div className="NavBarLanding">
+                <h1 className="titleLanding">Titulo</h1>
+                 <SearchBar/>
+                 <div className="linksLanding">
+                 <Link className="linksLanding" to="/Productos">Productos</Link>
+                 <Link className="linksLanding" to="#">Ayuda</Link>
+                 <Link className="linksLanding" to="/MiCuenta">Mi Cuenta</Link>
+                 </div>
+            </div>
+          
+            {/*Aca iria el import de la NavBar, configurar para que los links se adapten segun}
+             el componente en el que se encuentra*/}
+                   <ReactPlayer
                         url={url}
                         loop={true}
-                        playing={play}
-                        volume={audio}
-                        width={1280}
-                        height={575}
-                    />
-                </div>
-                <div className='setbuttonvideos'>
-                    <button className='buttonvideo' onClick={playstop}  >Play/Stop</button>
-                    <button className='buttonvideo' onClick={addaudio} >Audio +</button>
-                    <button className='buttonvideo' onClick={lessaudio} >Audio -</button>
-                    <button className='buttonvideo' onClick={mute} >Mute</button>
-                </div >
-                <h4 className='henrycavill'>Find the computer of your dreams, be like Henry Cavill</h4>
-                <h4>Aca irian los productos</h4>
+                        playing={true}
+                        muted={true}
+                    /> 
+                
+               {/*  <h4>Aca irian los productos</h4>
                 {products && products.map((item) => {
                 <div>
                     <p>{item.name}</p>
@@ -104,11 +76,11 @@ const VideoLand = () => {
                     <img src={item.image} alt=''/>
                     </Link>
                 </div>
-            })}
+            })} */}
                {/*  <Link to='/Home' >
                     <img className='iconlanding' src={start} alt='' />
                 </Link> */}
-            </div>
+            
         </div>
     )
 }
