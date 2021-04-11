@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import './Payment.scss'
+import { usePaymentInputs } from 'react-payment-inputs';
+
 
 interface PropsDetails {
     history: {
@@ -11,6 +13,7 @@ interface PropsDetails {
     }
 }
 
+
 interface Datacard {
     Name: string,
     Number: string,
@@ -18,6 +21,8 @@ interface Datacard {
     Year: string,
     CCV: string
 }
+
+
 
 const Payment = (props: PropsDetails): JSX.Element => {
     const [datacard, setDatacard] = useState<Datacard>({
@@ -33,6 +38,7 @@ const Payment = (props: PropsDetails): JSX.Element => {
             ...datacard,
             [event.target.name]: event.target.value
         })
+
     }
 
     console.log(datacard.Name)
@@ -78,6 +84,7 @@ const Payment = (props: PropsDetails): JSX.Element => {
                                     type='text'
                                     onChange={Onchangecard}
                                     placeholder='Name'
+                                    maxLength={25}
                                     value={datacard.Name}
                                 />
                             </label>
@@ -88,6 +95,8 @@ const Payment = (props: PropsDetails): JSX.Element => {
                                     placeholder='Number Card'
                                     value={datacard.Number}
                                     onChange={Onchangecard}
+                                    maxLength={19}
+                                    required={true}
                                 />
                             </label>
                             <div className="row">
@@ -98,7 +107,10 @@ const Payment = (props: PropsDetails): JSX.Element => {
                                         name='Month'
                                         placeholder='Month'
                                         value={datacard.Month}
-                                        onChange={Onchangecard} />
+                                        onChange={Onchangecard}
+                                        maxLength={2}
+                                        required={true}
+                                        />
                                 </div>
                                 <div className="small-4 columns end">
                                     <input
@@ -106,6 +118,8 @@ const Payment = (props: PropsDetails): JSX.Element => {
                                         name='Year'
                                         placeholder='Year'
                                         value={datacard.Year}
+                                        maxLength={2}
+                                        required={true}
                                         onChange={Onchangecard} />
                                 </div>
                             </div>
@@ -115,9 +129,12 @@ const Payment = (props: PropsDetails): JSX.Element => {
                                 <input
                                             type="text"
                                             name='CCV'
+                                            maxLength={3}
                                             placeholder='CCV'
                                             value={datacard.CCV}
-                                            onChange={Onchangecard} />
+                                            onChange={Onchangecard}
+                                            required={true}
+                                            />
                                     </label>
                                 </div>
                             </div>

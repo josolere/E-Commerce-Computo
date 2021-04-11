@@ -16,7 +16,7 @@ interface DetailsData {
 }
 
 const Pepe = gql` 
-    query Pepe {
+    {
         getProducts {
             id
             name
@@ -42,6 +42,6 @@ const Test = () => {
             })}
         </div>
     )
-} 
+}
 
 export default Test
