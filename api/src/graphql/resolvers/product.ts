@@ -54,42 +54,9 @@ export default {
   },
   Mutation: {
     createProduct: (
-      _parent: object,
-      { input }: { input: iCreateProductInput },
-      { models }: { models: iModels }
-    ): iProduct => models.Product.create({ ...input }),
-
-    deleteProduct: async (
-      _parent: object,
-      { id }: { id: string },
-      { models }: { models: iModels }
-    ): Promise<any> => {
-      const productToRemove = await models.Product.findByPk(id);
-
-      if (productToRemove) {
-        await productToRemove.destroy({ where: { id } });
-        return productToRemove;
-      }
-
-      return null;
-    },
-    editProduct: async (
-      _parent: object,
-      { id, input }: { id: string; input: iEditProductInput },
-      { models }: { models: iModels }
-    ): Promise<any> => {
-      const productToEdit = await models.Product.findByPk(id);
-
-      if (productToEdit) {
-        const updatedProduct = await productToEdit.update(
-          { ...input },
-          { where: { id } }
-        );
-
-        return updatedProduct;
-      }
-
-      return null;
-    },
+      _: any,
+      { input }: { input: any },
+      { models }: { models: any }
+    ): any => models.Product.create({ ...input }),
   },
 };

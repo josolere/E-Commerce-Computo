@@ -14,15 +14,17 @@ export const typeDefs = gql`
   }
 
   type Query {
+<<<<<<< HEAD
     getProducts(filter:FilterProducts): [Product!]
     getProductById(id: ID!): Product
     getProductByName(name: String): [Product]
+=======
+    getProducts: [Product!]
+>>>>>>> 72a58178d9cb35babda10ad595dc6c92d30c770c
   }
 
   type Mutation {
     createProduct(input: CreateProductInput): Product
-    deleteProduct(id: String!): Product!
-    editProduct(id: String, input: EditProductInput): Product!
   }
 
   input CreateProductInput {
@@ -33,6 +35,7 @@ export const typeDefs = gql`
     price: Int
     details: String
   }
+<<<<<<< HEAD
   input EditProductInput {
     name: String
     image: String
@@ -48,4 +51,6 @@ export const typeDefs = gql`
     categoriesId:[Int]
   }
 
+=======
+>>>>>>> 72a58178d9cb35babda10ad595dc6c92d30c770c
 `;

@@ -1,5 +1,6 @@
 // Types
-import { User, Product } from "./types";
+import { Product } from "../models/Product";
+import { User } from "./types";
 
 // User
 export interface iUser extends User {
