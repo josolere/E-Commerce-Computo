@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import Login from './components/login/Login'
-import './App.css';
 import { Route } from 'react-router-dom'
 import Details from './components/Details/ProductsDetails'
 import StarRating from './components/rating/Rating'

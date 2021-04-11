@@ -19,7 +19,6 @@
     font-weight: bold;
 }
 
-
 .LandPage {
     background-color: black;
     background-image: url('C:\ecommerce-FT10-G5\client\src\components\images\Land.jpg');
@@ -76,7 +75,6 @@
     margin-top: 35px;
     margin-bottom: 35px;
     width: 400px;
-
 }
 
 .iconlanding:hover {
