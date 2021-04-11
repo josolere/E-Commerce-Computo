@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchBar from '../SearchBar/SearchBar'
-import navBar from './NavBar.module.css'
+import navBar from './NavBar.module.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';

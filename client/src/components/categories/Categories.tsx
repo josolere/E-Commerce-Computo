@@ -1,4 +1,5 @@
 import SubMenu from "./SubMenu";
+import styles from './Categories.module.scss'
 
 export interface model {
   title: string;
@@ -47,11 +48,11 @@ const NavCategories = (): JSX.Element => {
   ];
 
   return (
-    <>
+    <div className={styles.container}>
       {categorias.map((item: model, i: number) => {
         return <SubMenu item={item} key={i}></SubMenu>;
       })}
-    </>
+    </div>
   );
 };
 
