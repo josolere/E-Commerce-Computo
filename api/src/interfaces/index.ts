@@ -12,6 +12,7 @@ export interface iUser extends User {
 //Product
 export interface iProduct extends Product {
   id: number;
+  categories: Array<string>;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -5,15 +5,33 @@ import {
   iProduct,
 } from "../../interfaces";
 import Sequelize from "sequelize";
+import { Category } from "../../models/Category";
+import { idText } from "typescript";
+import category from "./category";
 
 export default {
   Query: {
-    getProducts: (
+    getProducts: async (
       _parent: object,
       _args: object,
       { models }: { models: iModels }
-    ): iProduct[] => {
-      return models.Product.findAll();
+    ): Promise<iProduct[]> => {
+      let productsFetch = await models.Product.findAll({
+          include: Category,
+          raw : false
+        })
+      /* console.log(productsFetch[0].dataValues.Categories)
+
+      /* let products = productsFetch.map((product: any) =>{
+        let categories = product.Categories.map((category))
+
+      }) */
+    //   var newArray = Product.dataValues.Categories.map(item =>{
+    //     return item.dataValues.name
+    //  })
+
+
+      return productsFetch;
     },
     getProductById: async (
       _parent: object,
