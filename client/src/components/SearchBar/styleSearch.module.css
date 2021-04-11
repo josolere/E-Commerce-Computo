@@ -1,0 +1,36 @@
+
+.contenedor{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.inputSearch{
+    width: 300px;
+    height: 40px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 18px;
+    margin: 0;
+    border: none;
+}
+
+.inputSearch::placeholder{
+    font-size: 18px;
+    padding: 5px;
+}
+
+.buttonSearch{
+    width: 60px;
+    height: 70px;
+    border: none;
+    background-color:rgb(246,36,62);
+    outline: none;
+    color: white;
+    margin: 0;
+}
+
+.buttonSearch:hover{
+cursor: pointer;
+}
