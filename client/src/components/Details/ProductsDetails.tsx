@@ -27,8 +27,8 @@ interface PropsDetails {
     }
 }
 
-const GET_PRODUCTS = gql` 
-    query getProducts {
+const GET = gql` 
+    {
         getProducts {
             id
             name
@@ -38,7 +38,7 @@ const GET_PRODUCTS = gql`
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
-    const { loading, error, data } = useQuery<DetailsData>(GET_PRODUCTS);
+    const { loading, error, data } = useQuery<DetailsData>(GET);
 
     let [rating, setRating] = useState<Array<any>>([{
         id: null,
@@ -96,7 +96,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     <p> Marca: {item.brand} </p>
                     <p> Nombre: {item.name} </p>
                     <p> Precio: {item.price}</p>
-                    <p>Detalles: {item.details}</p>
+                    <p> Detalles: {item.details}</p>
                     <div>
                         {[...Array(5)].map((star, index: number) => {
                             const ratingvalue = index + 1;
