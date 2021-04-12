@@ -126,7 +126,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 </div>
             </div>
             <Link to={{
-                pathname: '/payment',
+                pathname: '/Pago',
                 state: {
                     id: id
                 }
