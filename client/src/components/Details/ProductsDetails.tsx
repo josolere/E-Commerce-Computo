@@ -17,6 +17,19 @@ interface DetailsData {
     getProducts: DetailsProduct[]
 }
 
+const GET = gql` 
+    {
+        getProducts {
+            id
+            name
+            price
+            details
+            brand
+            image
+        }
+    }
+`;
+
 interface PropsDetails {
     history: {
         location: {
@@ -27,27 +40,10 @@ interface PropsDetails {
     }
 }
 
-const GET = gql` 
-    {
-        getProducts {
-            id
-            name
-        }
-    }
-`;
 
 
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
-
-    const productest = [{
-        id: 10,
-        name: 'Nvidia 3080',
-        image: 'https://static2.srcdn.com/wordpress/wp-content/uploads/2020/09/RTX-3080-close-up.jpg',
-        details: 'High expensive',
-        price: 1000,
-        brand: 'Nvidia'
-    }]
 
     const { loading, error, data } = useQuery<DetailsData>(GET);
 
@@ -65,13 +61,13 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating: null
     }])
 
-    /*     const id = props.history.location.state.id */
+    const id = props.history.location.state.id
 
-    const id = 10
+    const filtred = data?.getProducts.filter(item => item.id == id)
 
-    const filtred = productest.filter(item => item.id === id)
+    console.log(id)
 
-    const title = filtred.map(item => item.name)
+    console.log(filtred)
 
     let totalrating: number = 0
 
@@ -93,8 +89,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     return (
         <Fragment>
             <h1>Detalles del Producto</h1>
-            <h3>{title}</h3>
-            <div>{filtred && filtred.map((item, index: number) => (
+            {/*             <h3>{title}</h3>
+ */}            <div>{filtred && filtred.map((item, index: number) => (
                 <div>
                     <img src={item.image} alt='' />
                     <p> Marca: {item.brand} </p>

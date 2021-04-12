@@ -23,7 +23,7 @@ function App() {
         <Route exact path= '/categories' component={NavCategories} />
         <Route exact path='/createC' component={CreateCategory} />
         <Route exact path='/createP' component={CreateProduct} />
-        <Route exact path='/Details' component={Details} />
+        <Route exact path='/Detalles' component={Details} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/Rating' component={StarRating} />
         <Route exact path='/' component={LandPage} />
