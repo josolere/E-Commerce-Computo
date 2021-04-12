@@ -77,7 +77,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     let summulti: Array<number> = [];
 
-    let sumlength:Array<number> = [];
+    let sumlength: Array<number> = [];
 
     let count = 1;
     if (rating.length > 0) {
@@ -86,7 +86,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             sumlength.push(rating.filter(item => item === count).length);
             count++;
         }
-        totalrating = summulti.reduce((a,b) => a + b) / sumlength.reduce((a,b) => a + b)
+        totalrating = summulti.reduce((a, b) => a + b) / sumlength.reduce((a, b) => a + b)
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
@@ -101,50 +101,48 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     <p> Nombre: {item.name} </p>
                     <p> Precio: {item.price}</p>
                     <p> Detalles: {item.details}</p>
- 
-                    <Link to={{
-                        pathname: '/payment',
-                        state: {
-                            image: item.image,
-                            price: item.price
-                        }
-                    }}>
-                        <button>Comprar</button>
-                    </Link>
                 </div>
             ))}
-        <div>
-            {[...Array(5)].map((star, index) => {
-                const ratingvalue = index + 1;
-                return <label>
-                    <input type='radio'
-                        name='Rating'
-                        value={ratingvalue}
-                        onClick={function pushrating() {
-                            setRating([...rating, ratingvalue])
-                        }}
-                    />
-                    <FaStar size={30}
-                        className='star'
-                        color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
-                        onMouseEnter={() => setHover(ratingvalue)}
-                        onMouseLeave={() => setHover(0)}
-                    />
-                </label>
-            })}
+                <div>
+                    {[...Array(5)].map((star, index) => {
+                        const ratingvalue = index + 1;
+                        return <label>
+                            <input type='radio'
+                                name='Rating'
+                                value={ratingvalue}
+                                onClick={function pushrating() {
+                                    setRating([...rating, ratingvalue])
+                                }}
+                            />
+                            <FaStar size={30}
+                                className='star'
+                                color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
+                                onMouseEnter={() => setHover(ratingvalue)}
+                                onMouseLeave={() => setHover(0)}
+                            />
+                        </label>
+                    })}
                 </div>
             </div>
             <p>El rating de este producto es {totalrating}</p>
             <h4>Escribe una review</h4>
-                    <textarea
-                        name='review'
-                        value={reviewuser.review}
-                        onChange={(event) =>
-                            setReviewuser({
-                                ...reviewuser,
-                                review: event.target.value
-                            })}
-                    />
+            <textarea
+                name='review'
+                value={reviewuser.review}
+                onChange={(event) =>
+                    setReviewuser({
+                        ...reviewuser,
+                        review: event.target.value
+                    })}
+            />
+                                <Link to={{
+                        pathname: '/payment',
+                        state: {
+                            id: id
+                        }
+                    }}>
+                        <button>Comprar</button>
+                    </Link>
         </Fragment>
     )
 }
