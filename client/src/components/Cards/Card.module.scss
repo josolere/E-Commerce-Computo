@@ -1,0 +1,42 @@
+.card {
+  width: 12rem;
+  height: 17rem;
+//   border: solid 1px whitesmoke;
+//   border-radius: 0.5rem;
+  margin: 0rem 1rem 1rem 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: whitesmoke;
+  img{
+      position:absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 0;
+  }
+  span{
+      position: absolute;
+      bottom: 2.5rem;
+      font-weight: 600;
+  }
+}
+.buttons {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    button{
+        color: whitesmoke;
+        padding: 0.7rem 00.5rem;
+    }
+}
+.buy{
+    background-color: #F21B42;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.learn{
+    font-size: 00.7rem;
+    background-color: #000406;
+}
