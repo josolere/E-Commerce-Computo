@@ -17,7 +17,8 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.linksNav {
+.linksNav,
+.linksNava {
     font-weight: 600;
     display: flex;
     color: ivory;
@@ -27,6 +28,9 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.linksNava:hover{
+    cursor: pointer;
+}
 .iconCart {
     width: 20px !important;
     padding-right: 8px;

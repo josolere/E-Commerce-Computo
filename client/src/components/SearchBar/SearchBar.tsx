@@ -9,6 +9,8 @@ interface Search{
     name:string
 }
 
+const mutation = gql
+
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
