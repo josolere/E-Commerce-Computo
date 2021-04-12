@@ -3,18 +3,25 @@ import {
   iEditProductInput,
   iModels,
   iProduct,
+  iFilterProducts
 } from "../../interfaces";
+<<<<<<< HEAD
 import Sequelize from "sequelize";
 import { Category } from "../../models/Category";
 import { idText } from "typescript";
 import category from "./category";
+=======
+import Sequelize,{ Op } from "sequelize";
+import { Category } from "../../models/Category";
+>>>>>>> 9311e295c0b36c2172f20363dd8e643215661752
 
 export default {
   Query: {
     getProducts: async (
       _parent: object,
-      _args: object,
+      { filter }: {filter:iFilterProducts},
       { models }: { models: iModels }
+<<<<<<< HEAD
     ): Promise<iProduct[]> => {
       let productsFetch = await models.Product.findAll({
           include: Category,
@@ -32,10 +39,28 @@ export default {
 
 
       return productsFetch;
+=======
+    ): iProduct[] => {
+      if(!filter) {filter={name:'',offset:0,limit:10}}
+        const limit = filter.limit
+        const offset = filter.offset
+        const categoriesId = filter.categoriesId || []
+        return models.Product.findAll({
+          include : categoriesId.length===0? [] : [{ model: Category, through: 'productsxcategories',attributes:[], where : { id : {[Op.in] : categoriesId} }}], 
+          where: {
+            [Op.and] : [
+              { name : {[Op.iLike] : `%${filter.name}%` }},
+            ]      
+          },
+            limit,
+            offset
+          }
+      );
+>>>>>>> 9311e295c0b36c2172f20363dd8e643215661752
     },
     getProductById: async (
       _parent: object,
-      { id }: { id: string },
+      { id }: { id: number },
       { models }: { models: iModels }
     ): Promise<iProduct> => {
       const data = await models.Product.findByPk(id);
@@ -55,6 +80,7 @@ export default {
     },
   },
   Mutation: {
+<<<<<<< HEAD
     createProduct: async (
       _parent: object,
       { input }: { input: iCreateProductInput },
@@ -103,5 +129,12 @@ export default {
 
       return null;
     },
+=======
+    createProduct: (
+      _: any,
+      { input }: { input: any },
+      { models }: { models: any }
+    ): any => models.Product.create({ ...input }),
+>>>>>>> 9311e295c0b36c2172f20363dd8e643215661752
   },
 };

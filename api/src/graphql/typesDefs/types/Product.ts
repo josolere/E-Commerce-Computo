@@ -15,15 +15,13 @@ export const typeDefs = gql`
   }
 
   type Query {
-    getProducts: [Product!]
-    getProductById(id: String!): Product
+    getProducts(filter:FilterProducts): [Product!]
+    getProductById(id: ID!): Product
     getProductByName(name: String): [Product]
   }
 
   type Mutation {
     createProduct(input: CreateProductInput): Product
-    deleteProduct(id: String!): Product!
-    editProduct(id: String, input: EditProductInput): Product!
   }
 
   input CreateProductInput {
@@ -42,4 +40,12 @@ export const typeDefs = gql`
     price: String
     details: String
   }
+
+  input FilterProducts {
+    name:String = "", 
+    offset:Int = 0, 
+    limit:Int = 10, 
+    categoriesId:[Int]
+  }
+
 `;

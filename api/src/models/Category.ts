@@ -11,7 +11,8 @@ import { Association ,DataTypes, Model, Optional, Sequelize,
     BelongsToManySetAssociationsMixin,
     BelongsToManyCreateAssociationMixin } from 'sequelize';
 
-import {Product} from './Product'
+import { Product } from "./Product"
+
 
 export interface CategoryAttributesI {
     id:number;
