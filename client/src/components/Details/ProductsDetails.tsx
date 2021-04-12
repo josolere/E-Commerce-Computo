@@ -135,14 +135,14 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         review: event.target.value
                     })}
             />
-                                <Link to={{
-                        pathname: '/payment',
-                        state: {
-                            id: id
-                        }
-                    }}>
-                        <button>Comprar</button>
-                    </Link>
+            <Link to={{
+                pathname: '/payment',
+                state: {
+                    id: id
+                }
+            }}>
+                <button>Comprar</button>
+            </Link>
         </Fragment>
     )
 }
