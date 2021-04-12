@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 
@@ -34,13 +34,16 @@ const Test = () => {
     console.log(products)
 
     return (
+        <Fragment>
+        <h1>Pepe</h1>
         <div>
-            {products && products.map((item) => {
+            {products && products.map((item) => (
                 <div>
-                    {item.id}
+                    <p>id: {item.id}</p>
                 </div>
-            })}
+            ))}
         </div>
+        </Fragment>
     )
 }
 
