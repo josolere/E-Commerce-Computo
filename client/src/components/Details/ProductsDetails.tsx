@@ -101,7 +101,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     <p> Marca: {product?.brand} </p>
                     <p> Detalles: {product?.details}</p>
                     <div className={styles.botonPrecio}>
-                        <h2 className={styles.precioDetail}>${product?.price}</h2>
+                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(product?.price || 0 )}</h2>
                         <div className={styles.estrellas}>
                             <div >
                                 {[...Array(5)].map((star, index) => {

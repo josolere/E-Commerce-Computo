@@ -20,7 +20,7 @@ interface DetailsData {
 
 const products = gql` 
 {
-    getProducts {
+    getProducts (filter:{limit:12}) {
         id
         name
         brand
@@ -51,6 +51,8 @@ export default function Cards(){
     const { loading, error, data } = useQuery<DetailsData>(products)
 
     const product = data?.getProducts
+
+    console.log(product)
 
     return (
         <div className={styles.container}>
