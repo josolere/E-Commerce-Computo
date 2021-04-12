@@ -1,10 +1,35 @@
 
-.contenedor{
+.inputSearch{
+    width: 30rem;
+    height: 2rem;
+    border-radius: 7px;
+    padding: 5px;
+    font-size: 1rem;
+    margin-left: 3rem;
+    outline: none;
+    border-color: transparent;
+} 
+
+.buttonSearch{
+    width: 2rem;
+    height: 3rem;
+    border-radius: 12pxpx;
+    background-color: transparent;
+    border-color: transparent;
+    outline: none;
+    color: white;
+}
+
+
+
+/* .contenedor{
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
 }
+
+
 
 .inputSearch{
     width: 300px;
@@ -33,4 +58,4 @@
 
 .buttonSearch:hover{
 cursor: pointer;
-}
+}/*  */ 

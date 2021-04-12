@@ -39,9 +39,6 @@ function App() {
         <Route exact path='/Payment' component={Payment} />
       </Switch>
     </Router>
-
-
-
   );
 }
 

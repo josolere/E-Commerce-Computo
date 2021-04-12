@@ -5,9 +5,9 @@ import '../fonts/audiowide.regular.ttf';
 import '../fonts/Baumans-Regular.ttf';
 import '../fonts/Revalia-Regular.ttf';
 import { Link } from 'react-router-dom';
-//import start from '../images/Landstart.png';
 import { useQuery, gql } from '@apollo/client';
-import { start } from 'node:repl';
+import NavBar from "../NavBar/NavBar"
+
 
 
 interface DetailsProduct {
@@ -38,60 +38,24 @@ const VideoLand = () => {
 
     const products = data?.getProducts
 
-    let url = 'https://youtu.be/fslpPpjhRAk'
+    let url = 'https://www.youtube.com/watch?v=2jpGbR9Dpl8&ab_channel=SantiRosales'
 
-    const [play, setPlay] = useState(false)
-
-    const [audio, setAudio] = useState(0.5)
-
-    const playstop = () => {
-        play ? setPlay(false) : setPlay(true);
-    }
-
-    const addaudio = () => {
-        if (audio >= 0.9) {
-            setAudio(0.9)
-        }
-        else {
-            setAudio(audio + 0.1)
-        }
-    }
-
-    const lessaudio = () => {
-        if (audio <= 0.1) {
-            setAudio(0.1)
-        }
-        else {
-            setAudio(audio - 0.1)
-        }
-    }
-
-    const mute = () => {
-        setAudio(0.0)
-    }
-
+ 
     return (
-        <div className='LandPage' >
-            <div className='alignlandpage' >
-                <h1 className='titleland' >Hexabyte</h1>
-                <div className='video'>
-                    <ReactPlayer
-                        url={url}
-                        loop={true}
-                        playing={play}
-                        volume={audio}
-                        width={1280}
-                        height={575}
-                    />
-                </div>
-                <div className='setbuttonvideos'>
-                    <button className='buttonvideo' onClick={playstop}  >Play/Stop</button>
-                    <button className='buttonvideo' onClick={addaudio} >Audio +</button>
-                    <button className='buttonvideo' onClick={lessaudio} >Audio -</button>
-                    <button className='buttonvideo' onClick={mute} >Mute</button>
-                </div >
-                <h4 className='henrycavill'>Find the computer of your dreams, be like Henry Cavill</h4>
-                <h4>Aca irian los productos</h4>
+        <div className="containerLand">
+            <NavBar/>
+            <img className="imgLand" src="https://images.unsplash.com/photo-1613258176465-eb77f3a050d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80"></img>
+            
+            <h1 className="titleLand">Bienvenidos a CompuHenry</h1>
+            <p className="pLand">Siempre desde tu lado gamer</p>
+            <Link to="/home"><button className="botonLand">Ir a la Tienda</button></Link>
+              <footer className="footerLand">
+                 <h2>Proximamente Redes</h2>
+              </footer>  
+
+
+
+               {/*  <h4>Aca irian los productos</h4>
                 {products && products.map((item) => {
                 <div>
                     <p>{item.name}</p>
@@ -104,13 +68,22 @@ const VideoLand = () => {
                     <img src={item.image} alt=''/>
                     </Link>
                 </div>
-            })}
+            })} */}
                {/*  <Link to='/Home' >
                     <img className='iconlanding' src={start} alt='' />
                 </Link> */}
-            </div>
+                 {/*  <div  className="videoLand">
+                   <ReactPlayer
+                        url={url}
+                        loop={true}
+                        playing={true}
+                        muted={true}
+                        
+                    /> 
+                 </div> */}
+            
         </div>
     )
 }
 
-export default VideoLand
+export default VideoLand;
