@@ -68,11 +68,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const filtred = data?.getProducts.filter(item => item.id == id)
 
-
-
     const product = filtred?.find(el => el)
-
-
 
     let totalrating: number = 0
 
