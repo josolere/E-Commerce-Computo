@@ -53,15 +53,12 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     let [rating, setRating] = useState<Array<any>>([])
 
-
-
-
     const [hover, setHover] = useState(0)
 
-    const [reviewuser, setReviewuser] = useState<Array<any>>([{
-        id: null,
-        review: null
-    }])
+    const [reviewuser, setReviewuser] = useState({
+        id: '',
+        review: ''
+    })
 
     const [total, setTotal] = useState<Array<any>>([{
         id: null,
@@ -93,9 +90,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
-    console.log(rating)
-
-
     return (
         <Fragment>
             <h1>Detalles del Producto</h1>
@@ -107,24 +101,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     <p> Nombre: {item.name} </p>
                     <p> Precio: {item.price}</p>
                     <p> Detalles: {item.details}</p>
-                    <h4>Escribe una review</h4>
-                    <textarea
-                        name='review'
-                        value={reviewuser}
-                        onChange={(event) =>
-                            setReviewuser([{
-                                ...reviewuser,
-                                id: item.id,
-                                review: event.target.value
-                            }])}
-                    />
-                    {reviewuser && reviewuser.map(function (itemreview, index: number) {
-                        if (itemreview.id === item.id) {
-                            <div key={index}>
-                                {itemreview.review}
-                            </div>
-                        }
-                    })}
+ 
                     <Link to={{
                         pathname: '/payment',
                         state: {
@@ -158,7 +135,16 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 </div>
             </div>
             <p>El rating de este producto es {totalrating}</p>
-
+            <h4>Escribe una review</h4>
+                    <textarea
+                        name='review'
+                        value={reviewuser.review}
+                        onChange={(event) =>
+                            setReviewuser({
+                                ...reviewuser,
+                                review: event.target.value
+                            })}
+                    />
         </Fragment>
     )
 }
