@@ -20,15 +20,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path= '/categories' component={NavCategories} />
-        <Route exact path='/createC' component={CreateCategory} />
-        <Route exact path='/createP' component={CreateProduct} />
         <Route exact path='/Details' component={Details} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/Rating' component={StarRating} />
         <Route exact path='/' component={LandPage} />
-        <Route exact path='/Test' component={TestProducts} />
-        <Route exact path='/Payment' component={Payment} />
         <Route exact path='/home'>
           <Home/>
           <div className={styles.catalog}>
@@ -36,8 +29,14 @@ function App() {
           <Cards/>
           </div>
         </Route>
-        <Route exact path='/cart' component={ShoppingCart}/>
+        <Route exact path='/createC' component={CreateCategory} />
+        <Route exact path='/createP' component={CreateProduct} />
         <Route component={PageNotFound}/>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/Rating' component={StarRating} />
+        <Route exact path='/cart' component={ShoppingCart}/>
+        <Route exact path='/Test' component={TestProducts} />
+        <Route exact path='/Payment' component={Payment} />
       </Switch>
     </Router>
 

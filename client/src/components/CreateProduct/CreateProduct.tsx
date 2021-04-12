@@ -18,18 +18,28 @@ interface newProductDetails{
     image:string
     details:string
 }
+// mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
+//     createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
+//         id
+//         name
+//         price
+//         brand
+//         image
+//         details
+//     }
+// }
 
 const NEW_PRODUCT = gql`
-    mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
-        createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
+    mutation createProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!) {
+         createProduct(input:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
             id
-            name
+            name 
             price
             brand
             image
             details
-        }
     }
+  }
 `;
 
 type FormEvent = React.FormEvent<HTMLFormElement> ;
@@ -39,10 +49,10 @@ type InputEvent = React.FormEvent<HTMLInputElement>;
 export default function CreateProduct(){
     const [state , setState] = useState({name:"",price:0,brand:"",image:"",details:""})
     
-    const [createNewProduct, { error, data }] = useMutation<
-    {createNewProduct: productInventary},
-    {product:newProductDetails}
-    >(NEW_PRODUCT,{variables:{product:state}})
+    const [createProduct, { error, data }] = useMutation<
+    {createProduct: productInventary},
+    {input:newProductDetails}
+    >(NEW_PRODUCT,{variables:{input:state}})
 
 
    function handleChange(e:InputEvent){
@@ -52,15 +62,17 @@ export default function CreateProduct(){
     })
    }
 
-   function handleSubmit(e:FormEvent){
+    async function handleSubmit(e:FormEvent){
     e.preventDefault()
-    createNewProduct()
+    // console.log(NEW_PRODUCT.definitions)
+    createProduct()
+    // console.log(result)
    }
 
     return(
         <div className={styles.container}>
         {error ? alert(`Oh no! ${error.message}`) : null}
-        {data && data.createNewProduct ? alert(`Saved!`) : null}
+        {data && data.createProduct ? alert(`Saved!`) : null}
          <form onSubmit={handleSubmit} className={styles.form} >
              <h1>Create Product</h1>
              <hr/>
