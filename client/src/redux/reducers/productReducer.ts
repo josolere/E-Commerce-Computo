@@ -1,8 +1,8 @@
-import { FileWatcherEventKind } from 'typescript';
-import {SET_FILTER} from '../actions'
+import {SET_FILTER, SET_ACTIVITIES} from '../actions'
 
 const initialState = {
-    filter:""
+    filter:"",
+    categories:[]
 }
 
 function productReducer(state = initialState, action:any):any{
@@ -12,6 +12,11 @@ function productReducer(state = initialState, action:any):any{
                 ...state,
                 filter: action.filter
             }
+            case SET_ACTIVITY:
+                return {
+                    ...state,
+                    categories : action.categories
+                }
         default: return state;
     }
 }
