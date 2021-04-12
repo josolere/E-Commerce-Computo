@@ -6,9 +6,8 @@ import '../fonts/Baumans-Regular.ttf';
 import '../fonts/Revalia-Regular.ttf';
 import { Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
-import SearchBar from "../SearchBar/SearchBar"
 import NavBar from "../NavBar/NavBar"
-import { start } from 'node:repl';
+
 
 
 interface DetailsProduct {
@@ -43,26 +42,19 @@ const VideoLand = () => {
 
  
     return (
-        <div>
-            <div className="NavBarLanding">
-                <h1 className="titleLanding">Titulo</h1>
-                 <SearchBar/>
-                 <div className="linksLanding">
-                 <Link className="linksLanding" to="/Productos">Productos</Link>
-                 <Link className="linksLanding" to="#">Ayuda</Link>
-                 <Link className="linksLanding" to="/MiCuenta">Mi Cuenta</Link>
-                 </div>
-            </div>
-          
-            {/*Aca iria el import de la NavBar, configurar para que los links se adapten segun}
-             el componente en el que se encuentra*/}
-                   <ReactPlayer
-                        url={url}
-                        loop={true}
-                        playing={true}
-                        muted={true}
-                    /> 
-                
+        <div className="containerLand">
+            <NavBar/>
+            <img className="imgLand" src="https://images.unsplash.com/photo-1613258176465-eb77f3a050d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80"></img>
+            
+            <h1 className="titleLand">Bienvenidos a CompuHenry</h1>
+            <p className="pLand">Siempre desde tu lado gamer</p>
+            <Link to="/home"><button className="botonLand">Ir a la Tienda</button></Link>
+              <footer className="footerLand">
+                 <h2>Proximamente Redes</h2>
+              </footer>  
+
+
+
                {/*  <h4>Aca irian los productos</h4>
                 {products && products.map((item) => {
                 <div>
@@ -80,9 +72,18 @@ const VideoLand = () => {
                {/*  <Link to='/Home' >
                     <img className='iconlanding' src={start} alt='' />
                 </Link> */}
+                 {/*  <div  className="videoLand">
+                   <ReactPlayer
+                        url={url}
+                        loop={true}
+                        playing={true}
+                        muted={true}
+                        
+                    /> 
+                 </div> */}
             
         </div>
     )
 }
 
-export default VideoLand
+export default VideoLand;

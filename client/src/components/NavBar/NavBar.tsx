@@ -1,50 +1,28 @@
-import React from 'react'
-import SearchBar from '../SearchBar/SearchBar'
-import navBar from './NavBar.module.scss'
+import React from "react";
+import SearchBar from "../SearchBar/SearchBar";
+import navBar from "./NavBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const NavBar = (): JSX.Element => {
-    return (
-        <>
-            <div className={navBar.container}>
-                <div className={navBar.containerNav}>
-                    <div className={navBar.containerTitle}>
-                        <h1>CompuHenry</h1>
-                    </div>
-                    <div className={navBar.containeCarrito}>
-                        <div className={navBar.containerRedes}>
-                            <p>redes</p>
-                        </div>
-                        <div className={navBar.containerLogin}>
-                            <Link className={navBar.login} to='/login'>Iniciar Sesion</Link>
-                        </div>
-                        <div className={navBar.containerIconProducts}>
-                            <div className={navBar.containerIcon}>
-                                <Link to='/cart'>
-                                    <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
-                                </Link>
-                            </div>
-                            <div className={navBar.containerProducts}>
-                                <p className={navBar.pProducts}>2 <span>productos</span></p>
-                                <p className={navBar.pPrice}>$1300</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={navBar.ContainerSearch}>
-                        <SearchBar />
-                    </div>
-                </div>
-                <div className={navBar.containerRutas}>
-                    <Link to='/home' className={navBar.linkInicio}>Inicio</Link>
-                    <p>productos</p>
-                    <p>cuenta</p>
-                    <p>otros</p>
-                </div>
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <div className={navBar.container}>
+        <h1 className={navBar.titleNav}>CompuHenry</h1>
+        <SearchBar />
+        <Link className={navBar.linksNav} to="/cart">
+        <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />$1300</Link>
+        <Link className={navBar.linksNav} to="/login"> Iniciar Sesion</Link>
+        <Link to="/home" className={navBar.linksNav}> Inicio </Link>
+        <Link to="/productos" className = {navBar.linksNav}>Productos</Link>  
+        <Link to="/cuenta" className = {navBar.linksNav}>Mi Cuenta</Link>  
+              
+      </div>
+    </>
+  );
+};
+
+//Redes en el footer
 
 export default NavBar;

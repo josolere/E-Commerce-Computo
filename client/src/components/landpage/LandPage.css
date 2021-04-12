@@ -1,28 +1,46 @@
- .NavBarLanding {
-    height: 7rem;
+ .containerLand {
+    background-color: #161616;
+    height: 100vh;
+ }
+ 
+ .imgLand {
+     background-size: cover;
+     width: 50%;
+     
+ }
+ .footerLand {
+    background-color: #101011;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 7px;
+    color: white;
     width: 100%;
-    background-color: black;
-    display: inline-flex;
-    justify-content: space-evenly;
-    padding-top: 2rem;
+    height: 5rem;
+    margin-top: 10rem;
+    text-align: center;
  }
 
- .titleLanding {
+ .titleLand {
+    font-family: 'Montserrat', sans-serif;
     color: aliceblue;
-    font-size: 25px;
-    margin-top: 12px;
-    padding-left: 2rem;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    float: right;
+    margin-right: 12rem;
+    margin-top: 5rem;
 }
 
-.linksLanding {
-    font-weight: 600;
-    display: flex;
-    color: ivory;
-    text-decoration: none;
-    margin-left: 1rem;
-    margin-top: 8px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
+.pLand {
+    font-family: 'Montserrat', sans-serif;
+    color: aliceblue;
+    float: right;
+    margin-right: 19rem;
+    margin-top: -20rem;
 }
 
+.botonLand {
+    width: fit-content;
+    float: right;
+    margin-right: 23rem;
+    margin-top: -17rem;
+    border-radius: 4px;
+    background-color: #F21B42;
+    font-weight: 700;
+}
