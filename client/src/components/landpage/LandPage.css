@@ -6,6 +6,7 @@
  .imgLand {
      background-size: cover;
      width: 50%;
+     margin-left: -3rem;
      
  }
  .footerLand {
@@ -23,8 +24,8 @@
     font-family: 'Montserrat', sans-serif;
     color: aliceblue;
     float: right;
-    margin-right: 12rem;
-    margin-top: 5rem;
+    margin-right: 13rem;
+    margin-top: 4rem;
 }
 
 .pLand {

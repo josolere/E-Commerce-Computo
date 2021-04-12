@@ -1,8 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
+import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
+import styles from "./ProductDetail.module.scss"
+
 
 interface DetailsProduct {
     id: number,
@@ -65,9 +68,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const filtred = data?.getProducts.filter(item => item.id == id)
 
-    console.log(id)
+    
 
-    console.log(filtred)
+    const product = filtred?.find(el => el)
+
+    
 
     let totalrating: number = 0
 
@@ -87,19 +92,18 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     return (
-        <Fragment>
-            <h1>Detalles del Producto</h1>
-            {/*             <h3>{title}</h3>
- */}            <div>{filtred && filtred.map((item, index: number) => (
-                <div>
-                    <img src={item.image} alt='' />
-                    <p> Marca: {item.brand} </p>
-                    <p> Nombre: {item.name} </p>
-                    <p> Precio: {item.price}</p>
-                    <p> Detalles: {item.details}</p>
-                </div>
-            ))}
-                <div>
+        <div className={styles.contenedorAll}>
+           <NavBar/>
+            <div className={styles.contenedorDetail}>
+                    <img src={product?.image} alt='' />
+                    <div >
+                    <h1 className={styles.nameDetail}>{product?.name}</h1>
+                    <p> Marca: {product?.brand} </p>
+                    <p> Detalles: {product?.details}</p>
+                    <div className={styles.botonPrecio}>
+                    <h2 className={styles.precioDetail}>${product?.price}</h2>
+                    <div className={styles.estrellas}>
+                <div >
                     {[...Array(5)].map((star, index) => {
                         const ratingvalue = index + 1;
                         return <label>
@@ -118,11 +122,20 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                             />
                         </label>
                     })}
+                    <p>Rating {totalrating}</p>
                 </div>
             </div>
-            <p>El rating de este producto es {totalrating}</p>
-            <h4>Escribe una review</h4>
-            <textarea
+            <Link to={{
+                pathname: '/payment',
+                state: {
+                    id: id
+                }
+            }}>
+                 <button className={styles.buttonCompra}>Comprar</button>
+                </Link>
+            <div className={styles.review}>
+                    <h4>Escribe una review</h4>
+                <textarea
                 name='review'
                 value={reviewuser.review}
                 onChange={(event) =>
@@ -131,15 +144,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         review: event.target.value
                     })}
             />
-            <Link to={{
-                pathname: '/payment',
-                state: {
-                    id: id
-                }
-            }}>
-                <button>Comprar</button>
-            </Link>
-        </Fragment>
+            </div>
+                    </div>
+                    </div>
+                </div>
+        </div>
     )
 }
 

@@ -1,0 +1,47 @@
+.contenedorDetail {
+    height: 100vh;
+    display: inline-flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 6rem;
+   div {
+        width: 40rem;
+        font-family:'Montserrat', sans-serif;
+        font-weight: 700;
+        margin-bottom: -2rem; 
+       
+        h1 {
+            margin-top: 0;
+        }       
+   } 	
+   img {
+       width: 20rem;
+       margin-right: 2rem;
+   }
+} 
+
+
+    
+.precioDetail {
+    width: fit-content;
+    background-color:#F21B42 ;
+    padding:1rem;
+    border-radius: 5px;
+}
+
+.contenedorAll {
+    color:white;
+    background-color: #161616;
+}
+
+
+.buttonCompra {
+    width: 12rem;
+    margin-top: 4rem;
+    color:white;
+    border-radius: 5px;
+    background-color:#F21B42 ;
+    font-weight: 700;
+}
+
+
