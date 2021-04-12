@@ -63,11 +63,11 @@ export function  ProductFactory(sequelize: Sequelize){
             primaryKey: true,
         },
         name: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull:false,
         },
         image: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         brand: {
             type: DataTypes.STRING,
@@ -76,7 +76,7 @@ export function  ProductFactory(sequelize: Sequelize){
             type : DataTypes.DECIMAL(18,2),
         },
         details : {
-            type : DataTypes.STRING,
+            type : DataTypes.TEXT,
         }
     },{ 
         tableName : 'products',

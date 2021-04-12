@@ -31,7 +31,7 @@ export const typeDefs = gql`
     name: String!
     image: String
     brand: String
-    price: Int
+    price: String
     details: String
     categories: [Int]
   }
@@ -39,7 +39,7 @@ export const typeDefs = gql`
     name: String
     image: String
     brand: String
-    price: Int
+    price: String
     details: String
   }
 `;
