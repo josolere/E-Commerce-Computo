@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 
@@ -16,7 +16,7 @@ interface DetailsData {
 }
 
 const Pepe = gql` 
-    query Pepe {
+    {
         getProducts {
             id
             name
@@ -34,14 +34,17 @@ const Test = () => {
     console.log(products)
 
     return (
+        <Fragment>
+        <h1>Pepe</h1>
         <div>
-            {products && products.map((item) => {
+            {products && products.map((item) => (
                 <div>
-                    {item.id}
+                    <p>id: {item.id}</p>
                 </div>
-            })}
+            ))}
         </div>
+        </Fragment>
     )
-} 
+}
 
 export default Test
