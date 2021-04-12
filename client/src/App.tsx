@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path='/Details' component={Details} />
+        <Route exact path='/Detalles' component={Details} />
         <Route exact path='/' component={LandPage} />
         <Route exact path='/home'>
           <Home/>
