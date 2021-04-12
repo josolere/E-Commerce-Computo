@@ -1,13 +1,37 @@
 import React from 'react'
 import Card from './CardHome'
 import styles from './CardsHome.module.scss'
+import { useQuery, gql } from '@apollo/client';
 
-interface IProduct {
-    name:string
-    img:string
+
+interface DetailsProduct {
+    id: number,
+    brand: string,
+    image: string,
+    name: string,
+    price: number,
+    details: string,
 }
 
-const products : IProduct[] = [
+interface DetailsData {
+    getProducts: DetailsProduct[]
+}
+
+
+const products = gql` 
+{
+    getProducts {
+        id
+        name
+        brand
+        details
+        price
+        image
+    }
+}
+`;
+
+/* const products : IProduct[] = [
     {name:'GAMER REDRAGON',img:'https://d3ugyf2ht6aenh.cloudfront.net/stores/896/208/products/h220-1_headset_1024x10242x2-954badd9ed46957ce915971658927709-1024-1024.png'},
     {name:'JBL ROSA',img:'https://www.jbl.com.pe/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw0fb18ea9/JBL_JR300BT_Pink_Fold-1605x1605px.png?sw=537&sfrm=png'},
     {name:'kOITON NOSECUANTO',img:'http://pngimg.com/uploads/headphones/headphones_PNG101982.png'},
@@ -20,12 +44,17 @@ const products : IProduct[] = [
     {name:'GETECH AZULES',img:'https://cdn.shopify.com/s/files/1/2584/5536/products/800_800_12fa48d2-16afa234f4f--7f893193053602387023096.upload_1024x1024.png?v=1582228883'},
     {name:'GETECH ROJOS',img:'https://cdn.shopify.com/s/files/1/2584/5536/products/800_800_12fa48d2-16afa234f4f--7f8d6506523086609125338.upload_1024x1024.png?v=1582228885'},
     {name:'GETECH MULTI',img:'https://m.media-amazon.com/images/I/61iQLvs2gUL._AC_SS450_.jpg'},
-]
+] */
 
 export default function Cards(){
+
+    const { loading, error, data } = useQuery<DetailsData>(products)
+
+    const product = data?.getProducts
+
     return (
         <div className={styles.container}>
-        {products?.map(p => <Card name={p.name} img={p.img}/>)}         
+        {product?.map(el => <Card id={el.id} name={el.name} image={el.image} price={el.price} />)}         
         </div>
     )
 }
