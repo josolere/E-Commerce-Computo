@@ -36,14 +36,25 @@ const GET = gql`
     }
 `;
 
+
+
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
+
+    const productest = [{
+        id: 10,
+        name: 'Nvidia 3080',
+        image: 'https://static2.srcdn.com/wordpress/wp-content/uploads/2020/09/RTX-3080-close-up.jpg',
+        details: 'High expensive',
+        price: 1000,
+        brand: 'Nvidia'
+    }]
 
     const { loading, error, data } = useQuery<DetailsData>(GET);
 
-    let [rating, setRating] = useState<Array<any>>([{
-        id: null,
-        rating: null
-    }])
+    let [rating, setRating] = useState<Array<any>>([])
+
+
+
 
     const [hover, setHover] = useState(0)
 
@@ -57,34 +68,33 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating: null
     }])
 
-    const id = props.history.location.state.id
+    /*     const id = props.history.location.state.id */
 
-    const filtred = data?.getProducts.filter(item => item.id === id)
+    const id = 10
 
-    const title = filtred?.map(item => item.name)
+    const filtred = productest.filter(item => item.id === id)
 
-    let totalrating: number = 0;
+    const title = filtred.map(item => item.name)
+
+    let totalrating: number = 0
 
     let summulti: Array<number> = [];
 
-    let sumlength: Array<number> = [];
+    let sumlength:Array<number> = [];
 
     let count = 1;
-
     if (rating.length > 0) {
         while (count <= 5) {
-            summulti.push(count * rating.filter(item => item.rating === count && item.id === id).length);
-            sumlength.push(rating.filter(item => item.rating === count && item.id === id).length);
+            summulti.push(count * rating.filter(item => item === count).length);
+            sumlength.push(rating.filter(item => item === count).length);
             count++;
         }
-        totalrating = summulti.reduce((a, b) => a + b) / sumlength.reduce((a, b) => a + b)
+        totalrating = summulti.reduce((a,b) => a + b) / sumlength.reduce((a,b) => a + b)
         totalrating = parseFloat(totalrating.toFixed(2))
-        setTotal([{ ...total, id: id, totalrating: totalrating }])
     }
 
-    let showtotal: number;
+    console.log(rating)
 
-    total.map(function (item) { if (item.id === id) showtotal = item.totalrating })
 
     return (
         <Fragment>
@@ -97,31 +107,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     <p> Nombre: {item.name} </p>
                     <p> Precio: {item.price}</p>
                     <p> Detalles: {item.details}</p>
-                    <div>
-                        {[...Array(5)].map((star, index: number) => {
-                            const ratingvalue = index + 1;
-                            return <label>
-                                <input type='radio'
-                                    name='Rating'
-                                    value={ratingvalue}
-                                    onClick={function pushrating() {
-                                        setRating([{
-                                            ...rating,
-                                            id: item.id,
-                                            rating: ratingvalue
-                                        }])
-                                    }}
-                                />
-                                <FaStar size={30}
-                                    className='star'
-                                    color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
-                                    onMouseEnter={() => setHover(ratingvalue)}
-                                    onMouseLeave={() => setHover(0)}
-                                />
-                            </label>
-                        })}
-                        <p>El rating de este producto es {showtotal}</p>
-                    </div>
                     <h4>Escribe una review</h4>
                     <textarea
                         name='review'
@@ -149,10 +134,31 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     }}>
                         <button>Comprar</button>
                     </Link>
-
                 </div>
             ))}
+        <div>
+            {[...Array(5)].map((star, index) => {
+                const ratingvalue = index + 1;
+                return <label>
+                    <input type='radio'
+                        name='Rating'
+                        value={ratingvalue}
+                        onClick={function pushrating() {
+                            setRating([...rating, ratingvalue])
+                        }}
+                    />
+                    <FaStar size={30}
+                        className='star'
+                        color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
+                        onMouseEnter={() => setHover(ratingvalue)}
+                        onMouseLeave={() => setHover(0)}
+                    />
+                </label>
+            })}
+                </div>
             </div>
+            <p>El rating de este producto es {totalrating}</p>
+
         </Fragment>
     )
 }
