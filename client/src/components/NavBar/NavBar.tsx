@@ -11,7 +11,7 @@ const NavBar = (): JSX.Element => {
       <div className={navBar.container}>
         <Link to='/'className={navBar.linksNav} > <h1 className={navBar.titleNav} >CompuHenry</h1> </Link>
         <SearchBar />
-        <Link className={navBar.linksNav} to="/cart">
+        <Link className={navBar.linksNav} to="/Carrodecompras">
         <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />$1300</Link>
         <Link className={navBar.linksNav} to="/login"> Iniciar Sesion</Link>
 
