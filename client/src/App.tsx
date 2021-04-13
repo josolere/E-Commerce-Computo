@@ -27,7 +27,6 @@ function App() {
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/' component={LandPage} />
-        <Route exact path='/Test' component={TestProducts} />
         <Route exact path='/Pago' component={Payment} />
         <Route exact path='/Home'>
           <Home/>
@@ -38,11 +37,11 @@ function App() {
         </Route>
         <Route exact path='/Carrodecompras' component={ShoppingCart}/>
         <Route component={PageNotFound}/>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/Test' component={Testfilter} />
+        <Route exact path='/Payment' component={Payment} />
       </Switch>
     </Router>
-
-
-
   );
 }
 

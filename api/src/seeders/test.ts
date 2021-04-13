@@ -95,7 +95,7 @@ let products = [
 
 ]
 
-    export function productsSeeder() {
+/*     export function productsSeeder() {
     products.forEach((item: any) => {
         Product.create({
             name: item.name,
@@ -105,4 +105,4 @@ let products = [
             details: item.details
     })
     })
-}
+} */
