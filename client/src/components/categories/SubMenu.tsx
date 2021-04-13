@@ -15,11 +15,11 @@ const SubMenu = ({item}:IProps): JSX.Element => {
   const showSubNav = () => setSubnav(!subnav);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.containerCategories}>
       <div >
-        <button className={styles.pri} onClick={showSubNav} value={item.title}>
+        <button onClick={showSubNav} value={item.title}>
           {item.title}
-          <div className="iconT">
+          <div className={styles.iconT}>
             {subnav ? <AiOutlineUp /> : <AiOutlineDown />}
           </div>
         </button>
@@ -28,7 +28,7 @@ const SubMenu = ({item}:IProps): JSX.Element => {
         {subnav &&
           item.subNav.map((item: { title: string }, i: number) => {
             return (
-              <button key={i} className={styles.subs}>
+              <button className={styles.botonSec} key={i}>
                 {item.title}
               </button>
             );

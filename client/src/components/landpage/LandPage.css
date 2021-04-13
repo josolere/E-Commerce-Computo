@@ -1,4 +1,4 @@
- .containerLand {
+.containerLand {
     background-color: #161616;
     height: 100vh;
  }
@@ -37,17 +37,20 @@
 }
 
 .botonLand {
-    width: fit-content;
+    width: 7rem;
+    height: 3rem;
+    border-color: transparent;
     float: right;
     margin-right: 23rem;
     margin-top: -17rem;
     border-radius: 4px;
     background-color: #F21B42;
-    font-weight: 700;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .botonLand:hover {
     color: white;
     background:#F21B42 ;
-    box-shadow: 0 0 50px #F21B42;
+    box-shadow: 0 0 3px #F21B42;
 }
