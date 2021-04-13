@@ -1,4 +1,4 @@
-import {gql, useMutation } from '@apollo/client';
+import {gql, useMutation, useQuery } from '@apollo/client';
 import React, { useState } from 'react'
 import styles from './CreateProduct.module.scss' 
 
@@ -41,10 +41,23 @@ interface newProductDetails{
     }
 `; */
 
+interface Categorie {
+    id: number,
+    name: string,
+}
+
+interface Categories {
+    getCategory: Categorie[]
+}
+
 const NEW_PRODUCT = gql`
-mutation NewProduct ($name: String! ) {
+mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String! ) {
     createProduct ( input: {
         name:$name,
+        price:$price, 
+        brand:$brand, 
+        image:$image, 
+        details:$details
       })
         {
             id
@@ -52,8 +65,16 @@ mutation NewProduct ($name: String! ) {
             
         }
     }
-    
 `;
+
+const GET_CATEGORIES = gql`
+query {
+    getCategory {
+        id
+        name
+    }
+}
+`
 
 type FormEvent = React.FormEvent<HTMLFormElement> ;
 type InputEvent = React.FormEvent<HTMLInputElement>;
@@ -66,9 +87,10 @@ export default function CreateProduct(){
     {createNewProduct: productInventary},
     {product:newProductDetails}
     >(NEW_PRODUCT,{variables:{product:state}}) */
+    const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
+    const categories = data?.getCategory
 
-    const [createProduct , {data}] = useMutation(NEW_PRODUCT)
-
+    const [createProduct , results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
    function handleChange(e:InputEvent){
     return setState({
@@ -77,9 +99,17 @@ export default function CreateProduct(){
     })
    }
 
+   function handlePrice (e : InputEvent) {
+    return setState({
+        ...state,
+        price: +e.currentTarget.value 
+    })
+   }
+
     async function handleSubmit(e:FormEvent){
     e.preventDefault()
-    createProduct({ variables: {  name: state.name } } )
+    console.log(state)
+    createProduct({ variables: state } )
     .then((resolve) => { console.log('Salio Bien') })
     .catch((err) => { console.log('Salio Mal') })
 }
@@ -94,13 +124,16 @@ export default function CreateProduct(){
              <label>Product Name</label>
              <input type='text' name='name' value={state.name} onChange={handleChange}/>
              <label>Price</label>
-             <input type='text' name='price' value={state.price} onChange={handleChange}/>
+             <input type='text' name='price' value={state.price} onChange={handlePrice}/>
              <label>Brand</label>
              <input type='text' name='brand' value={state.brand} onChange={handleChange}/>
              <label>Image</label>
              <input type='text' name='image' value={state.image} onChange={handleChange}/>
              <label>Details</label>
              <input type='text' name='details' value={state.details} onChange={handleChange}/>
+             <select>
+                 {categories?.map((cat) => <option>{cat.name}</option>)}
+             </select>
              <input type='submit' value='CREATE' className={styles.button} />
          </form>
 /*         </div>
