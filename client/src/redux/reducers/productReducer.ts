@@ -1,8 +1,9 @@
-import {SET_FILTER, SET_CATEGORIES} from '../actions'
+import {SET_FILTER, SET_CATEGORIES, PASS_ID} from '../actions'
 
 const initialState = {
     filter:"",
-    categories:[]
+    categories:[],
+    id: 1
 }
 
 function productReducer(state = initialState, action:any):any{
@@ -13,15 +14,16 @@ function productReducer(state = initialState, action:any):any{
                 ...state,
                 filter: action.filter
             }
-<<<<<<< HEAD
-            case SET_ACTIVITIES:
-=======
             case SET_CATEGORIES:
->>>>>>> c905d7cd8d645423639b8429a0fdda2401420957
                 return {
                     ...state,
                     categories : action.categories
                 }
+            case PASS_ID : {
+                return{
+                    id: action.idpass
+                }
+            }
         default: return state;
     }
 }
