@@ -37,11 +37,13 @@ function App() {
         </Route>
         <Route exact path='/Carrodecompras' component={ShoppingCart}/>
         <Route component={PageNotFound}/>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/Rating' component={StarRating} />
+        <Route exact path='/cart' component={ShoppingCart}/>
+        <Route exact path='/Test' component={TestProducts} />
+        <Route exact path='/Payment' component={Payment} />
       </Switch>
     </Router>
-
-
-
   );
 }
 

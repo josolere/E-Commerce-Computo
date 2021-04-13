@@ -5,6 +5,8 @@ const initialState = {
   categories: [],
 };
 
+
+
 function productReducer(state = initialState, action: any): any {
   switch (action.type) {
     case SET_FILTER:

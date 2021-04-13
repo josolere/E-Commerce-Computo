@@ -4,6 +4,8 @@ import AsyncSelect from "react-select";
 import {useQuery, gql} from '@apollo/client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from 'react-redux';
+import { setFilter } from '../../redux/actions';
 
 
 interface Search{
@@ -19,23 +21,34 @@ const InputSearch = (): JSX.Element => {
     const [options, setOptions] = useState([]) */
     const [searchInput, setSearchInput] = useState('')
     
+    const dispatch = useDispatch();
     
-    const handleSubmit = (e: FormElement) => {
+     const handleSubmit = (e: FormElement) => {
         e.preventDefault()
+        dispatch(setFilter(searchInput))
+    } 
+    
+    const handleChange = (e:React.FormEvent<HTMLInputElement>) => {
+        setSearchInput(e.currentTarget.value)
+        console.log("estado" + searchInput)
+        if(searchInput.length === 1) dispatch(setFilter(searchInput))
     }
+
+
+
     return (
         <>
             <form onSubmit={handleSubmit} className="searchBar">
                 <input type="text"
                     placeholder='Buscar...'
-                    onChange={(e) => setSearchInput(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                     value={searchInput}
                     className={search.inputSearch}
                 />
-            <button className={search.buttonSearch}><FontAwesomeIcon icon={faSearch}/></button>
+            <button type="submit" className={search.buttonSearch}><FontAwesomeIcon icon={faSearch}/></button>
             </form>
         </>
     )
 }
 
-export default InputSearch
+export default InputSearch;

@@ -28,16 +28,16 @@ export class Category extends Model<CategoryAttributesI, CategoryCreationAttribu
         public readonly createdAt!:Date;
         public readonly updatedAt!:Date;
         
-        public getCategories!: BelongsToManyGetAssociationsMixin<Category>
-        public addCategory!: BelongsToManyAddAssociationMixin<Category, number>
-        public addCategories!: BelongsToManyAddAssociationsMixin<Category, number>
-        public hasCategory!: BelongsToManyHasAssociationMixin<Category, number>
-        public hasCategories!: BelongsToManyHasAssociationsMixin<Category[], number>
-        public countCategories!:BelongsToManyCountAssociationsMixin;
-        public removeCategory!: BelongsToManyRemoveAssociationMixin<Category, number>
-        public removeCategories!: BelongsToManyRemoveAssociationsMixin<Category[], number>
-        public setCategories!: BelongsToManySetAssociationsMixin<Category[], number>
-        public createCategory!: BelongsToManyCreateAssociationMixin<Category>
+        public getProducts!: BelongsToManyGetAssociationsMixin<Product>
+        public addProduct!: BelongsToManyAddAssociationMixin<Product, number>
+        public addProductes!: BelongsToManyAddAssociationsMixin<Product, number>
+        public hasProduct!: BelongsToManyHasAssociationMixin<Product, number>
+        public hasProducts!: BelongsToManyHasAssociationsMixin<Product[], number>
+        public countProducts!:BelongsToManyCountAssociationsMixin;
+        public removeProduct!: BelongsToManyRemoveAssociationMixin<Product, number>
+        public removeProducts!: BelongsToManyRemoveAssociationsMixin<Product[], number>
+        public setProducts!: BelongsToManySetAssociationsMixin<Product[], number>
+        public createProduct!: BelongsToManyCreateAssociationMixin<Product>
 
         public readonly products?: Product[];
 

@@ -14,13 +14,15 @@ export const typeDefs = gql`
   }
 
   type Query {
-    getProducts(filter:FilterProducts): [Product!]
+    getProducts(filter: FilterProducts): [Product!]
     getProductById(id: ID!): Product
     getProductByName(name: String): [Product]
   }
 
   type Mutation {
     createProduct(input: CreateProductInput): Product
+    deleteProduct(id: String!): Product!
+    editProduct(id: String, input: EditProductInput): Product!
   }
 
   input CreateProductInput {
@@ -31,7 +33,7 @@ export const typeDefs = gql`
     price: Float
     details: String
   }
-  
+
   input EditProductInput {
     name: String
     image: String
@@ -41,10 +43,9 @@ export const typeDefs = gql`
   }
 
   input FilterProducts {
-    name:String = "", 
-    offset:Int = 0, 
-    limit:Int = 10, 
-    categoriesId:[Int]
+    name: String = ""
+    offset: Int = 0
+    limit: Int = 10
+    categoriesId: [ID]
   }
-
 `;
