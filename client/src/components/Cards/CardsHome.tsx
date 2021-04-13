@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from './CardHome'
 import styles from './CardsHome.module.scss'
 import { useQuery, gql } from '@apollo/client';
+import { useParams } from 'react-router';
+import { RootStateOrAny, useSelector } from 'react-redux';
+import { AppState } from '../../redux/reducers';
 
 
 interface DetailsProduct {
@@ -17,18 +20,21 @@ interface DetailsData {
     getProducts: DetailsProduct[]
 }
 
-
-const products = gql` 
-{
-    getProducts (filter:{limit:12}) {
-        id
-        name
-        brand
-        details
-        price
-        image
-    }
+interface IParams {
+    name:string
 }
+
+
+
+const products = gql`
+    query ($name: String!){
+        getProducts (filter:{limit:12 name:$name}) {
+            id
+            name
+            price
+            image
+        }
+    }
 `;
 
 /* const products : IProduct[] = [
@@ -47,16 +53,24 @@ const products = gql`
 ] */
 
 export default function Cards(){
+    // const[state,setState]: [any,Function] = useState({})
+    const name = useSelector((store: AppState) => store.productReducer.filter)
 
-    const { loading, error, data } = useQuery<DetailsData>(products)
+    const { loading, error, data } = useQuery<DetailsData>(products,{variables:{name:name}})
+    useEffect(()=>{
+        console.log(data)
+    },[data])
 
     const product = data?.getProducts
+
 
     console.log(product)
 
     return (
         <div className={styles.container}>
-        {product?.map(el => <Card id={el.id} name={el.name} image={el.image} price={el.price} />)}         
+        {loading ? <h2 style={{color:'whitesmoke'}}>Cargando Productos...</h2> : false}
+        {product?.length === 0?<h2 style={{color:'whitesmoke'}}>El producto que busca no existe o no se encuentra disponible</h2>:false}
+        {product?.map(el => <Card id={el.id} name={el.name} image={el.image} price={el.price} />)  }         
         </div>
     )
 }

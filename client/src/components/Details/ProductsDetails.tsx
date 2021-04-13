@@ -1,36 +1,58 @@
-import React, { Fragment, useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import React, { useState } from 'react';
+import { useQuery, useMutation, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import styles from "./ProductDetail.module.scss"
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 
 interface DetailsProduct {
-    id: number,
-    brand: string,
-    image: string,
-    name: string,
-    price: number,
-    details: string,
+    getProductById: {
+        id: number
+        brand: string
+        image: string
+        name: string
+        price: number
+        details: string
+    }
 }
 
-interface DetailsData {
-    getProducts: DetailsProduct[]
+interface Review {
+    rating: number
+    review: string
 }
 
-const GET = gql` 
-    {
-        getProducts {
+const Review_Mutation = gql`
+    mutation MutationReview ( $rating: Int! $review: String!) {
+        Product (rating: $rating review: $review )
+        {
             id
             name
             price
             details
             brand
             image
+            rating
+            review
         }
     }
+`
+
+const GET = gql`
+    query ($id:ID!) {
+        getProductById(id:$id)
+        {
+            id
+            name
+            price
+            brand
+            details
+            image
+        }
+}
+
 `;
 
 interface PropsDetails {
@@ -43,36 +65,27 @@ interface PropsDetails {
     }
 }
 
-
-
-
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
-    const { loading, error, data } = useQuery<DetailsData>(GET);
+    const id = props.history.location.state.id
+
+    const { loading, error, data } = useQuery<DetailsProduct>(GET, {
+        variables: { id }
+    });
+
+    const [MutationReview] = useMutation<Review>(Review_Mutation)
 
     let [rating, setRating] = useState<Array<any>>([])
 
     const [hover, setHover] = useState(0)
 
     const [reviewuser, setReviewuser] = useState({
-        id: '',
         review: ''
     })
 
-    const [total, setTotal] = useState<Array<any>>([{
-        id: null,
-        totalrating: null
-    }])
+    const [hidestar, setHidestar] = useState(true)
 
-    const id = props.history.location.state.id
-
-    const filtred = data?.getProducts.filter(item => item.id == id)
-
-
-
-    const product = filtred?.find(el => el)
-
-
+    const filtred = data?.getProductById
 
     let totalrating: number = 0
 
@@ -91,39 +104,57 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
+    const changereview = () => {
+        MutationReview({ variables: { rating: totalrating, review: reviewuser.review }})
+        .then(review =>{
+            console.log('review up')
+        })
+        .catch((err) => {console.log('review mal')})
+        alert('Gracias por dejar su review del producto')
+    }
+
     return (
         <div className={styles.contenedorAll}>
             <NavBar />
             <div className={styles.contenedorDetail}>
-                <img src={product?.image} alt='' />
+                <img src={filtred?.image} alt='' />
                 <div >
-                    <h1 className={styles.nameDetail}>{product?.name}</h1>
-                    <p> Marca: {product?.brand} </p>
-                    <p> Detalles: {product?.details}</p>
+                    <h1 className={styles.nameDetail}>{filtred?.name}</h1>
+                    <p> Marca: {filtred?.brand} </p>
+                    <p> Detalles: {filtred?.details}</p>
                     <div className={styles.botonPrecio}>
-                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(product?.price || 0 )}</h2>
+                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>
                         <div className={styles.estrellas}>
-                            <div >
-                                {[...Array(5)].map((star, index) => {
-                                    const ratingvalue = index + 1;
-                                    return <label>
-                                        <input type='radio'
-                                            name='Rating'
-                                            value={ratingvalue}
-                                            onClick={function pushrating() {
-                                                setRating([...rating, ratingvalue])
-                                            }}
-                                        />
-                                        <FaStar size={30}
-                                            className='star'
-                                            color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
-                                            onMouseEnter={() => setHover(ratingvalue)}
-                                            onMouseLeave={() => setHover(0)}
-                                        />
-                                    </label>
-                                })}
-                                <p>Rating {totalrating}</p>
-                            </div>
+                            {hidestar ?
+                                <div >
+                                    {[...Array(5)].map((star, index) => {
+                                        const ratingvalue = index + 1;
+                                        return <label>
+                                            <input type='radio'
+                                                name='Rating'
+                                                value={ratingvalue}
+                                                onClick={function pushrating() {
+                                                    setRating([...rating, ratingvalue])
+                                                    setHidestar(false)
+                                                }}
+                                            />
+                                            <FaStar size={30}
+                                                className='star'
+                                                color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
+                                                onMouseEnter={() => setHover(ratingvalue)}
+                                                onMouseLeave={() => setHover(0)}
+                                            />
+                                        </label>
+                                    })}
+                                    <p className={styles.raiting}>Rating {totalrating}</p>
+                                </div>
+                                :
+                                <div>
+                                    <h1 className={styles.gracias} >Gracias por dejar su review</h1>
+                                    <p className={styles.raiting} >Rating {totalrating}</p>
+                                </div>
+                            }
+
                         </div>
                         <Link to={{
                             pathname: '/Pago',
@@ -147,7 +178,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
                         </div>
                     </div>
-                    <button className={styles.buttonCompra} >Guardar Review</button>
+                    <button onClick={changereview} className={styles.buttonCompra} >Guardar Review</button>
                 </div>
             </div>
         </div>

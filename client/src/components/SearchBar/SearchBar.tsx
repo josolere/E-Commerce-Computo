@@ -3,6 +3,8 @@ import search from './styleSearch.module.css'
 import {useQuery, gql} from '@apollo/client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from 'react-redux';
+import { setFilter } from '../../redux/actions';
 
 
 interface Search{
@@ -13,11 +15,12 @@ interface Search{
 type FormElement = React.FormEvent<HTMLFormElement>;
 
 const InputSearch = (): JSX.Element => {
-
+    const dispatch = useDispatch()
     const [searchInput, setSearchInput] = useState('')
     
     const handleSubmit = (e: FormElement) => {
         e.preventDefault()
+        dispatch(setFilter(searchInput))
     }
     return (
         <>

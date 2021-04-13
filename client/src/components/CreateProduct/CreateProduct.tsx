@@ -29,9 +29,9 @@ interface newProductDetails{
 //     }
 // }
 
-const NEW_PRODUCT = gql`
-    mutation createProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!) {
-         createProduct(input:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
+/* const NEW_PRODUCT = gql`
+    mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
+        createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
             id
             name 
             price
@@ -39,7 +39,20 @@ const NEW_PRODUCT = gql`
             image
             details
     }
-  }
+`; */
+
+const NEW_PRODUCT = gql`
+mutation NewProduct ($name: String! ) {
+    createProduct ( input: {
+        name:$name,
+      })
+        {
+            id
+            name
+            
+        }
+    }
+    
 `;
 
 type FormEvent = React.FormEvent<HTMLFormElement> ;
@@ -49,10 +62,12 @@ type InputEvent = React.FormEvent<HTMLInputElement>;
 export default function CreateProduct(){
     const [state , setState] = useState({name:"",price:0,brand:"",image:"",details:""})
     
-    const [createProduct, { error, data }] = useMutation<
-    {createProduct: productInventary},
-    {input:newProductDetails}
-    >(NEW_PRODUCT,{variables:{input:state}})
+/*     const [createNewProduct, { error, data }] = useMutation<
+    {createNewProduct: productInventary},
+    {product:newProductDetails}
+    >(NEW_PRODUCT,{variables:{product:state}}) */
+
+    const [createProduct , {data}] = useMutation(NEW_PRODUCT)
 
 
    function handleChange(e:InputEvent){
@@ -64,15 +79,15 @@ export default function CreateProduct(){
 
     async function handleSubmit(e:FormEvent){
     e.preventDefault()
-    // console.log(NEW_PRODUCT.definitions)
-    createProduct()
-    // console.log(result)
-   }
+    createProduct({ variables: {  name: state.name } } )
+    .then((resolve) => { console.log('Salio Bien') })
+    .catch((err) => { console.log('Salio Mal') })
+}
 
     return(
-        <div className={styles.container}>
+/*         <div className={styles.container}>
         {error ? alert(`Oh no! ${error.message}`) : null}
-        {data && data.createProduct ? alert(`Saved!`) : null}
+        {data && data.createNewProduct ? alert(`Saved!`) : null} */
          <form onSubmit={handleSubmit} className={styles.form} >
              <h1>Create Product</h1>
              <hr/>
@@ -88,6 +103,6 @@ export default function CreateProduct(){
              <input type='text' name='details' value={state.details} onChange={handleChange}/>
              <input type='submit' value='CREATE' className={styles.button} />
          </form>
-        </div>
-    )
+/*         </div>
+ */    )
 }
