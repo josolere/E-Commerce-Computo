@@ -12,7 +12,6 @@ import { Association ,DataTypes, Model, Optional, Sequelize ,
     BelongsToManyCreateAssociationMixin,
 } from 'sequelize';
 
-
 import { Category } from './Category'
 
 export interface ProductAttributesI {

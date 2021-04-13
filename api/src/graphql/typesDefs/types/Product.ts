@@ -7,7 +7,7 @@ export const typeDefs = gql`
     name: String!
     image: String
     brand: String
-    price: Int
+    price: Float
     details: String
     createdAt: String
     updatedAt: String
@@ -28,14 +28,15 @@ export const typeDefs = gql`
     name: String!
     image: String
     brand: String
-    price: Int
+    price: Float
     details: String
   }
+  
   input EditProductInput {
     name: String
     image: String
     brand: String
-    price: Int
+    price: Float
     details: String
   }
 
