@@ -105,7 +105,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     const changereview = () => {
-        MutationReview({ variables: { rating: totalrating, review: reviewuser.review } }  )
+        MutationReview({ variables: { rating: totalrating, review: reviewuser.review }})
         .then(review =>{
             console.log('review up')
         })

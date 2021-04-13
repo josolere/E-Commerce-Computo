@@ -16,7 +16,7 @@ import { gql, useMutation } from '@apollo/client';
 
 const NEW_CATEGORY = gql`
 mutation NewCategory ($name: String!) {
-    createCategory (input:{
+    createCategory ( input: {
         name:$name
       })
         {
@@ -31,6 +31,7 @@ type FormEvent = React.FormEvent<HTMLFormElement>
 type InputEvent = React.FormEvent<HTMLInputElement>
 
 export default function CreateProduct() {
+    
     const [categorie, setCategorie] = useState("")
     /*     const [createNewCategory, { error, data }] = useMutation<
         {createNewProduct: categoryInventary},

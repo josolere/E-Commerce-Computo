@@ -19,7 +19,7 @@ interface newProductDetails{
     details:string
 }
 
-const NEW_PRODUCT = gql`
+/* const NEW_PRODUCT = gql`
     mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
         createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
             id
@@ -30,6 +30,20 @@ const NEW_PRODUCT = gql`
             details
         }
     }
+`; */
+
+const NEW_PRODUCT = gql`
+mutation NewProduct ($name: String! ) {
+    createProduct ( input: {
+        name:$name,
+      })
+        {
+            id
+            name
+            
+        }
+    }
+    
 `;
 
 type FormEvent = React.FormEvent<HTMLFormElement> ;
@@ -39,10 +53,12 @@ type InputEvent = React.FormEvent<HTMLInputElement>;
 export default function CreateProduct(){
     const [state , setState] = useState({name:"",price:0,brand:"",image:"",details:""})
     
-    const [createNewProduct, { error, data }] = useMutation<
+/*     const [createNewProduct, { error, data }] = useMutation<
     {createNewProduct: productInventary},
     {product:newProductDetails}
-    >(NEW_PRODUCT,{variables:{product:state}})
+    >(NEW_PRODUCT,{variables:{product:state}}) */
+
+    const [createProduct , {data}] = useMutation(NEW_PRODUCT)
 
 
    function handleChange(e:InputEvent){
@@ -54,13 +70,15 @@ export default function CreateProduct(){
 
    function handleSubmit(e:FormEvent){
     e.preventDefault()
-    createNewProduct()
-   }
+    createProduct({ variables: {  name: state.name } } )
+    .then((resolve) => { console.log('Salio Bien') })
+    .catch((err) => { console.log('Salio Mal') })
+}
 
     return(
-        <div className={styles.container}>
+/*         <div className={styles.container}>
         {error ? alert(`Oh no! ${error.message}`) : null}
-        {data && data.createNewProduct ? alert(`Saved!`) : null}
+        {data && data.createNewProduct ? alert(`Saved!`) : null} */
          <form onSubmit={handleSubmit} className={styles.form} >
              <h1>Create Product</h1>
              <hr/>
@@ -76,6 +94,6 @@ export default function CreateProduct(){
              <input type='text' name='details' value={state.details} onChange={handleChange}/>
              <input type='submit' value='CREATE' className={styles.button} />
          </form>
-        </div>
-    )
+/*         </div>
+ */    )
 }

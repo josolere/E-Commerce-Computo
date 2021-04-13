@@ -12,7 +12,7 @@ function productReducer(state = initialState, action:any):any{
                 ...state,
                 filter: action.filter
             }
-            case SET_ACTIVITY:
+            case SET_ACTIVITIES:
                 return {
                     ...state,
                     categories : action.categories
