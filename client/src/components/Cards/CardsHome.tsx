@@ -52,8 +52,6 @@ export default function Cards(){
 
     const product = data?.getProducts
 
-    console.log(product)
-
     return (
         <div className={styles.container}>
         {product?.map(el => <Card id={el.id} name={el.name} image={el.image} price={el.price} />)}         

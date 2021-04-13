@@ -15,11 +15,15 @@
       top: 1rem;
       left: 1rem;
       right: 0;
+      width:10rem;
+      height: auto;
   }
   span{
       position: absolute;
       bottom: 2.5rem;
       font-weight: 600;
+      color: black;
+      margin:0rem 0rem 1rem 1rem;   
   }
 }
 .buttons {
@@ -29,12 +33,15 @@
     button{
         color: whitesmoke;
         padding: 0.7rem 00.5rem;
+        border-color: transparent;
+        width: 96px;
     }
 }
 .buy{
     background-color: #F21B42;
     font-size: 1.2rem;
     font-weight: 700;
+    outline: none;
 }
 .learn{
     font-size: 00.7rem;

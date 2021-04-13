@@ -14,6 +14,7 @@
             margin-top: 0;
         }       
    } 	
+  
    img {
        width: 20rem;
        margin-right: 2rem;
@@ -43,17 +44,19 @@
 
 .buttonCompra {
     width: 12rem;
+    height: 3rem;
     margin-top: 4rem;
     color:#161616;
     border-radius: 5px;
     background-color:#F21B42 ;
-    font-weight: 700;
+    font-weight: 800;
+    border-color: transparent;
 }
 
 .buttonCompra:hover {
-        color: white;
-        background:#F21B42 ;
-        box-shadow: 0 0 50px #F21B42;
+    color: white;
+    background:#F21B42 ;
+    box-shadow: 0 0 5px #F21B42;
 }
 
 

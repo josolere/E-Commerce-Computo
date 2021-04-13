@@ -1,12 +1,44 @@
-button{
+.containerCategories {
+    width: 100%;
+    div {
+        .botonSec {
+            background-color:#F21B42;
+        }
+        button {
+            background-color: black;
+            text-align: start;
+            color: whitesmoke;
+            border: transparent;
+            width: 12rem;
+            padding: 1rem;
+            outline: none;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.iconT {
+   display: inline-flex;
+   float: right;
+   
+}
+
+
+
+
+
+
+
+
+/* button{
     border: none;
     width: 100%;
     background-color: none;
     outline: none;
     padding: 1rem;
-    &:hover{
-        cursor: pointer;
-    }
+    
 }
 div{
     width: 100%;
@@ -14,9 +46,9 @@ div{
 
 .pri{
     color: whitesmoke;
-    background-color: #000406;
+    
 }
 .subs{
     color: whitesmoke;
     background-color: #F21B42
-}
+} */
