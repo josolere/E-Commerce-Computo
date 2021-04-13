@@ -43,5 +43,12 @@
     margin-top: -17rem;
     border-radius: 4px;
     background-color: #F21B42;
+    color:white;
     font-weight: 700;
+}
+
+.botonLand:hover{
+         color: white;
+        background:#F21B42 ;
+        box-shadow: 0 0 50px #F21B42;
 }

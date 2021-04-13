@@ -68,11 +68,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const filtred = data?.getProducts.filter(item => item.id == id)
 
-    
+
 
     const product = filtred?.find(el => el)
 
-    
+
 
     let totalrating: number = 0
 
@@ -93,61 +93,63 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     return (
         <div className={styles.contenedorAll}>
-           <NavBar/>
+            <NavBar />
             <div className={styles.contenedorDetail}>
-                    <img src={product?.image} alt='' />
-                    <div >
+                <img src={product?.image} alt='' />
+                <div >
                     <h1 className={styles.nameDetail}>{product?.name}</h1>
                     <p> Marca: {product?.brand} </p>
                     <p> Detalles: {product?.details}</p>
                     <div className={styles.botonPrecio}>
-                    <h2 className={styles.precioDetail}>${product?.price}</h2>
-                    <div className={styles.estrellas}>
-                <div >
-                    {[...Array(5)].map((star, index) => {
-                        const ratingvalue = index + 1;
-                        return <label>
-                            <input type='radio'
-                                name='Rating'
-                                value={ratingvalue}
-                                onClick={function pushrating() {
-                                    setRating([...rating, ratingvalue])
-                                }}
-                            />
-                            <FaStar size={30}
-                                className='star'
-                                color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
-                                onMouseEnter={() => setHover(ratingvalue)}
-                                onMouseLeave={() => setHover(0)}
-                            />
-                        </label>
-                    })}
-                    <p>Rating {totalrating}</p>
+                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(product?.price || 0 )}</h2>
+                        <div className={styles.estrellas}>
+                            <div >
+                                {[...Array(5)].map((star, index) => {
+                                    const ratingvalue = index + 1;
+                                    return <label>
+                                        <input type='radio'
+                                            name='Rating'
+                                            value={ratingvalue}
+                                            onClick={function pushrating() {
+                                                setRating([...rating, ratingvalue])
+                                            }}
+                                        />
+                                        <FaStar size={30}
+                                            className='star'
+                                            color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
+                                            onMouseEnter={() => setHover(ratingvalue)}
+                                            onMouseLeave={() => setHover(0)}
+                                        />
+                                    </label>
+                                })}
+                                <p>Rating {totalrating}</p>
+                            </div>
+                        </div>
+                        <Link to={{
+                            pathname: '/Pago',
+                            state: {
+                                id: id
+                            }
+                        }}>
+                            <button className={styles.buttonCompra}>Comprar</button>
+                        </Link>
+                        <div className={styles.review}>
+                            <textarea
+                                placeholder={'Escriba aquí una review del producto'}
+                                className={styles.textarea}
+                                name='review'
+                                value={reviewuser.review}
+                                onChange={(event) =>
+                                    setReviewuser({
+                                        ...reviewuser,
+                                        review: event.target.value
+                                    })} />
+
+                        </div>
+                    </div>
+                    <button className={styles.buttonCompra} >Guardar Review</button>
                 </div>
             </div>
-            <Link to={{
-                pathname: '/payment',
-                state: {
-                    id: id
-                }
-            }}>
-                 <button className={styles.buttonCompra}>Comprar</button>
-                </Link>
-            <div className={styles.review}>
-                    <h4>Escribe una review</h4>
-                <textarea
-                name='review'
-                value={reviewuser.review}
-                onChange={(event) =>
-                    setReviewuser({
-                        ...reviewuser,
-                        review: event.target.value
-                    })}
-            />
-            </div>
-                    </div>
-                    </div>
-                </div>
         </div>
     )
 }
