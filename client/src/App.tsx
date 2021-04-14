@@ -37,9 +37,6 @@ function App() {
         </Route>
         <Route exact path='/Carrodecompras' component={ShoppingCart}/>
         <Route component={PageNotFound}/>
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/Test' component={Testfilter} />
-        <Route exact path='/Payment' component={Payment} />
       </Switch>
     </Router>
   );

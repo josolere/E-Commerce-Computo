@@ -12,9 +12,9 @@ const NavBar = (): JSX.Element => {
         <Link to='/'className={navBar.linksNav} > <h1 className={navBar.titleNav} >CompuHenry</h1> </Link>
         <SearchBar />
         <Link className={navBar.linksNav} to="/cart">
-        <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />$1300</Link>
+        <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} /></Link>
         <Link className={navBar.linksNav} to="/login"> Iniciar Sesion</Link>
-
+        
         <Link to="/Home" className = {navBar.linksNav}>Productos</Link>  
         <Link to="/cuenta" className = {navBar.linksNav}>Mi Cuenta</Link>  
               
