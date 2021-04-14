@@ -4,18 +4,20 @@ import {
   iModels,
   iProduct,
   iFilterProducts,
+  iAddReviewInput,
 } from "../../interfaces";
 import Sequelize, { Op } from "sequelize";
-import Category from "../../models";
-import db from "../../models";
+import { Category } from "../../models/Category";
+import { Review } from "../../models/Review";
+import db from "../../models/";
 
 export default {
   Query: {
-    getProducts: (
+    getProducts: async (
       _parent: object,
       { filter }: { filter: iFilterProducts },
       { models }: { models: iModels }
-    ): iProduct[] => {
+    ): Promise<iProduct[]> => {
       if (!filter) {
         filter = { name: "", offset: 0, limit: 10, categoriesId: [0] };
       }
@@ -36,7 +38,7 @@ export default {
                 {
                   model: db.Category,
                   through: "productsxcategories",
-                  attributes: [],
+                  attributes: ["name", "id"],
                   where: { id: { [Op.in]: categoriesId } },
                 },
               ],
@@ -69,11 +71,22 @@ export default {
     },
   },
   Mutation: {
-    createProduct: (
+    createProduct: async (
       _parent: object,
       { input }: { input: iCreateProductInput },
       { models }: { models: iModels }
-    ): iProduct => models.Product.create({ ...input }),
+    ): Promise<any> => {
+      console.log(input.categories);
+      let categoryArray = input.categories; //para que tome que hay categorias hay que agregarlas en la interfaz del create product input
+
+      let createdProduct = await models.Product.create({ ...input });
+      categoryArray.forEach((item: any) => {
+        //let currentCategory = await models.Category.findByPk(item)
+
+        createdProduct.addCategory(item);
+      });
+      return createdProduct;
+    },
     deleteProduct: async (
       _parent: object,
       { id }: { id: string },
@@ -106,5 +119,23 @@ export default {
 
       return null;
     },
+    /*
+    addReview: async(
+      _parent: object,
+      { id, input }: { id : string; input: iAddReviewInput },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const currentProduct = await models.Product.findByPk(input.product,{include:'reviews'})
+
+      let createdReview = await Review.create({ ...input})
+
+      console.log(currentProduct)
+
+      currentProduct.addReview(createdReview)
+
+      return createdReview
+
+    }
+    */
   },
 };

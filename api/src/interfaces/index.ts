@@ -1,5 +1,5 @@
 // Types
-import { User, Product, Order, OrderDetail } from "./types";
+import { User, Product, Order, OrderDetail, Review } from "./types";
 
 // User
 export interface iUser extends User {
@@ -17,7 +17,9 @@ export interface iProduct extends Product {
   createdAt: Date;
   updatedAt: Date;
 }
-export interface iCreateProductInput extends Product {}
+export interface iCreateProductInput extends Product {
+  categories: Array<any>;
+}
 export interface iEditProductInput extends Product {}
 
 export interface iFilterProducts {
@@ -44,6 +46,14 @@ export interface iOrderDetail extends OrderDetail {
 }
 export interface iCreateOrderDetailInput extends Order {}
 export interface iEditOrderDetailInput extends Order {}
+
+//Review
+export interface iReview extends Review {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface iAddReviewInput extends Review {}
 
 //Models
 export interface iModels {

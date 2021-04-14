@@ -27,6 +27,7 @@ export interface ProductAttributesI {
   brand: string;
   price: number;
   details: string;
+  categoriesId: number;
 }
 
 interface ProductCreationAttributesI
@@ -41,22 +42,23 @@ export class Product
   public brand!: string;
   public price!: number;
   public details!: string;
+  public categoriesId!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  public getProducts!: BelongsToManyGetAssociationsMixin<Product>;
-  public addProduct!: BelongsToManyAddAssociationMixin<Product, number>;
-  public addProductes!: BelongsToManyAddAssociationsMixin<Product, number>;
-  public hasProduct!: BelongsToManyHasAssociationMixin<Product, number>;
-  public hasProducts!: BelongsToManyHasAssociationsMixin<Product[], number>;
-  public countProducts!: BelongsToManyCountAssociationsMixin;
-  public removeProduct!: BelongsToManyRemoveAssociationMixin<Product, number>;
-  public removeProducts!: BelongsToManyRemoveAssociationsMixin<
-    Product[],
+  public getCategories!: BelongsToManyGetAssociationsMixin<Category>;
+  public addCategory!: BelongsToManyAddAssociationMixin<Category, number>;
+  public addCategories!: BelongsToManyAddAssociationsMixin<Category, number>;
+  public hasCategory!: BelongsToManyHasAssociationMixin<Category, number>;
+  public hasCategories!: BelongsToManyHasAssociationsMixin<Category[], number>;
+  public countCategories!: BelongsToManyCountAssociationsMixin;
+  public removeCategory!: BelongsToManyRemoveAssociationMixin<Category, number>;
+  public removeCategories!: BelongsToManyRemoveAssociationsMixin<
+    Category[],
     number
   >;
-  public setProducts!: BelongsToManySetAssociationsMixin<Product[], number>;
-  public createProduct!: BelongsToManyCreateAssociationMixin<Product>;
+  public setCategories!: BelongsToManySetAssociationsMixin<Category[], number>;
+  public createCategory!: BelongsToManyCreateAssociationMixin<Category>;
 
   public readonly categories?: Category[];
   public readonly orders?: Order[];
@@ -76,7 +78,7 @@ export function ProductFactory(sequelize: Sequelize) {
         primaryKey: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       image: {
@@ -90,6 +92,9 @@ export function ProductFactory(sequelize: Sequelize) {
       },
       details: {
         type: DataTypes.TEXT,
+      },
+      categoriesId: {
+        type: DataTypes.INTEGER,
       },
     },
     {

@@ -3,7 +3,7 @@ import styles from './Categories.module.scss'
 
 export interface model {
   title: string;
-  subNav: { title: string }[];
+  subNav: { title: string, id:number }[];
 }
 
 const NavCategories = (): JSX.Element => {
@@ -13,37 +13,44 @@ const NavCategories = (): JSX.Element => {
     {
       title: "Placa de Video",
       subNav: [
-        { title: "Placas de video Amd" },
-        { title: "Placas de video GeForce" },
+        { title: "Placas de video Amd", id : 1 },
+        { title: "Placas de video GeForce", id : 1 },
       ],
     },
     {
       title: "Memorias",
-      subNav: [{ title: "Memorias Ram" }, { title: "Memorias Sodimm" }],
+      subNav: [{ title: "Memorias Ram", id: 2}, { title: "Memorias Sodimm", id : 2 }],
     },
     {
       title: "Almacenamiento",
-      subNav: [{ title: "Disco SSD" }, { title: "Disco Rigido" }],
+      subNav: [{ title: "Disco SSD", id:3 }, { title: "Disco Rigido", id : 3 }],
     },
     {
       title: "Motherboards",
-      subNav: [{ title: "Mothers AMD" }, { title: "Mothers Intel" }],
+      subNav: [{ title: "Mothers AMD", id : 4 }, { title: "Mothers Intel", id : 4 }],
     },
     {
       title: "Teclados y Mouses",
       subNav: [
-        { title: "Mouses" },
-        { title: "Teclados" },
-        { title: "Mouse Pads" },
+        { title: "Mouses", id:5 },
+        { title: "Teclados", id:5 },
+        { title: "Mouse Pads", id:5 },
       ],
     },
     {
       title: "Monitores y Televisores",
-      subNav: [{ title: "Soportes" }, { title: "Monitores y pantallas" }],
+      subNav: [{ title: "Soportes", id:6 }, { title: "Monitores y pantallas", id:6 }],
     },
     {
       title: "Perifericos",
-      subNav: [{ title: "Webcam" }, { title: "Tablas Digitalizadoras" }],
+      subNav: [{ title: "Webcam", id:7 },{ title: "Auriculares", id:7 }, { title: "Tablas Digitalizadoras", id:7 }],
+    },
+    {
+      title: "Procesadores",
+      subNav: [
+        { title: "Procesadores Amd", id : 8 },
+        { title: "Procesadores Intel", id : 8 },
+      ],
     },
   ];
 

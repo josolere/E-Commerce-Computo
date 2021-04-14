@@ -20,3 +20,7 @@ export type OrderDetail = {
   quantity: number;
   price: number;
 };
+export type Review = {
+  text: string;
+  rating: number;
+};

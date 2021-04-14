@@ -1,8 +1,7 @@
 import * as React from 'react'; 
 import { useState }  from 'react';
 import { useHistory } from 'react-router';
-import { useMutation, gql } from '@apollo/client';
-import { AUTH_TOKEN } from './constants'
+import { useMutation, useQuery, gql } from '@apollo/client';
 
 interface LoginSet {
     email: string,
@@ -17,38 +16,30 @@ interface LoginData {
     login: LoginSet,
 }
 
-const SIGNUP_MUTATION = gql`
-  mutation SignupMutation(
-    $email: String!
-    $password: String!
-    $name: String!
-  ) {
-    signup(
-      email: $email
-      password: $password
-      name: $name
-    ) {
-      token
+const SIGNUPMUTATION = gql`
+    mutation SIGNUPMUTATION ($name: String! $password: String! $email: String!) 
+    {
+        supuestosignup (input:{name:$name password: $password email: $email})
+        {
+            nosequellega
+        }
     }
-  }
 `;
 
-const LOGIN_MUTATION = gql`
-  mutation LoginMutation(
-    $email: String!
-    $password: String!
-  ) {
-    login(
-        email: $email, 
-        password: $password) 
-        {
-      token
+const LOGINMUTATION = gql`
+    mutation LOGINMUTATION ($email: String!$password: String!) 
+    {
+        supuestologin (input : { email: $email  password: $password } ) 
+    
+    {
+        loquellega    
+    
     }
-  }
+}
 `;
 
 const Login = () => {
-    const history = useHistory();
+
     const [logform, setLogform] = useState({
         login: true,
         email: '',
@@ -56,33 +47,16 @@ const Login = () => {
         name: ''
     });
 
-    const [login] = useMutation<LoginData>(LOGIN_MUTATION, {
-        variables: {
-            email: logform.email,
-            password: logform.password
-        },
-        onCompleted: ({ login }) => {
-            localStorage.setItem(AUTH_TOKEN, login.token);
-            history.push('/');
-        }
-    });
+    const [login] = useMutation<LoginData>(LOGINMUTATION, {
+        variables: { email: logform.email, password: logform.password}});
 
-    const [signup] = useMutation<LoginData>(SIGNUP_MUTATION, {
-        variables: {
-            name: logform.name,
-            email: logform.email,
-            password: logform.password
-        },
-        onCompleted: ({ signup }) => {
-            localStorage.setItem(AUTH_TOKEN, signup.token);
-            history.push('/');
-        }
-    });
+    const [signup] = useMutation<LoginData>(SIGNUPMUTATION, {
+        variables: { name: logform.name, email: logform.email, password: logform.password}});
 
     return (
         <div>
             <h4>
-                {logform.login ? 'Loguearse' : 'Unirse'}
+                {logform.login ? 'Unirse' : 'Loguearse'}
             </h4>
             <div>
                 {logform.login && (
