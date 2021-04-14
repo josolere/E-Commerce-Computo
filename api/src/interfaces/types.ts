@@ -13,3 +13,10 @@ export type Product = {
   price: number;
   details: number;
 };
+export type Order = {
+  status: string;
+};
+export type OrderDetail = {
+  quantity: number;
+  price: number;
+};

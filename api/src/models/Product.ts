@@ -18,6 +18,7 @@ import {
 } from "sequelize";
 
 import { Category } from "./Category";
+import { Order } from "./Order";
 
 export interface ProductAttributesI {
   id: number;
@@ -58,9 +59,11 @@ export class Product
   public createProduct!: BelongsToManyCreateAssociationMixin<Product>;
 
   public readonly categories?: Category[];
+  public readonly orders?: Order[];
 
   public static associations: {
     categories: Association<Product, Category>;
+    orders: Association<Product, Order>;
   };
 }
 

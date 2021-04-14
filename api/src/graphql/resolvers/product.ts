@@ -17,7 +17,7 @@ export default {
       { models }: { models: iModels }
     ): iProduct[] => {
       if (!filter) {
-        filter = { name: "", offset: 0, limit: 10, categoriesId:[0] };
+        filter = { name: "", offset: 0, limit: 10, categoriesId: [0] };
       }
       const limit = filter.limit;
       const offset = filter.offset;
@@ -30,12 +30,16 @@ export default {
 
       return models.Product.findAll({
         include:
-        categoriesId.length === 0? [] : 
-        [
-          {
-            model: db.Category, through: "productsxcategories", attributes: [], where : { id : {[Op.in] : categoriesId}}
-          }
-        ],
+          categoriesId.length === 0
+            ? []
+            : [
+                {
+                  model: db.Category,
+                  through: "productsxcategories",
+                  attributes: [],
+                  where: { id: { [Op.in]: categoriesId } },
+                },
+              ],
         where: {
           [Op.and]: [{ name: { [Op.iLike]: `%${filter.name}%` } }],
         },
@@ -66,10 +70,10 @@ export default {
   },
   Mutation: {
     createProduct: (
-      _: any,
-      { input }: { input: any },
-      { models }: { models: any }
-    ): any => models.Product.create({ ...input }),
+      _parent: object,
+      { input }: { input: iCreateProductInput },
+      { models }: { models: iModels }
+    ): iProduct => models.Product.create({ ...input }),
     deleteProduct: async (
       _parent: object,
       { id }: { id: string },

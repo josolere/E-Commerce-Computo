@@ -7,7 +7,7 @@ import {
   // Belongs to many Model
 } from "sequelize";
 
-// import { OrderDetail } from './OrderDetail'
+import { OrderDetail } from "./OrderDetail";
 
 export interface OrderAttributesI {
   id: number;
@@ -23,6 +23,12 @@ export class Order
   public status!: String;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public readonly orderDetail?: OrderDetail[];
+
+  public static associations: {
+    orderDetail: Association<Order, OrderDetail>;
+  };
 }
 
 export function OrderFactory(sequelize: Sequelize) {

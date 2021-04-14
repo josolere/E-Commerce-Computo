@@ -1,5 +1,5 @@
 // Types
-import { User, Product } from "./types";
+import { User, Product, Order, OrderDetail } from "./types";
 
 // User
 export interface iUser extends User {
@@ -27,11 +27,30 @@ export interface iFilterProducts {
   categoriesId?: [number];
 }
 
+//Order
+export interface iOrder extends Order {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface iCreateOrderInput extends Order {}
+export interface iEditOrderInput extends Order {}
+
+//Order Details
+export interface iOrderDetail extends OrderDetail {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface iCreateOrderDetailInput extends Order {}
+export interface iEditOrderDetailInput extends Order {}
+
 //Models
 export interface iModels {
   Product: any;
   Category: any;
   User: any;
   Order: any;
+  OrderDetail: any;
   sequelize: any;
 }
