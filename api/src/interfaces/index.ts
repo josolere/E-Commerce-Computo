@@ -8,6 +8,8 @@ export interface iUser extends User {
   createdAt?: Date;
   updatedAt?: Date;
 }
+export interface iCreateUserInput extends User {}
+export interface iEditUserInput extends User {}
 
 //Product
 export interface iProduct extends Product {
@@ -22,6 +24,7 @@ export interface iEditProductInput extends Product {}
 export interface iModels {
   Product: any;
   Category: any;
+  User: any;
   sequelize: any;
 }
 

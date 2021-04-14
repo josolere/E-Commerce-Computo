@@ -4,6 +4,8 @@ export type User = {
   email: string;
   privilege: string;
   active: boolean;
+  name: string;
+  surname: string;
 };
 export type Product = {
   image: string;
