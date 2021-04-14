@@ -86,7 +86,7 @@ const InputSearch = (): JSX.Element => {
             (name) =>
                 name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1))
         setAuto(middlware)
-        data?.getProducts.map(function (item) { if (item.name === auto[0]) { setIdtodeatils(item.id) } })
+        
 
         if (searchInput.length === 1) dispatch(setFilter(searchInput))
     }
@@ -103,8 +103,7 @@ const InputSearch = (): JSX.Element => {
                 />
                 <button type="submit" className={search.buttonSearch}><FontAwesomeIcon icon={faSearch} /></button>
                 <div className={styles.option}>
-                <label color="white">{auto}</label>
-
+                    <label color="white">{auto}</label>
                 </div>
             </form>
         </>

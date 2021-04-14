@@ -52,9 +52,7 @@ const GET = gql`
             details
             image
         }
-}
-
-`;
+}`;
 
 interface PropsDetails {
     history: {
