@@ -1,8 +1,9 @@
 import { Association ,DataTypes, Model, Optional, Sequelize ,
     // Belongs to many Model
+    BelongsTo
 } from 'sequelize';
 
-//import { Category } from './Category'
+import { Order } from './Order'
 
 export interface OrderDetailAttributesI {
     id:number;
@@ -19,6 +20,8 @@ export class OrderDetail extends Model<OrderDetailAttributesI, OrderDetailCreati
         price!:number;
         public readonly createdAt!:Date;
         public readonly updatedAt!:Date;
+
+        public addOrder!: BelongsTo<Order>
 }
 
 export function  OrderDetailFactory(sequelize: Sequelize){
