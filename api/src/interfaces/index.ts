@@ -20,17 +20,18 @@ export interface iProduct extends Product {
 export interface iCreateProductInput extends Product {}
 export interface iEditProductInput extends Product {}
 
-//Models
-export interface iModels {
-  Product: any;
-  Category: any;
-  User: any;
-  sequelize: any;
-}
-
 export interface iFilterProducts {
   name?: String;
   offset?: number;
   limit?: number;
   categoriesId?: [number];
+}
+
+//Models
+export interface iModels {
+  Product: any;
+  Category: any;
+  User: any;
+  Order: any;
+  sequelize: any;
 }
