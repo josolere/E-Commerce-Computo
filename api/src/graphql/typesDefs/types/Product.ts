@@ -9,7 +9,8 @@ export const typeDefs = gql`
     brand: String
     price: Float
     details: String
-    createdAt: String
+    categories: [String]
+    createdAt: String 
     updatedAt: String
   }
 
@@ -32,6 +33,7 @@ export const typeDefs = gql`
     brand: String
     price: Float
     details: String
+    categories: [Int]
   }
 
   input EditProductInput {

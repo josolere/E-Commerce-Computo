@@ -66,7 +66,7 @@ export function  ProductFactory(sequelize: Sequelize){
             primaryKey: true,
         },
         name: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull:false,
         },
         image: {

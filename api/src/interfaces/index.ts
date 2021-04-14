@@ -1,4 +1,5 @@
 // Types
+import { Review } from "../models/Review";
 import { User, Product } from "./types";
 
 // User
@@ -15,8 +16,12 @@ export interface iProduct extends Product {
   createdAt: Date;
   updatedAt: Date;
 }
-export interface iCreateProductInput extends Product {}
+export interface iCreateProductInput extends Product {
+  categories: Array<any>;
+}
 export interface iEditProductInput extends Product {}
+
+export interface iAddReviewInput extends Review {}
 
 //Models
 export interface iModels {
