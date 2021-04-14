@@ -1,4 +1,4 @@
-.option {
+.linksearch {
     color: gray;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,7 @@
     border-radius: 0.5rem;
     margin-top: 0.5rem;
     z-index:100;
+    text-decoration: none;    
     p{
         margin: 0rem 0.5rem;
         padding: 0.5rem 0.3rem;
@@ -19,11 +20,15 @@
             background-color: #F21B42;
             color: whitesmoke;
             cursor: pointer;
-            padding: 0.7rem 0.3rem
+            
+            padding: 0.7rem 0.3rem;
         }
-
     }
 }
+.linksearch:link, .linksearch:visited, .linksearch:active {
+    text-decoration:none;
+}
+
 .bar{
     background-color: whitesmoke;
     border-radius: 0.5rem;

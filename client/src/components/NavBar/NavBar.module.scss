@@ -18,6 +18,10 @@
     text-decoration: none;
 }
 
+.titleNav:hover{
+    color: #F21B42;
+}
+
 .linksNav {
     font-weight: 600;
     display: flex;
@@ -28,9 +32,17 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.linksNav:hover {
+    color: #F21B42;
+}
+
 .iconCart {
     width: 20px !important;
     padding-right: 8px;
     height: 20px;
     color: white;
+}
+
+.iconCart:hover {
+    color: #F21B42;
 }

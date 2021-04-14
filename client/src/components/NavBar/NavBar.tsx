@@ -4,8 +4,13 @@ import navBar from "./NavBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import { setFilter } from '../../redux/actions';
 
 const NavBar = (): JSX.Element => {
+
+  const dispatch = useDispatch()
+
   return (
     <>
       <div className={navBar.container}>
@@ -14,8 +19,7 @@ const NavBar = (): JSX.Element => {
         <Link className={navBar.linksNav} to="/cart">
         <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} /></Link>
         <Link className={navBar.linksNav} to="/login"> Iniciar Sesion</Link>
-        
-        <Link to="/Home" className = {navBar.linksNav}>Productos</Link>  
+        <Link onClick={() => {dispatch(setFilter(""))}} to="/Home" className = {navBar.linksNav}>Productos</Link>  
         <Link to="/cuenta" className = {navBar.linksNav}>Mi Cuenta</Link>  
               
       </div>

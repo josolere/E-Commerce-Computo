@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/actions';
-import styles from "./searchbar.module.scss"
+import styles from "./searchbar.module.scss";
+import { Link } from 'react-router-dom'
 
 interface DetailsProduct {
     id: number
@@ -15,7 +16,6 @@ interface DetailsProduct {
     name: string
     price: number
     details: string
-
 }
 
 interface DetailsData {
@@ -49,29 +49,12 @@ const InputSearch = (): JSX.Element => {
         namesproducts = data?.getProducts.map(item => item.name)
         idlist = data?.getProducts.map(item => item)
     }
-    console.log(namesproducts)
-
-    const [userinput, setUserinput] = useState("")
 
     const [auto, setAuto] = useState<Array<string>>([""])
 
     const [middlware, setMiddlware] = useState([""])
 
     const [searchInput, setSearchInput] = useState('')
-
-    const [showoption, setShowoption] = useState(false)
-
-    const [idtodetails, setIdtodeatils] = useState<number>()
-
-    /*     const handleinput = (event:React.FormEvent<HTMLInputElement>) => {
-            setSearchInput(event?.currentTarget.value)
-            if (namesproducts) {
-            setMiddlware(namesproducts.filter(
-                (namesproducts) =>
-                  namesproducts.toLowerCase().indexOf(searchInput.toLowerCase()) > -1))
-            setAuto(middlware)
-        }
-        } */
 
     const dispatch = useDispatch();
 
@@ -84,33 +67,33 @@ const InputSearch = (): JSX.Element => {
         setSearchInput(e.currentTarget.value)
         setMiddlware(namesproducts.filter(
             (name) =>
-            name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1))
-            setAuto(middlware)
-            
-            if (e.currentTarget.value.length === 0) dispatch(setFilter(searchInput)) && setAuto([])
-
+                name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1))
+        setAuto(middlware)
+        if (e.currentTarget.value.length === 0) dispatch(setFilter(searchInput)) && setAuto([])
     }
-    console.log(idtodetails)
 
     return (
         <>
             <form onSubmit={handleSubmit} className={styles.searchBar}>
                 <div className={styles.bar}>
-
-                <input type="text"
-                    placeholder='Buscar...'
-                    onChange={handleChange}
-                    value={searchInput}
-                    className={search.inputSearch}
+                    <input type="text"
+                        placeholder='Buscar...'
+                        onChange={handleChange}
+                        value={searchInput}
+                        className={search.inputSearch}
                     />
-                <button type="submit" className={search.buttonSearch}><FontAwesomeIcon icon={faSearch} /></button>
+                    <button type="submit" className={search.buttonSearch}><FontAwesomeIcon icon={faSearch} /></button>
                 </div>
-                <div className={styles.option}>
-                {auto ? auto.slice(0,2).map(search => <p onClick={e => {
-                    dispatch(setFilter(search))
-                    setAuto([])
-                    }}>{search}</p>): false}
-                </div>
+                <Link className={styles.linksearch} to="/Home">
+                    <div className={styles.option}>
+                        {auto.length > 1 ? auto.slice(0, 2).map(search => <p onClick={e => {
+                            dispatch(setFilter(search))
+                            setAuto([])
+                        }}>{search}</p>) :
+                            <p onClick={() => dispatch(setFilter(''))} >Esperando
+                            </p>}
+                    </div>
+                </Link>
             </form>
         </>
     )
