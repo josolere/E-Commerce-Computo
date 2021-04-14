@@ -51,18 +51,18 @@ interface Categories {
 }
 
 const NEW_PRODUCT = gql`
-mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String! ) {
+mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!,$categoryId:Int![] ) {
     createProduct ( input: {
         name:$name,
         price:$price, 
         brand:$brand, 
         image:$image, 
         details:$details
+        categoryId:$categoryId
       })
         {
             id
-            name
-            
+            name  
         }
     }
 `;
@@ -81,7 +81,7 @@ type InputEvent = React.FormEvent<HTMLInputElement>;
 
 
 export default function CreateProduct(){
-    const [state , setState] = useState({name:"",price:0,brand:"",image:"",details:""})
+    const [state , setState] = useState({name:"",price:0,brand:"",image:"",details:"",categoryId:[]})
     
 /*     const [createNewProduct, { error, data }] = useMutation<
     {createNewProduct: productInventary},
@@ -132,7 +132,7 @@ export default function CreateProduct(){
              <label>Details</label>
              <input type='text' name='details' value={state.details} onChange={handleChange}/>
              <select>
-                 {categories?.map((cat) => <option>{cat.name}</option>)}
+                 {categories?.map((cat) => <option value={cat.id}>{cat.name}</option>)}
              </select>
              <input type='submit' value='CREATE' className={styles.button} />
          </form>

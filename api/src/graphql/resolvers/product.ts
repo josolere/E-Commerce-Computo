@@ -33,7 +33,7 @@ export default {
         categoriesId.length === 0? [] : 
         [
           {
-            model: db.Category, through: "productsxcategories", attributes: [], where : { id : {[Op.in] : categoriesId}}
+            model: db.Category, through: "productsxcategories", attributes: ["name", "id"], where : { id : {[Op.in] : categoriesId}}
           }
         ],
         where: {

@@ -5,6 +5,8 @@ export const setFilter = (filter:string)  => ({
     type: SET_FILTER , filter
 });
 
-export const seCategory = (categories:number[])  => ({
+export const setCategory = (categories:number[])  => (
+    
+    {
     type: SET_CATEGORIES , categories
 });
