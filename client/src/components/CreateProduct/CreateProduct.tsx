@@ -2,7 +2,7 @@ import {gql, useMutation, useQuery } from '@apollo/client';
 import React, { useState } from 'react'
 import styles from './CreateProduct.module.scss' 
 
-interface productInventary {
+/* interface productInventary {
     id:number
     name:string
     price:number
@@ -51,7 +51,7 @@ interface Categories {
 }
 
 const NEW_PRODUCT = gql`
-mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!,$categoryId:Int![] ) {
+mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categoryId: Int!) {
     createProduct ( input: {
         name:$name,
         price:$price, 
@@ -108,9 +108,8 @@ export default function CreateProduct(){
 
     async function handleSubmit(e:FormEvent){
     e.preventDefault()
-    console.log(state)
-    createProduct({ variables: state } )
-    .then((resolve) => { console.log('Salio Bien') })
+    createProduct({ variables: {  name: state.name } } )
+    .then((resolve) => { console.log(data) })
     .catch((err) => { console.log('Salio Mal') })
 }
 

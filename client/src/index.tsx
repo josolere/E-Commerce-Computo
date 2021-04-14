@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 
 //import { Provider } from 'react-redux'
 //import { createStore } from 'redux'
@@ -15,7 +17,7 @@ import {
 } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter } from 'react-router-dom'
-import {AUTH_TOKEN} from './components/login/constants'
+import { AUTH_TOKEN } from './components/login/constants'
 
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -37,14 +39,18 @@ const client = new ApolloClient({
   }),
 })
 
+const StripePromise = loadStripe('pk_test_51IfpazHObBDKzBSGun3Clgf3wbyo1QMxk6jwHwDwLPoxZTrfGCASzt1R8yDvUMTPqL8dmE4CIUgP8Qr0BqqwAFPq00RZ1Ulyai')
+
 ReactDOM.render(
-  <Provider store={store}>
-  <ApolloProvider client={client}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ApolloProvider>
-  </Provider>,
+  <Elements stripe={StripePromise} >
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ApolloProvider>
+    </Provider>
+  </Elements>,
   document.getElementById('root')
 );
 

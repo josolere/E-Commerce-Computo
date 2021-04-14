@@ -8,16 +8,18 @@
     margin-left: 3rem;
     outline: none;
     border-color: transparent;
+    background-color: transparent;
 } 
 
 .buttonSearch{
     width: 2rem;
     height: 3rem;
-    border-radius: 12pxpx;
+    border-radius: 12px;
     background-color: transparent;
     border-color: transparent;
     outline: none;
-    color: white;
+    color: black;
+
 }
 
 

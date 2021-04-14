@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import styles from "./ProductDetail.module.scss"
-import { text } from '@fortawesome/fontawesome-svg-core';
-
+import {useDispatch , useSelector} from 'react-redux'
+import RaitingReview from './RatingReview'
 
 interface DetailsProduct {
     getProductById: {
@@ -19,14 +19,14 @@ interface DetailsProduct {
     }
 }
 
-interface Review {
+/* interface Review {
     rating: number
     review: string
-}
+} */
 
-const Review_Mutation = gql`
+/* const Review_Mutation = gql`
     mutation MutationReview ( $rating: Int! $review: String!) {
-        Product (rating: $rating review: $review )
+        ???? (rating: $rating review: $review )
         {
             id
             name
@@ -38,7 +38,7 @@ const Review_Mutation = gql`
             review
         }
     }
-`
+`; */
 
 const GET = gql`
     query ($id:ID!) {
@@ -73,7 +73,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         variables: { id }
     });
 
-    const [MutationReview] = useMutation<Review>(Review_Mutation)
+
+/*     const [Mutation, { data }] = useMutation(Review_Mutation)
 
     let [rating, setRating] = useState<Array<any>>([])
 
@@ -83,11 +84,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         review: ''
     })
 
-    const [hidestar, setHidestar] = useState(true)
+    const [hidestar, setHidestar] = useState(true) */
 
     const filtred = data?.getProductById
 
-    let totalrating: number = 0
+/*     let totalrating: number = 0
 
     let summulti: Array<number> = [];
 
@@ -105,14 +106,14 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     const changereview = () => {
-        MutationReview({ variables: { rating: totalrating, review: reviewuser.review }})
-        .then(review =>{
-            console.log('review up')
-        })
-        .catch((err) => {console.log('review mal')})
+        Mutation({ variables: { rating: totalrating, review: reviewuser.review } })
+            .then(review => {
+                console.log('review up')
+            })
+            .catch((err) => { console.log('review mal') })
         alert('Gracias por dejar su review del producto')
     }
-
+ */
     return (
         <div className={styles.contenedorAll}>
             <NavBar />
@@ -123,8 +124,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     {true ? <p > Marca: <span contentEditable>{filtred?.brand}</span> </p> :<p> Marca: {filtred?.brand} </p>}
                     {true ? <p contentEditable> Detalles: {filtred?.details}</p>:<p > Detalles: {filtred?.details}</p>}
                     <div className={styles.botonPrecio}>
-                    {true ?<h2 className={styles.precioDetail}>$<span contentEditable>{new Intl.NumberFormat().format(filtred?.price || 0)}</span></h2>:<h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>}
-                        <div className={styles.estrellas}>
+                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>
+                        <div>
+                            <RaitingReview id ={id}/>
+                            {/* <div className={styles.estrellas}>
                             {hidestar ?
                                 <div >
                                     {[...Array(5)].map((star, index) => {
@@ -153,9 +156,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                     <h1 className={styles.gracias} >Gracias por dejar su review</h1>
                                     <p className={styles.raiting} >Rating {totalrating}</p>
                                 </div>
-                            }
+                            } */}
 
-                        </div>
+                            {/* </div>
                         <Link to={{
                             pathname: '/Pago',
                             state: {
@@ -178,7 +181,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
                         </div>
                     </div>
-                    <button onClick={changereview} className={styles.buttonCompra} >Guardar Review</button>
+                    <button onClick={changereview} className={styles.buttonCompra} >Guardar Review</button> */}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
