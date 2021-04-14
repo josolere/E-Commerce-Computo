@@ -1,6 +1,7 @@
 // Types
 import { Product } from "../models/Product";
 import { User } from "./types";
+import { Review } from "../models/Review";
 
 // User
 export interface iUser extends User {
@@ -13,14 +14,15 @@ export interface iUser extends User {
 //Product
 export interface iProduct extends Product {
   id: number;
-  categories: Array<string>;
   createdAt: Date;
   updatedAt: Date;
 }
 export interface iCreateProductInput extends Product {
-  categories: Array<number>
+  categories: Array<any>;
 }
 export interface iEditProductInput extends Product {}
+
+export interface iAddReviewInput extends Review {}
 
 //Models
 export interface iModels {

@@ -22,6 +22,8 @@ export const typeDefs = gql`
 
   type Mutation {
     createProduct(input: CreateProductInput): Product
+    deleteProduct(id: String!): Product!
+    editProduct(id: String, input: EditProductInput): Product!
   }
 
   input CreateProductInput {
@@ -47,5 +49,6 @@ export const typeDefs = gql`
     limit:Int = 10, 
     categoriesId:[Int]
   }
-
+  
+ 
 `;

@@ -1,6 +1,5 @@
 import Sequelize from "sequelize";
-import { Category } from "../models/Category"
-import { Product } from "../models/Product"
+import { Product } from "../models/Product";
 
 
 
@@ -9,7 +8,7 @@ import { Product } from "../models/Product"
 let products = [
     {
         name: 'Headset Redragon H220 THEMIS',
-        image: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/896/208/products/h220-1_headset_1024x10242x2-954badd9ed46957ce915971658927709-1024-1024.png%27%7D',
+        image: "https://d3ugyf2ht6aenh.cloudfront.net/stores/896/208/products/h220-1_headset_1024x10242x2-954badd9ed46957ce915971658927709-1024-1024.png%27%7D",
         brand: 'Redragon',
         details: 'Un auricular con un sonido brillante y claro, con una estructura liviana y cómoda, el Themis es un auricular pensado para jugar cómodamente. -Sonido:Este auricular, posee un claro sonido estéreo con ficha Jack 3.5 mm, garantizan la mejor calidad de sonido en nuestros diafragmas de 50mm con imanes de neodimio, ideales en la construcción de periféricos de sonido. -Micrófono: Integrado en la estructura de las copas, construido sobre un brazo rebatible y captación omnidireccional.',
         price: 2099

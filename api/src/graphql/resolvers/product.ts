@@ -3,17 +3,12 @@ import {
   iEditProductInput,
   iModels,
   iProduct,
-  iFilterProducts
+  iFilterProducts,
+  iAddReviewInput
 } from "../../interfaces";
-<<<<<<< HEAD
-import Sequelize from "sequelize";
-import { Category } from "../../models/Category";
-import { idText } from "typescript";
-import category from "./category";
-=======
 import Sequelize,{ Op } from "sequelize";
 import { Category } from "../../models/Category";
->>>>>>> 9311e295c0b36c2172f20363dd8e643215661752
+import { Review } from '../../models/Review'
 
 export default {
   Query: {
@@ -21,26 +16,7 @@ export default {
       _parent: object,
       { filter }: {filter:iFilterProducts},
       { models }: { models: iModels }
-<<<<<<< HEAD
     ): Promise<iProduct[]> => {
-      let productsFetch = await models.Product.findAll({
-          include: Category,
-          raw : false
-        })
-      /* console.log(productsFetch[0].dataValues.Categories)
-
-      /* let products = productsFetch.map((product: any) =>{
-        let categories = product.Categories.map((category))
-
-      }) */
-    //   var newArray = Product.dataValues.Categories.map(item =>{
-    //     return item.dataValues.name
-    //  })
-
-
-      return productsFetch;
-=======
-    ): iProduct[] => {
       if(!filter) {filter={name:'',offset:0,limit:10}}
         const limit = filter.limit
         const offset = filter.offset
@@ -56,7 +32,6 @@ export default {
             offset
           }
       );
->>>>>>> 9311e295c0b36c2172f20363dd8e643215661752
     },
     getProductById: async (
       _parent: object,
@@ -80,7 +55,6 @@ export default {
     },
   },
   Mutation: {
-<<<<<<< HEAD
     createProduct: async (
       _parent: object,
       { input }: { input: iCreateProductInput },
@@ -129,12 +103,21 @@ export default {
 
       return null;
     },
-=======
-    createProduct: (
-      _: any,
-      { input }: { input: any },
-      { models }: { models: any }
-    ): any => models.Product.create({ ...input }),
->>>>>>> 9311e295c0b36c2172f20363dd8e643215661752
+    addReview: async(
+      _parent: object,
+      { id, input }: { id : string; input: iAddReviewInput },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const currentProduct = await models.Product.findByPk(input.product,{include:'reviews'})
+
+      let createdReview = await Review.create({ ...input})
+
+      console.log(currentProduct)
+
+      currentProduct.addReview(createdReview)
+
+      return createdReview
+
+    }
   },
 };
