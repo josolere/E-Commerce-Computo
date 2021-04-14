@@ -14,15 +14,23 @@
             margin-top: 0;
         }       
    } 	
+  
    img {
        width: 20rem;
        margin-right: 2rem;
    }
 } 
 
-
+.textarea {
+    margin-top: 2rem;
+    width: 400px;
+    height: 100px;
+    border: 1px solid white; 
+    resize: none;
+}
     
 .precioDetail {
+    font-family: 'Montserrat', sans-serif;
     width: fit-content;
     background-color:#F21B42 ;
     padding:1rem;
@@ -34,14 +42,31 @@
     background-color: #161616;
 }
 
-
 .buttonCompra {
     width: 12rem;
+    height: 3rem;
     margin-top: 4rem;
-    color:white;
+    color:#161616;
     border-radius: 5px;
     background-color:#F21B42 ;
-    font-weight: 700;
+    font-weight: 800;
+    border-color: transparent;
+}
+
+.buttonCompra:hover {
+    color: white;
+    background:#F21B42 ;
+    box-shadow: 0 0 5px #F21B42;
 }
 
 
+
+.raiting {
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 1rem;
+}
+
+.gracias {
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 1.5rem;
+}

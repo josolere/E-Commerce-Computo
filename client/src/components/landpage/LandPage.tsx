@@ -38,9 +38,6 @@ const VideoLand = () => {
 
     const products = data?.getProducts
 
-    let url = 'https://www.youtube.com/watch?v=2jpGbR9Dpl8&ab_channel=SantiRosales'
-
- 
     return (
         <div className="containerLand">
             <NavBar/>

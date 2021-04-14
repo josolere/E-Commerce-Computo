@@ -9,29 +9,41 @@ import {
 import Sequelize,{ Op } from "sequelize";
 import { Category } from "../../models/Category";
 import { Review } from '../../models/Review'
+import db from '../../models/'
 
 export default {
   Query: {
     getProducts: async (
       _parent: object,
-      { filter }: {filter:iFilterProducts},
+      { filter }: { filter: iFilterProducts },
       { models }: { models: iModels }
     ): Promise<iProduct[]> => {
-      if(!filter) {filter={name:'',offset:0,limit:10}}
-        const limit = filter.limit
-        const offset = filter.offset
-        const categoriesId = filter.categoriesId || []
-        return models.Product.findAll({
-          include : categoriesId.length===0? [] : [{ model: Category, through: 'productsxcategories',attributes:[], where : { id : {[Op.in] : categoriesId} }}], 
-          where: {
-            [Op.and] : [
-              { name : {[Op.iLike] : `%${filter.name}%` }},
-            ]      
-          },
-            limit,
-            offset
+      if (!filter) {
+        filter = { name: "", offset: 0, limit: 10, categoriesId:[0] };
+      }
+      const limit = filter.limit;
+      const offset = filter.offset;
+      const categoriesId: number[] = filter.categoriesId || [];
+      //const categoriesId: number[] = [1];
+
+      //console.log(categoriesId)
+
+      //categoriesId.length === 0? [] : [{ model: Category, through: "productsxcategories", attributes: [], where: { id: { [Op.in]: [1] } }}],
+
+      return models.Product.findAll({
+        include:
+        categoriesId.length === 0? [] : 
+        [
+          {
+            model: db.Category, through: "productsxcategories", attributes: ["name", "id"], where : { id : {[Op.in] : categoriesId}}
           }
-      );
+        ],
+        where: {
+          [Op.and]: [{ name: { [Op.iLike]: `%${filter.name}%` } }],
+        },
+        limit,
+        offset,
+      });
     },
     getProductById: async (
       _parent: object,

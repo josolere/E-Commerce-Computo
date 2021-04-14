@@ -20,29 +20,30 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path= '/categories' component={NavCategories} />
-        <Route exact path='/createC' component={CreateCategory} />
-        <Route exact path='/createP' component={CreateProduct} />
+        <Route exact path= '/Categorias' component={NavCategories} />
+        <Route exact path='/CrearCategoria' component={CreateCategory} />
+        <Route exact path='/CrearProducto' component={CreateProduct} />
         <Route exact path='/Detalles' component={Details} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/Rating' component={StarRating} />
+        <Route exact path='/Login' component={Login} />
         <Route exact path='/' component={LandPage} />
         <Route exact path='/Test' component={TestProducts} />
-        <Route exact path='/Payment' component={Payment} />
-        <Route exact path='/home'>
+        <Route exact path='/Pago' component={Payment} />
+        <Route exact path='/Home'>
           <Home/>
           <div className={styles.catalog}>
           <NavCategories/>
           <Cards/>
           </div>
         </Route>
-        <Route exact path='/cart' component={ShoppingCart}/>
+        <Route exact path='/Carrodecompras' component={ShoppingCart}/>
         <Route component={PageNotFound}/>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/Rating' component={StarRating} />
+        <Route exact path='/cart' component={ShoppingCart}/>
+        <Route exact path='/Test' component={TestProducts} />
+        <Route exact path='/Payment' component={Payment} />
       </Switch>
     </Router>
-
-
-
   );
 }
 

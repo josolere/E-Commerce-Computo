@@ -1,7 +1,6 @@
 // Types
-import { Product } from "../models/Product";
-import { User } from "./types";
 import { Review } from "../models/Review";
+import { User, Product } from "./types";
 
 // User
 export interface iUser extends User {
@@ -31,10 +30,9 @@ export interface iModels {
   sequelize: any;
 }
 
-
-export interface iFilterProducts{
-  name?:String, 
-  offset?:number, 
-  limit?: number, 
-  categoriesId?:[number]
+export interface iFilterProducts {
+  name?: String;
+  offset?: number;
+  limit?: number;
+  categoriesId?: [number];
 }

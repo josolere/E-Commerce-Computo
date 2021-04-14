@@ -1,11 +1,8 @@
 .container{
-    display: flex;
-    flex-direction: column;
+    height: fit-content;
     justify-content: start;
-    align-items: center;
-    width: 10rem;
-    // height: fit-content;
-    border: solid 1px #F21B42;
+    width: 15rem;
     margin-top: 2rem;
+    margin-left: 2rem;
     background-color:#F21B42 ;
 }

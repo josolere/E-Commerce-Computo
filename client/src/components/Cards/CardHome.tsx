@@ -21,7 +21,7 @@ export default function Card({name, image, price, id}:props){
                     id:id
                 }
             }}>
-            <button className={styles.learn}>Learn More</button>
+            <button className={styles.learn}>Detalles del Producto</button>
             </Link>
             <button className={styles.buy}>${new Intl.NumberFormat().format(price)}</button>
             </div>
