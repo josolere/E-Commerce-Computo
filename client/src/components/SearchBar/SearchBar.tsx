@@ -84,26 +84,32 @@ const InputSearch = (): JSX.Element => {
         setSearchInput(e.currentTarget.value)
         setMiddlware(namesproducts.filter(
             (name) =>
-                name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1))
-        setAuto(middlware)
-        
+            name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1))
+            setAuto(middlware)
+            
+            if (e.currentTarget.value.length === 0) dispatch(setFilter(searchInput)) && setAuto([])
 
-        if (searchInput.length === 1) dispatch(setFilter(searchInput))
     }
     console.log(idtodetails)
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="searchBar">
+            <form onSubmit={handleSubmit} className={styles.searchBar}>
+                <div className={styles.bar}>
+
                 <input type="text"
                     placeholder='Buscar...'
                     onChange={handleChange}
                     value={searchInput}
                     className={search.inputSearch}
-                />
+                    />
                 <button type="submit" className={search.buttonSearch}><FontAwesomeIcon icon={faSearch} /></button>
+                </div>
                 <div className={styles.option}>
-                    <label color="white">{auto}</label>
+                {auto ? auto.slice(0,2).map(search => <p onClick={e => {
+                    dispatch(setFilter(search))
+                    setAuto([])
+                    }}>{search}</p>): false}
                 </div>
             </form>
         </>

@@ -1,6 +1,33 @@
 .option {
-    color: white;
+    color: gray;
     display: flex;
+    flex-direction: column;
+    // width: ;
     align-items: center;
-    font-size: 10px;
+    font-size: 0.8rem;
+    background-color: whitesmoke;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    z-index:100;
+    p{
+        margin: 0rem 0.5rem;
+        padding: 0.5rem 0.3rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        font-size: 0.8rem;
+        &:hover{
+            background-color: #F21B42;
+            color: whitesmoke;
+            cursor: pointer;
+            padding: 0.7rem 0.3rem
+        }
+
+    }
+}
+.bar{
+    background-color: whitesmoke;
+    border-radius: 0.5rem;
+    input{
+        margin: 0;
+    }
 }

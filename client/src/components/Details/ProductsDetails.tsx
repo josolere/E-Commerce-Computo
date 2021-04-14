@@ -6,7 +6,6 @@ import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import styles from "./ProductDetail.module.scss"
 import {useDispatch , useSelector} from 'react-redux'
-import {passid, PASS_ID} from  'C:/ecommerce-FT10-G5/client/src/redux/actions/index'
 import RaitingReview from './RatingReview'
 
 interface DetailsProduct {
@@ -119,9 +118,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             <div className={styles.contenedorDetail}>
                 <img src={filtred?.image} alt='' />
                 <div >
-                    <h1 className={styles.nameDetail}>{filtred?.name}</h1>
-                    <p> Marca: {filtred?.brand} </p>
-                    <p> Detalles: {filtred?.details}</p>
+                    {true ? <h1 contentEditable className={styles.nameDetail}>{filtred?.name}</h1>:<h1 className={styles.nameDetail}>{filtred?.name}</h1>}
+                    {true ? <p > Marca: <span contentEditable>{filtred?.brand}</span> </p> :<p> Marca: {filtred?.brand} </p>}
+                    {true ? <p contentEditable> Detalles: {filtred?.details}</p>:<p > Detalles: {filtred?.details}</p>}
                     <div className={styles.botonPrecio}>
                         <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>
                         <div>
