@@ -4,6 +4,8 @@ export const typeDefs = gql`
   # object querys mutations RECORDAR USAR MAYÚSCULAS
   type OrderDetail {
     id: Int
+    OrderId: Int
+    ProductId: Int
     quantity: Int
     price: Float
     createdAt: String
@@ -16,15 +18,9 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createOrderDetail(input: CreateOrderDetailInput, idOrder: ID): OrderDetail
+    createOrderDetail(idProduct: ID, idOrder: ID, quantity: Int): OrderDetail
     #deleteOrderDetail(id: String!): Order!
     #editOrderDetail(id: String, input: EditOrderDetailInput): Order!
-  }
-
-  input CreateOrderDetailInput {
-    id: Int
-    quantity: Int
-    price: Float
   }
 
   input EditOrderDetailInput {

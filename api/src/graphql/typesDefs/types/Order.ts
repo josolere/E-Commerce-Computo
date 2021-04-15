@@ -15,7 +15,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createOrder(input: CreateOrderInput, id: ID): Order
+    createOrder(input: CreateOrderInput, idUser: ID): Order
     #deleteOrder(id: String!): Order!
     #editOrder(id: String, input: EditOrderInput): Order!
   }
