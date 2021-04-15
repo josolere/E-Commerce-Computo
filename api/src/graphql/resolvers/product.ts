@@ -24,12 +24,6 @@ export default {
       const limit = filter.limit;
       const offset = filter.offset;
       const categoriesId: number[] = filter.categoriesId || [];
-      //const categoriesId: number[] = [1];
-
-      //console.log(categoriesId)
-
-      //categoriesId.length === 0? [] : [{ model: Category, through: "productsxcategories", attributes: [], where: { id: { [Op.in]: [1] } }}],
-
       return models.Product.findAll({
         include:
           categoriesId.length === 0
@@ -54,9 +48,20 @@ export default {
       { id }: { id: number },
       { models }: { models: iModels }
     ): Promise<iProduct> => {
-      const data = await models.Product.findByPk(id);
-      return data;
+      const options = {
+          include: [{model: db.Category,
+            through: "productsxcategories",
+            attributes: ["name"]}]
+    };
+      const product = await models.Product.findByPk(id,options);
+//      for(var x=0;x<product.Categories.length; x++){
+//      console.log(product.Categories[x].name)
+//      }
+
+      //product.Categories.map((category:any) => product.categories="category.name")
+      return product;
     },
+
     getProductByName: async (
       _parent: object,
       { name }: { name: string },
@@ -78,13 +83,8 @@ export default {
     ): Promise<any> => {
       console.log(input.categories);
       let categoryArray = input.categories; //para que tome que hay categorias hay que agregarlas en la interfaz del create product input
-
-      let createdProduct = await models.Product.create({ ...input });
-      categoryArray.forEach((item: any) => {
-        //let currentCategory = await models.Category.findByPk(item)
-
-        createdProduct.addCategory(item);
-      });
+      let createdProduct = await models.Product.create({ ...input })
+      createdProduct.addCategories(input.categories);
       return createdProduct;
     },
     deleteProduct: async (
