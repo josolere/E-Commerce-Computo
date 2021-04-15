@@ -11,13 +11,13 @@ export const typeDefs = gql`
 
   type Query {
     getOrderById(id: ID!): Order
-    #getOrderByName(name: String): [Order]
+    getOrdersByIdUser(idUser: ID!): [Order]
   }
 
   type Mutation {
     createOrder(input: CreateOrderInput, idUser: ID): Order
-    #deleteOrder(id: String!): Order!
-    #editOrder(id: String, input: EditOrderInput): Order!
+    deleteOrder(id: ID!): Order
+    editOrder(id: ID, input: EditOrderInput): Order
   }
 
   input CreateOrderInput {
