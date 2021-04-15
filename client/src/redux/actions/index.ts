@@ -6,7 +6,6 @@ export const setFilter = (filter:string)  => ({
 });
 
 export const setCategory = (categories:number[])  => (
-    
     {
     type: SET_CATEGORIES , categories
 });

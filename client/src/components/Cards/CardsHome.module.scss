@@ -8,4 +8,33 @@
     margin: 2rem 0rem 0rem 2rem;
     height: fit-content;
     // background-color: #191921;
+    ul {
+        display: flex;
+        background-color: #101011;
+        font-family: 'Montserrat', sans-serif;
+        color: white;
+        height: 2rem;
+        margin-top: 40rem;
+        list-style: none;
+        margin-left: 10rem;
+        align-items: center;
+        outline: none;
+        position: absolute;
+        li {
+            padding-right: 1rem;
+            padding-left: 1rem;
+            margin-right: 2rem;
+            border-color: transparent;
+            outline: none;
+            a{
+                outline: none;
+                font-size: large;
+                &:hover {
+                    cursor: pointer;
+                    background:#F21B42 ;
+                    box-shadow: 0 0 5px #F21B42;
+                }
+            }
+        }
+    }
 }

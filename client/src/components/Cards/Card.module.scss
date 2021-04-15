@@ -29,14 +29,22 @@
     button{
         color: whitesmoke;
         padding: 0.7rem 00.5rem;
+        border-color: transparent;
+        outline: none;
     }
 }
 .buy{
     background-color: #F21B42;
     font-size: 1.2rem;
     font-weight: 700;
+    &:hover {
+        cursor: auto;
+    }
 }
 .learn{
     font-size: 00.7rem;
     background-color: #000406;
+    &:hover {
+        cursor: pointer;
+    }
 }
