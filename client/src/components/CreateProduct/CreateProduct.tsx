@@ -1,5 +1,5 @@
 import {gql, useMutation, useQuery } from '@apollo/client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './CreateProduct.module.scss' 
 
 /* interface productInventary {
@@ -51,18 +51,20 @@ interface Categories {
 }
 
 const NEW_PRODUCT = gql`
-mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categoryId: [String]!) {
+mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categories:[Int]!) {
     createProduct ( input: {
         name:$name,
         price:$price, 
         brand:$brand, 
         image:$image, 
         details:$details
-        categoryId:$categoryId
+        categories:$categories
       })
         {
             id
-            name  
+            name
+          	categories
+          
         }
     }
 `;
@@ -87,11 +89,11 @@ interface IState {
     brand:string
     image:string
     details:string
-    categoryId:number[]
+    categories:number[]
 }
 
 export default function CreateProduct(){
-    const [state , setState] = useState<IState>({name:"",price:0,brand:"",image:"",details:"",categoryId:[]})
+    const [state , setState] = useState<IState>({name:"",price:0,brand:"",image:"",details:"",categories:[]})
     // const [categoriesId, setCategoriesId] = useState<Array<number>>([])
 /*     const [createNewProduct, { error, data }] = useMutation<
     {createNewProduct: productInventary},
@@ -102,6 +104,8 @@ export default function CreateProduct(){
     // console.log(categories)
 
     const [createProduct , results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
+
+    useEffect(()=>{console.log(results.data)},[results])
 
    function handleChange(e:InputEvent){
     return setState({
@@ -119,7 +123,7 @@ export default function CreateProduct(){
 
     async function handleSubmit(e:FormEvent){
     e.preventDefault()
-    createProduct({ variables: {  name: state.name } } )
+    createProduct({ variables: state } )
     .then((resolve) => { console.log(data) })
     .catch((err) => { console.log('Salio Mal') })
 }
@@ -135,7 +139,7 @@ export default function CreateProduct(){
         }])
             setState({
                 ...state,
-                categoryId: [...state.categoryId,parseInt(e.currentTarget.value)]
+                categories: [...state.categories,parseInt(e.currentTarget.value)]
             })
     }
 
@@ -144,7 +148,7 @@ export default function CreateProduct(){
         setCategors(categors.filter(cat => cat.id !== parseInt(e.currentTarget.value)))
         setState({
             ...state,
-            categoryId: state.categoryId.filter(id => id !== parseInt(e.currentTarget.value))
+            categories: state.categories.filter(id => id !== parseInt(e.currentTarget.value))
         })
     }
 
