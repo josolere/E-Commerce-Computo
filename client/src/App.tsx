@@ -3,7 +3,6 @@ import Login from './components/login/Login'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Details from './components/Details/ProductsDetails'
 import LandPage from './components/landpage/LandPage'
-import TestProducts from './components/testserver/test'
 import Payment from './components/payment/Stripe'
 import CreateProduct from './components/CreateProduct/CreateProduct';
 import CreateCategory from './components/CreateCategory/CreateCategory';
@@ -13,14 +12,12 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import NavCategories from './components/categories/Categories';
 import Cards from './components/Cards/CardsHome'
 import styles from './App.module.scss'
-import Testfilter from './components/testserver/testfilter'
       
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path ='/testfilter' component={Testfilter} />
         <Route exact path= '/Categorias' component={NavCategories} />
         <Route exact path='/CrearCategoria' component={CreateCategory} />
         <Route exact path='/CrearProducto' component={CreateProduct} />

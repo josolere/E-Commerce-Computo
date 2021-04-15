@@ -4,7 +4,7 @@ import {
   iModels,
   iOrderDetail,
 } from "../../interfaces";
-import OrderDetail from "../../models";
+// import OrderDetail from "../../models";
 
 export default {
   Query: {
@@ -20,13 +20,20 @@ export default {
   Mutation: {
     createOrderDetail: async (
       _parent: object,
-      { input, idOrder }: { input: iCreateOrderDetailInput; idOrder: number },
+      {
+        idProduct,
+        idOrder,
+        quantity,
+      }: { idProduct: number; idOrder: number; quantity: number },
       { models }: { models: iModels }
     ): Promise<iOrderDetail> => {
-      const detail = await models.OrderDetail.create({ ...input });
+      const product = await models.Product.findByPk(idProduct);
       const order = await models.Order.findByPk(idOrder);
-      detail.setOrder(order);
-      return detail;
+      const detail = await order.addProduct(product, {
+        through: { quantity: quantity, price: product.price },
+      });
+
+      return detail[0];
     },
   },
 };
