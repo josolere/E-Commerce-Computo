@@ -6,3 +6,15 @@
     margin-left: 2rem;
     background-color:#F21B42 ;
 }
+.todos {
+    background-color: black;
+    text-align: start;
+    color: whitesmoke;
+    border: transparent;
+    width: 12rem;
+    padding: 1rem;
+    outline: none;
+    &:hover{
+        cursor: pointer;
+    }
+}

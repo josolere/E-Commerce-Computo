@@ -1,5 +1,7 @@
 import SubMenu from "./SubMenu";
 import styles from './Categories.module.scss'
+import { useDispatch } from "react-redux";
+import { setCategory } from "../../redux/actions";
 
 export interface model {
   title: string;
@@ -54,8 +56,11 @@ const NavCategories = (): JSX.Element => {
     },
   ];
 
+  const dispatch = useDispatch()
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} >
+      <button className={styles.todos} onClick={(e) =>dispatch(setCategory([]))}>Todos</button>
       {categorias.map((item: model, i: number) => {
         return <SubMenu item={item} key={i}></SubMenu>;
       })}

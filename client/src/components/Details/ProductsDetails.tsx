@@ -36,6 +36,28 @@ const ReviewMutation = gql`
     }
 `;
 
+const EDIT_PRODUCT = gql `
+    mutation editProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categoryId: Int!){
+        editProduct ( input: {
+        name:$name,
+        price:$price,
+        brand:$brand,
+        image:$image,
+        details:$details
+        categoryId:$categoryId
+      })
+      {
+        id
+        name
+        price
+        brand
+        image
+        details
+        categoryId
+    }
+    }
+`
+
 const GET = gql`
     query ($id:ID!) {
         getProductById(id:$id)
@@ -68,6 +90,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     });
 
     const [addreview, results] = useMutation(ReviewMutation)
+
+    const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT)
 
     let resultsData: Array<string> = []
 
@@ -114,16 +138,23 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         setHidereviews(false)
     }
 
+    const handleEdit = (e:React.FormEvent<HTMLFormElement>) =>{
+        e.preventDefault()
+        editProduct({variables:{}})
+    }
+
+    const [state,setState] = useState({name:"",brand:filtred?.brand,details:filtred?.details,price:filtred?.price,image:filtred?.image})
+
     return (
         <div className={styles.contenedorAll}>
             <NavBar />
             <div className={styles.contenedorDetail}>
                 <img src={filtred?.image} alt='' />
                 <div >
-                    {true ? <h1 className={styles.nameDetail}>{filtred?.name}</h1> : <h1 className={styles.nameDetail}>{filtred?.name}</h1>}
+                    {true ? <input type='text' defaultValue={filtred?.name} value={state.name} /> : <h1  className={styles.nameDetail}>{filtred?.name}</h1>}
                     {true ? <p > Marca: <span contentEditable>{filtred?.brand}</span> </p> : <p> Marca: {filtred?.brand} </p>}
                     {true ? <p contentEditable> Detalles: {filtred?.details}</p> : <p > Detalles: {filtred?.details}</p>}
-                    <div className={styles.botonPrecio}>
+                    <div  className={styles.botonPrecio}>
                         <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>
                         <div>
                             <div className={styles.estrellas}>

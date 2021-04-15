@@ -51,7 +51,7 @@ interface Categories {
 }
 
 const NEW_PRODUCT = gql`
-mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categoryId: Int!) {
+mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categoryId: [String]!) {
     createProduct ( input: {
         name:$name,
         price:$price, 
@@ -78,17 +78,28 @@ query {
 
 type FormEvent = React.FormEvent<HTMLFormElement> ;
 type InputEvent = React.FormEvent<HTMLInputElement>;
+type SelectEvent = React.FormEvent<HTMLSelectElement>;
+type ButtonEvent = React.FormEvent<HTMLButtonElement>
 
+interface IState {
+    name:string
+    price:number
+    brand:string
+    image:string
+    details:string
+    categoryId:number[]
+}
 
 export default function CreateProduct(){
-    const [state , setState] = useState({name:"",price:0,brand:"",image:"",details:"",categoryId:[]})
-    
+    const [state , setState] = useState<IState>({name:"",price:0,brand:"",image:"",details:"",categoryId:[]})
+    // const [categoriesId, setCategoriesId] = useState<Array<number>>([])
 /*     const [createNewProduct, { error, data }] = useMutation<
     {createNewProduct: productInventary},
     {product:newProductDetails}
     >(NEW_PRODUCT,{variables:{product:state}}) */
     const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
     const categories = data?.getCategory
+    // console.log(categories)
 
     const [createProduct , results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
@@ -113,10 +124,34 @@ export default function CreateProduct(){
     .catch((err) => { console.log('Salio Mal') })
 }
 
+    const [categors, setCategors] = useState<Array<any>>([])
+    //estas dos trabajan juntas
+    const handleCategories =  (e:SelectEvent) =>{
+        e.preventDefault()
+        console.log(e.currentTarget.selectedOptions[0].innerHTML)
+        setCategors([...categors,{
+            id:parseInt(e.currentTarget.value),
+            name:e.currentTarget.selectedOptions[0].innerHTML
+        }])
+            setState({
+                ...state,
+                categoryId: [...state.categoryId,parseInt(e.currentTarget.value)]
+            })
+    }
+
+    const handleDeleteCategory = (e:ButtonEvent) => {
+        e.preventDefault()
+        setCategors(categors.filter(cat => cat.id !== parseInt(e.currentTarget.value)))
+        setState({
+            ...state,
+            categoryId: state.categoryId.filter(id => id !== parseInt(e.currentTarget.value))
+        })
+    }
+
     return(
-/*         <div className={styles.container}>
-        {error ? alert(`Oh no! ${error.message}`) : null}
-        {data && data.createNewProduct ? alert(`Saved!`) : null} */
+    <div className={styles.container}>
+        {/* {error ? alert(`Oh no! ${error.message}`) : null}
+        {data && data.createNewProduct ? alert(`Saved!`) : null}  */}
          <form onSubmit={handleSubmit} className={styles.form} >
              <h1>Create Product</h1>
              <hr/>
@@ -130,11 +165,14 @@ export default function CreateProduct(){
              <input type='text' name='image' value={state.image} onChange={handleChange}/>
              <label>Details</label>
              <input type='text' name='details' value={state.details} onChange={handleChange}/>
-             <select>
-                 {categories?.map((cat) => <option value={cat.id}>{cat.name}</option>)}
+             <select onChange={handleCategories}>
+                 {categories?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
              </select>
+             <div>
+                 {categors.map(cate => <button onClick={handleDeleteCategory} value={cate.id} key={cate.name}>{cate.name}</button>)}
+             </div>
              <input type='submit' value='CREATE' className={styles.button} />
          </form>
-/*         </div>
- */    )
+        </div>
+   )
 }
