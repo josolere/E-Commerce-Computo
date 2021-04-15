@@ -5,9 +5,6 @@ import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import styles from "./ProductDetail.module.scss"
-import { useDispatch, useSelector } from 'react-redux'
-import RaitingReview from './RatingReview'
-import { idText } from 'typescript';
 
 interface DetailsProduct {
     getProductById: {

@@ -17,20 +17,10 @@ import {
 } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter } from 'react-router-dom'
-import { AUTH_TOKEN } from './components/login/constants'
-
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-/* const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem(AUTH_TOKEN);
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : ''
-    }
-  };
-}); */
+
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),

@@ -10,7 +10,7 @@ export const typeDefs = gql`
     price: Float
     details: String
     categories: [String]
-    createdAt: String 
+    createdAt: String
     updatedAt: String
   }
 
