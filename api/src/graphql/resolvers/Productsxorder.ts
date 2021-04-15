@@ -29,9 +29,11 @@ export default {
     ): Promise<iOrderDetail> => {
       const product = await models.Product.findByPk(idProduct);
       const order = await models.Order.findByPk(idOrder);
-      order.addProduct(product, { through: { quantity: quantity } });
+      const detail = await order.addProduct(product, {
+        through: { quantity: quantity, price: product.price },
+      });
 
-      return order;
+      return detail[0];
     },
   },
 };

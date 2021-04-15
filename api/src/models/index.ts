@@ -41,8 +41,8 @@ Product.belongsToMany(Category, { through: "productsxcategories" });
 Category.belongsToMany(Product, { through: "productsxcategories" });
 
 //los detalles tienen muchos productos y cada producto puede estar en muchos detalles
-Order.belongsToMany(Product, { through: "productsxorder" });
-Product.belongsToMany(Order, { through: "productsxorder" });
+Order.belongsToMany(Product, { through: Productsxorder });
+Product.belongsToMany(Order, { through: Productsxorder });
 
 //cada pedido pertenece a un usuario, y un usuario puede tener muchos pedidos
 Order.belongsTo(User, { targetKey: "id" });
