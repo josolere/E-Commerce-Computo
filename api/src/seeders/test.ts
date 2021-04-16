@@ -2,6 +2,7 @@ import Sequelize from "sequelize";
 import { Category } from "../models/Category"
 import { Product } from "../models/Product"
 import db from "../models"
+import { User } from "../models/User";
 
 let categorie = [{name:"Placas de Video AMD"}, {name:"Placas de Video GeForce"}]
 
@@ -139,6 +140,46 @@ let categories = [
     }, 
 ]
 
+
+const users = [
+    {
+      name: 'Maurice',
+      surname: 'Moss',
+      email: 'maurice@moss.com',
+      password: 'abcdefg',
+      username: 'elmauricapo',
+      privilege: 'admin',
+      active: true,
+      address: '123 Main'
+    },
+    {
+      name: 'Roy',
+      surname: 'Trenneman',
+      email: 'roy@trenneman.com',
+      password: 'imroy',
+      username: 'elroycapo',
+      privilege: 'user',
+      active: true,
+      address: 'calle popo de perro 700'
+    }
+  ];
+
+export function usersSeeder(){
+    users.forEach((item: any) => {
+        User.create({
+            name: item.name,
+            surname: item.surname,
+            email: item.email,
+            password: item.password,
+            username: item.username,
+            privilege: item.privilege,
+            active: item.active,
+            address: item.address
+    })
+    })
+    
+}
+
 export function categoriesSeeder() {
     categories.forEach((item: any) => {
         Category.create({
@@ -156,3 +197,10 @@ export function categoriesSeeder() {
             details: item.details,
             categoriesId: item.categoriesId     
     }).then(productCreated => productCreated.setCategories([productCreated.categoriesId]))})}
+
+
+export async function getUsers(){
+    let users = await User.findAll();
+
+    return users;
+}

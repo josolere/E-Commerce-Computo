@@ -1,11 +1,14 @@
 export type User = {
-  username: string;
-  password: string;
+  username: string | null;
+  password: string | null;
   email: string;
   privilege: string;
   active: boolean;
   name: string;
   surname: string;
+  address: string | null;
+  id:number | undefined;
+  facebookId: string | null
 };
 export type Product = {
   image: string;
