@@ -7,7 +7,7 @@ import carts from './ShoppingCarts.module.css'
 const ShoppingCart = (): JSX.Element => {
     return (
         <>
-            <NavBar />
+           
             <div className={carts.containerCarts}>
                 <ShoppingCard />
                 <ShoppingCard />

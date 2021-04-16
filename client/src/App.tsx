@@ -17,6 +17,9 @@ import styles from './App.module.scss'
 function App() {
   return (
     <Router>
+      <Route path="/">
+          <Home />
+      </Route>
       <Switch>
         <Route exact path= '/Categorias' component={NavCategories} />
         <Route exact path='/CrearCategoria' component={CreateCategory} />
@@ -26,7 +29,6 @@ function App() {
         <Route exact path='/' component={LandPage} />
         <Route exact path='/Pago' component={Payment} />
         <Route exact path='/Home'>
-          <Home/>
           <div className={styles.catalog}>
           <NavCategories/>
           <Cards/>

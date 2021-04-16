@@ -114,7 +114,7 @@ const Login = () => {
 
     return (
         <div>
-            <NavBar />
+     
             <div className={styles.back}>
                 {showlogin ? <div className={styles.organizar}>
                     <div className={styles.caja}>

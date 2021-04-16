@@ -40,7 +40,6 @@ const VideoLand = () => {
 
     return (
         <div className="containerLand">
-            <NavBar/>
             <img className="imgLand" src="https://images.unsplash.com/photo-1613258176465-eb77f3a050d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80"></img>
             
             <h1 className="titleLand">Bienvenidos a CompuHenry</h1>
