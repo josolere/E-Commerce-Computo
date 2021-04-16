@@ -1,6 +1,7 @@
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
+
   # object querys mutations RECORDAR USAR MAYÚSCULAS
   type Product {
     id: Int
@@ -9,7 +10,7 @@ export const typeDefs = gql`
     brand: String
     price: Float
     details: String
-    categories: [String]
+    categories: [Category]
     createdAt: String
     updatedAt: String
   }

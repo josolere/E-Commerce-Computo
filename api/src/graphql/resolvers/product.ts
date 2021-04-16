@@ -43,6 +43,9 @@ export default {
         offset,
       });
     },
+
+
+    
     getProductById: async (
       _parent: object,
       { id }: { id: number },
@@ -51,14 +54,16 @@ export default {
       const options = {
           include: [{model: db.Category,
             through: "productsxcategories",
-            attributes: ["name"]}]
+            attributes: ["id", "name"]}]
     };
-      const product = await models.Product.findByPk(id,options);
-//      for(var x=0;x<product.Categories.length; x++){
-//      console.log(product.Categories[x].name)
-//      }
+      let product = await models.Product.findByPk(id,options);
 
-      //product.Categories.map((category:any) => product.categories="category.name")
+
+      product.categories = []
+      product.Categories.map((category:any) => { 
+      //  console.log(category.id, category.name)
+        product.categories.push({id:category.id, name:category.name})
+                                        })
       return product;
     },
 
