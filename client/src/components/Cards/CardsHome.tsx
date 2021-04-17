@@ -34,7 +34,7 @@ const products = gql`
         }
     }
 `;
-
+//query con filtros para el catalogo
 const filter = gql`
     query ($name: String!, $categoriesId:[ID!]){
         getProducts (filter:{limit:12 name:$name categoriesId:$categoriesId}) {
@@ -45,6 +45,7 @@ const filter = gql`
         }
     }
 `;
+
 
 export default function Cards(){
 

@@ -1,48 +1,57 @@
+// @import url('../SassVariables/variables.scss');
+$blue:#30475e;//dddddd
+$bluedark: #222831;//222831
+$ligthblue: #dddddd;//30475e
+$white:#f05454;//f05454
 
 .container {
-    height: 7rem;
-    width: 100%;
-    background-color: black;
+    padding: 0rem 13rem 0rem 3rem;
+    height: 4rem;
+    max-width: 100%;
+    background-color: $blue;
     display: inline-flex;
     justify-content: space-evenly;
-    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div{
+        display: flex;
+        a{
+            margin: 0rem 0.5rem;
+        }
+    }
  }
 
 
  .titleNav {
-    color: aliceblue;
+    color: $ligthblue;
     font-size: 25px;
-    margin-top: 12px;
-    padding-left: 2rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
 }
 
 .titleNav:hover{
-    color: #F21B42;
+    color: $white;
 }
 
 .linksNav {
     font-weight: 600;
     display: flex;
-    color: ivory;
+    color: $ligthblue;
     text-decoration: none;
-    margin-left: 1rem;
-    margin-top: 8px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .linksNav:hover {
-    color: #F21B42;
+    color: $white;
 }
 
 .iconCart {
     width: 20px !important;
-    padding-right: 8px;
     height: 20px;
-    color: white;
+    color: $ligthblue;
 }
 
 .iconCart:hover {
-    color: #F21B42;
+    color: $white;
 }

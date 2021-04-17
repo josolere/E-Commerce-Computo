@@ -1,15 +1,21 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+
 .container{
     height: fit-content;
     justify-content: start;
     width: 15rem;
     margin-top: 2rem;
     margin-left: 2rem;
-    background-color:#F21B42 ;
+    background-color:$red ;
 }
 .todos {
-    background-color: black;
+    background-color: $grey;
     text-align: start;
-    color: whitesmoke;
+    color: $white;
     border: transparent;
     width: 12rem;
     padding: 1rem;

@@ -64,11 +64,11 @@ const InputSearch = (): JSX.Element => {
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         setSearchInput(e.currentTarget.value)
-        setMiddlware(namesproducts.filter(
-            (name) =>
-                name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1))
-        setAuto(middlware)
-        if (e.currentTarget.value.length === 0) dispatch(setFilter(searchInput)) && setAuto([])
+        setAuto(namesproducts.filter((name) => 
+            name.toLowerCase().includes(searchInput.toLowerCase())
+        ))
+        // setAuto(middlware)
+        if (e.currentTarget.value.length < 1) dispatch(setFilter("")) && setAuto([])
     }
 
     return (
@@ -83,16 +83,14 @@ const InputSearch = (): JSX.Element => {
                     />
                     <button type="submit" className={search.buttonSearch}><FontAwesomeIcon icon={faSearch} /></button>
                 </div>
-                <Link className={styles.linksearch} to="/Home">
-                    <div className={styles.option}>
-                        {auto.length > 1 ? auto.slice(0, 2).map(search => <p onClick={e => {
+                {searchInput.length > 1 ? <div className={styles.linksearch} >
+                    
+                        {auto.slice(0, 5).map(search => <span onClick={e => {
                             dispatch(setFilter(search))
                             setAuto([])
-                        }}>{search}</p>) :
-                            <p onClick={() => dispatch(setFilter(''))} >Esperando
-                            </p>}
-                    </div>
-                </Link>
+                        }}>{search}</span>)}  
+                </div>:
+                            <span></span>}
             </form>
         </>
     )

@@ -21,12 +21,10 @@ function App() {
           <Home />
       </Route>
       <Switch>
-        <Route exact path= '/Categorias' component={NavCategories} />
         <Route exact path='/CrearCategoria' component={CreateCategory} />
         <Route exact path='/CrearProducto' component={CreateProduct} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
-        <Route exact path='/' component={LandPage} />
         <Route exact path='/Pago' component={Payment} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>
@@ -35,6 +33,7 @@ function App() {
           </div>
         </Route>
         <Route exact path='/Carrodecompras' component={ShoppingCart}/>
+        <Route exact path='/' component={LandPage} />
         <Route component={PageNotFound}/>
       </Switch>
     </Router>

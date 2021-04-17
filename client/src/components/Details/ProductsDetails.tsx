@@ -5,6 +5,13 @@ import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import styles from "./ProductDetail.module.scss"
+import { useDispatch } from 'react-redux';
+
+interface Icategories {
+    id:number
+    name:string
+
+}
 
 interface DetailsProduct {
     getProductById: {
@@ -14,7 +21,7 @@ interface DetailsProduct {
         name: string
         price: number
         details: string
-        categories: number[]
+        categories: Icategories[]
     }
 }
 
@@ -68,8 +75,30 @@ const GET = gql`
             brand
             details
             image
+            categories{
+                id
+                name
+
+            }
         }
 }`;
+
+const GET_CATEGORIES = gql`
+query {
+    getCategory {
+        id
+        name
+    }
+}
+`
+interface Categorie {
+    id: number,
+    name: string,
+}
+
+interface Categories {
+    getCategory: Categorie[]
+}
 
 interface PropsDetails {
     history: {
@@ -139,7 +168,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
     
     
-    const[details,setDetails] = useState({id:filtred?.id.toString(),name:filtred?.name,price:filtred?.price,brand:filtred?.brand,image:filtred?.image,details:filtred?.details})
+    const[details,setDetails] = useState({id:filtred?.id.toString(),name:filtred?.name,price:filtred?.price,brand:filtred?.brand,image:filtred?.image,details:filtred?.details,categories:filtred?.categories})
     const[editMode,setEditMode] = useState(false)
     
     console.log(details)
@@ -177,20 +206,43 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     function handleSubmit (e : React.FormEvent<HTMLFormElement>){
         e.preventDefault()
-        editProduct({variables:details})
+        editProduct({variables:{                                        //WARNING CUIDADO CON ESTO
+            ...details,
+        categories: details?.categories?.map(cat => cat.id)//esto puede llegar a romper estoy haciendo el edit mutation de las categorias
+        }})
     }
+        
+
+    const handleCategory = (e:React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setDetails({
+            ...details,
+            categories: details?.categories?.filter( cat => cat.id != +e.currentTarget.value)
+        })
+    }
+    const handleAddCategories = (e:React.FormEvent<HTMLSelectElement>) => {
+        details?.categories &&
+        setDetails({
+            ...details,
+            categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories:
+            [...details?.categories , {name:e.currentTarget.selectedOptions[0].innerHTML, id:parseInt(e.currentTarget.value)}]
+        })
+    }
+
+    const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
+    const categoriesQuery = categoriesQ.data?.getCategory
     
-    
+ 
+
     return (
         <div className={styles.contenedorAll}>
-            <NavBar />
             <div className={styles.contenedorDetail}>
                 <img src={filtred?.image} alt='' />
                 <form onSubmit={handleSubmit} >
                     <button onClick={handleEdit}>Edit</button>
-                    <input type='submit' value='Aceptar Cambios' />
+                    {editMode && <input type='submit' value='Aceptar Cambios' />}
                     {editMode?
-                    <input name='name' type='text' onChange={handleChange} defaultValue={filtred?.name}/>
+                    <input name='name' type='text' onChange={handleChange} defaultValue={details?.name}/>
                     :
                     <h1  className={styles.nameDetail}>{filtred?.name}</h1>}
                     {editMode ?
@@ -205,7 +257,17 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         {editMode ?
                         <h2 className={styles.precioDetail}>$<input onChange={handlePrice} defaultValue={details?.price} /></h2>
                         :
-                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>}
+                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>
+                        }
+                        {editMode && <select onChange={handleAddCategories}>
+                        {categoriesQuery?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
+                        </select>}
+                        {editMode ?
+                        details?.categories?.map(category => <button onClick={handleCategory} value={category.id} >{category.name}</button>)
+                        :
+                        details?.categories?.map(category => <p className={styles.category}>{category.name}</p>)
+                        }
+                        
                         <div>
                             <div className={styles.estrellas}>
                                 {hideStar ?
