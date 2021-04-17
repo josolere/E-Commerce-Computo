@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Card from './CardHome'
+import { FILTER } from "../../gql/card"
 import styles from './CardsHome.module.scss'
 import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'react-router';
 import {useSelector } from 'react-redux';
 import ReactPaginate from "react-paginate"
 import { AppState } from '../../redux/reducers';
@@ -26,23 +26,12 @@ interface IParams {
 }
 
 
-const filter = gql`
-    query ($name: String!, $categoriesId:[ID]){
-        getProducts (filter:{name:$name categoriesId:$categoriesId}) {
-            id
-            name
-            price
-            image
-        }
-    }
-`;
-
 export default function Cards(){
 
     const name = useSelector((store: AppState) => store.productReducer.filter)
     const categoriesId = useSelector((store: AppState) => Number(store.productReducer.categories) || [])
     
-    const { loading, error, data } = useQuery<DetailsData>(filter,{variables:{name:name, categoriesId:categoriesId}})
+    const { loading, error, data } = useQuery<DetailsData>(FILTER,{variables:{name:name, categoriesId:categoriesId}})
     
     useEffect(()=>{
     },[data])
