@@ -6,6 +6,9 @@ import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import styles from "./ProductDetail.module.scss"
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import stylesEdit from "./ProductEdit.module.scss"
 
 interface Icategories {
     id:number
@@ -236,29 +239,34 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     return (
         <div className={styles.contenedorAll}>
-            <div className={styles.contenedorDetail}>
+            <div className={ styles.contenedorDetail }>
                 <img src={filtred?.image} alt='' />
-                <form onSubmit={handleSubmit} >
-                    <button onClick={handleEdit}>Edit</button>
+                <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.aa} >
+                    <button className={styles.Edit} onClick={handleEdit}>Edit</button>
                     {editMode && <input type='submit' value='Aceptar Cambios' />}
                     {editMode?
-                    <input name='name' type='text' onChange={handleChange} defaultValue={details?.name}/>
+                    <input className={stylesEdit.input} name='name' type='text' onChange={handleChange} defaultValue={details?.name}/>
                     :
                     <h1  className={styles.nameDetail}>{filtred?.name}</h1>}
                     {editMode ?
-                     <p > Marca: <input name='brand' defaultValue={details?.brand} onChange={handleChange}/> </p>
+                     <p > Marca: <input className={stylesEdit.input} name='brand' defaultValue={details?.brand} onChange={handleChange}/> </p>
                     :
                     <p> Marca: {filtred?.brand} </p>}
                     {editMode ?
                     <p > Detalles: <textarea  onChange={handleDetails} defaultValue={details?.details} /></p> 
                     :
                     <p > Detalles: {filtred?.details}</p>}
-                    <div  className={styles.botonPrecio}>
+                    
+                        <div className={styles.botonPrecio}>
+
                         {editMode ?
-                        <h2 className={styles.precioDetail}>$<input onChange={handlePrice} defaultValue={details?.price} /></h2>
+                        <p className={styles.precioDetail}>$<input className={stylesEdit.input} onChange={handlePrice} defaultValue={details?.price} /></p>
                         :
-                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>
+                        <p className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</p>
                         }
+                        <hr style={{height:'1rem',backgroundColor:'white'}}/>
+                        <button className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
+                        </div>
                         {editMode && <select onChange={handleAddCategories}>
                         {categoriesQuery?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
                         </select>}
@@ -268,7 +276,44 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         details?.categories?.map(category => <p className={styles.category}>{category.name}</p>)
                         }
                         
-                        <div>
+                    
+                </form>
+            </div>
+                        <div className={styles.containerBot}>
+                            
+                            {/* <Link to={{
+                                pathname: '/Pago',
+                                state: {
+                                    id: id
+                                }
+                            }}>
+                            </Link> */}
+                            <div>{hidereviews ?
+                                <div>
+                                    <button onClick={changereview} className={styles.buttonCompra} >Enviar comentario</button>
+                                    <div className={styles.review}>
+                                        <textarea
+                                        style={{height:'5rem',width:'20rem'}}
+                                            placeholder={'Escriba aquí una review del producto'}
+                                            className={styles.textarea}
+                                            name='review'
+                                            value={reviewuser.review}
+                                            onChange={(event) =>
+                                                setReviewuser({
+                                                    ...reviewuser,
+                                                    review: event.target.value
+                                                })} />
+                                    </div>
+                                </div>
+                                :
+                                <div className={styles.gracias} >
+                                    <h4>Gracias por dejar su review</h4>
+                                    <div>{resultsData && resultsData.map((item) => (
+                                        <p>{item}</p>
+                                    ))}</div>
+                                </div>
+                            }
+                            </div>
                             <div className={styles.estrellas}>
                                 {hideStar ?
                                     <div >
@@ -291,7 +336,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                                 />
                                             </label>
                                         })}
-                                        <p className={styles.raiting}>Rating {totalrating}</p>
+                                        {/* <p className={styles.raiting}>Rating {totalrating}</p> */}
                                     </div>
                                     :
                                     <div>
@@ -300,43 +345,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                     </div>
                                 }
                             </div>
-                            <Link to={{
-                                pathname: '/Pago',
-                                state: {
-                                    id: id
-                                }
-                            }}>
-                                <button className={styles.buttonCompra}>Comprar</button>
-                            </Link>
-                            <div>{hidereviews ?
-                                <div>
-                                    <div className={styles.review}>
-                                        <textarea
-                                            placeholder={'Escriba aquí una review del producto'}
-                                            className={styles.textarea}
-                                            name='review'
-                                            value={reviewuser.review}
-                                            onChange={(event) =>
-                                                setReviewuser({
-                                                    ...reviewuser,
-                                                    review: event.target.value
-                                                })} />
-                                    </div>
-                                    <button onClick={changereview} className={styles.buttonCompra} >Guardar Review</button>
-                                </div>
-                                :
-                                <div className={styles.gracias} >
-                                    <h4>Gracias por dejar su review</h4>
-                                    <div>{resultsData && resultsData.map((item) => (
-                                        <p>{item}</p>
-                                    ))}</div>
-                                </div>
-                            }
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                        </div>//
         </div>
     )
 }
