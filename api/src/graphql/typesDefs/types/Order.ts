@@ -5,6 +5,7 @@ export const typeDefs = gql`
   type Order {
     id: Int
     status: String
+    details:[OrderDetail]
     createdAt: String
     updatedAt: String
   }

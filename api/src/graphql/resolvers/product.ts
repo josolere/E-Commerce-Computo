@@ -43,9 +43,6 @@ export default {
         offset,
       });
     },
-
-
-    
     getProductById: async (
       _parent: object,
       { id }: { id: number },
@@ -57,13 +54,10 @@ export default {
             attributes: ["id", "name"]}]
     };
       let product = await models.Product.findByPk(id,options);
-
-
       product.categories = []
       product.Categories.map((category:any) => { 
-      //  console.log(category.id, category.name)
         product.categories.push({id:category.id, name:category.name})
-                                        })
+      })
       return product;
     },
 

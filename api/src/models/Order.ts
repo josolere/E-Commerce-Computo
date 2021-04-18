@@ -5,6 +5,7 @@ import {
   Model,
   Optional,
   Sequelize,
+  BelongsToManyGetAssociationsMixin
 } from "sequelize";
 
 import { OrderDetail } from "./OrderDetail";
@@ -25,6 +26,8 @@ export class Order
   // public status!: EnumDataType<string>;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public getOrderDetails!: BelongsToManyGetAssociationsMixin<OrderDetail>;
 
   public readonly orderDetail?: OrderDetail[];
 
