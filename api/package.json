@@ -13,8 +13,9 @@
   "dependencies": {
     "@graphql-tools/load-files": "^6.3.2",
     "@graphql-tools/merge": "^6.2.11",
-    "@types/passport": "^1.0.6",
+    "@types/express-session": "^1.17.3",
     "@types/passport-facebook": "^2.1.10",
+    "@types/uuid": "^8.3.0",
     "apollo-server": "^2.22.2",
     "apollo-server-express": "^2.22.2",
     "cors": "^2.8.5",

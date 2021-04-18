@@ -2,6 +2,11 @@ import { gql } from "apollo-server";
 
 export const typeDefs = gql`
 
+type Query{
+  getReviews(id: Int): [Review]
+}
+
+
 #Estos datos devuelve
 type Review{
     id: Int
@@ -17,7 +22,7 @@ input AddReviewInput{
   }
 
 type Mutation{
-    addReview(id: String, input: AddReviewInput): Review
+    addReview(id: Int, input: AddReviewInput): Review
   }
 
 `;

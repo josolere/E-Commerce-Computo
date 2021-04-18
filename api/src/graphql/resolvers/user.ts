@@ -20,7 +20,7 @@ export default {
       const data = await models.User.findByPk(id);
       return data;
     },
-    currentUser: (parent:object, args:any, context:any) => context.user,
+    currentUser: (parent:object, args:any, context:any) => context.getUser(),
     
     
     getUsers: async(
@@ -99,7 +99,26 @@ export default {
         throw new Error('User with email already exists');
       }
 
-      let newUser = await db.User.create({ ...input })
+      console.log(input)
+
+      let newUserInput: any = {
+        id: uuid(),
+        name: input.name,
+        surname: input.surname,
+        email: input.email,
+        privilege: 'user',
+        active: true,
+        password: input.password,
+        address: input.address,
+        username: input.username
+      }
+      
+      console.log(newUserInput);
+      let newUser = context.models.User.create({ 
+        newUserInput 
+       })
+
+      //console.log(context)
 
       await context.login(newUser);
 

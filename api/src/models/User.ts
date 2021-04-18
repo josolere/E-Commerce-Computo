@@ -20,16 +20,16 @@ import {
 import { Product } from "./Product";
 
 export interface UserAttributesI {
-  id: number;
-  username: string | null;
-  password: string | null;
-  email: string;
-  privilege: string;
-  active: boolean;
-  name: string;
-  surname: string;
-  address: string | null; //puede ser otra tabla
-  facebookId: string | null;
+  id?: string;
+  username?: string | null;
+  password?: string | null;
+  email?: string;
+  privilege?: string;
+  active?: boolean;
+  name?: string;
+  surname?: string;
+  address?: string | null; //puede ser otra tabla
+  facebookId?: string | null;
 }
 
 interface UserCreationAttributesI extends Optional<UserAttributesI, "id" | "address" | "username" | "password" | "facebookId"> {}
@@ -37,7 +37,7 @@ interface UserCreationAttributesI extends Optional<UserAttributesI, "id" | "addr
 export class User
   extends Model<UserAttributesI, UserCreationAttributesI>
   implements UserAttributesI {
-  public id!: number;
+  public id!: string;
   public username!: string | null;
   public password!: string | null;
   public email!: string;
@@ -74,8 +74,8 @@ export function UserFactory(sequelize: Sequelize) {
   User.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.STRING,
+        allowNull:false,
         primaryKey: true,
       },
       facebookId:{

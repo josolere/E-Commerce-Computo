@@ -3,6 +3,7 @@ import { Category } from "../models/Category"
 import { Product } from "../models/Product"
 import db from "../models"
 import { User } from "../models/User";
+import { v4 as uuid } from 'uuid';
 
 let categorie = [{name:"Placas de Video AMD"}, {name:"Placas de Video GeForce"}]
 
@@ -150,7 +151,8 @@ const users = [
       username: 'elmauricapo',
       privilege: 'admin',
       active: true,
-      address: '123 Main'
+      address: '123 Main',
+      id: uuid()
     },
     {
       name: 'Roy',
@@ -160,7 +162,8 @@ const users = [
       username: 'elroycapo',
       privilege: 'user',
       active: true,
-      address: 'calle popo de perro 700'
+      address: 'calle popo de perro 700',
+      id: uuid()
     }
   ];
 
@@ -174,7 +177,8 @@ export function usersSeeder(){
             username: item.username,
             privilege: item.privilege,
             active: item.active,
-            address: item.address
+            address: item.address,
+            id: item.id
     })
     })
     
