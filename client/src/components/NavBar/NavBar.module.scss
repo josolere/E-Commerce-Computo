@@ -5,13 +5,13 @@ $ligthblue: #dddddd;//30475e
 $white:#f05454;//f05454
 
 .container {
-    padding: 0rem 5rem 0rem 3rem;
-    height: 5rem;
+/*     padding: 0rem 5rem 0rem 3rem;
+ */    height: 5rem;
     max-width: 100%;
     background-color: $blue;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content:space-around;
+    align-items:center ;
     div{
         display: flex;
         a{
@@ -40,19 +40,32 @@ $white:#f05454;//f05454
     text-decoration: none;
     cursor: pointer;
     font-family:'Montserrat', sans-serif;
+
+}
+
+.linkCart {
+    display: flex;
+    justify-content:space-around;
+    align-items:center ;
+    text-decoration: none;
+
     p{
-        position: relative;
-        background-color: rgb(177, 10, 10);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        width: 1.2rem;
-        height: 1.2rem;
-        bottom: 2rem;
-        right: 0.9rem;
+        color: $ligthblue;
+        cursor: pointer;
+        font-family:'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+    &:hover{
+        p{
+            color: #f05454;
+        }
+        svg{
+            color: #f05454;
+        }
     }
 }
+
+
 
 .linksNav:hover {
     color: #f05454;
@@ -63,8 +76,10 @@ $white:#f05454;//f05454
     height: 20px;
     padding-right: 3rem;
     color: $ligthblue;
+    
 }
-
+/* 
 .iconCart:hover {
     color: #f05454;
-}
+
+} */

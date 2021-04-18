@@ -43,7 +43,7 @@ const LandPage = () => {
 
     const current = new Date();
 
-    const { loading, error, data } = useQuery<DetailsData>(GET,{variables:{name:'', categoriesId:[]}})
+    const { loading, error, data } = useQuery<DetailsData>(GET, { variables: { name: '', categoriesId: [] } })
 
 
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
@@ -110,7 +110,7 @@ const LandPage = () => {
 
     return (
         <React.Fragment>
-            <ReactPlayer 
+            {/*             <ReactPlayer 
                 id='bg-video'
                 playing={true}
                 width={1400}
@@ -118,29 +118,31 @@ const LandPage = () => {
                 volume={0}
                 loop={true}
                 url='https://www.youtube.com/watch?v=ky_By2ehgks'  
-                />
-            <div className="containerLand">
-                <div className='ControlLand'>
-                    <h1 className={styles.TitleLand}>CompuHenry</h1>
-                    <p className={styles.DiscountLand}>Hoy {dayoftheweek} tenemos un descuento de {discount}!</p>
-                    <div className='pic-order'>
-                        <div className="pic-ctn">
-                            <img src={image1} alt="" className="pic" onClick={linkland} />
-                            <img src={image2} alt="" className="pic" onClick={linkland} />
-                            <img src={image3} alt="" className="pic" onClick={linkland} />
-                            <img src={image4} alt="" className="pic" onClick={linkland} />
-                            <img src={image5} alt="" className="pic" onClick={linkland} />
+                /> */}
+            <div className={styles.BackLand} >
+                <div className="containerLand">
+                    <div className='ControlLand'>
+                        <h1 className={styles.TitleLand}>CompuHenry</h1>
+{/*                         <p className={styles.DiscountLand}>Hoy {dayoftheweek} tenemos un descuento de {discount}!</p>
+ */}                        <div className='pic-order'>
+                            <div className="pic-ctn">
+                                <img src={image1} alt="" className="pic" onClick={linkland} />
+                                <img src={image2} alt="" className="pic" onClick={linkland} />
+                                <img src={image3} alt="" className="pic" onClick={linkland} />
+                                <img src={image4} alt="" className="pic" onClick={linkland} />
+                                <img src={image5} alt="" className="pic" onClick={linkland} />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className={styles.OrderSub}>
-                    <h1 className={styles.TitleConcat} >Contacta con nosotros</h1>
-                </div>
-                <div className={styles.LandPageInfo}>
-                    <p>  Dirección: Avenida Cabildo 3456</p>
-                    <p>  Telefono de contacto: 4567-3456</p>
-                    <p>  WhatsApp: +54 9 1134553321</p>
-                    <p>  E-mail: CompuHenry@yahoo.com</p>
+                    <div className={styles.OrderSub}>
+                        <h1 className={styles.TitleConcat} >Contacta con nosotros</h1>
+                    </div>
+                    <div className={styles.LandPageInfo}>
+                        <p>  Dirección: Avenida Cabildo 3456</p>
+                        <p>  Telefono de contacto: 4567-3456</p>
+                        <p>  WhatsApp: +54 9 1134553321</p>
+                        <p>  E-mail: CompuHenry@yahoo.com</p>
+                    </div>
                 </div>
             </div>
         </React.Fragment>
