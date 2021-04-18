@@ -1,14 +1,9 @@
-$grey:#30475e;//dddddd
-$dark: #222831;//222831
-$white: #dddddd;//30475e
-$red:#f05454;//f05454
-
 .container{
     display: flex;
+    height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color:$grey ;
-    border-radius: 0.5rem;
+    background-color:#191921 ;
 }
 
 .form{
@@ -21,9 +16,7 @@ $red:#f05454;//f05454
     height: fit-content;
     width: fit-content;
     border: solid 1px gray;
-    background-color:$grey;
-    border-radius: 0.5rem;
-
+    background-color:#1A1A1A;
 
     h1{
         color: whitesmoke;
@@ -31,8 +24,8 @@ $red:#f05454;//f05454
     }
     hr{
         margin:0;
-        color:$red ;
-        border:solid 3px $red;
+        color:#F21B42 ;
+        border:solid 3px #F21B42;
         width: 6rem;
         border-radius: 1rem;
     }
@@ -42,17 +35,17 @@ $red:#f05454;//f05454
     }
     label{
         margin-top: 1rem;
-        color:$white;
+        color:white;
     }
 }
 
 
 .button{
-    background-color: $red;
+    background-color: #F21B42;
     border: none;
     padding: 1rem;
     border-radius: 2rem;
-    color: $white;
+    color: white;
     font-size: 0.7rem;
     &:hover{
         cursor: pointer;

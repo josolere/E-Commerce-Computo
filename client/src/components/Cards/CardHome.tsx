@@ -60,22 +60,6 @@ export default function Card({ name, image, price, id }: props) {
 
     return (
         <div className={styles.card}>
-<<<<<<< HEAD
-        
-        <p >{name}</p> 
-        
-        <Link className={styles.link} style={{textDecoration:'none'}} to={{
-            pathname: '/Detalles',
-            state: {
-                id:id
-            }
-        }}>
-           
-            <div className={styles.containerimg}>          
-            <img  src={image}/>
-            </div> 
-            
-=======
 
             <Link className={styles.link} style={{ textDecoration: 'none' }} to={{
                 pathname: '/Detalles',
@@ -86,7 +70,6 @@ export default function Card({ name, image, price, id }: props) {
             }}>
                 <p >{name}</p>
                 <img style={{ width: '100%', height: 'auto' }} src={image} />
->>>>>>> bc5334125a01bbedea90b0078ce7f255e0c79f8e
             </Link>
 
             {/* <div className={styles.buy}>${new Intl.NumberFormat().format(price)}</div> */}
