@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import search from './styleSearch.module.css'
-
+import React, { useState } from 'react'
+/* import search from './styleSearch.module.css'
+ */
 
 const InputSearch = ():JSX.Element => {
 
@@ -13,8 +13,8 @@ const InputSearch = ():JSX.Element => {
                     placeholder='Buscar...'
                     onChange={(e) => setSearchInput(e.target.value)}
                     value={searchInput}
-                    className={search.inputSearch}
-                />
+/*                     className={search.inputSearch}
+ */                />
             </form>
         </>
     )

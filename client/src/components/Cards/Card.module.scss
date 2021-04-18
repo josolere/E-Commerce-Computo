@@ -4,14 +4,14 @@ $white: #dddddd;//30475e
 $red:#f05454;//f05454
 
 .card {
-  width: 16rem;
-  height: 25rem;
-  margin: 0rem 1rem 3rem 2rem;
-  border-radius: 00.2rem;
+  width: 14rem;
+  height: 22rem;
+  margin: 0rem 0rem 1.3rem 2rem;
+  border-radius: 0.2rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   //   align-items: flex-start;
   background-color: whitesmoke;
   -webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0); 
@@ -20,7 +20,6 @@ $red:#f05454;//f05454
     &:hover{
         transition: 2s;
     }
-
     p {
       margin: 0;
       font-size: 1.1rem;
@@ -31,15 +30,13 @@ $red:#f05454;//f05454
       color: white;
       height: 15%;
     }
-
     a {
-      height: 65%;
+      height: 100%;
     }
 
     div {
       height: 15%;
     }
-
 }
 
 .link{

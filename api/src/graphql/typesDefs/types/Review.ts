@@ -15,7 +15,6 @@ type Review{
 }
 ##Estos datos entran
 input AddReviewInput{
-    user: String
     rating: Int
     text: String
     product: Int
