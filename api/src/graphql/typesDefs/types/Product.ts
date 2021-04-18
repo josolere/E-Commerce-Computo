@@ -9,7 +9,7 @@ export const typeDefs = gql`
     brand: String
     price: Float
     details: String
-    categories: [String]
+    categories: [Category!]
     createdAt: String
     updatedAt: String
   }
