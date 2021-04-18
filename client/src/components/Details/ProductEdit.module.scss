@@ -40,6 +40,7 @@ $red:#f05454;//f05454
 }
 .bot{
     display: flex;
+    justify-content: space-between;
 }
 .cats{
     display:flex;
@@ -68,7 +69,6 @@ $red:#f05454;//f05454
     color: whitesmoke;
     max-width: 20rem;
     font-family:'Montserrat', sans-serif;
-
 }
 .acept{
     border: none;

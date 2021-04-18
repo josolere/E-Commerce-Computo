@@ -27,7 +27,7 @@ export default function Card({name, image, price, id}:props){
         }}>
            
             <div className={styles.containerimg}>          
-            <img style={{width:'100%',height:'auto'}} src={image}/>
+            <img  src={image}/>
             </div> 
             
             </Link>

@@ -1,9 +1,31 @@
 import React, { useState } from 'react'
 import styles from './CreateCategory.module.scss'
 import { gql, useMutation } from '@apollo/client';
-import { NEW_CATEGORY } from "../../gql/categories"
+
+/* interface categoryInventary {
+    input: {
+        id: number
+        name: string
+    }
+}
+ */
+/* interface newCategoryDetails {
+    name: string
+} */
 
 
+const NEW_CATEGORY = gql`
+mutation ($name: String!) {
+    createCategory ( input: {
+        name:$name
+      })
+        {
+            id
+            name
+        }
+    }
+    
+`;
 
 type FormEvent = React.FormEvent<HTMLFormElement>
 type InputEvent = React.FormEvent<HTMLInputElement>
@@ -11,7 +33,10 @@ type InputEvent = React.FormEvent<HTMLInputElement>
 export default function CreateProduct() {
     
     const [categorie, setCategorie] = useState("")
-    
+    /*     const [createNewCategory, { error, data }] = useMutation<
+        {createNewProduct: categoryInventary},
+        {category:newCategoryDetails}
+        >(NEW_CATEGORY,{variables:{category:{name:categorie}}}) */
 
     const [createCategory, {data}] = useMutation(NEW_CATEGORY)
 
@@ -21,7 +46,7 @@ export default function CreateProduct() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
-       
+        //AVERIGUAR COMO HACER POST Y COMO SON LOS MODELOS
         createCategory({ variables: {  name: categorie } } )
             .then((resolve) => { console.log(resolve) })
             .catch((err) => { console.log('Salio Mal') })
@@ -31,7 +56,8 @@ export default function CreateProduct() {
 
     return (
         <div className={styles.container}>
-         
+            {/*         {error ? alert(`Oh no! ${error.message}`) : null}
+        {data && data.createNewProduct ? alert(`Saved!`) : null} */}
             <form onSubmit={handleSubmit} className={styles.form} >
                 <h1>Create Categorie</h1>
                 <hr />
