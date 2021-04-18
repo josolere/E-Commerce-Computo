@@ -1,5 +1,5 @@
 import {gql, useMutation, useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import styles from './CreateProduct.module.scss' 
 
 /* interface productInventary {
@@ -51,7 +51,7 @@ interface Categories {
 }
 
 const NEW_PRODUCT = gql`
-mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categories:[Int]!) {
+mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categories:[Int!]) {
     createProduct ( input: {
         name:$name,
         price:$price, 
@@ -63,7 +63,11 @@ mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: St
         {
             id
             name
-          	categories
+          	categories{
+                id
+                name
+
+              }
           
         }
     }
@@ -132,7 +136,6 @@ export default function CreateProduct(){
     //estas dos trabajan juntas
     const handleCategories =  (e:SelectEvent) =>{
         e.preventDefault()
-        console.log(e.currentTarget.selectedOptions[0].innerHTML)
         setCategors([...categors,{
             id:parseInt(e.currentTarget.value),
             name:e.currentTarget.selectedOptions[0].innerHTML
@@ -143,6 +146,7 @@ export default function CreateProduct(){
             })
     }
 
+
     const handleDeleteCategory = (e:ButtonEvent) => {
         e.preventDefault()
         setCategors(categors.filter(cat => cat.id !== parseInt(e.currentTarget.value)))
@@ -152,22 +156,24 @@ export default function CreateProduct(){
         })
     }
 
+    const fileInput = createRef() 
+
     return(
     <div className={styles.container}>
         {/* {error ? alert(`Oh no! ${error.message}`) : null}
         {data && data.createNewProduct ? alert(`Saved!`) : null}  */}
          <form onSubmit={handleSubmit} className={styles.form} >
-             <h1>Create Product</h1>
+             <h1>Crear Producto</h1>
              <hr/>
-             <label>Product Name</label>
+             <label>Nombre del producto</label>
              <input type='text' name='name' value={state.name} onChange={handleChange}/>
-             <label>Price</label>
+             <label>Precio</label>
              <input type='text' name='price' value={state.price} onChange={handlePrice}/>
-             <label>Brand</label>
+             <label>Marca</label>
              <input type='text' name='brand' value={state.brand} onChange={handleChange}/>
-             <label>Image</label>
+             <label>Imagen</label>
              <input type='text' name='image' value={state.image} onChange={handleChange}/>
-             <label>Details</label>
+             <label>Detalles</label>
              <input type='text' name='details' value={state.details} onChange={handleChange}/>
              <select onChange={handleCategories}>
                  {categories?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
@@ -175,7 +181,7 @@ export default function CreateProduct(){
              <div>
                  {categors.map(cate => <button onClick={handleDeleteCategory} value={cate.id} key={cate.name}>{cate.name}</button>)}
              </div>
-             <input type='submit' value='CREATE' className={styles.button} />
+             <input type='submit' value='Crear' className={styles.button} />
          </form>
         </div>
    )

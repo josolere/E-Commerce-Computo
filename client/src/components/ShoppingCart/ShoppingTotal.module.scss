@@ -1,12 +1,11 @@
 .containerOrden{
-    /* background-color: silver; */
     width: 70%;
     height: 40%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     color: white;
-    margin: 30px;
+    margin: 1.8rem;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,7 +18,6 @@
 }
 
 .containerValue{
-    /* background-color: white; */
     display: flex;
     width: 50%;
     height: 100%;
@@ -31,37 +29,37 @@
 .containerTotal{
     display: flex;
     justify-content: space-around;
-}
-
-.containerSubTotal  h2,
-.containerSent  h2,
-.containerTotal  h2{
-    /* background-color: white; */
-    width: 180px;
-    display: flex;
-    justify-content: flex-start;
+    h2{
+        width: 180px;
+        display: flex;
+        justify-content: flex-start;
+    }
 }
 
 .containerButton{
     width: 100%;
-    height: 80px;
+    height: 5rem;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
 .buttonFinal{
-    width: 200px;
-    height: 40px;
-    margin-right: 250px;
+    width: 12.5rem;
+    height: 2.5rem;
+    margin-right: 15.5rem;
     border-radius: 20px;
     background-color: rgb(177, 10, 10);
     color: white;
     font-size: 18px;
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    &:hover{
+    cursor: pointer;
+    }
 }
 
-.buttonFinal{
-    cursor: pointer;
-}
 

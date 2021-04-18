@@ -1,42 +1,93 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
 .card {
-  width: 12rem;
-  height: 17rem;
-//   border: solid 1px whitesmoke;
-//   border-radius: 0.5rem;
-  margin: 0rem 1rem 1rem 1rem;
+  width: 16rem;
+  height: 25rem;
+  margin: 0rem 1rem 3rem 2rem;
+  border-radius: 00.2rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-end;
+  //   align-items: flex-start;
   background-color: whitesmoke;
-  img{
-      position:absolute;
-      top: 1rem;
-      left: 1rem;
-      right: 0;
-  }
-  span{
-      position: absolute;
-      bottom: 2.5rem;
-      font-weight: 600;
-  }
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0); 
+    box-shadow:  2px 5px 10px 0px #1b1b1b, 5px 5px 10px 5px rgba(0,0,0,0);
+    font-family:'Montserrat', sans-serif;
+    &:hover{
+        transition: 2s;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border-top-right-radius: 0.2rem ;
+      border-top-left-radius: 0.2rem;
+      background-color: $dark;
+      color: white;
+      height: 15%;
+    }
+
+    a {
+      height: 65%;
+    }
+
+    div {
+      height: 15%;
+    }
+
 }
-.buttons {
+
+.link{
+  div {
+    height: 100%;
     display: flex;
-    position: absolute;
-    bottom: 0;
-    button{
-        color: whitesmoke;
-        padding: 0.7rem 00.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+    img{
+        max-width: 100%;
+        max-height: 100%;
     }
 }
-.buy{
-    background-color: #F21B42;
-    font-size: 1.2rem;
-    font-weight: 700;
+ .buttons {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    margin-bottom: -0.5rem;
+    background-color:#30475e;
+    border-bottom-left-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+    button{
+        width: 50%;
+        border: none;
+        font-family:'Montserrat', sans-serif;
+        outline: none;
+    }
+} 
+
+.buy {
+  font-size: 140%;
+  font-weight: 400;
+  background-color: $red; 
+  color: #dddddd;
+  border-bottom-left-radius: 0.2rem;
 }
-.learn{
-    font-size: 00.7rem;
-    background-color: #000406;
-}
+
+.addCart{
+  background-color:#30475e; 
+  font-size: 180%;
+  color: #dddddd;
+  border-bottom-right-radius: 0.2rem;
+    &:hover{
+            transition: 1s;
+            position: relative;
+            bottom: 0.5rem;
+            cursor: pointer;
+            color: $red;
+        }
+} 

@@ -39,8 +39,8 @@ passport.use(
 );
 
 const facebookOptions: iUserFacebook = {
-  clientID: FACEBOOK_CLIENT_ID,
-  clientSecret: FACEBOOK_APP_SECRET,
+  clientID: 'FACEBOOK_CLIENT_ID',
+  clientSecret: 'FACEBOOK_APP_SECRET',
   callbackURL:'http://localhost:5000/auth/facebook/callback',
   profileFields:['id', 'email', 'first_name', 'last_name'],
 }
