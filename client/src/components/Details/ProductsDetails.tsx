@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom';
 import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
-<<<<<<< HEAD
 import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES} from "../../gql/productDetails"
-=======
-import { ReviewMutation, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
->>>>>>> 1e990633849f8daddbb184aa6da1d0b964b5587c
 import styles from "./ProductDetail.module.scss"
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
