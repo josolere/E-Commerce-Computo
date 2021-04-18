@@ -13,8 +13,7 @@ const InputSearch = ():JSX.Element => {
                     placeholder='Buscar...'
                     onChange={(e) => setSearchInput(e.target.value)}
                     value={searchInput}
-/*                     className={search.inputSearch}
- */                />
+                />
             </form>
         </>
     )

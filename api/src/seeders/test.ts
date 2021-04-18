@@ -89,7 +89,7 @@ let products = [
         brand: 'ASUS',
         details: 'Placa madre tope de gama ASUS, con socket AM4, compatible con lo mejor de AMD. Wi-Fi 6(.ax) incluido. Tres ranuras M.2. Disipadores gigantes para VRM, chipset y sockets M2. Ethernet 10gb incluido. Conectores USB 3.2 incluidos.',
         price: 57999,
-        categoriesId: 4
+        categoriesId: [4]
     },{
         name: 'Headset Redragon H220 THEMIS',
         image: 'https://cdn.shopify.com/s/files/1/2695/9506/products/H220-1_headset_250x250@2x.png?v=1582614574',
