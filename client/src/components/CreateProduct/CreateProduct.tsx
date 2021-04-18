@@ -1,6 +1,7 @@
 import {gql, useMutation, useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react'
-import { NEW_PRODUCT, GET_CATEGORIES} from "../../gql/createProduct"
+import React, { createRef, useEffect, useState } from 'react'
+import { GET_CATEGORIES }  from "../../gql/categories"
+import { NEW_PRODUCT }  from "../../gql/createProduct"
 import styles from './CreateProduct.module.scss' 
 
 
@@ -82,6 +83,8 @@ export default function CreateProduct(){
             categories: state.categories.filter(id => id !== parseInt(e.currentTarget.value))
         })
     }
+
+    const fileInput = createRef() 
 
     return(
     <div className={styles.container}>
