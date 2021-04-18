@@ -13,7 +13,6 @@ import stylesEdit from "./ProductEdit.module.scss"
 interface Icategories {
     id:number
     name:string
-
 }
 
 interface DetailsProduct {
@@ -108,6 +107,7 @@ interface PropsDetails {
         location: {
             state: {
                 id: number
+                newprice: number
             }
         }
     }
@@ -116,6 +116,8 @@ interface PropsDetails {
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const id = props.history.location.state.id
+
+    const newprice = props.history.location.state.newprice
 
     const { loading, error, data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
@@ -235,6 +237,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
     const categoriesQuery = categoriesQ.data?.getCategory
     
+    console.log(newprice)
  
 
     return (
@@ -260,9 +263,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         <div className={styles.botonPrecio}>
 
                         {editMode ?
-                        <p className={styles.precioDetail}>$<input className={stylesEdit.input} onChange={handlePrice} defaultValue={details?.price} /></p>
+                        <p className={styles.precioDetail}>$<input className={stylesEdit.input} onChange={handlePrice} defaultValue={newprice} /></p>
                         :
-                        <p className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</p>
+                        <p className={styles.precioDetail}>${new Intl.NumberFormat().format(newprice || 0)}</p>
                         }
                         <hr style={{height:'1rem',backgroundColor:'white'}}/>
                         <button className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>

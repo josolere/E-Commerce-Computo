@@ -10,9 +10,9 @@ import Home from './components/Home/Home'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import NavCategories from './components/categories/Categories';
-import Cards from './components/Cards/CardsHome'
-import styles from './App.module.scss'
-      
+import Cards from './components/Cards/CardsHome';
+import styles from './App.module.scss';
+import Unicrear from './components/Create/Create'
 
 function App() {
   return (
@@ -21,8 +21,9 @@ function App() {
           <Home />
       </Route>
       <Switch>
-        <Route exact path='/CrearCategoria' component={CreateCategory} />
-        <Route exact path='/CrearProducto' component={CreateProduct} />
+        <Route exact path='/Crear'component={Unicrear} />
+  {/*       <Route exact path='/CrearCategoria' component={CreateCategory} />
+        <Route exact path='/CrearProducto' component={CreateProduct} /> */}
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Pago' component={Payment} />
