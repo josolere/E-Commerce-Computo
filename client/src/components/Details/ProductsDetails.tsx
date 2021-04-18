@@ -12,13 +12,8 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
 
 interface Icategories {
-<<<<<<< HEAD
     id?:number
     name?:string
-=======
-    id: number
-    name: string
->>>>>>> 4d7329fa034a18cb39c775d1b99df271399ba84d
 }
 
 interface DetailsProduct {
@@ -116,7 +111,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             .catch((err) => { console.log('review mal') })
         setHidereviews(false)
     }
-<<<<<<< HEAD
     
     
     const[details,setDetails] = useState({id:"", name:"",price:0,brand:"",image:"",details:"", categories:[{id:"1",name:"default"}]})
@@ -127,12 +121,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const[editMode,setEditMode] = useState(false)
     
-=======
-
-    const [details, setDetails] = useState({ id: filtred?.id.toString(), name: filtred?.name, price: filtred?.price, brand: filtred?.brand, image: filtred?.image, details: filtred?.details, categories: filtred?.categories })
-    const [editMode, setEditMode] = useState(false)
-
->>>>>>> 4d7329fa034a18cb39c775d1b99df271399ba84d
     console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -180,28 +168,16 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         e.preventDefault()
         setDetails({
             ...details,
-<<<<<<< HEAD
             categories: details?.categories?.filter( cat => cat.id != e.currentTarget.value)
-=======
-            categories: details?.categories?.filter(cat => cat.id != +e.currentTarget.value)
->>>>>>> 4d7329fa034a18cb39c775d1b99df271399ba84d
         })
     }
     const handleAddCategories = (e: React.FormEvent<HTMLSelectElement>) => {
         details?.categories &&
-<<<<<<< HEAD
         setDetails({
             ...details,
             categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories:
             [...details?.categories , {name:e.currentTarget.selectedOptions[0].innerHTML, id:e.currentTarget.value}]
         })
-=======
-            setDetails({
-                ...details,
-                categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories :
-                    [...details?.categories, { name: e.currentTarget.selectedOptions[0].innerHTML, id: parseInt(e.currentTarget.value) }]
-            })
->>>>>>> 4d7329fa034a18cb39c775d1b99df271399ba84d
     }
 
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
