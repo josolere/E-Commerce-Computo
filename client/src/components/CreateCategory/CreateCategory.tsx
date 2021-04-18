@@ -59,11 +59,11 @@ export default function CreateProduct() {
             {/*         {error ? alert(`Oh no! ${error.message}`) : null}
         {data && data.createNewProduct ? alert(`Saved!`) : null} */}
             <form onSubmit={handleSubmit} className={styles.form} >
-                <h1>Create Categorie</h1>
+                <h1>Crear Categoría</h1>
                 <hr />
-                <label>Categorie Name</label>
+                <label>Nombre de la cateogía</label>
                 <input type='text' name='categorie' value={categorie} onChange={handleChange} />
-                <input type='submit' className={styles.button} value='CREATE' />
+                <input type='submit' className={styles.button} value='Crear' />
             </form>
         </div>
     )

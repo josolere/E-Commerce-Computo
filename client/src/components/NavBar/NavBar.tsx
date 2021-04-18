@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import navBar from "./NavBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,11 @@ import { setFilter } from '../../redux/actions';
 
 const NavBar = (): JSX.Element => {
 
+  const [showadmin, setShowadmin] = useState(false)
+
   const dispatch = useDispatch()
+
+  const opciones = ['Crear Producto', 'Crear Categoria']
 
   return (
     <>
@@ -24,7 +28,10 @@ const NavBar = (): JSX.Element => {
         <Link className={navBar.linksNav} to="/login"> Iniciar Sesion</Link>
         {false? <Link to="/cuenta" className = {navBar.linksNav}>Mi Cuenta</Link>:false}  
           </div>
-              
+          <div>
+          <button className={navBar.linksNav} onClick={() =>setShowadmin(!showadmin)} >✓</button>
+          {showadmin ? <Link className={navBar.linksNav} to='/Crear'><p>Crear</p></Link> : null}
+          </div>
       </div>
     </>
   );

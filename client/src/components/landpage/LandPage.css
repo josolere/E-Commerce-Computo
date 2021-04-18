@@ -1,56 +1,83 @@
-.containerLand {
-    background-color: #161616;
-    height: 100vh;
- }
- 
- .imgLand {
-     background-size: cover;
-     width: 50%;
-     margin-left: -3rem;
-     
- }
- .footerLand {
-    background-color: #101011;
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 7px;
-    color: white;
-    width: 100%;
-    height: 5rem;
-    margin-top: 10rem;
-    text-align: center;
+#bg-video{
+  object-fit: cover;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+
+
+ .ControlLand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
  }
 
- .titleLand {
-    font-family: 'Montserrat', sans-serif;
-    color: aliceblue;
-    float: right;
-    margin-right: 13rem;
-    margin-top: 4rem;
+
+.pic-order{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
 }
 
-.pLand {
-    font-family: 'Montserrat', sans-serif;
-    color: aliceblue;
-    float: right;
-    margin-right: 19rem;
-    margin-top: -20rem;
-}
+  @keyframes display {
+    0% {
+      transform: translateX(200px);
+      opacity: 0;
+    }
+    10% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    20% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    30% {
+      transform: translateX(-200px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(-200px);
+      opacity: 0;
+    }
+  }
+  
+  .pic-ctn {
+    position: relative;
+    width: 100px;
+    height: 280px;
+  }
+  
+  .pic-ctn > img {
+    background-color: transparent;
+    width: 300px;
+    cursor: pointer;
+    position: absolute;
+    left: calc(50% - 100px);
+    opacity: 0;
+    animation: display 10s infinite;
+    box-shadow: 20px 20px 25px 25px rgba(0,0,0,0.22);
 
-.botonLand {
-    width: 7rem;
-    height: 3rem;
-    border-color: transparent;
-    float: right;
-    margin-right: 23rem;
-    margin-top: -17rem;
-    border-radius: 4px;
-    background-color: #F21B42;
-    font-weight: 800;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.botonLand:hover {
-    color: white;
-    background:#F21B42 ;
-    box-shadow: 0 0 3px #F21B42;
-}
+  }
+  
+  img:nth-child(2) {
+    animation-delay: 4s;
+  }
+  img:nth-child(3) {
+    animation-delay: 8s;
+  }
+  img:nth-child(4) {
+    animation-delay: 12s;
+  }
+  img:nth-child(5) {
+    animation-delay: 16s;
+  }

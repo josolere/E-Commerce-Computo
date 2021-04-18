@@ -163,17 +163,17 @@ export default function CreateProduct(){
         {/* {error ? alert(`Oh no! ${error.message}`) : null}
         {data && data.createNewProduct ? alert(`Saved!`) : null}  */}
          <form onSubmit={handleSubmit} className={styles.form} >
-             <h1>Create Product</h1>
+             <h1>Crear Producto</h1>
              <hr/>
-             <label>Product Name</label>
+             <label>Nombre del producto</label>
              <input type='text' name='name' value={state.name} onChange={handleChange}/>
-             <label>Price</label>
+             <label>Precio</label>
              <input type='text' name='price' value={state.price} onChange={handlePrice}/>
-             <label>Brand</label>
+             <label>Marca</label>
              <input type='text' name='brand' value={state.brand} onChange={handleChange}/>
-             <label>Image</label>
+             <label>Imagen</label>
              <input type='text' name='image' value={state.image} onChange={handleChange}/>
-             <label>Details</label>
+             <label>Detalles</label>
              <input type='text' name='details' value={state.details} onChange={handleChange}/>
              <select onChange={handleCategories}>
                  {categories?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
@@ -181,7 +181,7 @@ export default function CreateProduct(){
              <div>
                  {categors.map(cate => <button onClick={handleDeleteCategory} value={cate.id} key={cate.name}>{cate.name}</button>)}
              </div>
-             <input type='submit' value='CREATE' className={styles.button} />
+             <input type='submit' value='Crear' className={styles.button} />
          </form>
         </div>
    )

@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import ReactPlayer from 'react-player';
+import React, { useState, useEffect } from 'react';
 import './LandPage.css';
-import '../fonts/audiowide.regular.ttf';
-import '../fonts/Baumans-Regular.ttf';
-import '../fonts/Revalia-Regular.ttf';
-import { Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
-import NavBar from "../NavBar/NavBar"
-
+import styles from './LandPage.module.scss'
+import ReactPlayer from 'react-player';
 
 
 interface DetailsProduct {
@@ -23,21 +18,133 @@ interface DetailsData {
     getProducts: DetailsProduct[]
 }
 
+const GET = gql`
+query ($name: String!, $categoriesId:[ID!]){
+    getProducts (filter:{limit:12 name:$name categoriesId:$categoriesId}) {
+        id
+        name
+        price
+        image
+    }
+}
+`;
 
-const VideoLand = () => {
+const LandPage = () => {
+
+    const nameoftheday = (fecha: any) => [
+        'Domingo',
+        'Lunes',
+        'Martes',
+        'Miércoles',
+        'Jueves',
+        'Viernes',
+        'Sabado',
+    ][new Date(fecha).getDay()];
+
+    const current = new Date();
+
+    const { loading, error, data } = useQuery<DetailsData>(GET,{variables:{name:'', categoriesId:[]}})
+
+
+    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+
+
+    let dayoftheweek = (nameoftheday(current))
+
+    let imagesoftheweek: Array<number> = [0, 0, 0, 0, 0, 0, 0]
+
+    let discountoftheweek: Array<any> = ['10%', '20%', '25%', '20%', '35%', '20%', '15%']
+
+    let discount: string = '0%'
+
+    if (dayoftheweek === 'Lunes') {
+        imagesoftheweek = [1, 2, 3, 4, 5, 6, 7]
+        discount = discountoftheweek[0]
+    }
+    else if (dayoftheweek === 'Martes') {
+        imagesoftheweek = [0, 3, 4, 7, 9, 11, 10]
+        discount = discountoftheweek[1]
+    }
+    else if (dayoftheweek === 'Miercoles') {
+        imagesoftheweek = [10, 3, 4, 7, 9, 11, 2]
+        discount = discountoftheweek[2]
+    }
+    else if (dayoftheweek === 'Jueves') {
+        imagesoftheweek = [3, 2, 4, 7, 1, 11, 10]
+        discount = discountoftheweek[3]
+    }
+    else if (dayoftheweek === 'Viernes') {
+        imagesoftheweek = [1, 4, 2, 5, 6, 0, 11]
+        discount = discountoftheweek[4]
+    }
+    else if (dayoftheweek === 'Sabado') {
+        imagesoftheweek = [0, 3, 4, 2, 9, 11, 10]
+        discount = discountoftheweek[5]
+    }
+    else if (dayoftheweek === 'Domingo') {
+        imagesoftheweek = [2, 3, 4, 7, 5, 7, 10]
+        discount = discountoftheweek[6]
+    }
+
+    const products = data?.getProducts
+
+    console.log(products)
+
+    let image1: string = "";
+    let image2: string = "";
+    let image3: string = "";
+    let image4: string = "";
+    let image5: string = "";
+
+    if (products) {
+        image1 = products[imagesoftheweek[0]].image
+        image2 = products[imagesoftheweek[1]].image
+        image3 = products[imagesoftheweek[2]].image
+        image4 = products[imagesoftheweek[3]].image
+        image5 = products[imagesoftheweek[4]].image
+    }
+
+    const linkland = () => {
+        window.location.href = 'http://localhost:3000/Home'
+    }
 
     return (
-        <div className="containerLand">
-            <img className="imgLand" src="https://images.unsplash.com/photo-1613258176465-eb77f3a050d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80"></img>
-            
-            <h1 className="titleLand">Bienvenidos a CompuHenry</h1>
-            <p className="pLand">Siempre desde tu lado gamer</p>
-            <Link to="/home"><button className="botonLand">Ir a la Tienda</button></Link>
-              <footer className="footerLand">
-                 <h2>Proximamente Redes</h2>
-              </footer>  
-        </div>
+        <React.Fragment>
+            <ReactPlayer 
+                id='bg-video'
+                playing={true}
+                width={1400}
+                height={800}
+                volume={0}
+                loop={true}
+                url='https://www.youtube.com/watch?v=ky_By2ehgks'  
+                />
+            <div className="containerLand">
+                <div className='ControlLand'>
+                    <h1 className={styles.TitleLand}>CompuHenry</h1>
+                    <p className={styles.DiscountLand}>Hoy {dayoftheweek} tenemos un descuento de {discount}!</p>
+                    <div className='pic-order'>
+                        <div className="pic-ctn">
+                            <img src={image1} alt="" className="pic" onClick={linkland} />
+                            <img src={image2} alt="" className="pic" onClick={linkland} />
+                            <img src={image3} alt="" className="pic" onClick={linkland} />
+                            <img src={image4} alt="" className="pic" onClick={linkland} />
+                            <img src={image5} alt="" className="pic" onClick={linkland} />
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.OrderSub}>
+                    <h1 className={styles.TitleConcat} >Contacta con nosotros</h1>
+                </div>
+                <div className={styles.LandPageInfo}>
+                    <p>  Dirección: Avenida Cabildo 3456</p>
+                    <p>  Telefono de contacto: 4567-3456</p>
+                    <p>  WhatsApp: +54 9 1134553321</p>
+                    <p>  E-mail: CompuHenry@yahoo.com</p>
+                </div>
+            </div>
+        </React.Fragment>
     )
 }
 
-export default VideoLand;
+export default LandPage;
