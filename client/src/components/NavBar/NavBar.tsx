@@ -14,12 +14,13 @@ const NavBar = (): JSX.Element => {
   return (
     <>
       <div className={navBar.container}>
-        <Link to='/'className={navBar.linksNav} > <h1 className={navBar.titleNav} >CompuHenry</h1> </Link>
+        <Link to='/'className={navBar.linksNav} > <h1 className={navBar.titleNav} >CH</h1> </Link>
         <SearchBar />
-        {true? <Link onClick={() => {dispatch(setFilter(""))}} to="/Home" className = {navBar.linksNav}>Productos</Link>:false}  
-          <div>
         <Link className={navBar.linksNav} to="/cart">
         <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} /></Link>
+        {true? <Link onClick={() => {dispatch(setFilter(""))}} to="/Home" className = {navBar.linksNav}>Productos</Link>:false}  
+          
+          <div>
         <Link className={navBar.linksNav} to="/login"> Iniciar Sesion</Link>
         {false? <Link to="/cuenta" className = {navBar.linksNav}>Mi Cuenta</Link>:false}  
           </div>

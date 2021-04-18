@@ -23,20 +23,8 @@ interface DetailsData {
     getProducts: DetailsProduct[]
 }
 
-const Pepe = gql` 
-    query Pepe {
-        getProducts {
-            id
-            name
-        }
-    }
-`;
 
 const VideoLand = () => {
-
-    const { loading, error, data } = useQuery<DetailsData>(Pepe);
-
-    const products = data?.getProducts
 
     return (
         <div className="containerLand">
@@ -48,36 +36,6 @@ const VideoLand = () => {
               <footer className="footerLand">
                  <h2>Proximamente Redes</h2>
               </footer>  
-
-
-
-               {/*  <h4>Aca irian los productos</h4>
-                {products && products.map((item) => {
-                <div>
-                    <p>{item.name}</p>
-                    <Link to={{
-                        pathname: '/Details',
-                        state: {
-                            id: item.id
-                        }
-                    }}>
-                    <img src={item.image} alt=''/>
-                    </Link>
-                </div>
-            })} */}
-               {/*  <Link to='/Home' >
-                    <img className='iconlanding' src={start} alt='' />
-                </Link> */}
-                 {/*  <div  className="videoLand">
-                   <ReactPlayer
-                        url={url}
-                        loop={true}
-                        playing={true}
-                        muted={true}
-                        
-                    /> 
-                 </div> */}
-            
         </div>
     )
 }

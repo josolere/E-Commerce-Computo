@@ -4,7 +4,10 @@ import styles from './CardsHome.module.scss'
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router';
 import {useSelector } from 'react-redux';
+import { FILTER } from "../../gql/card"
+import ReactPaginate from "react-paginate"
 import { AppState } from '../../redux/reducers';
+
 
 
 interface DetailsProduct {
@@ -24,50 +27,47 @@ interface IParams {
     name:string
 }
 
-const products = gql`
-    {
-        getProducts (filter:{limit:12}) {
-            id
-            name
-            price
-            image
-        }
-    }
-`;
-//query con filtros para el catalogo
-const filter = gql`
-    query ($name: String!, $categoriesId:[ID!]){
-        getProducts (filter:{limit:12 name:$name categoriesId:$categoriesId}) {
-            id
-            name
-            price
-            image
-        }
-    }
-`;
-
 
 export default function Cards(){
 
     const name = useSelector((store: AppState) => store.productReducer.filter)
     const categoriesId = useSelector((store: AppState) => Number(store.productReducer.categories) || [])
-   
-
-    const { loading, error, data } = useQuery<DetailsData>(filter,{variables:{name:name, categoriesId:categoriesId}})
     
-
+    const { loading, error, data } = useQuery<DetailsData>(FILTER,{variables:{name:name, categoriesId:categoriesId}})
+    
     useEffect(()=>{
     },[data])
     
    var product = data?.getProducts
+
+    const [pageNumber, setPageNumber] = useState(0)
+ 
+    const productsPerPage = 9
+    const pageVisited = pageNumber * productsPerPage
+
+    const pageCount = Math.ceil(product ? product.length / productsPerPage : 0)
+
+
+    const changePage = ({selected}:any) => {
+        setPageNumber(selected)
+    } 
       
+        const displayProducts = product?.slice(pageVisited, pageVisited + productsPerPage)
+        .map(el => {
+            return ( 
+             <Card id={el.id} name={el.name} image={el.image} price={el.price} />
+         );
+    })
+    return <div className={styles.container}>{displayProducts}
+        <ReactPaginate
+        previousLabel={"«"}
+        nextLabel={"»"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        marginPagesDisplayed ={2}
+        pageRangeDisplayed={5}
+        />
+       {/*  <div className={styles.footerCat}>Proximamente Redes</div> */}
+ </div>
     
-    console.log(filter)
-    return (
-        <div className={styles.container}>
-        {loading ? <h2 style={{color:'whitesmoke'}}>Cargando Productos...</h2> : false}
-        {product?.length === 0?<h2 style={{color:'whitesmoke'}}>El producto que busca no existe o no se encuentra disponible</h2>:false}
-        {product?.map(el => <Card id={el.id} name={el.name} image={el.image} price={el.price} />)  }         
-        </div>
-    )
 }

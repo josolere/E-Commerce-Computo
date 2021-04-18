@@ -6,20 +6,21 @@ import { setCategory } from '../../redux/actions';
 
 
 
-interface IProps{
-    item:{title:string, subNav:{title:string, id:number}[]}
+/* interface IProps{
+    id:number,
+    name:string
 }
 
-const SubMenu = ({item}:IProps): JSX.Element => {
+const SubMenu = ({id, name}:IProps): JSX.Element => {
 
   const [subnav, setSubnav] = useState(false);
   const [select, setSelect] = useState([])
   
   const showSubNav = () => setSubnav(!subnav);
 
-  const dispatch = useDispatch();
-
-  const filterCategories = (e:any) => {
+  const dis *//* patch = useDispatch();
+ */
+  /* const filterCategories = (e:any) => {
       dispatch(setCategory([e.target.value]))
   }
   
@@ -27,8 +28,8 @@ const SubMenu = ({item}:IProps): JSX.Element => {
   return (
     <div className={styles.containerCategories}>
       <div >
-        <button onClick={showSubNav} value={item.title}>
-          {item.title}
+        <button onClick={showSubNav} value={name}>
+          {name}
           <div className={styles.iconT}>
             {subnav ? <AiOutlineUp /> : <AiOutlineDown />}
           </div>
@@ -48,4 +49,4 @@ const SubMenu = ({item}:IProps): JSX.Element => {
   );
 };
 
-export default SubMenu;
+export default SubMenu; */ 

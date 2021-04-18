@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/actions';
+import { GET } from "../../gql/searchbar"
 import styles from "./searchbar.module.scss";
 import { Link } from 'react-router-dom'
 
@@ -27,15 +28,6 @@ interface Search {
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
-const GET = gql`
-{
-    getProducts (filter:{limit:12}) {
-        id
-        name
-        price
-        image
-    }
-}`;
 
 const InputSearch = (): JSX.Element => {
 
