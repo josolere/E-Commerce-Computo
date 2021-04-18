@@ -7,16 +7,17 @@ import { AppState } from '../../redux/reducers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
+
+
 interface props {
     id?: number
     name: string
     image: string
     price: number
     count: number
-    details: string
 }
 
-export default function Card({ name, image, price, id, count, details }: props) {
+export default function Card({ name, image, price, id, count }: props) {
     const dispatch = useDispatch()
     const {quantity, priceSubTotal, productTotal}: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
@@ -45,7 +46,6 @@ export default function Card({ name, image, price, id, count, details }: props) 
             count: count,
             image: image,
             name: name,
-            details: details
         }
       
         if (localStorage.getItem('productsLocal')) {
@@ -116,7 +116,7 @@ export default function Card({ name, image, price, id, count, details }: props) 
 
     return(
         <div className={styles.card}>
-
+               <p >{name}</p>
             <Link className={styles.link} style={{ textDecoration: 'none' }} to={{
                 pathname: '/Detalles',
                 state: {
@@ -124,7 +124,7 @@ export default function Card({ name, image, price, id, count, details }: props) 
                     newprice: 0
                 }
             }}>
-                <p >{name}</p>
+              
                 <img style={{ width: '100%', height: 'auto' }} src={image} />
             </Link>
 

@@ -15,14 +15,14 @@ import {
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
 
 
 const client = new ApolloClient({
+  connectToDevTools: true,
   cache: new InMemoryCache(),
   link: new HttpLink({
     uri: 'http://localhost:5000/graphql',
@@ -32,7 +32,7 @@ const client = new ApolloClient({
 const StripePromise = loadStripe('pk_test_51IfpazHObBDKzBSGun3Clgf3wbyo1QMxk6jwHwDwLPoxZTrfGCASzt1R8yDvUMTPqL8dmE4CIUgP8Qr0BqqwAFPq00RZ1Ulyai')
 
 ReactDOM.render(
-  <Elements stripe={StripePromise} >
+<Elements stripe={StripePromise} >
     <Provider store={store}>
       <ApolloProvider client={client}>
         <BrowserRouter>

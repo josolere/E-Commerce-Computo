@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client"
 
-export const ACTUALUSER = gql`
+
+export const ACTUAL_USER = gql`
 query {
     actualtUser {
       id
@@ -9,7 +10,7 @@ query {
     }
   }`;
 
-export const LOGOUTMUTATION = gql`
+export const LOGOUT_MUTATION = gql`
   mutation LOGOUTMUTATION ($email:String! $password: String! ){
       logout (input:{email:$email password:$password})
       {
@@ -18,7 +19,7 @@ export const LOGOUTMUTATION = gql`
   }
 `;
 
-export const SIGNUPMUTATION = gql`
+export const SIGNUP_MUTATION = gql`
     mutation SIGNUPMUTATION ($name: String! $password: String! $email: String!) 
     {
         supuestosignup (input:{name:$name password: $password email: $email})
@@ -27,7 +28,7 @@ export const SIGNUPMUTATION = gql`
         }
     }`;
 
-export const LOGINMUTATION = gql`
+export const LOGIN_MUTATION = gql`
     mutation LOGINMUTATION ($email: String!$password: String!) 
     {
         supuestologin (input : { email: $email  password: $password } ) 

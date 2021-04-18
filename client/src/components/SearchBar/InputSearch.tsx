@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 /* import search from './styleSearch.module.css'
  */
 
-type FormElement = React.FormEvent<HTMLFormElement>;
-
 const InputSearch = ():JSX.Element => {
 
     const [searchInput, setSearchInput] = useState('')  

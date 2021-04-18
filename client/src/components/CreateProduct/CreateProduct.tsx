@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import {gql, useMutation, useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react'
+import { NEW_PRODUCT } from "../../gql/products"
+import { GET_CATEGORIES } from "../../gql/categories"
+import styles from './CreateProduct.module.scss' 
+
+=======
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { createRef, useEffect, useState } from 'react'
 import styles from './CreateProduct.module.scss';
@@ -41,6 +49,7 @@ interface productInventary {
             details
     }
 `; */
+>>>>>>> 1e990633849f8daddbb184aa6da1d0b964b5587c
 
 interface Categorie {
     id: number,
@@ -51,29 +60,10 @@ interface Categories {
     getCategory: Categorie[]
 }
 
-const NEW_PRODUCT = gql`
-mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categories:[Int!]) {
-    createProduct ( input: {
-        name:$name,
-        price:$price, 
-        brand:$brand, 
-        image:$image, 
-        details:$details
-        categories:$categories
-      })
-        {
-            id
-            name
-          	categories{
-                id
-                name
 
-              }
-          
-        }
-    }
-`;
+<<<<<<< HEAD
 
+=======
 const GET_CATEGORIES = gql`
 query {
     getCategory {
@@ -81,6 +71,7 @@ query {
         name
     }
 }`;
+>>>>>>> 1e990633849f8daddbb184aa6da1d0b964b5587c
 
 type FormEvent = React.FormEvent<HTMLFormElement>;
 type InputEvent = React.FormEvent<HTMLInputElement>;
@@ -96,6 +87,11 @@ interface IState {
     categories: number[]
 }
 
+<<<<<<< HEAD
+export default function CreateProduct(){
+    const [state , setState] = useState<IState>({name:"",price:0,brand:"",image:"",details:"",categories:[]})
+  
+=======
 export default function CreateProduct() {
     const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })
     // const [categoriesId, setCategoriesId] = useState<Array<number>>([])
@@ -103,9 +99,10 @@ export default function CreateProduct() {
         {createNewProduct: productInventary},
         {product:newProductDetails}
         >(NEW_PRODUCT,{variables:{product:state}}) */
+>>>>>>> 1e990633849f8daddbb184aa6da1d0b964b5587c
     const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
     const categories = data?.getCategory
-    // console.log(categories)
+ 
 
     const [createProduct, results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
@@ -142,8 +139,13 @@ export default function CreateProduct() {
     }
 
     const [categors, setCategors] = useState<Array<any>>([])
+<<<<<<< HEAD
+    
+    const handleCategories =  (e:SelectEvent) =>{
+=======
     //estas dos trabajan juntas
     const handleCategories = (e: SelectEvent) => {
+>>>>>>> 1e990633849f8daddbb184aa6da1d0b964b5587c
         e.preventDefault()
         setCategors([...categors, {
             id: parseInt(e.currentTarget.value),
@@ -164,6 +166,34 @@ export default function CreateProduct() {
         })
     }
 
+<<<<<<< HEAD
+     
+
+    return(
+    <div className={styles.container}>
+      
+         <form onSubmit={handleSubmit} className={styles.form} >
+             <h1>Crear Producto</h1>
+             <hr/>
+             <label>Nombre del producto</label>
+             <input type='text' name='name' value={state.name} onChange={handleChange}/>
+             <label>Precio</label>
+             <input type='text' name='price' value={state.price} onChange={handlePrice}/>
+             <label>Marca</label>
+             <input type='text' name='brand' value={state.brand} onChange={handleChange}/>
+             <label>Imagen</label>
+             <input type='text' name='image' value={state.image} onChange={handleChange}/>
+             <label>Detalles</label>
+             <input type='text' name='details' value={state.details} onChange={handleChange}/>
+             <select onChange={handleCategories}>
+                 {categories?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
+             </select>
+             <div>
+                 {categors.map(cate => <button onClick={handleDeleteCategory} value={cate.id} key={cate.name}>{cate.name}</button>)}
+             </div>
+             <input type='submit' value='Crear' className={styles.button} />
+         </form>
+=======
     const fileInput = createRef()
 
 
@@ -206,6 +236,7 @@ export default function CreateProduct() {
                     </Link>
                 </div>
             </div>
+>>>>>>> 1e990633849f8daddbb184aa6da1d0b964b5587c
         </div>
     )
 }
