@@ -10,6 +10,7 @@ export const typeDefs = gql`
     price: Float
     details: String
     categories: [String]
+    reviews: [Review]
     createdAt: String
     updatedAt: String
   }
