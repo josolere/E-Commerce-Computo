@@ -18,7 +18,6 @@ $red:#f05454;//f05454
         justify-content: start;
         align-items: flex-start;
         margin: 0.2rem;
-        
     }
     textarea{
         resize: none;
@@ -34,18 +33,19 @@ $red:#f05454;//f05454
     select{
         width: 10rem;
         font-family:'Montserrat', sans-serif;
-
     }
-
 }
+
 .bot{
     display: flex;
     justify-content: space-between;
 }
+
 .cats{
     display:flex;
     flex-wrap: wrap;
 }
+
 .category{
     border: none;
     background-color:transparent;
@@ -70,6 +70,7 @@ $red:#f05454;//f05454
     max-width: 20rem;
     font-family:'Montserrat', sans-serif;
 }
+
 .acept{
     border: none;
     color: $white;

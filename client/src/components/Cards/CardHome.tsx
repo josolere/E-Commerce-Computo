@@ -67,7 +67,7 @@ export default function Card({ name, image, price, id, count, details }: props) 
             addLocaStorage();
         }
     }
-    const nameoftheday = (fecha: any) => [
+/*     const nameoftheday = (fecha: any) => [
         'Domingo',
         'Lunes',
         'Martes',
@@ -112,7 +112,7 @@ export default function Card({ name, image, price, id, count, details }: props) 
 
     let newprice: any
     newprice = price - (price * discountoapply / 100)
-    newprice = parseInt(newprice)
+    newprice = parseInt(newprice) */
 
     return(
         <div className={styles.card}>
@@ -121,7 +121,7 @@ export default function Card({ name, image, price, id, count, details }: props) 
                 pathname: '/Detalles',
                 state: {
                     id: id,
-                    newprice: newprice
+                    newprice: 0
                 }
             }}>
                 <p >{name}</p>
