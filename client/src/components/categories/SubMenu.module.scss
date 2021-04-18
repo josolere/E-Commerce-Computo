@@ -1,13 +1,18 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
 .containerCategories {
     width: 100%;
     div {
         .botonSec {
-            background-color:#F21B42;
+            background-color:$red;
         }
         button {
-            background-color: black;
+            background-color: $grey;
             text-align: start;
-            color: whitesmoke;
+            color: $white;
             border: transparent;
             width: 12rem;
             padding: 1rem;
@@ -24,31 +29,3 @@
    float: right;
    
 }
-
-
-
-
-
-
-
-
-/* button{
-    border: none;
-    width: 100%;
-    background-color: none;
-    outline: none;
-    padding: 1rem;
-    
-}
-div{
-    width: 100%;
-}
-
-.pri{
-    color: whitesmoke;
-    
-}
-.subs{
-    color: whitesmoke;
-    background-color: #F21B42
-} */
