@@ -18,9 +18,10 @@ $white:#f05454;//f05454
     border-radius: 0.3rem;
     padding:0.5rem $paddingSB;
     width: $widthSearchbar;
+    margin-left: 5rem;
     input{
         color: $blue;
-        padding: 0;
+        padding-left: 0;
         outline: none;
         background-color: transparent;
         border: none;

@@ -80,5 +80,6 @@ export default function Card({ name, image, price, id }: props) {
                 <button className={styles.learn}>Agregar</button>
             </div>
         </div>
-    )
+    
+  );
 }

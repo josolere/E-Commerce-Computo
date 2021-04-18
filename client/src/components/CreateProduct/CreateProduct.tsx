@@ -1,45 +1,9 @@
 import {gql, useMutation, useQuery } from '@apollo/client';
 import React, { createRef, useEffect, useState } from 'react'
+import { GET_CATEGORIES }  from "../../gql/categories"
+import { NEW_PRODUCT }  from "../../gql/createProduct"
 import styles from './CreateProduct.module.scss' 
 
-/* interface productInventary {
-    id:number
-    name:string
-    price:number
-    brand:string
-    image:string
-    details:string
-}
-
-interface newProductDetails{
-    name:string
-    price:number
-    brand:string
-    image:string
-    details:string
-}
-// mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
-//     createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
-//         id
-//         name
-//         price
-//         brand
-//         image
-//         details
-//     }
-// }
-
-/* const NEW_PRODUCT = gql`
-    mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
-        createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
-            id
-            name 
-            price
-            brand
-            image
-            details
-    }
-`; */
 
 interface Categorie {
     id: number,
@@ -50,33 +14,6 @@ interface Categories {
     getCategory: Categorie[]
 }
 
-const NEW_PRODUCT = gql`
-mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categories:[Int]!) {
-    createProduct ( input: {
-        name:$name,
-        price:$price, 
-        brand:$brand, 
-        image:$image, 
-        details:$details
-        categories:$categories
-      })
-        {
-            id
-            name
-          	categories
-          
-        }
-    }
-`;
-
-const GET_CATEGORIES = gql`
-query {
-    getCategory {
-        id
-        name
-    }
-}
-`
 
 type FormEvent = React.FormEvent<HTMLFormElement> ;
 type InputEvent = React.FormEvent<HTMLInputElement>;
@@ -94,15 +31,10 @@ interface IState {
 
 export default function CreateProduct(){
     const [state , setState] = useState<IState>({name:"",price:0,brand:"",image:"",details:"",categories:[]})
-    // const [categoriesId, setCategoriesId] = useState<Array<number>>([])
-/*     const [createNewProduct, { error, data }] = useMutation<
-    {createNewProduct: productInventary},
-    {product:newProductDetails}
-    >(NEW_PRODUCT,{variables:{product:state}}) */
+    
     const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
     const categories = data?.getCategory
-    // console.log(categories)
-
+   
     const [createProduct , results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
     useEffect(()=>{console.log(results.data)},[results])
