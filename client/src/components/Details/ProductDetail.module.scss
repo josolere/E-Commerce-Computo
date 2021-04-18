@@ -8,7 +8,7 @@ $red:#f05454;//f05454
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     height: 110vh;
     background-color: $white;
 }
@@ -21,7 +21,7 @@ $red:#f05454;//f05454
     justify-content: center;
     align-items: center;
     border-radius: 0.3rem;
-    padding: 5rem 0rem;
+    padding: 5rem 1rem;
     background-color: $grey;
     color: whitesmoke;
     font-family:'Montserrat', sans-serif;
@@ -37,13 +37,17 @@ $red:#f05454;//f05454
        width: 20rem;
        margin-right: 2rem;
     }
-    form{
-        width: 30rem;
+  
+
+}
+.formm{
+   
+        width: 90%;
+   
         p{
             max-width: 100%;
         }
-    }
-
+    
 } 
 .containerBot{
     display: flex;
@@ -113,6 +117,7 @@ $red:#f05454;//f05454
     padding: 1rem;
     border-radius: 0.2rem;
     color: $white;
+    outline: none;
     &:hover{
         cursor: pointer;
         background-color: $dark;

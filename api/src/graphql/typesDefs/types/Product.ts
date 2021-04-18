@@ -48,7 +48,7 @@ export const typeDefs = gql`
   input FilterProducts {
     name: String = ""
     offset: Int = 0
-    limit: Int = 20
+    limit: Int = 100
     categoriesId: [ID]
   }
 `;

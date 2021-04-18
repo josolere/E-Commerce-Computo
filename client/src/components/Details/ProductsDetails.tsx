@@ -185,9 +185,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         <div className={styles.contenedorAll}>
             <div className={ styles.contenedorDetail }>
                 <img src={filtred?.image} alt='' />
-                <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.aa} >
+                <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.formm} >
                     <button className={styles.Edit} onClick={handleEdit}>Edit</button>
-                    {editMode && <input type='submit' value='Aceptar Cambios' />}
+                    
                     {editMode?
                     <input className={stylesEdit.input} name='name' type='text' onChange={handleChange} defaultValue={details?.name}/>
                     :
@@ -197,9 +197,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     :
                     <p> Marca: {filtred?.brand} </p>}
                     {editMode ?
-                    <p > Detalles: <textarea  onChange={handleDetails} defaultValue={details?.details} /></p> 
+                    <p ><textarea  onChange={handleDetails} defaultValue={details?.details} /></p> 
                     :
-                    <p > Detalles: {filtred?.details}</p>}
+                    <p >{filtred?.details}</p>}
                     
                         <div className={styles.botonPrecio}>
 
@@ -211,16 +211,22 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         <hr style={{height:'1rem',backgroundColor:'white'}}/>
                         <button className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
                         </div>
+                        <div className={stylesEdit.bot}>
+
                         {editMode && <select onChange={handleAddCategories}>
                         {categoriesQuery?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
                         </select>}
+                        
+                        {editMode && <input className={stylesEdit.acept} type='submit' value='Aceptar Cambios' />}
+                        </div>
+                        <div className={stylesEdit.cats}>
+
                         {editMode ?
-                        details?.categories?.map(category => <button onClick={handleCategory} value={category.id} >{category.name}</button>)
+                        details?.categories?.map(category => <button className={stylesEdit.category} onClick={handleCategory} value={category.id} >{category.name}</button>)
                         :
                         details?.categories?.map(category => <p className={styles.category}>{category.name}</p>)
-                        }
-                        
-                    
+                    }
+                    </div>
                 </form>
             </div>
                         <div className={styles.containerBot}>
