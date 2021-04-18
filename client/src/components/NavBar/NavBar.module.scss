@@ -1,5 +1,8 @@
 
 .container {
+    position:sticky;
+    z-index: 10;
+    top: 0; 
     height: 7rem;
     width: 100%;
     background-color: black;
@@ -26,6 +29,18 @@
     margin-left: 1rem;
     margin-top: 8px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    p{
+        position: relative;
+        background-color: rgb(177, 10, 10);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        width: 1.2rem;
+        height: 1.2rem;
+        bottom: 2rem;
+        right: 0.9rem;
+    }
 }
 
 .iconCart {

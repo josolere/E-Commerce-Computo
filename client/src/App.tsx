@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Login from './components/login/Login'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Details from './components/Details/ProductsDetails'
@@ -14,9 +14,27 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import NavCategories from './components/categories/Categories';
 import Cards from './components/Cards/CardsHome'
 import styles from './App.module.scss'
+import Orders from './components/Order/Orders'
+import {addLocalStorage} from './redux/actions/index'
+import { useDispatch } from 'react-redux'
       
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (localStorage.getItem('productsLocal')) {
+      let productLocal: any = (localStorage.getItem('productsLocal'))
+      let quantity: any = (localStorage.getItem('quantity'))
+      let priceSubTotal: any = (localStorage.getItem('priceSubTotal'))
+
+      productLocal = JSON.parse(productLocal)
+      dispatch(addLocalStorage({productLocal, quantity, priceSubTotal}))
+    }
+  }, [])
+
+  
   return (
     <Router>
       <Switch>
@@ -28,20 +46,23 @@ function App() {
         <Route exact path='/' component={LandPage} />
         <Route exact path='/Test' component={TestProducts} />
         <Route exact path='/Pago' component={Payment} />
+        <Route exact path='/Ordenes' component={Orders}/>
         <Route exact path='/Home'>
           <Home/>
           <div className={styles.catalog}>
           <NavCategories/>
           <Cards/>
-          </div>
+          </div> 
         </Route>
         <Route exact path='/Carrodecompras' component={ShoppingCart}/>
         <Route component={PageNotFound}/>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/Rating' component={StarRating} />
+        <Route exact path='/cart' component={ShoppingCart}/>
+        <Route exact path='/Test' component={TestProducts} />
+        <Route exact path='/Payment' component={Payment} />
       </Switch>
     </Router>
-
-
-
   );
 }
 

@@ -1,0 +1,32 @@
+.containerPage {
+    background-image: url(./img/brightly-lit-laptop-keyboard.jpg);
+    background-size: 100% 100%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.containerPage p {
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.linkInicio {
+    height: 50px;
+    width: 150px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2px 2px rgba(255,255,255,0.7);
+}
+
+.linkInicio:hover{
+    background-color: rgba(255,255,255,0.1);
+}

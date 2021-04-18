@@ -46,6 +46,6 @@ export const typeDefs = gql`
     name: String = ""
     offset: Int = 0
     limit: Int = 10
-    categoriesId: [Int]
+    categoriesId: [ID]
   }
 `;

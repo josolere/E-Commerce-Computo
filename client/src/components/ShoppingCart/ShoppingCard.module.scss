@@ -3,7 +3,7 @@
     background-color: rgb(30,31,33);
     margin: 2rem;
     width: 80%;
-    height: 12.5rem;
+    height: 14rem;
     display: flex;
     box-shadow: 0 0 4px 3px rgba(0,0,0,0.2);
     color: white;
@@ -12,9 +12,13 @@
 .containerTitle{
     width: 40%;
     text-align: center;
-}
-.containerTitle h1{
-    font-size: 20px;
+    h1{
+        font-size: 20px;
+    }
+    p{
+        height: 10rem;
+        overflow:auto;
+    }
 }
 
 
@@ -32,24 +36,34 @@
     height: 100%;
 }
 
+.buttonCountLess,
+.buttonCountMore,
+.count p{
+    width: 2.3rem;
+    height: 2.3rem;
+    font-size: 20px;
+    outline: none;
+    margin: 2px;
+    border-radius: 50%;
+    color: white;
+}
+
 .count{
     width: 20%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    p{
+        background-color: white;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+    }
 }
 
-.buttonCountLess,
-.buttonCountMore,
-.count p{
-    width: 2.5rem;
-    height: 1.8rem;
-    font-size: 20px;
-    outline: none;
-    margin: 1.25px;
-    border-radius: 45%;
-    color: white;
-}
+   
 
 .buttonCountLess{
     border: none;
@@ -61,7 +75,7 @@
 }
 
 .buttonCountMore{
-    border: none;
+   border: none;
    background-color: rgb(177, 10, 10);
    display: flex;
    justify-content: center;
@@ -90,25 +104,24 @@
 }
 
 .buttonClose{
-    background-color: rgb(30,31,33);
-    width:80px;
-    height: 40px;
+    background-color: rgb(177, 10, 10);
+    width:7rem;
+    height: 2.5rem;
     border:none;
     font-size: 15px;
-    font-weight: 900;
-    color: gray;
+    font-weight: 700;
+    color:white;
     outline: none;
-    margin-left: 10px;
-    border-radius: 45%;
+    margin:0 10px 0 0;
+    border-radius: 1.25rem;
     box-shadow: 0 0 2px 2px rgba(255,255,255,0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.buttonClose:hover{
-    cursor: pointer;
-    color: rgb(177, 10, 10);
+    &:hover{
+        cursor: pointer;
+        
+    }
 }
 
 #buttonLess{
@@ -117,10 +130,3 @@
     color: white;
 }
 
-.count p{
-    background-color: white;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

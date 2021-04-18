@@ -18,17 +18,26 @@ interface newProductDetails{
     image:string
     details:string
 }
+// mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
+//     createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
+//         id
+//         name
+//         price
+//         brand
+//         image
+//         details
+//     }
+// }
 
 /* const NEW_PRODUCT = gql`
     mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
         createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
             id
-            name
+            name 
             price
             brand
             image
             details
-        }
     }
 `; */
 
@@ -68,7 +77,7 @@ export default function CreateProduct(){
     })
    }
 
-   function handleSubmit(e:FormEvent){
+    async function handleSubmit(e:FormEvent){
     e.preventDefault()
     createProduct({ variables: {  name: state.name } } )
     .then((resolve) => { console.log('Salio Bien') })
