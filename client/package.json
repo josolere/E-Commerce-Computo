@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@reduxjs/toolkit": "^1.5.1",
     "@stripe/react-stripe-js": "^1.4.0",
+    "@stripe/stripe-js": "^1.13.2",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -24,11 +25,13 @@
     "react-card-payment": "^0.1.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
+    "react-paginate": "^7.1.2",
     "react-payment-inputs": "^1.1.7",
     "react-player": "^2.9.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-select": "^4.3.0",
     "react-youtube-player": "^2.0.1",
     "readable-stream": "^2.3.7",
     "redux": "^4.0.5",
@@ -63,7 +66,9 @@
     ]
   },
   "devDependencies": {
+    "@types/react-paginate": "^6.2.1",
     "@types/react-router-dom": "^5.1.7",
+    "@types/react-select": "^4.0.14",
     "typescript-plugin-css-modules": "^3.2.0"
   }
 }

@@ -4,6 +4,8 @@ import styles from './Card.module.scss'
 import { Link } from 'react-router-dom'
 import { addShopping, local } from '../../redux/actions'
 import { AppState } from '../../redux/reducers';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface props {
     id?: number
@@ -66,25 +68,39 @@ export default function Card({ name, image, price, id, count, details }: props) 
         }
     }
 
-    return (
+    return(
         <div className={styles.card}>
-            <img style={{ width: '10rem', height: 'auto' }} src={image} />
-            <span style={{ margin: '0rem 0rem 1rem 1rem' }}>{name}</span>
+        
+        <p >{name}</p> 
+        
+        <Link className={styles.link} style={{textDecoration:'none'}} to={{
+            pathname: '/Detalles',
+            state: {
+                id:id
+            }
+        }}>
+           
+            <div className={styles.containerimg}>          
+            <img style={{width:'100%',height:'auto'}} src={image}/>
+            </div> 
+            
+            </Link>
+           
+           
+            {/* <div className={styles.buy}>${new Intl.NumberFormat().format(price)}</div> */}
             <div className={styles.buttons}>
-                <Link to={{
-                    pathname: '/Detalles',
-                    state: {
-                        id: id
-                    }
-                }}>
-                    <button className={styles.learn}>Detalles del Producto</button>
-                </Link>
-                <button
-                    onClick={() => {
-                        handleAddProduct();
-                    }}
-                    className={styles.buy}>${new Intl.NumberFormat().format(price)}</button>
+            <button className={styles.buy}>${new Intl.NumberFormat().format(price)}</button>
+            <button 
+             onClick={() => {
+                handleAddProduct();
+            }}
+            className={styles.addCart}> 
+            <FontAwesomeIcon icon={faCartPlus} /></button>
             </div>
         </div>
-    )
+    
+  );
+
+
+
 }

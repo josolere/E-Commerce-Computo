@@ -1,0 +1,14 @@
+
+.containerEdit{
+    display: flex;
+    flex-direction: column;
+    input{
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border-bottom: solid 1px red;
+    }
+}
+.Edit{
+    background-color: red;
+}

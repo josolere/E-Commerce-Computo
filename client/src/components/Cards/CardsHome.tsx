@@ -3,8 +3,12 @@ import Card from './CardHome'
 import styles from './CardsHome.module.scss'
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { FILTER } from "../../gql/card"
+import ReactPaginate from "react-paginate"
 import { AppState } from '../../redux/reducers';
+
+
 
 interface DetailsProduct {
     id: number,
@@ -38,7 +42,8 @@ const products = gql`
 export default function Cards() {
 
     const name = useSelector((store: AppState) => store.productReducer.filter)
-   
+    const categoriesId = useSelector((store: AppState) => Number(store.productReducer.categories) || [])
+
     const { loading, error, data } = useQuery<DetailsData>(products, { variables: { name: name } })
     const [count, setCount] = useState(1)
 
@@ -46,21 +51,59 @@ export default function Cards() {
         console.log(data)
     }, [data])
 
-    const product = data?.getProducts
+    var product = data?.getProducts
+    const [pageNumber, setPageNumber] = useState(0)
 
-    return (
-        <div className={styles.container}>
-            {loading ? <h2 style={{ color: 'whitesmoke' }}>Cargando Productos...</h2> : false}
-            {product?.length === 0 ? <h2 style={{ color: 'whitesmoke' }}>El producto que busca no existe o no se encuentra disponible</h2> : false}
-            {product?.map(el =>
+    const productsPerPage = 9
+    const pageVisited = pageNumber * productsPerPage
+
+    const pageCount = Math.ceil(product ? product.length / productsPerPage : 0)
+
+
+    const changePage = ({ selected }: any) => {
+        setPageNumber(selected)
+    }
+
+    const displayProducts = product?.slice(pageVisited, pageVisited + productsPerPage)
+        .map(el => {
+            return (
                 <Card
                     key={el.id}
                     details={el.details}
                     count={count} id={el.id}
                     name={el.name}
                     image={el.image}
-                    price={el.price}                    
-                />)}
-        </div>
-    )
-}
+                    price={el.price}
+                />
+        
+        );
+})
+
+return(
+<div className={styles.container}>
+{loading ? <h2 style={{ color: 'whitesmoke' }}>Cargando Productos...</h2> : false}
+{product?.length === 0 ? <h2 style={{ color: 'whitesmoke' }}>El producto que busca no existe o no se encuentra disponible</h2> : false}
+{product?.map(el =>
+    <Card
+        key={el.id}
+        details={el.details}
+        count={count} id={el.id}
+        name={el.name}
+        image={el.image}
+        price={el.price}                    
+    />)}
+</div>
+)}
+{/* <div className={styles.container}>
+    <ReactPaginate
+        previousLabel={"«"}
+        nextLabel={"»"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+    />
+</div> */}
+    
+
+// }

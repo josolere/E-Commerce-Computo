@@ -1,176 +1,203 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useHistory } from 'react-router';
-import { useMutation, gql } from '@apollo/client';
-import { AUTH_TOKEN } from './constants'
-import style from './Login.module.scss'
+import { useMutation, useQuery, gql } from '@apollo/client';
+import styles from './loguin.module.scss';
+import { LOGINMUTATION, SIGNUPMUTATION, LOGOUTMUTATION, ACTUALUSER} from "../../gql/login"
 import NavBar from '../NavBar/NavBar';
 
-interface PropsLogin {
-    handleClose: () => void
-}
 
-
-interface LoginSet {
-    email: string,
-    name: string,
-    password: string,
-    login: boolean,
-    token: string,
-}
-
-interface LoginData {
-    signup: LoginSet,
-    login: LoginSet,
-}
-
-interface propsl {
-    closeModal: boolean
-}
-const SIGNUP_MUTATION = gql`
-  mutation SignupMutation(
-    $email: String!
-    $password: String!
-    $name: String!
-  ) {
-    signup(
-      email: $email
-      password: $password
-      name: $name
-    ) {
-      token
+interface user {
+    actualuser: {
+        name: string,
+        password: string,
+        email: string
     }
-  }
-`;
+}
 
-const LOGIN_MUTATION = gql`
-  mutation LoginMutation(
-    $email: String!
-    $password: String!
-  ) {
-    login(
-        email: $email, 
-        password: $password) 
-        {
-      token
-    }
-  }
-`;
+interface datauser {
+    actualUser: user[]
+}
 
-const Login = ({ handleClose }: PropsLogin) => {
 
-    const history = useHistory();
+
+const Login = () => {
+
     const [logform, setLogform] = useState({
-        login: true,
         email: '',
         password: '',
         name: ''
     });
 
-    const [login] = useMutation<LoginData>(LOGIN_MUTATION, {
-        variables: {
-            email: logform.email,
-            password: logform.password
-        },
-        onCompleted: ({ login }) => {
-            localStorage.setItem(AUTH_TOKEN, login.token);
-            history.push('/');
-        }
-    });
+    const [showlogin, setshowLogin] = useState(false)
 
-    const [signup] = useMutation<LoginData>(SIGNUP_MUTATION, {
-        variables: {
-            name: logform.name,
-            email: logform.email,
-            password: logform.password
-        },
-        onCompleted: ({ signup }) => {
-            localStorage.setItem(AUTH_TOKEN, signup.token);
-            history.push('/');
+    //useEffect ????
+
+    useQuery<datauser>(ACTUALUSER)
+
+    const [login, logindata] = useMutation(LOGINMUTATION)
+
+    const destructuringLogin = logindata.data
+
+    const [signup, signupdata] = useMutation(SIGNUPMUTATION)
+
+    const destructuringsingup = signupdata.data
+
+    const [logout, logoutdata] = useMutation(LOGOUTMUTATION)
+
+    const destructuringlogout = logoutdata.data
+
+    const handleclickevent = () => {
+        showlogin ? setshowLogin(false) : setshowLogin(true)
+    }
+
+    const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
+        setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
+    }
+
+    console.log(logform)
+
+    const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
+        if (showlogin === true) {
+            login({ variables: { email: logform.email, password: logform.password } })
+                .then((resolve) => { console.log("logueado") })
+                .catch((error) => { console.log("error login") })
+                ;
         }
-    });
+        else {
+            signup({ variables: { name: logform.name, email: logform.email, password: logform.password } })
+                .then((resolve) => { console.log("signup bien") })
+                .catch((error) => { console.log("signup mal") })
+                ;
+        }
+        event.preventDefault()
+    }
+
+    const logoutchange = () => {
+        logout({ variables: { email: logform.email, password: logform.password } })
+            .then((resolve) => { console.log("logout bien") })
+            .catch((error) => { console.log("logout mal") })
+            ;
+    }
 
 
 
 
     return (
-        <>
-            <NavBar />
-            <div className={style.container}>
-                <div className={style.containerModal}>
-                    {/* <div className={style.Close}>
-                        <button onClick={handleClose}
-                        >X</button>
-                    </div> */}
-                    <div className={style.containerTitle}>
-                        <h4>
-                            {logform.login ? 'Crear Cuenta' : 'Iniciar Sesion'}
-                        </h4>
-                    </div>
-                    <div className={style.containerLogin}>
-                        {logform.login && (
-                            <input
-                                value={logform.name}
-                                onChange={(event) =>
-                                    setLogform({
-                                        ...logform,
-                                        name: event.target.value
-                                    })
-                                }
-                                type="text"
-                                required={true}
-                                placeholder="Ingresar Nombre"
-                            />
-                        )}
-                        <input
-                            value={logform.email}
-                            onChange={(event) =>
-                                setLogform({
-                                    ...logform,
-                                    email: event.target.value
-                                })
-                            }
-                            type="text"
-                            required={true}
-                            placeholder="Ingresar Correo"
-                        />
-                        <input
-                            value={logform.password}
-                            onChange={(event) =>
-                                setLogform({
-                                    ...logform,
-                                    password: event.target.value
-                                })
-                            }
-                            type="password"
-                            required={true}
-                            placeholder="Ingresar Contraseña"
-                        />
-                    </div>
-                    <div className={style.containerButtons}>
-                        <button
-                            className={style.buttonLogin}
-                            onClick={() => logform.login ? login : signup}>
-                            {logform.login ? 'Crear Cuenta' : 'Iniciar Sesion'}
-                        </button>
-                        <button
-                            className={style.buttonSingUp}
-                            onClick={() =>
-                                setLogform({
-                                    ...logform,
-                                    login: !logform.login
-                                })
-                            }
-                        >
-                            {logform.login
-                                ? 'Ya Tienes Una Cuenta?'
-                                : 'Necesitas Crear Una Cuenta?'}
-                        </button>
+        <div>
+     
+            <div className={styles.back}>
+                {showlogin ? <div className={styles.organizar}>
+                    <div className={styles.caja}>
+                        <div className={styles.container}>
+                            Introduce
+                            <div className={styles.flip}>
+                                <div><div>tus</div></div>
+                                <div><div>datos</div></div>
+                                <div><div>para</div></div>
+                            </div>
+                            loguearte
+                            </div>
+                        <form className={styles.form} onSubmit={handlesubmitchange}>
+                            <div className={styles.form__group}>
+                                <label htmlFor='email' className={styles.form__label} >E-Mail</label>
+                                <input
+                                    className={styles.form__field}
+                                    placeholder='E-mail'
+                                    minLength={10}
+                                    maxLength={30}
+                                    type='email'
+                                    name='email'
+                                    onChange={handleinputchange}
+                                    required={true}
+                                />
+                            </div>
+                            <div className={styles.form__group}>
+                                <label htmlFor='password' className={styles.form__label} >Password</label>
+                                <input
+                                    className={styles.form__field}
+                                    placeholder='Contraseña'
+                                    minLength={8}
+                                    maxLength={12}
+                                    type="password"
+                                    name='password'
+                                    onChange={handleinputchange}
+                                    required={true}
+                                />
+                            </div>
+                            <div className={styles.form__group}></div>
+                            <div className={styles.organizarbotones}>
+                                <button className={styles.boton} type='submit' >Loguear</button>
+                                <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
+                                <button className={styles.boton} onClick={logoutchange} >Desvincular</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
+                    :
+                    <div className={styles.organizar}>
+                        <div className={styles.caja}>
+
+                            <div className={styles.container}>
+                                Introduce
+                            <div className={styles.flip}>
+                                    <div><div>tus</div></div>
+                                    <div><div>datos</div></div>
+                                    <div><div>para</div></div>
+                                </div>
+                            registrarte
+                            </div>
+                            <form className={styles.form} onSubmit={handlesubmitchange}>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='email' className={styles.form__label} >E-Mail</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='email'
+                                        minLength={10}
+                                        maxLength={30}
+                                        placeholder='E-Mail'
+                                        name='email'
+                                        onChange={handleinputchange}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='password' className={styles.form__label} >Password</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='password'
+                                        minLength={8}
+                                        maxLength={12}
+                                        placeholder='Contraseña'
+                                        name='password'
+                                        onChange={handleinputchange}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='name' className={styles.form__label} >Nombre</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='text'
+                                        minLength={5}
+                                        maxLength={12}
+                                        placeholder='Apodo'
+                                        name='name'
+                                        onChange={handleinputchange}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className={styles.organizarbotones}>
+                                    <button className={styles.boton} type='submit' >Crea tu cuenta</button>
+                                    <button className={styles.boton} onClick={handleclickevent}>Ya tienes una  cuenta?</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                }
             </div>
-        </>
+        </div>
     );
 };
 
 export default Login;
+

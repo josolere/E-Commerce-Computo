@@ -1,14 +1,33 @@
-.contenedorDetail {
-    height: 100vh;
-    display: inline-flex;
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+
+.contenedorAll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
-    margin-top: 6rem;
-   div {
-        width: 40rem;
-        font-family:'Montserrat', sans-serif;
-        font-weight: 700;
-        margin-bottom: -2rem; 
+    height: 110vh;
+    background-color: $white;
+}
+.contenedorDetail {
+    position: relative;
+    height: fit-content;
+    width: 70%;
+    border:solid 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.3rem;
+    padding: 5rem 0rem;
+    background-color: $grey;
+    color: whitesmoke;
+    font-family:'Montserrat', sans-serif;
+    div {
+        // width: 40rem;
+        font-weight: 700; 
        
         h1 {
             margin-top: 0;
@@ -17,51 +36,146 @@
    img {
        width: 20rem;
        margin-right: 2rem;
-   }
+    }
+    form{
+        width: 30rem;
+        p{
+            max-width: 100%;
+        }
+    }
+
 } 
+.containerBot{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    border: solid 1px black;
+    margin: 2rem 0rem 0rem 0rem;
+    padding: 2rem 0rem;
+    border-radius: 0.3rem;
+    background-color: $grey;
 
-.textarea {
-    margin-top: 2rem;
-    width: 400px;
-    height: 100px;
-    border: 1px solid white; 
-    resize: none;
+    div{
+        div{
+            div{
+                textarea{
+                    resize: none;
+                    height: 0px;
+                    
+                }
+            }
+        }
+    }
 }
-    
-.precioDetail {
-    font-family: 'Montserrat', sans-serif;
+
+.botonPrecio{
+    display: flex;
     width: fit-content;
-    background-color:#F21B42 ;
-    padding:1rem;
-    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    background-color:$red ;
+    border-radius: 0.1rem;
+    hr{
+        margin: 0;
+    }
+    p{
+        margin: 0rem 0.2rem;
+        padding: 0.8rem;
+        color: whitesmoke;
+    }
+    
+    button{
+        padding: 1rem;
+        background-color: transparent;
+        border: none;
+        color: whitesmoke;
+        outline: none;
+        svg{
+            font-size: 1.2rem;
+        }
+        &:hover{
+            cursor: pointer;
+            background-color: $dark;
+            color: $red;
+            padding: 1.5rem;
+            transition: 1s;
+        }
+    }
 }
 
-.contenedorAll {
-    color:white;
-    background-color: #161616;
+.Edit{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: $red;
+    border: none;
+    padding: 1rem;
+    border-radius: 0.2rem;
+    color: $white;
+    &:hover{
+        cursor: pointer;
+        background-color: $dark;
+        color: $red;
+        
+    }
 }
 
-.buttonCompra {
-    width: 12rem;
-    margin-top: 4rem;
-    color:#161616;
-    border-radius: 5px;
-    background-color:#F21B42 ;
-    font-weight: 700;
+.estrellas{
+    display: flex;
+    flex-direction: row;
+    div{
+        width: fit-content;
+        display: flex;
+        height: fit-content;
+    }
 }
+// .textarea {
+//     margin-top: 2rem;
+//     width: 400px;
+//     height: 100px;
+//     border: 1px solid white; 
+//     resize: none;
+// }
+    
+// .precioDetail {
+//     font-family: 'Montserrat', sans-serif;
+//     width: fit-content;
+//     background-color:#F21B42 ;
+//     padding:1rem;
+//     border-radius: 5px;
+// }
 
-.buttonCompra:hover {
-        color: white;
-        background:#F21B42 ;
-        box-shadow: 0 0 50px #F21B42;
-}
+// .category{
+//     color: brown;
+//     padding: 1rem;
+// }
 
-.raiting {
-    font-family: 'Montserrat', sans-serif ;
-    font-size: 1rem;
-}
+// .buttonCompra {
+//     width: 12rem;
+//     height: 3rem;
+//     margin-top: 4rem;
+//     color:#161616;
+//     border-radius: 5px;
+//     background-color:#F21B42 ;
+//     font-weight: 800;
+//     border-color: transparent;
+// }
 
-.gracias {
-    font-family: 'Montserrat', sans-serif ;
-    font-size: 1.5rem;
-}
+// .buttonCompra:hover {
+//     color: white;
+//     background:#F21B42 ;
+//     box-shadow: 0 0 5px #F21B42;
+// }
+
+
+
+// .raiting {
+//     font-family: 'Montserrat', sans-serif ;
+//     font-size: 1rem;
+// }
+
+// .gracias {
+//     font-family: 'Montserrat', sans-serif ;
+//     font-size: 1.2rem;
+// }

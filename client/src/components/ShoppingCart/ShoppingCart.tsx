@@ -19,7 +19,6 @@ const ShoppingCart = (): JSX.Element => {
     }       
         return (
             <>
-                <NavBar />
                 <div className={carts.containerCarts}>
                     {
                         idsProducts.map((mapeo, index): any => {

@@ -7,15 +7,19 @@ export const LESS_PRICE = 'LESS_PRICE'
 export const LOCAL = 'LOCAL'
 export const ADD_LOCALSTORAGE = 'ADD_LOCALSTORAGE'
 export const DELETE_CART = 'DELETE_CART'
+export const PASS_ID = 'PASS_ID' //Pasar id
 
 export const setFilter = (filter: string) => ({
     type: SET_FILTER, filter
 });
 
-export const seCategory = (categories: number[]) => ({
+export const setCategory = (categories: number[]) => ({
     type: SET_CATEGORIES, categories
 });
 
+export const passid = (idpass:number) => ({
+    type: PASS_ID , idpass
+});
 
 export const addShopping = (idProduct: any) => ({
     type: ADD_SHOPPING, idProduct
