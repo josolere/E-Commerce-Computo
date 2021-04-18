@@ -1,3 +1,5 @@
+import { Category } from "../models/Category";
+
 export type User = {
   username: string | null;
   password: string | null;
@@ -15,6 +17,7 @@ export type Product = {
   brand: string;
   price: number;
   details: number;
+  categories : number[]
 };
 export type Order = {
   status: string;
