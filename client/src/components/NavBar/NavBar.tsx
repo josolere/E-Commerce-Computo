@@ -25,7 +25,7 @@ const NavBar = (): JSX.Element => {
       <div className={navBar.container}>
         <Link to='/' className={navBar.linksNav} > <h1 className={navBar.titleNav} >CH</h1> </Link>
         <SearchBar />
-        <Link className={navBar.linksNav} to="/Carrodecompras">
+        <Link  to="/Carrodecompras">
           <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
           <p>{quantity}</p>
           ${idsProducts}

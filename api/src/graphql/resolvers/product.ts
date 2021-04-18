@@ -139,7 +139,8 @@ export default {
           productToEdit.removeCategories(product.categories);
 
           //inserto las nuevas
-          console.log(input.categories.length);
+          // console.log(input.categories.length);
+        
           await productToEdit.addCategories(input.categories);
 
         return {updatedProduct} ;
