@@ -7,7 +7,7 @@ export type User = {
   name: string;
   surname: string;
   address: string | null;
-  id:number | undefined;
+  id:string | undefined;
   facebookId: string | null
 };
 export type Product = {

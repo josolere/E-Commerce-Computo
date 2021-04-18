@@ -3,7 +3,7 @@ import { gql } from "apollo-server";
 export const typeDefs = gql`
   # object querys mutations RECORDAR USAR MAYÚSCULAS
   type User {
-    id: Int
+    id: String
     username: String
     password: String
     email: String
@@ -36,7 +36,7 @@ export const typeDefs = gql`
   }
 
   input CreateUserInput {
-    id: Int
+    id: String
     username: String
     password: String
     email: String

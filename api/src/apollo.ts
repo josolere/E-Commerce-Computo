@@ -20,7 +20,7 @@ const schema = makeExecutableSchema({
 //de las request en el contexto y las hace accesibles desde los resolvers.
 const apolloServer = new ApolloServer({
   schema,
-  context: ({ req, res }) => buildContext({req, res}),
+  context: ({ req, res }) => buildContext({req, res, models}),
 });
 
 export default apolloServer;

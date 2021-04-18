@@ -3,7 +3,7 @@ import { User, Product, Order, OrderDetail, Review } from "./types";
 
 // User
 export interface iUser extends User {
-  id: number;
+  id: string;
   token?: string;
   createdAt?: Date;
   updatedAt?: Date;

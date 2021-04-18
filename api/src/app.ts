@@ -14,11 +14,14 @@ const facebookStrategy = passportFacebook.Strategy
 import { CLIENT_RENEG_WINDOW } from "node:tls";
 const app: express.Application = express();
 
+app.use(passport.initialize())
+app.use(passport.session())
+
 require("dotenv").config();
-const { PORT } = process.env;
+const PORT  = 'localhost:3000' || 'localhost:5000';
 
 const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID || ''
-const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || ''
+const FACEBOOK_APP_SECRET = 'a1e05f5a17e23fd232a21f169690dd37'
 
 
 //añadimos el soporte para el registro y login desde los resolvers de graphQL para evitar hacer rutas nuevas 
@@ -26,7 +29,8 @@ const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || ''
 //añadimos estrategia de passport para logear con email y contraseña
 passport.use(
   new GraphQLLocalStrategy( async (email:any, password:any, done:any) => {
-    const users = await getUsers();
+    const users = await User.findAll();
+    console.log(users)
     const matchingUser = users.find((user:any) => email === user.dataValues.email && password == user.dataValues.password)
     console.log(matchingUser)
     const error = matchingUser ? null : new Error('no matching user found');
@@ -38,25 +42,37 @@ const facebookOptions: iUserFacebook = {
   clientID: FACEBOOK_CLIENT_ID,
   clientSecret: FACEBOOK_APP_SECRET,
   callbackURL:'http://localhost:5000/auth/facebook/callback',
-  profileFields:['id', 'email', 'name', 'surname'],
+  profileFields:['id', 'email', 'first_name', 'last_name'],
 }
-const facebookCallback = (accessToken:any, refreshToken:any, profile:any, done:any) => {
-  const users:any = getUsers()
-  const matchingUser = users.find((user:any) => user.dataValues.facebookId === profile.id)
-
+const facebookCallback = async (accessToken:any, refreshToken:any, profile:any, done:any) => {
+  const users:any = await User.findAll()
+  console.log(users)
+  const matchingUser = users?.find((user:any) => user.dataValues.facebookId === profile.id)
+  console.log(matchingUser)
   if(matchingUser){
     done(null, matchingUser);
     return;
   }
 
-  User.create({ 
+  let input : any = {
+    id: uuid(),
     facebookId: profile.id,
     name: profile.name.givenName,
     surname: profile.name.familyName,
     email: profile.emails && profile.emails[0] && profile.emails[0].value,
     privilege: 'user',
-    active: true
+    active: true,
+    password: null,
+    address: null,
+    username: null
+  }
+
+  User.create({ 
+    ...input 
    })
+
+   done(null, input)
+
 
 
 }
@@ -69,7 +85,7 @@ passport.use(new facebookStrategy(
 
 
 passport.serializeUser((user:any, done) => {
-  done(null, user.id);
+  done(null, user.dataValues.id);
 })
 
 passport.deserializeUser(async (id, done) => {
@@ -87,7 +103,7 @@ const SESSION_SECRET = 'bad secret'
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:" + { PORT }); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://" + { PORT }); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -104,8 +120,13 @@ app.use(session({
   saveUninitialized: false,
 }))
 
-app.use(passport.initialize())
-app.use(passport.session())
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: 'http://localhost:5000/graphql',
+  failureRedirect: 'http://localhost:5000/graphql',
+}));
+
+
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const status = err.status || 500;
