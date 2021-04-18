@@ -1,20 +1,46 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+
 .container{
     height: fit-content;
     justify-content: start;
     width: 15rem;
-    margin-top: 2rem;
+    margin-top: 3rem;
     margin-left: 2rem;
-    background-color:#F21B42 ;
 }
 .todos {
-    background-color: black;
+    background-color: $grey;
     text-align: start;
-    color: whitesmoke;
+    color: $white;
     border: transparent;
-    width: 12rem;
+    width: 100%;
     padding: 1rem;
     outline: none;
     &:hover{
         cursor: pointer;
     }
+}
+
+.containerCategories {
+    width: 100%;
+    background-color: $grey;
+    border-color: transparent;
+    color: white;
+    text-align: start;
+   padding: 1rem;
+    outline: none;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    
+
+
+.iconT {
+   display: inline-flex;
+   float: right;
+   
 }

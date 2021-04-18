@@ -1,0 +1,107 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+$verdesito:#E0FFFF;
+$blanquito:#F0F0F0;
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+.TitleLand {
+    background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, black, black, black);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: 		#FFE4E1;
+    font-size: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    animation: reveal 3000ms ease-in-out forwards 200ms,
+             glow 2500ms linear infinite 2000ms;
+
+    @keyframes reveal {
+        80%{
+        letter-spacing: 1px;
+        }
+        100% {
+        background-size: 300% 300%;
+        }
+        }
+    @keyframes glow {
+        40% {
+        text-shadow: 0 0 8px black;
+            }
+        }
+    }
+
+.DiscountLand {
+    background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, white, white, white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 3vw;
+    font-family: 'Montserrat', sans-serif;
+    animation: reveal 300ms ease-in-out forwards 20ms,
+    glow 250ms linear infinite 200ms;
+
+@keyframes reveal {
+    80%{
+    letter-spacing: 8px;
+    }
+    100% {
+    background-size: 300% 300%;
+    }
+    }
+@keyframes glow {
+    40% {
+    text-shadow: 0 0 8px 	#FFE4E1;
+    }
+    }
+    }
+
+
+
+.OrderSub{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.TitleConcat {
+    color: 		#FFE4E1;
+    font-size: 3vw;
+    font-family: 'Montserrat', sans-serif;
+    animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2500ms linear infinite 2000ms;
+    border: solid;
+    border-color:	#FFE4E1;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.WeWant {
+    color:	#FFE4E1;
+    font-size: 2vw;
+    font-family: 'Montserrat', sans-serif;
+    animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2500ms linear infinite 2000ms;
+    border: solid;
+    border-color:		#FFE4E1;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.LandPageInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: 		#FFE4E1;
+    font-size: 1.3vw;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0rem;
+} 
+
+
+
+

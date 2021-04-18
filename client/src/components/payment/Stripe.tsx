@@ -128,7 +128,7 @@ const StripePay = (): JSX.Element => {
   return (
     <React.Fragment>
       <div className={styles.back} >
-        <NavBar />
+      
         <div className={styles.organizar} >
           <div className={styles.caja} >
             <h4>Precio</h4>

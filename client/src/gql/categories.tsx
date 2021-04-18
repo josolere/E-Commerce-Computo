@@ -15,10 +15,11 @@ mutation NewCategory ($name: String!) {
 `;
 
 export const GET_CATEGORIES = gql`
-query {
-    getCategory {
-        id
-        name
-    }
-}
-`
+   query {
+         getCategory
+            {
+                id
+                name
+                    }
+        }
+`;

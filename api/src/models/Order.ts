@@ -1,17 +1,19 @@
 import {
   Association,
   DataTypes,
+  EnumDataType,
   Model,
   Optional,
   Sequelize,
-  // Belongs to many Model
+  BelongsToManyGetAssociationsMixin
 } from "sequelize";
 
 import { OrderDetail } from "./OrderDetail";
 
 export interface OrderAttributesI {
   id: number;
-  status: String;
+  status: string;
+  // status: EnumDataType<string>;
 }
 
 interface OrderCreationAttributesI extends Optional<OrderAttributesI, "id"> {}
@@ -20,9 +22,12 @@ export class Order
   extends Model<OrderAttributesI, OrderCreationAttributesI>
   implements OrderAttributesI {
   public id!: number;
-  public status!: String;
+  public status!: string;
+  // public status!: EnumDataType<string>;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public getOrderDetails!: BelongsToManyGetAssociationsMixin<OrderDetail>;
 
   public readonly orderDetail?: OrderDetail[];
 
@@ -41,6 +46,8 @@ export function OrderFactory(sequelize: Sequelize) {
       },
       status: {
         type: DataTypes.STRING,
+        // type: DataTypes.ENUM("CANCELLED", "PROCESSING", "COMPLETE"),
+        allowNull: true,
       },
     },
     {

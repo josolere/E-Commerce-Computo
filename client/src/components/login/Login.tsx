@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER } from "../../gql/login"
-import {  LOGOUT_MUTATION } from "../../gql/login"
-import { SIGNUP_MUTATION } from "../../gql/login"
-import { LOGIN_MUTATION } from "../../gql/login"
-
 import styles from './loguin.module.scss';
+import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER} from "../../gql/login"
 import NavBar from '../NavBar/NavBar';
 
 
@@ -83,9 +79,12 @@ const Login = () => {
             ;
     }
 
+
+
+
     return (
         <div>
-            <NavBar />
+     
             <div className={styles.back}>
                 {showlogin ? <div className={styles.organizar}>
                     <div className={styles.caja}>

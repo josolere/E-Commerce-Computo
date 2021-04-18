@@ -1,7 +1,14 @@
+$white:#dddddd;
+
 .catalog{
     display: flex;
     flex-direction: row;
-    background-color: #161719;
+    background-color: $white;
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
+}
+
+.navbar{
+    position: sticky;
+    top: 0; 
 }

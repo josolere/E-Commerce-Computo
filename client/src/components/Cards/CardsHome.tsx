@@ -3,9 +3,11 @@ import Card from './CardHome'
 import { FILTER } from "../../gql/card"
 import styles from './CardsHome.module.scss'
 import { useQuery, gql } from '@apollo/client';
-import {useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 import ReactPaginate from "react-paginate"
 import { AppState } from '../../redux/reducers';
+
 
 
 interface DetailsProduct {
@@ -21,27 +23,30 @@ interface DetailsData {
     getProducts: DetailsProduct[]
 }
 
-interface IParams {
-    name:string
+interface IProps {
+    reset:number
 }
 
 
-export default function Cards(){
+export default function Cards({reset}:IProps) {
 
     const name = useSelector((store: AppState) => store.productReducer.filter)
     const categoriesId = useSelector((store: AppState) => Number(store.productReducer.categories) || [])
-    
-    const { loading, error, data } = useQuery<DetailsData>(FILTER,{variables:{name:name, categoriesId:categoriesId}})
-    
-    useEffect(()=>{
-    },[data])
-    
-   var product = data?.getProducts
 
+    const { loading, error, data } = useQuery<DetailsData>(FILTER,{variables:{name:name, categoriesId:categoriesId}})   
+    const [count, setCount] = useState(1)
+
+    
+
+    var product = data?.getProducts
     const [pageNumber, setPageNumber] = useState(0)
 
-    const productsPerPage = 8
+    const productsPerPage = 9
     const pageVisited = pageNumber * productsPerPage
+
+    useEffect(() => {
+       setPageNumber(reset)
+    }, [data, reset])
 
     const pageCount = Math.ceil(product ? product.length / productsPerPage : 0)
 
@@ -57,7 +62,7 @@ export default function Cards(){
         const displayProducts = product?.slice(pageVisited, pageVisited + productsPerPage)
         .map(el => {
             return ( 
-             <Card id={el.id} name={el.name} image={el.image} price={el.price} />
+             <Card id={el.id} name={el.name} image={el.image} price={el.price} count={count} />
          );
     })
     return <div className={styles.container}>{displayProducts}

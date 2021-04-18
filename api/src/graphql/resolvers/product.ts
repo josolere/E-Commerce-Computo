@@ -19,7 +19,7 @@ export default {
       { models }: { models: iModels }
     ): Promise<iProduct[]> => {
       if (!filter) {
-        filter = { name: "", offset: 0, limit: 10, categoriesId: [0] };
+        filter = { name: "", offset: 0, limit: 100, categoriesId: [0] };
       }
       const limit = filter.limit;
       const offset = filter.offset;
@@ -51,14 +51,13 @@ export default {
       const options = {
           include: [{model: db.Category,
             through: "productsxcategories",
-            attributes: ["name"]}]
+            attributes: ["id", "name"]}]
     };
-      const product = await models.Product.findByPk(id,options);
-//      for(var x=0;x<product.Categories.length; x++){
-//      console.log(product.Categories[x].name)
-//      }
-
-      //product.Categories.map((category:any) => product.categories="category.name")
+      let product = await models.Product.findByPk(id,options);
+      product.categories = []
+      product.Categories.map((category:any) => { 
+        product.categories.push({id:category.id, name:category.name})
+      })
       return product;
     },
 
@@ -81,11 +80,21 @@ export default {
       { input }: { input: iCreateProductInput },
       { models }: { models: iModels }
     ): Promise<any> => {
-      console.log(input.categories);
       let categoryArray = input.categories; //para que tome que hay categorias hay que agregarlas en la interfaz del create product input
       let createdProduct = await models.Product.create({ ...input })
-      createdProduct.addCategories(input.categories);
-      return createdProduct;
+      await createdProduct.addCategories(input.categories);
+      const options = {
+          include: [{model: db.Category,
+            through: "productsxcategories",
+            attributes: ["id", "name"]}]
+      };
+        let product = await models.Product.findByPk(createdProduct.dataValues.id,options);
+        product.categories = []
+        product.Categories.map((category:any) => { 
+        product.categories.push({id:category.id, name:category.name})
+
+      })
+      return product;
     },
     deleteProduct: async (
       _parent: object,
@@ -113,8 +122,27 @@ export default {
           { ...input },
           { where: { id } }
         );
+          
+        // elimino sus antiguas categorias
+        const options = {
+          include: [{model: db.Category,
+            through: "productsxcategories",
+            attributes: ["id", "name"]}]
+        };
 
-        return updatedProduct;
+        const product = await models.Product.findByPk(id,options);
+        
+        product.categories = []
+        product.Categories.map((category:any) => { 
+          product.categories.push(category.id)
+        });
+          productToEdit.removeCategories(product.categories);
+
+          //inserto las nuevas
+          console.log(input.categories.length);
+          await productToEdit.addCategories(input.categories);
+
+        return {updatedProduct} ;
       }
 
       return null;

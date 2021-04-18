@@ -9,7 +9,7 @@ export const typeDefs = gql`
     brand: String
     price: Float
     details: String
-    categories: [String]
+    categories: [Category!]
     createdAt: String
     updatedAt: String
   }
@@ -42,12 +42,13 @@ export const typeDefs = gql`
     brand: String
     price: Float
     details: String
+    categories: [ID!]
   }
 
   input FilterProducts {
     name: String = ""
     offset: Int = 0
-    limit: Int = 10
+    limit: Int = 100
     categoriesId: [ID]
   }
 `;
