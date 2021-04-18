@@ -5,12 +5,10 @@ $ligthblue: #dddddd;//30475e
 $white:#f05454;//f05454
 
 .container {
-    padding: 0rem 13rem 0rem 3rem;
-    height: 4rem;
+    padding: 0rem 5rem 0rem 3rem;
+    height: 5rem;
     max-width: 100%;
     background-color: $blue;
-    display: inline-flex;
-    justify-content: space-evenly;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,11 +20,12 @@ $white:#f05454;//f05454
     }
  }
 
+ @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
 
  .titleNav {
-    color: $ligthblue;
-    font-size: 25px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #f05454;
+    font-size: 2,5rem;
+    font-family:'Fugaz One', cursive;
     text-decoration: none;
 }
 
@@ -39,19 +38,33 @@ $white:#f05454;//f05454
     display: flex;
     color: $ligthblue;
     text-decoration: none;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+    font-family:'Montserrat', sans-serif;
+    p{
+        position: relative;
+        background-color: rgb(177, 10, 10);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        width: 1.2rem;
+        height: 1.2rem;
+        bottom: 2rem;
+        right: 0.9rem;
+    }
 }
 
 .linksNav:hover {
-    color: $white;
+    color: #f05454;
 }
 
 .iconCart {
     width: 20px !important;
     height: 20px;
+    padding-right: 3rem;
     color: $ligthblue;
 }
 
 .iconCart:hover {
-    color: $white;
+    color: #f05454;
 }

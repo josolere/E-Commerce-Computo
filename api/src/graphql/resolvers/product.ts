@@ -19,7 +19,7 @@ export default {
       { models }: { models: iModels }
     ): Promise<iProduct[]> => {
       if (!filter) {
-        filter = { name: "", offset: 0, limit: 10, categoriesId: [0] };
+        filter = { name: "", offset: 0, limit: 100, categoriesId: [0] };
       }
       const limit = filter.limit;
       const offset = filter.offset;

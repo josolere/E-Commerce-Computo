@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
+import { ReviewMutation, EDIT_PRODUCT, GET, GET_CATEGORIES} from "../../gql/productDetails"
 import styles from "./ProductDetail.module.scss"
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import stylesEdit from "./ProductEdit.module.scss"
 
 interface Icategories {
     id:number
     name:string
-
 }
 
 interface DetailsProduct {
@@ -30,67 +33,7 @@ interface Review {
     review: string
 }
 
-const ReviewMutation = gql`
-    mutation ReviewMutation ( $rating:Int! $text: String! $product:Int!) {
-        addReview ( input: {rating: $rating text:$text product:$product} )
-        {
-            rating
-            text
-            id
-        }
-    }
-`;
 
-const EDIT_PRODUCT = gql `
-mutation editProduct ($id:String!,$name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!) {
-    editProduct ( 
-      id:$id,
-      input: {
-        name:$name,
-        price:$price, 
-        brand:$brand, 
-        image:$image, 
-        details:$details
-
-      })
-        {
-            id
-            name
-            price
-            brand
-            image
-            details
-          
-        }
-    }
-`
-
-const GET = gql`
-    query ($id:ID!) {
-        getProductById(id:$id)
-        {
-            id
-            name
-            price
-            brand
-            details
-            image
-            categories{
-                id
-                name
-
-            }
-        }
-}`;
-
-const GET_CATEGORIES = gql`
-query {
-    getCategory {
-        id
-        name
-    }
-}
-`
 interface Categorie {
     id: number,
     name: string,
@@ -105,6 +48,7 @@ interface PropsDetails {
         location: {
             state: {
                 id: number
+                newprice: number
             }
         }
     }
@@ -113,6 +57,8 @@ interface PropsDetails {
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const id = props.history.location.state.id
+
+    const newprice = props.history.location.state.newprice
 
     const { loading, error, data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
@@ -232,43 +178,92 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
     const categoriesQuery = categoriesQ.data?.getCategory
     
+    console.log(newprice)
  
 
     return (
         <div className={styles.contenedorAll}>
-            <div className={styles.contenedorDetail}>
+            <div className={ styles.contenedorDetail }>
                 <img src={filtred?.image} alt='' />
-                <form onSubmit={handleSubmit} >
-                    <button onClick={handleEdit}>Edit</button>
-                    {editMode && <input type='submit' value='Aceptar Cambios' />}
+                <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.formm} >
+                    <button className={styles.Edit} onClick={handleEdit}>Edit</button>
+                    
                     {editMode?
-                    <input name='name' type='text' onChange={handleChange} defaultValue={details?.name}/>
+                    <input className={stylesEdit.input} name='name' type='text' onChange={handleChange} defaultValue={details?.name}/>
                     :
                     <h1  className={styles.nameDetail}>{filtred?.name}</h1>}
                     {editMode ?
-                     <p > Marca: <input name='brand' defaultValue={details?.brand} onChange={handleChange}/> </p>
+                     <p > Marca: <input className={stylesEdit.input} name='brand' defaultValue={details?.brand} onChange={handleChange}/> </p>
                     :
                     <p> Marca: {filtred?.brand} </p>}
                     {editMode ?
-                    <p > Detalles: <textarea  onChange={handleDetails} defaultValue={details?.details} /></p> 
+                    <p ><textarea  onChange={handleDetails} defaultValue={details?.details} /></p> 
                     :
-                    <p > Detalles: {filtred?.details}</p>}
-                    <div  className={styles.botonPrecio}>
+                    <p >{filtred?.details}</p>}
+                    
+                        <div className={styles.botonPrecio}>
+
                         {editMode ?
-                        <h2 className={styles.precioDetail}>$<input onChange={handlePrice} defaultValue={details?.price} /></h2>
+                        <p className={styles.precioDetail}>$<input className={stylesEdit.input} onChange={handlePrice} defaultValue={newprice} /></p>
                         :
-                        <h2 className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</h2>
+                        <p className={styles.precioDetail}>${new Intl.NumberFormat().format(newprice || 0)}</p>
                         }
+                        <hr style={{height:'1rem',backgroundColor:'white'}}/>
+                        <button className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
+                        </div>
+                        <div className={stylesEdit.bot}>
+
                         {editMode && <select onChange={handleAddCategories}>
                         {categoriesQuery?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
                         </select>}
+                        
+                        {editMode && <input className={stylesEdit.acept} type='submit' value='Aceptar Cambios' />}
+                        </div>
+                        <div className={stylesEdit.cats}>
+
                         {editMode ?
-                        details?.categories?.map(category => <button onClick={handleCategory} value={category.id} >{category.name}</button>)
+                        details?.categories?.map(category => <button className={stylesEdit.category} onClick={handleCategory} value={category.id} >{category.name}</button>)
                         :
                         details?.categories?.map(category => <p className={styles.category}>{category.name}</p>)
-                        }
-                        
-                        <div>
+                    }
+                    </div>
+                </form>
+            </div>
+                        <div className={styles.containerBot}>
+                            
+                            {/* <Link to={{
+                                pathname: '/Pago',
+                                state: {
+                                    id: id
+                                }
+                            }}>
+                            </Link> */}
+                            <div>{hidereviews ?
+                                <div>
+                                    <button onClick={changereview} className={styles.buttonCompra} >Enviar comentario</button>
+                                    <div className={styles.review}>
+                                        <textarea
+                                        style={{height:'5rem',width:'20rem'}}
+                                            placeholder={'Escriba aquí una review del producto'}
+                                            className={styles.textarea}
+                                            name='review'
+                                            value={reviewuser.review}
+                                            onChange={(event) =>
+                                                setReviewuser({
+                                                    ...reviewuser,
+                                                    review: event.target.value
+                                                })} />
+                                    </div>
+                                </div>
+                                :
+                                <div className={styles.gracias} >
+                                    <h4>Gracias por dejar su review</h4>
+                                    <div>{resultsData && resultsData.map((item) => (
+                                        <p>{item}</p>
+                                    ))}</div>
+                                </div>
+                            }
+                            </div>
                             <div className={styles.estrellas}>
                                 {hideStar ?
                                     <div >
@@ -291,7 +286,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                                 />
                                             </label>
                                         })}
-                                        <p className={styles.raiting}>Rating {totalrating}</p>
+                                        {/* <p className={styles.raiting}>Rating {totalrating}</p> */}
                                     </div>
                                     :
                                     <div>
@@ -300,43 +295,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                     </div>
                                 }
                             </div>
-                            <Link to={{
-                                pathname: '/Pago',
-                                state: {
-                                    id: id
-                                }
-                            }}>
-                                <button className={styles.buttonCompra}>Comprar</button>
-                            </Link>
-                            <div>{hidereviews ?
-                                <div>
-                                    <div className={styles.review}>
-                                        <textarea
-                                            placeholder={'Escriba aquí una review del producto'}
-                                            className={styles.textarea}
-                                            name='review'
-                                            value={reviewuser.review}
-                                            onChange={(event) =>
-                                                setReviewuser({
-                                                    ...reviewuser,
-                                                    review: event.target.value
-                                                })} />
-                                    </div>
-                                    <button onClick={changereview} className={styles.buttonCompra} >Guardar Review</button>
-                                </div>
-                                :
-                                <div className={styles.gracias} >
-                                    <h4>Gracias por dejar su review</h4>
-                                    <div>{resultsData && resultsData.map((item) => (
-                                        <p>{item}</p>
-                                    ))}</div>
-                                </div>
-                            }
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                        </div>//
         </div>
     )
 }

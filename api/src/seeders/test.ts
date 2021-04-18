@@ -106,7 +106,11 @@ let products = [
         brand: 'ASUS',
         details: 'Placa madre tope de gama ASUS, con socket AM4, compatible con lo mejor de AMD. Wi-Fi 6(.ax) incluido. Tres ranuras M.2. Disipadores gigantes para VRM, chipset y sockets M2. Ethernet 10gb incluido. Conectores USB 3.2 incluidos.',
         price: 57999,
+<<<<<<< HEAD
         categoriesId:[ 4]
+=======
+        categoriesId:[4]
+>>>>>>> Front
     } 
 
 ]

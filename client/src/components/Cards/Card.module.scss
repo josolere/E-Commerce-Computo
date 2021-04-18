@@ -4,62 +4,90 @@ $white: #dddddd;//30475e
 $red:#f05454;//f05454
 
 .card {
-  width: 18rem;
-  height: 27rem;
+  width: 16rem;
+  height: 25rem;
   margin: 0rem 1rem 3rem 2rem;
   border-radius: 00.2rem;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-//   align-items: flex-start;
+  //   align-items: flex-start;
   background-color: whitesmoke;
   -webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0); 
     box-shadow:  2px 5px 10px 0px #1b1b1b, 5px 5px 10px 5px rgba(0,0,0,0);
     font-family:'Montserrat', sans-serif;
     &:hover{
-        position: relative;
-        // background-color: $red;
-        bottom: 0.5rem;
         transition: 2s;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border-top-right-radius: 0.2rem ;
+      border-top-left-radius: 0.2rem;
+      background-color: $dark;
+      color: white;
+      height: 15%;
+    }
+
+    a {
+      height: 65%;
+    }
+
+    div {
+      height: 15%;
     }
 
 }
 
 .link{
-    position: absolute;
-    top: 0;
+  div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
     img{
-        max-width: 18rem;
-        max-height: 16rem;
+        max-width: 100%;
+        max-height: 100%;
     }
-       p{
-           
-           margin: 1rem;
-         text-decoration: none;
-         color:$dark;
-       //   position: absolute;
-       //   bottom: 2.5rem;
-         font-weight: 600;
-     }
 }
-.buttons {
+ .buttons {
     width: 100%;
     display: flex;
-    height: 13%;
-    
-    // border-top: solid 1px black;
+    height: 100%;
+    margin-bottom: -0.5rem;
+    background-color:#30475e;
+    border-bottom-left-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
     button{
         width: 50%;
-        background-color: transparent;
         border: none;
-        font-size: 1.2rem;
+        font-family:'Montserrat', sans-serif;
+        outline: none;
     }
-}
-.learn{
+} 
 
+.buy {
+  font-size: 140%;
+  font-weight: 400;
+  background-color: $red; 
+  color: #dddddd;
+  border-bottom-left-radius: 0.2rem;
+}
+
+.addCart{
+  background-color:#30475e; 
+  font-size: 180%;
+  color: #dddddd;
+  border-bottom-right-radius: 0.2rem;
     &:hover{
+            transition: 1s;
+            position: relative;
+            bottom: 0.5rem;
             cursor: pointer;
             color: $red;
         }
-}
+} 
