@@ -1,0 +1,20 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.UniContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2.2rem;
+    align-items: flex-start;
+    background-color: $white;
+    width: 191vh;
+}
+
+.UniEach {
+    
+    padding: 1.5rem;
+}
+
