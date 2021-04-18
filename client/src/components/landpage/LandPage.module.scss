@@ -6,6 +6,12 @@ $verdesito:#E0FFFF;
 $blanquito:#F0F0F0;
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 
+.BackLand{
+    background-image: url(../images/CubosGif.gif);
+    width: 100%;
+    background-position: center;
+}
+
 .TitleLand {
     background: 50% 100% / 50% 50% no-repeat
     radial-gradient(ellipse at bottom, black, black, black);
@@ -69,19 +75,19 @@ $blanquito:#F0F0F0;
 
 .TitleConcat {
     color: 		#FFE4E1;
-    font-size: 3vw;
+    font-size: 2vw;
     font-family: 'Montserrat', sans-serif;
     animation: reveal 3000ms ease-in-out forwards 200ms,
     glow 2500ms linear infinite 2000ms;
     border: solid;
-    border-color:	#FFE4E1;
+    border-color:#FFE4E1;
     border-radius: 10px;
     padding: 1rem;
 }
-
+/* 
 .WeWant {
     color:	#FFE4E1;
-    font-size: 2vw;
+    font-size: 1.5vw;
     font-family: 'Montserrat', sans-serif;
     animation: reveal 3000ms ease-in-out forwards 200ms,
     glow 2500ms linear infinite 2000ms;
@@ -89,17 +95,21 @@ $blanquito:#F0F0F0;
     border-color:		#FFE4E1;
     border-radius: 10px;
     padding: 1rem;
-}
+} */
 
 .LandPageInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: 		#FFE4E1;
-    font-size: 1.3vw;
+    color: #FFE4E1;
+    margin: 0;
+    padding-bottom: 2rem;
+    font-size: 1vw;
     font-family: 'Montserrat', sans-serif;
-    padding: 0rem;
+    p{
+        margin: 0.2rem;
+    }
 } 
 
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import search from './styleSearch.module.css'
-
+/* import search from './styleSearch.module.css'
+ */
 
 
 const ButtonSearch = (): JSX.Element => {
@@ -10,8 +10,8 @@ const ButtonSearch = (): JSX.Element => {
         <>
             <button
                 type='submit'
-                className={search.buttonSearch}
-            >
+/*                 className={search.buttonSearch}
+ */            >
                 <FontAwesomeIcon icon={faSearch} />
             </button>
         </>

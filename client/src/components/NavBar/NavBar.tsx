@@ -25,10 +25,16 @@ const NavBar = (): JSX.Element => {
       <div className={navBar.container}>
         <Link to='/' className={navBar.linksNav} > <h1 className={navBar.titleNav} >CH</h1> </Link>
         <SearchBar />
+<<<<<<< HEAD
         <Link  to="/Carrodecompras">
           <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
+=======
+        <Link className={navBar.linkCart} to="/Carrodecompras">
+>>>>>>> 4d7329fa034a18cb39c775d1b99df271399ba84d
           <p>{quantity}</p>
-          ${idsProducts}
+          <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
+          <p>Total: ${new Intl.NumberFormat().format(idsProducts)}</p>
+
         </Link>
         {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}>Productos</Link> : false}
         <div>
@@ -36,8 +42,8 @@ const NavBar = (): JSX.Element => {
           {false ? <Link to="/cuenta" className={navBar.linksNav}>Mi Cuenta</Link> : false}
         </div>
         <div>
-          <button className={navBar.linksNav} onClick={() => setShowadmin(!showadmin)} >✓</button>
-          {showadmin ? <Link className={navBar.linksNav} to='/Crear'><p>Crear</p></Link> : null}
+{/*           <button className={navBar.linksNav} onClick={() => setShowadmin(!showadmin)} >✓</button>
+          {showadmin ? */} <Link className={navBar.linksNav} to='/Crear'><p>Crear</p></Link>{/*  : null} */}
         </div>
       </div>
     </>

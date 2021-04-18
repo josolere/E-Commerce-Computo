@@ -37,7 +37,7 @@ const Review = ReviewFactory(sequelize);
 const Productsxorder = ProductsxorderFactory(sequelize);
 
 //los productos tienen muchas categorias y las categorias tienen muchos productos
-Product.belongsToMany(Category, { through: "productsxcategories" });
+Product.belongsToMany(Category, { through: "productsxcategories", as: 'categories'});
 Category.belongsToMany(Product, { through: "productsxcategories" });
 
 //los detalles tienen muchos productos y cada producto puede estar en muchos detalles

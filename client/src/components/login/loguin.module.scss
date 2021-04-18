@@ -4,10 +4,14 @@ $white: #fff;
 $gray: #9b9b9b;
 $verdesito: 	#E0FFFF;
 $blanquito: #F0F0F0;
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
 
 .back {
-    color:#202020;
-    background-color:	#43609C ;
+    color:$dark;
+    background-color:	$dark;
 }
 
 .organizar {
@@ -109,13 +113,13 @@ $blanquito: #F0F0F0;
       margin-top: 2rem;
       color:#161616;
       border-radius: 5px;
-      background-color:#1E90FF ;
+      background-color:$red ;
       font-weight: 800;
       border-color: transparent;
   }
   .boton:hover{
       color: white;
-      background: 	#1E90FF ;
+      background:$red ;
       box-shadow: 0 0 5px $secondary;
   }
 

@@ -48,7 +48,16 @@ export default {
       { id }: { id: number },
       { models }: { models: iModels }
     ): Promise<iProduct> => {
-      const options = {
+      let product = await models.Product.findByPk(id, {
+      include: [{ association: 'categories'},{ association: 'reviews' }]
+      }
+      )
+      console.log(product)
+      return product;
+    },
+
+    /* 
+    const options = {
           include: [{model: db.Category,
             through: "productsxcategories",
             attributes: ["id", "name"]}]
@@ -58,8 +67,8 @@ export default {
       product.Categories.map((category:any) => { 
         product.categories.push({id:category.id, name:category.name})
       })
-      return product;
-    },
+
+    */
 
     getProductByName: async (
       _parent: object,

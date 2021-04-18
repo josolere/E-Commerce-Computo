@@ -1,10 +1,17 @@
-$widthSearchbar: 20rem;
+$widthSearchbar: 10rem;
 $paddingSB: 1rem;
 $blue:#30475e;//dddddd
 $bluedark: #222831;//222831
 $ligthblue: #dddddd;//30475e
 $white:#f05454;//f05454
 
+/* .alineSearch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+ */
 .searchBar{
     position: relative;
     height: fit-content;
@@ -44,15 +51,16 @@ $white:#f05454;//f05454
     color: gray;
     display: flex;
     flex-direction: column;
-    width: $widthSearchbar;
-    align-items: center;
+/*     width: $widthSearchbar;
+ */    align-items: center;
     font-size: 0.8rem;
     background-color: whitesmoke;
     border-radius: 0.2rem;
     text-decoration: none;    
     position: absolute;
     top: 2rem;
-    z-index:100;
+    margin-left: 5rem;
+     z-index:100;
     padding:0rem$paddingSB;
     span{
         margin: 0rem;

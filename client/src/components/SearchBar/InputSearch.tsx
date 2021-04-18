@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import search from './styleSearch.module.css'
-
+/* import search from './styleSearch.module.css'
+ */
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
@@ -15,8 +15,8 @@ const InputSearch = ():JSX.Element => {
                     placeholder='Buscar...'
                     onChange={(e) => setSearchInput(e.target.value)}
                     value={searchInput}
-                    className={search.inputSearch}
-                />
+/*                     className={search.inputSearch}
+ */                />
             </form>
         </>
     )

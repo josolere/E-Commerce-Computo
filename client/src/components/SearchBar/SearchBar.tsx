@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import search from './styleSearch.module.css'
-import { useQuery, gql } from '@apollo/client'
+/* import search from './styleSearch.module.css'
+ */import { useQuery, gql } from '@apollo/client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from 'react-redux';
@@ -64,16 +64,16 @@ const InputSearch = (): JSX.Element => {
     }
 
     return (
-        <>
+        <div className={styles.alineSearch}>
             <form onSubmit={handleSubmit} className={styles.searchBar}>
                 <div className={styles.bar}>
                     <input type="text"
                         placeholder='Buscar...'
                         onChange={handleChange}
                         value={searchInput}
-                        className={search.inputSearch}
-                    />
-                    <button type="submit" className={search.buttonSearch}><FontAwesomeIcon icon={faSearch} /></button>
+/*                         className={search.inputSearch}
+ */                    />
+                    <button type="submit" /* className={search.buttonSearch} */><FontAwesomeIcon icon={faSearch} /></button>
                 </div>
                 {searchInput.length > 1 ? <div className={styles.linksearch} >
                     
@@ -84,7 +84,7 @@ const InputSearch = (): JSX.Element => {
                 </div>:
                             <span></span>}
             </form>
-        </>
+        </div>
     )
 }
 
