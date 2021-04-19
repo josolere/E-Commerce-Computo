@@ -1,8 +1,7 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
- import { NEW_PRODUCT } from "../../gql/products";
- import { GET_CATEGORIES } from "../../gql/categories";
-
+/* import { NEW_PRODUCT } from "../../gql/products";
+ */import { GET_CATEGORIES } from "../../gql/categories";
 import styles from './CreateProduct.module.scss';
 import { Link } from 'react-router-dom'
 
@@ -41,7 +40,27 @@ interface IState {
     categories: number[]
 }
 
-
+const NEW_PRODUCT = gql`
+mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categories:[Int!]) {
+    createProduct ( input: {
+        name:$name,
+        price:$price, 
+        brand:$brand, 
+        image:$image, 
+        details:$details
+        categories:$categories
+      })
+        {
+            id
+            name
+          	categories{
+                id
+                name
+              }
+          
+        }
+    }
+`;
 
 export default function CreateProduct() {
     const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })

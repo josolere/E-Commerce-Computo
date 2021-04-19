@@ -13,7 +13,7 @@ mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: St
         {
             id
             name
-          	categories{
+              categories{
                 id
                 name
               }
