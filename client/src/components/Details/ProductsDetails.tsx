@@ -25,6 +25,7 @@ interface DetailsProduct {
         price: number
         details: string
         categories: any[]
+        reviews:any[]
     }
 }
 
@@ -70,6 +71,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     if (results) {
         resultsData.push(results?.data?.addReview?.text)
+        console.log(results)
     }
 
     let [rating, setRating] = useState<Array<any>>([])
@@ -105,10 +107,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
-    const changereview = async () => {
-        await addreview({ variables: { rating: totalrating, text: reviewuser.review, product: filtred?.id } })
+    const changereview = async() => {
+        await addreview({ variables: {id:filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
             .then(review => { console.log('review up') })
-            .catch((err) => { console.log('review mal') })
+            .catch((err) => { console.log(results) })
         setHidereviews(false)
     }
     
@@ -254,9 +256,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     :
                     <div className={styles.gracias} >
                         <h4>Gracias por dejar su review</h4>
-                        <div>{resultsData && resultsData.map((item) => (
-                            <p>{item}</p>
-                        ))}</div>
                     </div>
                 }
                 </div>
@@ -291,7 +290,13 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         </div>
                     }
                 </div>
-            </div>//
+            </div>
+                <div className={styles.reviews}>
+                {results.called ? resultsData.map((item) => (
+                            <div>{item}</div>
+                        )): false}
+                    {filtred?.reviews.map(review => <div>{review.text}{review.rating}</div>)}
+                </div>
         </div>
     )
 }

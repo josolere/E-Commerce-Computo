@@ -116,7 +116,7 @@ export default function Card({ name, image, price, id, count }: props) {
 
     return(
         <div className={styles.card}>
-               <div >{name}</div>
+               <div className={styles.name}>{name}</div>
             <Link className={styles.link} style={{ textDecoration: 'none' }} to={{
                 pathname: '/Detalles',
                 state: {
