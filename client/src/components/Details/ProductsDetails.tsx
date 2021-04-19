@@ -172,11 +172,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
     const handleAddCategories = (e: React.FormEvent<HTMLSelectElement>) => {
         details?.categories &&
-            setDetails({
-                ...details,
-                categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories :
-                    [...details?.categories, { name: e.currentTarget.selectedOptions[0].innerHTML, id: e.currentTarget.value }]
-            })
+        setDetails({
+            ...details,
+            categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories:
+            [...details?.categories , {name:e.currentTarget.selectedOptions[0].innerHTML, id:e.currentTarget.value}]
+        })
     }
 
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
