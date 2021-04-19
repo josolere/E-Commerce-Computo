@@ -63,6 +63,7 @@ export default {
       product.categories.push({id:category.id, name:category.name})
     })
       console.log(product)
+      product.reviews= await product.getReviews()
       return product;
     },
 

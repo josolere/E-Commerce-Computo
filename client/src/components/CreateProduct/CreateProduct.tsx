@@ -1,49 +1,9 @@
-import {gql, useMutation, useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react'
-import { NEW_PRODUCT } from "../../gql/products"
-import { GET_CATEGORIES } from "../../gql/categories"
-import styles from './CreateProduct.module.scss' 
-import { Link } from 'react-router-dom';
-
-
-interface productInventary {
-    id: number | null
-    name: string
-    price: number
-    brand: string
-    image: string
-    details: string
-}
-
-/* interface newProductDetails{
-    name:string
-    price:number
-    brand:string
-    image:string
-    details:string
-} */
-// mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
-//     createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
-//         id
-//         name
-//         price
-//         brand
-//         image
-//         details
-//     }
-// }
-
-/* const NEW_PRODUCT = gql`
-    mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
-        createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
-            id
-            name 
-            price
-            brand
-            image
-            details
-    }
-`; */
+import { gql, useMutation, useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+/* import { NEW_PRODUCT } from "../../gql/products";
+ */import { GET_CATEGORIES } from "../../gql/categories";
+import styles from './CreateProduct.module.scss';
+import { Link } from 'react-router-dom'
 
 interface Categorie {
     id: number,
@@ -54,12 +14,22 @@ interface Categories {
     getCategory: Categorie[]
 }
 
+interface productInventary {
+    name: string,
+    price: number,
+    brand: string,
+    image: string,
+    details: string,
+    id: number | null
+}
 
 
 type FormEvent = React.FormEvent<HTMLFormElement>;
 type InputEvent = React.FormEvent<HTMLInputElement>;
 type SelectEvent = React.FormEvent<HTMLSelectElement>;
 type ButtonEvent = React.FormEvent<HTMLButtonElement>
+
+
 
 interface IState {
     name: string
@@ -70,16 +40,34 @@ interface IState {
     categories: number[]
 }
 
+const NEW_PRODUCT = gql`
+mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categories:[Int!]) {
+    createProduct ( input: {
+        name:$name,
+        price:$price, 
+        brand:$brand, 
+        image:$image, 
+        details:$details
+        categories:$categories
+      })
+        {
+            id
+            name
+          	categories{
+                id
+                name
+              }
+          
+        }
+    }
+`;
+
 export default function CreateProduct() {
     const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })
-    // const [categoriesId, setCategoriesId] = useState<Array<number>>([])
-    /*     const [createNewProduct, { error, data }] = useMutation<
-        {createNewProduct: productInventary},
-        {product:newProductDetails}
-        >(NEW_PRODUCT,{variables:{product:state}}) */
+
     const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
     const categories = data?.getCategory
- 
+
 
     const [createProduct, results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
@@ -116,7 +104,7 @@ export default function CreateProduct() {
     }
 
     const [categors, setCategors] = useState<Array<any>>([])
-    //estas dos trabajan juntas
+
     const handleCategories = (e: SelectEvent) => {
         e.preventDefault()
         setCategors([...categors, {
@@ -138,13 +126,8 @@ export default function CreateProduct() {
         })
     }
 
-    // const fileInput = createRef()
-
-
     return (
         <div className={styles.container}>
-            {/* {error ? alert(`Oh no! ${error.message}`) : null}
-        {data && data.createNewProduct ? alert(`Saved!`) : null}  */}
             <form onSubmit={handleSubmit} className={styles.form} >
                 <h1>Crear Producto</h1>
                 <hr />
@@ -167,16 +150,17 @@ export default function CreateProduct() {
                 <input type='submit' value='Crear' className={styles.button} />
             </form>
             <div className={styles.separateList}>
-                <div className={styles.listProducts}>
-                    <h4 className={styles.TitleList} >Productos creados</h4>
+                <div className={styles.listProducts} >
+                    <label className={styles.TitleList} >Productos creados</label>
                     <hr className={styles.hrList} />
                     <Link style={{ textDecoration: 'none' }} to={{
                         pathname: '/Detalles',
                         state: {
-                            id: listProducts?.id,
+                            id: listProducts.id,
+                            newprice: 0
                         }
                     }}>
-                        <p className={styles.pList} >{listProducts && listProducts?.name}</p>
+                        <p className={styles.pList} >{listProducts.name}</p>
                     </Link>
                 </div>
             </div>
