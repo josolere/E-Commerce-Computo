@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
 import Login from './components/login/Login'
+import { useEffect } from "react"
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Details from './components/Details/ProductsDetails'
 import LandPage from './components/landpage/LandPage'
@@ -49,9 +49,8 @@ function App() {
         <Route exact path='/Ordenes' component={Orders} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>
-            <NavCategories />
-            <Cards />
-          </div>
+          <NavCategories/>
+          </div> 
         </Route>
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/' component={LandPage} />

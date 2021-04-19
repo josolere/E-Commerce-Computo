@@ -15,8 +15,9 @@ export const setFilter = (filter: string) => ({
     type: SET_FILTER, filter
 });
 
-export const setCategory = (categories: number[]) => ({
-    type: SET_CATEGORIES, categories
+export const setCategory = (categories:number[])  => (
+    {
+    type: SET_CATEGORIES , categories
 });
 
 export const passid = (idpass:number) => ({

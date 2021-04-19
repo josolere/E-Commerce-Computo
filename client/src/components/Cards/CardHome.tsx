@@ -14,10 +14,9 @@ interface props {
     image: string
     price: number
     count: number
-    details: string
 }
 
-export default function Card({ name, image, price, id, count, details }: props) {
+export default function Card({ name, image, price, id, count }: props) {
     const dispatch = useDispatch()
     const { quantity, priceSubTotal, productTotal, addCart, addHome,idDetails,priceDetails,countDetails }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
@@ -49,7 +48,6 @@ export default function Card({ name, image, price, id, count, details }: props) 
             count: count,
             image: image,
             name: name,
-            details: details
         }
 
         if (localStorage.getItem('productsLocal')) {
@@ -86,52 +84,52 @@ export default function Card({ name, image, price, id, count, details }: props) 
         }
 
 
-    const nameoftheday = (fecha: any) => [
-        'Domingo',
-        'Lunes',
-        'Martes',
-        'Miércoles',
-        'Jueves',
-        'Viernes',
-        'Sabado',
-    ][new Date(fecha).getDay()];
+    // const nameoftheday = (fecha: any) => [
+    //     'Domingo',
+    //     'Lunes',
+    //     'Martes',
+    //     'Miércoles',
+    //     'Jueves',
+    //     'Viernes',
+    //     'Sabado',
+    // ][new Date(fecha).getDay()];
 
-    const current = new Date();
+    // const current = new Date();
 
-    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+    // const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 
-    let dayoftheweek = (nameoftheday(current))
+    // let dayoftheweek = (nameoftheday(current))
 
-    let discountoftheweek: Array<any> = ['10%', '20%', '25%', '20%', '35%', '20%', '15%'];
+    // let discountoftheweek: Array<any> = ['10%', '20%', '25%', '20%', '35%', '20%', '15%'];
 
-    let discount: string = '0%';
+    // let discount: string = '0%';
 
-    if (dayoftheweek === 'Lunes') {
-        discount = discountoftheweek[0]
-    }
-    else if (dayoftheweek === 'Martes') {
-        discount = discountoftheweek[1]
-    }
-    else if (dayoftheweek === 'Miercoles') {
-        discount = discountoftheweek[2]
-    }
-    else if (dayoftheweek === 'Jueves') {
-        discount = discountoftheweek[3]
-    }
-    else if (dayoftheweek === 'Viernes') {
-        discount = discountoftheweek[4]
-    }
-    else if (dayoftheweek === 'Sabado') {
-        discount = discountoftheweek[5]
-    }
-    else if (dayoftheweek === 'Domingo') {
-        discount = discountoftheweek[6]
-    }
-    let discountoapply = parseInt(discount)
+    // if (dayoftheweek === 'Lunes') {
+    //     discount = discountoftheweek[0]
+    // }
+    // else if (dayoftheweek === 'Martes') {
+    //     discount = discountoftheweek[1]
+    // }
+    // else if (dayoftheweek === 'Miercoles') {
+    //     discount = discountoftheweek[2]
+    // }
+    // else if (dayoftheweek === 'Jueves') {
+    //     discount = discountoftheweek[3]
+    // }
+    // else if (dayoftheweek === 'Viernes') {
+    //     discount = discountoftheweek[4]
+    // }
+    // else if (dayoftheweek === 'Sabado') {
+    //     discount = discountoftheweek[5]
+    // }
+    // else if (dayoftheweek === 'Domingo') {
+    //     discount = discountoftheweek[6]
+    // }
+    // let discountoapply = parseInt(discount)
 
-    let newprice: any
-    newprice = price - (price * discountoapply / 100)
-    newprice = parseInt(newprice)
+    // let newprice: any
+    // newprice = price - (price * discountoapply / 100)
+    // newprice = parseInt(newprice) */
 
     return (
         <div className={styles.card}>
@@ -142,10 +140,9 @@ export default function Card({ name, image, price, id, count, details }: props) 
                     pathname: '/Detalles',
                     state: {
                         id: id,
-                        newprice: newprice
+                        newprice: 0
                     }
                 }}>
-                <p >{name}</p>
                 <img style={{ width: '100%', height: 'auto' }} src={image} />
             </Link>
 

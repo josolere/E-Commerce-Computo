@@ -1,12 +1,15 @@
 .containerOrden{
     width: 70%;
+   background-color:  #f05454;
     height: 40%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    color: white;
+    color: #dddd;
+    border-radius: 0.2rem;
     margin: 1.8rem;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+     font-family:'Montserrat', sans-serif;
 }
 
 .containerTitle{
@@ -29,6 +32,7 @@
 .containerTotal{
     display: flex;
     justify-content: space-around;
+    background-color: #30475e;
     h2{
         width: 180px;
         display: flex;
@@ -42,14 +46,15 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    font-family:'Montserrat', sans-serif;
 }
 
 .buttonFinal{
     width: 12.5rem;
     height: 2.5rem;
     margin-right: 15.5rem;
-    border-radius: 20px;
-    background-color: rgb(177, 10, 10);
+    border-radius: 0.2rem;
+    background-color:#f05454;
     color: white;
     font-size: 18px;
     font-weight: 700;

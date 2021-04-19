@@ -11,7 +11,7 @@ const UniCreate = () => {
                 <div className={styles.UniEach}>
                     <CCategory />
                 </div>
-                <div className={styles.UniEach} >
+                <div className={styles.UniEach2} >
                     <CProduct />
                 </div>
             </div>

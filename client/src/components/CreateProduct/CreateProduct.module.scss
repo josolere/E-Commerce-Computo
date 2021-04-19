@@ -5,10 +5,12 @@ $red:#f05454;//f05454
 
 .container{
     display: flex;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    background-color:$grey ;
     border-radius: 0.5rem;
+    align-items: flex-start;
+
 }
 
 .form{
@@ -24,15 +26,14 @@ $red:#f05454;//f05454
     background-color:$grey;
     border-radius: 0.5rem;
 
-
     h1{
         color: whitesmoke;
         margin-bottom: 1rem;
     }
     hr{
         margin:0;
-        color:$red ;
-        border:solid 3px $red;
+        color:#f05454;//f05454;
+        border:solid 3px #f05454;//f05454;
         width: 6rem;
         border-radius: 1rem;
     }
@@ -46,7 +47,6 @@ $red:#f05454;//f05454
     }
 }
 
-
 .button{
     background-color: $red;
     border: none;
@@ -58,4 +58,44 @@ $red:#f05454;//f05454
         cursor: pointer;
         border-radius: 1rem;
     }
+}
+
+.separateList {
+    padding-right: 1rem;
+
+}
+
+.listProducts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1.4rem;
+    height: fit-content;
+    width: fit-content;
+    border: solid 1px gray;
+    background-color:$grey;
+    border-radius: 0.5rem;
+}
+.TitleList {
+    font-size: 1.3rem;
+    font-family: 'Montserrat', sans-serif;
+    color: whitesmoke;
+    margin-bottom: 0.2rem;
+}
+
+.hrList {
+    margin:1rem 0rem;
+    color:#f05454;//f05454;
+    border:solid 3px #f05454;//f05454;
+    width: 4rem;
+    border-radius: 1rem;
+}
+
+.pList {
+    margin: 0.3rem;
+    justify-content:space-around;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    color: whitesmoke;
 }

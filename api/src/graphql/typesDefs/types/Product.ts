@@ -1,7 +1,6 @@
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
-
   # object querys mutations RECORDAR USAR MAYÚSCULAS
   type Product {
     id: Int
@@ -10,7 +9,8 @@ export const typeDefs = gql`
     brand: String
     price: Float
     details: String
-    categories: [Category]
+    categories: [Category!]
+    reviews: [Review]
     createdAt: String
     updatedAt: String
   }
@@ -43,12 +43,13 @@ export const typeDefs = gql`
     brand: String
     price: Float
     details: String
+    categories: [ID!]
   }
 
   input FilterProducts {
     name: String = ""
     offset: Int = 0
-    limit: Int = 20
+    limit: Int = 100
     categoriesId: [ID]
   }
 `;

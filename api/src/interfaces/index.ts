@@ -8,7 +8,16 @@ export interface iUser extends User {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface iUserFacebook{
+  clientID: string;
+  clientSecret: string;
+  callbackURL: string;
+  profileFields: string[];
+}
+
 export interface iCreateUserInput extends User {}
+export interface iSignUpInput extends User {}
 export interface iEditUserInput extends User {}
 
 //Product

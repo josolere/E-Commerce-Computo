@@ -20,31 +20,33 @@ import {
 import { Product } from "./Product";
 
 export interface UserAttributesI {
-  id: number;
-  username: string;
-  password: string;
-  email: string;
-  privilege: string;
-  active: boolean;
-  name: string;
-  surname: string;
-  address: string; //puede ser otra tabla
+  id?: string;
+  username?: string | null;
+  password?: string | null;
+  email?: string;
+  privilege?: string;
+  active?: boolean;
+  name?: string;
+  surname?: string;
+  address?: string | null; //puede ser otra tabla
+  facebookId?: string | null;
 }
 
-interface UserCreationAttributesI extends Optional<UserAttributesI, "id"> {}
+interface UserCreationAttributesI extends Optional<UserAttributesI, "id" | "address" | "username" | "password" | "facebookId"> {}
 
 export class User
   extends Model<UserAttributesI, UserCreationAttributesI>
   implements UserAttributesI {
-  public id!: number;
-  public username!: string;
-  public password!: string;
+  public id!: string;
+  public username!: string | null;
+  public password!: string | null;
   public email!: string;
-  public privilege!: string;
+   public privilege!: string;
   public active!: boolean;
   public name!: string;
   public surname!: string;
-  public address!: string;
+  public address!: string | null;
+  public facebookId!:string | null;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -72,18 +74,22 @@ export function UserFactory(sequelize: Sequelize) {
   User.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.STRING,
+        allowNull:false,
         primaryKey: true,
+      },
+      facebookId:{
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       username: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
 
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -107,7 +113,7 @@ export function UserFactory(sequelize: Sequelize) {
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
