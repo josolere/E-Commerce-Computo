@@ -13,12 +13,14 @@ $red:#f05454;//f05454
     width: 30rem;
     min-width: 1rem;
     font-family:'Montserrat', sans-serif;
+    
     p{
         display: flex;
         justify-content: start;
         align-items: flex-start;
         margin: 0.2rem;
     }
+
     textarea{
         resize: none;
         width: 100%;
@@ -44,6 +46,9 @@ $red:#f05454;//f05454
 .cats{
     display:flex;
     flex-wrap: wrap;
+    p{
+        margin-left:1rem;
+    }
 }
 
 .category{
@@ -55,6 +60,7 @@ $red:#f05454;//f05454
     font-family:'Montserrat', sans-serif;
     font-size: 1rem;
     outline: none;
+    
     &:hover{
         color: $red;
         cursor: pointer;
