@@ -89,11 +89,11 @@ export default function CreateProduct() {
 
     const [newpro, setnewpr] = useState<any>([])
 
-
+    let LunesMañana = []
 
     useEffect(() => { 
         setProd(products?.data?.getProducts)
-     }, [results])
+     }, [products])
 
 
     function handleChange(e: InputEvent) {

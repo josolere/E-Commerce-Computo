@@ -18,53 +18,6 @@ interface props {
 
 export default function Card({ name, image, price, id, count }: props) {
 
-    const nameoftheday = (fecha: any) => [
-        'Domingo',
-        'Lunes',
-        'Martes',
-        'Miércoles',
-        'Jueves',
-        'Viernes',
-        'Sabado',
-    ][new Date(fecha).getDay()];
-
-    const current = new Date();
-
-    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
-
-    let dayoftheweek = (nameoftheday(current))
-
-    let discountoftheweek: Array<number> = [10, 20, 25, 20, 35, 20, 15];
-
-    let discount: number = 0;
-
-    if (dayoftheweek === 'Lunes') {
-        discount = discountoftheweek[0]
-    }
-    else if (dayoftheweek === 'Martes') {
-        discount = discountoftheweek[1]
-    }
-    else if (dayoftheweek === 'Miercoles') {
-        discount = discountoftheweek[2]
-    }
-    else if (dayoftheweek === 'Jueves') {
-        discount = discountoftheweek[3]
-    }
-    else if (dayoftheweek === 'Viernes') {
-        discount = discountoftheweek[4]
-    }
-    else if (dayoftheweek === 'Sabado') {
-        discount = discountoftheweek[5]
-    }
-    else if (dayoftheweek === 'Domingo') {
-        discount = discountoftheweek[6]
-    }
-
-    let newprice: any
-    newprice = price - (price * discount / 100)
-    newprice = parseInt(newprice)
-
-
     const dispatch = useDispatch()
     const { quantity, priceSubTotal, productTotal, addCart, addHome,idDetails,priceDetails,countDetails }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
@@ -173,7 +126,7 @@ export default function Card({ name, image, price, id, count }: props) {
 
     return (
         <div className={styles.card}>
-
+            <div className={styles.name}>{name}</div>
             <Link
                 onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{

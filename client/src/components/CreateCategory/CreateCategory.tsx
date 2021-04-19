@@ -50,7 +50,9 @@ export default function CreateProduct() {
 
     useEffect(() => {
         setCat(categories)
-    },[results])
+/*         setListCategory([...listCategory, newCategory])
+ */
+    },[categories])
 
     function handleChange(e: InputEvent) {
         return setCategorie(e.currentTarget.value)
