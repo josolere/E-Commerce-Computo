@@ -104,6 +104,26 @@ $red:#f05454;//f05454
     }
 }
 
+.buttonCompra{
+    
+        padding: 1rem;
+        background-color: transparent;
+        border: none;
+        color: whitesmoke;
+        outline: none;
+        svg{
+            font-size: 1.2rem;
+        }
+        &:hover{
+            cursor: pointer;
+            background-color: $dark;
+            color: $red;
+            padding: 1.5rem;
+            transition: 1s;
+        }
+    }
+
+
 .Edit{
     position: absolute;
     top: 1rem;

@@ -94,6 +94,7 @@ return(
     />)}
 </div>
 )}
+
 {/* <div className={styles.container}>
     <ReactPaginate
         previousLabel={"«"}
