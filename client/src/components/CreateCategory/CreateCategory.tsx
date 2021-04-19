@@ -30,13 +30,15 @@ type InputEvent = React.FormEvent<HTMLInputElement>
 
 export default function CreateProduct() {
 
-    const results  = useQuery<Categories>(GET_CATEGORIES)
+    const results = useQuery<Categories>(GET_CATEGORIES)
 
     const categories = results?.data?.getCategory
 
     const [cat, setCat] = useState<any>()
 
     const [categorie, setCategorie] = useState("")
+
+    const [showCreate, setShowCreate] = useState(false)
     /*     const [createNewCategory, { error, data }] = useMutation<
         {createNewProduct: categoryInventary},
         {category:newCategoryDetails}
@@ -50,9 +52,9 @@ export default function CreateProduct() {
 
     useEffect(() => {
         setCat(categories)
-/*         setListCategory([...listCategory, newCategory])
- */
-    },[categories])
+        /*         setListCategory([...listCategory, newCategory])
+         */
+    }, [categories])
 
     function handleChange(e: InputEvent) {
         return setCategorie(e.currentTarget.value)
@@ -87,11 +89,11 @@ export default function CreateProduct() {
                 <div className={styles.listProducts}>
                     <h4 className={styles.TitleList} >Categorias creadas</h4>
                     <hr className={styles.hrList} />
-                    {cat && cat.map((item:any, index:number) => (
+                    {cat && cat.map((item: any, index: number) => (
                         <p className={styles.pList}>{item?.id}: {item?.name}</p>
                     ))}
-                    {listCategory && listCategory.map((item:any, index:number) => (
-                        <p className={styles.pList} >{item?.id }: {item.name}</p>
+                    {listCategory && listCategory.map((item: any, index: number) => (
+                        <p className={styles.pList} >{item?.id}: {item.name}</p>
                     ))}
                 </div>
             </div>

@@ -104,7 +104,57 @@ let products = [
         details: 'WD Purple están fabricados para los sistemas de seguridad de alta definición siempre en funcionamiento que operan las 24 horas. El sistema de almacenamiento para videovigilancia WD Purple también incorpora la exclusiva tecnología AllFrame de WD, para que pueda crear un sistema de seguridad fiable y adaptado a las necesidades de la empresa. Tecnología AllFrame mejora las transmisiones ATA para reducir los errores, el pixelado y las interrupciones del vídeo, además de su duración extra.',
         price:18034,
         categoriesId:3
+    },
+    {
+        name: 'Mouse Gamer Redragon Nemeanlion 2 7200DPI',
+        image:'https://tjgaming.com.br/wp-content/uploads/2019/09/0ddd5dad7408c7e4baf1385b0e0890a4.png',
+        details:'Redragon M602 - 1 .Raton para juegos con cable RGB (retroiluminado, ergonomico, programable, con 7 modos de retroiluminacion de hasta 7200 PPP), RGB',
+        price:6999,
+        categoriesId: 5
+    },
+    {
+        name: 'Monitor Acer Predator Xb241h 144hz 24',
+        image: 'https://media.aws.alkosto.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/4/7/4713392518904_6.png',
+        details: 'Monitor plano 24 pulgadas ACER, su innovador diseño con visuales en 3D te transporta de lo digital a la realidad.|Viene con tarjeta gráfica y sistema G-Sync integrado, creando una experiencia de juego fluida. Además, se actualiza rápido y elimina por completo las interferencias de la pantalla',
+        price: 85999,
+        categoriesId: 6
+    },
+    {
+        name: 'Tableta gráfica Wacom One black y white',
+        image: 'https://cdn-reichelt.de/bilder/web/xxl_ws/E500/WACOM_CTL-6100WLK-N_02.png',
+        details: 'Con los 4096 niveles de presión vas a lograr trazos muy fieles con solo variar la intensidad del lápiz sobre la tableta. Dejá volar tu imaginación y disfrutá de una experiencia creativa inigualable.',
+        price: 82199,
+        categoriesId: 7
+    },
+    {
+        name: 'Camara Web Cam Genius 1000x V2 Hd 720p Usb Microfono Zoom 3x',
+        image:'http://xtcomputacion.com/images/detailed/2/FaceCam_1000_product_left_HiRes_sm_clipped_rev_1.png',
+        details:'Conexión en 720p HD en aplicaciones de mensajería, la cámara proporciona una experiencia de chat mucho más clara.',
+        price: 2995,
+        categoriesId: 7
+    },
+    {
+        name:'Mousepad Medium Rgb Steelseries Qck Gaming Surface',
+        image:'https://cdn.idntimes.com/content-images/community/2017/10/stel-e8111faa795a43916354266643ffeaf4.png',
+        details:'El software SteelSeries Engine desbloquea un impresionante arsenal de aplicaciones de motor que hacen que la personalización sea fácil e intuitiva.',
+        price:16969,
+        categoriesId:5
+    },
+    {
+        name:'Monitor curvo MSI Optix G27C led 27 " negro 100V/240V',
+        image:'https://asset.msi.com/global/picture/images/monitor/Gaming_monitor.png',
+        details: 'Disfrutá de todas las cualidades que el monitor MSI G27C tiene para ofrecerte. Percibí las imágenes de una manera completamente diferente y complementá cualquier espacio ya sea en tu casa u oficina.',
+        price: 58900,
+        categoriesId: 6
+    },
+    {
+        name: 'Memoria RAM Vengeance LPX 16GB 2x8GB Corsair',
+        image:'https://www.arjansac.com/image/cache/catalog/CORSAIR/Memorias%20RAM/Memoria%20RAM%20DDR4%202666Mhz%20PC4-21300/COR%2016GB%202666MHZ%20VENG%20DDR4/COR%2016GB%202666MHZ%20VENG%20DDR42-1000x1000.png',
+        details:'Su capacidad de 16 GB distribuida en módulos de 2 x 8 GB hace de esta memoria un soporte ideal para trabajos con aplicaciones de diseño o edición, juegos exigentes, contenidos multimedia, entre otros. A su vez, la distribución de la capacidad total en dos módulos iguales te permitirá maximizar tus posibilidades de uso.',
+        price: 13490,
+        categoriesId:2
     }
+
 
 
 ]

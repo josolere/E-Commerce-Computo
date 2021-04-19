@@ -77,11 +77,11 @@ const InputSearch = (): JSX.Element => {
                 </div>
                 {searchInput.length > 1 ? <div className={styles.linksearch} >
 
-                    {auto.slice(0, 5).map(search => <span onClick={e => {
+                    {auto.slice(0, 5).map(search => <span  onClick={e => {
                         dispatch(setFilter(search))
                         setAuto([])
                     }}>
-                        <Link to='/Home'>
+                        <Link to='/Home'className={styles.listsearchbar}>
                             {search}
                         </Link>
                     </span>)}

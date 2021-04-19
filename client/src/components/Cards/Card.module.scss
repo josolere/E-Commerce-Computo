@@ -23,6 +23,9 @@ $red:#f05454;//f05454
 
     a {
       height: 70%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     div {
@@ -47,9 +50,7 @@ $red:#f05454;//f05454
 .link{
   div {
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  
   }
     img{
         max-width: 100%;

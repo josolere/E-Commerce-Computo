@@ -110,22 +110,28 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
-    const changereview = async () => {
-        await addreview({ variables: { rating: totalrating, text: reviewuser.review, product: filtred?.id } })
+    const changereview =  () => {
+        addreview({ variables: {id:filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
             .then(review => { console.log('review up') })
             .catch((err) => { console.log(results) })
         setHidereviews(false)
     }
+    
+    
+    const[details,setDetails] = useState({id:"", name:"",price:0,brand:"",image:"",details:"", categories:[{id:"1",name:"default"}]})
+    
+    useEffect(()=>{
+        console.log(results.data)
+        // setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
+    },[results])
 
+    useEffect(()=>{
+        console.log(results.data)
+        setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
+    },[filtred])
 
-    const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
-
-    useEffect(() => {
-        setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
-    }, [filtred])
-
-    const [editMode, setEditMode] = useState(false)
-
+    const[editMode,setEditMode] = useState(false)
+    
     console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -188,13 +194,14 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
     const categoriesQuery = categoriesQ.data?.getCategory
 
-    console.log(newprice)
 
     const handleAddProduct = () => {
         const state = true
         dispatch(addProductDetails(state));
-
     }
+
+    
+
     return (
         <div className={styles.contenedorAll}>
             <div className={styles.contenedorDetail}>
@@ -303,12 +310,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     }
                 </div>
             </div>
-            <div className={styles.reviews}>
-                {results.called ? resultsData.map((item) => (
-                    <div>{item}</div>
-                )) : false}
-                {filtred?.reviews.map(review => <div>{review.text}{review.rating}</div>)}
-            </div>
+                <div className={styles.reviews}>
+                {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
+                        : false}
+                    {filtred?.reviews.map(review => <div><div>{review.text}</div><div>{review.rating}</div></div>)}
+                </div>
         </div>
     )
 }

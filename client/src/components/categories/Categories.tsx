@@ -20,12 +20,14 @@ const NavCategories = (): JSX.Element => {
   const { loading, error, data } = useQuery<DetailsData>(GET_CATEGORIES)
 
   const categories = data?.getCategory
+
+  const reset = 0
+  const dispatch = useDispatch()
   
   const filterCategories = (e:any) => {
     dispatch(setCategory([e.target.value]))
 }
-  const reset = 0
-  const dispatch = useDispatch()
+  
 
   return (
     <>

@@ -24,7 +24,7 @@ $white:#f05454;//f05454
     background-color: $ligthblue;
     border-radius: 0.3rem;
     padding:0.5rem $paddingSB;
-    width: $widthSearchbar;
+    width: fit-content;
     margin-left: 5rem;
     input{
         color: $blue;
@@ -63,6 +63,7 @@ $white:#f05454;//f05454
      z-index:100;
     padding:0rem$paddingSB;
     span{
+        text-decoration: none;
         margin: 0rem;
         padding: 0.5rem 0rem;
         border-radius: 0.2rem;
@@ -78,4 +79,14 @@ $white:#f05454;//f05454
 }
 .linksearch:link, .linksearch:visited, .linksearch:active {
     text-decoration:none;
+}
+
+.listsearchbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #222831;;
+    cursor: pointer;
+    margin: 0rem;
 }
