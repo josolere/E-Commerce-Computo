@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
-import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
+import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES} from "../../gql/productDetails"
 import styles from "./ProductDetail.module.scss"
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,8 +12,8 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
 
 interface Icategories {
-    id: number
-    name: string
+    id?:number
+    name?:string
 }
 
 interface DetailsProduct {
@@ -111,10 +111,16 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             .catch((err) => { console.log('review mal') })
         setHidereviews(false)
     }
+    
+    
+    const[details,setDetails] = useState({id:"", name:"",price:0,brand:"",image:"",details:"", categories:[{id:"1",name:"default"}]})
+    
+    useEffect(()=>{
+        setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
+    },[filtred])
 
-    const [details, setDetails] = useState({ id: filtred?.id.toString(), name: filtred?.name, price: filtred?.price, brand: filtred?.brand, image: filtred?.image, details: filtred?.details, categories: filtred?.categories })
-    const [editMode, setEditMode] = useState(false)
-
+    const[editMode,setEditMode] = useState(false)
+    
     console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -162,16 +168,16 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         e.preventDefault()
         setDetails({
             ...details,
-            categories: details?.categories?.filter(cat => cat.id != +e.currentTarget.value)
+            categories: details?.categories?.filter( cat => cat.id != e.currentTarget.value)
         })
     }
     const handleAddCategories = (e: React.FormEvent<HTMLSelectElement>) => {
         details?.categories &&
-            setDetails({
-                ...details,
-                categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories :
-                    [...details?.categories, { name: e.currentTarget.selectedOptions[0].innerHTML, id: parseInt(e.currentTarget.value) }]
-            })
+        setDetails({
+            ...details,
+            categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories:
+            [...details?.categories , {name:e.currentTarget.selectedOptions[0].innerHTML, id:e.currentTarget.value}]
+        })
     }
 
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
