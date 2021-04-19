@@ -85,18 +85,17 @@ export default function CreateProduct() {
 
     const products = useQuery<DetailsData>(GET, { variables: { name: '', categoriesId: [] } })
 
-    const [p, setP] = useState<any>()
+    const [prod, setProd] = useState<any>()
 
-    const [ta, setT] = useState<any>([])
+    const [newpro, setnewpr] = useState<any>([])
+
+
 
     useEffect(() => { 
-        setP(products?.data?.getProducts)
+        setProd(products?.data?.getProducts)
      }, [results])
 
 
-
-
- 
     function handleChange(e: InputEvent) {
         return setState({
             ...state,
@@ -116,7 +115,7 @@ export default function CreateProduct() {
         createProduct({ variables: state })
             .then((resolve) => { console.log(data) })
             .catch((err) => { console.log('Salio Mal') })
-            setT([...ta, results?.data?.createProduct])
+            setnewpr([...newpro, results?.data?.createProduct])
 
    }
 
@@ -171,24 +170,24 @@ export default function CreateProduct() {
                 <div className={styles.listProducts} >
                     <label className={styles.TitleList} >Productos creados</label>
                     <hr className={styles.hrList} />
-                    {p && p.map((item: any, index: number) => (
+                    {prod && prod.map((item: any, index: number) => (
                         <Link style={{ textDecoration: 'none' }} to={{
                             pathname: '/Detalles',
                             state: {
                                 id: item.id
                             }
                         }}>
-                            <p className={styles.pList}>{item.id}: {item.name}</p>
+                            <p className={styles.pList}>{item?.id}: {item.name}</p>
                         </Link>
                     ))}
-                    {ta && ta.map((item: any) => (  
+                    {newpro && newpro.map((item: any) => (  
                         <Link style={{ textDecoration: 'none' }} to={{
                             pathname: '/Detalles',
                             state: {
                                 id: item?.id
                             }
                         }}>
-                            <p className={styles.pList}>{item.id} {item?.name}</p>
+                            <p className={styles.pList}>{item?.id} {item?.name}</p>
                         </Link>
                         ))}
 

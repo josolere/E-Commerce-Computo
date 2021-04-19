@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './CreateCategory.module.scss'
 import { NEW_CATEGORY } from "../../gql/categories"
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { GET_CATEGORIES } from "../../gql/categories";
+
 
 /* interface categoryInventary {
     input: {
@@ -14,11 +16,25 @@ import { gql, useMutation } from '@apollo/client';
     name: string
 } */
 
+interface Categorie {
+    id: number | undefined,
+    name: string | undefined,
+}
+
+interface Categories {
+    getCategory: Categorie[]
+}
 
 type FormEvent = React.FormEvent<HTMLFormElement>
 type InputEvent = React.FormEvent<HTMLInputElement>
 
 export default function CreateProduct() {
+
+    const results  = useQuery<Categories>(GET_CATEGORIES)
+
+    const categories = results?.data?.getCategory
+
+    const [cat, setCat] = useState<any>()
 
     const [categorie, setCategorie] = useState("")
     /*     const [createNewCategory, { error, data }] = useMutation<
@@ -32,6 +48,10 @@ export default function CreateProduct() {
 
     let newCategory = ''
 
+    useEffect(() => {
+        setCat(categories)
+    },[results])
+
     function handleChange(e: InputEvent) {
         return setCategorie(e.currentTarget.value)
     }
@@ -43,7 +63,7 @@ export default function CreateProduct() {
             .then((resolve) => { console.log(resolve) })
             .catch((err) => { console.log('Salio Mal') })
         if (data) {
-            newCategory = data?.createCategory.name
+            newCategory = data?.createCategory
             setListCategory([...listCategory, newCategory])
         }
     }
@@ -65,8 +85,11 @@ export default function CreateProduct() {
                 <div className={styles.listProducts}>
                     <h4 className={styles.TitleList} >Categorias creadas</h4>
                     <hr className={styles.hrList} />
-                    {listCategory.map((item) => (
-                        <p className={styles.pList} >{item}</p>
+                    {cat && cat.map((item:any, index:number) => (
+                        <p className={styles.pList}>{item?.id}: {item?.name}</p>
+                    ))}
+                    {listCategory && listCategory.map((item:any, index:number) => (
+                        <p className={styles.pList} >{item?.id }: {item.name}</p>
                     ))}
                 </div>
             </div>

@@ -133,7 +133,7 @@ const LandPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.OrderSub}>
+{/*                     <div className={styles.OrderSub}>
                         <h1 className={styles.TitleConcat} >Contacta con nosotros</h1>
                     </div>
                     <div className={styles.LandPageInfo}>
@@ -141,7 +141,7 @@ const LandPage = () => {
                         <p>  Telefono de contacto: 4567-3456</p>
                         <p>  WhatsApp: +54 9 1134553321</p>
                         <p>  E-mail: CompuHenry@yahoo.com</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </React.Fragment>
