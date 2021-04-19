@@ -1,35 +1,23 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-/* import { NEW_PRODUCT } from "../../gql/products";
- */import { GET_CATEGORIES } from "../../gql/categories";
+/* import { NEW_PRODUCT } from "../../gql/products";*/
+import { GET_CATEGORIES } from "../../gql/categories";
 import styles from './CreateProduct.module.scss';
 import { Link } from 'react-router-dom'
 
 interface Categorie {
-    id: number,
-    name: string,
+    id: number | undefined,
+    name: string | undefined,
 }
 
 interface Categories {
     getCategory: Categorie[]
 }
 
-interface productInventary {
-    name: string,
-    price: number,
-    brand: string,
-    image: string,
-    details: string,
-    id: number | null
-}
-
-
 type FormEvent = React.FormEvent<HTMLFormElement>;
 type InputEvent = React.FormEvent<HTMLInputElement>;
 type SelectEvent = React.FormEvent<HTMLSelectElement>;
 type ButtonEvent = React.FormEvent<HTMLButtonElement>
-
-
 
 interface IState {
     name: string
@@ -38,6 +26,19 @@ interface IState {
     image: string
     details: string
     categories: number[]
+}
+
+interface DetailsProduct {
+    id: number | undefined,
+    brand: string | undefined,
+    image: string | undefined,
+    name: string | undefined,
+    price: number | undefined,
+    details: string | undefined,
+}
+
+interface DetailsData {
+    getProducts: DetailsProduct[]
 }
 
 const NEW_PRODUCT = gql`
@@ -59,25 +60,43 @@ mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: St
               }
           
         }
+    }`;
+
+const GET = gql`
+query ($name: String!, $categoriesId:[ID!]){
+    getProducts (filter:{limit:40 name:$name categoriesId:$categoriesId}) {
+        id
+        name
+        price
+        image
     }
-`;
+}`;
+
+
 
 export default function CreateProduct() {
-    const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })
+
+    const [createProduct, results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
     const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
     const categories = data?.getCategory
 
+    const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })
 
-    const [createProduct, results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
+    const products = useQuery<DetailsData>(GET, { variables: { name: '', categoriesId: [] } })
 
-    const [listProducts, setListProdutcs] = useState<productInventary>({ name: "", price: 0, brand: "", image: "", details: "", id: null })
+    const [p, setP] = useState<any>()
 
-    let newProduct: any;
-    let newImage = '';
+    const [ta, setT] = useState<any>([])
 
-    useEffect(() => { console.log(results.data) }, [results])
+    useEffect(() => { 
+        setP(products?.data?.getProducts)
+     }, [results])
 
+
+
+
+ 
     function handleChange(e: InputEvent) {
         return setState({
             ...state,
@@ -97,11 +116,10 @@ export default function CreateProduct() {
         createProduct({ variables: state })
             .then((resolve) => { console.log(data) })
             .catch((err) => { console.log('Salio Mal') })
-        if (results.data) {
-            newProduct = results.data.createProduct
-            setListProdutcs(newProduct)
-        }
-    }
+            setT([...ta, results?.data?.createProduct])
+
+   }
+
 
     const [categors, setCategors] = useState<Array<any>>([])
 
@@ -153,15 +171,28 @@ export default function CreateProduct() {
                 <div className={styles.listProducts} >
                     <label className={styles.TitleList} >Productos creados</label>
                     <hr className={styles.hrList} />
-                    <Link style={{ textDecoration: 'none' }} to={{
-                        pathname: '/Detalles',
-                        state: {
-                            id: listProducts.id,
-                            newprice: 0
-                        }
-                    }}>
-                        <p className={styles.pList} >{listProducts.name}</p>
-                    </Link>
+                    {p && p.map((item: any, index: number) => (
+                        <Link style={{ textDecoration: 'none' }} to={{
+                            pathname: '/Detalles',
+                            state: {
+                                id: item.id
+                            }
+                        }}>
+                            <p className={styles.pList}>{item.id}: {item.name}</p>
+                        </Link>
+                    ))}
+                    {ta && ta.map((item: any) => (  
+                        <Link style={{ textDecoration: 'none' }} to={{
+                            pathname: '/Detalles',
+                            state: {
+                                id: item?.id
+                            }
+                        }}>
+                            <p className={styles.pList}>{item.id} {item?.name}</p>
+                        </Link>
+                        ))}
+
+
                 </div>
             </div>
         </div>

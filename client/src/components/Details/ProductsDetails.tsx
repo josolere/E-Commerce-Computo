@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
-import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES} from "../../gql/productDetails"
+import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
 import styles from "./ProductDetail.module.scss"
-import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
+import { addProductDetails } from '../../redux/actions'
+
 
 interface Icategories {
-    id?:number
-    name?:string
+    id?: number
+    name?: string
 }
 
 interface DetailsProduct {
@@ -25,7 +27,7 @@ interface DetailsProduct {
         price: number
         details: string
         categories: any[]
-        reviews:any[]
+        reviews: any[]
     }
 }
 
@@ -41,7 +43,7 @@ interface Categorie {
 }
 
 interface Categories {
-    getCategory: Categorie[]
+    getCategory: Icategories[]
 }
 
 interface PropsDetails {
@@ -56,6 +58,8 @@ interface PropsDetails {
 }
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
+    const dispatch = useDispatch()
+
 
     const id = props.history.location.state.id
 
@@ -88,7 +92,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const filtred = data?.getProductById
 
-
     let totalrating: number = 0;
 
     let summulti: Array<number> = [];
@@ -107,12 +110,13 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
-    const changereview = async() => {
-        await addreview({ variables: {id:filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
+    const changereview = async () => {
+        await addreview({ variables: { rating: totalrating, text: reviewuser.review, product: filtred?.id } })
             .then(review => { console.log('review up') })
             .catch((err) => { console.log(results) })
         setHidereviews(false)
     }
+<<<<<<< HEAD
     
     
     const[details,setDetails] = useState({id:"", name:"",price:0,brand:"",image:"",details:"", categories:[{id:"1",name:"default"}]})
@@ -129,6 +133,18 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const[editMode,setEditMode] = useState(false)
     
+=======
+
+
+    const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
+
+    useEffect(() => {
+        setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
+    }, [filtred])
+
+    const [editMode, setEditMode] = useState(false)
+
+>>>>>>> b188045010ca05d14a51f11eec021b1cbf9ee27a
     console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -176,21 +192,28 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         e.preventDefault()
         setDetails({
             ...details,
-            categories: details?.categories?.filter( cat => cat.id != e.currentTarget.value)
+            categories: details?.categories?.filter(cat => cat.id != e.currentTarget.value)
         })
     }
     const handleAddCategories = (e: React.FormEvent<HTMLSelectElement>) => {
         details?.categories &&
-        setDetails({
-            ...details,
-            categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories:
-            [...details?.categories , {name:e.currentTarget.selectedOptions[0].innerHTML, id:e.currentTarget.value}]
-        })
+            setDetails({
+                ...details,
+                categories: details?.categories?.find(cat => cat.name === e.currentTarget.selectedOptions[0].innerHTML) ? details.categories :
+                    [...details?.categories, { name: e.currentTarget.selectedOptions[0].innerHTML, id: e.currentTarget.value }]
+            })
     }
 
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
     const categoriesQuery = categoriesQ.data?.getCategory
 
+    console.log(newprice)
+
+    const handleAddProduct = () => {
+        const state = true
+        dispatch(addProductDetails(state));
+
+    }
     return (
         <div className={styles.contenedorAll}>
             <div className={styles.contenedorDetail}>
@@ -219,8 +242,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                             <p className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</p>
                         }
                         <hr style={{ height: '1rem', backgroundColor: 'white' }} />
-                        <Link to='/Carrodecompras' >
-                            <button className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
+                        <Link to='/Home' >
+                            <button onClick={() => {
+                                handleAddProduct();
+                            }} className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
                         </Link>
                     </div>
                     <div className={stylesEdit.bot}>
@@ -297,13 +322,25 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     }
                 </div>
             </div>
+<<<<<<< HEAD
                 <div className={styles.reviews}>
                 {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
                         : false}
                     {filtred?.reviews.map(review => <div><div>{review.text}</div><div>{review.rating}</div></div>)}
                 </div>
+=======
+            <div className={styles.reviews}>
+                {results.called ? resultsData.map((item) => (
+                    <div>{item}</div>
+                )) : false}
+                {filtred?.reviews.map(review => <div>{review.text}{review.rating}</div>)}
+            </div>
+>>>>>>> b188045010ca05d14a51f11eec021b1cbf9ee27a
         </div>
     )
 }
 
 export default DetailsComponent
+
+
+

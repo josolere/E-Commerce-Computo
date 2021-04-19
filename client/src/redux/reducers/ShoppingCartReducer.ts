@@ -1,10 +1,15 @@
-import { ADD_SHOPPING, DELETE_PRODUCT, MORE_PRICE, LESS_PRICE, LOCAL, ADD_LOCALSTORAGE, DELETE_CART } from '../actions'
+import { ADD_SHOPPING, DELETE_PRODUCT, MORE_PRICE, LESS_PRICE, LOCAL, ADD_LOCALSTORAGE, DELETE_CART, ADD_PRODUCT_DETAILS, ADD_PRODUCT_HOME } from '../actions'
 
 const initialState = {
     productTotal: [],
     quantity: 0,
     priceSubTotal: 0,
-    local: []
+    local: [],
+    addCart: false,
+    addHome: false,
+    idDetails:0,
+    priceDetails:0,
+    countDetails:0
 };
 
 export default (state = initialState, action: any): any => {
@@ -65,8 +70,8 @@ export default (state = initialState, action: any): any => {
             return {
                 ...state,
                 productTotal: action.arrayProducts.productLocal,
-                priceSubTotal: action.arrayProducts.priceSubTotal *1,
-                quantity: action.arrayProducts.quantity *1
+                priceSubTotal: action.arrayProducts.priceSubTotal * 1,
+                quantity: action.arrayProducts.quantity * 1
 
             }
 
@@ -78,6 +83,21 @@ export default (state = initialState, action: any): any => {
                 priceSubTotal: 0,
                 local: []
 
+            }
+
+        case ADD_PRODUCT_DETAILS:
+            return {
+                ...state,
+                addCart: action.state
+            }
+
+        case ADD_PRODUCT_HOME:
+            return {
+                ...state,
+                addHome: action.state.stateHome,
+                idDetails:action.state.id,
+                priceDetails:action.state.price,
+                countDetails:action.state.count
             }
         default: return state
     }
