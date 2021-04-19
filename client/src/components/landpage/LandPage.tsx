@@ -26,8 +26,7 @@ query ($name: String!, $categoriesId:[ID!]){
         price
         image
     }
-}
-`;
+}`;
 
 const LandPage = () => {
 
