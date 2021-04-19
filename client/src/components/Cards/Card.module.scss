@@ -21,20 +21,21 @@ $red:#f05454;//f05454
         transition: 2s;
     }
     p {
+      
+    }
+    a {
+      height: 70%;
+    }
+
+    div {
+      height: 15%;
       margin: 0;
-      font-size: 1.1rem;
-      padding: 1rem;
+      font-size: auto;
+      // padding: 1rem;
       border-top-right-radius: 0.2rem ;
       border-top-left-radius: 0.2rem;
       background-color: $dark;
       color: white;
-      height: 15%;
-    }
-    a {
-      height: 100%;
-    }
-
-    div {
       height: 15%;
     }
 }
