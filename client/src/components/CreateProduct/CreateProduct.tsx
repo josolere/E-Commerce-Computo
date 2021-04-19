@@ -188,7 +188,7 @@ export default function CreateProduct() {
                                 id: item?.id
                             }
                         }}>
-                            <p className={styles.pList}>{item.id} {item?.name}</p>
+                            <p className={styles.pList}>{item?.id} {item?.name}</p>
                         </Link>
                         ))}
 
