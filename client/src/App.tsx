@@ -14,7 +14,7 @@ import Cards from './components/Cards/CardsHome';
 import styles from './App.module.scss';
 import Unicrear from './components/Create/Create'
 import Orders from './components/Order/Orders'
-import {addLocalStorage} from './redux/actions/index'
+import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux'
 
 function App() {
@@ -26,34 +26,35 @@ function App() {
       let productLocal: any = (localStorage.getItem('productsLocal'))
       let quantity: any = (localStorage.getItem('quantity'))
       let priceSubTotal: any = (localStorage.getItem('priceSubTotal'))
-
       productLocal = JSON.parse(productLocal)
-      dispatch(addLocalStorage({productLocal, quantity, priceSubTotal}))
+      dispatch(addLocalStorage({ productLocal, quantity, priceSubTotal }))
+    } else {
+      localStorage.setItem('productsLocal', JSON.stringify([]))
     }
   }, [])
 
-  
+
   return (
     <Router>
       <Route path="/">
-          <Home />
+        <Home />
       </Route>
       <Switch>
-        <Route exact path='/Crear'component={Unicrear} />
-  {/*       <Route exact path='/CrearCategoria' component={CreateCategory} />
+        <Route exact path='/Crear' component={Unicrear} />
+        {/*       <Route exact path='/CrearCategoria' component={CreateCategory} />
         <Route exact path='/CrearProducto' component={CreateProduct} /> */}
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Pago' component={Payment} />
-        <Route exact path='/Ordenes' component={Orders}/>
+        <Route exact path='/Ordenes' component={Orders} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>
           <NavCategories/>
           </div> 
         </Route>
-        <Route exact path='/Carrodecompras' component={ShoppingCart}/>
+        <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/' component={LandPage} />
-        <Route component={PageNotFound}/>
+        <Route component={PageNotFound} />
       </Switch>
     </Router>
   );

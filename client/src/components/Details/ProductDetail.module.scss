@@ -9,7 +9,7 @@ $red:#f05454;//f05454
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    min-height: 120vh;
+    height: fit-content;
     background-color: $white;
 }
 .contenedorDetail {
@@ -108,6 +108,26 @@ $red:#f05454;//f05454
     }
 }
 
+.buttonCompra{
+    
+        padding: 1rem;
+        background-color: transparent;
+        border: none;
+        color: whitesmoke;
+        outline: none;
+        svg{
+            font-size: 1.2rem;
+        }
+        &:hover{
+            cursor: pointer;
+            background-color: $dark;
+            color: $red;
+            padding: 1.5rem;
+            transition: 1s;
+        }
+    }
+
+
 .Edit{
     position: absolute;
     top: 1rem;
@@ -175,12 +195,27 @@ $red:#f05454;//f05454
 
 
 
-// .raiting {
-//     font-family: 'Montserrat', sans-serif ;
-//     font-size: 1rem;
-// }
+.raiting {
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 1rem;
+    color: whitesmoke;
+}
 
-// .gracias {
-//     font-family: 'Montserrat', sans-serif ;
-//     font-size: 1.2rem;
-// }
+.gracias {
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 1.2rem;
+    color: whitesmoke;
+}
+.reviews{
+    background-color: $grey;
+    width: 70%;
+    color: $dark;
+    border-radius: 0.3rem;
+    margin-top: 1rem;
+    div{
+        padding: 0.5rem;
+        margin: 0.5rem;
+        background-color: $white;
+        border-radius: 0.2rem;
+    }
+}

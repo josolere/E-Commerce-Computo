@@ -20,24 +20,28 @@ $red:#f05454;//f05454
     &:hover{
         transition: 2s;
     }
-    p {
-      
-    }
+
     a {
       height: 70%;
     }
 
     div {
       height: 15%;
-      margin: 0;
+      
+    }
+}
+.name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
       font-size: auto;
-      // padding: 1rem;
+      padding: 0.3rem;
       border-top-right-radius: 0.2rem ;
       border-top-left-radius: 0.2rem;
       background-color: $dark;
       color: white;
-      height: 15%;
-    }
+
 }
 
 .link{
