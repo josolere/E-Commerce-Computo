@@ -3,7 +3,8 @@ $white:#dddddd;
 .catalog{
     display: flex;
     flex-direction: row;
-    background-color: $white;
+    background: linear-gradient( #e66465,#30475e);
+
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
 }

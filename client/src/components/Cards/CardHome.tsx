@@ -133,11 +133,7 @@ export default function Card({ name, image, price, id, count }: props) {
 
     return (
         <div className={styles.card}>
-<<<<<<< HEAD
-            <div className={styles.name}>{name}</div>
-=======
                 <div className={styles.name}>{name}</div>
->>>>>>> 118e40cba73c0c3de2fe1598a2ee20780010fdc3
             <Link
                 onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{

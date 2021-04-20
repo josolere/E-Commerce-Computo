@@ -38,10 +38,10 @@ export default function Cards({reset}:IProps) {
 
     
 
-    var product = data?.getProducts
+    const product = data?.getProducts
     const [pageNumber, setPageNumber] = useState(0)
 
-    const productsPerPage = 8
+    const productsPerPage = 9
     const pageVisited = pageNumber * productsPerPage
 
     useEffect(() => {
