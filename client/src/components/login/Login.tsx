@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER} from "../../gql/login"
-import NavBar from '../NavBar/NavBar';
+import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER } from "../../gql/login"
+import { useCookies } from "react-cookie";
 
 
 interface user {
@@ -18,21 +18,26 @@ interface datauser {
     actualUser: user[]
 }
 
-
-
 const Login = () => {
 
     const [logform, setLogform] = useState({
         email: '',
         password: '',
-        name: ''
+        firstname: '',
+        lastname: '',
+        username: '',
+        address: ''
+
     });
+
+    const [cookies, setCookie, removeCookie] = useCookies(["User"]);
 
     const [showlogin, setshowLogin] = useState(false)
 
-    //useEffect ????
 
-    useQuery<datauser>(ACTUAL_USER)
+    const currentUser =  useQuery<datauser>(ACTUAL_USER)
+
+    console.log(currentUser.data)
 
     const [login, logindata] = useMutation(LOGIN_MUTATION)
 
@@ -54,8 +59,6 @@ const Login = () => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
     }
 
-    console.log(logform)
-
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (showlogin === true) {
             login({ variables: { email: logform.email, password: logform.password } })
@@ -64,27 +67,26 @@ const Login = () => {
                 ;
         }
         else {
-            signup({ variables: { name: logform.name, email: logform.email, password: logform.password } })
+            signup({ variables: { firstName: logform.firstname, email: logform.email, password: logform.password, /* username:logform.username,  */
+                lastName:logform.lastname/* , address: logform.address */ }  })
                 .then((resolve) => { console.log("signup bien") })
                 .catch((error) => { console.log("signup mal") })
                 ;
         }
+        setCookie('User', logform.username, {
+            path: "/"
+        });
         event.preventDefault()
+        window.location.href = 'http://localhost:3000/Home'
+
     }
 
     const logoutchange = () => {
-        logout({ variables: { email: logform.email, password: logform.password } })
-            .then((resolve) => { console.log("logout bien") })
-            .catch((error) => { console.log("logout mal") })
-            ;
+        removeCookie('User')
     }
-
-
-
 
     return (
         <div>
-     
             <div className={styles.back}>
                 {showlogin ? <div className={styles.organizar}>
                     <div className={styles.caja}>
@@ -97,6 +99,7 @@ const Login = () => {
                             </div>
                             loguearte
                             </div>
+                        {cookies.User && <h4>Hola {cookies.User}</h4>}
                         <form className={styles.form} onSubmit={handlesubmitchange}>
                             <div className={styles.form__group}>
                                 <label htmlFor='email' className={styles.form__label} >E-Mail</label>
@@ -116,15 +119,27 @@ const Login = () => {
                                 <input
                                     className={styles.form__field}
                                     placeholder='Contraseña'
-                                    minLength={8}
-                                    maxLength={12}
+                                    minLength={4}
+                                    maxLength={15}
                                     type="password"
                                     name='password'
                                     onChange={handleinputchange}
                                     required={true}
                                 />
                             </div>
-                            <div className={styles.form__group}></div>
+                            <div className={styles.form__group}>
+                                <label htmlFor='username' className={styles.form__label} >Nombre de Usuario</label>
+                                <input
+                                    className={styles.form__field}
+                                    type='text'
+                                    minLength={5}
+                                    maxLength={15}
+                                    placeholder='Nombre de Usuario'
+                                    name='username'
+                                    onChange={handleinputchange}
+                                    required={true}
+                                />
+                            </div>
                             <div className={styles.organizarbotones}>
                                 <button className={styles.boton} type='submit' >Loguear</button>
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
@@ -136,7 +151,6 @@ const Login = () => {
                     :
                     <div className={styles.organizar}>
                         <div className={styles.caja}>
-
                             <div className={styles.container}>
                                 Introduce
                             <div className={styles.flip}>
@@ -146,6 +160,7 @@ const Login = () => {
                                 </div>
                             registrarte
                             </div>
+                            {cookies.User && <h4>Hola {cookies.User}</h4>}
                             <form className={styles.form} onSubmit={handlesubmitchange}>
                                 <div className={styles.form__group}>
                                     <label htmlFor='email' className={styles.form__label} >E-Mail</label>
@@ -165,8 +180,8 @@ const Login = () => {
                                     <input
                                         className={styles.form__field}
                                         type='password'
-                                        minLength={8}
-                                        maxLength={12}
+                                        minLength={4}
+                                        maxLength={15}
                                         placeholder='Contraseña'
                                         name='password'
                                         onChange={handleinputchange}
@@ -179,9 +194,48 @@ const Login = () => {
                                         className={styles.form__field}
                                         type='text'
                                         minLength={5}
-                                        maxLength={12}
-                                        placeholder='Apodo'
-                                        name='name'
+                                        maxLength={20}
+                                        placeholder='Nombre'
+                                        name='firstname'
+                                        onChange={handleinputchange}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='lastname' className={styles.form__label} >Apellido</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='text'
+                                        minLength={5}
+                                        maxLength={20}
+                                        placeholder='Apellido'
+                                        name='lastname'
+                                        onChange={handleinputchange}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='address' className={styles.form__label} >Dirección</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='text'
+                                        minLength={5}
+                                        maxLength={30}
+                                        placeholder='Dirección'
+                                        name='address'
+                                        onChange={handleinputchange}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='username' className={styles.form__label} >Nombre de Usuario</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='text'
+                                        minLength={5}
+                                        maxLength={15}
+                                        placeholder='Nombre de Usuario'
+                                        name='username'
                                         onChange={handleinputchange}
                                         required={true}
                                     />
@@ -200,4 +254,3 @@ const Login = () => {
 };
 
 export default Login;
-

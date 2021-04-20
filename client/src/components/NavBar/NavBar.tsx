@@ -7,6 +7,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { AppState } from '../../redux/reducers';
 import { setFilter } from '../../redux/actions';
+import Cookies from "universal-cookie";
 
 
 const NavBar = (): JSX.Element => {
@@ -17,8 +18,7 @@ const NavBar = (): JSX.Element => {
 
   const [showadmin, setShowadmin] = useState(false)
 
-
-  const opciones = ['Crear Producto', 'Crear Categoria']
+  
 
   return (
     <>
@@ -34,6 +34,7 @@ const NavBar = (): JSX.Element => {
         {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}>Productos</Link> : false}
         <div>
           <Link className={navBar.linksNav} to="/login"> Iniciar Sesion</Link>
+         
           {false ? <Link to="/cuenta" className={navBar.linksNav}>Mi Cuenta</Link> : false}
         </div>
         <div>

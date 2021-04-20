@@ -116,16 +116,22 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             .catch((err) => { console.log(results) })
         setHidereviews(false)
     }
+    
+    
+    const[details,setDetails] = useState({id:"", name:"",price:0,brand:"",image:"",details:"", categories:[{id:"1",name:"default"}]})
+    
+    useEffect(()=>{
+        console.log(results.data)
+        // setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
+    },[results])
 
+    useEffect(()=>{
+        console.log(results.data)
+        setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
+    },[filtred])
 
-    const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
-
-    useEffect(() => {
-        setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
-    }, [filtred])
-
-    const [editMode, setEditMode] = useState(false)
-
+    const[editMode,setEditMode] = useState(false)
+    
     console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -303,12 +309,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     }
                 </div>
             </div>
-            <div className={styles.reviews}>
-                {results.called ? resultsData.map((item) => (
-                    <div>{item}</div>
-                )) : false}
-                {filtred?.reviews.map(review => <div>{review.text}{review.rating}</div>)}
-            </div>
+                <div className={styles.reviews}>
+                {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
+                        : false}
+                    {filtred?.reviews.map(review => <div><div>{review.text}</div><div>{review.rating}</div></div>)}
+                </div>
         </div>
     )
 }

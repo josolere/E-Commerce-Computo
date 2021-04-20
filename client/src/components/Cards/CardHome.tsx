@@ -133,7 +133,7 @@ export default function Card({ name, image, price, id, count }: props) {
 
     return (
         <div className={styles.card}>
-                <div className={styles.name}>{name}</div>
+            <div className={styles.name}>{name}</div>
             <Link
                 onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{
