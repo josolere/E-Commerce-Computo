@@ -1,7 +1,6 @@
-import Sequelize from "sequelize";
+
 import { Category } from "../models/Category"
 import { Product } from "../models/Product"
-import db from "../models"
 import { User } from "../models/User";
 import { v4 as uuid } from 'uuid';
 
@@ -17,7 +16,7 @@ let products = [
         brand: 'Redragon',
         details: 'Un auricular con un sonido brillante y claro, con una estructura liviana y cómoda, el Themis es un auricular pensado para jugar cómodamente. -Sonido:Este auricular, posee un claro sonido estéreo con ficha Jack 3.5 mm, garantizan la mejor calidad de sonido en nuestros diafragmas de 50mm con imanes de neodimio, ideales en la construcción de periféricos de sonido. -Micrófono: Integrado en la estructura de las copas, construido sobre un brazo rebatible y captación omnidireccional.',
         price: 2099,
-        categoriesId: [1]
+        categoriesId: [7]
     }, 
     {
         name:'Headset Logitech G Series G432',
@@ -66,14 +65,6 @@ let products = [
         brand: 'PowerColor',
         details: 'Placa de video tope de gama de AMD. Velocidad base 1.8GHz, Velocidad Máxima 2.3GHz. 16 GB de memoria GDDR6. Corre todo en 4k a 60 fps, o 1080p 144fps.',
         price: 500000,
-        categoriesId: [8]
-    }, 
-    {
-        name:'AMD Radeon PowerColor RX 6800XT Red Devil',
-        image:'https://www.powercolor.com/_upload/images//2011251047440.png',
-        brand: 'PowerColor',
-        details: 'Placa de video gama alta de AMD. Velocidad base de 1.8GHz, Velocidad Máxima de 2.3GHz. 16GB de memoria GDDR6. Requiere una fuente de 750W.',
-        price: 450000,
         categoriesId: [1]
     }, 
     {
@@ -84,14 +75,6 @@ let products = [
         price: 600000,
         categoriesId: [1]
     }, 
-    {
-        name:'ASUS GeForce RTX 3080 ROG Strix',
-        image:'https://dlcdnwebimgs.asus.com/gain/44A520BD-D8B0-47E7-952A-1AE2973C9168/w1000/h732',
-        brand: 'ASUS',
-        details: 'Placa de video gama alta de NVIDIA. Velocidad base de 1.4GHz, Velocidad Máxima de 1.7GHz. 10GB de memoria GDDR6X. Requiere una fuente de 750W. Corre todo a 4k 60 fps, o 1080p 144fps',
-        price: 550000,
-        categoriesId: [1]
-    },
     {
         name:'ASUS ROG Maximus XII FORMULA Motherboard Socket 1200 Chipset z49',
         image:'https://www.asus.com/microsite/motherboard/Intel-Z490/nl/img/products/m12h_wifi.png',
@@ -106,8 +89,8 @@ let products = [
         brand: 'ASUS',
         details: 'Placa madre tope de gama ASUS, con socket AM4, compatible con lo mejor de AMD. Wi-Fi 6(.ax) incluido. Tres ranuras M.2. Disipadores gigantes para VRM, chipset y sockets M2. Ethernet 10gb incluido. Conectores USB 3.2 incluidos.',
         price: 57999,
-        categoriesId:[4]
-    } 
+        categoriesId: [4]
+    }
 
 ]
 
