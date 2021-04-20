@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
 import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER} from "../../gql/login"
@@ -49,6 +49,7 @@ const Login = () => {
     const handleclickevent = () => {
         showlogin ? setshowLogin(false) : setshowLogin(true)
     }
+
 
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })

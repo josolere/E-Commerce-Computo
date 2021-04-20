@@ -143,7 +143,7 @@ export default function CreateProduct() {
             categories: state.categories.filter(id => id !== parseInt(e.currentTarget.value))
         })
     }
-
+console.log(ta)
     return (
         <div className={styles.container}>
             <form onSubmit={handleSubmit} className={styles.form} >

@@ -4,6 +4,8 @@ import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from 'react-redux'
 import { deleteProduct, morePrice, lessPrice } from '../../redux/actions'
 import { PRODUCTS } from "../../gql/shopingCart"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface DetailsProduct {
     id: number,
@@ -27,9 +29,11 @@ interface props {
 
 const ShoppingCard = (props: props): JSX.Element => {
     const idsProducts = props.id
-  
+
     const { loading, error, data } = useQuery<DetailsData>(PRODUCTS, { variables: { id: idsProducts } })
     const product: any = data?.getProductById
+
+    const deletePro = () => toast.error("Producto Eliminado");
 
     const [price, setPrice] = useState(0)
     const dispatch = useDispatch()
@@ -134,14 +138,14 @@ const ShoppingCard = (props: props): JSX.Element => {
 
             const newquantity = productLocal.filter((filt: any) => filt.id === product.id)
             let quantity: any = localStorage.getItem('quantity')
-           
+
             let quantityDelete = quantity - newquantity[0].count
             localStorage.setItem('quantity', JSON.stringify(quantityDelete))
 
             const newSubTotal = productLocal.filter((filt: any) => filt.id === product.id)
             let SubTotal: any = localStorage.getItem('priceSubTotal')
-           
-            let priceSubTotal = SubTotal - (newquantity[0].price *  newquantity[0].count)
+
+            let priceSubTotal = SubTotal - (newquantity[0].price * newquantity[0].count)
             localStorage.setItem('priceSubTotal', JSON.stringify(priceSubTotal))
         }
     }
@@ -149,17 +153,14 @@ const ShoppingCard = (props: props): JSX.Element => {
     return (
         <>
             {
-                    <div className={cart.containerCard}>
-                       
-                        <div className={cart.containerImg}>
-                            <img style={{maxWidth: '100%', maxHeight: '100%'}} src={product?.image} alt="producto" />
-                        </div> 
-                      
-                      <div className={cart.containerOthers}>
+                <div className={cart.containerCard}>
+                    <ToastContainer />
+                    <div className={cart.containerImg}>
+                        <img style={{ maxWidth: '100%', maxHeight: '100%' }} src={product?.image} alt="producto" />
+                    </div>
+                    <div className={cart.containerOthers}>
                         <h1>{product?.name}</h1>
-                       
-                       
-                            <h2 className={cart.price}>${price}</h2> 
+                        <h2 className={cart.price}>${price}</h2>
                         <div className={cart.containerButtons}>
                             <button
                                 id={props.count > 1 ? cart.buttonLess : undefined}
@@ -168,8 +169,8 @@ const ShoppingCard = (props: props): JSX.Element => {
                                     addLocaStorageLess()
                                 }}
                             >-</button>
-                            
-                            <button style={{borderColor:"transparent", backgroundColor:"transparent"}}>{props.count}</button>
+
+                            <button style={{ borderColor: "transparent", backgroundColor: "transparent" }}>{props.count}</button>
                             <button
                                 onClick={() => {
                                     addLocaStorageMore()
@@ -180,11 +181,12 @@ const ShoppingCard = (props: props): JSX.Element => {
                                 onClick={() => {
                                     eliminateProduct();
                                     deleteLocaStorageLess();
+                                    deletePro();
                                 }}
-                                >Eliminar</button>
+                            >Eliminar</button>
                         </div>
-                        </div>
-                        </div>  
+                    </div>
+                </div>
             }
         </>
     )
