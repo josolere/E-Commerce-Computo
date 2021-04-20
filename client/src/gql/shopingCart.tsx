@@ -2,9 +2,9 @@ import { gql } from "@apollo/client"
 
 
 export const NEW_ORDER = gql`
-mutation newOrder($status: String!, $idUser:[Int]!) {
+mutation newOrder($status: String!,$idUser:[Int]!) {
     createOrder( input: {
-       status:$status
+        status:$status
     }
     idUser:$idUser
       )
@@ -17,12 +17,12 @@ mutation newOrder($status: String!, $idUser:[Int]!) {
 `;
 
 export const NEW_ORDER_DETAIL = gql`
-mutation newOrderDetail($idProduct:[Int]!, $idOrder:[Int]!, $quantity:[Int]!) {
-    createOrderDetail( input: {
+mutation($idProduct:[Int]!, $idOrder:[Int]!, $quantity:[Int]!) {
+    createOrderDetail( 
         idProduct:$idProduct,
         idOrder:$idOrder,
         quantity:$quantity
-      })
+      )
         {
             id
             OrderID
