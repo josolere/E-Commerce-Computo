@@ -1,54 +1,44 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
-import React, { createRef, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+/* import { NEW_PRODUCT } from "../../gql/products";*/
+import { GET_CATEGORIES } from "../../gql/categories";
 import styles from './CreateProduct.module.scss';
 import { Link } from 'react-router-dom'
 
-interface productInventary {
-    id: number | null
+interface Categorie {
+    id: number | undefined,
+    name: string | undefined,
+}
+
+interface Categories {
+    getCategory: Categorie[]
+}
+
+type FormEvent = React.FormEvent<HTMLFormElement>;
+type InputEvent = React.FormEvent<HTMLInputElement>;
+type SelectEvent = React.FormEvent<HTMLSelectElement>;
+type ButtonEvent = React.FormEvent<HTMLButtonElement>
+
+interface IState {
     name: string
     price: number
     brand: string
     image: string
     details: string
+    categories: number[]
 }
 
-/* interface newProductDetails{
-    name:string
-    price:number
-    brand:string
-    image:string
-    details:string
-} */
-// mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
-//     createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
-//         id
-//         name
-//         price
-//         brand
-//         image
-//         details
-//     }
-// }
-
-/* const NEW_PRODUCT = gql`
-    mutation createNewProduct( $name: String!, $price: Number!, $brand: String!, $image: String!, $details: String!){
-        createNewProduct(product:{ name:$name, price:$price, brand:$brand, image:$image, details:$details}){
-            id
-            name 
-            price
-            brand
-            image
-            details
-    }
-`; */
-
-interface Categorie {
-    id: number,
-    name: string,
+interface DetailsProduct {
+    id: number | undefined,
+    brand: string | undefined,
+    image: string | undefined,
+    name: string | undefined,
+    price: number | undefined,
+    details: string | undefined,
 }
 
-interface Categories {
-    getCategory: Categorie[]
+interface DetailsData {
+    getProducts: DetailsProduct[]
 }
 
 const NEW_PRODUCT = gql`
@@ -67,55 +57,46 @@ mutation NewProduct ($name: String!, $price: Float!, $brand: String!, $image: St
           	categories{
                 id
                 name
-
               }
           
         }
-    }
-`;
+    }`;
 
-const GET_CATEGORIES = gql`
-query {
-    getCategory {
+const GET = gql`
+query ($name: String!, $categoriesId:[ID!]){
+    getProducts (filter:{limit:40 name:$name categoriesId:$categoriesId}) {
         id
         name
+        price
+        image
     }
 }`;
 
-type FormEvent = React.FormEvent<HTMLFormElement>;
-type InputEvent = React.FormEvent<HTMLInputElement>;
-type SelectEvent = React.FormEvent<HTMLSelectElement>;
-type ButtonEvent = React.FormEvent<HTMLButtonElement>
 
-interface IState {
-    name: string
-    price: number
-    brand: string
-    image: string
-    details: string
-    categories: number[]
-}
 
 export default function CreateProduct() {
-    const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })
-    // const [categoriesId, setCategoriesId] = useState<Array<number>>([])
-    /*     const [createNewProduct, { error, data }] = useMutation<
-        {createNewProduct: productInventary},
-        {product:newProductDetails}
-        >(NEW_PRODUCT,{variables:{product:state}}) */
-    const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
-    const categories = data?.getCategory
-    // console.log(categories)
 
     const [createProduct, results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
-    const [listProducts, setListProdutcs] = useState<productInventary>({ name: "", price: 0, brand: "", image: "", details: "", id: null })
+    const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
+    const categories = data?.getCategory
 
-    let newProduct: any;
-    let newImage = '';
+    const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })
 
-    useEffect(() => { console.log(results.data) }, [results])
+    const products = useQuery<DetailsData>(GET, { variables: { name: '', categoriesId: [] } })
 
+    const [p, setP] = useState<any>()
+
+    const [ta, setT] = useState<any>([])
+
+    useEffect(() => { 
+        setP(products?.data?.getProducts)
+     }, [results])
+
+
+
+
+ 
     function handleChange(e: InputEvent) {
         return setState({
             ...state,
@@ -135,14 +116,13 @@ export default function CreateProduct() {
         createProduct({ variables: state })
             .then((resolve) => { console.log(data) })
             .catch((err) => { console.log('Salio Mal') })
-        if (results.data) {
-            newProduct = results.data.createProduct
-            setListProdutcs(newProduct)
-        }
-    }
+            setT([...ta, results?.data?.createProduct])
+
+   }
+
 
     const [categors, setCategors] = useState<Array<any>>([])
-    //estas dos trabajan juntas
+
     const handleCategories = (e: SelectEvent) => {
         e.preventDefault()
         setCategors([...categors, {
@@ -164,13 +144,8 @@ export default function CreateProduct() {
         })
     }
 
-    const fileInput = createRef()
-
-
     return (
         <div className={styles.container}>
-            {/* {error ? alert(`Oh no! ${error.message}`) : null}
-        {data && data.createNewProduct ? alert(`Saved!`) : null}  */}
             <form onSubmit={handleSubmit} className={styles.form} >
                 <h1>Crear Producto</h1>
                 <hr />
@@ -193,17 +168,31 @@ export default function CreateProduct() {
                 <input type='submit' value='Crear' className={styles.button} />
             </form>
             <div className={styles.separateList}>
-                <div className={styles.listProducts}>
-                    <h4 className={styles.TitleList} >Productos creados</h4>
+                <div className={styles.listProducts} >
+                    <label className={styles.TitleList} >Productos creados</label>
                     <hr className={styles.hrList} />
-                    <Link style={{ textDecoration: 'none' }} to={{
-                        pathname: '/Detalles',
-                        state: {
-                            id: listProducts?.id,
-                        }
-                    }}>
-                        <p className={styles.pList} >{listProducts && listProducts?.name}</p>
-                    </Link>
+                    {p && p.map((item: any, index: number) => (
+                        <Link style={{ textDecoration: 'none' }} to={{
+                            pathname: '/Detalles',
+                            state: {
+                                id: item.id
+                            }
+                        }}>
+                            <p className={styles.pList}>{item.id}: {item.name}</p>
+                        </Link>
+                    ))}
+                    {ta && ta.map((item: any) => (  
+                        <Link style={{ textDecoration: 'none' }} to={{
+                            pathname: '/Detalles',
+                            state: {
+                                id: item?.id
+                            }
+                        }}>
+                            <p className={styles.pList}>{item?.id} {item?.name}</p>
+                        </Link>
+                        ))}
+
+
                 </div>
             </div>
         </div>

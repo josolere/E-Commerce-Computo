@@ -1,43 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import total from './ShoppingTotal.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../redux/reducers';
 import { deleteCart } from '../../redux/actions'
 import { gql, useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
+import { NEW_ORDER} from "../../gql/shopingCart"
 
-
-const NEW_ORDER = gql`
-mutation newOrder($status: String!, $idUser:[Int]!) {
-    createOrder( input: {
-       status:$status
-    }
-    idUser:$idUser
-      )
-        {
-            id
-            status
-        }
-    }
-    
-`;
-
-const NEW_ORDER_DETAIL = gql`
-mutation newOrderDetail($idProduct:[Int]!, $idOrder:[Int]!, $quantity:[Int]!) {
-    createOrderDetail( input: {
-        idProduct:$idProduct,
-        idOrder:$idOrder,
-        quantity:$quantity
-      })
-        {
-            id
-            OrderID
-            quantity
-            price
-        }
-    }
-    
-`;
 
 
 const ShoppingTotal = (): JSX.Element => {
@@ -97,7 +66,7 @@ const ShoppingTotal = (): JSX.Element => {
                 </div>
             </div>
             <div className={total.containerButton}>
-                <Link to='/Ordenes' onClick={() => { handleOrder() }}
+                <Link to='/pago' onClick={() => { handleOrder() }}
                     className={total.buttonFinal}>Finalizar Compra</Link>
 
             </div>

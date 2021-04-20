@@ -8,13 +8,16 @@ export const LOCAL = 'LOCAL'
 export const ADD_LOCALSTORAGE = 'ADD_LOCALSTORAGE'
 export const DELETE_CART = 'DELETE_CART'
 export const PASS_ID = 'PASS_ID' //Pasar id
+export const ADD_PRODUCT_DETAILS = 'ADD_PRODUCT_DETAILS'
+export const ADD_PRODUCT_HOME = 'ADD_PRODUCT_HOME'
 
 export const setFilter = (filter: string) => ({
     type: SET_FILTER, filter
 });
 
-export const setCategory = (categories: number[]) => ({
-    type: SET_CATEGORIES, categories
+export const setCategory = (categories:number[])  => (
+    {
+    type: SET_CATEGORIES , categories
 });
 
 export const passid = (idpass:number) => ({
@@ -55,3 +58,12 @@ export const deleteCart = () => ({
 
 })
 
+export const addProductDetails = (state:boolean) =>({
+    type:ADD_PRODUCT_DETAILS,
+    state
+})
+
+export const addProductHome = (state:any) =>({
+    type:ADD_PRODUCT_HOME,
+    state
+})

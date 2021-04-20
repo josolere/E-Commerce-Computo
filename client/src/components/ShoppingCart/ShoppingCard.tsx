@@ -3,6 +3,7 @@ import cart from './ShoppingCard.module.scss'
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from 'react-redux'
 import { deleteProduct, morePrice, lessPrice } from '../../redux/actions'
+import { PRODUCTS } from "../../gql/shopingCart"
 
 interface DetailsProduct {
     id: number,
@@ -23,22 +24,11 @@ interface props {
     priceProps: number
 }
 
-const products = gql`
-    query ($id: ID!){
-        getProductById (id:$id) {
-            id
-            name
-            price
-            image
-            details
-        }
-    }
-`;
 
 const ShoppingCard = (props: props): JSX.Element => {
     const idsProducts = props.id
   
-    const { loading, error, data } = useQuery<DetailsData>(products, { variables: { id: idsProducts } })
+    const { loading, error, data } = useQuery<DetailsData>(PRODUCTS, { variables: { id: idsProducts } })
     const product: any = data?.getProductById
 
     const [price, setPrice] = useState(0)
@@ -159,45 +149,42 @@ const ShoppingCard = (props: props): JSX.Element => {
     return (
         <>
             {
-                loading ? <h2>Cargando...</h2> :
                     <div className={cart.containerCard}>
+                       
                         <div className={cart.containerImg}>
-                            <img className={cart.image} src={product.image} alt="producto" />
-                        </div>
-                        <div className={cart.containerTitle}>
-                            <h1>{product.name}</h1>
-                            <p>{product.details} </p>
-                        </div>
-                        <div className={cart.count}>
+                            <img style={{maxWidth: '100%', maxHeight: '100%'}} src={product?.image} alt="producto" />
+                        </div> 
+                      
+                      <div className={cart.containerOthers}>
+                        <h1>{product?.name}</h1>
+                       
+                       
+                            <h2 className={cart.price}>${price}</h2> 
+                        <div className={cart.containerButtons}>
                             <button
                                 id={props.count > 1 ? cart.buttonLess : undefined}
-                                className={cart.buttonCountLess}
                                 onClick={() => {
                                     accountantLess();
                                     addLocaStorageLess()
                                 }}
                             >-</button>
-                            <p>{props.count}</p>
+                            
+                            <button style={{borderColor:"transparent", backgroundColor:"transparent"}}>{props.count}</button>
                             <button
-                                className={cart.buttonCountMore}
                                 onClick={() => {
                                     addLocaStorageMore()
                                     accountantMore();
                                 }}
                             >+</button>
-                        </div>
-                        <div className={cart.containerPrice}>
-                            <p className={cart.price}>${price}</p>
-                        </div>
-                        <div className={cart.containerClose}>
-                            <button
+                            <button className={cart.delete}
                                 onClick={() => {
                                     eliminateProduct();
                                     deleteLocaStorageLess();
                                 }}
-                                className={cart.buttonClose}>Eliminar</button>
+                                >Eliminar</button>
                         </div>
-                    </div>
+                        </div>
+                        </div>  
             }
         </>
     )

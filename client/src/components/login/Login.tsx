@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGINMUTATION, SIGNUPMUTATION, LOGOUTMUTATION, ACTUALUSER} from "../../gql/login"
+import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER} from "../../gql/login"
 import NavBar from '../NavBar/NavBar';
 
 
@@ -32,17 +32,17 @@ const Login = () => {
 
     //useEffect ????
 
-    useQuery<datauser>(ACTUALUSER)
+    useQuery<datauser>(ACTUAL_USER)
 
-    const [login, logindata] = useMutation(LOGINMUTATION)
+    const [login, logindata] = useMutation(LOGIN_MUTATION)
 
     const destructuringLogin = logindata.data
 
-    const [signup, signupdata] = useMutation(SIGNUPMUTATION)
+    const [signup, signupdata] = useMutation(SIGNUP_MUTATION)
 
     const destructuringsingup = signupdata.data
 
-    const [logout, logoutdata] = useMutation(LOGOUTMUTATION)
+    const [logout, logoutdata] = useMutation(LOGOUT_MUTATION)
 
     const destructuringlogout = logoutdata.data
 

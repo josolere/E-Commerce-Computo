@@ -6,7 +6,6 @@ const Orders = () => {
     return (
         <>
             <div className={ordersStyle.bodyOrders}>
-                <NavBar />
                 <h1>TusOrdenes</h1>
                 <div className={ordersStyle.contenedorCard}>
                     <div className={ordersStyle.contenedorHeaderCard}>

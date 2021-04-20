@@ -1,6 +1,4 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
-import NavBar from '../NavBar/NavBar'
 import ShoppingCard from './ShoppingCard'
 import ShoppingTotal from './ShoppingTotal'
 import carts from './ShoppingCarts.module.scss'

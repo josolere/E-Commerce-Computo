@@ -4,6 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from "react-redux";
 import { setCategory } from "../../redux/actions";
 import {GET_CATEGORIES} from "../../gql/categories"
+import Cards from '../Cards/CardsHome';
 
 export interface model {
   id: number;
@@ -19,14 +20,17 @@ const NavCategories = (): JSX.Element => {
   const { loading, error, data } = useQuery<DetailsData>(GET_CATEGORIES)
 
   const categories = data?.getCategory
+
+  const reset = 0
+  const dispatch = useDispatch()
   
   const filterCategories = (e:any) => {
     dispatch(setCategory([e.target.value]))
 }
-
-  const dispatch = useDispatch()
+  
 
   return (
+    <>
     <div className={styles.container} >
       <button className={styles.todos} onClick={(e) =>dispatch(setCategory([]))}>Todos</button>
       {categories?.map((item: model, i: number) => {
@@ -34,6 +38,8 @@ const NavCategories = (): JSX.Element => {
         className={styles.containerCategories}>{item.name}</button>;
       })}
     </div>
+    <Cards reset = {reset}/>
+    </>
   );
 };
 

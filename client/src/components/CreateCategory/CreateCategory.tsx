@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './CreateCategory.module.scss'
+import { NEW_CATEGORY } from "../../gql/categories"
 import { gql, useMutation } from '@apollo/client';
 
 /* interface categoryInventary {
@@ -13,19 +14,6 @@ import { gql, useMutation } from '@apollo/client';
     name: string
 } */
 
-
-const NEW_CATEGORY = gql`
-mutation ($name: String!) {
-    createCategory ( input: {
-        name:$name
-      })
-        {
-            id
-            name
-        }
-    }
-    
-`;
 
 type FormEvent = React.FormEvent<HTMLFormElement>
 type InputEvent = React.FormEvent<HTMLInputElement>
