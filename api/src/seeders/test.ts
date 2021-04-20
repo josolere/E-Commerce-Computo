@@ -154,9 +154,6 @@ let products = [
         price: 13490,
         categoriesId:2
     }
-
-
-
 ]
 
 
