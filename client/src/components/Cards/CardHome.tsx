@@ -6,6 +6,8 @@ import { addShopping, local, addProductDetails, addProductHome } from '../../red
 import { AppState } from '../../redux/reducers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 interface props {
@@ -21,6 +23,8 @@ export default function Card({ name, image, price, id, count }: props) {
     const { quantity, priceSubTotal, productTotal, addCart, addHome,idDetails,priceDetails,countDetails }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
     const [stateHome, setStateHome] = useState(true)
+
+    const notify = () => toast.dark("Agregado Al Carrito");
 
     function useSendSelector() {    //  hook personalizado para evitar conflicto al ejecutar useSelector
         const firsstRender = useRef(true) // evita ejecutar el useEffect cuando se renderize el componente
@@ -72,7 +76,9 @@ export default function Card({ name, image, price, id, count }: props) {
         if (productRepet.length === 0) {
             dispatch(addShopping({ id, price, count }));
             addLocaStorage();
+            notify()
         }
+       
     }
 
         if (addCart === true && addHome === true) {
@@ -133,7 +139,8 @@ export default function Card({ name, image, price, id, count }: props) {
 
     return (
         <div className={styles.card}>
-            <div className={styles.name}>{name}</div>
+            <ToastContainer />
+
             <Link
                 onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{
