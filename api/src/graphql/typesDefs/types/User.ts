@@ -30,9 +30,15 @@ export const typeDefs = gql`
     createUser(input: CreateUserInput): User
     deleteUser(id: ID!): User!
     editUser(id: ID, input: EditUserInput): User!
+
     logout: Boolean
     login(email: String!, password: String!): AuthPayload
-    signup(input: SignUpInput): AuthPayload
+    signup(
+      firstName: String!
+      lastName: String!
+      email: String!
+      password: String!
+    ): AuthPayload
   }
 
   input CreateUserInput {

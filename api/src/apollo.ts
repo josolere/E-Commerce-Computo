@@ -1,5 +1,5 @@
 import { ApolloServer, makeExecutableSchema } from "apollo-server-express";
-import { GraphQLLocalStrategy, buildContext  } from "graphql-passport"
+import { GraphQLLocalStrategy, buildContext } from "graphql-passport";
 
 // Models
 import models from "./models";
@@ -20,7 +20,12 @@ const schema = makeExecutableSchema({
 //de las request en el contexto y las hace accesibles desde los resolvers.
 const apolloServer = new ApolloServer({
   schema,
-  context: ({ req, res }) => buildContext({req, res, models}),
+  context: ({ req, res }) => buildContext({ req, res, models }),
+  playground: {
+    settings: {
+      "request.credentials": "same-origin",
+    },
+  },
 });
 
 export default apolloServer;
