@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import SearchBar from "../SearchBar/SearchBar";
 import navBar from './NavBar.module.scss';
@@ -7,6 +7,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { AppState } from '../../redux/reducers';
 import { setFilter } from '../../redux/actions';
+import { Cookies, CookiesProvider, useCookies } from "react-cookie";
 
 
 const NavBar = (): JSX.Element => {
@@ -17,8 +18,16 @@ const NavBar = (): JSX.Element => {
 
   const [showadmin, setShowadmin] = useState(false)
 
-
+  const [cookiess, setCookies ] = useState<any>()
+ 
   const opciones = ['Crear Producto', 'Crear Categoria']
+
+  const cookie = new Cookies
+
+
+  useEffect (() => {
+    setCookies(cookie.get('User'))
+  }, [])
 
   return (
     <>
@@ -37,6 +46,7 @@ const NavBar = (): JSX.Element => {
           {false ? <Link to="/cuenta" className={navBar.linksNav}>Mi Cuenta</Link> : false}
         </div>
         <div>
+          <p>{cookiess && cookiess}</p>
 {/*           <button className={navBar.linksNav} onClick={() => setShowadmin(!showadmin)} >✓</button>
           {showadmin ? */} <Link className={navBar.linksNav} to='/Crear'><p>Crear</p></Link>{/*  : null} */}
         </div>
