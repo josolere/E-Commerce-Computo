@@ -6,8 +6,7 @@ import {
 } from "../../interfaces";
 
 import db from "../../models";
-import { transporter } from "../../mailer";
-
+import { MailOrderCreate } from "../../mailer/functions";
 export default {
   Query: {
     getOrderById: async (
@@ -83,18 +82,7 @@ export default {
       order.setUser(user);
 
       //mail
-
-      try {
-        await transporter.sendMail({
-          from: '"Test FROM 👻" <proyectohenry5@gmail.com>', // sender address
-          to: "crissoria07@gmail.com", // list of receivers
-          subject: "Hello ✔ ASUNTO", // Subject line
-          text: "Hello world? TEXTO PLANO", // plain text body
-          html: "<b>Hello world? HTML NEGRITA </b>", // html body
-        });
-      } catch (error) {
-        console.error("alloo el email", error);
-      }
+      MailOrderCreate(user.email);
 
       return order;
     },
