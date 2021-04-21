@@ -8,6 +8,8 @@ import Home from './components/Home/Home'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import NavCategories from './components/categories/Categories';
+import CrearProducto from "./components/CreateProduct/CreateProduct"
+import CrearCategoria from "./components/CreateCategory/CreateCategory"
 import Cards from './components/Cards/CardsHome';
 import styles from './App.module.scss';
 import Unicrear from './components/Create/Create'
@@ -39,8 +41,8 @@ function App() {
         <Home />
       </Route>
       <Switch>
-        <Route exact path= '/EditarCuenta' component={EditAccount} />
-        <Route exact path='/Crear'component={Unicrear} />
+        <Route exact path='/CrearProducto'component={CrearProducto} />
+        <Route exact path='/CrearCategoria'component={CrearCategoria} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Pago' component={Payment} />

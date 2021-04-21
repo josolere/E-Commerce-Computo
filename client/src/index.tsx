@@ -5,10 +5,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { CookiesProvider } from "react-cookie";
 
-//import { Provider } from 'react-redux'
-//import { createStore } from 'redux'
-//import rootReducer from './redux/reducers'
-//const store = createStore(rootReducer)
 
 import {
   ApolloClient,
@@ -52,4 +48,3 @@ ReactDOM.render(
 function rootReducer(rootReducer: any) {
   throw new Error('Function not implemented.');
 }
-

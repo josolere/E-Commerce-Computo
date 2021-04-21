@@ -4,6 +4,8 @@ import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
 import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER } from "../../gql/login"
 import { useCookies } from "react-cookie";
+import DropdownMenu from '../NavBar/Dropdown';
+import NavBarItem from '../NavBar/NavBarItem';
 
 
 interface user {
@@ -34,7 +36,6 @@ const Login = () => {
 
     const [showlogin, setshowLogin] = useState(false)
 
-    //useEffect ????
 
     const currentUser = useQuery<datauser>(ACTUAL_USER)
 
@@ -61,9 +62,11 @@ const Login = () => {
     }
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
-        if (showlogin === true) {
+        if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
-                .then((resolve) => { console.log("logueado") })
+                .then((resolve) => {  setCookie('User', logform.email, {
+                    path: "/"
+                }); window.location.href = 'http://localhost:3000/Home'})
                 .catch((error) => { console.log("error login") })
                 ;
         }
@@ -78,28 +81,14 @@ const Login = () => {
                 .catch((error) => { console.log("signup mal") })
                 ;
         }
-        setCookie('User', logform.username, {
-            path: "/"
-        });
+       
         event.preventDefault()
-        window.location.href = 'http://localhost:3000/Home'
-
-    }
-
-    const logoutchange = () => {
-        removeCookie('User')
-        window.location.href = 'http://localhost:3000/Home'
-
-    }
-
-    const handleclickForget = () => {
-        window.location.href = 'http://localhost:3000/EditarCuenta'
     }
 
     return (
         <div>
             <div className={styles.back}>
-                {showlogin ? <div className={styles.organizar}>
+                {!showlogin ? <div className={styles.organizar}>
                     <div className={styles.caja}>
                         <div className={styles.container}>
                             Introduce
@@ -138,26 +127,10 @@ const Login = () => {
                                     required={true}
                                 />
                             </div>
-                            <div className={styles.form__group}>
-                                <label htmlFor='username' className={styles.form__label} >Nombre de Usuario</label>
-                                <input
-                                    className={styles.form__field}
-                                    type='text'
-                                    minLength={5}
-                                    maxLength={15}
-                                    placeholder='Nombre de Usuario'
-                                    name='username'
-                                    onChange={handleinputchange}
-                                    required={true}
-                                />
-                            </div>
+                            
                             <div className={styles.organizarbotones}>
-                                <button className={styles.boton} type='submit' >Loguear</button>
+                                <button className={styles.boton} type='submit' >Login</button>
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
-                            </div>
-                            <div className={styles.organizarbotones}>
-                                <button className={styles.boton} onClick={handleclickForget} >Olvidaste tu contraseña?</button>
-                                <button className={styles.boton} onClick={logoutchange} >Desvincular</button>
                             </div>
                         </form>
                     </div>
@@ -268,4 +241,3 @@ const Login = () => {
 };
 
 export default Login;
-

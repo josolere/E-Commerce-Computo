@@ -5,16 +5,6 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { GET_CATEGORIES } from "../../gql/categories";
 
 
-/* interface categoryInventary {
-    input: {
-        id: number
-        name: string
-    }
-}
- */
-/* interface newCategoryDetails {
-    name: string
-} */
 
 interface Categorie {
     id: number | undefined,
@@ -39,10 +29,7 @@ export default function CreateProduct() {
     const [categorie, setCategorie] = useState("")
 
     const [showCreate, setShowCreate] = useState(false)
-    /*     const [createNewCategory, { error, data }] = useMutation<
-        {createNewProduct: categoryInventary},
-        {category:newCategoryDetails}
-        >(NEW_CATEGORY,{variables:{category:{name:categorie}}}) */
+    
 
     const [createCategory, { data }] = useMutation(NEW_CATEGORY)
 
@@ -52,8 +39,7 @@ export default function CreateProduct() {
 
     useEffect(() => {
         setCat(categories)
-        /*         setListCategory([...listCategory, newCategory])
-         */
+    
     }, [categories])
 
     function handleChange(e: InputEvent) {
@@ -62,7 +48,7 @@ export default function CreateProduct() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
-        //AVERIGUAR COMO HACER POST Y COMO SON LOS MODELOS
+      
         createCategory({ variables: { name: categorie } })
             .then((resolve) => { console.log(resolve) })
             .catch((err) => { console.log('Salio Mal') })
@@ -76,8 +62,7 @@ export default function CreateProduct() {
 
     return (
         <div className={styles.container}>
-            {/*         {error ? alert(`Oh no! ${error.message}`) : null}
-        {data && data.createNewProduct ? alert(`Saved!`) : null} */}
+           
             <form onSubmit={handleSubmit} className={styles.form} >
                 <h1>Crear Categoría</h1>
                 <hr />
@@ -90,10 +75,10 @@ export default function CreateProduct() {
                     <h4 className={styles.TitleList} >Categorias creadas</h4>
                     <hr className={styles.hrList} />
                     {cat && cat.map((item: any, index: number) => (
-                        <p className={styles.pList}>{item?.id}: {item?.name}</p>
+                        <p key= {index} className={styles.pList}>{item?.id}: {item?.name}</p>
                     ))}
                     {listCategory && listCategory.map((item: any, index: number) => (
-                        <p className={styles.pList} >{item?.id}: {item.name}</p>
+                        <p key= {index} className={styles.pList} >{item?.id}: {item.name}</p>
                     ))}
                 </div>
             </div>

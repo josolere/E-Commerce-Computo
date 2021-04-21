@@ -89,50 +89,72 @@ let products = [
         brand: 'ASUS',
         details: 'Placa madre tope de gama ASUS, con socket AM4, compatible con lo mejor de AMD. Wi-Fi 6(.ax) incluido. Tres ranuras M.2. Disipadores gigantes para VRM, chipset y sockets M2. Ethernet 10gb incluido. Conectores USB 3.2 incluidos.',
         price: 57999,
-        categoriesId: 4
+        categoriesId: [4]
+    },{
+        name: 'MONITOR 24 LED VIEWSONIC VX2458-MHD 144HZ 1MS',
+        image: 'https://www.venex.com.ar/products_images/1585891907_monitor_24_led_viewsonic_vx2458_mhd_144hz.png',
+        brand: 'ViewSonic',
+        details: 'l VX2458-mhd de ViewSonic® es un monitor Full HD de 24" (23,6" visibles) desarrollado para juegos y entretenimiento. Con una calidad de imagen increíble y una frecuencia de actualización de 144 hz, este monitor es perfecto para imágenes multimedia que se mueven rápidamente, como películas cargadas de acción o juegos de alta velocidad. La tecnología AMD FreeSync™ prácticamente elimina la fragmentación de la pantalla y los cortes para que pueda jugar de manera fluida, mientras un tiempo de respuesta ultra rápido de 1 ms y el bajo retraso de entrada ofrecen un rendimiento de pantalla sin interrupciones ni imágenes borrosas. ',
+        price: 46599,
+        categoriesId: [6]
+    }, 
+    {
+        name:'MONITOR 22" LG 22MK600M FHD IPS 75HZ 5MS        ',
+        image:"https://www.venex.com.ar/products_images/1608298268_large01.png",
+        brand: 'LG',
+        details: 'La tecnología IPS mejora el rendimiento de las pantallas de cristal líquido. Reducción del tiempo de respuesta, mejora de la reproducción del color, y el usuario puede ver la pantalla desde prácticamente cualquier ángulo.',
+        price: 21999,
+        categoriesId: [6]
+    }, 
+    {
+        name: 'DISCO SOLIDO SSD 240 GB KINGSTON SATA III A400        ',
+        image:'https://www.venex.com.ar/products_images/1585751676_ssd_240gb_kingston_a400.jpg',
+        brand:'GIGABYTE',
+        details:"La unidad de estado sólido A400 de Kingston mejora drásticamente la capacidad de respuesta de su sistema existente con increíbles tiempos de arranque, carga y transferencia en comparación con los discos duros mecánicos.",
+        price: 4769,
+        categoriesId: [3]
     },
     {
-        name:'Teclado Redragon YAMA K550 Black RGB Mecánico Switch Purple',
-        image:'https://www.sepuls.cl/wp-content/uploads/2020/04/REDDRAGON-YAMA-K550-BLACK2.png',
-        details:'Este teclado en español tiene todo lo necesario: Marco sólido de aluminio para proveer durabilidad y estabilidad, rueda para controlar el volumen de aluminio y multimedia dedicadas, puerto adicional USB 2.1 Pass Through ubicado en la parte posterior del teclado, reposamuñecas desmontable y 12 teclas G completamente configurables.',
-        price: 10689,
-        categoriesId: 5
+        name:'DISCO SOLIDO SSD 250 GB WD M2 NVME SN550 2400MB/S BLUE        ',
+        image:"https://www.venex.com.ar/products_images/1574943255_wdbluesn500nvmessdangle.png.thumb.1280.1280.png",
+        brand: 'WDIGITAL',
+        details: 'Ponga la potencia de NVMe™ en el corazón de su PC para lograr un rendimiento ultrarrápido con una capacidad de respuesta impresionante. El disco SSD WD Blue™ SN550 NVMe™ puede ofrecer una velocidad más de 4 veces superior a la de nuestras mejores unidades SSD SATA. Ya sea que esté trabajando, creando, jugando ocasionalmente o procesando grandes cantidades de datos, puede aprovechar las altas velocidades de esta potente unidad interna para hacer más cosas, de manera más rápida. Con disponibilidad en capacidades hasta 1 TB en un factor de forma M.2 2280 económico, no existe mejor momento que ahora mismo para cambiarse a las unidades NVMe.',
+        price: 5999,
+        categoriesId: [3]
     },
     {
-        name: 'Disco Rigido 4TERA WESTERN DIGITAL 64MB SATA III WD60PURX',
-        image: 'https://shop.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-4tb.png.thumb.1280.1280.png',
-        details: 'WD Purple están fabricados para los sistemas de seguridad de alta definición siempre en funcionamiento que operan las 24 horas. El sistema de almacenamiento para videovigilancia WD Purple también incorpora la exclusiva tecnología AllFrame de WD, para que pueda crear un sistema de seguridad fiable y adaptado a las necesidades de la empresa. Tecnología AllFrame mejora las transmisiones ATA para reducir los errores, el pixelado y las interrupciones del vídeo, además de su duración extra.',
-        price:18034,
-        categoriesId:3
-    },
+        
+        name:'MEMORIA RAM DDR4 4GB 2666MHZ HYPERX FURY',
+        image:'https://www.venex.com.ar/products_images/1585850472_ddr4_4gb_2666mhz_hyperxfury.png',
+        brand: 'HYPERX',
+        details: 'HyperX® FURY DDR4 reconoce automáticamente la plataforma a la que se conecta y realiza el overclock a la máxima frecuencia publicada, hasta 2666 MHz, para una funcionalidad plug-and-play perfecta. Ofrece un rendimiento de máximo nivel automático para placas base incluyendo los chiptsets X99 y de la serie 200 de Intel, y es un complemento a los procesadores de 2, 4, 6, 8 y 10 núcleos de Intel para acelerar la edición de vídeo, el renderizado 3D, las prestaciones de juego y el procesamiento de IA. HyperX FURY DDR4 da como resultado velocidades más rápidas, mayor rendimiento y fiabilidad mejorada. ',
+        price: 3099,
+        categoriesId: [2]
+    }, 
     {
-        name: 'Mouse Gamer Redragon Nemeanlion 2 7200DPI',
-        image:'https://tjgaming.com.br/wp-content/uploads/2019/09/0ddd5dad7408c7e4baf1385b0e0890a4.png',
-        details:'Redragon M602 - 1 .Raton para juegos con cable RGB (retroiluminado, ergonomico, programable, con 7 modos de retroiluminacion de hasta 7200 PPP), RGB',
-        price:6999,
-        categoriesId: 5
-    },
+        name:'MEMORIA RAM DDR4 8GB 3200MHZ ADATA XPG SPECTRIX D60G RGB        ',
+        image:'https://www.venex.com.ar/products_images/1594237851_productgallery38.png',
+        brand: 'ADATA',
+        details: 'estacar por encima de la competencia,más RGB por mm2, diseño cortado con diamante, estable, duradera y confiable',
+        price: 6799,
+        categoriesId: [2]
+    }, 
     {
-        name: 'Monitor Acer Predator Xb241h 144hz 24',
-        image: 'https://media.aws.alkosto.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/4/7/4713392518904_6.png',
-        details: 'Monitor plano 24 pulgadas ACER, su innovador diseño con visuales en 3D te transporta de lo digital a la realidad.|Viene con tarjeta gráfica y sistema G-Sync integrado, creando una experiencia de juego fluida. Además, se actualiza rápido y elimina por completo las interferencias de la pantalla',
-        price: 85999,
-        categoriesId: 6
-    },
+        name:'TECLADO HYPERX ALLOY FPS PRO MECANICO ENG SWITCH RED        ',
+        image:'https://www.venex.com.ar/products_images/1616076589_740617268782.png',
+        brand: 'HYPERX',
+        details: 'Los teclados HyperXTM Alloy FPS están diseñados para una gran durabilidad, confiabilidad y juego de alto nivel. Si lo que necesitas es un teclado completo, el Alloy FPS es el equipo ideal para ti. Si estás buscando un teclado tenkeyless (TKL, sin teclado numérico) que sólo te brinde las teclas más esenciales, el Alloy FPS Pro es el teclado que necesitas1. Todos los teclados cuentan con las características que todo shooter de primera persona (FPS) exigente querría en su teclado: teclas mecánicas CHERRY® MX, una sólida estructura de acero, cable desmontable, Modo Juego, 100% Anti-Ghosting, y N-key rollover. Ya sea que seas un shooter de primera persona (FPS) o que juegues como ellos, HyperX Alloy FPS es el teclado correcto para ti.',
+        price: 8490,
+        categoriesId: [5]
+    }, 
     {
-        name: 'Tableta gráfica Wacom One black y white',
-        image: 'https://cdn-reichelt.de/bilder/web/xxl_ws/E500/WACOM_CTL-6100WLK-N_02.png',
-        details: 'Con los 4096 niveles de presión vas a lograr trazos muy fieles con solo variar la intensidad del lápiz sobre la tableta. Dejá volar tu imaginación y disfrutá de una experiencia creativa inigualable.',
-        price: 82199,
-        categoriesId: 7
-    },
-    {
-        name: 'Camara Web Cam Genius 1000x V2 Hd 720p Usb Microfono Zoom 3x',
-        image:'http://xtcomputacion.com/images/detailed/2/FaceCam_1000_product_left_HiRes_sm_clipped_rev_1.png',
-        details:'Conexión en 720p HD en aplicaciones de mensajería, la cámara proporciona una experiencia de chat mucho más clara.',
-        price: 2995,
-        categoriesId: 7
-    },
+        name:'MOUSE COOLER MASTER MM710 BLACK MATTE        ',
+        image:'https://www.venex.com.ar/products_images/1601583482_iil193015636750.png',
+        brand: 'MASTER',
+        details: 'Al implementar un nuevo y novedoso diseño de carcasa de nido de abeja que es a la vez ligero y duradero, hemos recortado el peso total de nuestro ratón a menos de 53 g. No más peleas contra el ratón y no más francotiradores perdidos debido a un rango de movimiento de peso limitado. El dolor de muñeca después de las batallas de maratón y la fatiga después de pasar la noche es cosa del pasado. Apunte mejor, rinda mejor, durante más tiempo.',
+        price: 4890,
+        categoriesId: [5]
+    }, 
     {
         name:'Mousepad Medium Rgb Steelseries Qck Gaming Surface',
         image:'https://cdn.idntimes.com/content-images/community/2017/10/stel-e8111faa795a43916354266643ffeaf4.png',

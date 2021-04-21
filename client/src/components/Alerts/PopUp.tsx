@@ -31,16 +31,18 @@ const PopUp = () => {
     return (
         <div className={styles.PopBox} >
             <div className={styles.Pop} >
-                <h4>Producto en promoción</h4>
-                <p>{productPopUp?.name}</p>
-                <Link to={{
-                    pathname: '/Detalles',
-                    state: {
-                        id: id,
-                    }
-                }}>
-                    <img src={productPopUp?.image} alt='' />
-                </Link>
+                <div className={styles.OrderPop} >
+                    <h4 className={styles.PopTitle} >Producto Destacado 🤩</h4>
+                    <p className={styles.PPop} >{productPopUp?.name}</p>
+                    <Link className={styles.ImagePop} to={{
+                        pathname: '/Detalles',
+                        state: {
+                            id: id,
+                        }
+                    }}>
+                        <img className={styles.ImagePop} src={productPopUp?.image} alt='' />
+                    </Link>
+                </div>
             </div>
         </div>
     )
