@@ -7,6 +7,7 @@ import {
 
 import db from "../../models";
 import { transporter } from "../../mailer";
+
 export default {
   Query: {
     getOrderById: async (
@@ -50,6 +51,24 @@ export default {
         },
       });
       return data;
+    },
+
+    getOrderByStatus: async (
+      _parent: object,
+      { status }: { status: string },
+      { models }: { models: iModels }
+    ): Promise<iOrder> => {
+      const orders = await models.Order.findAll({ where: { status: status } });
+      return orders;
+    },
+
+    getAllOrders: async (
+      _parent: object,
+      _args: object,
+      { models }: { models: iModels }
+    ): Promise<iOrder> => {
+      const orders = await models.Order.findAll();
+      return orders;
     },
   },
 
