@@ -6,7 +6,6 @@ import {
 } from "../../interfaces";
 
 import db from "../../models";
-import product from "./product";
 
 export default {
   Query: {
@@ -14,27 +13,29 @@ export default {
       _parent: object,
       { id }: { id: number },
       { models }: { models: iModels }
-      ): Promise<iOrder> => {
-
+    ): Promise<iOrder> => {
       const options = {
-        include: [{model: db.Product,
-          through: "productsxorder",
-          attributes: ["id","name"]
-        }]
-    };
+        include: [
+          {
+            model: db.Product,
+            through: "productsxorder",
+            attributes: ["id", "name"],
+          },
+        ],
+      };
 
-      let data = await models.Order.findByPk(id,options);
+      let data = await models.Order.findByPk(id, options);
       data.details = [];
-      data.Products.map((det:any) => {
+      data.Products.map((det: any) => {
         const detail = {
-                          id: det.Productsxorder.id, 
-                          price : det.Productsxorder.price, 
-                          quantity: det.Productsxorder.quantity, 
-                          OrderId: det.Productsxorder.OrderId,
-                          ProductId: det.Productsxorder.ProductId 
-                        }
-        data.details.push(detail)
-      })
+          id: det.Productsxorder.id,
+          price: det.Productsxorder.price,
+          quantity: det.Productsxorder.quantity,
+          OrderId: det.Productsxorder.OrderId,
+          ProductId: det.Productsxorder.ProductId,
+        };
+        data.details.push(detail);
+      });
       return data;
     },
 
@@ -49,6 +50,24 @@ export default {
         },
       });
       return data;
+    },
+
+    getOrderByStatus: async (
+      _parent: object,
+      { status }: { status: string },
+      { models }: { models: iModels }
+    ): Promise<iOrder> => {
+      const orders = await models.Order.findAll({ where: { status: status } });
+      return orders;
+    },
+
+    getAllOrders: async (
+      _parent: object,
+      _args: object,
+      { models }: { models: iModels }
+    ): Promise<iOrder> => {
+      const orders = await models.Order.findAll();
+      return orders;
     },
   },
 
