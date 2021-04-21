@@ -6,35 +6,36 @@ import {
 } from "../../interfaces";
 
 import db from "../../models";
-import product from "./product";
-
+import { transporter } from "../../mailer";
 export default {
   Query: {
     getOrderById: async (
       _parent: object,
       { id }: { id: number },
       { models }: { models: iModels }
-      ): Promise<iOrder> => {
-
+    ): Promise<iOrder> => {
       const options = {
-        include: [{model: db.Product,
-          through: "productsxorder",
-          attributes: ["id","name"]
-        }]
-    };
+        include: [
+          {
+            model: db.Product,
+            through: "productsxorder",
+            attributes: ["id", "name"],
+          },
+        ],
+      };
 
-      let data = await models.Order.findByPk(id,options);
+      let data = await models.Order.findByPk(id, options);
       data.details = [];
-      data.Products.map((det:any) => {
+      data.Products.map((det: any) => {
         const detail = {
-                          id: det.Productsxorder.id, 
-                          price : det.Productsxorder.price, 
-                          quantity: det.Productsxorder.quantity, 
-                          OrderId: det.Productsxorder.OrderId,
-                          ProductId: det.Productsxorder.ProductId 
-                        }
-        data.details.push(detail)
-      })
+          id: det.Productsxorder.id,
+          price: det.Productsxorder.price,
+          quantity: det.Productsxorder.quantity,
+          OrderId: det.Productsxorder.OrderId,
+          ProductId: det.Productsxorder.ProductId,
+        };
+        data.details.push(detail);
+      });
       return data;
     },
 
@@ -61,6 +62,21 @@ export default {
       const order = await models.Order.create({ ...input });
       const user = await models.User.findByPk(idUser);
       order.setUser(user);
+
+      //mail
+
+      try {
+        await transporter.sendMail({
+          from: '"Test FROM 👻" <proyectohenry5@gmail.com>', // sender address
+          to: "crissoria07@gmail.com", // list of receivers
+          subject: "Hello ✔ ASUNTO", // Subject line
+          text: "Hello world? TEXTO PLANO", // plain text body
+          html: "<b>Hello world? HTML NEGRITA </b>", // html body
+        });
+      } catch (error) {
+        console.error("alloo el email", error);
+      }
+
       return order;
     },
 
