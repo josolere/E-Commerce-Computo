@@ -24,14 +24,24 @@ export default {
     currentUser: (_parent: object, _args: any, context: any) =>
       context.getUser(),
 
+<<<<<<< HEAD
+    getUsers: async (
+=======
     /* getUsers: async (
+>>>>>>> development
       _parent: object,
       _args: object,
       { models }: { models: iModels }
     ): Promise<any> => {
+<<<<<<< HEAD
+      const users = await models.User.findAll();
+      return users;
+    }, 
+=======
       const users = await models.User.findfindAll();
       return users;
     }, */
+>>>>>>> development
   },
   Mutation: {
     /* createUser: (
@@ -119,9 +129,15 @@ export default {
       };
 
       // console.log(newUserInput);
+<<<<<<< HEAD
+      let newUser = await context.models.User.create(
+        newUserInput,
+      );
+=======
       let newUser = context.models.User.create({
         newUserInput,
       });
+>>>>>>> development
 
       //console.log(context)
 

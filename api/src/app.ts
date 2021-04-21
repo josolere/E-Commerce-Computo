@@ -85,6 +85,16 @@ passport.use(
 // passport.use(new facebookStrategy(facebookOptions, facebookCallback));
 
 passport.serializeUser((user: any, done) => {
+<<<<<<< HEAD
+  done(null, user);
+});
+
+passport.deserializeUser(async (id:any, done) => {
+  const users: any = await db.User.findAll();
+  console.log('--------------------------------', id)
+  const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
+  console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
+=======
   done(null, user.id);
 });
 
@@ -92,6 +102,7 @@ passport.deserializeUser(async (id, done) => {
   const users: any = await db.User.findAll();
   const matchingUser = users.find((user: any) => user.dataValues.id === id);
   // console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
+>>>>>>> development
   done(null, matchingUser);
 });
 
