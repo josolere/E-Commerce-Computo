@@ -1,5 +1,22 @@
 import { gql } from "@apollo/client"
 
+export const GET_ALL_ORDERS =  gql `
+query{
+  getAllOrders{
+    id
+    status
+    details{
+      id
+      quantity
+      price
+      productName
+      
+    }
+
+  }
+
+}
+`
 
 export const GET_ORDER_DETAILS = gql`
 query($id:ID!){
@@ -10,10 +27,11 @@ query($id:ID!){
         id
         quantity
         price
-        ProductId
-        OrderId
         
-    }}}
+    }
+
+  }
+}
   `;
 
 export const EDIT_ORDER = gql `

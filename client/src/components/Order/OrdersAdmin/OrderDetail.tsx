@@ -12,7 +12,7 @@ export default function OrderDetails() {
     //obtengo id desde la url
     const { id } = useParams<IParams>()
     //traigo la orden x su id
-    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id: id } })
+    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id } })
     const order = data?.getOrderById
 
     const [editOrderStatus, editResults] = useMutation(EDIT_ORDER)
@@ -23,8 +23,9 @@ export default function OrderDetails() {
     }
 
     useEffect(() => {
-        console.log(editResults?.data)
-    }, [editResults])
+        console.log(id)
+        console.log(order)
+    }, [id,order])
 
     const totalCalc = () =>{
         let total = 0
@@ -34,13 +35,14 @@ export default function OrderDetails() {
         return total
     }
 
+
     return (//creada => procesando => completa || cancelada
         <div className={styles.container}>
             <h1>Orden Nro: {order?.id}</h1>
             <h4>Estado: {order?.status}</h4>
-            {order?.status === "pending" && <button onClick={handleStatus} value='creado'>Creado</button>}
-            {order?.status === "creado" && <button onClick={handleStatus} value='procesando'>Procesando</button>}
-            {order?.status === "procesando" && <button onClick={handleStatus} value='completo'>Completo</button>}
+            {/* {order?.status === "pending" && <button onClick={handleStatus} value='creado'>Creado</button>} */}
+            {order?.status === "pending" && <> <button onClick={handleStatus} value='procesando'>Procesando</button><button onClick={handleStatus} value='cancelado'>Cancelar</button> </>}
+            {order?.status === "procesando" && <><button onClick={handleStatus} value='completo'>Completo</button><button onClick={handleStatus} value='cancelado'>Cancelar</button> </>}
             {order?.status === "completo" && <button onClick={handleStatus} value='pending'>pending</button>}
             <div className={styles.products}>
                 <nav>

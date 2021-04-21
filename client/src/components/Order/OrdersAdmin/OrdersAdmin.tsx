@@ -9,7 +9,7 @@ export default function OrdersAdmin() {
             <nav>
             
             </nav>
-            
+            <AllOrders/>
         </div>
     )
 }

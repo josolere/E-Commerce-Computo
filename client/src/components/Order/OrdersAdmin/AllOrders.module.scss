@@ -1,0 +1,30 @@
+.container{
+    font-family:'Montserrat', sans-serif;
+    padding: 2rem;
+    
+}
+.products{
+    border: 1px solid black;
+    nav{
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid gray;
+        div{
+            width: 45%;
+            border: 1px solid gray;
+            padding: 1rem;
+        }
+        a{
+            color: black;
+            width: 10%;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover{
+                background-color: gray;
+                color: whitesmoke;
+            }
+        }
+    }
+}
