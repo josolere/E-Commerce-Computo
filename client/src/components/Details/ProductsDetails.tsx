@@ -110,8 +110,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
-    const changereview = async () => {
-        await addreview({ variables: { rating: totalrating, text: reviewuser.review, product: filtred?.id } })
+    const changereview =  () => {
+        addreview({ variables: {id:filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
             .then(review => { console.log('review up') })
             .catch((err) => { console.log(results) })
         setHidereviews(false)
@@ -194,13 +194,14 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
     const categoriesQuery = categoriesQ.data?.getCategory
 
-    console.log(newprice)
 
     const handleAddProduct = () => {
         const state = true
         dispatch(addProductDetails(state));
-
     }
+
+    
+
     return (
         <div className={styles.contenedorAll}>
             <div className={styles.contenedorDetail}>

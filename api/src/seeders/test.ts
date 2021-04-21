@@ -156,31 +156,26 @@ let products = [
         categoriesId: [5]
     }, 
     {
-        name:'ASUS GeForce RTX 3080 ROG Strix',
-        image:'https://dlcdnwebimgs.asus.com/gain/44A520BD-D8B0-47E7-952A-1AE2973C9168/w1000/h732',
-        brand: 'ASUS',
-        details: 'Placa de video gama alta de NVIDIA. Velocidad base de 1.4GHz, Velocidad Máxima de 1.7GHz. 10GB de memoria GDDR6X. Requiere una fuente de 750W. Corre todo a 4k 60 fps, o 1080p 144fps',
-        price: 550000,
-        categoriesId: [1]
+        name:'Mousepad Medium Rgb Steelseries Qck Gaming Surface',
+        image:'https://cdn.idntimes.com/content-images/community/2017/10/stel-e8111faa795a43916354266643ffeaf4.png',
+        details:'El software SteelSeries Engine desbloquea un impresionante arsenal de aplicaciones de motor que hacen que la personalización sea fácil e intuitiva.',
+        price:16969,
+        categoriesId:5
     },
     {
-        name:'ASUS ROG Maximus XII FORMULA Motherboard Socket 1200 Chipset z49',
-        image:'https://www.asus.com/microsite/motherboard/Intel-Z490/nl/img/products/m12h_wifi.png',
-        brand: 'ASUS',
-        details: 'Placa madre tope de gama ASUS, con socket LGA 1200, compatible con lo mejor de Intel. Wi-Fi 6(.ax) incluido. Tres ranuras M.2. Disipadores gigantes para VRM, chipset y sockets M2. Ethernet 10gb incluido. Compatible con Thunderbolt y conectores USB 3.2 incluidos.',
-        price: 72999,
-        categoriesId: [4]
-    }, 
+        name:'Monitor curvo MSI Optix G27C led 27 " negro 100V/240V',
+        image:'https://asset.msi.com/global/picture/images/monitor/Gaming_monitor.png',
+        details: 'Disfrutá de todas las cualidades que el monitor MSI G27C tiene para ofrecerte. Percibí las imágenes de una manera completamente diferente y complementá cualquier espacio ya sea en tu casa u oficina.',
+        price: 58900,
+        categoriesId: 6
+    },
     {
-        name:'ASUS ROG Strix Chipset x570 Socket AM4',
-        image:'https://avadirect-freedomusainc1.netdna-ssl.com/Pictures/Big/12858027_1.png',
-        brand: 'ASUS',
-        details: 'Placa madre tope de gama ASUS, con socket AM4, compatible con lo mejor de AMD. Wi-Fi 6(.ax) incluido. Tres ranuras M.2. Disipadores gigantes para VRM, chipset y sockets M2. Ethernet 10gb incluido. Conectores USB 3.2 incluidos.',
-        price: 57999,
-        categoriesId: [4]
-    } 
-
-
+        name: 'Memoria RAM Vengeance LPX 16GB 2x8GB Corsair',
+        image:'https://www.arjansac.com/image/cache/catalog/CORSAIR/Memorias%20RAM/Memoria%20RAM%20DDR4%202666Mhz%20PC4-21300/COR%2016GB%202666MHZ%20VENG%20DDR4/COR%2016GB%202666MHZ%20VENG%20DDR42-1000x1000.png',
+        details:'Su capacidad de 16 GB distribuida en módulos de 2 x 8 GB hace de esta memoria un soporte ideal para trabajos con aplicaciones de diseño o edición, juegos exigentes, contenidos multimedia, entre otros. A su vez, la distribución de la capacidad total en dos módulos iguales te permitirá maximizar tus posibilidades de uso.',
+        price: 13490,
+        categoriesId:2
+    }
 ]
 
 

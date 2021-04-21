@@ -10,6 +10,7 @@
     "@types/react-paginate": "^6.2.1",
     "react-autocomplete": "^1.8.1",
     "react-cookie": "^4.0.3",
+    "react-dropdown": "^1.9.2",
     "react-paginate": "^7.1.2",
     "react-select": "^4.3.0"
   }

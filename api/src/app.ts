@@ -85,13 +85,14 @@ passport.use(
 // passport.use(new facebookStrategy(facebookOptions, facebookCallback));
 
 passport.serializeUser((user: any, done) => {
-  done(null, user.id);
+  done(null, user);
 });
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id:any, done) => {
   const users: any = await db.User.findAll();
-  const matchingUser = users.find((user: any) => user.dataValues.id === id);
-  // console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
+  console.log('--------------------------------', id)
+  const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
+  console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
   done(null, matchingUser);
 });
 
