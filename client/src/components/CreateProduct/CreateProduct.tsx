@@ -164,7 +164,7 @@ export default function CreateProduct() {
                 <div>
                     {categors.map(cate => <button onClick={handleDeleteCategory} value={cate.id} key={cate.name}>{cate.name}</button>)}
                 </div>
-                <input type='submit' value='Crear' className={styles.button} />
+                <button type='submit'className={styles.button} > Crear </button>
             </form>
             <div className={styles.separateList}>
                 <div className={styles.listProducts} >

@@ -13,7 +13,8 @@ import styles from './App.module.scss';
 import Unicrear from './components/Create/Create'
 import Orders from './components/Order/Orders'
 import { addLocalStorage } from './redux/actions/index'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import EditAccount from './components/login/EditAccount';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
         <Home />
       </Route>
       <Switch>
+        <Route exact path= '/EditarCuenta' component={EditAccount} />
         <Route exact path='/Crear'component={Unicrear} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />

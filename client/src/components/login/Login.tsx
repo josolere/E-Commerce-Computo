@@ -36,7 +36,7 @@ const Login = () => {
 
     //useEffect ????
 
-    const currentUser =  useQuery<datauser>(ACTUAL_USER)
+    const currentUser = useQuery<datauser>(ACTUAL_USER)
 
     console.log(currentUser.data)
 
@@ -68,8 +68,12 @@ const Login = () => {
                 ;
         }
         else {
-            signup({ variables: { firstName: logform.firstname, email: logform.email, password: logform.password, /* username:logform.username,  */
-                lastName:logform.lastname/* , address: logform.address */ }  })
+            signup({
+                variables: {
+                    firstName: logform.firstname, email: logform.email, password: logform.password, /* username:logform.username,  */
+                    lastName: logform.lastname/* , address: logform.address */
+                }
+            })
                 .then((resolve) => { console.log("signup bien") })
                 .catch((error) => { console.log("signup mal") })
                 ;
@@ -86,6 +90,10 @@ const Login = () => {
         removeCookie('User')
         window.location.href = 'http://localhost:3000/Home'
 
+    }
+
+    const handleclickForget = () => {
+        window.location.href = 'http://localhost:3000/EditarCuenta'
     }
 
     return (
@@ -146,6 +154,9 @@ const Login = () => {
                             <div className={styles.organizarbotones}>
                                 <button className={styles.boton} type='submit' >Loguear</button>
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
+                            </div>
+                            <div className={styles.organizarbotones}>
+                                <button className={styles.boton} onClick={handleclickForget} >Olvidaste tu contraseña?</button>
                                 <button className={styles.boton} onClick={logoutchange} >Desvincular</button>
                             </div>
                         </form>

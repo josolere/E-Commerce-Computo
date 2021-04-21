@@ -18,14 +18,14 @@ const NavBar = (): JSX.Element => {
 
   const [showadmin, setShowadmin] = useState(false)
 
-  const [cookiess, setCookies ] = useState<any>()
- 
+  const [cookiess, setCookies] = useState<any>()
+
   const opciones = ['Crear Producto', 'Crear Categoria']
 
   const cookie = new Cookies
 
 
-  useEffect (() => {
+  useEffect(() => {
     setCookies(cookie.get('User'))
   }, [])
 
@@ -47,8 +47,7 @@ const NavBar = (): JSX.Element => {
         </div>
         <div>
           <p>{cookiess && cookiess}</p>
-{/*           <button className={navBar.linksNav} onClick={() => setShowadmin(!showadmin)} >✓</button>
-          {showadmin ? */} <Link className={navBar.linksNav} to='/Crear'><p>Crear</p></Link>{/*  : null} */}
+          <Link className={navBar.linksNav} to='/Crear'><p>Crear</p></Link>{/*  : null} */}
         </div>
       </div>
     </>
