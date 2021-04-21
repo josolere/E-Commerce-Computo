@@ -110,8 +110,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
-    const changereview = async () => {
-        await addreview({ variables: { rating: totalrating, text: reviewuser.review, product: filtred?.id } })
+    const changereview =  () => {
+        addreview({ variables: {id:filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
             .then(review => { console.log('review up') })
             .catch((err) => { console.log(results) })
         setHidereviews(false)
@@ -121,7 +121,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const[details,setDetails] = useState({id:"", name:"",price:0,brand:"",image:"",details:"", categories:[{id:"1",name:"default"}]})
     
     useEffect(()=>{
-        console.log(results.data)
+        // console.log(results.data)
+        console.log(results)
         // setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
     },[results])
 
