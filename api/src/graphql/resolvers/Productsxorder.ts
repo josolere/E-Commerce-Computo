@@ -30,7 +30,11 @@ export default {
       const product = await models.Product.findByPk(idProduct);
       const order = await models.Order.findByPk(idOrder);
       const detail = await order.addProduct(product, {
-        through: { quantity: quantity, price: product.price },
+        through: {
+          quantity: quantity,
+          price: product.price,
+          productName: product.name,
+        },
       });
 
       return detail[0];

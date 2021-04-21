@@ -8,6 +8,7 @@ export const typeDefs = gql`
     ProductId: Int
     quantity: Int
     price: Float
+    productName: String
     createdAt: String
     updatedAt: String
   }
