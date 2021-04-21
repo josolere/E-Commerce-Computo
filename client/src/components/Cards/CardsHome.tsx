@@ -7,7 +7,7 @@ import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import ReactPaginate from "react-paginate"
 import { AppState } from '../../redux/reducers';
-
+import PopUp from '../Alerts/PopUp';
 
 
 interface DetailsProduct {
@@ -35,8 +35,6 @@ export default function Cards({reset}:IProps) {
 
     const { loading, error, data } = useQuery<DetailsData>(FILTER,{variables:{name:name, categoriesId:categoriesId}})   
     const [count, setCount] = useState(1)
-
-    
 
     var product = data?.getProducts
     const [pageNumber, setPageNumber] = useState(0)
@@ -66,6 +64,8 @@ export default function Cards({reset}:IProps) {
          );
     })
     return <div className={styles.container}>{displayProducts}
+        <button className={styles.BackButton} >X</button>
+        <PopUp/>
         <ReactPaginate
         previousLabel={"Anterior"}
         nextLabel={"Siguiente"}
