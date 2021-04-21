@@ -6,7 +6,7 @@ import {
 } from "../../interfaces";
 
 import db from "../../models";
-
+import { MailOrderCreate } from "../../mailer/functions";
 export default {
   Query: {
     getOrderById: async (
@@ -82,6 +82,10 @@ export default {
       const order = await models.Order.create({ ...input });
       const user = await models.User.findByPk(idUser);
       order.setUser(user);
+
+      //mail
+      MailOrderCreate(user.email);
+
       return order;
     },
 
