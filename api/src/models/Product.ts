@@ -28,6 +28,7 @@ export interface ProductAttributesI {
   price: number;
   details: string;
   categoriesId: number;
+  stock:number;
 }
 
 interface ProductCreationAttributesI
@@ -43,6 +44,7 @@ export class Product
   public price!: number;
   public details!: string;
   public categoriesId!: number;
+  public stock!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -96,6 +98,10 @@ export function ProductFactory(sequelize: Sequelize) {
       categoriesId: {
         type: DataTypes.INTEGER,
       },
+      stock: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+      }
     },
     {
       tableName: "products",
