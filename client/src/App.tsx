@@ -15,7 +15,8 @@ import styles from './App.module.scss';
 import Unicrear from './components/Create/Create'
 import Orders from './components/Order/Orders'
 import { addLocalStorage } from './redux/actions/index'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import EditAccount from './components/login/EditAccount';
 
 function App() {
 

@@ -68,7 +68,7 @@ export default function CreateProduct() {
                 <hr />
                 <label>Nombre de la cateogía</label>
                 <input type='text' name='categorie' value={categorie} onChange={handleChange} />
-                <input type='submit' className={styles.button} value='Crear' />
+                <button type='submit' className={styles.button}> Crear </button>
             </form>
             <div className={styles.separateList}>
                 <div className={styles.listProducts}>

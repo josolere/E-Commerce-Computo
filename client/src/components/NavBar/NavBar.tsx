@@ -25,7 +25,7 @@ const NavBar = (): JSX.Element => {
   const cookie = new Cookies
 
 
-  useEffect (() => {
+  useEffect(() => {
     setCookies(cookie.get('User'))
   }, [])
 

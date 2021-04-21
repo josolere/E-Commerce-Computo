@@ -37,7 +37,7 @@ const Login = () => {
     const [showlogin, setshowLogin] = useState(false)
 
 
-    const currentUser =  useQuery<datauser>(ACTUAL_USER)
+    const currentUser = useQuery<datauser>(ACTUAL_USER)
 
     console.log(currentUser.data)
 
@@ -71,8 +71,12 @@ const Login = () => {
                 ;
         }
         else {
-            signup({ variables: { firstName: logform.firstname, email: logform.email, password: logform.password, /* username:logform.username,  */
-                lastName:logform.lastname/* , address: logform.address */ }  })
+            signup({
+                variables: {
+                    firstName: logform.firstname, email: logform.email, password: logform.password, /* username:logform.username,  */
+                    lastName: logform.lastname/* , address: logform.address */
+                }
+            })
                 .then((resolve) => { console.log("signup bien") })
                 .catch((error) => { console.log("signup mal") })
                 ;
