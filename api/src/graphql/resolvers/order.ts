@@ -63,10 +63,12 @@ export default {
 
     getAllOrders: async (
       _parent: object,
-      _args: object,
+      { status }: { status: string },
       { models }: { models: iModels }
     ): Promise<iOrder> => {
-      const orders = await models.Order.findAll();
+
+      let orders:any
+      status? orders = await models.Order.findAll({ where: { status: status } }) : orders = await models.Order.findAll();
       return orders;
     },
   },
