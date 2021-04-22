@@ -10,13 +10,12 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import NavCategories from './components/categories/Categories';
 import CrearProducto from "./components/CreateProduct/CreateProduct"
 import CrearCategoria from "./components/CreateCategory/CreateCategory"
-import Cards from './components/Cards/CardsHome';
 import styles from './App.module.scss';
-import Unicrear from './components/Create/Create'
 import Orders from './components/Order/Orders'
 import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux';
 import EditAccount from './components/login/EditAccount';
+import { ToastContainer } from 'react-toastify'
 
 function App() {
 
@@ -37,12 +36,24 @@ function App() {
 
   return (
     <Router>
+       <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar
+              newestOnTop
+              closeOnClick
+              rtl={false}
+              pauseOnHover
+              pauseOnFocusLoss
+              draggable
+            />
       <Route path="/">
         <Home />
       </Route>
       <Switch>
         <Route exact path='/CrearProducto'component={CrearProducto} />
         <Route exact path='/CrearCategoria'component={CrearCategoria} />
+        <Route exact path='/Perfil'component={EditAccount} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Pago' component={Payment} />

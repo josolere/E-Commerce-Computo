@@ -3,6 +3,10 @@ import styles from "./Dropdown.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt, faWrench, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { BiUserCircle } from "react-icons/bi"
+import { RiQuestionnaireFill } from "react-icons/ri"
+import { FaShippingFast } from "react-icons/fa"
+
 
 
 function DropdownMenu (props:any) {
@@ -14,11 +18,29 @@ function DropdownMenu (props:any) {
         window.location.href = 'http://localhost:3000/Home'
     }
 
+    
     return (
         <div className={styles.dropdown} onMouseLeave={props.data}>
-            <p ><FontAwesomeIcon className={styles.icon} icon={faWrench}></FontAwesomeIcon>Perfil</p>
-            <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Producto</Link></p>
+            <Link className={styles.profile} to="/Perfil"><BiUserCircle className={styles.iconButton}></BiUserCircle>{cookies.User.username}</Link>
+            
+            {cookies.User.privilege === "user" ? 
+
+                <><p ><FaShippingFast className={styles.icon} ></FaShippingFast>Mis Pedidos</p>
+                <p ><RiQuestionnaireFill className={styles.icon}></RiQuestionnaireFill>Preguntas</p></> 
+            
+            : false}
+
+           
+           
+            {cookies.User.privilege === "admin" ? 
+            <>
+
+            <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Producto</Link></p> 
             <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Categoría</Link></p>
+
+            </>:false}
+           
+           
             <p onClick = {logoutchange} ><FontAwesomeIcon className={styles.icon} icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
         </div>
     )

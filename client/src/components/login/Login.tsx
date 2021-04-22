@@ -6,7 +6,7 @@ import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER } from ".
 import { useCookies } from "react-cookie";
 import DropdownMenu from '../NavBar/Dropdown';
 import NavBarItem from '../NavBar/NavBarItem';
-
+import { toast, ToastContainer } from "react-toastify"
 
 interface user {
     actualuser: {
@@ -21,6 +21,9 @@ interface datauser {
 }
 
 const Login = () => {
+ 
+
+ 
 
     const [logform, setLogform] = useState({
         email: '',
@@ -32,60 +35,57 @@ const Login = () => {
 
     });
 
-    const [cookies, setCookie, removeCookie] = useCookies(["User"]);
+    const [cookies, setCookie, removeCookie] = useCookies(["User", "Status"]);
+
 
     const [showlogin, setshowLogin] = useState(false)
 
 
-    const currentUser = useQuery<datauser>(ACTUAL_USER)
-
-    console.log(currentUser.data)
-
     const [login, logindata] = useMutation(LOGIN_MUTATION)
 
-    const destructuringLogin = logindata.data
 
     const [signup, signupdata] = useMutation(SIGNUP_MUTATION)
 
-    const destructuringsingup = signupdata.data
 
     const [logout, logoutdata] = useMutation(LOGOUT_MUTATION)
 
-    const destructuringlogout = logoutdata.data
 
     const handleclickevent = () => {
         showlogin ? setshowLogin(false) : setshowLogin(true)
     }
 
+
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
     }
 
+    
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
-                .then((resolve) => {  setCookie('User', logform.username, {
-                    path: "/"
-                }); window.location.href = 'http://localhost:3000/Home'})
-                .catch((error) => { console.log("error login") })
+                .then((resolve) => {  const visitante = resolve.data.login.user; setCookie('User', visitante,  {
+                    path: "/"}); toast.success("Bienvenido " + visitante.username);
+                    setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 1800) })
+                .catch((error) => { toast.error(error.message)})
                 ;
         }
         else {
             signup({
                 variables: {
-                    firstName: logform.firstname, email: logform.email, password: logform.password, /* username:logform.username,  */
-                    lastName: logform.lastname/* , address: logform.address */
+                    firstName: logform.firstname, email: logform.email, password: logform.password, 
+                    lastName: logform.lastname
                 }
             })
-                .then((resolve) => { console.log("signup bien") })
-                .catch((error) => { console.log("signup mal") })
+                .then((resolve) => { toast.success("Te has registrado correctamente"); 
+                setTimeout(function(){window.location.href = 'http://localhost:3000/login';}, 2000 )})
+                .catch((error) => { toast.error(error.message) })
                 ;
         }
        
         event.preventDefault()
     }
 
-    
+
     return (
         <div>
             <div className={styles.back}>
@@ -100,7 +100,6 @@ const Login = () => {
                             </div>
                             loguearte
                             </div>
-                        {cookies.User && <h4>Hola {cookies.User}</h4>}
                         <form className={styles.form} onSubmit={handlesubmitchange}>
                             <div className={styles.form__group}>
                                 <label htmlFor='email' className={styles.form__label} >E-Mail</label>
@@ -130,7 +129,7 @@ const Login = () => {
                             </div>
                             
                             <div className={styles.organizarbotones}>
-                                <button className={styles.boton} type='submit' >Login</button>
+                                <button style={{paddingTop:"1rem"}} className={styles.boton} type='submit' >Login</button>
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
                             </div>
                         </form>
@@ -229,7 +228,7 @@ const Login = () => {
                                     />
                                 </div>
                                 <div className={styles.organizarbotones}>
-                                    <button className={styles.boton} type='submit' >Crea tu cuenta</button>
+                                    <button style={{paddingTop:"1rem"}} className={styles.boton} type='submit' >Crea tu cuenta</button>
                                     <button className={styles.boton} onClick={handleclickevent}>Ya tienes una  cuenta?</button>
                                 </div>
                             </form>

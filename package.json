@@ -12,6 +12,7 @@
     "react-cookie": "^4.0.3",
     "react-dropdown": "^1.9.2",
     "react-paginate": "^7.1.2",
-    "react-select": "^4.3.0"
+    "react-select": "^4.3.0",
+    "react-toastify": "^7.0.3"
   }
 }

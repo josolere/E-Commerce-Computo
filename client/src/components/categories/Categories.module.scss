@@ -7,10 +7,9 @@ $red:#f05454;//f05454
 .container{
     height: fit-content;
     justify-content: start;
-    width: 15rem;
+    width: 20%;
     margin-top: 4rem;
     margin-left: 1rem;
-    
 }
 .todos {
     background-color: $grey;
@@ -18,7 +17,6 @@ $red:#f05454;//f05454
     color: $white;
     border: transparent;
     width: 100%;
-    padding: 1rem;
     outline: none;
     &:hover{
         cursor: pointer;
@@ -26,21 +24,20 @@ $red:#f05454;//f05454
 }
 
 .containerCategories {
-    font-weight: bold;
+    font-family:'Montserrat', sans-serif;
     border: 1px solid $grey;
     display: flex;
-    width: 100%;
-    padding: 1rem;
-    color:$dark;;
+    width: 99%;
+    padding: 1.4rem;
     font-size: 0.8rem;
     transition: all .3s;
     position: relative;
     overflow: hidden;
     z-index: 1;
     color: $white;
-    background-color: yellow;
     cursor: pointer;
     outline: none;
+    
     &:after {
           content: '';
           position: absolute;
@@ -74,7 +71,6 @@ $red:#f05454;//f05454
   }
         
     
-
 
 .iconT {
    display: inline-flex;

@@ -24,6 +24,7 @@ export const SIGNUP_MUTATION = gql`
                             {    
                                 user{
                                     username
+                                    privilege
                                 }
                             }
                         
@@ -35,6 +36,8 @@ export const LOGIN_MUTATION = gql`
             login (email: $email password: $password) {
         user{
             id
+            username
+            privilege
             }  
         } 
     }`;

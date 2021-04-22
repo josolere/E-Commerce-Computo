@@ -7,7 +7,7 @@ $red:#f05454;//f05454
 .containerOrden{
     width: 70%;
    background-color:  #f05454;
-    height: 40%;
+    height: 33%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -16,6 +16,7 @@ $red:#f05454;//f05454
     margin: 1.8rem;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
      font-family:'Montserrat', sans-serif;
+     
 }
 
 .containerTitle{
@@ -39,6 +40,7 @@ $red:#f05454;//f05454
     display: flex;
     justify-content: space-around;
     background-color: #30475e;
+    height: 34%;
     h2{
         width: 180px;
         display: flex;
@@ -92,9 +94,8 @@ $red:#f05454;//f05454
         left: 0;
         width: 0%;
         height: 100%;
-        background-color: darken($red, 15%);
+        background-color: #30475e;
         transition: all .3s;
-        border-radius: 0.5rem;
         z-index: -1;
     }
     &:hover {

@@ -7,7 +7,7 @@ import { gql, useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { NEW_ORDER } from "../../gql/shopingCart"
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
-import Alert from '../Alerts/AlertsBuy';
+import { toast } from "react-toastify"
 
 
 const ShoppingTotal = (): JSX.Element => {
@@ -19,7 +19,6 @@ const ShoppingTotal = (): JSX.Element => {
     const [send, setSend] = useState(500)
     const [order, setOrder] = useState([])
     const [gotcookie, setGotcookie] = useState(false)
-    const [hideAlert, setHideAlert] = useState(false)
     const cookie = new Cookies
 
     useEffect(() => {
@@ -38,27 +37,21 @@ const ShoppingTotal = (): JSX.Element => {
             setOrder(productLocal)
             localStorage.clear()
             dispatch(deleteCart())
-            console.log(productLocal)
-            console.log(order)
             createOrder({ variables: { status: 'pending', idUser: 1 } })
                 .then((resolve) => { console.log(data) })
                 .catch((err) => { console.log('Salio Mal') })
             window.location.href = 'http://localhost:3000/Pago'
         }
         else {
-            setHideAlert(true)
+            toast.error("Debes iniciar sesión para realizar una compra")
         }
     }
 
-    console.log(order)
+    
 
     return (
         <>
             <div className={total.containerOrden}>
-            {hideAlert ?
-                <div className={total.alert}>
-                    <Alert />
-                </div> : false}
                 <div className={total.containerTitle}>
                     <h1>Mi Compra</h1>
                 </div>

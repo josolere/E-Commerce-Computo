@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
-import NavBar from "../NavBar/NavBar";
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
@@ -12,7 +11,7 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
 import { addProductDetails } from '../../redux/actions'
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
-import Alert from '../Alerts/AlertLDetails'
+import { toast } from 'react-toastify';
 
 interface Icategories {
     id?: number
@@ -59,6 +58,7 @@ interface PropsDetails {
 }
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
+
     const dispatch = useDispatch()
 
     const [gotcookie, setGotcookie] = useState<any>(false)
@@ -83,7 +83,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     if (results) {
         resultsData.push(results?.data?.addReview?.text)
-        console.log(results)
     }
 
     let [rating, setRating] = useState<Array<any>>([])
@@ -98,7 +97,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const [hideStar, setHideStar] = useState(true)
 
-    const [hideAlert, setHideAlert] = useState(false)
+   
 
     const filtred = data?.getProductById
 
@@ -128,7 +127,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         setHidereviews(false)
         }
         else {
-            setHideAlert(true)
+            toast.error("Debes estar logueado para comentar")
         }
     }
 
@@ -220,10 +219,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         <React.Fragment>
             <div className={styles.contenedorAll}>
                 <div className={styles.contenedorDetail}>
-                    {hideAlert ? 
-                    <div className={styles.alert}>
-                        <Alert />
-                    </div> : false}
                     <img src={filtred?.image} alt='' />
                     <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.formm} >
                         {gotcookie ? <button className={styles.Edit} onClick={handleEdit}>Edit</button> : false}

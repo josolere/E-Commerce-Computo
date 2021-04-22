@@ -32,7 +32,7 @@ const NavBar = (): JSX.Element => {
   return (
     <>
       <div className={navBar.container}>
-        <Link to='/' className={navBar.linksNav} > <h1 className={navBar.titleNav} >CH</h1> </Link>
+        <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
         <SearchBar />
 
         <Link className={navBar.linkCart} to="/Carrodecompras">
@@ -50,10 +50,9 @@ const NavBar = (): JSX.Element => {
           {cookiess ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
          
         </div>
-        <div>
-          <p>{cookiess &&
-          <NavBarItem info= "Mi Cuenta"></NavBarItem>}</p>
-        </div>
+        
+          <p>{cookiess && <NavBarItem info= "Mi Cuenta"></NavBarItem>  }</p>
+        
         </div>
       </div>
     </>
