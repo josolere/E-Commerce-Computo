@@ -23,16 +23,21 @@ a {
 
 .navItem {
     font-family: 'Montserrat', sans-serif;
-    color: white;
+    color: #dddddd;
     display: flex;
+    margin-top: 0.5rem;
+    font-weight: 600;
 }
 
 .iconButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 4rem;
+    border-radius: 40px;
+    position: relative;
+    top: 1rem;
+    margin-right: 1rem;
     &:hover {
-        cursor: pointer;
+        transition-duration: 650ms;
+        background-color:#f05454;
     }
 }
 
@@ -40,16 +45,21 @@ a {
     background-color: #30475e;
     border-radius: 0.2rem;
     position: absolute;
+    border:2px solid #30475e;
     top:58px;
-    width: fit-content;
+    width: 20%;
     flex-direction: column;
     font-size: 0.7rem;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     overflow: hidden;
     z-index: 1;
     p {
         color: white;
-        padding: 10px;
+        font-size: 0.9rem;
+        padding: 0 1rem 1rem 1rem;
+        position: relative;
+       
+        width: 100%;
         &:hover {
             cursor: pointer;
             transition-duration: 650ms;
@@ -60,10 +70,18 @@ a {
 }
 
 .icon {
-    margin-right: 1rem;
+    margin-left: 1rem;
+    padding: 0.5rem;
     font-size: 1rem;
+    position: relative;
+    top: 0.4rem;
+    right: 0.8rem;
 }
 
+.profile {
+    font-size: 1.1rem;
+    padding-bottom:1.4rem ;
+}
 
 /* .menuItem {
     height: 50px;

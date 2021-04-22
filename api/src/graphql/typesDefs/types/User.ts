@@ -38,6 +38,7 @@ export const typeDefs = gql`
       lastName: String!
       email: String!
       password: String!
+      privilege: String
     ): AuthPayload
   }
 

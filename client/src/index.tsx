@@ -4,6 +4,7 @@ import App from './App';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { CookiesProvider } from "react-cookie";
+import "react-toastify/dist/ReactToastify.css"
 
 
 import {
