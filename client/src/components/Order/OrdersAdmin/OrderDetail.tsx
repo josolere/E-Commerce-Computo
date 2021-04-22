@@ -5,27 +5,39 @@ import { useMutation, useQuery } from '@apollo/client'
 import { useParams } from 'react-router'
 
 interface IParams {
-    id: string
+    id: string 
+}
+interface PropsDetails {
+    history: {
+        location: {
+            state: {
+                id: number
+                newprice: number
+            }
+        }
+    }
 }
 
-export default function OrderDetails() {
+
+export default function OrderDetails(props:PropsDetails) {
     //obtengo id desde la url
     const { id } = useParams<IParams>()
+    // const id = props.history.location.state.id
     //traigo la orden x su id
-    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id } })
+    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id:+id } })
     const order = data?.getOrderById
 
     const [editOrderStatus, editResults] = useMutation(EDIT_ORDER)
 
 
     const handleStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log(e.currentTarget.value)
         editOrderStatus({ variables: { id: order?.id, status: e.currentTarget.value } })
     }
 
-    useEffect(() => {
-        console.log(id)
-        console.log(order)
-    }, [id,order])
+    // useEffect(() => {
+    //     setIdSearch(id)
+    // }, [id])
 
     const totalCalc = () =>{
         let total = 0
@@ -41,9 +53,9 @@ export default function OrderDetails() {
             <h1>Orden Nro: {order?.id}</h1>
             <h4>Estado: {order?.status}</h4>
             {/* {order?.status === "pending" && <button onClick={handleStatus} value='creado'>Creado</button>} */}
-            {order?.status === "pending" && <> <button onClick={handleStatus} value='procesando'>Procesando</button><button onClick={handleStatus} value='cancelado'>Cancelar</button> </>}
-            {order?.status === "procesando" && <><button onClick={handleStatus} value='completo'>Completo</button><button onClick={handleStatus} value='cancelado'>Cancelar</button> </>}
-            {order?.status === "completo" && <button onClick={handleStatus} value='pending'>pending</button>}
+            {order?.status === "pending" && <> <button onClick={handleStatus} value='Procesando'>Procesando</button><button onClick={handleStatus} value='Cancelada'>Cancelar</button> </>}
+            {order?.status === "Procesando" && <><button onClick={handleStatus} value='Completa'>Completo</button><button onClick={handleStatus} value='Cancelada'>Cancelar</button> </>}
+            {/* {order?.status === "Completa" && <button onClick={handleStatus} value='pending'>pending</button>} */}
             <div className={styles.products}>
                 <nav>
                 <div>Nombre</div>
@@ -51,7 +63,7 @@ export default function OrderDetails() {
                 <div>Precio</div>
                 <div>TOTAL</div>
                 </nav>
-                {order?.details?.map((obj: any) => <nav>
+                {order?.details?.map((obj: any) => <nav key={obj.id}>
                     <div>"Nombre"</div>
                     <div>{obj.quantity}</div>
                     <div>{obj.price}</div>

@@ -47,7 +47,7 @@ function App() {
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Pago' component={Payment} />
-        <Route exact path='/Ordenes/:id' component={OrderDetails} />
+        <Route exact path='/Orden/Detalle/:id' component={OrderDetails} />
         <Route exact path='/Ordenes' component={OrdersAdmin} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>

@@ -14,6 +14,8 @@ export default {
       { models }: { models: iModels }
     ): Promise<iOrderDetail> => {
       const data = await models.Order.findByPk(id);
+      console.log("++++++++++" && id)
+      console.log("++++++++++" && data)
       return data;
     },
   },

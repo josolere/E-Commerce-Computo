@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './AllOrders.module.scss'
 import {GET_ALL_ORDERS} from '../../../gql/orders'
 import { useQuery } from '@apollo/client'
@@ -12,34 +12,44 @@ interface IOrder {
 }
 
 export default function AllOrders() {
+    const [status, setStatus] = useState("")
 
-    const {loading, error, data} = useQuery(GET_ALL_ORDERS)
+    const {loading, error, data} = useQuery(GET_ALL_ORDERS,{variables:{status:status}})
     const orders = data?.getAllOrders
 
     useEffect(()=>{
         console.log(data)
     },[data])
 
+    const handleStatus = (e: React.FormEvent<HTMLSelectElement>) => {
+        setStatus(e.currentTarget.value)
+    }
+
     return (
         <div className={styles.container}>
             <h1>Todas las órdenes</h1>
             <form>
             <label >Filtrar por:</label>
-            <select>
+            <select onChange={handleStatus}>
                 <option value=''>Todas</option>
-                <option value='pendiente'>Pendiente</option>
-                <option value='enProceso'>En Proceso</option>
-                <option value='completada'>Completada</option>
-                <option value='cancelada'>Cancelada</option>
+                <option value='pending'>Pendiente</option>
+                <option value='Procesando'>Procesando</option>
+                <option value='Completa'>Completa</option>
+                <option value='Cancelada'>Cancelada</option>
             </select>
             </form>
             <div className={styles.products}>
-                {!loading && orders?.map((order:IOrder) => <nav>
-                    <div>{order.id}</div>
+            <nav>
+                <div>Nro de Orden</div>
+                <div>Estado</div>
+                <a></a>
+            </nav>
+                {!loading && orders?.map((order:IOrder) => <nav key={order.id}>
+                    <div >{order.id}</div>
                     <div>{order.status}</div>
-                    <Link to={`/Ordenes/${order.id}`}>
+                    <a href={'/Orden/Detalle/'+order.id}>
                         Ver más
-                    </Link>
+                    </a>
                 </nav>)}
             </div>
             

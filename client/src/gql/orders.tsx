@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client"
 
 export const GET_ALL_ORDERS =  gql `
-query{
-  getAllOrders{
+query($status:String){
+  getAllOrders(status:$status){
     id
     status
     details{
