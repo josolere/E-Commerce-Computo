@@ -20,7 +20,7 @@ const app: express.Application = express();
 require("dotenv").config();
 const PORT = "localhost:3000" || "localhost:5000";
 
-const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID || "";
+const FACEBOOK_CLIENT_ID = "936411523566877";
 const FACEBOOK_APP_SECRET = "a1e05f5a17e23fd232a21f169690dd37";
 
 //añadimos el soporte para el registro y login desde los resolvers de graphQL para evitar hacer rutas nuevas
@@ -39,19 +39,19 @@ passport.use(
   })
 );
 
-/* const facebookOptions: iUserFacebook = {
-  clientID: "FACEBOOK_CLIENT_ID",
-  clientSecret: "FACEBOOK_APP_SECRET",
+const facebookOptions: iUserFacebook = {
+  clientID: FACEBOOK_CLIENT_ID,
+  clientSecret: FACEBOOK_APP_SECRET,
   callbackURL: "http://localhost:5000/auth/facebook/callback",
   profileFields: ["id", "email", "first_name", "last_name"],
-}; */
-/* const facebookCallback = async (
+};
+const facebookCallback = async (
   accessToken: any,
   refreshToken: any,
   profile: any,
   done: any
 ) => {
-  const users: any = await User.findAll();
+  const users: any = await db.User.findAll();
   // console.log(users)
   const matchingUser = users?.find(
     (user: any) => user.dataValues.facebookId === profile.id
@@ -75,17 +75,16 @@ passport.use(
     username: null,
   };
 
-  User.create({
+  db.User.create({
     ...input,
   });
 
   done(null, input);
-}; */
+};
 
-// passport.use(new facebookStrategy(facebookOptions, facebookCallback));
+
 
 passport.serializeUser((user: any, done) => {
-<<<<<<< HEAD
   done(null, user);
 });
 
@@ -94,15 +93,6 @@ passport.deserializeUser(async (id:any, done) => {
   console.log('--------------------------------', id)
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
   console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
-=======
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  const users: any = await db.User.findAll();
-  const matchingUser = users.find((user: any) => user.dataValues.id === id);
-  // console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
->>>>>>> development
   done(null, matchingUser);
 });
 
@@ -130,19 +120,19 @@ app.use(
     saveUninitialized: false,
   })
 );
+passport.use(new facebookStrategy(facebookOptions, facebookCallback));
 app.use(passport.initialize());
 app.use(passport.session());
-/* app.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", { scope: ["email"] })
-  app.get(
+
+app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"] }));
+
+app.get(
     "/auth/facebook/callback",
     passport.authenticate("facebook", {
       successRedirect: "http://localhost:5000/graphql",
       failureRedirect: "http://localhost:5000/graphql",
-    })
-    );
-    ); */
+    }),
+    ); 
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const status = err.status || 500;
