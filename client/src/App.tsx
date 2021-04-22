@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Login from './components/login/Login'
+import Login from './components/Users/Login'
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import Details from './components/Details/ProductsDetails'
 import LandPage from './components/landpage/LandPage'
@@ -15,10 +15,10 @@ import styles from './App.module.scss';
 import Orders from './components/Order/Orders';
 import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux';
-import EditAccount from './components/login/EditAccount';
+import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
-import CreateAdmin from './components/login/CreateAdmin';
-
+import CreateAdmin from './components/Users/CreateAdmin';
+import DeleteUser from './components/Users/DeleteUser';
 
 function App() {
 
@@ -64,6 +64,7 @@ function App() {
         <Route exact path='Pago'>
           {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
+        <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/CrearAdministrador' component={CreateAdmin} />
         <Route exact path='/EditarCuenta' component={EditAccount} />
         <Route exact path='/Detalles' component={Details} />

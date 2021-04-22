@@ -16,10 +16,7 @@ const CreateAdmin = () => {
     const [logform, setLogform] = useState({
         email: '',
         password: '',
-        firstname: '',
-        lastname: '',
-        username: '',
-        address: ''
+        username: ''
     });
 
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -36,13 +33,13 @@ const CreateAdmin = () => {
             <div className={styles2.organizar2}>
                 <div className={styles.caja}>
                     <div className={styles.container}>
-                        ASIGNA
+                        Elimina
                             <div className={styles.flip}>
-                            <div><div>NUEVO</div></div>
-                            <div><div>NUEVO</div></div>
-                            <div><div>NUEVO</div></div>
+                            <div><div>tus</div></div>
+                            <div><div>tus</div></div>
+                            <div><div>tus</div></div>
                         </div>
-                            ADMINISTRADOR
+                            datos
                             </div>
                     <form className={styles.form} >
                         <div className={styles.form__group}>
@@ -83,47 +80,9 @@ const CreateAdmin = () => {
                                 onChange={handleinputchange}
                             />
                         </div>
-                        <div className={styles2.showMore}>
-                            <div className={styles.form__group}>
-                                <label htmlFor='name' className={styles.form__label} >Nombre</label>
-                                <input
-                                    className={styles.form__field}
-                                    type='text'
-                                    minLength={5}
-                                    maxLength={20}
-                                    placeholder='Nombre'
-                                    name='firstname'
-                                    onChange={handleinputchange}
-                                />
-                            </div>
-                            <div className={styles.form__group}>
-                                <label htmlFor='lastname' className={styles.form__label} >Apellido</label>
-                                <input
-                                    className={styles.form__field}
-                                    type='text'
-                                    minLength={5}
-                                    maxLength={20}
-                                    placeholder='Apellido'
-                                    name='lastname'
-                                    onChange={handleinputchange}
-                                />
-                            </div>
-                            <div className={styles.form__group}>
-                                <label htmlFor='address' className={styles.form__label} >Dirección</label>
-                                <input
-                                    className={styles.form__field}
-                                    type='text'
-                                    minLength={5}
-                                    maxLength={30}
-                                    placeholder='Dirección'
-                                    name='address'
-                                    onChange={handleinputchange}
-                                />
-                            </div>
-                            <div className={styles.organizarbotones}>
-                                <button className={styles.boton} type='submit' >Crear Administrador</button>
-                                <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
-                            </div>
+                        <div className={styles.organizarbotones}>
+                            <button className={styles.boton} type='submit' >Eliminar Usuario</button>
+                            <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
                         </div>
                     </form>
                 </div>
