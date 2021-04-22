@@ -64,9 +64,11 @@ const Login = () => {
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
-                .then((resolve) => {  setCookie('User', logform.email, {
-                    path: "/"
-                }); window.location.href = 'http://localhost:3000/Home'})
+                .then((resolve) => {
+                    setCookie('User', logform.email, {
+                        path: "/"
+                    }); window.location.href = 'http://localhost:3000/Home'
+                })
                 .catch((error) => { console.log("error login") })
                 ;
         }
@@ -81,8 +83,12 @@ const Login = () => {
                 .catch((error) => { console.log("signup mal") })
                 ;
         }
-       
         event.preventDefault()
+    }
+
+    const handleResetPassword = () => {
+        window.location.href = 'http://localhost:3000/EditarCuenta'
+
     }
 
     return (
@@ -115,22 +121,24 @@ const Login = () => {
                                 />
                             </div>
                             <div className={styles.form__group}>
-                                <label htmlFor='password' className={styles.form__label} >Password</label>
+                                <label htmlFor='password' className={styles.form__label} >Contraseña</label>
                                 <input
                                     className={styles.form__field}
-                                    placeholder='Contraseña'
+                                    type='password'
                                     minLength={4}
                                     maxLength={15}
-                                    type="password"
+                                    placeholder='Contraseña'
                                     name='password'
                                     onChange={handleinputchange}
                                     required={true}
                                 />
                             </div>
-                            
                             <div className={styles.organizarbotones}>
                                 <button className={styles.boton} type='submit' >Login</button>
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
+                            </div>
+                            <div className={styles.organizarbotones}>
+                                <button className={styles.boton} onClick={handleResetPassword} >Te olvidaste la Contraseña?</button>
                             </div>
                         </form>
                     </div>
@@ -163,7 +171,7 @@ const Login = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='password' className={styles.form__label} >Password</label>
+                                    <label htmlFor='password' className={styles.form__label} >Contraseña</label>
                                     <input
                                         className={styles.form__field}
                                         type='password'

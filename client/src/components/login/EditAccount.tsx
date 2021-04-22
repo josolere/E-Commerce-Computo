@@ -16,6 +16,7 @@ const EditAccount = () => {
 
     const [logform, setLogform] = useState({
         email: '',
+        newpassword: '',
         password: '',
         firstname: '',
         lastname: '',
@@ -61,7 +62,7 @@ const EditAccount = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles.form__label} >Password</label>
+                            <label htmlFor='password' className={styles.form__label} >Contraseña Anterior</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='Contraseña'
@@ -69,6 +70,19 @@ const EditAccount = () => {
                                 maxLength={15}
                                 type="password"
                                 name='password'
+                                onChange={handleinputchange}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.form__group}>
+                            <label htmlFor='password' className={styles.form__label} >Nueva Contraseña</label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Nueva Contraseña'
+                                minLength={4}
+                                maxLength={15}
+                                type="password"
+                                name='newpassword'
                                 onChange={handleinputchange}
                                 required={true}
                             />
@@ -83,7 +97,6 @@ const EditAccount = () => {
                                 placeholder='Nombre de Usuario'
                                 name='username'
                                 onChange={handleinputchange}
-                                required={true}
                             />
                         </div>
                         {showMore ?

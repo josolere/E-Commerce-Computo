@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './AlertDetails.module.scss'
-import { faExclamationTriangle, faHandPointUp } from '@fortawesome/free-solid-svg-icons'
+import { faExclamationTriangle, faHandPointUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AlertLogin = () => {

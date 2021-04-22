@@ -69,7 +69,7 @@ export default function Cards({ reset }: IProps) {
                 <Card id={el.id} name={el.name} image={el.image} price={el.price} count={count} />
             );
         })
-    
+
     const closePopup = () => {
         setIsOpen(false)
     }
@@ -77,15 +77,14 @@ export default function Cards({ reset }: IProps) {
     return (
         <React.Fragment>
             <div className={styles.container}>{displayProducts}
-            {isOpen ? 
-                <div className={styles.PopBox}>
-                    <div className={styles.Pop} >
-                    <button onClick={closePopup} className={styles.PopButton} >
-                            <FontAwesomeIcon icon={faTimes} aria-hidden={true} />
-                            </button>
-                        <PopUp />
-                    </div>
-                </div> : false }
+                {isOpen ?
+                    <div className={styles.PopBox}>
+                        <button onClick={closePopup} className={styles.PopButton} >
+                        <FontAwesomeIcon icon={faTimes} aria-hidden={true} /></button>
+                        <div className={styles.Pop} >
+                            <PopUp />
+                        </div>
+                    </div> : false}
                 <ReactPaginate
                     previousLabel={"Previous"}
                     nextLabel={"Next"}

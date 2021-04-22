@@ -3,7 +3,8 @@ import styles from './CreateCategory.module.scss'
 import { NEW_CATEGORY } from "../../gql/categories"
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { GET_CATEGORIES } from "../../gql/categories";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileAlt, faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
 
 
 interface Categorie {
@@ -18,7 +19,7 @@ interface Categories {
 type FormEvent = React.FormEvent<HTMLFormElement>
 type InputEvent = React.FormEvent<HTMLInputElement>
 
-export default function CreateProduct() {
+export default function CreateProduct():JSX.Element {
 
     const results = useQuery<Categories>(GET_CATEGORIES)
 
@@ -29,7 +30,7 @@ export default function CreateProduct() {
     const [categorie, setCategorie] = useState("")
 
     const [showCreate, setShowCreate] = useState(false)
-    
+
 
     const [createCategory, { data }] = useMutation(NEW_CATEGORY)
 
@@ -39,7 +40,7 @@ export default function CreateProduct() {
 
     useEffect(() => {
         setCat(categories)
-    
+
     }, [categories])
 
     function handleChange(e: InputEvent) {
@@ -48,7 +49,7 @@ export default function CreateProduct() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
-      
+
         createCategory({ variables: { name: categorie } })
             .then((resolve) => { console.log(resolve) })
             .catch((err) => { console.log('Salio Mal') })
@@ -62,25 +63,45 @@ export default function CreateProduct() {
 
     return (
         <div className={styles.container}>
-           
-            <form onSubmit={handleSubmit} className={styles.form} >
-                <h1>Crear Categoría</h1>
-                <hr />
-                <label>Nombre de la cateogía</label>
-                <input type='text' name='categorie' value={categorie} onChange={handleChange} />
-                <button type='submit' className={styles.button}> Crear </button>
-            </form>
-            <div className={styles.separateList}>
-                <div className={styles.listProducts}>
-                    <h4 className={styles.TitleList} >Categorias creadas</h4>
-                    <hr className={styles.hrList} />
-                    {cat && cat.map((item: any, index: number) => (
-                        <p key= {index} className={styles.pList}>{item?.id}: {item?.name}</p>
-                    ))}
-                    {listCategory && listCategory.map((item: any, index: number) => (
-                        <p key= {index} className={styles.pList} >{item?.id}: {item.name}</p>
-                    ))}
+            <h4 className={styles.TitleCreate} >Crear Categoría</h4>
+            <div className={styles.OrderCreate} >
+                <div className={styles.OrderForm} >
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <div className={styles.form__group}>
+                            <label htmlFor='Nombre' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Nombre
+                        </label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Nombre'
+                                minLength={2}
+                                maxLength={30}
+                                value={categorie}
+                                type='text'
+                                name='name'
+                                onChange={handleChange}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.OrderButton} >
+                            <button type='submit' className={styles.button}> Crear </button>
+                        </div>
+                    </form>
                 </div>
+
+                <div className={styles.separateList}>
+                    <div className={styles.listProducts}>
+                        <h4 className={styles.TitleList} >Categorías creadas</h4>
+                        <hr className={styles.hrList} />
+                        {cat && cat.map((item: any, index: number) => (
+                            <button key={index} className={styles.pList}>{item?.id}: {item?.name}</button>
+                        ))}
+                        {listCategory && listCategory.map((item: any, index: number) => (
+                            <button key={index} className={styles.pList} >{item?.id}: {item.name}</button>
+                        ))}
+                    </div>
+                </div>
+
             </div>
         </div>
     )

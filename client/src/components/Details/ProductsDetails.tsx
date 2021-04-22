@@ -37,7 +37,6 @@ interface Review {
     review: string
 }
 
-
 interface Categorie {
     id: number,
     name: string,
@@ -59,6 +58,7 @@ interface PropsDetails {
 }
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
+
     const dispatch = useDispatch()
 
     const [gotcookie, setGotcookie] = useState<any>(false)
