@@ -37,6 +37,14 @@ export default {
         },
       });
 
+      const stock = product.stock - quantity;
+      if (product) {
+        const updatedProduct = await product.update(
+          { stock },
+          { where: { idProduct } }
+        );
+      } 
+
       return detail[0];
     },
   },
