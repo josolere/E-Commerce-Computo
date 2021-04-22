@@ -87,8 +87,6 @@ const LandPage = () => {
 
     const products = data?.getProducts
 
-    console.log(products)
-
     let image1: string = "";
     let image2: string = "";
     let image3: string = "";

@@ -36,7 +36,6 @@ interface Review {
     review: string
 }
 
-
 interface Categorie {
     id: number,
     name: string,

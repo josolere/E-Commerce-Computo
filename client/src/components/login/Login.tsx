@@ -63,10 +63,19 @@ const Login = () => {
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
+<<<<<<< HEAD
                 .then((resolve) => {  const visitante = resolve.data.login.user; setCookie('User', visitante,  {
                     path: "/"}); toast.success("Bienvenido " + visitante.username);
                     setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 1800) })
                 .catch((error) => { toast.error(error.message)})
+=======
+                .then((resolve) => {
+                    setCookie('User', logform.email, {
+                        path: "/"
+                    }); window.location.href = 'http://localhost:3000/Home'
+                })
+                .catch((error) => { console.log("error login") })
+>>>>>>> a98e7ae2d885beca2e3dbc3acc21cf99ddfaa721
                 ;
         }
         else {
@@ -81,10 +90,16 @@ const Login = () => {
                 .catch((error) => { toast.error(error.message) })
                 ;
         }
-       
         event.preventDefault()
     }
 
+<<<<<<< HEAD
+=======
+    const handleResetPassword = () => {
+        window.location.href = 'http://localhost:3000/EditarCuenta'
+
+    }
+>>>>>>> a98e7ae2d885beca2e3dbc3acc21cf99ddfaa721
 
     return (
         <div>
@@ -115,22 +130,24 @@ const Login = () => {
                                 />
                             </div>
                             <div className={styles.form__group}>
-                                <label htmlFor='password' className={styles.form__label} >Password</label>
+                                <label htmlFor='password' className={styles.form__label} >Contraseña</label>
                                 <input
                                     className={styles.form__field}
-                                    placeholder='Contraseña'
+                                    type='password'
                                     minLength={4}
                                     maxLength={15}
-                                    type="password"
+                                    placeholder='Contraseña'
                                     name='password'
                                     onChange={handleinputchange}
                                     required={true}
                                 />
                             </div>
-                            
                             <div className={styles.organizarbotones}>
                                 <button style={{paddingTop:"1rem"}} className={styles.boton} type='submit' >Login</button>
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
+                            </div>
+                            <div className={styles.organizarbotones}>
+                                <button className={styles.boton} onClick={handleResetPassword} >Te olvidaste la Contraseña?</button>
                             </div>
                         </form>
                     </div>
@@ -163,7 +180,7 @@ const Login = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='password' className={styles.form__label} >Password</label>
+                                    <label htmlFor='password' className={styles.form__label} >Contraseña</label>
                                     <input
                                         className={styles.form__field}
                                         type='password'
