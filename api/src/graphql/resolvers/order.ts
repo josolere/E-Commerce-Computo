@@ -6,7 +6,9 @@ import {
 } from "../../interfaces";
 
 import db from "../../models";
-import { MailOrderCreate } from "../../mailer/functions";
+import { OrderCreateMail, StatusChangeMail } from "../../mailer/functions";
+import user from "./user";
+
 export default {
   Query: {
     getOrderById: async (
@@ -66,9 +68,10 @@ export default {
       { status }: { status: string },
       { models }: { models: iModels }
     ): Promise<iOrder> => {
-
-      let orders:any
-      status? orders = await models.Order.findAll({ where: { status: status } }) : orders = await models.Order.findAll();
+      let orders: any;
+      status
+        ? (orders = await models.Order.findAll({ where: { status: status } }))
+        : (orders = await models.Order.findAll());
       return orders;
     },
   },
@@ -84,7 +87,7 @@ export default {
       order.setUser(user);
 
       //mail
-      MailOrderCreate(user.email);
+      OrderCreateMail(user.email);
 
       return order;
     },
@@ -113,6 +116,11 @@ export default {
           { ...input },
           { where: { id } }
         );
+
+        //si el estado fue cambiado enviar un email informando ese cambio
+        const user = await models.User.findByPk(updatedOrder.UserId);
+        await StatusChangeMail(user.email, updatedOrder.status);
+
         return updatedOrder;
       }
       return null;
