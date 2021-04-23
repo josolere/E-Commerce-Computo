@@ -22,7 +22,7 @@ const PopUp = () => {
 
     let id = 19
 
-    const { loading, error, data } = useQuery<DetailsProduct>(GET, {
+    const { data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
     });
 

@@ -7,18 +7,15 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { AppState } from '../../redux/reducers';
 import { setFilter } from '../../redux/actions';
-import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 import NavBarItem from "./NavBarItem";
-import DropdownMenu from "./Dropdown";
 
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
 
-  const idsProducts: number = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
+  
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
-
-  const [showadmin, setShowadmin] = useState(false)
 
   const [cookiess, setCookies ] = useState<any>()
  

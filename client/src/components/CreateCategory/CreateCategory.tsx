@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styles from './CreateCategory.module.scss'
 import { NEW_CATEGORY } from "../../gql/categories"
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_CATEGORIES } from "../../gql/categories";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileAlt, faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import { faFileSignature } from '@fortawesome/free-solid-svg-icons';
 
 
 interface Categorie {
@@ -28,9 +28,6 @@ export default function CreateProduct():JSX.Element {
     const [cat, setCat] = useState<any>()
 
     const [categorie, setCategorie] = useState("")
-
-    const [showCreate, setShowCreate] = useState(false)
-
 
     const [createCategory, { data }] = useMutation(NEW_CATEGORY)
 

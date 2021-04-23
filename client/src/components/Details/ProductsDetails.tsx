@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation, gql } from '@apollo/client';
-import { useDispatch, useSelector } from 'react-redux'
+import { useQuery, useMutation } from '@apollo/client';
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
-import styles from "./ProductDetail.module.scss"
+import styles from  "./ProductDetail.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
 import { addProductDetails } from '../../redux/actions'
-import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 import { toast } from 'react-toastify';
 
 interface Icategories {
@@ -29,16 +29,6 @@ interface DetailsProduct {
         categories: any[]
         reviews: any[]
     }
-}
-
-interface Review {
-    rating: number
-    review: string
-}
-
-interface Categorie {
-    id: number,
-    name: string,
 }
 
 interface Categories {
@@ -64,9 +54,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const id = props.history.location.state.id
 
-    const newprice = props.history.location.state.newprice
+    /* const newprice = props.history.location.state.newprice */
 
-    const { loading, error, data } = useQuery<DetailsProduct>(GET, {
+    const { data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
     });
 

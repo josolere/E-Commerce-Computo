@@ -32,10 +32,9 @@ const Login = () => {
         lastname: '',
         username: '',
         address: ''
-
     });
 
-    const [cookies, setCookie, removeCookie] = useCookies(["User", "Status"]);
+    const [cookies, setCookie, removeCookie] = useCookies(["User"]);
 
 
     const [showlogin, setshowLogin] = useState(false)
@@ -46,6 +45,11 @@ const Login = () => {
 
     const [signup, signupdata] = useMutation(SIGNUP_MUTATION)
 
+    /* const {loading, error, data} = useQuery(ACTUAL_USER, {
+        fetchPolicy: "no-cache"
+      }); */
+
+ 
 
     const [logout, logoutdata] = useMutation(LOGOUT_MUTATION)
 
@@ -59,12 +63,12 @@ const Login = () => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
     }
 
-    
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
                 .then((resolve) => {  const visitante = resolve.data.login.user; setCookie('User', visitante,  {
-                    path: "/"}); toast.success("Bienvenido " + visitante.username);
+                    sameSite:"none", secure:true,
+                    path: "/", }); toast.success("Bienvenido " + visitante.username);
                     setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 1800) })
                 .catch((error) => { toast.error(error.message)})
                 ;
@@ -88,6 +92,8 @@ const Login = () => {
         window.location.href = 'http://localhost:3000/EditarCuenta'
 
     }
+
+    
 
     return (
         <div>

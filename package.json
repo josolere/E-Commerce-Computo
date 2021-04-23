@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/cookie-session": "^2.0.42",
     "@types/jest": "^26.0.22"
   },
   "dependencies": {
@@ -8,6 +9,9 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@stripe/react-stripe-js": "^1.4.0",
     "@types/react-paginate": "^6.2.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
     "react-autocomplete": "^1.8.1",
     "react-cookie": "^4.0.3",
     "react-dropdown": "^1.9.2",

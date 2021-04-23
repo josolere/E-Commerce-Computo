@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 /* import search from './styleSearch.module.css'
- */import { useQuery, gql } from '@apollo/client'
+ */import { useQuery } from '@apollo/client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from 'react-redux';
@@ -22,9 +22,6 @@ interface DetailsData {
     getProducts: DetailsProduct[]
 }
 
-interface Search {
-    name: string
-}
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
@@ -33,17 +30,13 @@ const InputSearch = (): JSX.Element => {
 
     let namesproducts: Array<any> = [""]
 
-    let idlist: Array<any> = []
-
-    const { loading, error, data } = useQuery<DetailsData>(GET);
+    const { data } = useQuery<DetailsData>(GET);
     if (data) {
         namesproducts = data?.getProducts.map(item => item.name)
-        idlist = data?.getProducts.map(item => item)
     }
 
     const [auto, setAuto] = useState<Array<string>>([""])
 
-    const [middlware, setMiddlware] = useState([""])
 
     const [searchInput, setSearchInput] = useState('')
 

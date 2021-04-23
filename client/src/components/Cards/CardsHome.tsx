@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Card from './CardHome'
 import { FILTER } from "../../gql/card"
 import styles from './CardsHome.module.scss'
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import ReactPaginate from "react-paginate"
 import { AppState } from '../../redux/reducers';
 import PopUp from '../Alerts/PopUp';
-import { faCross, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface DetailsProduct {
@@ -34,13 +34,14 @@ export default function Cards({ reset }: IProps) {
     const categoriesId = useSelector((store: AppState) => Number(store.productReducer.categories) || [])
 
     const { loading, error, data } = useQuery<DetailsData>(FILTER, { variables: { name: name, categoriesId: categoriesId } })
+    
     const [count, setCount] = useState(1)
 
     const [isOpen, setIsOpen] = useState(true);
 
-    const togglePopup = () => {
+     /* const togglePopup = () => {
         setIsOpen(!isOpen);
-    }
+    }  */
 
     const product = data?.getProducts
     const [pageNumber, setPageNumber] = useState(0)
@@ -59,10 +60,7 @@ export default function Cards({ reset }: IProps) {
         setPageNumber(selected)
     }
 
-    /* return (
-        <div className={styles.container}>
-        {loading ? <h2 style={{color:'whitesmoke'}}>Cargando Productos...</h2> : false}
-        {product?.length === 0?<h2 style={{color:'whitesmoke'}}>El producto que busca no existe o no se encuentra disponible</h2>:false} */
+    
     const displayProducts = product?.slice(pageVisited, pageVisited + productsPerPage)
         .map(el => {
             return (
@@ -77,14 +75,14 @@ export default function Cards({ reset }: IProps) {
     return (
         <React.Fragment>
             <div className={styles.container}>{displayProducts}
-                {isOpen ?
+               { isOpen ?
                     <div className={styles.PopBox}>
                         <button onClick={closePopup} className={styles.PopButton} >
                         <FontAwesomeIcon icon={faTimes} aria-hidden={true} /></button>
                         <div className={styles.Pop} >
                             <PopUp />
                         </div>
-                    </div> : false}
+                    </div> : false } 
                 <ReactPaginate
                     previousLabel={"Previous"}
                     nextLabel={"Next"}

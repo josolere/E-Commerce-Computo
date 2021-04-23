@@ -1,11 +1,10 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-/* import { NEW_PRODUCT } from "../../gql/products";*/
 import { GET_CATEGORIES } from "../../gql/categories";
 import styles from './CreateProduct.module.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileAlt, faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import {  faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
 
 
 interface Categorie {
@@ -81,7 +80,7 @@ export default function CreateProduct():JSX.Element {
 
     const [createProduct, results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
-    const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
+    const { data } = useQuery<Categories>(GET_CATEGORIES)
     const categories = data?.getCategory
 
     const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })
@@ -92,7 +91,7 @@ export default function CreateProduct():JSX.Element {
 
     const [newpro, setnewpr] = useState<any>([])
 
-    let LunesMañana = []
+   
 
     useEffect(() => {
         setProd(products?.data?.getProducts)

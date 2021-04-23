@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Login from './components/login/Login'
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import Details from './components/Details/ProductsDetails'
@@ -15,7 +15,7 @@ import Orders from './components/Order/Orders';
 import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux';
 import EditAccount from './components/login/EditAccount';
-import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 import { ToastContainer } from 'react-toastify'
 import CreateAdmin from './components/login/CreateAdmin';
 

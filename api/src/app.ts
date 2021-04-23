@@ -29,11 +29,11 @@ const FACEBOOK_APP_SECRET = "a1e05f5a17e23fd232a21f169690dd37";
 passport.use(
   new GraphQLLocalStrategy(async (email: any, password: any, done: any) => {
     const users = await db.User.findAll();
-    // console.log(users);
+    
     const matchingUser = users.find(
       (user: any) => email === user.email && password === user.password
     );
-    // console.log(matchingUser);
+    
     const error = matchingUser ? null : new Error("no matching user found");
     done(error, matchingUser);
   })
@@ -52,11 +52,11 @@ passport.use(
   done: any
 ) => {
   const users: any = await User.findAll();
-  // console.log(users)
+  
   const matchingUser = users?.find(
     (user: any) => user.dataValues.facebookId === profile.id
   );
-  // console.log(matchingUser)
+ 
   if (matchingUser) {
     done(null, matchingUser);
     return;
@@ -90,9 +90,7 @@ passport.serializeUser((user: any, done) => {
 
 passport.deserializeUser(async (id:any, done) => {
   const users: any = await db.User.findAll();
-  console.log('--------------------------------', id)
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
-  console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
   done(null, matchingUser);
 });
 
@@ -137,7 +135,6 @@ app.use(passport.session());
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const status = err.status || 500;
   const message = err.message || err;
-  console.error(err);
   res.status(status).send(message);
 });
 

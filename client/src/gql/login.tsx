@@ -4,10 +4,8 @@ import { gql } from "@apollo/client"
 export const ACTUAL_USER = gql`
 query {
     currentUser {
-      id
       name
-      privilege
-    }
+     }
   }`;
 
 export const LOGOUT_MUTATION = gql`
