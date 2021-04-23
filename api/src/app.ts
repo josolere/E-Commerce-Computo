@@ -91,78 +91,8 @@ const facebookCallback = async (
   done(null, input);
 };
 
-/* function googleCallback (
-  accessToken: any,
-  refreshToken: any,
-  profile:any,
-  done:any
-) {
-  console.log(profile);
+const googleCallback = (accessToken:any, refreshToken:any, email:any ,profile:any,  cb:any) => {
   
-
-  let input: any = {
-    id: uuid(),
-    googleId: profile.id,
-    name: profile.name.givenName,
-    surname: profile.name.familyName,
-    email: profile.emails && profile.emails[0] && profile.emails[0].value,
-    privilege: "user",
-    active: true,
-    password: null,
-    address: null,
-    username: null,
-  };
-
-  db.User.create({
-    ...input,
-  });
-
-  done(null, input);
-} */
-
-
-
-passport.serializeUser((user: any, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser(async (id:any, done) => {
-  const users: any = await db.User.findAll();
-  console.log('--------------------------------', id)
-  const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
-  console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
-  done(null, matchingUser);
-});
-
-const SESSION_SECRET = "bad secret";
-
-// declaramos como tienen que ser los headers
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-app.use(express.json({ limit: "50mb" }));
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://" + { PORT }); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  next();
-});
-
-app.use(
-  session({
-    genid: (req) => uuid(),
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-passport.use(new facebookStrategy(facebookOptions, facebookCallback));
-
-passport.use(new googleStrategy(googleOptions ,
-  
-  function (accessToken:any, refreshToken:any, email:any ,profile:any,  cb:any) {
     console.log('+++++++++++++++++++++',profile)
     console.log('---------------------',email)
 
@@ -186,7 +116,51 @@ passport.use(new googleStrategy(googleOptions ,
     cb(null, input);
   }
   
-));
+
+
+
+passport.serializeUser((user: any, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser(async (id:any, done) => {
+  const users: any = await db.User.findAll();
+  console.log('--------------------------------', id)
+  const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
+  console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
+  done(null, matchingUser);
+});
+
+const SESSION_SECRET = "bad secret";
+
+// declaramos como tienen que ser los headers
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+app.use(express.json({ limit: "50mb" }));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
+
+app.use(
+  session({
+    genid: (req) => uuid(),
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+passport.use(new facebookStrategy(facebookOptions, facebookCallback));
+
+passport.use(new googleStrategy(
+  googleOptions ,
+  googleCallback
+  ));
 
 app.use(passport.initialize());
 app.use(passport.session());
