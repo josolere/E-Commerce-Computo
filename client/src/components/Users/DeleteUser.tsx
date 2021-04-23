@@ -7,11 +7,13 @@ import styles2 from './Edit.module.scss';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { DELETE_USER } from "../../gql/login"
 
 
 const CreateAdmin = () => {
 
-    const [showMore, setShowMore] = useState(false)
+    const [deleteUser, data] = useMutation(DELETE_USER)
 
     const [logform, setLogform] = useState({
         email: '',
@@ -27,6 +29,14 @@ const CreateAdmin = () => {
         window.location.href = 'http://localhost:3000/Login'
     }
 
+    const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        deleteUser({
+            variables: { id: 1 }
+        })
+            .then((resolve) => { console.log('Usuario Eliminado') })
+            .catch((err) => (console.log('No se elimino')))
+    }
 
     return (
         <div className={styles.back}>
@@ -43,7 +53,8 @@ const CreateAdmin = () => {
                             </div>
                     <form className={styles.form} >
                         <div className={styles.form__group}>
-                            <label htmlFor='email' className={styles.form__label} >E-Mail</label>
+                            <label htmlFor='email' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='E-mail'
@@ -56,7 +67,8 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles.form__label} >Contraseña</label>
+                            <label htmlFor='password' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faUnlock} /> Contraseña</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='Nueva Contraseña'
@@ -69,7 +81,8 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='username' className={styles.form__label} >Nombre de Usuario</label>
+                            <label htmlFor='username' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faShareAlt} /> Nombre de Usuario</label>
                             <input
                                 className={styles.form__field}
                                 type='text'

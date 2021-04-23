@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import styles2 from './Edit.module.scss';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -43,7 +44,8 @@ const CreateAdmin = () => {
                             </div>
                     <form className={styles.form} >
                         <div className={styles.form__group}>
-                            <label htmlFor='email' className={styles.form__label} >E-Mail</label>
+                            <label htmlFor='email' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='E-mail'
@@ -56,7 +58,8 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles.form__label} >Contraseña</label>
+                            <label htmlFor='password' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faUnlock} /> Contraseña</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='Nueva Contraseña'
@@ -69,7 +72,8 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='username' className={styles.form__label} >Nombre de Usuario</label>
+                            <label htmlFor='username' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faShareAlt} /> Nombre de Usuario</label>
                             <input
                                 className={styles.form__field}
                                 type='text'
@@ -81,7 +85,8 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='name' className={styles.form__label} >Nombre</label>
+                            <label htmlFor='name' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faFileSignature} /> Nombre</label>
                             <input
                                 className={styles.form__field}
                                 type='text'
@@ -93,7 +98,8 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='lastname' className={styles.form__label} >Apellido</label>
+                            <label htmlFor='lastname' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faFileSignature} /> Apellido</label>
                             <input
                                 className={styles.form__field}
                                 type='text'
@@ -105,7 +111,8 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='address' className={styles.form__label} >Dirección</label>
+                            <label htmlFor='address' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faMapMarker} /> Dirección</label>
                             <input
                                 className={styles.form__field}
                                 type='text'
