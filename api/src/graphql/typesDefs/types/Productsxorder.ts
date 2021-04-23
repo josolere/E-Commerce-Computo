@@ -3,7 +3,7 @@ import { gql } from "apollo-server";
 export const typeDefs = gql`
   # object querys mutations RECORDAR USAR MAYÚSCULAS
   type OrderDetail {
-    id: Int
+    id: ID
     OrderId: Int
     ProductId: Int
     quantity: Int
@@ -20,13 +20,16 @@ export const typeDefs = gql`
 
   type Mutation {
     createOrderDetail(idProduct: ID, idOrder: ID, quantity: Int): OrderDetail
-    #deleteOrderDetail(id: String!): Order!
-    #editOrderDetail(id: String, input: EditOrderDetailInput): Order!
+    deleteOrderDetail(id: ID!): OrderDetail!
+    editOrderDetail(id: ID, input: EditOrderDetailInput): OrderDetail!
   }
 
   input EditOrderDetailInput {
-    id: Int
+    id: ID
+    OrderId: Int
+    ProductId: Int
     quantity: Int
     price: Float
+    productName: String
   }
 `;
