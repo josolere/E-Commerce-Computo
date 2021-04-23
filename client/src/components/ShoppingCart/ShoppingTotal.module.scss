@@ -1,7 +1,19 @@
+<<<<<<< HEAD
 .containerOrden{
     width: 70%;
    background-color:  #f05454;
     height: 40%;
+=======
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.containerOrden{
+    width: 70%;
+   background-color:  #f05454;
+    height: 33%;
+>>>>>>> front_roto
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -10,6 +22,10 @@
     margin: 1.8rem;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
      font-family:'Montserrat', sans-serif;
+<<<<<<< HEAD
+=======
+     
+>>>>>>> front_roto
 }
 
 .containerTitle{
@@ -33,6 +49,10 @@
     display: flex;
     justify-content: space-around;
     background-color: #30475e;
+<<<<<<< HEAD
+=======
+    height: 34%;
+>>>>>>> front_roto
     h2{
         width: 180px;
         display: flex;
@@ -59,12 +79,55 @@
     font-size: 18px;
     font-weight: 700;
     display: flex;
+<<<<<<< HEAD
     justify-content: center;
     align-items: center;
     text-decoration: none;
     &:hover{
     cursor: pointer;
     }
+=======
+    cursor: pointer;
+    border:transparent;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $red;
+        border-radius: 0.5rem;
+        z-index: -2;
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: #30475e;
+        transition: all .3s;
+        z-index: -1;
+    }
+    &:hover {
+        color: #fff;
+        &:before {
+            width: 100%;
+        }
+    }
+}
+.alert {
+    position: fixed;
+>>>>>>> front_roto
 }
 
 

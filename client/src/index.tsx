@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+<<<<<<< HEAD
 
 //import { Provider } from 'react-redux'
 //import { createStore } from 'redux'
 //import rootReducer from './redux/reducers'
 //const store = createStore(rootReducer)
+=======
+import { CookiesProvider } from "react-cookie";
+import "react-toastify/dist/ReactToastify.css"
+
+>>>>>>> front_roto
 
 import {
   ApolloClient,
@@ -26,12 +32,17 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
     uri: 'http://localhost:5000/graphql',
+<<<<<<< HEAD
+=======
+    credentials: 'include',
+>>>>>>> front_roto
   }),
 })
 
 const StripePromise = loadStripe('pk_test_51IfpazHObBDKzBSGun3Clgf3wbyo1QMxk6jwHwDwLPoxZTrfGCASzt1R8yDvUMTPqL8dmE4CIUgP8Qr0BqqwAFPq00RZ1Ulyai')
 
 ReactDOM.render(
+<<<<<<< HEAD
 <Elements stripe={StripePromise} >
     <Provider store={store}>
       <ApolloProvider client={client}>
@@ -49,4 +60,24 @@ ReactDOM.render(
 function rootReducer(rootReducer: any) {
   throw new Error('Function not implemented.');
 }
+=======
+  <CookiesProvider>
+    <Elements stripe={StripePromise} >
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ApolloProvider>
+      </Provider>
+    </Elements>
+  </CookiesProvider>,
+  document.getElementById('root')
+);
 
+>>>>>>> front_roto
+
+
+function rootReducer(rootReducer: any) {
+  throw new Error('Function not implemented.');
+}

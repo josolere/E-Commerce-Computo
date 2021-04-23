@@ -32,7 +32,11 @@ const NavCategories = (): JSX.Element => {
   return (
     <>
     <div className={styles.container} >
+<<<<<<< HEAD
       <button className={styles.todos} onClick={(e) =>dispatch(setCategory([]))}>Todos</button>
+=======
+      <button className={styles.containerCategories} onClick={(e) =>dispatch(setCategory([]))}>Todos</button>
+>>>>>>> front_roto
       {categories?.map((item: model, i: number) => {
         return <button onClick ={e => filterCategories(e)} value={item.id}
         className={styles.containerCategories}>{item.name}</button>;

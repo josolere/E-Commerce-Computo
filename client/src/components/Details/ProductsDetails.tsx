@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import NavBar from "../NavBar/NavBar";
+=======
+>>>>>>> front_roto
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
@@ -11,7 +14,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
 import { addProductDetails } from '../../redux/actions'
+<<<<<<< HEAD
 
+=======
+import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { toast } from 'react-toastify';
+>>>>>>> front_roto
 
 interface Icategories {
     id?: number
@@ -36,7 +44,10 @@ interface Review {
     review: string
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> front_roto
 interface Categorie {
     id: number,
     name: string,
@@ -58,8 +69,15 @@ interface PropsDetails {
 }
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
+<<<<<<< HEAD
     const dispatch = useDispatch()
 
+=======
+
+    const dispatch = useDispatch()
+
+    const [gotcookie, setGotcookie] = useState<any>(false)
+>>>>>>> front_roto
 
     const id = props.history.location.state.id
 
@@ -73,9 +91,20 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     let resultsData: Array<string> = []
 
+<<<<<<< HEAD
     if (results) {
         resultsData.push(results?.data?.addReview?.text)
         console.log(results)
+=======
+    const cookie = new Cookies
+
+    useEffect(() => {
+        cookie.get('User') ? setGotcookie(true) : setGotcookie(false);
+    }, [cookie])
+
+    if (results) {
+        resultsData.push(results?.data?.addReview?.text)
+>>>>>>> front_roto
     }
 
     let [rating, setRating] = useState<Array<any>>([])
@@ -90,6 +119,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const [hideStar, setHideStar] = useState(true)
 
+<<<<<<< HEAD
+=======
+   
+
+>>>>>>> front_roto
     const filtred = data?.getProductById
 
     let totalrating: number = 0;
@@ -110,6 +144,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
+<<<<<<< HEAD
     const changereview = async () => {
         await addreview({ variables: { rating: totalrating, text: reviewuser.review, product: filtred?.id } })
             .then(review => { console.log('review up') })
@@ -132,6 +167,34 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const[editMode,setEditMode] = useState(false)
     
+=======
+    const changereview = () => {
+        if (gotcookie) {
+        addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
+            .then(review => { console.log('review up') })
+            .catch((err) => { console.log(results) })
+        setHidereviews(false)
+        }
+        else {
+            toast.error("Debes estar logueado para comentar")
+        }
+    }
+
+    const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
+
+    useEffect(() => {
+        console.log(results.data)
+        // setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
+    }, [results])
+
+    useEffect(() => {
+        console.log(results.data)
+        setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
+    }, [filtred])
+
+    const [editMode, setEditMode] = useState(false)
+
+>>>>>>> front_roto
     console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -194,11 +257,15 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
     const categoriesQuery = categoriesQ.data?.getCategory
 
+<<<<<<< HEAD
     console.log(newprice)
+=======
+>>>>>>> front_roto
 
     const handleAddProduct = () => {
         const state = true
         dispatch(addProductDetails(state));
+<<<<<<< HEAD
 
     }
     return (
@@ -315,6 +382,127 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     {filtred?.reviews.map(review => <div><div>{review.text}</div><div>{review.rating}</div></div>)}
                 </div>
         </div>
+=======
+    }
+
+
+
+    return (
+        <React.Fragment>
+            <div className={styles.contenedorAll}>
+                <div className={styles.contenedorDetail}>
+                    <img src={filtred?.image} alt='' />
+                    <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.formm} >
+                        {gotcookie ? <button className={styles.Edit} onClick={handleEdit}>Edit</button> : false}
+                        {editMode ?
+                            <input className={stylesEdit.input} name='name' type='text' onChange={handleChange} defaultValue={details?.name} />
+                            :
+                            <h1 className={styles.nameDetail}>{filtred?.name}</h1>}
+                        {editMode ?
+                            <p > Marca: <input className={stylesEdit.input} name='brand' defaultValue={details?.brand} onChange={handleChange} /> </p>
+                            :
+                            <p> Marca: {filtred?.brand} </p>}
+                        {editMode ?
+                            <p ><textarea onChange={handleDetails} defaultValue={details?.details} /></p>
+                            :
+                            <p >{filtred?.details}</p>}
+
+                        <div className={styles.botonPrecio}>
+
+                            {editMode ?
+                                <p className={styles.precioDetail}>$<input className={stylesEdit.input} onChange={handlePrice} defaultValue={details?.price} /></p>
+                                :
+                                <p className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</p>
+                            }
+                            <hr style={{ height: '1rem', backgroundColor: 'white' }} />
+                            <Link to='/Home' >
+                                <button onClick={() => {
+                                    handleAddProduct();
+                                }} className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
+                            </Link>
+                        </div>
+                        <div className={stylesEdit.bot}>
+
+                            {editMode && <select onChange={handleAddCategories}>
+                                {categoriesQuery?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
+                            </select>}
+
+                            {editMode && <input className={stylesEdit.acept} type='submit' value='Aceptar Cambios' />}
+                        </div>
+                        <div className={stylesEdit.cats}>
+
+                            {editMode ?
+                                details?.categories?.map(category => <button className={stylesEdit.category} onClick={handleCategory} value={category.id} >{category.name}</button>)
+                                :
+                                details?.categories?.map(category => <p className={styles.category}>{category.name}</p>)
+                            }
+                        </div>
+                    </form>
+                </div>
+                <div className={styles.containerBot}>
+                    <div>{hidereviews ?
+                        <div>
+                            <button onClick={changereview} className={styles.buttonCompra} >Enviar comentario</button>
+                            <div className={styles.review}>
+                                <textarea
+                                    style={{ height: '5rem', width: '20rem' }}
+                                    placeholder={'Escriba aquí una review del producto'}
+                                    className={styles.textarea}
+                                    name='review'
+                                    value={reviewuser.review}
+                                    onChange={(event) =>
+                                        setReviewuser({
+                                            ...reviewuser,
+                                            review: event.target.value
+                                        })} />
+                            </div>
+                        </div>
+                        :
+                        <div className={styles.gracias} >
+                            <h4>Gracias por dejar su review</h4>
+                        </div>
+                    }
+                    </div>
+                    <div className={styles.estrellas}>
+                        {hideStar ?
+                            <div >
+                                {[...Array(5)].map((star, index) => {
+                                    const ratingvalue = index + 1;
+                                    return <label>
+                                        <input type='radio'
+                                            name='Rating'
+                                            value={ratingvalue}
+                                            onClick={function pushrating() {
+                                                setRating([...rating, ratingvalue])
+                                                setHideStar(false)
+                                            }}
+                                        />
+                                        <FaStar size={30}
+                                            className='star'
+                                            color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
+                                            onMouseEnter={() => setHover(ratingvalue)}
+                                            onMouseLeave={() => setHover(0)}
+                                        />
+                                    </label>
+                                })}
+                                {/* <p className={styles.raiting}>Rating {totalrating}</p> */}
+                            </div>
+                            :
+                            <div>
+                                <h4 className={styles.gracias} >Gracias por dar una clasificación</h4>
+                                <p className={styles.raiting} >Rating {totalrating}</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div className={styles.reviews}>
+                    {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
+                        : false}
+                    {filtred?.reviews.map(review => <div><div>{review.text}</div><div>{review.rating}</div></div>)}
+                </div>
+            </div>
+        </React.Fragment>
+>>>>>>> front_roto
     )
 }
 

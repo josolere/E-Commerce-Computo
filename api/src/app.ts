@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
+import cors from 'cors';
 dotenv.config();
 import session from "express-session";
 import { v4 as uuid } from "uuid";
@@ -15,10 +16,17 @@ import { User } from "./models/User";
 const app: express.Application = express();
 
 
+const PORT = "localhost:3000" || "localhost:5000";
+
+const corsOptions = {
+  credentials: true,
+  origin: 'http://localhost:3000'
+}
+
 var googleStrategy = googleOAuth.Strategy
 
 require("dotenv").config();
-const PORT = "localhost:3000" || "localhost:5000";
+
 
 const FACEBOOK_CLIENT_ID = "936411523566877";
 const FACEBOOK_APP_SECRET = "a1e05f5a17e23fd232a21f169690dd37";
@@ -134,6 +142,7 @@ passport.deserializeUser(async (id:any, done) => {
 const SESSION_SECRET = "bad secret";
 
 // declaramos como tienen que ser los headers
+app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 app.use((req, res, next) => {

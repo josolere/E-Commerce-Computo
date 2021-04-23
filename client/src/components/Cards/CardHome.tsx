@@ -17,6 +17,10 @@ interface props {
 }
 
 export default function Card({ name, image, price, id, count }: props) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> front_roto
     const dispatch = useDispatch()
     const { quantity, priceSubTotal, productTotal, addCart, addHome,idDetails,priceDetails,countDetails }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
@@ -75,6 +79,7 @@ export default function Card({ name, image, price, id, count }: props) {
         }
     }
 
+<<<<<<< HEAD
         if (addCart === true && addHome === true) {
             handleAddProduct()
             const state = false
@@ -83,6 +88,8 @@ export default function Card({ name, image, price, id, count }: props) {
             dispatch(addProductHome(state))
         }
 
+=======
+>>>>>>> front_roto
 
     // const nameoftheday = (fecha: any) => [
     //     'Domingo',

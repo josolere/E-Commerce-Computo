@@ -23,6 +23,11 @@
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-card-payment": "^0.1.2",
+<<<<<<< HEAD
+=======
+    "react-cookie": "^4.0.3",
+    "react-cookies": "^0.1.1",
+>>>>>>> front_roto
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-paginate": "^7.1.2",
@@ -32,6 +37,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",
+<<<<<<< HEAD
+=======
+    "react-toastify": "^7.0.3",
+>>>>>>> front_roto
     "react-youtube-player": "^2.0.1",
     "readable-stream": "^2.3.7",
     "redux": "^4.0.5",

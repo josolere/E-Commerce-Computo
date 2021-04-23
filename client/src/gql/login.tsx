@@ -3,10 +3,17 @@ import { gql } from "@apollo/client"
 
 export const ACTUAL_USER = gql`
 query {
+<<<<<<< HEAD
     actualtUser {
       id
       name
       email
+=======
+    currentUser {
+      id
+      name
+      privilege
+>>>>>>> front_roto
     }
   }`;
 
@@ -16,6 +23,7 @@ export const LOGOUT_MUTATION = gql`
       {
             loquellegue
       }
+<<<<<<< HEAD
   }
 `;
 
@@ -36,3 +44,32 @@ export const LOGIN_MUTATION = gql`
             loquellega    
         }
     }`;
+=======
+  }`;
+
+export const SIGNUP_MUTATION = gql`
+    mutation  ($firstName: String! $password: String! $email: String!  $lastName:String!) {
+        signup (firstName:$firstName lastName:$lastName password:$password email: $email ) 
+                            {    
+                                user{
+                                    username
+                                    privilege
+                                }
+                            }
+                        
+    }`;
+    
+
+export const LOGIN_MUTATION = gql`
+    mutation ($email: String!,  $password: String!) {
+            login (email: $email, password: $password) {
+                user{
+                    id
+                    username
+                    name
+                    surname
+                    privilege
+                    }  
+                } 
+    }`;
+>>>>>>> front_roto
