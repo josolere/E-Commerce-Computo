@@ -19,9 +19,26 @@ import { Cookies, CookiesProvider, useCookies } from "react-cookie";
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify'
+import { useMutation, useQuery, gql } from '@apollo/client';
+import { ACTUAL_USER } from "./gql/login"
+  
+interface user {
+  currentUser: {
+      name: string,
+      password: string,
+      email: string
+  }
+}
 
+interface datauser {
+  actualUser: user[]
+}
 
 function App() {
+
+  const actualuser = useQuery<user>(ACTUAL_USER)
+
+  console.log(actualuser.data)
 
   const dispatch = useDispatch()
 

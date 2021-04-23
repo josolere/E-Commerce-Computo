@@ -2,11 +2,13 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER } from "../../gql/login"
+import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/login"
 import { useCookies } from "react-cookie";
 import DropdownMenu from '../NavBar/Dropdown';
 import NavBarItem from '../NavBar/NavBarItem';
 import { toast, ToastContainer } from "react-toastify"
+import {faEnvelopeSquare, faUnlock,faFileSignature, faMapMarker, faShareAlt} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface user {
     actualuser: {
@@ -22,9 +24,6 @@ interface datauser {
 
 const Login = () => {
  
-
- 
-
     const [logform, setLogform] = useState({
         email: '',
         password: '',
@@ -40,31 +39,24 @@ const Login = () => {
 
     const [showlogin, setshowLogin] = useState(false)
 
-
     const [login, logindata] = useMutation(LOGIN_MUTATION)
 
-
     const [signup, signupdata] = useMutation(SIGNUP_MUTATION)
-
-
-    const [logout, logoutdata] = useMutation(LOGOUT_MUTATION)
-
 
     const handleclickevent = () => {
         showlogin ? setshowLogin(false) : setshowLogin(true)
     }
 
-
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
     }
-
     
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
-                .then((resolve) => {  const visitante = resolve.data.login.user; setCookie('User', visitante,  {
-                    path: "/"}); toast.success("Bienvenido " + visitante.username);
+                .then((resolve) => {  const visitante = resolve.data.login.user; setCookie('User', logform.email,  {
+                    path: "/"}); toast.success("Bienvenido " + logform.email);
+                    console.log(visitante)
                     setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 1800) })
                 .catch((error) => { toast.error(error.message)})
                 ;
@@ -78,7 +70,7 @@ const Login = () => {
             })
                 .then((resolve) => { toast.success("Te has registrado correctamente"); 
                 setTimeout(function(){window.location.href = 'http://localhost:3000/login';}, 2000 )})
-                .catch((error) => { toast.error(error.message) })
+                .catch((error) => { toast.error('Error al registrarse') })
                 ;
         }
         event.preventDefault()
@@ -105,7 +97,8 @@ const Login = () => {
                             </div>
                         <form className={styles.form} onSubmit={handlesubmitchange}>
                             <div className={styles.form__group}>
-                                <label htmlFor='email' className={styles.form__label} >E-Mail</label>
+                                <label htmlFor='email' className={styles.form__label} > 
+                                <FontAwesomeIcon icon={faEnvelopeSquare} aria-hidden={true} /> E-Mail</label>
                                 <input
                                     className={styles.form__field}
                                     placeholder='E-mail'
@@ -118,7 +111,8 @@ const Login = () => {
                                 />
                             </div>
                             <div className={styles.form__group}>
-                                <label htmlFor='password' className={styles.form__label} >Contraseña</label>
+                                <label htmlFor='password' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faUnlock} aria-hidden={true} /> Contraseña</label>
                                 <input
                                     className={styles.form__field}
                                     type='password'
@@ -155,7 +149,8 @@ const Login = () => {
                             {cookies.User && <h4>Hola {cookies.User}</h4>}
                             <form className={styles.form} onSubmit={handlesubmitchange}>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='email' className={styles.form__label} >E-Mail</label>
+                                    <label htmlFor='email' className={styles.form__label} >
+                                    <FontAwesomeIcon icon={faEnvelopeSquare} aria-hidden={true} /> E-Mail</label>
                                     <input
                                         className={styles.form__field}
                                         type='email'
@@ -168,7 +163,8 @@ const Login = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='password' className={styles.form__label} >Contraseña</label>
+                                    <label htmlFor='password' className={styles.form__label} >
+                                    <FontAwesomeIcon icon={faUnlock} aria-hidden={true} /> Contraseña</label>
                                     <input
                                         className={styles.form__field}
                                         type='password'
@@ -181,7 +177,8 @@ const Login = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='name' className={styles.form__label} >Nombre</label>
+                                    <label htmlFor='name' className={styles.form__label} >
+                                    <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Nombre</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
@@ -194,7 +191,8 @@ const Login = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='lastname' className={styles.form__label} >Apellido</label>
+                                    <label htmlFor='lastname' className={styles.form__label} >
+                                    <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Apellido</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
@@ -207,8 +205,9 @@ const Login = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='address' className={styles.form__label} >Dirección</label>
-                                    <input
+                                    <label htmlFor='address' className={styles.form__label} >
+                                    <FontAwesomeIcon icon={faMapMarker} aria-hidden={true} /> Dirección</label>
+                                    <input 
                                         className={styles.form__field}
                                         type='text'
                                         minLength={5}
@@ -220,7 +219,8 @@ const Login = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='username' className={styles.form__label} >Nombre de Usuario</label>
+                                    <label htmlFor='username' className={styles.form__label} >
+                                    <FontAwesomeIcon icon={faShareAlt} aria-hidden={true} /> Nombre de Usuario</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
