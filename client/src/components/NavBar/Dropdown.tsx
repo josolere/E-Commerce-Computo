@@ -21,12 +21,13 @@ function DropdownMenu (props:any) {
     
     return (
         <div className={styles.dropdown} onMouseLeave={props.data}>
-            <Link className={styles.profile} to="/Perfil"><BiUserCircle className={styles.iconButton}></BiUserCircle>{cookies.User.username}</Link>
+            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle className={styles.iconButton}></BiUserCircle>{cookies.User.username}</Link>
             
             {cookies.User.privilege === "user" ? 
 
                 <><p ><FaShippingFast className={styles.icon} ></FaShippingFast>Mis Pedidos</p>
                 <p ><RiQuestionnaireFill className={styles.icon}></RiQuestionnaireFill>Preguntas</p></> 
+            
             
             : false}
 
@@ -34,7 +35,7 @@ function DropdownMenu (props:any) {
            
             {cookies.User.privilege === "admin" ? 
             <>
-
+            <p><Link to="/CrearAdministrador"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Asignar Permisos</Link></p>
             <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Producto</Link></p> 
             <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Categoría</Link></p>
 

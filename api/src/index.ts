@@ -16,7 +16,11 @@ sequelize.sync({ alter, force, logging }).then(() => {
     productsSeeder()
     usersSeeder()
   }
+<<<<<<< HEAD
   apolloServer.applyMiddleware({ app });
+=======
+  apolloServer.applyMiddleware({ app, cors:false });
+>>>>>>> ba9ea5d80e1f74ec14a56ecfd7f9df8a5d466db0
   app.listen(PORT, () => {
     console.log(`\nRunning Playground on ${PORT}/graphql`);
   });

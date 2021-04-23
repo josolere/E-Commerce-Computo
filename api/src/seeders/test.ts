@@ -90,6 +90,7 @@ let products = [
         details: 'Placa madre tope de gama ASUS, con socket AM4, compatible con lo mejor de AMD. Wi-Fi 6(.ax) incluido. Tres ranuras M.2. Disipadores gigantes para VRM, chipset y sockets M2. Ethernet 10gb incluido. Conectores USB 3.2 incluidos.',
         price: 57999,
         categoriesId: [4]
+<<<<<<< HEAD
     },{
         name: 'MONITOR 24 LED VIEWSONIC VX2458-MHD 144HZ 1MS',
         image: 'https://www.venex.com.ar/products_images/1585891907_monitor_24_led_viewsonic_vx2458_mhd_144hz.png',
@@ -176,6 +177,10 @@ let products = [
         price: 13490,
         categoriesId:2
     }
+=======
+    }
+
+>>>>>>> ba9ea5d80e1f74ec14a56ecfd7f9df8a5d466db0
 ]
 
 

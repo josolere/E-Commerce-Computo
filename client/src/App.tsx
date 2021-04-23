@@ -16,14 +16,10 @@ import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux';
 import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
-<<<<<<< HEAD
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
-=======
 import { ToastContainer } from 'react-toastify'
-import CreateAdmin from './components/login/CreateAdmin';
 
->>>>>>> 79be3a8822d2e75ba1b7aee7eaad1e6fdc0e505c
 
 function App() {
 
