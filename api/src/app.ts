@@ -53,7 +53,6 @@ const googleOptions: any = {
   clientID: clientID,
   clientSecret: clientSecret,
   callbackURL: 'http://localhost:5000/auth/google/redirect',
-  passReqToCallback:true,
 }
 const facebookCallback = async (
   accessToken: any,
@@ -92,12 +91,12 @@ const facebookCallback = async (
   done(null, input);
 };
 
-const googleCallback = async (
+/* function googleCallback (
   accessToken: any,
   refreshToken: any,
   profile:any,
   done:any
-) => {
+) {
   console.log(profile);
   
 
@@ -119,7 +118,7 @@ const googleCallback = async (
   });
 
   done(null, input);
-}
+} */
 
 
 
@@ -161,7 +160,33 @@ app.use(
 );
 passport.use(new facebookStrategy(facebookOptions, facebookCallback));
 
-passport.use(new googleStrategy(googleOptions , googleCallback));
+passport.use(new googleStrategy(googleOptions ,
+  
+  function (accessToken:any, refreshToken:any, email:any ,profile:any,  cb:any) {
+    console.log('+++++++++++++++++++++',profile)
+    console.log('---------------------',email)
+
+    let input: any = {
+      id: uuid(),
+      googleId: profile.id,
+      name: profile.name.givenName,
+      surname: profile.name.familyName,
+      email: profile.emails && profile.emails[0] && profile.emails[0].value,
+      privilege: "user",
+      active: true,
+      password: null,
+      address: null,
+      username: null,
+    };
+  
+    db.User.create({
+      ...input,
+    });
+  
+    cb(null, input);
+  }
+  
+));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -182,7 +207,7 @@ app.get(
 
 //Rutas autenticación google
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile']}))
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}))
 
 app.get('/auth/google/redirect', 
   passport.authenticate('google', { failureRedirect: 'http://localhost:5000/graphql'}),
