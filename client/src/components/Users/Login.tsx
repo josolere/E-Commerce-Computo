@@ -76,6 +76,7 @@ const Login = () => {
         event.preventDefault()
     }
 
+    
     const handleResetPassword = () => {
         window.location.href = 'http://localhost:3000/EditarCuenta'
 

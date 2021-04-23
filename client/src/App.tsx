@@ -16,12 +16,13 @@ import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux';
 import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
-import { ToastContainer } from 'react-toastify'
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
+import { ToastContainer } from 'react-toastify'
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER } from "./gql/login"
+import { ACTUAL_USER } from "./gql/login";
 
+  
 interface user {
   currentUser: {
       name: string,
@@ -52,7 +53,7 @@ function App() {
     }
   }, [cookie])
 
-  
+  console.log(gotCookies)
 
   useEffect(() => {
     if (localStorage.getItem('productsLocal')) {

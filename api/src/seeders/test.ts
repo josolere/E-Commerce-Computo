@@ -233,7 +233,7 @@ const users = [
       id: uuid()
     }
   ];
-
+  
 export function usersSeeder(){
     users.forEach((item: any) => {
         User.create({
