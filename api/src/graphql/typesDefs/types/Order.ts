@@ -5,14 +5,16 @@ export const typeDefs = gql`
   type Order {
     id: Int
     status: String
-    details:[OrderDetail]
+    details: [OrderDetail]
     createdAt: String
     updatedAt: String
   }
 
   type Query {
     getOrderById(id: ID!): Order
+    getOrderByStatus(status: String): [Order]
     getOrdersByIdUser(idUser: ID!): [Order]
+    getAllOrders(status: String): [Order]
   }
 
   type Mutation {

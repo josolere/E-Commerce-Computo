@@ -47,7 +47,7 @@ const NavCategories = (): JSX.Element => {
   const [idOrder, setIdOrder] = useState(0)
   const [order, setOrder] = useState([])
   const [statusOrder, setStatusOrder] = useState([])
-  const [idUser, setIdUser] = useState( "c97f0885-7519-44a5-83db-e49fa6922cab")
+  const [idUser, setIdUser] = useState("4828ebd1-306c-4349-8397-f90e0ebc8fd1")
 
 
   useEffect(() => {
