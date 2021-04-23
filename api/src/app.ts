@@ -5,23 +5,25 @@ import session from "express-session";
 import { v4 as uuid } from "uuid";
 import passport from "passport";
 import db from "./models";
-import { usersSeeder } from "./seeders/test";
-import { getUsers } from "./seeders/test";
 import { GraphQLLocalStrategy } from "graphql-passport";
 import { iUserFacebook } from "./interfaces/index";
 import * as passportFacebook from "passport-facebook";
 const facebookStrategy = passportFacebook.Strategy;
 import { CLIENT_RENEG_WINDOW } from "node:tls";
+import googleOAuth from 'passport-google-oauth20'
+import { User } from "./models/User";
 const app: express.Application = express();
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+
+var googleStrategy = googleOAuth.Strategy
 
 require("dotenv").config();
 const PORT = "localhost:3000" || "localhost:5000";
 
 const FACEBOOK_CLIENT_ID = "936411523566877";
 const FACEBOOK_APP_SECRET = "a1e05f5a17e23fd232a21f169690dd37";
+const clientID = process.env.GOOGLE_CLIENT_ID;
+const clientSecret = process.env.GOOGLE_SECRET;
 
 //añadimos el soporte para el registro y login desde los resolvers de graphQL para evitar hacer rutas nuevas
 //usando la libreria graphql-passport, podemos acceder a las funciones de passport desde el contexto de GraphQL
@@ -39,12 +41,20 @@ passport.use(
   })
 );
 
+
+
 const facebookOptions: iUserFacebook = {
   clientID: FACEBOOK_CLIENT_ID,
   clientSecret: FACEBOOK_APP_SECRET,
   callbackURL: "http://localhost:5000/auth/facebook/callback",
   profileFields: ["id", "email", "first_name", "last_name"],
 };
+const googleOptions: any = {
+  clientID: clientID,
+  clientSecret: clientSecret,
+  callbackURL: 'http://localhost:5000/auth/google/redirect',
+  passReqToCallback:true,
+}
 const facebookCallback = async (
   accessToken: any,
   refreshToken: any,
@@ -81,6 +91,35 @@ const facebookCallback = async (
 
   done(null, input);
 };
+
+const googleCallback = async (
+  accessToken: any,
+  refreshToken: any,
+  profile:any,
+  done:any
+) => {
+  console.log(profile);
+  
+
+  let input: any = {
+    id: uuid(),
+    googleId: profile.id,
+    name: profile.name.givenName,
+    surname: profile.name.familyName,
+    email: profile.emails && profile.emails[0] && profile.emails[0].value,
+    privilege: "user",
+    active: true,
+    password: null,
+    address: null,
+    username: null,
+  };
+
+  db.User.create({
+    ...input,
+  });
+
+  done(null, input);
+}
 
 
 
@@ -121,8 +160,14 @@ app.use(
   })
 );
 passport.use(new facebookStrategy(facebookOptions, facebookCallback));
+
+passport.use(new googleStrategy(googleOptions , googleCallback));
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+//Rutas autenticación facebook
 
 app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"] }));
 
@@ -133,6 +178,20 @@ app.get(
       failureRedirect: "http://localhost:5000/graphql",
     }),
     ); 
+
+
+//Rutas autenticación google
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile']}))
+
+app.get('/auth/google/redirect', 
+  passport.authenticate('google', { failureRedirect: 'http://localhost:5000/graphql'}),
+  function(req, res) {
+    //successful authentication
+    res.redirect('/graphql')
+  }
+  )
+
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const status = err.status || 500;
