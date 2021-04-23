@@ -33,6 +33,7 @@ export default {
           quantity: det.Productsxorder.quantity,
           OrderId: det.Productsxorder.OrderId,
           ProductId: det.Productsxorder.ProductId,
+          productName: det.Productsxorder.productName
         };
         data.details.push(detail);
       });
@@ -44,13 +45,45 @@ export default {
       { idUser }: { idUser: number },
       { models }: { models: iModels }
     ): Promise<iOrder> => {
+      const options = {
+        include: [
+          {
+            model: db.Product,
+            through: "productsxorder",
+          },
+        ],
+      };
       const data = await models.Order.findAll({
+        include: [
+          {
+            model: db.Product,
+            through: "productsxorder",
+           // attributes: ["id", "name"],
+          },
+        ],
         where: {
           UserId: idUser,
         },
       });
+      let i:number = 0;
+      data.map((item:any) => {
+        data[i].details = []
+          item.Products.map((det:any) => {
+              const detail = {
+                id: det.Productsxorder.id,
+                price: det.Productsxorder.price,
+                quantity: det.Productsxorder.quantity,
+                OrderId: det.Productsxorder.OrderId,
+                ProductId : det.Productsxorder.ProductId,
+                productName: det.Productsxorder.productName
+              };
+          data[i].details.push(detail)
+          })
+          i++;
+      })
       return data;
     },
+
 
     getOrderByStatus: async (
       _parent: object,
