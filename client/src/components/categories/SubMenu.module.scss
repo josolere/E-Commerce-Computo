@@ -1,0 +1,31 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.containerCategories {
+    width: 100%;
+    div {
+        .botonSec {
+            background-color:$red;
+        }
+        button {
+            background-color: $grey;
+            text-align: start;
+            color: $white;
+            border: transparent;
+            width: 12rem;
+            padding: 1rem;
+            outline: none;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.iconT {
+   display: inline-flex;
+   float: right;
+   
+}

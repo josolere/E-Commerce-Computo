@@ -1,0 +1,219 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+$verdesito: 	#E0FFFF;
+$blanquito: #F0F0F0;
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.back {
+    color:$dark;
+    background-color:	$dark;
+}
+
+.organizar {
+    font-family:'Montserrat', sans-serif;
+    height: 140vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.caja{
+  background-color: $blanquito;
+  margin-top: 2rem;
+  width: 55vh;
+  box-shadow: 20px 20px 25px 25px rgba(0,0,0,0.22);
+  padding: 5.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+}
+
+.form__group {
+    position: relative;
+
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 20rem;
+  }
+  
+  .form__field {
+    margin-left: 4rem;
+    margin-top: 0.3rem;
+    font-family:'Montserrat', sans-serif;
+    width: 16rem;
+    border: 0;
+    border-bottom: 2px solid $gray;
+    outline: 0;
+    font-size: 1.1rem;
+    color: black;
+    padding: 1rem 0.3rem 0 ;
+    background: transparent;
+    transition: border-color 0.2s;
+  
+      
+  &::-moz-placeholder ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+  
+  .form__label {
+      margin-left: 4rem;
+      font-family:'Montserrat', sans-serif;
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: $gray;
+  }
+  
+  .form__field:focus {
+    ~ .form__label {
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: $primary;
+      font-weight:700;    
+    }
+    padding-bottom: 6px;  
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, $primary, $secondary	);
+    border-image-slice: 1;
+  }
+  
+  .organizarbotones {
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .boton{
+  font-family: 'Montserrat', sans-serif;
+  border: transparent;
+	display: flex;
+  width: 8rem;
+  padding: 0.6rem;
+  justify-content: center;
+  
+  color: #dddddd;
+  cursor: pointer;
+	font-size: 0.9rem;
+	margin-left: 2rem;
+  margin-top: 1rem;
+	transition: all .3s;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #30475e;
+    color: #dddddd;
+		border-radius: 0.2rem;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: #f05454;
+		transition: all .3s;
+		border-radius: 0.2rem;
+		z-index: -1;
+	}
+	&:hover {
+		color: #fff;
+		&:before {
+			width: 100%;
+		}
+	}
+}
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+  .container {
+    padding-top: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:#999;
+    text-transform: uppercase;
+    font-size:36px;
+    width:100%;
+    bottom:45%;
+  }
+  
+  .flip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:50px;
+    overflow:hidden;
+  }
+  
+  .flip > div > div {
+    color:#fff;
+    padding:4px 12px;
+    height:45px;
+    margin-bottom:45px;
+    display:inline-block;
+  }
+  
+  .flip div:first-child {
+    animation: show 5s linear infinite;
+  }
+  
+  .flip div div {
+    background:#42c58a;
+  }
+  .flip div:first-child div {
+    background:#4ec7f3;
+  }
+  .flip div:last-child div {
+    background:#DC143C;
+  }
+  
+  @keyframes show {
+    0% {margin-top:-270px;}
+    5% {margin-top:-180px;}
+    33% {margin-top:-180px;}
+    38% {margin-top:-90px;}
+    66% {margin-top:-90px;}
+    71% {margin-top:0px;}
+    99.99% {margin-top:0px;}
+    100% {margin-top:-270px;}
+  }
+  
