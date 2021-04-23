@@ -45,3 +45,27 @@ export async function StatusChangeMail(userEmail: string, status: string) {
     console.error(error);
   }
 }
+
+// orden completada por el usuario
+
+import { html } from "./templates/welcom";
+import { OrderDetail } from "./templates/OrderDetail";
+export async function orderCreatedMail(
+  userEmail: string,
+  idOrder: number,
+  products: any,
+  address: any,
+  name: string
+) {
+  try {
+    await transporter.sendMail({
+      from: '"Compu Henry" <proyectohenry5@gmail.com>',
+      to: userEmail,
+      subject: "ASUNTO",
+      text: "Hello world?  ",
+      html: OrderDetail(idOrder, products, address, name),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
