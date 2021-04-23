@@ -206,6 +206,18 @@ $red:#f05454;//f05454
     background:#DC143C;
   }
   
+   .buttonFB {
+    width: fit-content;
+    margin-left: 20%;
+    margin-top: 10%;
+    height: fit-content;
+  } 
+
+  .buttonGoogle {
+    width: 98%;
+    margin-top: 1rem;
+    
+  }
   @keyframes show {
     0% {margin-top:-270px;}
     5% {margin-top:-180px;}

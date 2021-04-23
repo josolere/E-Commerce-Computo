@@ -18,10 +18,9 @@ function DropdownMenu (props:any) {
         window.location.href = 'http://localhost:3000/Home'
     }
 
-    
     return (
         <div className={styles.dropdown} onMouseLeave={props.data}>
-            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle className={styles.iconButton}></BiUserCircle>{cookies.User.username}</Link>
+            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle className={styles.iconButton}></BiUserCircle>{cookies.User.name}</Link>
             
             {cookies.User.privilege === "user" ? 
 

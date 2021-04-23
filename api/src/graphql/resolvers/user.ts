@@ -103,7 +103,7 @@ export default {
       );
 
       if (userWithEmailAlreadyExists) {
-        throw new Error("User with email already exists");
+        throw new Error("Ya existe un usuario con ese E-Mail");
       }
 
       // console.log(input);

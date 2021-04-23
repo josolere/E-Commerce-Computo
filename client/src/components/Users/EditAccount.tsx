@@ -3,40 +3,48 @@ import { useState } from 'react';
 import { useSelector} from "react-redux"
 import { useMutation, useQuery,  gql, useLazyQuery } from '@apollo/client';
 import styles from './loguin.module.scss';
+import { EDIT_USER_MUTATION } from "../../gql/login"
 import { useCookies } from "react-cookie";
 import styles2 from './Edit.module.scss';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ACTUAL_USER } from "../../gql/login"
+import { Link } from "react-router-dom"
+import { DELETE_USER } from "../../gql/login"
+import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
+import { Cookies, CookiesProvider } from "react-cookie";
+import { classNames } from 'react-select/src/utils';
+import "./Edit.module.scss"
+import Swal from 'sweetalert2'
 
-interface DetailUser {
-    id: number,
-    name: string,
-    
+
+
+
+interface user {
+    actualuser: {
+        name: string,
+        password: string,
+        email: string
+    }
 }
 
+interface datauser {
+    actualUser: user[]
+}
 
 
 const EditAccount = () => {
 
+    const [editUser, data] = useMutation(EDIT_USER_MUTATION)
+
     const [showMore, setShowMore] = useState(false)
 
-     /* const { loading, error, data } = useQuery(ACTUAL_USER, {
-        fetchPolicy: "no-cache"
-      });
- */
-     /*  console.log(data)
- */
-     const { loading, error, data } = useQuery(ACTUAL_USER) 
+   const [deleteUser, info] = useMutation(DELETE_USER)
 
-/*    var opcion = data?.currentUser
- */
-   console.log(data)
+   const cookies = new Cookies
+   const user = cookies.get("User")
 
-    /* useEffect (() {
-        setDeleteAccount()
-    },[]) */
 
     const [logform, setLogform] = useState({
         email: '',
@@ -57,10 +65,44 @@ const EditAccount = () => {
         window.location.href = 'http://localhost:3000/Login'
     }
 
-    /* const handleDelete= () => {
-        setDeletAccount()
-    } */
+    const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        editUser({
+            variables: {
+                name: logform.firstname, email: logform.email, password: logform.password,
+                surname: logform.lastname, username: logform.username, address: logform.address,
+                privilege: 'Admin', active: true
+            }
+        })
+            .then((resolve) => console.log(data))
+            .catch((error) => { console.log('Edit Mal') })
+    }
 
+
+    const handleAlert = () => {
+        Swal.fire({
+            title: '<h3><font face="Montserrat, sans-serif">Eliminaras tu cuenta</font></h3>',
+            icon: 'warning',
+            html: '<p><font face="Montserrat, sans-serif">Estas seguro de eliminar tu cuenta?</font><p>',
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: 'Si',
+            confirmButtonColor: "#ab3857",
+            cancelButtonText:  'Cancelar',
+            cancelButtonColor: "#2194c2",
+           }).then(resp =>{
+            if(resp.isConfirmed === true){
+                deleteUser({
+                    variables: { id: user.id }
+                })
+                    .then((resolve) => { window.location.href = 'http://localhost:3000'; cookies.remove("User")})
+                    .catch((err) => toast.error("Las credenciales no coinciden, intenta nuevamente"))
+            } else {
+                return ""
+            }
+        })
+    }
 
     return (
         <div className={styles.back}>
@@ -75,9 +117,10 @@ const EditAccount = () => {
                         </div>
                             Datos
                             </div>
-                    <form className={styles.form} >
+                    <form className={styles.form} onSubmit={handlesubmitchange}>
                         <div className={styles.form__group}>
-                            <label htmlFor='email' className={styles.form__label} >E-Mail</label>
+                            <label htmlFor='email' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='E-mail'
@@ -90,7 +133,8 @@ const EditAccount = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles.form__label} >Contraseña Anterior</label>
+                            <label htmlFor='password' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faUnlock} /> Contraseña Anterior</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='Contraseña'
@@ -103,7 +147,8 @@ const EditAccount = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles.form__label} >Nueva Contraseña</label>
+                            <label htmlFor='password' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faUnlock} /> Nueva Contraseña</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='Nueva Contraseña'
@@ -116,7 +161,8 @@ const EditAccount = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='username' className={styles.form__label} >Nombre de Usuario</label>
+                            <label htmlFor='username' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faShareAlt} /> Nombre de Usuario</label>
                             <input
                                 className={styles.form__field}
                                 type='text'
@@ -131,7 +177,8 @@ const EditAccount = () => {
                             <div className={styles2.showMore}>
 
                                 <div className={styles.form__group}>
-                                    <label htmlFor='name' className={styles.form__label} >Nombre</label>
+                                    <label htmlFor='name' className={styles.form__label} >
+                                        <FontAwesomeIcon icon={faFileSignature} /> Nombre</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
@@ -144,7 +191,8 @@ const EditAccount = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='lastname' className={styles.form__label} >Apellido</label>
+                                    <label htmlFor='lastname' className={styles.form__label} >
+                                        <FontAwesomeIcon icon={faFileSignature} /> Apellido</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
@@ -157,7 +205,8 @@ const EditAccount = () => {
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='address' className={styles.form__label} >Dirección</label>
+                                    <label htmlFor='address' className={styles.form__label} >
+                                        <FontAwesomeIcon icon={faMapMarker} /> Dirección</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
@@ -171,33 +220,33 @@ const EditAccount = () => {
                                 </div>
                                 <div className={styles2.orderButtonEdit} >
                                     <button className={styles.boton} style={{width:"fit-content"}}onClick={() => setShowMore(!showMore)} >
-                                            <FontAwesomeIcon icon={faMinus} />
+                                        <FontAwesomeIcon icon={faMinus} />
 
-                                  </button>
+                                    </button>
                                 </div>
-                                        <div className={styles.organizarbotones}>
-                                            <button className={styles.boton} type='submit' >Editar</button>
-                                            <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
-                                        </div>
+                                <div className={styles.organizarbotones}>
+                                    <button className={styles.boton} type='submit' >Editar</button>
+                                    <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
+                                </div>
                             </div>
                             :
                             <div className={styles2.showMore} >
-                                        <div className={styles2.orderButtonEdit} >
-                                            <button className={styles.boton} style={{width:"fit-content"}} onClick={() => setShowMore(!showMore)} >
-                                                <FontAwesomeIcon icon={faPlus} />
-                                            </button>
-                                        </div>
-                                        <div className={styles.organizarbotones}>
-                                            <button className={styles.boton} type='submit' >Editar</button>
-                                            <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
-                                           {/*  <button className={styles.boton} onClick={handleDelete} type='submit' >Eliminar mi cuenta</button> */}
-                                        </div>
-                                    </div>                          
+                                <div className={styles2.orderButtonEdit} >
+                                    <button className={styles.boton} style={{width:"fit-content"}} onClick={() => setShowMore(!showMore)} >
+                                        <FontAwesomeIcon icon={faPlus} />
+                                    </button>
+                                </div>
+                                <div className={styles.organizarbotones}>
+                                    <button className={styles.boton} type='submit' >Editar</button>
+                                    <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
+                                </div>
+                                {user ? <button onClick ={handleAlert} className={styles.boton} type='submit' >Eliminar Usuario</button> : <></>}
+                            </div>
                         }
                     </form>
-                            </div>
-            </div>
                 </div>
+            </div>
+        </div>
     )
 }
 
