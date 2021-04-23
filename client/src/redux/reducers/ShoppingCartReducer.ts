@@ -1,4 +1,7 @@
-import { ADD_SHOPPING, DELETE_PRODUCT, MORE_PRICE, LESS_PRICE, LOCAL, ADD_LOCALSTORAGE, DELETE_CART, ADD_PRODUCT_DETAILS, ADD_PRODUCT_HOME } from '../actions'
+import {
+    ADD_SHOPPING, DELETE_PRODUCT, MORE_PRICE, LESS_PRICE, LOCAL, ADD_LOCALSTORAGE,
+    DELETE_CART, ADD_PRODUCT_DETAILS, ADD_PRODUCT_HOME, LOGEO
+} from '../actions'
 
 const initialState = {
     productTotal: [],
@@ -7,9 +10,11 @@ const initialState = {
     local: [],
     addCart: false,
     addHome: false,
-    idDetails:0,
-    priceDetails:0,
-    countDetails:0
+    idDetails: 0,
+    priceDetails: 0,
+    countDetails: 0,
+    logeo: false,
+    idUsers:""
 };
 
 export default (state = initialState, action: any): any => {
@@ -95,9 +100,16 @@ export default (state = initialState, action: any): any => {
             return {
                 ...state,
                 addHome: action.state.stateHome,
-                idDetails:action.state.id,
-                priceDetails:action.state.price,
-                countDetails:action.state.count
+                idDetails: action.state.id,
+                priceDetails: action.state.price,
+                countDetails: action.state.count
+            }
+
+        case LOGEO:
+            return {
+                ...state,
+                logeo: action.state.login,
+                idUsers:action.state.idUsers
             }
         default: return state
     }

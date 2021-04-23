@@ -13,7 +13,7 @@ import NavCategories from './components/categories/Categories';
 import Cards from './components/Cards/CardsHome';
 import styles from './App.module.scss';
 import Unicrear from './components/Create/Create'
-import Orders from './components/Order/Orders'
+import Order from './components/Order/Order'
 import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux'
 
@@ -46,7 +46,7 @@ function App() {
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Pago' component={Payment} />
-        <Route exact path='/Ordenes' component={Orders} />
+        <Route exact path='/Ordenes' component={Order} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>
           <NavCategories/>

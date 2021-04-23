@@ -35,6 +35,7 @@ export default {
                         }
         data.details.push(detail)
       })
+      console.log(data)
       return data;
     },
 

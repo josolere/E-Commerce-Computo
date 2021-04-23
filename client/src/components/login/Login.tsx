@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { useState,useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER} from "../../gql/login"
+import { LOGIN_MUTATION, SIGNUP_MUTATION, LOGOUT_MUTATION, ACTUAL_USER } from "../../gql/login"
+import { logeo } from "../../redux/actions";
+import { useDispatch } from 'react-redux'
 import NavBar from '../NavBar/NavBar';
+import { Link } from 'react-router-dom';
 
 
 interface user {
@@ -18,9 +21,26 @@ interface datauser {
     actualUser: user[]
 }
 
+interface orden {
+    getProductById: {
+        id: any
+        status: string
+    }
+}
 
 
 const Login = () => {
+
+    //-------------------------------------------------------------------
+    const [logeoIn, setLogeoIn] = useState(false)
+    const dispatch = useDispatch()
+    const hendleLogin = () => {
+        // setLogeoIn(true)
+        dispatch(logeo({login:true, idUsers: "c97f0885-7519-44a5-83db-e49fa6922cab"}))
+        localStorage.setItem('logeo', JSON.stringify(true))
+    }
+    //----------------------------------------------------------------------
+
 
     const [logform, setLogform] = useState({
         email: '',
@@ -55,7 +75,7 @@ const Login = () => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
     }
 
-    console.log(logform)
+    // console.log(logform)
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (showlogin === true) {
@@ -74,6 +94,8 @@ const Login = () => {
     }
 
     const logoutchange = () => {
+        localStorage.setItem('logeo', JSON.stringify(false))
+
         logout({ variables: { email: logform.email, password: logform.password } })
             .then((resolve) => { console.log("logout bien") })
             .catch((error) => { console.log("logout mal") })
@@ -83,9 +105,10 @@ const Login = () => {
 
 
 
+
     return (
         <div>
-     
+
             <div className={styles.back}>
                 {showlogin ? <div className={styles.organizar}>
                     <div className={styles.caja}>
@@ -127,9 +150,11 @@ const Login = () => {
                             </div>
                             <div className={styles.form__group}></div>
                             <div className={styles.organizarbotones}>
-                                <button className={styles.boton} type='submit' >Loguear</button>
+                                <Link to='Home'>
+                                    <button onClick={() => hendleLogin()} className={styles.boton} type='submit' >Loguear</button>
+                                </Link>
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
-                                <button className={styles.boton} onClick={logoutchange} >Desvincular</button>
+                                <button  className={styles.boton} onClick={logoutchange} >Desvincular</button>
                             </div>
                         </form>
                     </div>
