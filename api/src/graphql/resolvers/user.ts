@@ -22,7 +22,9 @@ export default {
     },
 
     currentUser: (_parent: object, _args: any, context: any) =>
-      context.getUser(),
+   context.getUser(),
+
+   
 
     getUsers: async (
       _parent: object,
@@ -101,7 +103,7 @@ export default {
       );
 
       if (userWithEmailAlreadyExists) {
-        throw new Error("User with email already exists");
+        throw new Error("Ya existe un usuario con ese E-Mail");
       }
 
       // console.log(input);

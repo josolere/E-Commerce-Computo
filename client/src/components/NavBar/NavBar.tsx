@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useState } from "react";
 =======
 import React, { useState, useEffect } from "react";
 >>>>>>> front_roto
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> LogFront
 import { useSelector, useDispatch } from 'react-redux'
 import SearchBar from "../SearchBar/SearchBar";
 import navBar from './NavBar.module.scss';
@@ -12,25 +16,33 @@ import { Link } from "react-router-dom";
 import { AppState } from '../../redux/reducers';
 import { setFilter } from '../../redux/actions';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
 import NavBarItem from "./NavBarItem";
 import DropdownMenu from "./Dropdown";
 >>>>>>> front_roto
+=======
+import { Cookies } from "react-cookie";
+import NavBarItem from "./NavBarItem";
+>>>>>>> LogFront
 
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
 
-  const idsProducts: number = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
+  
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
 
+<<<<<<< HEAD
   const [showadmin, setShowadmin] = useState(false)
 
 <<<<<<< HEAD
 
   const opciones = ['Crear Producto', 'Crear Categoria']
 =======
+=======
+>>>>>>> LogFront
   const [cookiess, setCookies ] = useState<any>()
  
   const cookie = new Cookies
@@ -39,11 +51,15 @@ const NavBar = (): JSX.Element => {
   useEffect(() => {
     setCookies(cookie.get('User'))
   }, [])
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
 
   return (
     <>
       <div className={navBar.container}>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <Link to='/' className={navBar.linksNav} > <h1 className={navBar.titleNav} >CH</h1> </Link>
         <SearchBar />
@@ -62,6 +78,8 @@ const NavBar = (): JSX.Element => {
 {/*           <button className={navBar.linksNav} onClick={() => setShowadmin(!showadmin)} >✓</button>
           {showadmin ? */} <Link className={navBar.linksNav} to='/Crear'><p>Crear</p></Link>{/*  : null} */}
 =======
+=======
+>>>>>>> LogFront
         <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
         <SearchBar />
 
@@ -83,7 +101,10 @@ const NavBar = (): JSX.Element => {
         
           <p>{cookiess && <NavBarItem info= "Mi Cuenta"></NavBarItem>  }</p>
         
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
         </div>
       </div>
     </>

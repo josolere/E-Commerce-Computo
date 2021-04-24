@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import styles from "./Dropdown.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt, faWrench, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
-import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { faSignOutAlt, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import { useCookies } from "react-cookie";
 import { BiUserCircle } from "react-icons/bi"
 import { RiQuestionnaireFill } from "react-icons/ri"
 import { FaShippingFast } from "react-icons/fa"
@@ -18,10 +18,9 @@ function DropdownMenu (props:any) {
         window.location.href = 'http://localhost:3000/Home'
     }
 
-    
     return (
         <div className={styles.dropdown} onMouseLeave={props.data}>
-            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle className={styles.iconButton}></BiUserCircle>{cookies.User.username}</Link>
+            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle className={styles.iconButton}></BiUserCircle>{cookies.User.name}</Link>
             
             {cookies.User.privilege === "user" ? 
 

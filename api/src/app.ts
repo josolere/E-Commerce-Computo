@@ -39,11 +39,11 @@ const clientSecret = process.env.GOOGLE_SECRET;
 passport.use(
   new GraphQLLocalStrategy(async (email: any, password: any, done: any) => {
     const users = await db.User.findAll();
-    // console.log(users);
+    
     const matchingUser = users.find(
       (user: any) => email === user.email && password === user.password
     );
-    // console.log(matchingUser);
+    
     const error = matchingUser ? null : new Error("no matching user found");
     done(error, matchingUser);
   })
@@ -58,7 +58,7 @@ const facebookOptions: iUserFacebook = {
   profileFields: ["id", "email", "first_name", "last_name"],
 };
 const googleOptions: any = {
-  clientID: clientID,
+  clientID: "xxxxx",
   clientSecret: clientSecret,
   callbackURL: 'http://localhost:5000/auth/google/redirect',
 }
@@ -73,7 +73,7 @@ const facebookCallback = async (
   const matchingUser = users?.find(
     (user: any) => user.dataValues.facebookId === profile.id
   );
-  // console.log(matchingUser)
+ 
   if (matchingUser) {
     done(null, matchingUser);
     return;
@@ -133,7 +133,6 @@ passport.serializeUser((user: any, done) => {
 
 passport.deserializeUser(async (id:any, done) => {
   const users: any = await db.User.findAll();
-  console.log('--------------------------------', id)
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
   console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
   done(null, matchingUser);
@@ -204,7 +203,6 @@ app.get('/auth/google/redirect',
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const status = err.status || 500;
   const message = err.message || err;
-  console.error(err);
   res.status(status).send(message);
 });
 

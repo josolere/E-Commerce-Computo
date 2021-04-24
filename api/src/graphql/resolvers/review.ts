@@ -5,7 +5,7 @@ import {
   import Sequelize, { Op } from "sequelize";
   import { Category } from "../../models/Category";
   import { Review } from "../../models/Review";
-  import db from "../../models/";
+  
 
   export default {
     Query:{
@@ -16,12 +16,8 @@ import {
             ): Promise<any> => {
                 let currentProduct = await models.Product.findByPk(id, {include: 'reviews'})
                 let reviews = await currentProduct.getReviews()
-                console.log(reviews)
-
                 return reviews;
             }
-
-
     },
 
 
@@ -35,7 +31,7 @@ import {
 
       let createdReview = await Review.create({ ...input})
 
-      console.log(currentProduct)
+   
 
       currentProduct.addReview(createdReview)
 

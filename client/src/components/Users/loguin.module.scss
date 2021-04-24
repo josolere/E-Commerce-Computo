@@ -16,11 +16,15 @@ $red:#f05454;//f05454
 
 .organizar {
     font-family:'Montserrat', sans-serif;
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
     height: 120vh;
 =======
     height: 140vh;
 >>>>>>> front_roto
+=======
+    height: 140vh;
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -30,17 +34,23 @@ $red:#f05454;//f05454
 .caja{
   background-color: $blanquito;
   margin-top: 2rem;
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
   box-shadow: 20px 20px 25px 25px rgba(0,0,0,0.22);
   padding: 5.4rem;
 =======
+=======
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
   width: 55vh;
   box-shadow: 20px 20px 25px 25px rgba(0,0,0,0.22);
   padding: 5.4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
 }
 
 .form {
@@ -53,36 +63,50 @@ $red:#f05454;//f05454
 
 .form__group {
     position: relative;
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
 =======
 
 >>>>>>> front_roto
+=======
+
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
     padding: 15px 0 0;
     margin-top: 10px;
     width: 20rem;
   }
   
   .form__field {
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
     margin-top: 0.3rem;
     font-family:'Montserrat', sans-serif;
     width: 20rem;
 =======
+=======
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
     margin-left: 4rem;
     margin-top: 0.3rem;
     font-family:'Montserrat', sans-serif;
     width: 16rem;
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
     border: 0;
     border-bottom: 2px solid $gray;
     outline: 0;
     font-size: 1.1rem;
     color: black;
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
     padding: 7px 0;
 =======
     padding: 1rem 0.3rem 0 ;
 >>>>>>> front_roto
+=======
+    padding: 1rem 0.3rem 0 ;
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
     background: transparent;
     transition: border-color 0.2s;
   
@@ -97,6 +121,7 @@ $red:#f05454;//f05454
       color: transparent;
     }
   }
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
 
   
@@ -106,6 +131,11 @@ $red:#f05454;//f05454
   .form__label {
       margin-left: 4rem;
 >>>>>>> front_roto
+=======
+  
+  .form__label {
+      margin-left: 4rem;
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
       font-family:'Montserrat', sans-serif;
       position: absolute;
       top: 0;
@@ -133,6 +163,7 @@ $red:#f05454;//f05454
   }
   
   .organizarbotones {
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
     display: flex;
     flex-direction: row;
@@ -159,6 +190,8 @@ $red:#f05454;//f05454
   }
 
 =======
+=======
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
     margin-left: 2rem;
     display: flex;
     flex-direction: row;
@@ -214,7 +247,10 @@ $red:#f05454;//f05454
 		}
 	}
 }
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
   .container {
     padding-top: 0.5rem;
@@ -227,10 +263,13 @@ $red:#f05454;//f05454
     color:#999;
     text-transform: uppercase;
     font-size:36px;
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
     font-weight:bold;
 =======
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss
     width:100%;
     bottom:45%;
   }
@@ -265,6 +304,18 @@ $red:#f05454;//f05454
     background:#DC143C;
   }
   
+   .buttonFB {
+    width: fit-content;
+    margin-left: 20%;
+    margin-top: 10%;
+    height: fit-content;
+  } 
+
+  .buttonGoogle {
+    width: 98%;
+    margin-top: 1rem;
+    
+  }
   @keyframes show {
     0% {margin-top:-270px;}
     5% {margin-top:-180px;}
@@ -276,6 +327,7 @@ $red:#f05454;//f05454
     100% {margin-top:-270px;}
   }
   
+<<<<<<< HEAD:client/src/components/login/loguin.module.scss
 <<<<<<< HEAD
 /*   p {
     position:fixed;
@@ -287,3 +339,5 @@ $red:#f05454;//f05454
   } */
 =======
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront:client/src/components/Users/loguin.module.scss

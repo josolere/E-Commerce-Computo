@@ -1,0 +1,235 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+$background: #fefefe;
+$text: #4b507a;
+$cyan: #60daaa;
+$yellow: #fbca67;
+$orange: #ff8a30;
+$red: #f45e61;
+$purple: #6477b9;
+$blue: #0eb7da;
+$dash-size: 8px;
+$theme-color: mediumseagreen;
+$fill-color: beige;
+$gray:#30475e;//dddddd
+$primary: #11998e;
+$secondary: #38ef7d;
+
+.searchAdmin{
+	width: 2rem;
+    border: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 2rem;
+	color:$dark;;
+	text-transform: uppercase;
+	font-size: 1rem;
+    cursor: pointer;
+	letter-spacing: .15rem;
+	transition: all .3s;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $red;
+		border-radius: 10rem;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: darken($red, 15%);
+		transition: all .3s;
+		border-radius: 10rem;
+		z-index: -1;
+	}
+	&:hover {
+		color: #fff;
+		&:before {
+			width: 100%;
+		}
+	}
+}
+
+.searchbar{
+    margin-left: 4rem;
+    margin-top: 0.3rem;
+    font-family:'Montserrat', sans-serif;
+    width: 16rem;
+    border: 0;
+    border-bottom: 2px solid $gray;
+    outline: 0;
+    font-size: 1.1rem;
+    color: black;
+    padding: 1rem 0.3rem 0 ;
+    background: transparent;
+    transition: border-color 0.2s;
+  
+      
+  &::-moz-placeholder ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+  .form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 20rem;
+  }
+  
+  .form__group {
+	  display: flex;
+
+	  position: relative;
+	  padding: 15px 0 0;
+	  margin-top: 10px;
+	  width: 22rem;
+	}
+	
+	.form__field {
+	  margin-left: 4rem;
+	  margin-top: 0.3rem;
+	  font-family:'Montserrat', sans-serif;
+	  width: 16rem;
+	  border: 0;
+	  border-bottom: 2px solid $gray;
+	  outline: 0;
+	  font-size: 1.1rem;
+	  color: black;
+	  padding: 1rem 0.3rem 0 ;
+	  background: transparent;
+	  transition: border-color 0.2s;
+	
+		
+	&::-moz-placeholder ~ .form__label {
+	  font-size: 1.3rem;
+	  cursor: text;
+	  top: 20px;
+	}
+  
+	  &::placeholder {
+		color: transparent;
+	  }
+	}
+	
+	.form__label {
+		margin-left: 4rem;
+		font-family:'Montserrat', sans-serif;
+		position: absolute;
+		top: 0;
+		display: block;
+		transition: 0.2s;
+		font-size: 1rem;
+		color: $gray;
+	}
+	
+	.form__field:focus {
+	  ~ .form__label {
+		position: absolute;
+		top: 0;
+		display: block;
+		transition: 0.2s;
+		font-size: 1rem;
+		color: $primary;
+		font-weight:700;    
+	  }
+	  padding-bottom: 6px;  
+	  font-weight: 700;
+	  border-width: 3px;
+	  border-image: linear-gradient(to right, $primary, $secondary	);
+	  border-image-slice: 1;
+	}
+
+.buttonSearch {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Montserrat', sans-serif;
+	border: transparent;
+	display: flex;
+	width: 15rem;
+	margin: 10%;
+	padding: 0.6rem;
+	justify-content: center;
+	color: #dddddd;
+	cursor: pointer;
+	font-size: 0.9rem;
+	margin-left: 2rem;
+	margin-top: 1rem;
+	  transition: all .3s;
+	  position: relative;
+	  overflow: hidden;
+	  z-index: 1;
+	  &:after {
+		  content: '';
+		  position: absolute;
+		  bottom: 0;
+		  left: 0;
+		  width: 100%;
+		  height: 100%;
+		  background-color: #30475e;
+	  color: #dddddd;
+		  border-radius: 0.2rem;
+		  z-index: -2;
+	  }
+	  &:before {
+		  content: '';
+		  position: absolute;
+		  bottom: 0;
+		  left: 0;
+		  width: 0%;
+		  height: 100%;
+		  background-color: #f05454;
+		  transition: all .3s;
+		  border-radius: 0.2rem;
+		  z-index: -1;
+	  }
+	  &:hover {
+		  color: #fff;
+		  &:before {
+			  width: 100%;
+		}
+	}
+}
+
+.sortUser{
+	margin: 10%;
+	font-weight: bold;
+	margin: 10%;
+	width: 100%;
+	height: fit-content;
+	border-radius: .3rem;
+	background: darken($red, 20%);
+	border: $dash-size dashed $red;
+	box-shadow: 0 0 0 ($dash-size / 2) darken($primary, 20%),
+		        0 0 0 ($dash-size * 2.5) $white,
+		        inset 0 0 0 ($dash-size / 2) darken($primary, 20%),
+		        0 $dash-size ($dash-size * 2) ($dash-size * 3) rgba(0,0,0,0.5),
+		        inset 0 0 0 ($dash-size * 1.2) $white,
+		        inset 0 0 100vw 100vw $fill-color;
+	color: $dark;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1rem;
+	text-shadow: 0 2px $white;
+	text-align: center;
+}

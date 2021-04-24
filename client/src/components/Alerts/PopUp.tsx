@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './PopUp.module.scss';
 import { GET } from '../../gql/details';
@@ -22,7 +21,7 @@ const PopUp = () => {
 
     let id = 19
 
-    const { loading, error, data } = useQuery<DetailsProduct>(GET, {
+    const { data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
     });
 

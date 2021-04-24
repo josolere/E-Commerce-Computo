@@ -1,16 +1,21 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-/* import { NEW_PRODUCT } from "../../gql/products";*/
 import { GET_CATEGORIES } from "../../gql/categories";
 import styles from './CreateProduct.module.scss';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Link } from 'react-router-dom'
 =======
+=======
+>>>>>>> LogFront
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileAlt, faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import {  faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
 
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
 
 interface Categorie {
     id: number | undefined,
@@ -82,20 +87,25 @@ query ($name: String!, $categoriesId:[ID!]){
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default function CreateProduct() {
 =======
 export default function CreateProduct():JSX.Element {
 >>>>>>> front_roto
+=======
+export default function CreateProduct():JSX.Element {
+>>>>>>> LogFront
 
     const [createProduct, results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
-    const { loading, error, data } = useQuery<Categories>(GET_CATEGORIES)
+    const { data } = useQuery<Categories>(GET_CATEGORIES)
     const categories = data?.getCategory
 
     const [state, setState] = useState<IState>({ name: "", price: 0, brand: "", image: "", details: "", categories: [] })
 
     const products = useQuery<DetailsData>(GET, { variables: { name: '', categoriesId: [] } })
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     const [p, setP] = useState<any>()
 
@@ -110,18 +120,23 @@ export default function CreateProduct():JSX.Element {
 
  
 =======
+=======
+>>>>>>> LogFront
     const [prod, setProd] = useState<any>()
 
     const [newpro, setnewpr] = useState<any>([])
 
-    let LunesMañana = []
+   
 
     useEffect(() => {
         setProd(products?.data?.getProducts)
     }, [products])
 
 
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
     function handleChange(e: InputEvent) {
         return setState({
             ...state,
@@ -142,18 +157,24 @@ export default function CreateProduct():JSX.Element {
             .then((resolve) => { console.log(data) })
             .catch((err) => { console.log('Salio Mal') })
 <<<<<<< HEAD
+<<<<<<< HEAD
             setT([...ta, results?.data?.createProduct])
 
    }
 
 
 =======
+=======
+>>>>>>> LogFront
         setnewpr([...newpro, results?.data?.createProduct])
 
     }
 
     console.log(state)
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
     const [categors, setCategors] = useState<Array<any>>([])
 
     const handleCategories = (e: SelectEvent) => {
@@ -179,6 +200,7 @@ export default function CreateProduct():JSX.Element {
 
     return (
         <div className={styles.container}>
+<<<<<<< HEAD
 <<<<<<< HEAD
             <form onSubmit={handleSubmit} className={styles.form} >
                 <h1>Crear Producto</h1>
@@ -228,6 +250,8 @@ export default function CreateProduct():JSX.Element {
 
 
 =======
+=======
+>>>>>>> LogFront
             <h4 className={styles.TitleCreate} >Crear Producto</h4>
             <div className={styles.OrderCreate} >
                 <div className={styles.OrderForm} >
@@ -354,7 +378,10 @@ export default function CreateProduct():JSX.Element {
                             </Link>
                         ))}
                     </div>
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
                 </div>
             </div>
         </div>

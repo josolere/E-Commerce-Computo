@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useState } from 'react'
 import styles from './CreateCategory.module.scss'
 import { NEW_CATEGORY } from "../../gql/categories"
@@ -16,13 +17,15 @@ import { gql, useMutation } from '@apollo/client';
 } */
 
 =======
+=======
+>>>>>>> LogFront
 import React, { useState, useEffect } from 'react'
 import styles from './CreateCategory.module.scss'
 import { NEW_CATEGORY } from "../../gql/categories"
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_CATEGORIES } from "../../gql/categories";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileAlt, faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import { faFileSignature } from '@fortawesome/free-solid-svg-icons';
 
 
 interface Categorie {
@@ -33,11 +36,15 @@ interface Categorie {
 interface Categories {
     getCategory: Categorie[]
 }
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
 
 type FormEvent = React.FormEvent<HTMLFormElement>
 type InputEvent = React.FormEvent<HTMLInputElement>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 export default function CreateProduct() {
 
@@ -47,6 +54,8 @@ export default function CreateProduct() {
         {category:newCategoryDetails}
         >(NEW_CATEGORY,{variables:{category:{name:categorie}}}) */
 =======
+=======
+>>>>>>> LogFront
 export default function CreateProduct():JSX.Element {
 
     const results = useQuery<Categories>(GET_CATEGORIES)
@@ -57,10 +66,13 @@ export default function CreateProduct():JSX.Element {
 
     const [categorie, setCategorie] = useState("")
 
+<<<<<<< HEAD
     const [showCreate, setShowCreate] = useState(false)
 
 >>>>>>> front_roto
 
+=======
+>>>>>>> LogFront
     const [createCategory, { data }] = useMutation(NEW_CATEGORY)
 
     const [listCategory, setListCategory] = useState<Array<any>>([])
@@ -68,13 +80,19 @@ export default function CreateProduct():JSX.Element {
     let newCategory = ''
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> LogFront
     useEffect(() => {
         setCat(categories)
 
     }, [categories])
 
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
     function handleChange(e: InputEvent) {
         return setCategorie(e.currentTarget.value)
     }
@@ -82,19 +100,27 @@ export default function CreateProduct():JSX.Element {
     function handleSubmit(e: FormEvent) {
         e.preventDefault()
 <<<<<<< HEAD
+<<<<<<< HEAD
         //AVERIGUAR COMO HACER POST Y COMO SON LOS MODELOS
 =======
 
 >>>>>>> front_roto
+=======
+
+>>>>>>> LogFront
         createCategory({ variables: { name: categorie } })
             .then((resolve) => { console.log(resolve) })
             .catch((err) => { console.log('Salio Mal') })
         if (data) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             newCategory = data?.createCategory.name
 =======
             newCategory = data?.createCategory
 >>>>>>> front_roto
+=======
+            newCategory = data?.createCategory
+>>>>>>> LogFront
             setListCategory([...listCategory, newCategory])
         }
     }
@@ -103,6 +129,7 @@ export default function CreateProduct():JSX.Element {
 
     return (
         <div className={styles.container}>
+<<<<<<< HEAD
 <<<<<<< HEAD
             {/*         {error ? alert(`Oh no! ${error.message}`) : null}
         {data && data.createNewProduct ? alert(`Saved!`) : null} */}
@@ -122,6 +149,8 @@ export default function CreateProduct():JSX.Element {
                     ))}
                 </div>
 =======
+=======
+>>>>>>> LogFront
             <h4 className={styles.TitleCreate} >Crear Categoría</h4>
             <div className={styles.OrderCreate} >
                 <div className={styles.OrderForm} >
@@ -161,7 +190,10 @@ export default function CreateProduct():JSX.Element {
                     </div>
                 </div>
 
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
             </div>
         </div>
     )

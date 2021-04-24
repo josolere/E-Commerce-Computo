@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './LandPage.css';
 import { useQuery, gql } from '@apollo/client';
 import styles from './LandPage.module.scss'
-import ReactPlayer from 'react-player';
 
 
 interface DetailsProduct {
@@ -21,10 +20,14 @@ interface DetailsData {
 const GET = gql`
 query ($name: String!, $categoriesId:[ID!]){
 <<<<<<< HEAD
+<<<<<<< HEAD
     getProducts (filter:{limit:12 name:$name categoriesId:$categoriesId}) {
 =======
     getProducts (filter:{limit:20 name:$name categoriesId:$categoriesId}) {
 >>>>>>> front_roto
+=======
+    getProducts (filter:{limit:20 name:$name categoriesId:$categoriesId}) {
+>>>>>>> LogFront
         id
         name
         price
@@ -62,10 +65,14 @@ const LandPage = () => {
 
     if (dayoftheweek === 'Lunes') {
 <<<<<<< HEAD
+<<<<<<< HEAD
         imagesoftheweek = [1, 2, 3, 4, 5, 6, 7]
 =======
         imagesoftheweek = [13, 14, 15, 12, 10, 16, 11]
 >>>>>>> front_roto
+=======
+        imagesoftheweek = [13, 14, 15, 12, 10, 16, 11]
+>>>>>>> LogFront
         discount = discountoftheweek[0]
     }
     else if (dayoftheweek === 'Martes') {
@@ -96,35 +103,49 @@ const LandPage = () => {
     const products = data?.getProducts
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log(products)
 
 =======
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
     let image1: string = "";
     let image2: string = "";
     let image3: string = "";
     let image4: string = "";
     let image5: string = "";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     let image6: string = "";
 
 >>>>>>> front_roto
+=======
+    let image6: string = "";
+
+>>>>>>> LogFront
 
     if (products) {
         image1 = products[imagesoftheweek[0]].image
         image2 = products[imagesoftheweek[1]].image
 <<<<<<< HEAD
+<<<<<<< HEAD
         image3 = products[imagesoftheweek[2]].image
         image4 = products[imagesoftheweek[3]].image
         image5 = products[imagesoftheweek[4]].image
 =======
+=======
+>>>>>>> LogFront
         image3 = products[imagesoftheweek[3]].image
         image4 = products[imagesoftheweek[4]].image
         image5 = products[imagesoftheweek[5]].image
 /*         image6 = products[imagesoftheweek[5]].image
  */
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
     }
 
     const linkland = () => {
@@ -158,10 +179,14 @@ const LandPage = () => {
                         </div>
                     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div className={styles.OrderSub}>
 =======
 {/*                     <div className={styles.OrderSub}>
 >>>>>>> front_roto
+=======
+{/*                     <div className={styles.OrderSub}>
+>>>>>>> LogFront
                         <h1 className={styles.TitleConcat} >Contacta con nosotros</h1>
                     </div>
                     <div className={styles.LandPageInfo}>
@@ -170,10 +195,14 @@ const LandPage = () => {
                         <p>  WhatsApp: +54 9 1134553321</p>
                         <p>  E-mail: CompuHenry@yahoo.com</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     </div>
 =======
                     </div> */}
 >>>>>>> front_roto
+=======
+                    </div> */}
+>>>>>>> LogFront
                 </div>
             </div>
         </React.Fragment>

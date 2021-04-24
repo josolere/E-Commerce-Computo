@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 /* import search from './styleSearch.module.css'
- */import { useQuery, gql } from '@apollo/client'
+ */import { useQuery } from '@apollo/client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from 'react-redux';
@@ -22,9 +22,6 @@ interface DetailsData {
     getProducts: DetailsProduct[]
 }
 
-interface Search {
-    name: string
-}
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
@@ -33,17 +30,13 @@ const InputSearch = (): JSX.Element => {
 
     let namesproducts: Array<any> = [""]
 
-    let idlist: Array<any> = []
-
-    const { loading, error, data } = useQuery<DetailsData>(GET);
+    const { data } = useQuery<DetailsData>(GET);
     if (data) {
         namesproducts = data?.getProducts.map(item => item.name)
-        idlist = data?.getProducts.map(item => item)
     }
 
     const [auto, setAuto] = useState<Array<string>>([""])
 
-    const [middlware, setMiddlware] = useState([""])
 
     const [searchInput, setSearchInput] = useState('')
 
@@ -57,10 +50,14 @@ const InputSearch = (): JSX.Element => {
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         setSearchInput(e.currentTarget.value)
 <<<<<<< HEAD
+<<<<<<< HEAD
         setAuto(namesproducts.filter((name) => 
 =======
         setAuto(namesproducts.filter((name) =>
 >>>>>>> front_roto
+=======
+        setAuto(namesproducts.filter((name) =>
+>>>>>>> LogFront
             name.toLowerCase().includes(searchInput.toLowerCase())
         ))
         // setAuto(middlware)
@@ -81,6 +78,7 @@ const InputSearch = (): JSX.Element => {
                 </div>
                 {searchInput.length > 1 ? <div className={styles.linksearch} >
 <<<<<<< HEAD
+<<<<<<< HEAD
                     
                         {auto.slice(0, 5).map(search => <span onClick={e => {
                             dispatch(setFilter(search))
@@ -89,6 +87,8 @@ const InputSearch = (): JSX.Element => {
                 </div>:
                             <span></span>}
 =======
+=======
+>>>>>>> LogFront
 
                     {auto.slice(0, 5).map(search => <span  onClick={e => {
                         dispatch(setFilter(search))
@@ -100,7 +100,10 @@ const InputSearch = (): JSX.Element => {
                     </span>)}
                 </div> :
                     <span></span>}
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
             </form>
         </div>
     )

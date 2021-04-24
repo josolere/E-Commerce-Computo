@@ -1,25 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation, gql } from '@apollo/client';
-import { useDispatch, useSelector } from 'react-redux'
+import { useQuery, useMutation } from '@apollo/client';
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 <<<<<<< HEAD
 import NavBar from "../NavBar/NavBar";
 =======
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
-import styles from "./ProductDetail.module.scss"
+import styles from  "./ProductDetail.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
 import { addProductDetails } from '../../redux/actions'
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
 import { toast } from 'react-toastify';
 >>>>>>> front_roto
+=======
+import { Cookies } from "react-cookie";
+import { toast } from 'react-toastify';
+>>>>>>> LogFront
 
 interface Icategories {
     id?: number
@@ -39,6 +47,7 @@ interface DetailsProduct {
     }
 }
 
+<<<<<<< HEAD
 interface Review {
     rating: number
     review: string
@@ -53,6 +62,8 @@ interface Categorie {
     name: string,
 }
 
+=======
+>>>>>>> LogFront
 interface Categories {
     getCategory: Icategories[]
 }
@@ -70,20 +81,26 @@ interface PropsDetails {
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     const dispatch = useDispatch()
 
 =======
+=======
+>>>>>>> LogFront
 
     const dispatch = useDispatch()
 
     const [gotcookie, setGotcookie] = useState<any>(false)
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
 
     const id = props.history.location.state.id
 
-    const newprice = props.history.location.state.newprice
+    /* const newprice = props.history.location.state.newprice */
 
-    const { loading, error, data } = useQuery<DetailsProduct>(GET, {
+    const { data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
     });
 
@@ -92,10 +109,13 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     let resultsData: Array<string> = []
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (results) {
         resultsData.push(results?.data?.addReview?.text)
         console.log(results)
 =======
+=======
+>>>>>>> LogFront
     const cookie = new Cookies
 
     useEffect(() => {
@@ -104,7 +124,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     if (results) {
         resultsData.push(results?.data?.addReview?.text)
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
     }
 
     let [rating, setRating] = useState<Array<any>>([])
@@ -120,10 +143,15 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const [hideStar, setHideStar] = useState(true)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
    
 
 >>>>>>> front_roto
+=======
+   
+
+>>>>>>> LogFront
     const filtred = data?.getProductById
 
     let totalrating: number = 0;
@@ -144,6 +172,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = parseFloat(totalrating.toFixed(2))
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     const changereview = async () => {
         await addreview({ variables: { rating: totalrating, text: reviewuser.review, product: filtred?.id } })
@@ -168,6 +197,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const[editMode,setEditMode] = useState(false)
     
 =======
+=======
+>>>>>>> LogFront
     const changereview = () => {
         if (gotcookie) {
         addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
@@ -194,7 +225,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const [editMode, setEditMode] = useState(false)
 
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
     console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -258,13 +292,17 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const categoriesQuery = categoriesQ.data?.getCategory
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log(newprice)
 =======
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
 
     const handleAddProduct = () => {
         const state = true
         dispatch(addProductDetails(state));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     }
@@ -383,6 +421,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 </div>
         </div>
 =======
+=======
+>>>>>>> LogFront
     }
 
 
@@ -502,7 +542,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 </div>
             </div>
         </React.Fragment>
+<<<<<<< HEAD
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
     )
 }
 

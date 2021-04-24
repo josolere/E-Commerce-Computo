@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useLayoutEffect, useMemo } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Card.module.scss'
 import { Link } from 'react-router-dom'
-import { addShopping, local, addProductDetails, addProductHome } from '../../redux/actions'
+import { addShopping, local, addProductHome } from '../../redux/actions'
 import { AppState } from '../../redux/reducers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
@@ -18,11 +18,15 @@ interface props {
 
 export default function Card({ name, image, price, id, count }: props) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> front_roto
+=======
+
+>>>>>>> LogFront
     const dispatch = useDispatch()
-    const { quantity, priceSubTotal, productTotal, addCart, addHome,idDetails,priceDetails,countDetails }: any = useSelector((store: AppState) => store.shoppingCartReducer)
+    const { quantity, priceSubTotal, productTotal, idDetails, priceDetails, countDetails }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
     const [stateHome, setStateHome] = useState(true)
 
@@ -80,6 +84,7 @@ export default function Card({ name, image, price, id, count }: props) {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (addCart === true && addHome === true) {
             handleAddProduct()
             const state = false
@@ -90,6 +95,8 @@ export default function Card({ name, image, price, id, count }: props) {
 
 =======
 >>>>>>> front_roto
+=======
+>>>>>>> LogFront
 
     // const nameoftheday = (fecha: any) => [
     //     'Domingo',
@@ -150,7 +157,7 @@ export default function Card({ name, image, price, id, count }: props) {
                         newprice: 0
                     }
                 }}>
-                <img style={{ width: '100%', height: 'auto' }} src={image} />
+                <img style={{ width: '100%', height: 'auto' }} src={image} alt="notfoundimg"/>
             </Link>
 
             {/* <div className={styles.buy}>${new Intl.NumberFormat().format(price)}</div> */}
