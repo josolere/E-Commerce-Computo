@@ -25,6 +25,7 @@ export type Order = {
 export type OrderDetail = {
   quantity: number;
   price: number;
+  productName: string;
 };
 export type Review = {
   text: string;

@@ -131,10 +131,10 @@ passport.serializeUser((user: any, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(async (id:any, done) => {
+passport.deserializeUser(async (id: any, done) => {
   const users: any = await db.User.findAll();
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
-  console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
+  //console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
   done(null, matchingUser);
 });
 
