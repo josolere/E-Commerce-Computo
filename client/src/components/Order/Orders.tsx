@@ -1,5 +1,3 @@
-import React from 'react'
-import NavBar from '../NavBar/NavBar'
 import ordersStyle from './Orders.module.scss'
 
 const Orders = () => {

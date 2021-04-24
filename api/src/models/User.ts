@@ -30,6 +30,7 @@ export interface UserAttributesI {
   surname?: string;
   address?: string | null; //puede ser otra tabla
   facebookId?: string | null;
+  googleId?: string | null;
 }
 
 interface UserCreationAttributesI extends Optional<UserAttributesI, "id" | "address" | "username" | "password" | "facebookId"> {}
@@ -41,12 +42,13 @@ export class User
   public username!: string | null;
   public password!: string | null;
   public email!: string;
-   public privilege!: string;
+  public privilege!: string;
   public active!: boolean;
   public name!: string;
   public surname!: string;
   public address!: string | null;
   public facebookId!:string | null;
+  public googleId!: string | null;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -79,6 +81,10 @@ export function UserFactory(sequelize: Sequelize) {
         primaryKey: true,
       },
       facebookId:{
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      googleId:{
         type: DataTypes.STRING,
         allowNull: true,
       },

@@ -1,8 +1,8 @@
 import React, { useState} from "react";
-import styles from './SubMenu.module.scss'
+/* import styles from './SubMenu.module.scss'
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { setCategory } from '../../redux/actions';
+import { setCategory } from '../../redux/actions'; */
 
 
 
