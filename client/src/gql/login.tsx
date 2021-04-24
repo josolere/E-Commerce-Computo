@@ -11,13 +11,7 @@ query {
     }
   }`;
 
-export const LOGOUT_MUTATION = gql`
-  mutation LOGOUTMUTATION ($email:String! $password: String! ){
-      logout (input:{email:$email password:$password})
-      {
-            loquellegue
-      }
-  }`;
+
 
 export const SIGNUP_MUTATION = gql`
     mutation  ($firstName: String! $password: String! $email: String!  $lastName:String! ) {

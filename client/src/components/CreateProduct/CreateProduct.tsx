@@ -2,20 +2,10 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { GET_CATEGORIES } from "../../gql/categories";
 import styles from './CreateProduct.module.scss';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { Link } from 'react-router-dom'
-=======
-=======
->>>>>>> LogFront
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
 
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront
 
 interface Categorie {
     id: number | undefined,
@@ -86,15 +76,7 @@ query ($name: String!, $categoriesId:[ID!]){
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-export default function CreateProduct() {
-=======
 export default function CreateProduct():JSX.Element {
->>>>>>> front_roto
-=======
-export default function CreateProduct():JSX.Element {
->>>>>>> LogFront
 
     const [createProduct, results] = useMutation(NEW_PRODUCT) // para utiilizar usar results.data
 
@@ -105,23 +87,6 @@ export default function CreateProduct():JSX.Element {
 
     const products = useQuery<DetailsData>(GET, { variables: { name: '', categoriesId: [] } })
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const [p, setP] = useState<any>()
-
-    const [ta, setT] = useState<any>([])
-
-    useEffect(() => { 
-        setP(products?.data?.getProducts)
-     }, [results])
-
-
-
-
- 
-=======
-=======
->>>>>>> LogFront
     const [prod, setProd] = useState<any>()
 
     const [newpro, setnewpr] = useState<any>([])
@@ -133,10 +98,6 @@ export default function CreateProduct():JSX.Element {
     }, [products])
 
 
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront
     function handleChange(e: InputEvent) {
         return setState({
             ...state,
@@ -156,25 +117,11 @@ export default function CreateProduct():JSX.Element {
         createProduct({ variables: state })
             .then((resolve) => { console.log(data) })
             .catch((err) => { console.log('Salio Mal') })
-<<<<<<< HEAD
-<<<<<<< HEAD
-            setT([...ta, results?.data?.createProduct])
-
-   }
-
-
-=======
-=======
->>>>>>> LogFront
         setnewpr([...newpro, results?.data?.createProduct])
 
     }
 
     console.log(state)
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront
     const [categors, setCategors] = useState<Array<any>>([])
 
     const handleCategories = (e: SelectEvent) => {
@@ -200,58 +147,6 @@ export default function CreateProduct():JSX.Element {
 
     return (
         <div className={styles.container}>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <form onSubmit={handleSubmit} className={styles.form} >
-                <h1>Crear Producto</h1>
-                <hr />
-                <label>Nombre del producto</label>
-                <input type='text' name='name' value={state.name} onChange={handleChange} />
-                <label>Precio</label>
-                <input type='text' name='price' value={state.price} onChange={handlePrice} />
-                <label>Marca</label>
-                <input type='text' name='brand' value={state.brand} onChange={handleChange} />
-                <label>Imagen</label>
-                <input type='text' name='image' value={state.image} onChange={handleChange} />
-                <label>Detalles</label>
-                <input type='text' name='details' value={state.details} onChange={handleChange} />
-                <select onChange={handleCategories}>
-                    {categories?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
-                </select>
-                <div>
-                    {categors.map(cate => <button onClick={handleDeleteCategory} value={cate.id} key={cate.name}>{cate.name}</button>)}
-                </div>
-                <input type='submit' value='Crear' className={styles.button} />
-            </form>
-            <div className={styles.separateList}>
-                <div className={styles.listProducts} >
-                    <label className={styles.TitleList} >Productos creados</label>
-                    <hr className={styles.hrList} />
-                    {p && p.map((item: any, index: number) => (
-                        <Link style={{ textDecoration: 'none' }} to={{
-                            pathname: '/Detalles',
-                            state: {
-                                id: item.id
-                            }
-                        }}>
-                            <p className={styles.pList}>{item.id}: {item.name}</p>
-                        </Link>
-                    ))}
-                    {ta && ta.map((item: any) => (  
-                        <Link style={{ textDecoration: 'none' }} to={{
-                            pathname: '/Detalles',
-                            state: {
-                                id: item?.id
-                            }
-                        }}>
-                            <p className={styles.pList}>{item?.id} {item?.name}</p>
-                        </Link>
-                        ))}
-
-
-=======
-=======
->>>>>>> LogFront
             <h4 className={styles.TitleCreate} >Crear Producto</h4>
             <div className={styles.OrderCreate} >
                 <div className={styles.OrderForm} >
@@ -378,10 +273,6 @@ export default function CreateProduct():JSX.Element {
                             </Link>
                         ))}
                     </div>
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront
                 </div>
             </div>
         </div>

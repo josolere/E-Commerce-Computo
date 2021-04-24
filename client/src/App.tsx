@@ -31,12 +31,9 @@ interface user {
   }
 }
 
-<<<<<<< HEAD
-=======
 interface datauser {
   actualUser: user[]
 }
->>>>>>> LogFront
 
 function App() {
 
@@ -73,10 +70,7 @@ function App() {
 
   return (
     <Router>
-<<<<<<< HEAD
-=======
       
->>>>>>> LogFront
        <ToastContainer
               position="top-right"
               autoClose={5000}

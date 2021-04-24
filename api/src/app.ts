@@ -58,7 +58,7 @@ const facebookOptions: iUserFacebook = {
   profileFields: ["id", "email", "first_name", "last_name"],
 };
 const googleOptions: any = {
-  clientID: "xxxxx",
+  clientID: clientID,
   clientSecret: clientSecret,
   callbackURL: 'http://localhost:5000/auth/google/redirect',
 }
@@ -181,7 +181,7 @@ app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"] }
 app.get(
     "/auth/facebook/callback",
     passport.authenticate("facebook", {
-      successRedirect: "http://localhost:5000/graphql",
+      successRedirect: "http://localhost:3000/Home",
       failureRedirect: "http://localhost:5000/graphql",
     }),
     ); 
@@ -195,7 +195,7 @@ app.get('/auth/google/redirect',
   passport.authenticate('google', { failureRedirect: 'http://localhost:5000/graphql'}),
   function(req, res) {
     //successful authentication
-    res.redirect('/graphql')
+    res.redirect('http://localhost:3000/Home')
   }
   )
 

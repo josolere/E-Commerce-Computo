@@ -1,16 +1,7 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> LogFront
 $white: #fff;
 $gray: #9b9b9b;
 $verdesito: 	#E0FFFF;
 $blanquito: #F0F0F0;
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront
 $grey:#30475e;//dddddd
 $dark: #222831;//222831
 $white: #dddddd;//30475e
@@ -18,85 +9,6 @@ $red:#f05454;//f05454
 
 .container{
     display: flex;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0.5rem;
-    align-items: flex-start;
-
-}
-
-.form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    font-family: 'Montserrat', sans-serif;
-    padding: 2rem;
-    height: fit-content;
-    width: fit-content;
-    border: solid 1px gray;
-    background-color:$grey;
-    border-radius: 0.5rem;
-
-    h1{
-        color: whitesmoke;
-        margin-bottom: 1rem;
-    }
-    hr{
-        margin:0;
-        color:#f05454;//f05454;
-        border:solid 3px #f05454;//f05454;
-        width: 6rem;
-        border-radius: 1rem;
-    }
-    input{
-        margin-top: 1rem;
-        outline: none;
-    }
-    label{
-        margin-top: 1rem;
-        color:$white;
-    }
-}
-
-.button{
-    background-color: $red;
-    border: none;
-    padding: 1rem;
-    border-radius: 2rem;
-    color: $white;
-    font-size: 0.7rem;
-    &:hover{
-        cursor: pointer;
-        border-radius: 1rem;
-    }
-}
-
-.separateList {
-    padding-right: 1rem;
-
-}
-
-.listProducts {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 1.4rem;
-    height: fit-content;
-    width: fit-content;
-    border: solid 1px gray;
-    background-color:$grey;
-    border-radius: 0.5rem;
-}
-.TitleList {
-    font-size: 1.3rem;
-=======
-=======
->>>>>>> LogFront
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -376,10 +288,6 @@ $red:#f05454;//f05454
 .TitleList {
     font-weight: bold;
     font-size: 1.4rem;
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront
     font-family: 'Montserrat', sans-serif;
     color: whitesmoke;
     margin-bottom: 0.2rem;
@@ -394,17 +302,6 @@ $red:#f05454;//f05454
 }
 
 .pList {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    margin: 0.3rem;
-    justify-content:space-around;
-    font-size: 0.7rem;
-    font-family: 'Montserrat', sans-serif;
-    color: whitesmoke;
-}
-=======
-=======
->>>>>>> LogFront
     margin-top: 0.4rem;
     display: flex;
     flex-direction: column;
@@ -452,7 +349,3 @@ $red:#f05454;//f05454
         }
     }
 } 
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront

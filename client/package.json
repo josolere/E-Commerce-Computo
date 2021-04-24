@@ -17,23 +17,17 @@
     "@types/node": "^12.20.7",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
+    "@types/react-facebook-login": "^4.1.3",
     "@types/react-redux": "^7.1.16",
     "@types/react-router": "^5.1.13",
     "graphql": "^15.5.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-card-payment": "^0.1.2",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     "react-cookie": "^4.0.3",
     "react-cookies": "^0.1.1",
->>>>>>> front_roto
-=======
-    "react-cookie": "^4.0.3",
-    "react-cookies": "^0.1.1",
->>>>>>> LogFront
     "react-dom": "^17.0.2",
+    "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.2.0",
     "react-paginate": "^7.1.2",
@@ -43,14 +37,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     "react-toastify": "^7.0.3",
->>>>>>> front_roto
-=======
-    "react-toastify": "^7.0.3",
->>>>>>> LogFront
     "react-youtube-player": "^2.0.1",
     "readable-stream": "^2.3.7",
     "redux": "^4.0.5",

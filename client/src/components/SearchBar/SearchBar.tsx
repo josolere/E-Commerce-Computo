@@ -49,15 +49,7 @@ const InputSearch = (): JSX.Element => {
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         setSearchInput(e.currentTarget.value)
-<<<<<<< HEAD
-<<<<<<< HEAD
-        setAuto(namesproducts.filter((name) => 
-=======
         setAuto(namesproducts.filter((name) =>
->>>>>>> front_roto
-=======
-        setAuto(namesproducts.filter((name) =>
->>>>>>> LogFront
             name.toLowerCase().includes(searchInput.toLowerCase())
         ))
         // setAuto(middlware)
@@ -77,18 +69,6 @@ const InputSearch = (): JSX.Element => {
                     <button type="submit" /* className={search.buttonSearch} */><FontAwesomeIcon icon={faSearch} /></button>
                 </div>
                 {searchInput.length > 1 ? <div className={styles.linksearch} >
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    
-                        {auto.slice(0, 5).map(search => <span onClick={e => {
-                            dispatch(setFilter(search))
-                            setAuto([])
-                        }}>{search}</span>)}  
-                </div>:
-                            <span></span>}
-=======
-=======
->>>>>>> LogFront
 
                     {auto.slice(0, 5).map(search => <span  onClick={e => {
                         dispatch(setFilter(search))
@@ -100,10 +80,6 @@ const InputSearch = (): JSX.Element => {
                     </span>)}
                 </div> :
                     <span></span>}
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront
             </form>
         </div>
     )

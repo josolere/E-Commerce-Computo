@@ -7,21 +7,9 @@ $red:#f05454;//f05454
 .container{
     height: fit-content;
     justify-content: start;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    width: 15rem;
-    margin-top: 3rem;
-    margin-left: 2rem;
-=======
     width: 20%;
     margin-top: 4rem;
     margin-left: 1rem;
->>>>>>> front_roto
-=======
-    width: 20%;
-    margin-top: 4rem;
-    margin-left: 1rem;
->>>>>>> LogFront
 }
 .todos {
     background-color: $grey;
@@ -29,13 +17,6 @@ $red:#f05454;//f05454
     color: $white;
     border: transparent;
     width: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    padding: 1rem;
-=======
->>>>>>> front_roto
-=======
->>>>>>> LogFront
     outline: none;
     &:hover{
         cursor: pointer;
@@ -43,24 +24,6 @@ $red:#f05454;//f05454
 }
 
 .containerCategories {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    width: 100%;
-    background-color: $grey;
-    border-color: transparent;
-    color: white;
-    text-align: start;
-   padding: 1rem;
-    outline: none;
-            &:hover{
-                cursor: pointer;
-            }
-        }
-    
-
-=======
-=======
->>>>>>> LogFront
     font-family:'Montserrat', sans-serif;
     border: 1px solid $grey;
     display: flex;
@@ -108,10 +71,6 @@ $red:#f05454;//f05454
   }
         
     
-<<<<<<< HEAD
->>>>>>> front_roto
-=======
->>>>>>> LogFront
 
 .iconT {
    display: inline-flex;
