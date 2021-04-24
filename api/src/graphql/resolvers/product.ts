@@ -62,7 +62,7 @@ export default {
     product.Categories.map((category:any) => { 
       product.categories.push({id:category.id, name:category.name})
     })
-      .log(product)
+      console.log(product)
       product.reviews= await product.getReviews()
       return product;
     },
