@@ -2,31 +2,75 @@ import React from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { useCookies } from "react-cookie";
 import styles2 from './Edit.module.scss';
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faMinus } from '@fortawesome/free-solid-svg-icons'
-import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelopeSquare, faFileSignature, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { EDIT_USER_MUTATION, GET_USERS } from "../../gql/login";
+import styles3 from './CreateAdmin.module.scss';
+
+interface user {
+    firstname: string,
+    password: string,
+    email: string,
+    id: string,
+    surname: string
+}
+
+interface datauser {
+    actualUser: user[]
+}
 
 
 const CreateAdmin = () => {
 
-    const [logform, setLogform] = useState({
-        email: '',
-        password: '',
-        firstname: '',
-        lastname: '',
-        username: '',
-        address: ''
-    });
+    const [editUser, user] = useMutation(EDIT_USER_MUTATION)
 
-    const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
-        setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
+    const resultsUsers = useQuery(GET_USERS)
+
+    let ListUsers: Array<any> = [];
+
+    let ListUsername: Array<any> = [];
+
+    if (resultsUsers) {
+        ListUsers = resultsUsers?.data?.getUsers
+        ListUsername = ListUsers?.map((item: any) => item.email)
     }
+    const [auto, setAuto] = useState<Array<string>>([""])
+
+    const [searchInput, setSearchInput] = useState('')
+
+    const [userToshow, setUserToShow] = useState<Array<any>>([])
+
+    const [logform, setLogform] = useState<user>({ firstname: "", password: "", email: "", id: "", surname: "" });
+
+    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+        setSearchInput(e.currentTarget.value)
+        setAuto(ListUsername?.filter((email: any) =>
+            email.toLowerCase().includes(searchInput.toLowerCase())
+        ))
+        setUserToShow(ListUsers?.filter((users) => users.email.toLowerCase() === auto.toString().toLocaleLowerCase()))
+        userToshow?.map(function (user: any) {
+            setLogform({ firstname: user.name, password: user.password, email: user.email, surname: user.surname, id: user.id })
+        })
+    }
+
+    console.log(logform)
 
     const handleclickevent = () => {
         window.location.href = 'http://localhost:3000/Login'
+    }
+
+    const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
+        editUser({
+            variables: {
+                id: logform.id, email: logform.email, name: logform.firstname, password: logform.password, surname: logform.surname,
+                active: true, privilege: 'admin'
+            }
+        })
+            .then((resolve) => { console.log('Admin bien') })
+            .catch((error) => (console.log('Admin Mal')))
+        event.preventDefault()
     }
 
     return (
@@ -42,86 +86,35 @@ const CreateAdmin = () => {
                         </div>
                             ADMINISTRADOR
                             </div>
-                    <form className={styles.form} >
-                        <div className={styles.form__group}>
-                            <label htmlFor='email' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail</label>
-                            <input
-                                className={styles.form__field}
-                                placeholder='E-mail'
-                                minLength={10}
-                                maxLength={30}
-                                type='email'
-                                name='email'
-                                onChange={handleinputchange}
-                                required={true}
-                            />
-                        </div>
-                        <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faUnlock} /> Contraseña</label>
-                            <input
-                                className={styles.form__field}
-                                placeholder='Nueva Contraseña'
-                                minLength={4}
-                                maxLength={15}
-                                type="password"
-                                name='password'
-                                onChange={handleinputchange}
-                                required={true}
-                            />
-                        </div>
-                        <div className={styles.form__group}>
-                            <label htmlFor='username' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faShareAlt} /> Nombre de Usuario</label>
-                            <input
-                                className={styles.form__field}
-                                type='text'
-                                minLength={5}
-                                maxLength={15}
-                                placeholder='Nombre de Usuario'
-                                name='username'
-                                onChange={handleinputchange}
-                            />
-                        </div>
-                        <div className={styles.form__group}>
-                            <label htmlFor='name' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faFileSignature} /> Nombre</label>
-                            <input
-                                className={styles.form__field}
-                                type='text'
-                                minLength={5}
-                                maxLength={20}
-                                placeholder='Nombre'
-                                name='firstname'
-                                onChange={handleinputchange}
-                            />
-                        </div>
-                        <div className={styles.form__group}>
-                            <label htmlFor='lastname' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faFileSignature} /> Apellido</label>
-                            <input
-                                className={styles.form__field}
-                                type='text'
-                                minLength={5}
-                                maxLength={20}
-                                placeholder='Apellido'
-                                name='lastname'
-                                onChange={handleinputchange}
-                            />
-                        </div>
-                        <div className={styles.form__group}>
-                            <label htmlFor='address' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faMapMarker} /> Dirección</label>
-                            <input
-                                className={styles.form__field}
-                                type='text'
-                                minLength={5}
-                                maxLength={30}
-                                placeholder='Dirección'
-                                name='address'
-                                onChange={handleinputchange}
-                            />
+                    <form className={styles3.form} onSubmit={handlesubmitchange}>
+                        <div className={styles3.form__group}>
+                                <label className={styles3.form__label} >Buscar Usuario</label>
+                                <input
+                                    className={styles3.form__field} 
+                                    type='text'
+                                    placeholder='Buscar usuario'
+                                    onChange={handleChange}
+                                    value={searchInput}
+                                />
+                                <button type="submit" className={styles3.searchAdmin} ><FontAwesomeIcon icon={faSearch} /></button>
+                            </div>
+                            <div>
+                                {searchInput.length > 1 ? <div>
+                                    {auto.slice(0, 5).map(search => <button className={styles3.buttonSearch} onClick={() => {
+                                        setAuto([])
+                                        setUserToShow([])
+                                    }}>{search}   <FontAwesomeIcon style={{marginLeft:'0.2rem'}} icon={faWindowClose}/></button>)}
+                                </div> :
+                                    <span></span>}
+                            </div>
+                        <div>
+                            {userToshow && userToshow.map((item: any) => (
+                                <div className={styles3.sortUser} >
+                                    <p className={styles3.UserP} ><FontAwesomeIcon icon={faFileSignature} /> Nombre: {item.name}</p>
+                                    <p className={styles3.UserP}  ><FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail: {item.email}</p>
+                                    <p className={styles3.UserP}  ><FontAwesomeIcon icon={faCrown} /> Nivel: {item.privilege}</p>
+                                </div>
+                            ))}
                         </div>
                         <div className={styles.organizarbotones}>
                             <button className={styles.boton} type='submit' >Crear Administrador</button>

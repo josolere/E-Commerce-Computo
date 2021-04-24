@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useSelector} from "react-redux"
-import { useMutation, useQuery,  gql, useLazyQuery } from '@apollo/client';
+import { useMutation,  gql } from '@apollo/client';
 import styles from './loguin.module.scss';
 import { EDIT_USER_MUTATION } from "../../gql/login"
-import { useCookies } from "react-cookie";
 import styles2 from './Edit.module.scss';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
@@ -13,8 +11,7 @@ import { Link } from "react-router-dom"
 import { DELETE_USER } from "../../gql/login"
 import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
-import { Cookies, CookiesProvider } from "react-cookie";
-import { classNames } from 'react-select/src/utils';
+import { Cookies } from "react-cookie";
 import "./Edit.module.scss"
 import Swal from 'sweetalert2'
 

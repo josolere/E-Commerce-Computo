@@ -39,9 +39,9 @@ export default function Cards({ reset }: IProps) {
 
     const [isOpen, setIsOpen] = useState(true);
 
-   /*  const togglePopup = () => {
+     /* const togglePopup = () => {
         setIsOpen(!isOpen);
-    } */
+    }  */
 
     const product = data?.getProducts
     const [pageNumber, setPageNumber] = useState(0)
@@ -75,14 +75,14 @@ export default function Cards({ reset }: IProps) {
     return (
         <React.Fragment>
             <div className={styles.container}>{displayProducts}
-               {/*  {isOpen ?
+               { isOpen ?
                     <div className={styles.PopBox}>
                         <button onClick={closePopup} className={styles.PopButton} >
                         <FontAwesomeIcon icon={faTimes} aria-hidden={true} /></button>
                         <div className={styles.Pop} >
                             <PopUp />
                         </div>
-                    </div> : false} */}
+                    </div> : false}
                 <ReactPaginate
                     previousLabel={"Previous"}
                     nextLabel={"Next"}

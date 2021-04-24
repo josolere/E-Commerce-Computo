@@ -3,10 +3,9 @@ import total from './ShoppingTotal.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../redux/reducers';
 import { deleteCart } from '../../redux/actions'
-import { gql, useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 import { NEW_ORDER } from "../../gql/shopingCart"
-import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 import { toast } from "react-toastify"
 
 

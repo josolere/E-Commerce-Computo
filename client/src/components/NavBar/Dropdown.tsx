@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import styles from "./Dropdown.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt, faWrench, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
-import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { faSignOutAlt, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import { useCookies } from "react-cookie";
 import { BiUserCircle } from "react-icons/bi"
 import { RiQuestionnaireFill } from "react-icons/ri"
 import { FaShippingFast } from "react-icons/fa"

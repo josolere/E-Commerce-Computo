@@ -26,6 +26,18 @@ export const SIGNUP_MUTATION = gql`
                         
     }`;
     
+    export const GET_USERS = gql`
+    query {
+        getUsers{
+            id
+            name
+            privilege
+            email
+            surname
+            address
+            password
+        }
+    }`;
     
 
 export const LOGIN_MUTATION = gql`
@@ -52,12 +64,13 @@ mutation ($id:ID! ){
 }`;
 
 export const EDIT_USER_MUTATION = gql`
-mutation  ($name:String! $password:String! $email:String! $surname:String! $username:String! $privilege:String! $active:Boolean! $address:String! ) {
-    editUser (name:$name surname:$surname password:$password email:$email username:$username privilege:$privilege active:$active address:$address) 
-                        {    
-                            user{
-                                username
-                                privilege
-                            }
+mutation( $id:ID! $name:String! $password:String! $email:String! $surname:String! $username:String! 
+    $privilege:String! $active:Boolean! $address:String! ) 
+    {
+    editUser (id:$id  input: {name:$name surname:$surname password:$password email:$email 
+        username:$username privilege:$privilege active:$active address:$address}) 
+                        { 
+                            name
+                            privilege
                         }             
 }`;  

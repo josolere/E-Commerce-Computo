@@ -1,15 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { useCookies } from "react-cookie";
 import styles2 from './Edit.module.scss';
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeSquare, faUnlock, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { DELETE_USER } from "../../gql/login"
-import { Cookies, CookiesProvider } from "react-cookie";
+import { Cookies } from "react-cookie";
 import { toast } from 'react-toastify';
 
 

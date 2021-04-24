@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useEffect} from "react"
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
 import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/login"
 import { useCookies } from "react-cookie";
-import DropdownMenu from '../NavBar/Dropdown';
-import NavBarItem from '../NavBar/NavBarItem';
 import { toast, ToastContainer } from "react-toastify"
 import {faEnvelopeSquare, faUnlock,faFileSignature, faMapMarker, faShareAlt} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
