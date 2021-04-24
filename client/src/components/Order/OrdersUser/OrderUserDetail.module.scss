@@ -13,18 +13,6 @@ h4{
         margin-left: 0.5rem;
     }
 }
-button{
-    background-color: transparent;
-    border: none;
-    padding: 1.5rem;
-    font-size: 1.5rem;
-    color: #222831;
-    &:hover{
-        cursor: pointer;
-        padding: 2.5rem;
-        transition: 1s;
-    }
-}
 .products{
     margin-top: 2rem;
     border: 1px solid gray;
@@ -35,6 +23,9 @@ button{
         align-items: center;
         border-bottom: 1px solid gray;
         background-color: #30475e;
+        a{
+            color: whitesmoke;
+        }
         div{
             width: 25%;
             // border: 1px solid gray;

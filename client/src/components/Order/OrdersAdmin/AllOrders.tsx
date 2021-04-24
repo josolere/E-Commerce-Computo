@@ -3,6 +3,8 @@ import styles from './AllOrders.module.scss'
 import {GET_ALL_ORDERS} from '../../../gql/orders'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
+import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt, faSearch, faCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface IOrder {
     id:number
@@ -32,27 +34,38 @@ export default function AllOrders() {
             <label >Filtrar por:</label>
             <select onChange={handleStatus}>
                 <option value=''>Todas</option>
-                <option value='pending'>Pendiente</option>
-                <option value='Procesando'>Procesando</option>
-                <option value='Completa'>Completa</option>
-                <option value='Cancelada'>Cancelada</option>
+                <option value='creado'>Creada</option>
+                <option value='procesando'>Procesando</option>
+                <option value='completa'>Completa</option>
+                <option value='cancelada'>Cancelada</option>
             </select>
             </form>
             <div className={styles.products}>
-            <nav>
+            <nav style={{backgroundColor:'#30475e', color:'whitesmoke'}}>
                 <div>Nro de Orden</div>
                 <div>Estado</div>
                 <a></a>
             </nav>
-                {!loading && orders?.map((order:IOrder) => <nav key={order.id}>
+                {!loading && orders?.map((order:IOrder) => <nav key={order.id}
+                //  style={
+                //     (order.status === 'procesando' && {backgroundColor:'#FCFF7F',color:'black'})||
+                //     (order.status === 'completa' && {backgroundColor:'#B2FF7F',color:'black'})||
+                //     {backgroundColor:'#F37E7E',color:'black'}}
+                >
                     <div >{order.id}</div>
+                    <FontAwesomeIcon icon={faCircle} style={
+                    (order.status === 'cancelada' && {color:'#FF3434'})||
+                    (order.status === 'procesando' && {color:'#FCFF2F'})||
+                    (order.status === 'completa' && {color:'#6DFF2F'})||
+                    {color:'#FF7400'}
+                    }/>
                     <div>{order.status}</div>
-                    <a href={'/Orden/Detalle/'+order.id}>
+                    <Link to={`/Orden/Detalle/${order.id}`}>
                         Ver más
-                    </a>
+                        <FontAwesomeIcon icon={faPlus}/>
+                    </Link>
                 </nav>)}
             </div>
-            
         </div>
     )
 }

@@ -3,6 +3,8 @@ import styles from './OrderDetail.module.scss'
 import { GET_ORDER_DETAILS, EDIT_ORDER } from '../../../gql/orders'
 import { useMutation, useQuery } from '@apollo/client'
 import { useParams } from 'react-router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
 
 interface IParams {
     id: string 
@@ -24,7 +26,8 @@ export default function OrderDetails(props:PropsDetails) {
     const { id } = useParams<IParams>()
     // const id = props.history.location.state.id
     //traigo la orden x su id
-    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id:+id } })
+    console.log(id)
+    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id:+ id } })
     const order = data?.getOrderById
 
     const [editOrderStatus, editResults] = useMutation(EDIT_ORDER)
@@ -35,9 +38,9 @@ export default function OrderDetails(props:PropsDetails) {
         editOrderStatus({ variables: { id: order?.id, status: e.currentTarget.value } })
     }
 
-    // useEffect(() => {
-    //     setIdSearch(id)
-    // }, [id])
+    useEffect(() => {
+        console.log(order)
+    }, [order])
 
     const totalCalc = () =>{
         let total = 0
@@ -51,10 +54,15 @@ export default function OrderDetails(props:PropsDetails) {
     return (//creada => procesando => completa || cancelada
         <div className={styles.container}>
             <h1>Orden Nro: {order?.id}</h1>
-            <h4>Estado: {order?.status}</h4>
+            <h4>Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={
+                    (order?.status === 'cancelada' && {color:'#FF3434'})||
+                    (order?.status === 'procesando' && {color:'#FCFF2F'})||
+                    (order?.status === 'completa' && {color:'#6DFF2F'})||
+                    {color:'#FF7400'}
+                    }/></h4>
             {/* {order?.status === "pending" && <button onClick={handleStatus} value='creado'>Creado</button>} */}
-            {order?.status === "pending" && <> <button onClick={handleStatus} value='Procesando'>Procesando</button><button onClick={handleStatus} value='Cancelada'>Cancelar</button> </>}
-            {order?.status === "Procesando" && <><button onClick={handleStatus} value='Completa'>Completo</button><button onClick={handleStatus} value='Cancelada'>Cancelar</button> </>}
+            {order?.status === "creado" && <> <button onClick={handleStatus} style={{backgroundColor:'#FCFF2F'}} value='procesando'>Procesando</button><button onClick={handleStatus} style={{backgroundColor:'#FF3434'}} value='cancelada'>Cancelar</button> </>}
+            {order?.status === "procesando" && <><button onClick={handleStatus} style={{backgroundColor:'#6DFF2F'}} value='completa'>Completo</button><button onClick={handleStatus} style={{backgroundColor:'#FF3434'}} value='cancelada'>Cancelar</button> </>}
             {/* {order?.status === "Completa" && <button onClick={handleStatus} value='pending'>pending</button>} */}
             <div className={styles.products}>
                 <nav>
@@ -63,14 +71,14 @@ export default function OrderDetails(props:PropsDetails) {
                 <div>Precio</div>
                 <div>TOTAL</div>
                 </nav>
-                {order?.details?.map((obj: any) => <nav key={obj.id}>
-                    <div>"Nombre"</div>
+                {order?.details?.map((obj: any) => <nav key={obj.id} >
+                    <div>{obj.productName}nnn</div>
                     <div>{obj.quantity}</div>
-                    <div>{obj.price}</div>
+                    <div>${obj.price}</div>
                     <div>${obj.price * obj.quantity}</div>
                     </nav>)}
                 <nav>
-                    <div>***</div>
+                    <div>TOTAL</div>
                     <div>***</div>
                     <div>***</div>
                     <div>${totalCalc()}</div>

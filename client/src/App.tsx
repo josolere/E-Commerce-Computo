@@ -17,6 +17,8 @@ import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
 import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux'
 import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
+import OrdersUser from './components/Order/OrdersUser/OrdersUser'
+import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
 
 function App() {
 
@@ -42,8 +44,8 @@ function App() {
       </Route>
       <Switch>
         <Route exact path='/Crear' component={Unicrear} />
-        {/*       <Route exact path='/CrearCategoria' component={CreateCategory} />
-        <Route exact path='/CrearProducto' component={CreateProduct} /> */}
+        <Route path='/Ordenes/Usuario' component={OrdersUser}/>
+        <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Pago' component={Payment} />

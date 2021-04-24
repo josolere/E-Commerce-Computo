@@ -43,3 +43,20 @@ mutation($id:ID!,$status:String){
   }
 }
 `
+
+export const GET_ORDERS_USER = gql `
+query($idUser:ID!){
+  getOrdersByIdUser(idUser:$idUser){
+    id
+    status
+    details{
+      id
+      productName
+      OrderId
+      price
+      quantity
+      
+    }
+  }
+}
+`
