@@ -11,7 +11,6 @@ query {
     }
   }`;
 
-<<<<<<< HEAD
 export const LOGOUT_MUTATION = gql`
   mutation LOGOUTMUTATION ($email:String! $password: String! ){
       logout (input:{email:$email password:$password})
@@ -19,9 +18,6 @@ export const LOGOUT_MUTATION = gql`
             loquellegue
       }
   }`;
-=======
-
->>>>>>> LogFront
 
 export const SIGNUP_MUTATION = gql`
     mutation  ($firstName: String! $password: String! $email: String!  $lastName:String! ) {
@@ -62,8 +58,6 @@ export const LOGIN_MUTATION = gql`
                     }  
                 } 
     }`;
-<<<<<<< HEAD
-=======
 
     
 export const DELETE_USER = gql`
@@ -86,4 +80,3 @@ mutation( $id:ID! $name:String! $password:String! $email:String! $surname:String
                             privilege
                         }             
 }`;  
->>>>>>> LogFront
