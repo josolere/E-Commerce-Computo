@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import cart from './ShoppingCard.module.scss'
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux'
 import { deleteProduct, morePrice, lessPrice } from '../../redux/actions'
 import { PRODUCTS } from "../../gql/shopingCart"

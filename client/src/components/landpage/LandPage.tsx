@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './LandPage.css';
 import { useQuery, gql } from '@apollo/client';
 import styles from './LandPage.module.scss'
-import ReactPlayer from 'react-player';
 
 
 interface DetailsProduct {
@@ -20,7 +19,7 @@ interface DetailsData {
 
 const GET = gql`
 query ($name: String!, $categoriesId:[ID!]){
-    getProducts (filter:{limit:12 name:$name categoriesId:$categoriesId}) {
+    getProducts (filter:{limit:20 name:$name categoriesId:$categoriesId}) {
         id
         name
         price
@@ -57,7 +56,7 @@ const LandPage = () => {
     let discount: string = '0%'
 
     if (dayoftheweek === 'Lunes') {
-        imagesoftheweek = [1, 2, 3, 4, 5, 6, 7]
+        imagesoftheweek = [13, 14, 15, 12, 10, 16, 11]
         discount = discountoftheweek[0]
     }
     else if (dayoftheweek === 'Martes') {
@@ -87,20 +86,22 @@ const LandPage = () => {
 
     const products = data?.getProducts
 
-    console.log(products)
-
     let image1: string = "";
     let image2: string = "";
     let image3: string = "";
     let image4: string = "";
     let image5: string = "";
+    let image6: string = "";
+
 
     if (products) {
         image1 = products[imagesoftheweek[0]].image
         image2 = products[imagesoftheweek[1]].image
-        image3 = products[imagesoftheweek[2]].image
-        image4 = products[imagesoftheweek[3]].image
-        image5 = products[imagesoftheweek[4]].image
+        image3 = products[imagesoftheweek[3]].image
+        image4 = products[imagesoftheweek[4]].image
+        image5 = products[imagesoftheweek[5]].image
+/*         image6 = products[imagesoftheweek[5]].image
+ */
     }
 
     const linkland = () => {
@@ -133,7 +134,7 @@ const LandPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.OrderSub}>
+{/*                     <div className={styles.OrderSub}>
                         <h1 className={styles.TitleConcat} >Contacta con nosotros</h1>
                     </div>
                     <div className={styles.LandPageInfo}>
@@ -141,7 +142,7 @@ const LandPage = () => {
                         <p>  Telefono de contacto: 4567-3456</p>
                         <p>  WhatsApp: +54 9 1134553321</p>
                         <p>  E-mail: CompuHenry@yahoo.com</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </React.Fragment>

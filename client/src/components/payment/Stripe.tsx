@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import NavBar from '../NavBar/NavBar';
 import styles from './Payment.module.scss';
 
 /* interface databuy {

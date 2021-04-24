@@ -1,16 +1,15 @@
-import Login from './components/login/Login'
-import { useEffect } from "react"
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import Login from './components/Users/Login'
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import Details from './components/Details/ProductsDetails'
 import LandPage from './components/landpage/LandPage'
 import Payment from './components/payment/Stripe'
-import CreateProduct from './components/CreateProduct/CreateProduct';
-import CreateCategory from './components/CreateCategory/CreateCategory';
 import Home from './components/Home/Home'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import NavCategories from './components/categories/Categories';
-import Cards from './components/Cards/CardsHome';
+import CrearProducto from "./components/CreateProduct/CreateProduct"
+import CrearCategoria from "./components/CreateCategory/CreateCategory"
 import styles from './App.module.scss';
 import Unicrear from './components/Create/Create'
 import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
@@ -19,10 +18,47 @@ import { useDispatch } from 'react-redux'
 import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
 import OrdersUser from './components/Order/OrdersUser/OrdersUser'
 import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
+import Orders from './components/Order/Orders';
+import EditAccount from './components/Users/EditAccount';
+import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import CreateAdmin from './components/Users/CreateAdmin';
+import DeleteUser from './components/Users/DeleteUser';
+import { ToastContainer } from 'react-toastify'
+import { useMutation, useQuery, gql } from '@apollo/client';
+import { ACTUAL_USER } from "./gql/login";
+
+  
+interface user {
+  currentUser: {
+      name: string,
+      password: string,
+      email: string
+  }
+}
+
+interface datauser {
+  actualUser: user[]
+}
 
 function App() {
 
+  const actualuser = useQuery<user>(ACTUAL_USER)
+
+  console.log(actualuser.data)
+
   const dispatch = useDispatch()
+
+  const [gotCookies, setGotCookies] = useState(false)
+
+  const cookie = new Cookies
+
+  useEffect(() => {
+    if (cookie.get('User')) {
+      setGotCookies(true)
+    }
+  }, [cookie])
+
+  console.log(gotCookies)
 
   useEffect(() => {
     if (localStorage.getItem('productsLocal')) {
@@ -39,22 +75,44 @@ function App() {
 
   return (
     <Router>
+      
+       <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar
+              newestOnTop
+              closeOnClick
+              rtl={false}
+              pauseOnHover
+              pauseOnFocusLoss
+              draggable
+            />
       <Route path="/">
         <Home />
       </Route>
       <Switch>
-        <Route exact path='/Crear' component={Unicrear} />
         <Route path='/Ordenes/Usuario' component={OrdersUser}/>
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Login' component={Login} />
-        <Route exact path='/Pago' component={Payment} />
         <Route exact path='/Orden/Detalle/:id' component={OrderDetails} />
         <Route exact path='/Ordenes' component={OrdersAdmin} />
+        <Route exact path='/CrearProducto'>
+          {gotCookies ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
+        </Route>
+        <Route exact path='/CrearCategoria'>
+          {gotCookies ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
+        </Route>
+        <Route exact path='Pago'>
+          {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
+        </Route>
+       {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
+        <Route exact path='/CrearAdministrador' component={CreateAdmin} />
+        <Route exact path='/EditarCuenta' component={EditAccount} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>
-          <NavCategories/>
-          </div> 
+            <NavCategories />
+          </div>
         </Route>
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/' component={LandPage} />

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 /* import search from './styleSearch.module.css'
- */import { useQuery, gql } from '@apollo/client'
+ */import { useQuery } from '@apollo/client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from 'react-redux';
@@ -22,9 +22,6 @@ interface DetailsData {
     getProducts: DetailsProduct[]
 }
 
-interface Search {
-    name: string
-}
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
@@ -33,17 +30,13 @@ const InputSearch = (): JSX.Element => {
 
     let namesproducts: Array<any> = [""]
 
-    let idlist: Array<any> = []
-
-    const { loading, error, data } = useQuery<DetailsData>(GET);
+    const { data } = useQuery<DetailsData>(GET);
     if (data) {
         namesproducts = data?.getProducts.map(item => item.name)
-        idlist = data?.getProducts.map(item => item)
     }
 
     const [auto, setAuto] = useState<Array<string>>([""])
 
-    const [middlware, setMiddlware] = useState([""])
 
     const [searchInput, setSearchInput] = useState('')
 
@@ -56,7 +49,7 @@ const InputSearch = (): JSX.Element => {
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         setSearchInput(e.currentTarget.value)
-        setAuto(namesproducts.filter((name) => 
+        setAuto(namesproducts.filter((name) =>
             name.toLowerCase().includes(searchInput.toLowerCase())
         ))
         // setAuto(middlware)
@@ -76,13 +69,17 @@ const InputSearch = (): JSX.Element => {
                     <button type="submit" /* className={search.buttonSearch} */><FontAwesomeIcon icon={faSearch} /></button>
                 </div>
                 {searchInput.length > 1 ? <div className={styles.linksearch} >
-                    
-                        {auto.slice(0, 5).map(search => <span onClick={e => {
-                            dispatch(setFilter(search))
-                            setAuto([])
-                        }}>{search}</span>)}  
-                </div>:
-                            <span></span>}
+
+                    {auto.slice(0, 5).map(search => <span  onClick={e => {
+                        dispatch(setFilter(search))
+                        setAuto([])
+                    }}>
+                        <Link to='/Home'className={styles.listsearchbar}>
+                            {search}
+                        </Link>
+                    </span>)}
+                </div> :
+                    <span></span>}
             </form>
         </div>
     )
