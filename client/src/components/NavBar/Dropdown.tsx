@@ -9,7 +9,7 @@ import { FaShippingFast } from "react-icons/fa"
 
 
 
-function DropdownMenu (props:any) {
+function DropdownMenu(props: any) {
 
     const [cookies, setCookie, removeCookie] = useCookies(["User"]);
 
@@ -21,30 +21,36 @@ function DropdownMenu (props:any) {
     return (
         <div className={styles.dropdown} onMouseLeave={props.data}>
             <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle className={styles.iconButton}></BiUserCircle>{cookies.User.name}</Link>
-            
-            {cookies.User.privilege === "user" ? 
 
-                <><p ><FaShippingFast className={styles.icon} ></FaShippingFast>Mis Pedidos</p>
-                <p ><RiQuestionnaireFill className={styles.icon}></RiQuestionnaireFill>Preguntas</p></> 
-            
-            
-            : false}
+            {cookies.User.privilege === "user" ?
 
-           
-           
-            {cookies.User.privilege === "admin" ? 
-            <>
-            <p><Link to="/CrearAdministrador"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Asignar Permisos</Link></p>
-            <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Producto</Link></p> 
-            <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Categoría</Link></p>
+                <>
+                    <p >
+                        <Link to={`/Ordenes/Usuario`}>
+                            <FaShippingFast className={styles.icon} ></FaShippingFast>Mis Pedidos
+                    </Link>
 
-            </>:false}
-           
-           
-            <p onClick = {logoutchange} ><FontAwesomeIcon className={styles.icon} icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
+                    </p>
+                    <p ><RiQuestionnaireFill className={styles.icon}></RiQuestionnaireFill>Preguntas</p></>
+
+
+                : false}
+
+
+
+            {cookies.User.privilege === "admin" ?
+                <>
+                    <p><Link to="/CrearAdministrador"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Asignar Permisos</Link></p>
+                    <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Producto</Link></p>
+                    <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Categoría</Link></p>
+
+                </> : false}
+
+
+            <p onClick={logoutchange} ><FontAwesomeIcon className={styles.icon} icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
         </div>
     )
-    
-  
-  } 
-  export default DropdownMenu;
+
+
+}
+export default DropdownMenu;

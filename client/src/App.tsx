@@ -75,7 +75,6 @@ function App() {
 
   return (
     <Router>
-      
        <ToastContainer
               position="top-right"
               autoClose={5000}
@@ -91,30 +90,30 @@ function App() {
         <Home />
       </Route>
       <Switch>
-        <Route path='/Ordenes/Usuario' component={OrdersUser}/>
-        <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
-        <Route exact path='/Detalles' component={Details} />
-        <Route exact path='/Login' component={Login} />
+        <Route exact path='/CrearAdministrador' component={CreateAdmin} />
+        <Route exact path='/EditarCuenta' component={EditAccount} />
         <Route exact path='/Orden/Detalle/:id' component={OrderDetails} />
         <Route exact path='/Ordenes' component={OrdersAdmin} />
+       {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
+        <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/CrearProducto'>
           {gotCookies ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
         <Route exact path='/CrearCategoria'>
           {gotCookies ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
+        <Route path='/Ordenes/Usuario' component={OrdersUser}/>
+        <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
         <Route exact path='Pago'>
           {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
-       {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
-        <Route exact path='/CrearAdministrador' component={CreateAdmin} />
-        <Route exact path='/EditarCuenta' component={EditAccount} />
+        <Route exact path='/Login' component={Login} />
+        <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>
             <NavCategories />
           </div>
         </Route>
-        <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/' component={LandPage} />
         <Route component={PageNotFound} />
       </Switch>

@@ -28,7 +28,8 @@ export default function OrdersUser() {
 
     const results = useQuery(GET_CURRENT_USER)
     const user = results?.data?.currentUser
-    const {loading, error, data} = useQuery(GET_ORDERS_USER ,{variables:{idUser:"d0eff038-b693-431c-9aa2-cdd302be048e"}})//aca iria user.id
+    console.log(user?.id)
+    const {loading, error, data} = useQuery(GET_ORDERS_USER ,{variables:{idUser:user?.id}})//aca iria user.id
     console.log(results.data)
     console.log(data)
     const orders = data?.getOrdersByIdUser
