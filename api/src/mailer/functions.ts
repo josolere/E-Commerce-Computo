@@ -48,7 +48,6 @@ export async function StatusChangeMail(userEmail: string, status: string) {
 
 // orden completada por el usuario
 
-import { html } from "./templates/welcom";
 import { OrderDetail } from "./templates/OrderDetail";
 export async function orderCreatedMail(
   userEmail: string,
@@ -61,9 +60,26 @@ export async function orderCreatedMail(
     await transporter.sendMail({
       from: '"Compu Henry" <proyectohenry5@gmail.com>',
       to: userEmail,
-      subject: "ASUNTO",
-      text: "Hello world?  ",
+      subject: "Tu pedido está completado",
       html: OrderDetail(idOrder, products, address, name),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+import { orderShipped } from "./templates/orderShipped";
+export async function orderShippedMail(
+  userEmail: string,
+  name: string,
+  date: string
+) {
+  try {
+    await transporter.sendMail({
+      from: '"Compu Henry" <proyectohenry5@gmail.com>',
+      to: userEmail,
+      subject: "Tu pedido está en camino",
+      html: orderShipped(name, date),
     });
   } catch (error) {
     console.error(error);

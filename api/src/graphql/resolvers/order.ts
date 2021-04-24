@@ -10,6 +10,7 @@ import {
   OrderCreateMail,
   StatusChangeMail,
   orderCreatedMail,
+  orderShippedMail,
 } from "../../mailer/functions";
 
 export default {
@@ -38,7 +39,7 @@ export default {
           quantity: det.Productsxorder.quantity,
           OrderId: det.Productsxorder.OrderId,
           ProductId: det.Productsxorder.ProductId,
-          productName: det.Productsxorder.productName
+          productName: det.Productsxorder.productName,
         };
         data.details.push(detail);
       });
@@ -63,32 +64,31 @@ export default {
           {
             model: db.Product,
             through: "productsxorder",
-           // attributes: ["id", "name"],
+            // attributes: ["id", "name"],
           },
         ],
         where: {
           UserId: idUser,
         },
       });
-      let i:number = 0;
-      data.map((item:any) => {
-        data[i].details = []
-          item.Products.map((det:any) => {
-              const detail = {
-                id: det.Productsxorder.id,
-                price: det.Productsxorder.price,
-                quantity: det.Productsxorder.quantity,
-                OrderId: det.Productsxorder.OrderId,
-                ProductId : det.Productsxorder.ProductId,
-                productName: det.Productsxorder.productName
-              };
-          data[i].details.push(detail)
-          })
-          i++;
-      })
+      let i: number = 0;
+      data.map((item: any) => {
+        data[i].details = [];
+        item.Products.map((det: any) => {
+          const detail = {
+            id: det.Productsxorder.id,
+            price: det.Productsxorder.price,
+            quantity: det.Productsxorder.quantity,
+            OrderId: det.Productsxorder.OrderId,
+            ProductId: det.Productsxorder.ProductId,
+            productName: det.Productsxorder.productName,
+          };
+          data[i].details.push(detail);
+        });
+        i++;
+      });
       return data;
     },
-
 
     getOrderByStatus: async (
       _parent: object,
@@ -158,7 +158,7 @@ export default {
 
         switch (input.status) {
           //orden finalizada por el usuario
-          case "completa":
+          case "procesando":
             let auxproducts: any = [];
             const idOrder: any = updatedOrder.id;
 
@@ -183,6 +183,10 @@ export default {
               user.name
             );
             break;
+
+          //pedido despachado
+          case "completa":
+            orderShippedMail(user.email, user.name, updatedOrder.updatedAt);
         }
 
         return updatedOrder;
