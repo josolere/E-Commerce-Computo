@@ -58,5 +58,9 @@ query($idUser:ID!){
       
     }
   }
-}
-`
+}`
+
+export const LOGOUT = gql `
+  mutation {
+      logout
+          }`;

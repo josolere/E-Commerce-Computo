@@ -1,32 +1,38 @@
 import React from 'react';
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
 import styles from './loguin.module.scss';
 import styles2 from './Edit.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelopeSquare, faUnlock, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { DELETE_USER } from "../../gql/login"
-import { Cookies } from "react-cookie";
 import { toast } from 'react-toastify';
+import { useMutation, useQuery, gql } from '@apollo/client';
+import { ACTUAL_USER, LOGOUT } from "../../gql/login";
+ 
+interface user {
+    currentUser: {
+        name: string,
+        password: string,
+        email: string
+    }
+}
 
+const DeleteUser = () => {
 
+    let user:any = {}
 
-const CreateAdmin = () => {
+    const {data} = useQuery<user>(ACTUAL_USER)
 
-    const [deleteUser, data] = useMutation(DELETE_USER)
+    user = data?.currentUser
 
+    const [deleteUser, results] = useMutation(DELETE_USER)
     
     const [logform, setLogform] = useState({
         email: '',
         password: '',
         username: ''
-    });
+    });    
 
-    const cookies = new Cookies
-    const user = cookies.get("User")
-    
-
-    console.log(typeof user.id)
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
     }
@@ -36,11 +42,12 @@ const CreateAdmin = () => {
     }
 
     const handlesubmitchange = (event:any) => {
+
         event.preventDefault()
         deleteUser({
-            variables: { id: user.id }
+            variables: { id: user?.id }
         })
-            .then((resolve) => { window.location.href = 'http://localhost:3000'; cookies.remove("User")})
+            .then((resolve) => { window.location.href = 'http://localhost:3000/home';})
             .catch((err) => toast.error("Las credenciales no coinciden, intenta nuevamente"))
     }
 
@@ -80,23 +87,11 @@ const CreateAdmin = () => {
                                 placeholder='Nueva Contraseña'
                                 minLength={4}
                                 maxLength={15}
+                                
                                 type="password"
                                 name='password'
                                 onChange={handleinputchange}
                                 required={true}
-                            />
-                        </div>
-                        <div className={styles.form__group}>
-                            <label htmlFor='username' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faShareAlt} /> Nombre de Usuario</label>
-                            <input
-                                className={styles.form__field}
-                                type='text'
-                                minLength={5}
-                                maxLength={15}
-                                placeholder='Nombre de Usuario'
-                                name='username'
-                                onChange={handleinputchange}
                             />
                         </div>
                         <div className={styles.organizarbotones}>
@@ -110,4 +105,4 @@ const CreateAdmin = () => {
     )
 }
 
-export default CreateAdmin;
+export default DeleteUser;

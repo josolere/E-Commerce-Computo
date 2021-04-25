@@ -125,8 +125,6 @@ const googleCallback = (accessToken:any, refreshToken:any, email:any ,profile:an
   }
   
 
-
-
 passport.serializeUser((user: any, done) => {
   done(null, user);
 });
@@ -135,7 +133,12 @@ passport.deserializeUser(async (id: any, done) => {
   const users: any = await db.User.findAll();
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
   //console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
+  if (matchingUser){
   done(null, matchingUser);
+  }
+  else{
+    done(null, true)
+  }
 });
 
 const SESSION_SECRET = "bad secret";
