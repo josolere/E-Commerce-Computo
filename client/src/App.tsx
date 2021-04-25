@@ -11,7 +11,6 @@ import NavCategories from './components/categories/Categories';
 import CrearProducto from "./components/CreateProduct/CreateProduct"
 import CrearCategoria from "./components/CreateCategory/CreateCategory"
 import styles from './App.module.scss';
-import Unicrear from './components/Create/Create'
 import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
 import { addLocalStorage } from './redux/actions/index'
 import { useDispatch } from 'react-redux'
@@ -25,9 +24,10 @@ import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify'
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER } from "./gql/login";
-
+import { ACTUAL_USER, GET_USERS } from "./gql/login";
+import ResetPassword from './components/Users/ResetPassword';
   
+
 interface user {
   currentUser: {
       name: string,
@@ -42,23 +42,23 @@ interface datauser {
 
 function App() {
 
-  const actualuser = useQuery<user>(ACTUAL_USER)
+  let user:any = {}
 
-  console.log(actualuser.data)
+  const {data} = useQuery<user>(ACTUAL_USER)
+
+  const resultsUsers = useQuery(GET_USERS)
+
+  let test = resultsUsers?.data?.getUsers
+
+  console.log(test)
+
+  if (data) {
+      user = data?.currentUser
+  }
+
+  console.log(user)
 
   const dispatch = useDispatch()
-
-  const [gotCookies, setGotCookies] = useState(false)
-
-  const cookie = new Cookies
-
-  useEffect(() => {
-    if (cookie.get('User')) {
-      setGotCookies(true)
-    }
-  }, [cookie])
-
-  console.log(gotCookies)
 
   useEffect(() => {
     if (localStorage.getItem('productsLocal')) {
@@ -97,19 +97,27 @@ function App() {
        {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/CrearProducto'>
-          {gotCookies ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
+          {user?.privilege === 'admin' ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
         <Route exact path='/CrearCategoria'>
-          {gotCookies ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
+          {user?.privilege === 'admin' ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
         <Route path='/Ordenes/Usuario' component={OrdersUser}/>
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
+<<<<<<< HEAD
         {/* <Route exact path='Pago'>
           {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
         {/* <Route exact path='Pago'> */}
           <Route exact path='/Pago' component={Payment} />
         {/* </Route> */}
+=======
+        <Route exact path='Pago'>
+          {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
+        </Route>
+        <Route exact path='/BorrarUsuario' component={DeleteUser} />
+        <Route exact path='/ResetContraseña' component={ResetPassword} />
+>>>>>>> d3ef6d98558d1f9802af605ad4f1e01fe35dcf56
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>

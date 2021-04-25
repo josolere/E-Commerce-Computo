@@ -4,17 +4,20 @@ import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
 import styles2 from './Edit.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelopeSquare, faFileSignature, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { EDIT_USER_MUTATION, GET_USERS } from "../../gql/login";
 import styles3 from './CreateAdmin.module.scss';
+import { toast } from 'react-toastify';
 
 interface user {
     firstname: string,
     password: string,
     email: string,
     id: string,
-    surname: string
+    surname: string,
+    username: string,
+    address: string
 }
 
 interface datauser {
@@ -36,13 +39,16 @@ const CreateAdmin = () => {
         ListUsers = resultsUsers?.data?.getUsers
         ListUsername = ListUsers?.map((item: any) => item.email)
     }
+
+    console.log(ListUsers)
+
     const [auto, setAuto] = useState<Array<string>>([""])
 
     const [searchInput, setSearchInput] = useState('')
 
     const [userToshow, setUserToShow] = useState<Array<any>>([])
 
-    const [logform, setLogform] = useState<user>({ firstname: "", password: "", email: "", id: "", surname: "" });
+    const [logform, setLogform] = useState<user>({ firstname: "", password: "", email: "", id: "", surname: "", username:"", address:""});
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         setSearchInput(e.currentTarget.value)
@@ -51,7 +57,8 @@ const CreateAdmin = () => {
         ))
         setUserToShow(ListUsers?.filter((users) => users.email.toLowerCase() === auto.toString().toLocaleLowerCase()))
         userToshow?.map(function (user: any) {
-            setLogform({ firstname: user.name, password: user.password, email: user.email, surname: user.surname, id: user.id })
+            setLogform({ firstname: user.name, password: user.password, email: user.email, surname: user.surname, id: user.id, 
+                username: user.username, address:user.address})
         })
     }
 
@@ -65,10 +72,10 @@ const CreateAdmin = () => {
         editUser({
             variables: {
                 id: logform.id, email: logform.email, name: logform.firstname, password: logform.password, surname: logform.surname,
-                active: true, privilege: 'admin'
+                username:logform.username, address:logform.address, active: true, privilege: 'admin'
             }
         })
-            .then((resolve) => { console.log('Admin bien') })
+            .then((resolve) => {toast.success('Se ha creado un nuevo administrador 🥳')})
             .catch((error) => (console.log('Admin Mal')))
         event.preventDefault()
     }
@@ -111,8 +118,10 @@ const CreateAdmin = () => {
                             {userToshow && userToshow.map((item: any) => (
                                 <div className={styles3.sortUser} >
                                     <p className={styles3.UserP} ><FontAwesomeIcon icon={faFileSignature} /> Nombre: {item.name}</p>
-                                    <p className={styles3.UserP}  ><FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail: {item.email}</p>
-                                    <p className={styles3.UserP}  ><FontAwesomeIcon icon={faCrown} /> Nivel: {item.privilege}</p>
+                                    <p className={styles3.UserP} ><FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail: {item.email}</p>
+                                    <p className={styles3.UserP} ><FontAwesomeIcon icon={faMapMarker} />Direccion: {item.address}</p>
+                                    <p className={styles3.UserP} ><FontAwesomeIcon icon={faShareAlt} />Nombre de Usuario: {item.username} </p>
+                                    <p className={styles3.UserP} ><FontAwesomeIcon icon={faCrown} /> Nivel: {item.privilege}</p>
                                 </div>
                             ))}
                         </div>
