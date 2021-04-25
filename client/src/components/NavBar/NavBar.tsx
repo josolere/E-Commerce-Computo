@@ -9,12 +9,26 @@ import { AppState } from '../../redux/reducers';
 import { setFilter } from '../../redux/actions';
 import { Cookies } from "react-cookie";
 import NavBarItem from "./NavBarItem";
+import { useMutation, useQuery, gql } from '@apollo/client';
+import { ACTUAL_USER } from "../../gql/login";
 
+interface user {
+  currentUser: {
+      name: string,
+      password: string,
+      email: string
+  }
+}
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
 
-  
+  let user:any = {}
+
+  const {data} = useQuery<user>(ACTUAL_USER)
+
+  user = data?.currentUser
+
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
 
   const [cookiess, setCookies ] = useState<any>()
@@ -44,11 +58,11 @@ const NavBar = (): JSX.Element => {
         {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}><p>Productos</p></Link> : false}
         <div>
 
-          {cookiess ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
+          {user?.name ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
          
         </div>
         
-          <p>{cookiess && <NavBarItem info= "Mi Cuenta"></NavBarItem>  }</p>
+          <p>{user?.name && <NavBarItem info= "Mi Cuenta"></NavBarItem>  }</p>
         
         </div>
       </div>

@@ -4,18 +4,22 @@ import { gql } from "@apollo/client"
 export const ACTUAL_USER = gql`
 query {
     currentUser {
-      name
-      email
-      surname
-      privilege
+        id
+        name
+        email
+        surname
+        privilege
+        username
+        address
+        password
     }
   }`;
 
 
 
 export const SIGNUP_MUTATION = gql`
-    mutation  ($firstName: String! $password: String! $email: String!  $lastName:String! ) {
-        signup (firstName:$firstName lastName:$lastName password:$password email: $email ) 
+    mutation  ($firstName: String! $password: String! $email: String!  $lastName:String! $username:String! $address:String! ) {
+        signup (firstName:$firstName lastName:$lastName password:$password email: $email username:$username address:$address ) 
                             {    
                                 user {
                                     name
@@ -36,6 +40,7 @@ export const SIGNUP_MUTATION = gql`
             surname
             address
             password
+            username
         }
     }`;
     
@@ -74,3 +79,8 @@ mutation( $id:ID! $name:String! $password:String! $email:String! $surname:String
                             privilege
                         }             
 }`;  
+
+export const LOGOUT = gql `
+  mutation {
+      logout
+          }`;

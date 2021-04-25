@@ -125,8 +125,6 @@ const googleCallback = (accessToken:any, refreshToken:any, email:any ,profile:an
   }
   
 
-
-
 passport.serializeUser((user: any, done) => {
   done(null, user);
 });

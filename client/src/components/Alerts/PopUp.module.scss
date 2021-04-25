@@ -5,6 +5,8 @@ $red:#f05454;//f05454
 $primary: #11998e;
 $secondary: #38ef7d;
 
+
+
 /* .PopBox {
     position: fixed;
     background: #00000050;
@@ -27,17 +29,31 @@ $secondary: #38ef7d;
     border: 1px solid #999;
     overflow: auto;
 } */
-
+::-webkit-scrollbar {
+	width: 0.9rem;               /* width of the entire scrollbar */
+  }
+  
+::-webkit-scrollbar-track {
+	background: $grey;        /* color of the tracking area */
+	border-radius: 0.2rem;
+  }
+  
+::-webkit-scrollbar-thumb {
+	background-color: $dark;    /* color of the scroll thumb */
+	border-radius: 0.5rem;       /* roundness of the scroll thumb */
+	border: 3px solid $red;  /* creates padding around scroll thumb */
+  }
 
 .OrderPop {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .PopTitle {
-    margin: .5rem;
+    margin: 10%;
     padding: 0;    
     background: 50% 100% / 50% 50% no-repeat
     radial-gradient(ellipse at bottom, white, white, white);
@@ -65,7 +81,7 @@ $secondary: #38ef7d;
     }
 
 .PPop {
-    margin: .5rem;
+    margin: 10%;
     padding: 0;    
     background: 50% 100% / 50% 50% no-repeat
     radial-gradient(ellipse at bottom, white, white, white);
