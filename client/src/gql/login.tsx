@@ -11,6 +11,7 @@ query {
         privilege
         username
         address
+        password
     }
   }`;
 

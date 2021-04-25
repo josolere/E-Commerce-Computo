@@ -6,20 +6,21 @@ import styles2 from './Edit.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { EDIT_USER_MUTATION, GET_USERS } from "../../gql/login";
+import { EDIT_USER_MUTATION, ACTUAL_USER } from "../../gql/login";
 import styles3 from './CreateAdmin.module.scss';
+import { toast } from 'react-toastify';
 
 interface user {
-    firstname: string,
-    email: string,
-    id: string,
-    surname: string,
-    username: string,
-    address: string
-}
-
-interface datauser {
-    actualUser: user[]
+    currentUser: {
+        name: string,
+        password: string,
+        email: string
+        id: string,
+        surname: string,
+        privilege: string,
+        username: string,
+        address: string
+    }
 }
 
 
@@ -27,61 +28,39 @@ const ResetPassword = () => {
 
     const [editUser, user] = useMutation(EDIT_USER_MUTATION)
 
-    const resultsUsers = useQuery(GET_USERS)
+    let currentuser: any = {}
 
-    let ListUsers: Array<any> = [];
+    const { data } = useQuery<user>(ACTUAL_USER)
 
-    let ListUsername: Array<any> = [];
+    currentuser = data?.currentUser
 
-    if (resultsUsers) {
-        ListUsers = resultsUsers?.data?.getUsers
-        ListUsername = ListUsers?.map((item: any) => item.email)
+    const [control, setControl] = useState({ email: '', password: '', newpassword: '' })
+
+    const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+        setControl({ ...control, [event?.currentTarget.name]: event?.currentTarget.value })
     }
 
-    console.log(ListUsers)
 
-    const [auto, setAuto] = useState<Array<string>>([""])
-
-    const [searchInput, setSearchInput] = useState('')
-
-    const [newPassword, setNewPassword] = useState('')
-
-    const [userToshow, setUserToShow] = useState<Array<any>>([])
-
-    const [logform, setLogform] = useState<user>({ firstname: "", email: "", id: "", surname: "", username:"", address:""});
-
-    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-        setSearchInput(e.currentTarget.value)
-        setAuto(ListUsername?.filter((email: any) =>
-            email.toLowerCase().includes(searchInput.toLowerCase())
-        ))
-        setUserToShow(ListUsers?.filter((users) => users.email.toLowerCase() === auto.toString().toLocaleLowerCase()))
-        userToshow?.map(function (user: any) {
-            setLogform({ firstname: user.name, email: user.email, surname: user.surname, id: user.id, 
-                username: user.username, address:user.address})
-        })
-    }
-
-    const handlePassword = (e: React.FormEvent<HTMLInputElement>) => {
-        setNewPassword(e.currentTarget.value)
-    }
-
-    console.log(logform)
 
     const handleclickevent = () => {
         window.location.href = 'http://localhost:3000/Login'
     }
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
-        editUser({
-            variables: {
-                id: logform.id, email: logform.email, name: logform.firstname, surname: logform.surname,
-                password:newPassword ,username:logform.username, address:logform.address, active: true, privilege: 'user'
-            }
-        })
-            .then((resolve) => { console.log('Reset bien') })
-            .catch((error) => (console.log('Reset Mal')))
         event.preventDefault()
+        if (currentuser?.password === control.password && currentuser?.email === control.email) {
+            editUser({
+                variables: {
+                    id: currentuser?.id, email: currentuser?.email, name: currentuser?.name, surname: currentuser?.surname,
+                    password: control.newpassword, username: currentuser?.username, address: currentuser?.address, active: true, privilege: currentuser?.privilege
+                }
+            })
+                .then((resolve) => { console.log('Reset bien') })
+                .catch((error) => (console.log('Reset Mal')))
+        }
+        else {
+            toast.error('Los datos proporcionados no son correctos 🤔')
+        }
     }
 
     return (
@@ -99,17 +78,17 @@ const ResetPassword = () => {
                             </div>
                     <form className={styles.form} onSubmit={handlesubmitchange}>
                         <div className={styles.form__group}>
-                                <label className={styles3.form__label} >
+                            <label className={styles3.form__label} >
                                 <FontAwesomeIcon icon={faEnvelopeSquare} /> E-mail</label>
-                                <input
-                                    className={styles.form__field} 
-                                    type='text'
-                                    placeholder='E-Mail'
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles.form__label} >
+                            <input
+                                className={styles.form__field}
+                                type='text'
+                                placeholder='E-Mail'
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className={styles.form__group}>
+                            <label htmlFor='password' className={styles3.form__label} >
                                 <FontAwesomeIcon icon={faUnlock} /> Contraseña Anterior</label>
                             <input
                                 className={styles.form__field}
@@ -119,10 +98,11 @@ const ResetPassword = () => {
                                 type="password"
                                 name='No'
                                 required={true}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles.form__label} >
+                            <label htmlFor='password' className={styles3.form__label} >
                                 <FontAwesomeIcon icon={faUnlock} /> Nueva Contraseña</label>
                             <input
                                 className={styles.form__field}
@@ -130,8 +110,8 @@ const ResetPassword = () => {
                                 minLength={4}
                                 maxLength={15}
                                 type="password"
-                                name='password'
-                                onChange={handlePassword}
+                                name='newpassword'
+                                onChange={handleChange}
                                 required={true}
                             />
                         </div>

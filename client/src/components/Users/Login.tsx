@@ -74,7 +74,7 @@ const Login = () => {
     }
 
     const responseGoogle = () => {
-        window.location.href = 'http://localhost:3000/Home';
+        window.location.href = 'http://localhost:5000/auth/google';
     }
 
     return (

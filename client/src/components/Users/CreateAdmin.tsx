@@ -8,6 +8,7 @@ import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt } 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { EDIT_USER_MUTATION, GET_USERS } from "../../gql/login";
 import styles3 from './CreateAdmin.module.scss';
+import { toast } from 'react-toastify';
 
 interface user {
     firstname: string,
@@ -74,7 +75,7 @@ const CreateAdmin = () => {
                 username:logform.username, address:logform.address, active: true, privilege: 'admin'
             }
         })
-            .then((resolve) => { console.log('Admin bien') })
+            .then((resolve) => {toast.success('Se ha creado un nuevo administrador 🥳')})
             .catch((error) => (console.log('Admin Mal')))
         event.preventDefault()
     }

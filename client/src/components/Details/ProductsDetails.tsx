@@ -215,10 +215,18 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     <img src={filtred?.image} alt='' />
                     <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.formm} >
                         {user?.privilege === 'admin' ? <button className={styles.Edit} onClick={handleEdit}>Edit</button> : false}
+
                         {editMode ?
                             <input className={stylesEdit.input} name='name' type='text' onChange={handleChange} defaultValue={details?.name} />
                             :
                             <h1 className={styles.nameDetail}>{filtred?.name}</h1>}
+                        <div className={stylesEdit.cats}>
+                            {editMode ?
+                                details?.categories?.map(category => <button className={stylesEdit.input} onClick={handleCategory} value={category.id} >Categoría: {category.name}</button>)
+                                :
+                                details?.categories?.map(category => <p className={styles.PDetails}>Categoría: {category.name}</p>)
+                            }
+                        </div>
                         {editMode ?
                             <p > Marca: <input className={stylesEdit.input} name='brand' defaultValue={details?.brand} onChange={handleChange} /> </p>
                             :
@@ -226,7 +234,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         {editMode ?
                             <p ><textarea onChange={handleDetails} defaultValue={details?.details} /></p>
                             :
-                            <p >{filtred?.details}</p>}
+                            <p className={styles.PDetails} >{filtred?.details}</p>}
 
                         <div className={styles.botonPrecio}>
 
@@ -249,14 +257,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                             </select>}
 
                             {editMode && <input className={stylesEdit.acept} type='submit' value='Aceptar Cambios' />}
-                        </div>
-                        <div className={stylesEdit.cats}>
-
-                            {editMode ?
-                                details?.categories?.map(category => <button className={stylesEdit.category} onClick={handleCategory} value={category.id} >{category.name}</button>)
-                                :
-                                details?.categories?.map(category => <p className={styles.category}>{category.name}</p>)
-                            }
                         </div>
                     </form>
                 </div>
@@ -285,9 +285,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                             </div>
                         }
                         </div>
-                        <div className={styles.estrellas}>
+                        <div >
                             {hideStar ?
-                                <div >
+                                <div className={styles.estrellas}>
                                     {[...Array(5)].map((star, index) => {
                                         const ratingvalue = index + 1;
                                         return <label>
@@ -310,9 +310,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                     {/* <p className={styles.raiting}>Rating {totalrating}</p> */}
                                 </div>
                                 :
-                                <div>
-                                    <h4 className={styles.gracias} >Gracias por dar una clasificación</h4>
-                                    <p className={styles.raiting} >Rating {totalrating}</p>
+                                <div className={styles.sortthanks}>
+                                    <h1 className={styles.Hrating}><span className={styles.hspan} >Gracias por dejar su votación</span></h1>
+                                    <h1 className={styles.Hrating}><span className={styles.hspan} >Rating {totalrating}</span></h1>
                                 </div>
                             }
                         </div>
