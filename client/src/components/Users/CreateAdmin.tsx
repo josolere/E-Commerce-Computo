@@ -77,9 +77,8 @@ const CreateAdmin = () => {
                 username: logform.username, address: logform.address, active: true, privilege: 'admin'
             }
         })
-            .then((resolve) => { toast.success('Se ha creado un nuevo administrador 🥳') })
+            .then((resolve) => { toast.success('Se ha creado un nuevo administrador 🥳'); SetAdmin(true) })
             .catch((error) => (console.log('Admin Mal')))
-        SetAdmin(true)
         event.preventDefault()
     }
 
@@ -117,10 +116,10 @@ const CreateAdmin = () => {
                             </div> :
                                 <span></span>}
                         </div>
-                        {Admin ? 
-                        <div className={styles3.sort}>
-                            <h1 className={styles3.Hrating}><span className={styles3.hspan} >Nuevo administrador {logform.firstname}</span></h1>
-                        </div>
+                        {Admin ?
+                            <div className={styles3.sort}>
+                                <h1 className={styles3.Hrating}><span className={styles3.hspan} >Nuevo administrador {logform.firstname}</span></h1>
+                            </div>
                             :
                             <div>
                                 {userToshow && userToshow.map((item: any) => (

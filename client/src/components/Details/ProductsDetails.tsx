@@ -115,9 +115,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     const changereview = () => {
-            addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, userId:user?.id } })
-                .then(review => { console.log('review up') })
-                .catch((err) => { console.log('review mal') })
+        addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, userId: user?.id } })
+            .then(review => { console.log('review up') })
+            .catch((err) => { console.log('review mal') })
+            setHidereviews(false)
     }
 
     const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
@@ -275,7 +276,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                             </div>
                             :
                             <div className={styles.gracias} >
-                                <h4>Gracias por dejar su review</h4>
+                                <h1 className={styles.Hrating}><span className={styles.hspan} >Gracias por dejar su comentario</span></h1>
                             </div>
                         }
                         </div>

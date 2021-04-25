@@ -66,36 +66,31 @@ $red:#f05454;//f05454
 
 .PopBox {
     position: fixed;
-    background: #00000050;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
+    top: 15%;
+    left: 10%;
 }
 
 .Pop {
     position: relative;
     width: 60%;
-    margin: 0 auto;
-    height: 90%;
-    max-height: 75vh;
-    margin-top: calc(100vh - 85vh - 20px);
+    margin: auto auto;
+    height:fit-content;
+    max-height:fit-content;
     background:$dark;
-    border-radius: 40px;
-    padding: 20px;
-    border: solid $white 0.3rem;
+    border-radius: 0.5rem;
+    padding: 2% ;
+    border: solid  darken($white, 15% ) 0.3rem;
     overflow: auto;
 }
 
 .PopButton {
-    margin-top: calc(100vh - 85vh - 20px);
-    margin-top: 7rem;
-    margin-left: 17rem;
+    margin-top: 3%;
+    margin-left: 20%;
     position: fixed;
-    padding: .75rem 1.25rem;
-	border-radius: 2rem;
+    padding: 0.75% 1.25%;
+	border-radius: 45%;
 	border:transparent;
-	font-size: 1rem;
+	font-size: 100%;
     cursor: pointer;
 	letter-spacing: .15rem;
 	transition: all .3s;
@@ -109,7 +104,7 @@ $red:#f05454;//f05454
 		width: 100%;
 		height: 100%;
 		background-color: $red;
-		border-radius: 10rem;
+        border-radius: 45%;
 		z-index: -2;
 	}
 	&:before {
@@ -121,7 +116,7 @@ $red:#f05454;//f05454
 		height: 100%;
 		background-color: darken($red, 15%);
 		transition: all .3s;
-		border-radius: 10rem;
+        border-radius: 45%;
 		z-index: -1;
 	}
 	&:hover {
