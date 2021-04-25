@@ -51,6 +51,7 @@ function DropdownMenu(props: any) {
                     <p><Link to="/CrearAdministrador"><FontAwesomeIcon className={styles.icon} icon={faUserPlus}></FontAwesomeIcon> Asignar Administrador</Link></p>
                     <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faCashRegister}></FontAwesomeIcon>Añadir Producto</Link></p>
                     <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faList}></FontAwesomeIcon>Añadir Categoría</Link></p>
+                    <p><Link to="/Ordenes"><FaShippingFast className={styles.icon}></FaShippingFast>Ordenes</Link></p>
                     <p onClick={logoutchange} ><FontAwesomeIcon className={styles.icon} icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
                 </div> : false}
         </div>

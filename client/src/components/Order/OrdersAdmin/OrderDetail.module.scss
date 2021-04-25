@@ -16,17 +16,15 @@
             transition: 1s;
         }
     }
-    h4{
-        display: flex;
-        align-items: center;
-        height: 1rem;
-        svg{
-            margin-left: 0.5rem;
-        }
+}
+h4{
+    display: flex;
+    align-items: center;
+    height: 1rem;
+    svg{
+        margin-left: 0.5rem;
     }
 }
-
-
 .products{
     margin-top: 2rem;
     border: 1px solid gray;
