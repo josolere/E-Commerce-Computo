@@ -148,8 +148,13 @@ export default {
     ): Promise<any> => {
       const OrderToEdit = await models.Order.findByPk(id);
       if (OrderToEdit) {
+
+        let confirmAt = null;
+        if(input.status === "creada") {
+          confirmAt = Date.now()
+        } 
         const updatedOrder = await OrderToEdit.update(
-          { ...input },
+          { ...input, confirmAt },
           { where: { id } }
         );
 

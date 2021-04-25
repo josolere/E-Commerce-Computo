@@ -2,11 +2,11 @@ import { gql } from "apollo-server";
 
 export const typeDefs = gql`
   # object querys mutations RECORDAR USAR MAYÚSCULAS
-
   type Order {
     id: Int
     status: String
     details: [OrderDetail]
+    confirmAt: String
     createdAt: String
     updatedAt: String
   }
@@ -31,5 +31,6 @@ export const typeDefs = gql`
 
   input EditOrderInput {
     status: String
+    confirmAt: String
   }
 `;

@@ -21,6 +21,7 @@ export type Product = {
 };
 export type Order = {
   status: string;
+  confirmAt: Date;
 };
 export type OrderDetail = {
   quantity: number;
