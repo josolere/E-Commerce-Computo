@@ -21,8 +21,12 @@ export default {
       return data;
     },
 
-    currentUser: (_parent: object, _args: any, context: any) =>
-   context.getUser(),
+    currentUser: (_parent: object, _args: any, context: any) =>{
+    let user = context.getUser()
+     
+    console.log(user)
+    return user
+    },
 
    
 

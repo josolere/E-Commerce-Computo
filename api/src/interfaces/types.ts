@@ -30,4 +30,5 @@ export type OrderDetail = {
 export type Review = {
   text: string;
   rating: number;
+  userId: string;
 };
