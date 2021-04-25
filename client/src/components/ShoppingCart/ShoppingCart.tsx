@@ -8,6 +8,7 @@ const ShoppingCart = (): JSX.Element => {
 
     const idsProducts: any[] = useSelector((store: AppState) => store.shoppingCartReducer.productTotal)
 
+    console.log(idsProducts)
     if (idsProducts.length === 0) {
         if (localStorage.getItem('productsLocal')) {
             let productLocal: any = []
@@ -19,9 +20,9 @@ const ShoppingCart = (): JSX.Element => {
             <>
                 <div className={carts.containerCarts}>
                     {
-                        idsProducts.map((mapeo, index): any => {
+                       idsProducts.map((mapeo, index): any => {
                             if (mapeo.id !== 0) {
-                                return <ShoppingCard key={index} priceProps={mapeo.price} id={mapeo.id} count={mapeo.count} />
+                                return <ShoppingCard key={index} priceProps={mapeo.price} id={ mapeo.ProductId||mapeo.id } count={mapeo.count||mapeo.quantity} />
                             }
                         })}
                     <ShoppingTotal />

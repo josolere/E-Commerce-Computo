@@ -3,7 +3,7 @@
 import styles from './Categories.module.scss'
 import { useQuery, gql, useMutation } from '@apollo/client';
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory, deleteCart } from "../../redux/actions";
+import { setCategory, deleteCart, orderId } from "../../redux/actions";
 import { GET_CATEGORIES } from "../../gql/categories"
 import Cards from '../Cards/CardsHome';
 import { useState, useRef, useEffect } from 'react';
@@ -47,7 +47,7 @@ const NavCategories = (): JSX.Element => {
   const [idOrder, setIdOrder] = useState(0)
   const [order, setOrder] = useState([])
   const [statusOrder, setStatusOrder] = useState([])
-  const [idUser, setIdUser] = useState("4828ebd1-306c-4349-8397-f90e0ebc8fd1")
+  const [idUser, setIdUser] = useState("519afecb-0d71-4b53-a361-2833757c4d1f")
 
 
   useEffect(() => {
@@ -77,6 +77,7 @@ const NavCategories = (): JSX.Element => {
         createOrder({ variables: { status: "pendiente", idUser:idUser } })
           .then((resolve) => {
             const resolveIdOrder = resolve.data.createOrder.id
+            dispatch(orderId(resolveIdOrder))
             if (localStorage.getItem('productsLocal')) {
               let productLocal: any = []
               productLocal = (localStorage.getItem('productsLocal'))
@@ -84,8 +85,8 @@ const NavCategories = (): JSX.Element => {
               productLocal.map((mapeo: any) => {
                 createOrderDetail({ variables: { idOrder: resolveIdOrder, idProduct: mapeo.id, quantity: mapeo.count } })
                   .then((resolve) => {
-                    localStorage.clear()
-                    dispatch(deleteCart())
+                    // localStorage.clear()
+                    // dispatch(deleteCart())
                     console.log(resolve)
                   })
                   .catch((error) => {
@@ -102,11 +103,12 @@ const NavCategories = (): JSX.Element => {
           productLocals = (localStorage.getItem('productsLocal'))
           productLocals = (JSON.parse(productLocals))
           console.log(idOrder)
+          dispatch(orderId(idOrder))
           productLocals.map((mapeo: any) => {
             createOrderDetail({ variables: { idOrder: idOrder, idProduct: mapeo.id, quantity: mapeo.count } })
               .then((resolve) => {
-                localStorage.clear()
-                dispatch(deleteCart())
+                // localStorage.clear()
+                // dispatch(deleteCart())
                 console.log(resolve)
               })
               .catch((error) => {

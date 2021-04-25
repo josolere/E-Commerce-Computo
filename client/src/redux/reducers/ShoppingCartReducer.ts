@@ -1,6 +1,6 @@
 import {
     ADD_SHOPPING, DELETE_PRODUCT, MORE_PRICE, LESS_PRICE, LOCAL, ADD_LOCALSTORAGE,
-    DELETE_CART, ADD_PRODUCT_DETAILS, ADD_PRODUCT_HOME, LOGEO
+    DELETE_CART, ADD_PRODUCT_DETAILS, ADD_PRODUCT_HOME, LOGEO, ADD_BASE_DE_DATOS, ORDER_ID
 } from '../actions'
 
 const initialState = {
@@ -14,7 +14,8 @@ const initialState = {
     priceDetails: 0,
     countDetails: 0,
     logeo: false,
-    idUsers:""
+    idUsers: "",
+    idOrder: 0
 };
 
 export default (state = initialState, action: any): any => {
@@ -109,8 +110,23 @@ export default (state = initialState, action: any): any => {
             return {
                 ...state,
                 logeo: action.state.login,
-                idUsers:action.state.idUsers
+                idUsers: action.state.idUsers
             }
+
+        case ADD_BASE_DE_DATOS:
+            return {
+                ...state,
+                productTotal: action.arrayProducts.productBas,
+                priceSubTotal: action.arrayProducts.priceBase * 1,
+                quantity: action.arrayProducts.conte * 1
+            }
+
+            case ORDER_ID:
+                return{
+                    ...state,
+                    idOrder:action.data
+                }
+
         default: return state
     }
 }

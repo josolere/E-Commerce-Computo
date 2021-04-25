@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useQuery, gql, useMutation } from '@apollo/client';
+import { NEW_ORDER_DETAIL } from "../../gql/shopingCart"
+
+
 
 
 interface props {
@@ -20,15 +24,30 @@ interface props {
 
 export default function Card({ name, image, price, id, count }: props) {
     const dispatch = useDispatch()
-    const { quantity, priceSubTotal, productTotal, addCart, addHome,idDetails,priceDetails,countDetails }: any = useSelector((store: AppState) => store.shoppingCartReducer)
+    const { quantity, priceSubTotal, productTotal, addCart,
+        addHome, idDetails, priceDetails, countDetails, idOrder }: any = useSelector((store: AppState) => store.shoppingCartReducer)
+
+
+    //---------------------------------------------------------------------
+    const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL)
+
+    const [logeos, setLogeos] = useState()
+
+
+    useEffect(() => {
+        if (localStorage.getItem('productsLocal')) {
+            let log: any = false
+            log = (localStorage.getItem('logeo'))
+            log = (JSON.parse(log))
+            setLogeos(log)
+        }
+    }, [])
+    //________________________________________________________________________
+
 
     const [stateHome, setStateHome] = useState(true)
 
-    //tarjetas de mensaje
-    
-    const notify = () => toast.success("Agregado Al Carrito");
-    const repeat = () => toast.error("El Producto Ya Esta En El Carrito");
-//--------------------------------------------------------------------------------------------
+    const notify = () => toast.dark("Agregado Al Carrito");
 
     function useSendSelector() {    //  hook personalizado para evitar conflicto al ejecutar useSelector
         const firsstRender = useRef(true) // evita ejecutar el useEffect cuando se renderize el componente
@@ -71,37 +90,43 @@ export default function Card({ name, image, price, id, count }: props) {
     useSendSelector()
 
     const handleAddProduct = () => {
-        if(idDetails >0){
-            id=idDetails
-            price=priceDetails
-            count=countDetails
+        if (idDetails > 0) {
+            id = idDetails
+            price = priceDetails
+            count = countDetails
         }
         let productRepet = productTotal.filter((filt: any) => filt.id === id)
         if (productRepet.length === 0) {
             dispatch(addShopping({ id, price, count }));
             addLocaStorage();
             notify()
-        }else{
-            repeat()
+            logeos && createOrderDetail({ variables: { idOrder: idOrder, idProduct: id, quantity: count } })
+                .then((resolve) => {
+                    console.log(resolve)
+                })
+                .catch((error) => {
+                    console.log('no responde')
+                })
         }
+
     }
 
-        if (addCart === true && addHome === true) {
-            handleAddProduct()
-            const state = false
-            setStateHome(false)
-            dispatch(addProductDetails(state));
-            dispatch(addProductHome(state))
-        }
+    if (addCart === true && addHome === true) {
+        handleAddProduct()
+        const state = false
+        setStateHome(false)
+        dispatch(addProductDetails(state));
+        dispatch(addProductHome(state))
+
+    }
 
 
-  
     return (
         <div className={styles.card}>
-            <div className={styles.name}>{name}</div>
             {/* <ToastContainer /> */}
+
             <Link
-                onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
+                onClick={() => dispatch(addProductHome({ stateHome, id, price, count }))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{
                     pathname: '/Detalles',
                     state: {
