@@ -50,6 +50,8 @@ User.hasMany(Order, { sourceKey: "id" });
 
 Review.belongsTo(Product, { as: "product" });
 Product.hasMany(Review, { as: "reviews" });
+Review.belongsTo(User, { as: 'users'});
+User.hasMany(Review, { as: 'reviews' });
 
 const db: DB = {
   sequelize,

@@ -12,16 +12,18 @@ type Review{
     id: Int
     text: String
     rating: Int
+    userId: String
 }
 ##Estos datos entran
 input AddReviewInput{
     rating: Int
     text: String
     product: Int
+    userId: String
   }
 
 type Mutation{
-    addReview(id: Int, input: AddReviewInput): Review
+    addReview(id: Int, userId:String, input: AddReviewInput): Review
   }
 
 `;
