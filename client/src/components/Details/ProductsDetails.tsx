@@ -115,15 +115,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     const changereview = () => {
-        if (gotcookie) {
-            addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
+            addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, userId:user?.id } })
                 .then(review => { console.log('review up') })
-                .catch((err) => { console.log(results) })
-            setHidereviews(false)
-        }
-        else {
-            toast.error("Debes estar logueado para comentar")
-        }
+                .catch((err) => { console.log('review mal') })
     }
 
     const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
