@@ -104,20 +104,14 @@ function App() {
         </Route>
         <Route path='/Ordenes/Usuario' component={OrdersUser}/>
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
-<<<<<<< HEAD
         {/* <Route exact path='Pago'>
           {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-        {/* <Route exact path='Pago'> */}
-          <Route exact path='/Pago' component={Payment} />
-        {/* </Route> */}
-=======
         <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
->>>>>>> d3ef6d98558d1f9802af605ad4f1e01fe35dcf56
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>

@@ -133,17 +133,12 @@ passport.deserializeUser(async (id: any, done) => {
   const users: any = await db.User.findAll();
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
   //console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
-<<<<<<< HEAD
-  // done(null, matchingUser);
-  done(null, true);
-=======
   if (matchingUser){
   done(null, matchingUser);
   }
   else{
     done(null, true)
   }
->>>>>>> d3ef6d98558d1f9802af605ad4f1e01fe35dcf56
 });
 
 const SESSION_SECRET = "bad secret";
