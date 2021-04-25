@@ -5,6 +5,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { useParams } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 
 interface IParams {
     id: string 
@@ -27,7 +28,7 @@ export default function OrderDetails(props:PropsDetails) {
     // const id = props.history.location.state.id
     //traigo la orden x su id
     console.log(id)
-    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id:+ id } })
+    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id:+id } })
     const order = data?.getOrderById
 
     const [editOrderStatus, editResults] = useMutation(EDIT_ORDER)
@@ -39,8 +40,10 @@ export default function OrderDetails(props:PropsDetails) {
     }
 
     useEffect(() => {
-        console.log(order)
-    }, [order])
+        console.log(data)
+        console.log(loading)
+        console.log(error)
+    }, [data])
 
     const totalCalc = () =>{
         let total = 0
@@ -54,6 +57,7 @@ export default function OrderDetails(props:PropsDetails) {
     return (//creada => procesando => completa || cancelada
         <div className={styles.container}>
             <h1>Orden Nro: {order?.id}</h1>
+            <h6>Fecha de realización:{order?.confirmAt }</h6>
             <h4>Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={
                     (order?.status === 'cancelada' && {color:'#FF3434'})||
                     (order?.status === 'procesando' && {color:'#FCFF2F'})||
@@ -72,7 +76,16 @@ export default function OrderDetails(props:PropsDetails) {
                 <div>TOTAL</div>
                 </nav>
                 {order?.details?.map((obj: any) => <nav key={obj.id} >
-                    <div>{obj.productName}nnn</div>
+                <Link
+                className={styles.link} style={{ textDecoration: 'none' }} to={{
+                    pathname: '/Detalles',
+                    state: {
+                        id: obj.id,
+                        newprice: 0
+                    }
+                }}>
+                    {obj.productName}
+                    </Link>
                     <div>{obj.quantity}</div>
                     <div>${obj.price}</div>
                     <div>${obj.price * obj.quantity}</div>

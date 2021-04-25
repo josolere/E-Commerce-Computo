@@ -16,12 +16,16 @@ export default function OrderUserDetails() {
     const { id } = useParams<IParams>()
     // const id = props.history.location.state.id
     //traigo la orden x su id
-    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id:+id } })
+    const { loading, error, data } = useQuery(GET_ORDER_DETAILS,{ variables: {id:1}})
+
     const order = data?.getOrderById
-    console.log(id)
-    // useEffect(() => {
-    //     setIdSearch(id)
-    // }, [id])
+
+    console.log("aaaaa")
+    useEffect(() => {
+        console.log("aaaaa")
+        console.log(id)
+        console.log(data)
+    }, [data])
 
     const totalCalc = () =>{
         let total = 0
@@ -31,10 +35,11 @@ export default function OrderUserDetails() {
         return total
     }
 
-
+    
     return (//creada => procesando => completa || cancelada
         <div className={styles.container}>
             <h1>Orden Nro: {order?.id}</h1>
+            <h6>Fecha de realización:{order?.confirmAt }</h6>
             <h4>Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={
                     (order?.status === 'cancelada' && {color:'#FF3434'})||
                     (order?.status === 'procesando' && {color:'#FCFF2F'})||
@@ -58,7 +63,7 @@ export default function OrderUserDetails() {
                         newprice: 0
                     }
                 }}>
-                    {obj.productName}aaa
+                    {obj.productName}
                     </Link>
                     </div>
                     <div>{obj.quantity}</div>

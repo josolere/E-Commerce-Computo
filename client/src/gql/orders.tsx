@@ -20,18 +20,21 @@ query($status:String){
 
 export const GET_ORDER_DETAILS = gql`
 query($id:ID!){
-    getOrderById(id:$id){
+  getOrderById(id:$id){
+    id
+    status
+    confirmAt
+    details{
       id
-      status
-      details{
-        id
-        quantity
-        price
-        
+      quantity
+      price
+      productName
+      ProductId
+      
     }
-
   }
 }
+
   `;
 
 export const EDIT_ORDER = gql `
