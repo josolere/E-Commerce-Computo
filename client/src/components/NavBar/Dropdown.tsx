@@ -43,7 +43,7 @@ function DropdownMenu(props: any) {
                     <p><Link to="/CrearAdministrador"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Asignar Permisos</Link></p>
                     <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Producto</Link></p>
                     <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faFolderPlus}></FontAwesomeIcon>Añadir Categoría</Link></p>
-
+                    <p><Link to="/Ordenes"><FaShippingFast className={styles.icon}></FaShippingFast>Ordenes</Link></p>
                 </> : false}
 
 

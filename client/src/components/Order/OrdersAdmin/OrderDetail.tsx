@@ -61,7 +61,7 @@ export default function OrderDetails(props:PropsDetails) {
                     {color:'#FF7400'}
                     }/></h4>
             {/* {order?.status === "pending" && <button onClick={handleStatus} value='creado'>Creado</button>} */}
-            {order?.status === "creado" && <> <button onClick={handleStatus} style={{backgroundColor:'#FCFF2F'}} value='procesando'>Procesando</button><button onClick={handleStatus} style={{backgroundColor:'#FF3434'}} value='cancelada'>Cancelar</button> </>}
+            {order?.status === "creada" && <> <button onClick={handleStatus} style={{backgroundColor:'#FCFF2F'}} value='procesando'>Procesando</button><button onClick={handleStatus} style={{backgroundColor:'#FF3434'}} value='cancelada'>Cancelar</button> </>}
             {order?.status === "procesando" && <><button onClick={handleStatus} style={{backgroundColor:'#6DFF2F'}} value='completa'>Completo</button><button onClick={handleStatus} style={{backgroundColor:'#FF3434'}} value='cancelada'>Cancelar</button> </>}
             {/* {order?.status === "Completa" && <button onClick={handleStatus} value='pending'>pending</button>} */}
             <div className={styles.products}>

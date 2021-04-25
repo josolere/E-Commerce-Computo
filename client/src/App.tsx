@@ -104,9 +104,12 @@ function App() {
         </Route>
         <Route path='/Ordenes/Usuario' component={OrdersUser}/>
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
-        <Route exact path='Pago'>
+        {/* <Route exact path='Pago'>
           {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route>
+        </Route> */}
+        {/* <Route exact path='Pago'> */}
+          <Route exact path='/Pago' component={Payment} />
+        {/* </Route> */}
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>
