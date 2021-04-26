@@ -156,8 +156,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='name'
                   type='text'
-                  required={true}
-                  placeholder='Nombre completo'
+/*                   required={true}
+ */                  placeholder='Nombre completo'
                   minLength={5}
                   maxLength={20}
                 />
@@ -169,8 +169,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='email'
                   type='email'
-                  required={true}
-                  placeholder='E-Mail'
+/*                   required={true}
+ */                  placeholder='E-Mail'
                   minLength={10}
                   maxLength={30}
                 />
@@ -182,8 +182,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='line1'
                   type='text'
-                  required={true}
-                  placeholder='Direccion'
+/*                   required={true}
+ */                  placeholder='Direccion'
                   minLength={5}
                   maxLength={40}
                 />
@@ -195,8 +195,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='city'
                   type='text'
-                  required={true}
-                  placeholder='Ciudad'
+/*                   required={true}
+ */                  placeholder='Ciudad'
                   maxLength={20}
                 />
               </div>
@@ -207,8 +207,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='state'
                   type='text'
-                  required={true}
-                  placeholder='Estado / Provincia'
+/*                   required={true}
+ */                  placeholder='Estado / Provincia'
                   maxLength={20}
                 />
               </div>
@@ -219,8 +219,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='postal_code'
                   type='text'
-                  required={true}
-                  placeholder='Codigo Postal / ZIP'
+/*                   required={true}
+ */                  placeholder='Codigo Postal / ZIP'
                   minLength={3}
                   maxLength={5}
                 />

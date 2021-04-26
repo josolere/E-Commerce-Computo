@@ -61,7 +61,7 @@ const DeleteUser = () => {
             cancelButtonText: 'Cancelar',
             cancelButtonColor: "#2194c2",
         }).then(resp => {
-            if (user?.email === logform.email && user?.password === logform.password) {
+            if (user?.email === logform.email) {
                 if (resp.isConfirmed === true) {
                     deleteUser({
                         variables: { id: user?.id }

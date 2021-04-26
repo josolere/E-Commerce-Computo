@@ -52,9 +52,9 @@ function App() {
 
   console.log(test)
 
-  if (data) {
-      user = data?.currentUser
-  }
+  user = data?.currentUser
+  
+  console.log(user)
 
   const dispatch = useDispatch()
 

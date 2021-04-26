@@ -48,7 +48,7 @@ const ResetPassword = () => {
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        if (currentuser?.password === control.password && currentuser?.email === control.email) {
+        if (currentuser?.email === control.email) {
             editUser({
                 variables: {
                     id: currentuser?.id, email: currentuser?.email, name: currentuser?.name, surname: currentuser?.surname,

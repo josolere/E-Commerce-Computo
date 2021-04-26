@@ -248,7 +248,7 @@ const users = [
       email: 'roy@trenneman.com',
       password: 'imroy',
       username: 'elroycapo',
-      privilege: 'user',
+      privilege: 'admin',
       active: true,
       address: 'calle popo de perro 700',
       id: uuid()
