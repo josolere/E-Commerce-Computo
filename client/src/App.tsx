@@ -22,7 +22,7 @@ import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/login";
 import ResetPassword from './components/Users/ResetPassword';
@@ -52,7 +52,9 @@ function App() {
 
   console.log(test)
 
-  user = data?.currentUser
+  if (data) {
+      user = data?.currentUser
+  }
 
   console.log(user)
 
@@ -103,11 +105,9 @@ function App() {
         <Route path='/Ordenes/Usuario' component={OrdersUser}/>
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
         {/* <Route exact path='Pago'>
-          {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route> */}
-        <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route>
+        </Route> */}
+        <Route exact path='/Pago' component={Payment}/>
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />

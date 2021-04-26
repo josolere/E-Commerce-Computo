@@ -12,9 +12,7 @@ query($status:String){
       productName
       
     }
-
   }
-
 }
 `
 
@@ -67,3 +65,31 @@ export const LOGOUT = gql `
   mutation {
       logout
           }`;
+
+export const CREATE_ORDER = gql `
+mutation($status:String,$idUser:ID){
+  createOrder(input:{status:$status},idUser:$idUser){
+    id
+    status
+
+    
+  }
+}
+`
+
+export const CREATE_ORDER_DETAIL = gql `
+mutation($idOrder:ID,$idProduct:ID,$quantity:Int){
+  createOrderDetail(
+  	idOrder:$idOrder
+    idProduct:$idProduct
+    quantity:$quantity
+  ){
+    id
+    quantity
+    price
+    OrderId
+    ProductId
+    
+  }
+}
+`

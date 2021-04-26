@@ -32,7 +32,7 @@ export default function OrdersUser() {
     const {loading, error, data} = useQuery(GET_ORDERS_USER ,{variables:{idUser:user?.id}})//aca iria user.id
     console.log(results.data)
     console.log(data)
-    const orders = data?.getOrdersByIdUser
+    const orders = data?.getOrdersByIdUser.filter((order:any) =>  order?.status != "pendiente")
 
     return (
         <div className={styles.container}>

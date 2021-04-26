@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import styles from './Payment.module.scss';
+import {CREATE_ORDER, EDIT_ORDER } from '../../gql/orders'
+import { useMutation, useQuery } from '@apollo/client';
+import { ACTUAL_USER } from '../../gql/login';
 
 /* interface databuy {
   name: string,
@@ -100,25 +103,39 @@ const StripePay = (): JSX.Element => {
     })
   }
 
+  const {loading , error , data} = useQuery(ACTUAL_USER)
+  console.log(data)
+  useEffect(()=>{
+    console.log(data)
+    console.log("hola")
+},[data])
+
+  const [createOrder, results] = useMutation(CREATE_ORDER)
+  const [editOrder, resuult] = useMutation(EDIT_ORDER)
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault()
 
-    if (!stripe || !elements) {
-      return;
-    } else {
-      cardElement = elements?.getElement(CardElement);
-    }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: datastripe
-    });
+    createOrder({variables:{status:"pendiente",idUser:data?.currentUser?.id}})
+    .then(({data}) => editOrder({variables:{id:data?.createOrder?.id, status:'creada'}}))
 
-    if (error) {
-      console.log('[error]', error);
-    } else {
-      console.log('[PaymentMethod]', paymentMethod);
-    }
+    // if (!stripe || !elements) {
+    //   return;
+    // } else {
+    //   cardElement = elements?.getElement(CardElement);
+    // }
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: 'card',
+    //   card: cardElement,
+    //   billing_details: datastripe
+    // });
+
+    // if (error) {
+    //   console.log('[error]', error);
+    // } else {
+    //   console.log('[PaymentMethod]', paymentMethod);
+    // }
+
 
   };
 
