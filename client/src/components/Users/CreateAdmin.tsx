@@ -73,7 +73,7 @@ const CreateAdmin = () => {
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         editUser({
             variables: {
-                id: logform.id, email: logform.email, name: logform.firstname, password: logform.password, surname: logform.surname,
+                id: logform.id, email: logform.email, name: logform.firstname, surname: logform.surname,
                 username: logform.username, address: logform.address, active: true, privilege: 'admin'
             }
         })

@@ -150,50 +150,50 @@ export default {
       if (OrderToEdit) {
 
         let confirmAt = null;
-        if(input.status === "creada") {
+        if (input.status === "creada") {
           confirmAt = Date.now()
-        } 
+        }
         const updatedOrder = await OrderToEdit.update(
           { ...input, confirmAt },
           { where: { id } }
         );
 
         //si el estado fue cambiado enviar un email informando ese cambio
-        // console.log("+++++++++",updatedOrder)
-        // const user = await models.User.findByPk(updatedOrder.UserId);
+        console.log("+++++++++", updatedOrder)
+        const user = await models.User.findByPk(updatedOrder.UserId);
 
-        // switch (input.status) {
-        //   //orden finalizada por el usuario
-        //   case "procesando":
-        //     let auxproducts: any = [];
-        //     const idOrder: any = updatedOrder.id;
+        switch (input.status) {
+          //orden finalizada por el usuario
+          case "procesando":
+            let auxproducts: any = [];
+            const idOrder: any = updatedOrder.id;
 
-        //     const aux = await models.Productsxorder.findAll({
-        //       where: {
-        //         OrderId: idOrder,
-        //       },
-        //     });
-        //     auxproducts = aux.map((p: any) => {
-        //       return {
-        //         name: p.dataValues.productName,
-        //         price: p.dataValues.price,
-        //         quantity: p.dataValues.quantity,
-        //       };
-        //     });
-        //     //console.log("el array generado es: ", auxproducts);
-        //     orderCreatedMail(
-        //       user.email,
-        //       updatedOrder.id,
-        //       auxproducts,
-        //       user.address,
-        //       user.name
-        //     );
-        //     break;
+            const aux = await models.Productsxorder.findAll({
+              where: {
+                OrderId: idOrder,
+              },
+            });
+            auxproducts = aux.map((p: any) => {
+              return {
+                name: p.dataValues.productName,
+                price: p.dataValues.price,
+                quantity: p.dataValues.quantity,
+              };
+            });
+            console.log("el array generado es: ", auxproducts);
+            orderCreatedMail(
+              user.email,
+              updatedOrder.id,
+              auxproducts,
+              user.address,
+              user.name
+            );
+            break;
 
-        //   //pedido despachado
-        //   case "completa":
-        //     orderShippedMail(user.email, user.name, updatedOrder.updatedAt);
-        // }
+          //pedido despachado
+          case "completa":
+            orderShippedMail(user.email, user.name, updatedOrder.updatedAt);
+        }
 
         return updatedOrder;
       }

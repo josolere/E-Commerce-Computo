@@ -32,7 +32,8 @@ interface user {
   currentUser: {
       name: string,
       password: string,
-      email: string
+      email: string,
+      privilege: string
   }
 }
 
