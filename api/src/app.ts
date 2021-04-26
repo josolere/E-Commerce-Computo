@@ -12,7 +12,7 @@ import * as passportFacebook from "passport-facebook";
 const facebookStrategy = passportFacebook.Strategy;
 import { CLIENT_RENEG_WINDOW } from "node:tls";
 import googleOAuth from 'passport-google-oauth20'
-import { User } from "./models/User";
+import bcrypt from 'bcrypt';
 const app: express.Application = express();
 
 
@@ -40,12 +40,38 @@ passport.use(
   new GraphQLLocalStrategy(async (email: any, password: any, done: any) => {
     const users = await db.User.findAll();
     
-    const matchingUser = users.find(
-      (user: any) => email === user.email && password === user.password
+    const matchingUser:any  = users.find(
+      (user: any) => email === user.email
     );
+
+    if(!matchingUser){
+      const error = matchingUser ? null : new Error("no matching user found");
+      done(error, matchingUser)
+    }
     
-    const error = matchingUser ? null : new Error("no matching user found");
-    done(error, matchingUser);
+
+    async function decrypt(password:string) {
+      //... fetch user from a db etc.
+  
+      const match = await bcrypt.compare(password, matchingUser.password);
+      console.log('matcheaONoMatchea',match)
+  
+      if(match) {
+        let error = null
+        done(error, matchingUser);
+      }else{
+        
+        const error = new Error("Passwords doesn't match")
+        done(error, matchingUser)
+      }
+  
+  }
+
+  await decrypt(password)
+
+    
+    
+    
   })
 );
 
@@ -99,7 +125,7 @@ const facebookCallback = async (
   done(null, input);
 };
 
-const googleCallback = (accessToken:any, refreshToken:any, email:any ,profile:any,  cb:any) => {
+const googleCallback = async (accessToken:any, refreshToken:any, email:any ,profile:any,  cb:any) => {
   
     console.log('+++++++++++++++++++++',profile)
     console.log('---------------------',email)
@@ -117,11 +143,22 @@ const googleCallback = (accessToken:any, refreshToken:any, email:any ,profile:an
       username: null,
     };
   
-    db.User.create({
-      ...input,
-    });
+    
+    const users = await db.User.findAll();
+    
+    const matchingUser:any  = users.find(
+      (user: any) => profile.id === user.googleId
+    );
+    if(matchingUser){
+      cb(null, matchingUser);
+    }else{
+      db.User.create({
+        ...input
+      })
+      cb(null, input)
+    }
   
-    cb(null, input);
+    
   }
   
 
