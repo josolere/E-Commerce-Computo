@@ -54,8 +54,6 @@ function App() {
 
   user = data?.currentUser
 
-  console.log(user)
-
   const dispatch = useDispatch()
 
   useEffect(() => {

@@ -4,7 +4,7 @@ $white: #dddddd;//30475e
 $red:#f05454;//f05454
 $primary: #11998e;
 $secondary: #38ef7d;
-
+$yellow: #ffb200;
 
 
 /* .PopBox {
@@ -132,7 +132,7 @@ $secondary: #38ef7d;
 	width: 350%;
 	height: 650%;
 	background: repeating-linear-gradient(
-			$white 0%,
+			$white 10px,
 			$white 7.5px,
 			$red 7.5px,
 			$red 15px,
@@ -209,7 +209,7 @@ $secondary: #38ef7d;
 	width: 250%;
 	height: 750%;
 	background: repeating-linear-gradient(
-			$primary 0%,
+			$primary 10px,
 			$primary 7.5px,
 			$secondary 7.5px,
 			$secondary 15px,

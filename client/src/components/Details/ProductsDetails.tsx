@@ -62,39 +62,35 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     user = currentU?.data?.currentUser
 
+    console.log(user)
+
     const dispatch = useDispatch()
 
-    const [gotcookie, setGotcookie] = useState<any>(false)
-
     const id = props.history.location.state.id
-
-    /* const newprice = props.history.location.state.newprice */
 
     const { data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
     });
 
-    const [addreview, results] = useMutation(REVIEW_MUTATION)
+    const [controReview, setControlReview] = useState('');
 
-    let resultsData: Array<string> = []
+    const [addreview, results] = useMutation(REVIEW_MUTATION);
 
-    if (results) {
-        resultsData.push(results?.data?.addReview?.text)
-    }
+    let [rating, setRating] = useState<Array<any>>([]);
 
-    let [rating, setRating] = useState<Array<any>>([])
-
-    const [hover, setHover] = useState(0)
+    const [hover, setHover] = useState(0);
 
     const [reviewuser, setReviewuser] = useState({
         review: ''
-    })
+    });
 
-    const [hidereviews, setHidereviews] = useState(true)
+    const [hideRating, setHideRating] = useState(true);
 
-    const [hideStar, setHideStar] = useState(true)
+    const [hideReview, setHideReview] = useState(true);
 
     const filtred = data?.getProductById
+
+    console.log(filtred)
 
     let totalrating: number = 0;
 
@@ -115,17 +111,17 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     const changereview = () => {
-        addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, userId: user?.id } })
+        setControlReview(user?.id)
+        addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, userId: user?.id, product: 1 } })
             .then(review => { console.log('review up') })
             .catch((err) => { console.log('review mal') })
-            setHidereviews(false)
+        setHideReview(false)
     }
 
     const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
 
     useEffect(() => {
-        console.log(results.data)
-        // setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
+        console.log(results?.data)
     }, [results])
 
     useEffect(() => {
@@ -133,9 +129,15 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
     }, [filtred])
 
+    useEffect(() => {
+        filtred?.reviews?.map(item => setControlReview(item?.name))
+    }, [filtred])
+
+    console.log(user?.id)
+    console.log(filtred?.reviews)
+    console.log(controReview !== user?.id)
     const [editMode, setEditMode] = useState(false)
 
-    console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         setEditMode(!editMode)
@@ -166,7 +168,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT)
-    console.log(resultsEdit.data)
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -257,31 +258,32 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 </div>
                 {user?.privilege === 'user' ?
                     <div className={styles.containerBot}>
-                        <div>{hidereviews ?
-                            <div>
-                                <button onClick={changereview} className={styles.buttonCompra} >Enviar comentario</button>
-                                <div className={styles.review}>
-                                    <textarea
-                                        style={{ height: '5rem', width: '20rem' }}
-                                        placeholder={'Escriba aquí una review del producto'}
-                                        className={styles.textarea}
-                                        name='review'
-                                        value={reviewuser.review}
-                                        onChange={(event) =>
-                                            setReviewuser({
-                                                ...reviewuser,
-                                                review: event.target.value
-                                            })} />
+                        <div>
+                            {hideReview ?
+                                <div>
+                                    <button onClick={changereview} className={styles.buttonCompra} >Enviar comentario</button>
+                                    <div className={styles.review}>
+                                        <textarea
+                                            style={{ height: '5rem', width: '20rem' }}
+                                            placeholder={'Escriba aquí una review del producto'}
+                                            className={styles.textarea}
+                                            name='review'
+                                            value={reviewuser.review}
+                                            onChange={(event) =>
+                                                setReviewuser({
+                                                    ...reviewuser,
+                                                    review: event.target.value
+                                                })} />
+                                    </div>
                                 </div>
-                            </div>
-                            :
-                            <div className={styles.gracias} >
-                                <h1 className={styles.Hrating}><span className={styles.hspan} >Gracias por dejar su comentario</span></h1>
-                            </div>
-                        }
+                                :
+                                <div className={styles.gracias} >
+                                    <h1 className={styles.Hrating}><span className={styles.hspan} >Gracias por dejar su comentario</span></h1>
+                                </div>
+                            }
                         </div>
                         <div >
-                            {hideStar ?
+                            {hideRating ?
                                 <div className={styles.estrellas}>
                                     {[...Array(5)].map((star, index) => {
                                         const ratingvalue = index + 1;
@@ -291,7 +293,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                                 value={ratingvalue}
                                                 onClick={function pushrating() {
                                                     setRating([...rating, ratingvalue])
-                                                    setHideStar(false)
+                                                    setHideRating(false)
                                                 }}
                                             />
                                             <FaStar size={30}
@@ -313,13 +315,16 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         </div>
                     </div>
                     : false}
-                <div className={styles.reviews}>
-                    {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
-                        : false}
-                    {filtred?.reviews.map(review => <div><div>{review.text}</div><div>{review.rating}</div></div>)}
+                {/*                   {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
+                        : false} */}
+                <div className={styles.box}>
+                    {filtred?.reviews.map(review =>
+                        <div className={styles.content}>
+                            <p className={styles.pReview} >{review.text}</p>
+                            <p className={styles.pRanking}>{review.rating}<FaStar size={20} className='star' color={rating ? '#ffc107' : '#e4e5e9'} /></p>
+                        </div>)}
                 </div>
             </div>
-
         </React.Fragment>
     )
 }
