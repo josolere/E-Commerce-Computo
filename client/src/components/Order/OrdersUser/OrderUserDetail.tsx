@@ -19,13 +19,12 @@ export default function OrderUserDetails() {
     const { loading, error, data } = useQuery(GET_ORDER_DETAILS,{ variables: {id:1}})
 
     const order = data?.getOrderById
-
+    let date: any = ""
     console.log("aaaaa")
     useEffect(() => {
-        console.log("aaaaa")
-        console.log(id)
-        console.log(data)
-    }, [data])
+       console.log(order?.confirmAt)
+       new Date(order?.confirmAt).toLocaleDateString("en-US")
+    }, [order])
 
     const totalCalc = () =>{
         let total = 0
@@ -39,7 +38,7 @@ export default function OrderUserDetails() {
     return (//creada => procesando => completa || cancelada
         <div className={styles.container}>
             <h1>Orden Nro: {order?.id}</h1>
-            <h5>Fecha de realización:{order?.confirmAt }</h5>
+            <h5>Fecha de realización: {new Date(+order?.confirmAt).toLocaleDateString("en-GB")}</h5>
             <h4>Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={
                     (order?.status === 'cancelada' && {color:'#FF3434'})||
                     (order?.status === 'procesando' && {color:'#FCFF2F'})||
