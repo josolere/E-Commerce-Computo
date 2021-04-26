@@ -1,4 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
+import React, { Fragment, useEffect, useState } from 'react';
+import { ACTUAL_USER } from '../../gql/login';
+import { CREATE_ORDER } from '../../gql/orders';
 import './Payment.scss';
 
 interface PropsDetails {
@@ -41,8 +44,16 @@ const Payment = (props: PropsDetails): JSX.Element => {
             ...datacard,
             [event.target.name]: event.target.value
         })
-
     }
+
+    const {loading , error , data} = useQuery(ACTUAL_USER)
+    useEffect(()=>{
+
+        console.log(data)
+        console.log("hola")
+    },[data])
+  
+    const [createOrder, results] = useMutation(CREATE_ORDER,{variables:{status:"pendiente",idUser:"83e4aa4e-f503-4657-8e16-7caf9b7995ef"}})
 
     const Onbuybutton = () => {
         if (parseInt(datacard.Month) > 12 || parseInt(datacard.Month) < 1) {
