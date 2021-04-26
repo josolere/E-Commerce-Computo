@@ -138,8 +138,8 @@ passport.serializeUser((user: any, done) => {
 passport.deserializeUser(async (id:any, done) => {
   const users: any = await db.User.findAll();
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
-  done(null, true);
-  //done(null, matchingUser)
+  /* done(null, true); */
+  done(null, true)
 });
 
 const SESSION_SECRET = "bad secret";
