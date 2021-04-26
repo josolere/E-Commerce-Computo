@@ -40,7 +40,7 @@ const ResetPassword = () => {
         setControl({ ...control, [event?.currentTarget.name]: event?.currentTarget.value })
     }
 
-
+    console.log(control)
 
     const handleclickevent = () => {
         window.location.href = 'http://localhost:3000/Login'
@@ -55,7 +55,8 @@ const ResetPassword = () => {
                     password: control.newpassword, username: currentuser?.username, address: currentuser?.address, active: true, privilege: currentuser?.privilege
                 }
             })
-                .then((resolve) => { console.log('Reset bien') })
+                .then((resolve) => { toast.success('Tienes una nueva contraseña 🥳') 
+                setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
                 .catch((error) => (console.log('Reset Mal')))
         }
         else {
@@ -84,6 +85,7 @@ const ResetPassword = () => {
                                 className={styles.form__field}
                                 type='text'
                                 placeholder='E-Mail'
+                                name='email'
                                 onChange={handleChange}
                             />
                         </div>
@@ -96,7 +98,7 @@ const ResetPassword = () => {
                                 minLength={4}
                                 maxLength={15}
                                 type="password"
-                                name='No'
+                                name='password'
                                 required={true}
                                 onChange={handleChange}
                             />

@@ -40,9 +40,9 @@ const Login = () => {
         if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
                 .then((resolve) => {  const visitante = resolve.data.login.user;
-                    toast.success("Bienvenido " + visitante.name);
-                    setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 1800) })
-                .catch((error) => { toast.error(error.message)})
+                    toast.success("Bienvenido " + visitante.name + ' ' +  '🥳');
+                    setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
+                .catch((error) => { toast.error('Tu no eres de aquí 🤔')})
                 ;
         }
         else {
@@ -53,8 +53,8 @@ const Login = () => {
                 }
             })
                 .then((resolve) => { toast.success("Te has registrado correctamente"); 
-                setTimeout(function(){window.location.href = 'http://localhost:3000/login';}, 1500 )})
-                .catch((error) => { toast.error('Error al registrarse') })
+                setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
+                .catch((error) => { toast.error('Error al registrarse 🤔') })
                 ;
         }
         event.preventDefault()
@@ -130,7 +130,7 @@ const Login = () => {
                                         autoLoad={true}
                                         onClick={componentClicked}
                                         callback={responseFacebook} 
-                                        /> */}
+                                        />  */}
                                     <GoogleLogin className={styles.buttonGoogle}
                                         clientId="700487855245-ffig42s6ln7oao3itcpcg18g0mi8de8u.apps.googleusercontent.com"
                                         theme= 'dark'
@@ -204,7 +204,7 @@ const Login = () => {
                                     <input
                                         className={styles.form__field}
                                         type='text'
-                                        minLength={5}
+                                        minLength={2}
                                         maxLength={20}
                                         placeholder='Apellido'
                                         name='lastname'
