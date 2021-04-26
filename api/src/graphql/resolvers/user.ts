@@ -74,6 +74,18 @@ export default {
           { where: { id } }
         );
 
+        if(input.password){
+
+          bcrypt.hash(input.password, saltRounds, function(err, hash){
+            models.User.update({password: hash},{ 
+              where:{ 
+                id: id
+              }
+             })
+          })
+
+        }
+
         return updatedUser;
       }
 
