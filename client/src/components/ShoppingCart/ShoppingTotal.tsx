@@ -3,13 +3,30 @@ import total from './ShoppingTotal.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../redux/reducers';
 import { deleteCart } from '../../redux/actions'
-import { useMutation } from '@apollo/client';
 import { NEW_ORDER } from "../../gql/shopingCart"
 import { Cookies } from "react-cookie";
 import { toast } from "react-toastify"
+import { ACTUAL_USER, GET_USERS } from "../../gql/login";
+import { useMutation, useQuery, gql } from '@apollo/client';
+import {Link} from 'react-router-dom';
 
+interface user {
+    currentUser: {
+        name: string,
+        password: string,
+        email: string,
+        privilege: string
+    }
+  }
+  
 
 const ShoppingTotal = (): JSX.Element => {
+
+    let user:any = {}
+
+    const currentU = useQuery<user>(ACTUAL_USER)
+
+    user = currentU?.data?.currentUser
 
     const [createOrder, { data }] = useMutation(NEW_ORDER)
     const dispatch = useDispatch()
@@ -70,11 +87,21 @@ const ShoppingTotal = (): JSX.Element => {
                     </div>
                 </div>
             </div>
+            {user?.privilege ==='user' ?
             <div className={total.containerButton}>
                 <button onClick={handleOrder}
                     className={total.buttonFinal}>Finalizar Compra
                     </button>
             </div>
+            :
+            <div className={total.containerButton}>
+                <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
+                <Link to='/Login'>
+                    <button
+                    className={total.buttonFinal}
+                    >Login</button>
+                </Link>
+            </div>}
         </>
     )
 }

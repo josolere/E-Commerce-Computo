@@ -18,8 +18,8 @@ type Review{
 input AddReviewInput{
     rating: Int
     text: String
-    product: Int
     userId: String
+    product: Int
   }
 
 type Mutation{

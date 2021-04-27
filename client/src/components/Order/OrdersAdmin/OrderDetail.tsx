@@ -57,7 +57,7 @@ export default function OrderDetails(props:PropsDetails) {
     return (//creada => procesando => completa || cancelada
         <div className={styles.container}>
             <h1>Orden Nro: {order?.id}</h1>
-            <h6>Fecha de realización:{order?.confirmAt }</h6>
+            <h6>Fecha de realización: {new Date(+order?.confirmAt).toLocaleDateString("en-GB")}</h6>
             <h4>Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={
                     (order?.status === 'cancelada' && {color:'#FF3434'})||
                     (order?.status === 'procesando' && {color:'#FCFF2F'})||
