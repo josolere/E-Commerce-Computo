@@ -71,7 +71,6 @@ const ShoppingTotal = (): JSX.Element => {
                 </div>
             </div>
             <div className={total.containerButton}>
-
                 <button onClick={handleOrder}
                     className={total.buttonFinal}>Finalizar Compra
                     </button>

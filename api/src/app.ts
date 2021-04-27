@@ -31,7 +31,7 @@ require("dotenv").config();
 const FACEBOOK_CLIENT_ID = "936411523566877";
 const FACEBOOK_APP_SECRET = "a1e05f5a17e23fd232a21f169690dd37";
 const clientID = process.env.GOOGLE_CLIENT_ID;
-const clientSecret = process.env.GOOGLE_SECRET || '';
+const clientSecret = process.env.GOOGLE_SECRET;
 
 //añadimos el soporte para el registro y login desde los resolvers de graphQL para evitar hacer rutas nuevas
 //usando la libreria graphql-passport, podemos acceder a las funciones de passport desde el contexto de GraphQL
@@ -58,10 +58,9 @@ const facebookOptions: iUserFacebook = {
   profileFields: ["id", "email", "first_name", "last_name"],
 };
 const googleOptions: any = {
-  clientID: "xxxxx",
+  clientID: clientID,
   clientSecret: clientSecret,
   callbackURL: 'http://localhost:5000/auth/google/redirect',
-  passReqToCallback:true,
 }
 const facebookCallback = async (
   accessToken: any,
@@ -100,46 +99,46 @@ const facebookCallback = async (
   done(null, input);
 };
 
-const googleCallback = async (
-  accessToken: any,
-  refreshToken: any,
-  profile:any,
-  done:any
-) => {
-  console.log(profile);
+const googleCallback = (accessToken:any, refreshToken:any, email:any ,profile:any,  cb:any) => {
   
+    console.log('+++++++++++++++++++++',profile)
+    console.log('---------------------',email)
 
-  let input: any = {
-    id: uuid(),
-    googleId: profile.id,
-    name: profile.name.givenName,
-    surname: profile.name.familyName,
-    email: profile.emails && profile.emails[0] && profile.emails[0].value,
-    privilege: "user",
-    active: true,
-    password: null,
-    address: null,
-    username: null,
-  };
-
-  db.User.create({
-    ...input,
-  });
-
-  done(null, input);
-}
-
-
+    let input: any = {
+      id: uuid(),
+      googleId: profile.id,
+      name: profile.name.givenName,
+      surname: profile.name.familyName,
+      email: profile.emails && profile.emails[0] && profile.emails[0].value,
+      privilege: "user",
+      active: true,
+      password: null,
+      address: null,
+      username: null,
+    };
+  
+    db.User.create({
+      ...input,
+    });
+  
+    cb(null, input);
+  }
+  
 
 passport.serializeUser((user: any, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(async (id:any, done) => {
+passport.deserializeUser(async (id: any, done) => {
   const users: any = await db.User.findAll();
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
-  /* done(null, true); */
-  done(null, true)
+  //console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
+  if( matchingUser !== undefined){
+    done(null, matchingUser);
+  }else{
+    done(null, true)
+  }
+  
 });
 
 const SESSION_SECRET = "bad secret";
@@ -149,7 +148,7 @@ app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", 'http://localhost:3000'); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -169,7 +168,10 @@ app.use(
 );
 passport.use(new facebookStrategy(facebookOptions, facebookCallback));
 
-passport.use(new googleStrategy(googleOptions , googleCallback));
+passport.use(new googleStrategy(
+  googleOptions ,
+  googleCallback
+  ));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -182,7 +184,7 @@ app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"] }
 app.get(
     "/auth/facebook/callback",
     passport.authenticate("facebook", {
-      successRedirect: "http://localhost:5000/graphql",
+      successRedirect: "http://localhost:3000/Home",
       failureRedirect: "http://localhost:5000/graphql",
     }),
     ); 
@@ -190,13 +192,13 @@ app.get(
 
 //Rutas autenticación google
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile','email']}))
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}))
 
 app.get('/auth/google/redirect', 
   passport.authenticate('google', { failureRedirect: 'http://localhost:5000/graphql'}),
   function(req, res) {
     //successful authentication
-    res.redirect('/graphql')
+    res.redirect('http://localhost:3000/Home')
   }
   )
 

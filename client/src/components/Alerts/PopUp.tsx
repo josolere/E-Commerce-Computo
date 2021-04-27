@@ -31,8 +31,8 @@ const PopUp = () => {
         <div className={styles.OrderPop} >
             <div className={styles.box} >
                 <div className={styles.content} >
-                    <h4 className={styles.PopTitle} >Producto Destacado </h4>
-                    <p className={styles.PPop} >{productPopUp?.name}</p>
+                    <h1 className={styles.PopTitle} >Producto en oferta </h1>
+                    <h1 className={styles.PPop} >{productPopUp?.name}</h1>
                 </div>
             </div>
             <div className={styles.box2} >

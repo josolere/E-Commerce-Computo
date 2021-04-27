@@ -213,23 +213,63 @@ $secondary: #38ef7d;
 }
 
 .sortUser{
-	margin: 10%;
-	font-weight: bold;
-	margin: 10%;
-	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	align-items: flex-start;
+	margin-top: 10%;
+	margin-bottom: 10%;
+	width: 110%;
 	height: fit-content;
 	border-radius: .3rem;
-	background: darken($red, 20%);
-	border: $dash-size dashed $red;
+	background: darken($text, 20%);
+	border: $dash-size dashed $text;
 	box-shadow: 0 0 0 ($dash-size / 2) darken($primary, 20%),
 		        0 0 0 ($dash-size * 2.5) $white,
 		        inset 0 0 0 ($dash-size / 2) darken($primary, 20%),
 		        0 $dash-size ($dash-size * 2) ($dash-size * 3) rgba(0,0,0,0.5),
 		        inset 0 0 0 ($dash-size * 1.2) $white,
 		        inset 0 0 100vw 100vw $fill-color;
-	color: $dark;
+
+}
+
+.UserP{
 	font-family: 'Montserrat', sans-serif;
+	color: $dark;
+	font-weight: bold;
 	font-size: 1rem;
 	text-shadow: 0 2px $white;
-	text-align: center;
+	padding-left: 1rem;
+	font-family: 'Montserrat', sans-serif;
 }
+
+.sort{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-left: 15%;
+}
+
+.Hrating {
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 2rem;
+    max-width: 75vw;
+    color: $grey;
+    .hspan {
+    font-family: 'Montserrat', sans-serif ;
+    background-image: linear-gradient(
+    transparent calc(65% - 5px),
+    darken($red, 0%) 5px,
+    );
+    background-size: 0;
+    background-repeat: no-repeat;
+    display: inline;
+    transition: 0.5s ease;
+    }
+    &:hover {
+      .hspan {
+        background-size: 100%;
+      }
+    }
+  }

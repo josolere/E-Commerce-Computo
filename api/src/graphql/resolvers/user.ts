@@ -21,8 +21,12 @@ export default {
       return data;
     },
 
-    currentUser: (_parent: object, _args: any, context: any) =>
-   context.getUser(),
+    currentUser: (_parent: object, _args: any, context: any) =>{
+    let user = context.getUser()
+     
+    console.log(user)
+    return user
+    },
 
    
 
@@ -94,7 +98,7 @@ export default {
 
     signup: async (
       _parent: object,
-      { firstName, lastName, email, password }: any,
+      { firstName, lastName, email, password, address, username }: any,
       context: any
     ): Promise<any> => {
       const existingUsers = await context.models.User.findAll();
@@ -116,8 +120,8 @@ export default {
         privilege: "user",
         active: true,
         password: password,
-        address: "input.address",
-        username: "input.username",
+        address: address,
+        username: username,
       };
 
       // console.log(newUserInput);

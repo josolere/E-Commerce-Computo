@@ -127,12 +127,11 @@ const StripePay = (): JSX.Element => {
   return (
     <React.Fragment>
       <div className={styles.back} >
-      
         <div className={styles.organizar} >
           <div className={styles.caja} >
             <h4>Precio</h4>
             <h4>Detalles de la compra</h4>
-            <form onSubmit={handleSubmit}  >
+            <form onSubmit={handleSubmit}>
               <div className={styles.form__group}>
                 <label htmlFor='name' className={styles.form__label} >Nombre</label>
                 <input
