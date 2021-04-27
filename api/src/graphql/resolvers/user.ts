@@ -22,7 +22,9 @@ export default {
     },
 
     currentUser: (_parent: object, _args: any, context: any) =>
-      context.getUser(),
+   context.getUser(),
+
+   
 
     getUsers: async (
       _parent: object,
@@ -92,7 +94,7 @@ export default {
 
     signup: async (
       _parent: object,
-      { firstName, lastName, email, password }: any,
+      { firstName, lastName, email, password, address, username }: any,
       context: any
     ): Promise<any> => {
       const existingUsers = await context.models.User.findAll();
@@ -101,7 +103,7 @@ export default {
       );
 
       if (userWithEmailAlreadyExists) {
-        throw new Error("User with email already exists");
+        throw new Error("Ya existe un usuario con ese E-Mail");
       }
 
       // console.log(input);
@@ -114,8 +116,8 @@ export default {
         privilege: "user",
         active: true,
         password: password,
-        address: "input.address",
-        username: "input.username",
+        address: address,
+        username: username,
       };
 
       // console.log(newUserInput);

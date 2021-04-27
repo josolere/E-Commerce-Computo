@@ -13,6 +13,7 @@ export const ADD_PRODUCT_HOME = 'ADD_PRODUCT_HOME'
 export const LOGEO = 'LOGEO'
 export const ADD_BASE_DE_DATOS = 'ADD_BASE_DE_DATOS'
 export const ORDER_ID = 'ORDER_ID'
+export const ORDER_PENDING = 'ORDER_PENDING'
 
 export const setFilter = (filter: string) => ({
     type: SET_FILTER, filter
@@ -86,5 +87,10 @@ export const addBaseDeDatos = (arrayProducts:any) =>({
 
 export const orderId = (data:any) =>({
     type:ORDER_ID,
+    data
+})
+
+export const orderPending = (data:[]) => ({
+    type:ORDER_PENDING,
     data
 })

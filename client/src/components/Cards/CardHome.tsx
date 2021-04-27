@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useLayoutEffect, useMemo } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Card.module.scss'
 import { Link } from 'react-router-dom'
-import { addShopping, local, addProductDetails, addProductHome } from '../../redux/actions'
+import { addShopping, local, addProductHome, orderPending, addProductDetails } from '../../redux/actions'
 import { AppState } from '../../redux/reducers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
@@ -10,8 +10,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import { NEW_ORDER_DETAIL } from "../../gql/shopingCart"
-
-
 
 
 interface props {
@@ -23,29 +21,16 @@ interface props {
 }
 
 export default function Card({ name, image, price, id, count }: props) {
+
     const dispatch = useDispatch()
-    const { quantity, priceSubTotal, productTotal, addCart,
-        addHome, idDetails, priceDetails, countDetails, idOrder }: any = useSelector((store: AppState) => store.shoppingCartReducer)
+    const { quantity, priceSubTotal, productTotal, idDetails,
+        priceDetails, countDetails, logeo, idOrder, addHome, addCart }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
-
-    //---------------------------------------------------------------------
     const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL)
-
-    const [logeos, setLogeos] = useState()
-
-
-    useEffect(() => {
-        if (localStorage.getItem('productsLocal')) {
-            let log: any = false
-            log = (localStorage.getItem('logeo'))
-            log = (JSON.parse(log))
-            setLogeos(log)
-        }
-    }, [])
-    //________________________________________________________________________
 
 
     const [stateHome, setStateHome] = useState(true)
+    const [AddProductReload, setAddProductReload] = useState(false)
 
     const notify = () => toast.dark("Agregado Al Carrito");
 
@@ -56,7 +41,6 @@ export default function Card({ name, image, price, id, count }: props) {
         if (quantity !== 0) {
             localStorage.setItem('quantity', JSON.stringify(quantity))
             localStorage.setItem('priceSubTotal', JSON.stringify(priceSubTotal))
-
         }
 
         useEffect(() => {
@@ -67,6 +51,7 @@ export default function Card({ name, image, price, id, count }: props) {
             }
         }, [idsProducts])
     }
+
 
     const addLocaStorage = () => {
         const idProduct: any = {
@@ -100,15 +85,15 @@ export default function Card({ name, image, price, id, count }: props) {
             dispatch(addShopping({ id, price, count }));
             addLocaStorage();
             notify()
-            logeos && createOrderDetail({ variables: { idOrder: idOrder, idProduct: id, quantity: count } })
+            logeo && createOrderDetail({ variables: { idOrder: idOrder, idProduct: id, quantity: count } })
                 .then((resolve) => {
-                    console.log(resolve)
+                    console.log('resolve')
                 })
                 .catch((error) => {
                     console.log('no responde')
                 })
-        }
 
+        }
     }
 
     if (addCart === true && addHome === true) {
@@ -134,7 +119,7 @@ export default function Card({ name, image, price, id, count }: props) {
                         newprice: 0
                     }
                 }}>
-                <img style={{ width: '100%', height: 'auto' }} src={image} />
+                <img style={{ width: '100%', height: 'auto' }} src={image} alt="notfoundimg" />
             </Link>
 
             {/* <div className={styles.buy}>${new Intl.NumberFormat().format(price)}</div> */}

@@ -70,6 +70,7 @@ export interface iModels {
   Category: any;
   User: any;
   Order: any;
+  OrderDetail:any;
   Productsxorder: any;
   sequelize: any;
 }

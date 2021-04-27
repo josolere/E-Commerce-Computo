@@ -159,7 +159,7 @@ export default {
           productToEdit.removeCategories(product.categories);
 
           //inserto las nuevas
-          // console.log(input.categories.length);
+          // .log(input.categories.length);
         
           await productToEdit.addCategories(input.categories);
 
@@ -178,7 +178,7 @@ export default {
 
       let createdReview = await Review.create({ ...input})
 
-      console.log(currentProduct)
+      .log(currentProduct)
 
       currentProduct.addReview(createdReview)
 

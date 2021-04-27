@@ -1,14 +1,20 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import ShoppingCard from './ShoppingCard'
 import ShoppingTotal from './ShoppingTotal'
 import carts from './ShoppingCarts.module.scss'
 import { AppState } from '../../redux/reducers';
+import { useEffect } from 'react';
+
 
 const ShoppingCart = (): JSX.Element => {
 
     const idsProducts: any[] = useSelector((store: AppState) => store.shoppingCartReducer.productTotal)
 
-    console.log(idsProducts)
+    // useEffect(() => {
+    //     location.reload()
+    // }, [])
+
+
     if (idsProducts.length === 0) {
         if (localStorage.getItem('productsLocal')) {
             let productLocal: any = []

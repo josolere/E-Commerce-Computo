@@ -6,7 +6,7 @@ $red:#f05454;//f05454
 .card {
   width: 14rem;
   height: 22rem;
-  margin: 0rem 0rem 1.3rem 2rem;
+  margin: 1rem 0rem 1.3rem 2rem;
   border-radius: 0.2rem;
   position: relative;
   display: flex;
@@ -42,7 +42,7 @@ $red:#f05454;//f05454
       padding: 0.3rem;
       border-top-right-radius: 0.2rem ;
       border-top-left-radius: 0.2rem;
-      background-color: $dark;
+      background-color: #30475e;
       color: white;
 
 }

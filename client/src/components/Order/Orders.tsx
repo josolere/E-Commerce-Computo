@@ -1,7 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import NavBar from '../NavBar/NavBar'
 import ordersStyle from './Orders.module.scss'
+import {Link} from 'react-router-dom'
 
 interface props {
     id: number

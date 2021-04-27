@@ -1,5 +1,3 @@
-import product from "../../graphql/resolvers/product";
-
 export function OrderDetail(
   idOrder: number,
   products: any,
@@ -177,7 +175,7 @@ a[x-apple-data-detectors] {
                       <td align="center" style="padding:0;Margin:0;padding-bottom:10px"><h2 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:30px;font-style:normal;font-weight:bold;color:#333333">¡Gracias por tu compra!</h2></td> 
                      </tr> 
                      <tr style="border-collapse:collapse"> 
-                      <td align="left" style="padding:0;Margin:0;padding-top:15px;padding-bottom:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777;font-size:16px">Tu pedido está siendo procesado. Muchas gracias por confiar en nosotros&nbsp;podés consultar el estado de tu pedido desde&nbsp;</p></td> 
+                      <td align="left" style="padding:0;Margin:0;padding-top:15px;padding-bottom:20px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777;font-size:16px">Tu pedido está siendo procesado. Muchas gracias por confiar en nosotros&nbsp;podés consultar el estado de tu pedido desde nuestra página web</p></td> 
                      </tr> 
                    </table></td> 
                  </tr> 
