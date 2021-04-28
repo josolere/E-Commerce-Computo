@@ -60,7 +60,7 @@ const NavBar = (): JSX.Element => {
   })
 
   const dataOrderSatus: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
-    variables: { status: "pendiente" }
+    variables: { status: "pendiente", idUser: idUsers }
   })
 
 

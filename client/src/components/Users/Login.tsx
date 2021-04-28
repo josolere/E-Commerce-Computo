@@ -18,9 +18,9 @@ import {GET_ORDER_BY_StATUS } from "../../gql/orders"
 
 const Login = () => {
 
-    const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
-        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente"}}]
-    })
+    // const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
+    //     refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente"}}]
+    // })
     //-----------------------------------------------
     // const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL)
     const [createOrder] = useMutation(NEW_ORDER)
@@ -35,6 +35,11 @@ const Login = () => {
     const { data } = useQuery(GET_ORDER, {
         variables: { idUser: idUser }
     });
+
+    const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
+        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUser}}]
+    })
+    //--
 
     useEffect(() => {
         if (data) {
@@ -95,7 +100,11 @@ const Login = () => {
                     lastName: logform.lastname, username: logform.username, address: logform.address
                 }
             })
-                .then((resolve) => { toast.success("Te has registrado correctamente"); 
+                .then((resolve) => { 
+                    setLog(true)
+                    console.log(resolve?.data?.signup?.user?.id)
+                    setIdUser(resolve?.data?.signup?.user?.id)
+                    toast.success("Te has registrado correctamente"); 
                 setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
                 .catch((error) => { toast.error('Error al registrarse 🤔') })
                 ;

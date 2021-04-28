@@ -92,11 +92,11 @@ export default {
 
     getOrderByStatus: async (
       _parent: object,
-      { status }: { status: string },
+      { status, idUser }: { status: string; idUser: any },
       { models }: { models: iModels }
     ): Promise<iOrder> => {
       const data = await models.Order.findAll({
-        where: { status: status },
+        where: { status: status, UserId: idUser },
         include: [
           {
             model: db.Product,

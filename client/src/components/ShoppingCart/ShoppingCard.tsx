@@ -70,12 +70,14 @@ const ShoppingCard = (props: props): JSX.Element => {
     })
 
     const productsCart: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
-        variables: { status: "pendiente" }
+        variables: { status: "pendiente", idUser: idUsers  }
       })
       
 
       let details = productsCart?.data?.getOrderByStatus[0]?.details
       useEffect(() => {
+          console.log(idUsers)
+         console.log(productsCart)
          console.log(productsCart?.data?.getOrderByStatus[0]?.details)
       }, [productsCart])
 
@@ -143,14 +145,14 @@ const ShoppingCard = (props: props): JSX.Element => {
     }
 
     const accountantMore = async () => {
-       let resultId = details.find((finds:any)=> finds.ProductId === product.id
+       let resultId = details?.find((finds:any)=> finds?.ProductId === product?.id
        )
     //    console.log(details)
        console.log(productsCart?.data?.getOrderByStatus[0]?.details)
 
 
-        if (idProductOrder.data !== undefined && productsCart !==undefined) {
-            accounrMoreBases(resultId.id)
+        if (idProductOrder?.data !== undefined && productsCart !==undefined) {
+            accounrMoreBases(resultId?.id)
         }
     }
 

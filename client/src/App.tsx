@@ -65,7 +65,7 @@ function App() {
   const idOrder = useQuery<detailOrderid>(GET_ORDER, ({ variables: { idUser: idUser } }))
   const dispatch = useDispatch()
 
-  const [gotCookies, setGotCookies] = useState(false)
+  // const [gotCookies, setGotCookies] = useState(false)
 
   const cookie = new Cookies 
 
@@ -79,11 +79,11 @@ function App() {
   useEffect(() => {
 
     if (actualuser.data && idOrder.data) {
-      let login = gotCookies
+      let login = true
       if (actualuser.data.currentUser !== null) {
         let idUsers = actualuser?.data?.currentUser.id
         setIdUser(idUsers)
-        dispatch(logeo({ idUsers, login }))
+        dispatch(logeo({ idUsers, login}))
 
         if (actualuser.data && idOrder.data.getOrdersByIdUser.length > 0) {
           console.log(idOrder.data)
@@ -97,11 +97,11 @@ function App() {
 
   }, [actualuser, idOrder])
 
-  useEffect(() => {
-    if (cookie.get('User')) {
-      setGotCookies(true)
-    }
-  }, [cookie])
+  // useEffect(() => {
+  //   if (cookie.get('User')) {
+  //     setGotCookies(true)
+  //   }
+  // }, [cookie])
 
 
   useEffect(() => {
