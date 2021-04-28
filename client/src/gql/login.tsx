@@ -69,10 +69,10 @@ mutation ($id:ID! ){
 }`;
 
 export const EDIT_USER_MUTATION = gql`
-mutation( $id:ID! $name:String! $password:String! $email:String! $surname:String! $username:String! 
+mutation( $id:ID! $name:String! $email:String! $surname:String! $username:String! 
     $privilege:String! $active:Boolean! $address:String! ) 
     {
-    editUser (id:$id  input: {name:$name surname:$surname password:$password email:$email 
+    editUser (id:$id  input: {name:$name surname:$surname email:$email 
         username:$username privilege:$privilege active:$active address:$address}) 
                         { 
                             name

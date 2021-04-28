@@ -13,7 +13,16 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_ORDER_LIST } from "../../gql/order"
 import { GET_ORDER_DETAILS, GET_ORDER_BY_StATUS } from '../../gql/orders'
 import { addBaseDeDatos } from '../../redux/actions'
+import { ACTUAL_USER } from "../../gql/login"
 
+
+interface user {
+  currentUser: {
+    name: string,
+    password: string,
+    email: string
+  }
+}
 
 
 interface detailOrderid {
@@ -50,7 +59,7 @@ const NavBar = (): JSX.Element => {
     variables: { idUser: idUsers }
   })
 
-  const { data, loading, error }: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
+  const dataOrderSatus: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
     variables: { status: "pendiente" }
   })
 
@@ -58,31 +67,37 @@ const NavBar = (): JSX.Element => {
 
   useEffect(() => {
     console.log(data)
-    if (logeo === true && data) {
-      let arrayProducts =[]
-      if(data?.getOrderByStatus[0]?.details.length !== 0){
-        console.log(data?.getOrderByStatus[0]?.details)
-        arrayProducts = data?.getOrderByStatus[0]?.details 
-      }else{
-        console.log(data?.getOrderByStatus)
-        arrayProducts = data?.getOrderByStatus
+    if (logeo === true && dataOrderSatus.data) {
+      let arrayProducts = []
+      if (dataOrderSatus.data?.getOrderByStatus[0]?.details.length !== 0) {
+        console.log(dataOrderSatus.data?.getOrderByStatus[0]?.details)
+        arrayProducts = dataOrderSatus.data?.getOrderByStatus[0]?.details
+      } else {
+        console.log(dataOrderSatus.data?.getOrderByStatus)
+        arrayProducts = dataOrderSatus.data?.getOrderByStatus
       }
       let productBas: any = []
       let conte = 0
       let priceBase = 0
       console.log(arrayProducts)
       arrayProducts !== undefined &&
-      arrayProducts.map((mapeo: any) => {
-        productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity })
-        conte = conte + mapeo.quantity
-        priceBase = priceBase + mapeo.price * conte
-      })
+        arrayProducts.map((mapeo: any) => {
+          productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity })
+          conte = conte + mapeo.quantity
+          priceBase = priceBase + mapeo.price * conte
+        })
       dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
       localStorage.setItem('productsLocal', JSON.stringify(productBas))
       localStorage.setItem('quantity', JSON.stringify(conte))
       localStorage.setItem('priceSubTotal', JSON.stringify(priceBase))
     }
-  }, [data])
+  }, [dataOrderSatus.data])
+
+  let user:any = {}
+
+  const {data} = useQuery<user>(ACTUAL_USER)
+
+  user = data?.currentUser
 
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
 
@@ -112,12 +127,11 @@ const NavBar = (): JSX.Element => {
 
           {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}><p>Productos</p></Link> : false}
           <div>
-
-            {cookiess ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
+            {user?.name ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
 
           </div>
 
-          <p>{cookiess && <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
+          <p>{user?.name && <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
 
         </div>
       </div>

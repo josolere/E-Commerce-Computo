@@ -12,27 +12,27 @@ query($status:String){
       productName
       
     }
-
   }
-
 }
 `
 
 export const GET_ORDER_DETAILS = gql`
 query($id:ID!){
-    getOrderById(id:$id){
+  getOrderById(id:$id){
+    id
+    status
+    confirmAt
+    details{
       id
-      status
-      details{
-        id
-        ProductId
-        quantity
-        price
-        
+      quantity
+      price
+      productName
+      ProductId
+      
     }
-
   }
 }
+
   `;
 
 export const EDIT_ORDER = gql `
@@ -57,6 +57,38 @@ query($idUser:ID!){
       quantity
       
     }
+  }
+}`
+
+export const LOGOUT = gql `
+  mutation {
+      logout
+          }`;
+
+export const CREATE_ORDER = gql `
+mutation($status:String,$idUser:ID){
+  createOrder(input:{status:$status},idUser:$idUser){
+    id
+    status
+
+    
+  }
+}
+`
+
+export const CREATE_ORDER_DETAIL = gql `
+mutation($idOrder:ID,$idProduct:ID,$quantity:Int){
+  createOrderDetail(
+  	idOrder:$idOrder
+    idProduct:$idProduct
+    quantity:$quantity
+  ){
+    id
+    quantity
+    price
+    OrderId
+    ProductId
+    
   }
 }
 `

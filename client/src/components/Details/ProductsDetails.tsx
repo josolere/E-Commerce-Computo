@@ -5,13 +5,21 @@ import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
 import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
-import styles from  "./ProductDetail.module.scss"
+import styles from "./ProductDetail.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
 import { addProductDetails } from '../../redux/actions'
-import { Cookies } from "react-cookie";
 import { toast } from 'react-toastify';
+import { ACTUAL_USER, GET_USERS } from "../../gql/login";
+
+interface user {
+    currentUser: {
+        name: string,
+        password: string,
+        email: string
+    }
+}
 
 interface Icategories {
     id?: number
@@ -48,47 +56,41 @@ interface PropsDetails {
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
+    let user: any = {}
+
+    const currentU = useQuery<user>(ACTUAL_USER)
+
+    user = currentU?.data?.currentUser
+
+    console.log(user)
+
     const dispatch = useDispatch()
 
-    const [gotcookie, setGotcookie] = useState<any>(false)
-
     const id = props.history.location.state.id
-
-    /* const newprice = props.history.location.state.newprice */
 
     const { data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
     });
 
-    const [addreview, results] = useMutation(REVIEW_MUTATION)
+    const [controReview, setControlReview] = useState('');
 
-    let resultsData: Array<string> = []
+    const [addreview, results] = useMutation(REVIEW_MUTATION);
 
-    const cookie = new Cookies
+    let [rating, setRating] = useState<Array<any>>([]);
 
-    useEffect(() => {
-        cookie.get('User') ? setGotcookie(true) : setGotcookie(false);
-    }, [cookie])
-
-    if (results) {
-        resultsData.push(results?.data?.addReview?.text)
-    }
-
-    let [rating, setRating] = useState<Array<any>>([])
-
-    const [hover, setHover] = useState(0)
+    const [hover, setHover] = useState(0);
 
     const [reviewuser, setReviewuser] = useState({
         review: ''
-    })
+    });
 
-    const [hidereviews, setHidereviews] = useState(true)
+    const [hideRating, setHideRating] = useState(true);
 
-    const [hideStar, setHideStar] = useState(true)
-
-   
+    const [hideReview, setHideReview] = useState(true);
 
     const filtred = data?.getProductById
+
+    console.log(filtred)
 
     let totalrating: number = 0;
 
@@ -109,22 +111,17 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     const changereview = () => {
-        if (gotcookie) {
-        addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, product: filtred?.id } })
+        setControlReview(user?.id)
+        addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, userId: user?.id, product: 1 } })
             .then(review => { console.log('review up') })
-            .catch((err) => { console.log(results) })
-        setHidereviews(false)
-        }
-        else {
-            toast.error("Debes estar logueado para comentar")
-        }
+            .catch((err) => { console.log('review mal') })
+        setHideReview(false)
     }
 
     const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
 
     useEffect(() => {
-        console.log(results.data)
-        // setDetails({id:filtred?.id.toString() || "",name:filtred?.name || "",price:filtred?.price|| 0,brand:filtred?.brand || "",image:filtred?.image ||"",details:filtred?.details||"",categories:filtred?.categories||[{}]})
+        console.log(results?.data)
     }, [results])
 
     useEffect(() => {
@@ -132,9 +129,15 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
     }, [filtred])
 
+    useEffect(() => {
+        filtred?.reviews?.map(item => setControlReview(item?.name))
+    }, [filtred])
+
+    console.log(user?.id)
+    console.log(filtred?.reviews)
+    console.log(controReview !== user?.id)
     const [editMode, setEditMode] = useState(false)
 
-    console.log(details)
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         setEditMode(!editMode)
@@ -165,7 +168,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     }
 
     const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT)
-    console.log(resultsEdit.data)
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -202,19 +204,25 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         dispatch(addProductDetails(state));
     }
 
-
-
     return (
         <React.Fragment>
             <div className={styles.contenedorAll}>
                 <div className={styles.contenedorDetail}>
                     <img src={filtred?.image} alt='' />
                     <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.formm} >
-                        {gotcookie ? <button className={styles.Edit} onClick={handleEdit}>Edit</button> : false}
+                        {user?.privilege === 'admin' ? <button className={styles.Edit} onClick={handleEdit}>Edit</button> : false}
+
                         {editMode ?
                             <input className={stylesEdit.input} name='name' type='text' onChange={handleChange} defaultValue={details?.name} />
                             :
                             <h1 className={styles.nameDetail}>{filtred?.name}</h1>}
+                        <div className={stylesEdit.cats}>
+                            {editMode ?
+                                details?.categories?.map(category => <button className={stylesEdit.input} onClick={handleCategory} value={category.id} >Categoría: {category.name}</button>)
+                                :
+                                details?.categories?.map(category => <p className={styles.PDetails}>Categoría: {category.name}</p>)
+                            }
+                        </div>
                         {editMode ?
                             <p > Marca: <input className={stylesEdit.input} name='brand' defaultValue={details?.brand} onChange={handleChange} /> </p>
                             :
@@ -222,7 +230,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         {editMode ?
                             <p ><textarea onChange={handleDetails} defaultValue={details?.details} /></p>
                             :
-                            <p >{filtred?.details}</p>}
+                            <p className={styles.PDetails} >{filtred?.details}</p>}
 
                         <div className={styles.botonPrecio}>
 
@@ -246,76 +254,75 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
                             {editMode && <input className={stylesEdit.acept} type='submit' value='Aceptar Cambios' />}
                         </div>
-                        <div className={stylesEdit.cats}>
-
-                            {editMode ?
-                                details?.categories?.map(category => <button className={stylesEdit.category} onClick={handleCategory} value={category.id} >{category.name}</button>)
-                                :
-                                details?.categories?.map(category => <p className={styles.category}>{category.name}</p>)
-                            }
-                        </div>
                     </form>
                 </div>
-                <div className={styles.containerBot}>
-                    <div>{hidereviews ?
+                {user?.privilege === 'user' ?
+                    <div className={styles.containerBot}>
                         <div>
-                            <button onClick={changereview} className={styles.buttonCompra} >Enviar comentario</button>
-                            <div className={styles.review}>
-                                <textarea
-                                    style={{ height: '5rem', width: '20rem' }}
-                                    placeholder={'Escriba aquí una review del producto'}
-                                    className={styles.textarea}
-                                    name='review'
-                                    value={reviewuser.review}
-                                    onChange={(event) =>
-                                        setReviewuser({
-                                            ...reviewuser,
-                                            review: event.target.value
-                                        })} />
-                            </div>
+                            {hideReview ?
+                                <div>
+                                    <button onClick={changereview} className={styles.buttonCompra} >Enviar comentario</button>
+                                    <div className={styles.review}>
+                                        <textarea
+                                            style={{ height: '5rem', width: '20rem' }}
+                                            placeholder={'Escriba aquí una review del producto'}
+                                            className={styles.textarea}
+                                            name='review'
+                                            value={reviewuser.review}
+                                            onChange={(event) =>
+                                                setReviewuser({
+                                                    ...reviewuser,
+                                                    review: event.target.value
+                                                })} />
+                                    </div>
+                                </div>
+                                :
+                                <div className={styles.gracias} >
+                                    <h1 className={styles.Hrating}><span className={styles.hspan} >Gracias por dejar su comentario</span></h1>
+                                </div>
+                            }
                         </div>
-                        :
-                        <div className={styles.gracias} >
-                            <h4>Gracias por dejar su review</h4>
+                        <div >
+                            {hideRating ?
+                                <div className={styles.estrellas}>
+                                    {[...Array(5)].map((star, index) => {
+                                        const ratingvalue = index + 1;
+                                        return <label>
+                                            <input type='radio'
+                                                name='Rating'
+                                                value={ratingvalue}
+                                                onClick={function pushrating() {
+                                                    setRating([...rating, ratingvalue])
+                                                    setHideRating(false)
+                                                }}
+                                            />
+                                            <FaStar size={30}
+                                                className='star'
+                                                color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
+                                                onMouseEnter={() => setHover(ratingvalue)}
+                                                onMouseLeave={() => setHover(0)}
+                                            />
+                                        </label>
+                                    })}
+                                    {/* <p className={styles.raiting}>Rating {totalrating}</p> */}
+                                </div>
+                                :
+                                <div className={styles.sortthanks}>
+                                    <h1 className={styles.Hrating}><span className={styles.hspan} >Gracias por dejar su votación</span></h1>
+                                    <h1 className={styles.Hrating}><span className={styles.hspan} >Rating {totalrating}</span></h1>
+                                </div>
+                            }
                         </div>
-                    }
                     </div>
-                    <div className={styles.estrellas}>
-                        {hideStar ?
-                            <div >
-                                {[...Array(5)].map((star, index) => {
-                                    const ratingvalue = index + 1;
-                                    return <label>
-                                        <input type='radio'
-                                            name='Rating'
-                                            value={ratingvalue}
-                                            onClick={function pushrating() {
-                                                setRating([...rating, ratingvalue])
-                                                setHideStar(false)
-                                            }}
-                                        />
-                                        <FaStar size={30}
-                                            className='star'
-                                            color={ratingvalue <= hover ? '#ffc107' : '#e4e5e9'}
-                                            onMouseEnter={() => setHover(ratingvalue)}
-                                            onMouseLeave={() => setHover(0)}
-                                        />
-                                    </label>
-                                })}
-                                {/* <p className={styles.raiting}>Rating {totalrating}</p> */}
-                            </div>
-                            :
-                            <div>
-                                <h4 className={styles.gracias} >Gracias por dar una clasificación</h4>
-                                <p className={styles.raiting} >Rating {totalrating}</p>
-                            </div>
-                        }
-                    </div>
-                </div>
-                <div className={styles.reviews}>
-                    {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
-                        : false}
-                    {filtred?.reviews.map(review => <div><div>{review.text}</div><div>{review.rating}</div></div>)}
+                    : false}
+                {/*                   {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
+                        : false} */}
+                <div className={styles.box}>
+                    {filtred?.reviews.map(review =>
+                        <div className={styles.content}>
+                            <p className={styles.pReview} >{review.text}</p>
+                            <p className={styles.pRanking}>{review.rating}<FaStar size={20} className='star' color={rating ? '#ffc107' : '#e4e5e9'} /></p>
+                        </div>)}
                 </div>
             </div>
         </React.Fragment>

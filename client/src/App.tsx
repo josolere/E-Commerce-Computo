@@ -11,7 +11,6 @@ import NavCategories from './components/categories/Categories';
 import CrearProducto from "./components/CreateProduct/CreateProduct"
 import CrearCategoria from "./components/CreateCategory/CreateCategory"
 import styles from './App.module.scss';
-import Unicrear from './components/Create/Create'
 import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
 import { addLocalStorage, logeo, orderId } from './redux/actions/index'
 import { useDispatch } from 'react-redux'
@@ -23,17 +22,19 @@ import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from 'react-cookie';
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify';
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER } from "./gql/login";
+import { ACTUAL_USER, GET_USERS } from "./gql/login";
+import ResetPassword from './components/Users/ResetPassword';
 import { GET_ORDER } from "./gql/shopingCart";
 
 interface user {
   currentUser: {
-    name: string,
-    password: string,
-    email: string,
-    id: string
+      name: string,
+      password: string,
+      email: string,
+      privilege: string
+      id:string
   }
 }
 
@@ -56,15 +57,24 @@ interface detailsorder {
 function App() {
   const firsstRender = useRef(true)
 
+  let user:any = {}
+
   const [idUser, setIdUser] = useState('')
+  
   const actualuser = useQuery<user>(ACTUAL_USER)
   const idOrder = useQuery<detailOrderid>(GET_ORDER, ({ variables: { idUser: idUser } }))
-
   const dispatch = useDispatch()
 
   const [gotCookies, setGotCookies] = useState(false)
 
-  const cookie = new Cookies
+  const cookie = new Cookies 
+
+  const resultsUsers = useQuery(GET_USERS)
+
+  let test = resultsUsers?.data?.getUsers
+  console.log(test)
+  user = actualuser.data?.currentUser  
+  console.log(user)
 
   useEffect(() => {
 
@@ -131,17 +141,19 @@ function App() {
         {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/CrearProducto'>
-          {gotCookies ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
+          {user?.privilege === 'admin' ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
         <Route exact path='/CrearCategoria'>
-          {gotCookies ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
+          {user?.privilege === 'admin' ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
-        <Route path='/Ordenes/Usuario' component={OrdersUser} />
-        <Route path='/Orden/Usuario/:id' component={OrderUserDetails} />
+        <Route path='/Ordenes/Usuario' component={OrdersUser}/>
+        <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
         {/* <Route exact path='Pago'>
-          {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
+          {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-        <Route exact path='/Pago' component={Payment} />
+        <Route exact path='/Pago' component={Payment}/>
+        <Route exact path='/BorrarUsuario' component={DeleteUser} />
+        <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>

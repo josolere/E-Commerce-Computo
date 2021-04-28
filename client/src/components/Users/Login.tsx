@@ -55,7 +55,6 @@ const Login = () => {
         address: ''
     });
 
-    const [cookies, setCookie, removeCookie] = useCookies(["User"]);
 
     const [showlogin, setshowLogin] = useState(false)
 
@@ -80,33 +79,25 @@ const Login = () => {
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
-                .then((resolve) => {
+                .then((resolve) => {  
                     const visitante = resolve.data.login.user;
-                    setLog(true)
                     setIdUser(resolve.data.login.user.id)
-                    setCookie('User', visitante, {
-                        path: "/"
-                    });
-
-                    toast.success("Bienvenido " + visitante.name);
-                    setTimeout(function () { window.location.href = 'http://localhost:3000/Home'; }, 1800)
-                    console.log(resolve.data?.login.user.id)
-                })
-                .catch((error) => { toast.error(error.message) })
+                    setLog(true)
+                    toast.success("Bienvenido " + visitante.name + ' ' +  '🥳');
+                    setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
+                .catch((error) => { toast.error('Tu no eres de aquí 🤔')})
                 ;
         }
         else {
             signup({
                 variables: {
-                    firstName: logform.firstname, email: logform.email, password: logform.password,
-                    lastName: logform.lastname
+                    firstName: logform.firstname, email: logform.email, password: logform.password, 
+                    lastName: logform.lastname, username: logform.username, address: logform.address
                 }
             })
-                .then((resolve) => {
-                    toast.success("Te has registrado correctamente");
-                    setTimeout(function () { window.location.href = 'http://localhost:3000/login'; }, 1500)
-                })
-                .catch((error) => { toast.error('Error al registrarse') })
+                .then((resolve) => { toast.success("Te has registrado correctamente"); 
+                setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
+                .catch((error) => { toast.error('Error al registrarse 🤔') })
                 ;
         }
         event.preventDefault()
@@ -178,8 +169,7 @@ const Login = () => {
     //-----------------------------------------------------------------------------------------------
 
     const handleResetPassword = () => {
-        window.location.href = 'http://localhost:3000/EditarCuenta'
-
+        window.location.href = 'http://localhost:3000/ResetContraseña'
     }
 
     const responseFacebook = (res: any) => {
@@ -191,7 +181,7 @@ const Login = () => {
     }
 
     const responseGoogle = () => {
-        window.location.href = 'http://localhost:5000/auth/google'
+        window.location.href = 'http://localhost:5000/auth/google';
     }
 
     return (
@@ -242,18 +232,18 @@ const Login = () => {
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
                             </div>
                             <div className={styles.buttonFB}>
-                                <FacebookLogin
-                                    appId="x"
-                                    autoLoad={true}
-                                    onClick={componentClicked}
-                                    callback={responseFacebook}
-                                />
-                                <GoogleLogin className={styles.buttonGoogle}
-                                    clientId="700487855245-ffig42s6ln7oao3itcpcg18g0mi8de8u.apps.googleusercontent.com"
-                                    theme='dark'
-                                    onSuccess={responseGoogle}
-                                />
-                            </div>
+{/*                                      <FacebookLogin
+                                        appId="x"
+                                        autoLoad={true}
+                                        onClick={componentClicked}
+                                        callback={responseFacebook} 
+                                        />  */}
+                                    <GoogleLogin className={styles.buttonGoogle}
+                                        clientId="700487855245-ffig42s6ln7oao3itcpcg18g0mi8de8u.apps.googleusercontent.com"
+                                        theme= 'dark'
+                                        onSuccess={responseGoogle}
+                                    />
+                                </div>
                             <div className={styles.organizarbotones}>
                                 <button className={styles.boton} onClick={handleResetPassword} >Olvidaste tu contraseña?</button>
                             </div>
@@ -272,7 +262,6 @@ const Login = () => {
                                 </div>
                             registrarte
                             </div>
-                            {cookies.User && <h4>Hola {cookies.User}</h4>}
                             <form className={styles.form} onSubmit={handlesubmitchange}>
                                 <div className={styles.form__group}>
                                     <label htmlFor='email' className={styles.form__label} >
@@ -308,7 +297,7 @@ const Login = () => {
                                     <input
                                         className={styles.form__field}
                                         type='text'
-                                        minLength={5}
+                                        minLength={3}
                                         maxLength={20}
                                         placeholder='Nombre'
                                         name='firstname'
@@ -322,7 +311,7 @@ const Login = () => {
                                     <input
                                         className={styles.form__field}
                                         type='text'
-                                        minLength={5}
+                                        minLength={2}
                                         maxLength={20}
                                         placeholder='Apellido'
                                         name='lastname'

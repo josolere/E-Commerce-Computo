@@ -163,15 +163,16 @@ export default {
       if (OrderToEdit) {
 
         let confirmAt = null;
-        if(input.status === "creada") {
+        if (input.status === "creada") {
           confirmAt = Date.now()
-        } 
+        }
         const updatedOrder = await OrderToEdit.update(
           { ...input, confirmAt },
           { where: { id } }
         );
 
         //si el estado fue cambiado enviar un email informando ese cambio
+        console.log("+++++++++", updatedOrder)
         const user = await models.User.findByPk(updatedOrder.UserId);
 
         switch (input.status) {
@@ -192,7 +193,7 @@ export default {
                 quantity: p.dataValues.quantity,
               };
             });
-            //console.log("el array generado es: ", auxproducts);
+            console.log("el array generado es: ", auxproducts);
             orderCreatedMail(
               user.email,
               updatedOrder.id,

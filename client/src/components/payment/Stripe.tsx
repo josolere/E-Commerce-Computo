@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import styles from './Payment.module.scss';
 import { useMutation, useQuery } from '@apollo/client';
-import { EDIT_ORDER, GET_ORDER_BY_StATUS } from '../../gql/orders'
+import { EDIT_ORDER, GET_ORDER_BY_StATUS, CREATE_ORDER } from '../../gql/orders'
 import { useDispatch } from 'react-redux';
 import { deleteCart } from '../../redux/actions';
+import { ACTUAL_USER } from '../../gql/login';
 
 /* interface databuy {
   name: string,
@@ -105,14 +106,24 @@ const StripePay = (): JSX.Element => {
       address: { postal_code: addressdata.postal_code, city: addressdata.city, state: addressdata.state, line1: addressdata.line1 }
     })
   }
-  const { loading, error, data } = useQuery(GET_ORDER_BY_StATUS, { variables: { status: "pendiente" } })
+  const {loading:load , error:err , data:datas} = useQuery(GET_ORDER_BY_StATUS, { variables: { status: "pendiente" } })
   const [edditOrder] = useMutation(EDIT_ORDER)
+
+  const {loading, error, data} = useQuery(ACTUAL_USER)
+  console.log(data)
+  useEffect(()=>{
+    console.log(data)
+    console.log("hola")
+},[data])
+
+  const [createOrder, results] = useMutation(CREATE_ORDER)
+  const [editOrder, resuult] = useMutation(EDIT_ORDER)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault()
 
     console.log(data)
-    let id = data?.getOrderByStatus[0]?.id
+    let id = datas?.getOrderByStatus[0]?.id
 
     edditOrder({ variables: { id: id, status: "creada" } })
       .then((resolve) => {
@@ -120,6 +131,8 @@ const StripePay = (): JSX.Element => {
         dispatch(deleteCart())
       })
 
+    //   createOrder({variables:{status:"pendiente",idUser:data?.currentUser?.id}})
+    // .then(({data}) => editOrder({variables:{id:data?.createOrder?.id, status:'creada'}}))
 
     // if (!stripe || !elements) {
     //   return;
@@ -137,7 +150,6 @@ const StripePay = (): JSX.Element => {
     // } else {
     //   console.log('[PaymentMethod]', paymentMethod);
     // }
-
 
 
   };
@@ -159,8 +171,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='name'
                   type='text'
-                  // required={true}
-                  placeholder='Nombre completo'
+/*                   required={true}
+ */                  placeholder='Nombre completo'
                   minLength={5}
                   maxLength={20}
                 />
@@ -172,8 +184,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='email'
                   type='email'
-                  // required={true}
-                  placeholder='E-Mail'
+/*                   required={true}
+ */                  placeholder='E-Mail'
                   minLength={10}
                   maxLength={30}
                 />
@@ -185,8 +197,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='line1'
                   type='text'
-                  // required={true}
-                  placeholder='Direccion'
+/*                   required={true}
+ */                  placeholder='Direccion'
                   minLength={5}
                   maxLength={40}
                 />
@@ -198,8 +210,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='city'
                   type='text'
-                  // required={true}
-                  placeholder='Ciudad'
+/*                   required={true}
+ */                  placeholder='Ciudad'
                   maxLength={20}
                 />
               </div>
@@ -210,8 +222,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='state'
                   type='text'
-                  // required={true}
-                  placeholder='Estado / Provincia'
+/*                   required={true}
+ */                  placeholder='Estado / Provincia'
                   maxLength={20}
                 />
               </div>
@@ -222,8 +234,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='postal_code'
                   type='text'
-                  // required={true}
-                  placeholder='Codigo Postal / ZIP'
+/*                   required={true}
+ */                  placeholder='Codigo Postal / ZIP'
                   minLength={3}
                   maxLength={5}
                 />

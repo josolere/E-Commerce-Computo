@@ -2,6 +2,7 @@ $grey:#30475e;//dddddd
 $dark: #222831;//222831
 $white: #dddddd;//30475e
 $red:#f05454;//f05454
+$yellow: #ffb200;
 
 
 .alert{
@@ -159,74 +160,136 @@ $red:#f05454;//f05454
         width: fit-content;
         display: flex;
         height: fit-content;
+        
     }
 }
-// .textarea {
-//     margin-top: 2rem;
-//     width: 400px;
-//     height: 100px;
-//     border: 1px solid white; 
-//     resize: none;
-// }
-    
-// .precioDetail {
-//     font-family: 'Montserrat', sans-serif;
-//     width: fit-content;
-//     background-color:#F21B42 ;
-//     padding:1rem;
-//     border-radius: 5px;
-// }
-
-// .category{
-//     color: brown;
-//     padding: 1rem;
-// }
-
-// .buttonCompra {
-//     width: 12rem;
-//     height: 3rem;
-//     margin-top: 4rem;
-//     color:#161616;
-//     border-radius: 5px;
-//     background-color:#F21B42 ;
-//     font-weight: 800;
-//     border-color: transparent;
-// }
-
-// .buttonCompra:hover {
-//     color: white;
-//     background:#F21B42 ;
-//     box-shadow: 0 0 5px #F21B42;
-// }
 
 
+.sortthanks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-.raiting {
+.Hrating {
     font-family: 'Montserrat', sans-serif ;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    max-width: 75vw;
+    color: $white;
+    .hspan {
+    font-family: 'Montserrat', sans-serif ;
+    background-image: linear-gradient(
+    transparent calc(65% - 5px),
+    darken($red, 15%) 5px,
+    );
+    background-size: 0;
+    background-repeat: no-repeat;
+    display: inline;
+    transition: 0.5s ease;
+    }
+    &:hover {
+      .hspan {
+        background-size: 100%;
+      }
+    }
+  }
+
+  .PDetails{
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 1.3rem;
     color: whitesmoke;
 }
 
-.gracias {
-    font-family: 'Montserrat', sans-serif ;
-    font-size: 1.2rem;
-    color: whitesmoke;
+.box .content {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-.reviews{
-    background-color: $grey;
-    width: 70%;
-    color: $dark;
-    border-radius: 0.3rem;
-    margin-top: 1rem;
-    padding: 1rem;
-    div{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: auto;
-        padding: 0.5rem;
-        margin: 0.5rem;
-        background-color: $white;
-        border-radius: 0.2rem;
-    }
+
+.box {
+    margin-top: 2%;
+    margin-bottom: 3%;
+	width: 55%;
+	height: fit-content;
+	box-sizing: border-box;
+	padding: 2%;
+	position: relative;
+	overflow: hidden;
+}
+
+.box::before {
+	content: '';
+	position: absolute;
+	width: 200rem;
+	height: 200rem;
+	background: repeating-linear-gradient(
+			$red 10px,
+			$red 7.5px,
+			$dark 7.5px,
+			$dark 15px,
+		    $red 15px,
+			$red 22.5px,
+			$dark 22.5px,
+			$dark 30px);
+	transform: translateX(-20%) translateY(-20%) rotate(-45deg);
+	animation: animate 20s linear infinite;
+}
+
+.box .content {
+	position: relative;
+	background-color:$white;
+	flex-direction: row;
+	box-sizing: border-box;
+	padding: 2%;
+	text-align: center;
+	z-index: 2;
+    justify-content: space-between;
+    border-bottom: solid .5rem $red;
+}
+
+.box,
+.box .content {
+	box-shadow: 0 0 2px deeppink,
+				0 0 5px rgba(0, 0, 0, 1),
+				inset 0 0 5px rgba(0, 0, 0, 1);
+	border-radius: 10px;
+}
+
+.box .content h2 {
+	color: deeppink;
+}
+
+.box .content p {
+	color: dimgray;
+}
+
+@keyframes animate {
+	from {
+		background-position: 0;
+	}
+
+	to {
+		background-position: 0 450px;
+	}
+}
+
+.pReview{
+
+    max-width: 10%;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 100%;
+}
+
+
+
+.pRanking{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 100%;
 }

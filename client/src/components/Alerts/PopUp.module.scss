@@ -4,6 +4,8 @@ $white: #dddddd;//30475e
 $red:#f05454;//f05454
 $primary: #11998e;
 $secondary: #38ef7d;
+$yellow: #ffb200;
+
 
 /* .PopBox {
     position: fixed;
@@ -27,24 +29,38 @@ $secondary: #38ef7d;
     border: 1px solid #999;
     overflow: auto;
 } */
-
+::-webkit-scrollbar {
+	width: 0.9rem;               /* width of the entire scrollbar */
+  }
+  
+::-webkit-scrollbar-track {
+	background: $grey;        /* color of the tracking area */
+	border-radius: 0.2rem;
+  }
+  
+::-webkit-scrollbar-thumb {
+	background-color: $dark;    /* color of the scroll thumb */
+	border-radius: 0.5rem;       /* roundness of the scroll thumb */
+	border: 3px solid $red;  /* creates padding around scroll thumb */
+  }
 
 .OrderPop {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .PopTitle {
-    margin: .5rem;
+    margin: 5%;
     padding: 0;    
     background: 50% 100% / 50% 50% no-repeat
     radial-gradient(ellipse at bottom, white, white, white);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 2.5rem;
+    font-size: 4vh;
     font-family: 'Montserrat', sans-serif;
     animation: reveal 300ms ease-in-out forwards 20ms,
     glow 250ms linear infinite 200ms;
@@ -62,17 +78,18 @@ $secondary: #38ef7d;
     text-shadow: 0 0 8px 	#FFE4E1;
     }
     }
-    }
+}
+
 
 .PPop {
-    margin: .5rem;
+    margin: 5%;
     padding: 0;    
     background: 50% 100% / 50% 50% no-repeat
     radial-gradient(ellipse at bottom, white, white, white);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 1rem;
+    font-size: 2vh;
     font-family: 'Montserrat', sans-serif;
     animation: reveal 300ms ease-in-out forwards 20ms,
     glow 250ms linear infinite 200ms;
@@ -101,10 +118,10 @@ $secondary: #38ef7d;
 }
 
 .box {
-	width: 500px;
-	height: 300px;
+	width: 60%;
+	height: 70%;
 	box-sizing: border-box;
-	padding: 15px;
+	padding: 2%;
 	position: relative;
 	overflow: hidden;
 }
@@ -112,10 +129,10 @@ $secondary: #38ef7d;
 .box::before {
 	content: '';
 	position: absolute;
-	width: 150%;
-	height: 150%;
+	width: 350%;
+	height: 650%;
 	background: repeating-linear-gradient(
-			$white 0%,
+			$white 10px,
 			$white 7.5px,
 			$red 7.5px,
 			$red 15px,
@@ -132,7 +149,7 @@ $secondary: #38ef7d;
 	background-color:$grey;
 	flex-direction: column;
 	box-sizing: border-box;
-	padding: 30px;
+	padding: 2%;
 	text-align: center;
 	font-family: sans-serif;
 	z-index: 2;
@@ -168,8 +185,8 @@ $secondary: #38ef7d;
 .box2 .content2 {
 	height: 100%;
 	display: flex;
-    margin: 0rem;
-    padding: 0rem;
+    margin: 0%;
+    padding: 0%;
     flex-direction: row;
 	align-items: center;
 	justify-content: center;
@@ -177,11 +194,11 @@ $secondary: #38ef7d;
 }
 
 .box2 {
-	width: 700px;
-	height: 350px;
+	width: 90%;
+	height: fit-content;
 	box-sizing: border-box;
-    margin: 2rem;
-	padding: 15px;
+    margin: 3%;
+	padding: 2%;
 	position: relative;
 	overflow: hidden;
 }
@@ -189,10 +206,10 @@ $secondary: #38ef7d;
 .box2::before {
 	content: '';
 	position: absolute;
-	width: 150%;
-	height: 150%;
+	width: 250%;
+	height: 750%;
 	background: repeating-linear-gradient(
-			$primary 0%,
+			$primary 10px,
 			$primary 7.5px,
 			$secondary 7.5px,
 			$secondary 15px,
@@ -245,18 +262,24 @@ $secondary: #38ef7d;
 .South1 {
     margin: 0;
     padding: 0;
-    width: 60vh;
+    width: 60%;
+	max-width: 60%;
+	min-width: 20%;
+	
 }
 
 .South2 {
     margin: 0;
     padding: 0;
-    width: 60vh;
+    width: 60%;
+	max-width: 60%;
+	min-width: 20%;
 }
 
 .ImagePop {
-    display: flex;
     margin: 0;
     padding: 0;    
-    width: 40vh;
+    width: 80%;
+	max-width: 80%;
+	min-width: 60%;
 }

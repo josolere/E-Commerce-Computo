@@ -9,6 +9,8 @@ import {
 // import User from "../../models";
 // import db from "../../models";
 import { v4 as uuid } from "uuid";
+import bcrypt from 'bcrypt'
+const saltRounds = 10;
 
 export default {
   Query: {
@@ -21,8 +23,12 @@ export default {
       return data;
     },
 
-    currentUser: (_parent: object, _args: any, context: any) =>
-   context.getUser(),
+    currentUser: (_parent: object, _args: any, context: any) =>{
+    let user = context.getUser()
+     
+    console.log(user)
+    return user
+    },
 
    
 
@@ -68,6 +74,18 @@ export default {
           { where: { id } }
         );
 
+        if(input.password){
+
+          bcrypt.hash(input.password, saltRounds, function(err, hash){
+            models.User.update({password: hash},{ 
+              where:{ 
+                id: id
+              }
+             })
+          })
+
+        }
+
         return updatedUser;
       }
 
@@ -107,6 +125,7 @@ export default {
       }
 
       // console.log(input);
+      
 
       let newUserInput: any = {
         id: uuid(),
@@ -115,7 +134,7 @@ export default {
         email: email,
         privilege: "user",
         active: true,
-        password: password,
+        password: null,
         address: address,
         username: username,
       };
@@ -124,6 +143,14 @@ export default {
       let newUser = await context.models.User.create(
         newUserInput,
       );
+
+      bcrypt.hash(password, saltRounds, function(err, hash){
+        context.models.User.update({password: hash},{ 
+          where:{ 
+            email: email
+          }
+         })
+      })
 
       //console.log(context)
 

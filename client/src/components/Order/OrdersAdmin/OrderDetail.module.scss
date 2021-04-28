@@ -4,6 +4,18 @@
     padding: 2rem;
     background-color: #222831;
     color: whitesmoke;
+    button{
+        background-color: transparent;
+        border: none;
+        padding: 1.5rem;
+        font-size: 1.5rem;
+        color: #222831;
+        &:hover{
+            cursor: pointer;
+            padding: 2.5rem;
+            transition: 1s;
+        }
+    }
 }
 h4{
     display: flex;
@@ -13,18 +25,6 @@ h4{
         margin-left: 0.5rem;
     }
 }
-// button{
-//     background-color: transparent;
-//     border: none;
-//     padding: 1.5rem;
-//     font-size: 1.5rem;
-//     color: #222831;
-//     &:hover{
-//         cursor: pointer;
-//         padding: 2.5rem;
-//         transition: 1s;
-//     }
-// }
 .products{
     margin-top: 2rem;
     border: 1px solid gray;

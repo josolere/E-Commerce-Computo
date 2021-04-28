@@ -10,7 +10,6 @@ import { EDIT_ORDER_DETAIL, GET_ORDER_LIST, DELETE_ORDER_DETAIL } from "../../gq
 import {GET_ORDER_BY_StATUS } from "../../gql/orders"
 
 import { AppState } from '../../redux/reducers';
-import { graphql } from 'graphql';
 
 
 
