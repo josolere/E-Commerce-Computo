@@ -8,7 +8,7 @@ import { Cookies } from "react-cookie";
 import { toast } from "react-toastify"
 import { ACTUAL_USER, GET_USERS } from "../../gql/login";
 import { useMutation, useQuery, gql } from '@apollo/client';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface user {
     currentUser: {
@@ -17,12 +17,12 @@ interface user {
         email: string,
         privilege: string
     }
-  }
-  
+}
+
 
 const ShoppingTotal = (): JSX.Element => {
 
-    let user:any = {}
+    let user: any = {}
 
     const currentU = useQuery<user>(ACTUAL_USER)
 
@@ -56,14 +56,14 @@ const ShoppingTotal = (): JSX.Element => {
             createOrder({ variables: { status: 'pending', idUser: 1 } })
                 .then((resolve) => { console.log(data) })
                 .catch((err) => { console.log('Salio Mal') })
-            window.location.href = 'http://localhost:3000/Pago'
+            window.location.href = 'http://localhost:3000/Mercado'
         }
         else {
             toast.error("Debes iniciar sesión para realizar una compra")
         }
     }
 
-    
+
 
     return (
         <>
@@ -87,21 +87,23 @@ const ShoppingTotal = (): JSX.Element => {
                     </div>
                 </div>
             </div>
-            {user?.privilege ==='user' ?
-            <div className={total.containerButton}>
-                <button onClick={handleOrder}
-                    className={total.buttonFinal}>Finalizar Compra
+            {user?.privilege === 'user' ?
+                <div className={total.containerButton}>
+                    <Link to='/Mercado'>
+                        <button onClick={handleOrder}
+                            className={total.buttonFinal}>Finalizar Compra
                     </button>
-            </div>
-            :
-            <div className={total.containerButton}>
-                <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
-                <Link to='/Login'>
-                    <button
-                    className={total.buttonFinal}
-                    >Login</button>
-                </Link>
-            </div>}
+                    </Link>
+                </div>
+                :
+                <div className={total.containerButton}>
+                    <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
+                    <Link to='/Login'>
+                        <button
+                            className={total.buttonFinal}
+                        >Login</button>
+                    </Link>
+                </div>}
         </>
     )
 }

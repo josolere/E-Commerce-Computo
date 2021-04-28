@@ -16,15 +16,17 @@ $fill-color: beige;
 $gray:#30475e;//dddddd
 $primary: #11998e;
 $secondary: #38ef7d;
-
-
+$Lblue:#6495ED;
 
 .back {
-    color: #161616;
     background-color:$dark;
 }
 
 .caja{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
   width: 30%;
   background-color: $white;
   margin-top: 3%;
@@ -55,6 +57,10 @@ $secondary: #38ef7d;
 }
 
 .Details{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
   font-family:'Montserrat', sans-serif;
   display: flex;
   flex-direction: column;
@@ -77,52 +83,46 @@ $secondary: #38ef7d;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 20rem;
+  width: 100%;
 }
 
 .form__group {
     position: relative;
-
-    padding: 15px 0 0;
-    margin-top: 10px;
-    width: 20rem;
+    margin-top: 5%;
+    width: 100%;
   }
-  
   .form__field {
-    margin-left: 4rem;
-    margin-top: 0.3rem;
+    margin-top: 2%;
+    margin-left: 15%;
     font-family:'Montserrat', sans-serif;
-    width: 16rem;
+    width: 70%;
     border: 0;
-    border-bottom: 2px solid $gray;
+    border-bottom: 2px solid $Lblue;
     outline: 0;
     font-size: 1.1rem;
-    color: black;
+    color: $dark;
     padding: 1rem 0.3rem 0 ;
     background: transparent;
-    transition: border-color 0.2s;
-  
-      
+    transition: border-color 0.2s; 
   &::-moz-placeholder ~ .form__label {
     font-size: 1.3rem;
     cursor: text;
     top: 20px;
   }
-
     &::placeholder {
       color: transparent;
     }
   }
   
   .form__label {
-      margin-left: 4rem;
       font-family:'Montserrat', sans-serif;
+      margin-left: 15%;
       position: absolute;
       top: 0;
       display: block;
       transition: 0.2s;
       font-size: 1rem;
-      color: $gray;
+      color: $dark;
   }
   
   .form__field:focus {
@@ -138,7 +138,7 @@ $secondary: #38ef7d;
     padding-bottom: 6px;  
     font-weight: 700;
     border-width: 3px;
-    border-image: linear-gradient(to right, #002366, #87cefa	);
+    border-image: linear-gradient(to right, $Lblue, $gray	);
     border-image-slice: 1;
   }
 
@@ -150,20 +150,19 @@ $secondary: #38ef7d;
 }
 
 .boton{
+  color: $white;
+  padding: 10%;
   font-family: 'Montserrat', sans-serif;
   border: transparent;
 	display: flex;
-  min-width: 8rem;
-  min-height: 3.5rem;
-  width: fit-content;
-  height: fit-content;
+  min-width: 4rem;
+  min-height: 2rem;
+  width: 7rem;
+  height: 5rem;
   justify-content: center;
   align-self: center;
-  color: $white;
   cursor: pointer;
 	font-size: 3.5vh;
-  padding: 10%;
-  margin-left: 10%;
 	transition: all .3s;
 	position: relative;
 	overflow: hidden;
@@ -176,7 +175,7 @@ $secondary: #38ef7d;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #002366;
+		background-color: $Lblue;
     color: $white;
 		border-radius: 0.2rem;
 		z-index: -2;
@@ -194,7 +193,7 @@ $secondary: #38ef7d;
 		z-index: -1;
 	}
 	&:hover {
-		color: #fff;
+		color:$dark;
 		&:before {
 			width: 100%;
 		}
@@ -231,7 +230,7 @@ $secondary: #38ef7d;
 
 .box select {
   font-family: 'Montserrat', sans-serif;
-  background-color:#002366;
+  background-color:#6495ED;
   color: $white;
   margin-top: 10%;
   margin-left: 50%;
@@ -267,7 +266,7 @@ $secondary: #38ef7d;
   top:0;
 }
 .formYearMonthIn{
-  width: 80%;
+  width: fit-content;
 }
 
 .options{

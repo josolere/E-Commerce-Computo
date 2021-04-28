@@ -26,7 +26,7 @@ import { ToastContainer } from 'react-toastify';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/login";
 import ResetPassword from './components/Users/ResetPassword';
-import Test from './components/payment/test';
+import Mercado from './components/payment/Mercado';
 
 interface user {
   currentUser: {
@@ -102,8 +102,7 @@ function App() {
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-        <Route exact path='/Pago' component={Payment}/>
-        <Route exact path= '/test'component={Test} />
+        <Route exact path= '/Mercado'component={Mercado} />
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
