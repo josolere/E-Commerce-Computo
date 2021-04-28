@@ -13,6 +13,7 @@ export interface ProductsxorderAttributesI {
   id: number;
   quantity: number;
   price: number;
+  productName: string;
 }
 
 interface ProductsxorderCreationAttributesI
@@ -24,6 +25,7 @@ export class Productsxorder
   public id!: number;
   public quantity!: number;
   public price!: number;
+  public productName!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -41,6 +43,9 @@ export function ProductsxorderFactory(sequelize: Sequelize) {
       },
       quantity: {
         type: DataTypes.INTEGER,
+      },
+      productName: {
+        type: DataTypes.STRING,
       },
     },
     {

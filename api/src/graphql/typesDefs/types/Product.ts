@@ -11,6 +11,7 @@ export const typeDefs = gql`
     details: String
     categories: [Category!]
     reviews: [Review]
+    stock:Int
     createdAt: String
     updatedAt: String
   }
@@ -35,6 +36,7 @@ export const typeDefs = gql`
     price: Float
     details: String
     categories: [Int]
+    stock: Int
   }
 
   input EditProductInput {

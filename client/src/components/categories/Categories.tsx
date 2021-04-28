@@ -1,10 +1,15 @@
 /* import SubMenu from "./SubMenu"; */
 import styles from './Categories.module.scss'
 import { useQuery, gql } from '@apollo/client';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../redux/actions";
 import {GET_CATEGORIES} from "../../gql/categories"
 import Cards from '../Cards/CardsHome';
+// import {orderPending} from '../../redux/actions'
+// import { useEffect } from 'react';
+// import { AppState } from '../../redux/reducers';
+// import { GET_ORDER_LIST } from "../../gql/order"
+
 
 export interface model {
   id: number;
@@ -19,6 +24,26 @@ const NavCategories = (): JSX.Element => {
 
   const { loading, error, data } = useQuery<DetailsData>(GET_CATEGORIES)
 
+  // const { logeo, idUsers }: any = useSelector((store: AppState) => store.shoppingCartReducer)
+
+
+    //  const idProductOrder = useQuery(GET_ORDER_LIST, {
+    //     variables: { idUser: idUsers }
+    //   });
+    
+
+      // useEffect(() => {
+      
+      //   if (idProductOrder.data !== undefined) {
+      //     console.log(idProductOrder)
+      //     let arrayOrders = idProductOrder.data?.getOrdersByIdUser.filter((filt: any) => filt.status === 'pendiente')
+      //     let arrayOrder = arrayOrders[0].details
+      //     dispatch(orderPending(arrayOrder))    
+      //   }
+    
+      // }, [idProductOrder])
+
+
   const categories = data?.getCategory
 
   const reset = 0
@@ -32,7 +57,7 @@ const NavCategories = (): JSX.Element => {
   return (
     <>
     <div className={styles.container} >
-      <button className={styles.todos} onClick={(e) =>dispatch(setCategory([]))}>Todos</button>
+      <button className={styles.containerCategories} onClick={(e) =>dispatch(setCategory([]))}>Todos</button>
       {categories?.map((item: model, i: number) => {
         return <button onClick ={e => filterCategories(e)} value={item.id}
         className={styles.containerCategories}>{item.name}</button>;

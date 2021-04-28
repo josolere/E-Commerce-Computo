@@ -9,6 +9,8 @@ import {
 // import User from "../../models";
 // import db from "../../models";
 import { v4 as uuid } from "uuid";
+import bcrypt from 'bcrypt'
+const saltRounds = 10;
 
 export default {
   Query: {
@@ -21,17 +23,23 @@ export default {
       return data;
     },
 
-    currentUser: (_parent: object, _args: any, context: any) =>
-      context.getUser(),
+    currentUser: (_parent: object, _args: any, context: any) =>{
+    let user = context.getUser()
+     
+    console.log(user)
+    return user
+    },
 
-    /* getUsers: async (
+   
+
+    getUsers: async (
       _parent: object,
       _args: object,
       { models }: { models: iModels }
     ): Promise<any> => {
-      const users = await models.User.findfindAll();
+      const users = await models.User.findAll();
       return users;
-    }, */
+    }, 
   },
   Mutation: {
     /* createUser: (
@@ -66,6 +74,18 @@ export default {
           { where: { id } }
         );
 
+        if(input.password){
+
+          bcrypt.hash(input.password, saltRounds, function(err, hash){
+            models.User.update({password: hash},{ 
+              where:{ 
+                id: id
+              }
+             })
+          })
+
+        }
+
         return updatedUser;
       }
 
@@ -92,7 +112,7 @@ export default {
 
     signup: async (
       _parent: object,
-      { firstName, lastName, email, password }: any,
+      { firstName, lastName, email, password, address, username }: any,
       context: any
     ): Promise<any> => {
       const existingUsers = await context.models.User.findAll();
@@ -101,10 +121,11 @@ export default {
       );
 
       if (userWithEmailAlreadyExists) {
-        throw new Error("User with email already exists");
+        throw new Error("Ya existe un usuario con ese E-Mail");
       }
 
       // console.log(input);
+      
 
       let newUserInput: any = {
         id: uuid(),
@@ -113,15 +134,23 @@ export default {
         email: email,
         privilege: "user",
         active: true,
-        password: password,
-        address: "input.address",
-        username: "input.username",
+        password: null,
+        address: address,
+        username: username,
       };
 
       // console.log(newUserInput);
-      let newUser = context.models.User.create({
+      let newUser = await context.models.User.create(
         newUserInput,
-      });
+      );
+
+      bcrypt.hash(password, saltRounds, function(err, hash){
+        context.models.User.update({password: hash},{ 
+          where:{ 
+            email: email
+          }
+         })
+      })
 
       //console.log(context)
 

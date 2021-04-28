@@ -9,7 +9,7 @@ export interface iUser extends User {
   updatedAt?: Date;
 }
 
-export interface iUserFacebook{
+export interface iUserFacebook {
   clientID: string;
   clientSecret: string;
   callbackURL: string;
@@ -70,6 +70,7 @@ export interface iModels {
   Category: any;
   User: any;
   Order: any;
-  OrderDetail: any;
+  OrderDetail:any;
+  Productsxorder: any;
   sequelize: any;
 }

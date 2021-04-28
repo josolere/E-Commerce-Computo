@@ -7,9 +7,9 @@ $red:#f05454;//f05454
 .container{
     height: fit-content;
     justify-content: start;
-    width: 15rem;
-    margin-top: 3rem;
-    margin-left: 2rem;
+    width: 20%;
+    margin-top: 4rem;
+    margin-left: 1rem;
 }
 .todos {
     background-color: $grey;
@@ -17,7 +17,6 @@ $red:#f05454;//f05454
     color: $white;
     border: transparent;
     width: 100%;
-    padding: 1rem;
     outline: none;
     &:hover{
         cursor: pointer;
@@ -25,19 +24,53 @@ $red:#f05454;//f05454
 }
 
 .containerCategories {
-    width: 100%;
-    background-color: $grey;
-    border-color: transparent;
-    color: white;
-    text-align: start;
-   padding: 1rem;
+    font-family:'Montserrat', sans-serif;
+    border: 1px solid $grey;
+    display: flex;
+    width: 99%;
+    padding: 1.4rem;
+    font-size: 0.8rem;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    color: $white;
+    cursor: pointer;
     outline: none;
-            &:hover{
-                cursor: pointer;
-            }
-        }
     
-
+    &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          color: $white;
+          background-color: $grey;
+          z-index: -2;
+      }
+      &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0%;
+          height: 100%;
+          background-color: $red;
+          transition: all .3s;
+          border-radius: 0.1rem;
+          z-index: -1;
+          color: $white;
+      }
+      &:hover {
+          color: #fff;
+          &:before {
+              width: 100%;
+          }
+      }
+  }
+        
+    
 
 .iconT {
    display: inline-flex;

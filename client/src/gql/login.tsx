@@ -3,36 +3,84 @@ import { gql } from "@apollo/client"
 
 export const ACTUAL_USER = gql`
 query {
-    actualtUser {
-      id
-      name
-      email
+    currentUser {
+        id
+        name
+        email
+        surname
+        privilege
+        username
+        address
+        password
     }
   }`;
 
-export const LOGOUT_MUTATION = gql`
-  mutation LOGOUTMUTATION ($email:String! $password: String! ){
-      logout (input:{email:$email password:$password})
-      {
-            loquellegue
-      }
-  }
-`;
+
 
 export const SIGNUP_MUTATION = gql`
-    mutation SIGNUPMUTATION ($name: String! $password: String! $email: String!) 
-    {
-        supuestosignup (input:{name:$name password: $password email: $email})
-        {
-            nosequellega
+    mutation  ($firstName: String! $password: String! $email: String!  $lastName:String! $username:String! $address:String! ) {
+        signup (firstName:$firstName lastName:$lastName password:$password email: $email username:$username address:$address ) 
+                            {    
+                                user {
+                                    name
+                                }
+                                    
+                            
+                            }
+                        
+    }`;
+    
+    export const GET_USERS = gql`
+    query {
+        getUsers{
+            id
+            name
+            privilege
+            email
+            surname
+            address
+            password
+            username
         }
     }`;
+    
 
 export const LOGIN_MUTATION = gql`
-    mutation LOGINMUTATION ($email: String!$password: String!) 
-    {
-        supuestologin (input : { email: $email  password: $password } ) 
-        {
-            loquellega    
-        }
+    mutation ($email: String!,  $password: String!) {
+            login (email: $email, password: $password) {
+                user{
+                    id
+                    username
+                    name
+                    surname
+                    privilege
+                    }  
+                } 
     }`;
+
+    
+export const DELETE_USER = gql`
+mutation ($id:ID! ){
+    deleteUser (id:$id)
+  {
+          name
+          
+  }
+}`;
+
+export const EDIT_USER_MUTATION = gql`
+mutation( $id:ID! $name:String! $email:String! $surname:String! $username:String! 
+    $privilege:String! $active:Boolean! $address:String! ) 
+    {
+    editUser (id:$id  input: {name:$name surname:$surname email:$email 
+        username:$username privilege:$privilege active:$active address:$address}) 
+                        { 
+                            name
+                            privilege
+                        }             
+}`;  
+
+export const LOGOUT = gql `
+  mutation {
+      logout
+          }`;

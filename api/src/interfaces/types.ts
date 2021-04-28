@@ -21,12 +21,15 @@ export type Product = {
 };
 export type Order = {
   status: string;
+  confirmAt: Date;
 };
 export type OrderDetail = {
   quantity: number;
   price: number;
+  productName: string;
 };
 export type Review = {
   text: string;
   rating: number;
+  userId: string;
 };

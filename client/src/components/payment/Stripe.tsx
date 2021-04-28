@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import NavBar from '../NavBar/NavBar';
 import styles from './Payment.module.scss';
+import { useMutation, useQuery } from '@apollo/client';
+import { EDIT_ORDER, GET_ORDER_BY_StATUS, CREATE_ORDER } from '../../gql/orders'
+import { useDispatch } from 'react-redux';
+import { deleteCart } from '../../redux/actions';
+import { ACTUAL_USER } from '../../gql/login';
 
 /* interface databuy {
   name: string,
@@ -29,6 +33,8 @@ interface datastripe {
 }
 
 const StripePay = (): JSX.Element => {
+  const dispatch = useDispatch()
+
 
   /*   const [databuy, setdatabuy] = useState<databuy>({
       name: "",
@@ -100,26 +106,51 @@ const StripePay = (): JSX.Element => {
       address: { postal_code: addressdata.postal_code, city: addressdata.city, state: addressdata.state, line1: addressdata.line1 }
     })
   }
+  const {loading:load , error:err , data:datas} = useQuery(GET_ORDER_BY_StATUS, { variables: { status: "pendiente" } })
+  const [edditOrder] = useMutation(EDIT_ORDER)
+
+  const {loading, error, data} = useQuery(ACTUAL_USER)
+  console.log(data)
+  useEffect(()=>{
+    console.log(data)
+    console.log("hola")
+},[data])
+
+  const [createOrder, results] = useMutation(CREATE_ORDER)
+  const [editOrder, resuult] = useMutation(EDIT_ORDER)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault()
 
-    if (!stripe || !elements) {
-      return;
-    } else {
-      cardElement = elements?.getElement(CardElement);
-    }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: datastripe
-    });
+    console.log(data)
+    let id = datas?.getOrderByStatus[0]?.id
 
-    if (error) {
-      console.log('[error]', error);
-    } else {
-      console.log('[PaymentMethod]', paymentMethod);
-    }
+    edditOrder({ variables: { id: id, status: "creada" } })
+      .then((resolve) => {
+        localStorage.clear()
+        dispatch(deleteCart())
+      })
+
+    //   createOrder({variables:{status:"pendiente",idUser:data?.currentUser?.id}})
+    // .then(({data}) => editOrder({variables:{id:data?.createOrder?.id, status:'creada'}}))
+
+    // if (!stripe || !elements) {
+    //   return;
+    // } else {
+    //   cardElement = elements?.getElement(CardElement);
+    // }
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: 'card',
+    //   card: cardElement,
+    //   billing_details: datastripe
+    // });
+
+    // if (error) {
+    //   console.log('[error]', error);
+    // } else {
+    //   console.log('[PaymentMethod]', paymentMethod);
+    // }
+
 
   };
 
@@ -128,12 +159,11 @@ const StripePay = (): JSX.Element => {
   return (
     <React.Fragment>
       <div className={styles.back} >
-      
         <div className={styles.organizar} >
           <div className={styles.caja} >
             <h4>Precio</h4>
             <h4>Detalles de la compra</h4>
-            <form onSubmit={handleSubmit}  >
+            <form onSubmit={handleSubmit}>
               <div className={styles.form__group}>
                 <label htmlFor='name' className={styles.form__label} >Nombre</label>
                 <input
@@ -141,8 +171,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='name'
                   type='text'
-                  required={true}
-                  placeholder='Nombre completo'
+/*                   required={true}
+ */                  placeholder='Nombre completo'
                   minLength={5}
                   maxLength={20}
                 />
@@ -154,8 +184,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='email'
                   type='email'
-                  required={true}
-                  placeholder='E-Mail'
+/*                   required={true}
+ */                  placeholder='E-Mail'
                   minLength={10}
                   maxLength={30}
                 />
@@ -167,8 +197,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='line1'
                   type='text'
-                  required={true}
-                  placeholder='Direccion'
+/*                   required={true}
+ */                  placeholder='Direccion'
                   minLength={5}
                   maxLength={40}
                 />
@@ -180,8 +210,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='city'
                   type='text'
-                  required={true}
-                  placeholder='Ciudad'
+/*                   required={true}
+ */                  placeholder='Ciudad'
                   maxLength={20}
                 />
               </div>
@@ -192,8 +222,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='state'
                   type='text'
-                  required={true}
-                  placeholder='Estado / Provincia'
+/*                   required={true}
+ */                  placeholder='Estado / Provincia'
                   maxLength={20}
                 />
               </div>
@@ -204,8 +234,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='postal_code'
                   type='text'
-                  required={true}
-                  placeholder='Codigo Postal / ZIP'
+/*                   required={true}
+ */                  placeholder='Codigo Postal / ZIP'
                   minLength={3}
                   maxLength={5}
                 />

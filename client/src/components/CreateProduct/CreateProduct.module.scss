@@ -1,3 +1,7 @@
+$white: #fff;
+$gray: #9b9b9b;
+$verdesito: 	#E0FFFF;
+$blanquito: #F0F0F0;
 $grey:#30475e;//dddddd
 $dark: #222831;//222831
 $white: #dddddd;//30475e
@@ -5,87 +9,291 @@ $red:#f05454;//f05454
 
 .container{
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    border-radius: 0.5rem;
-    align-items: flex-start;
-
+    background-color: $dark;
+    width: 201.5vh;
+    height: fit-content;
 }
 
-.form{
+.OrderCreate {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 3%;
+}
+
+.TitleCreate {
+    margin: 3%;
+    padding: 3%;    
+    background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, white, white, white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 10vh;
     font-family: 'Montserrat', sans-serif;
-    padding: 2rem;
-    height: fit-content;
+    animation: reveal 300ms ease-in-out forwards 20ms,
+    glow 250ms linear infinite 200ms;
+
+@keyframes reveal {
+    80%{
+    letter-spacing: 8px;
+    }
+    100% {
+    background-size: 300% 300%;
+    }
+    }
+@keyframes glow {
+    40% {
+    text-shadow: 0 0 8px 	#FFE4E1;
+    }
+    }
+}
+
+.OrderForm {
+    display: flex;
+    align-self: start;
+    border: solid $white 0.3rem;
+    border-radius: .5rem;
+    background-color: $grey;
     width: fit-content;
-    border: solid 1px gray;
-    background-color:$grey;
-    border-radius: 0.5rem;
-
-    h1{
-        color: whitesmoke;
-        margin-bottom: 1rem;
-    }
-    hr{
-        margin:0;
-        color:#f05454;//f05454;
-        border:solid 3px #f05454;//f05454;
-        width: 6rem;
-        border-radius: 1rem;
-    }
-    input{
-        margin-top: 1rem;
-        outline: none;
-    }
-    label{
-        margin-top: 1rem;
-        color:$white;
-    }
+    height: fit-content;
 }
 
-.button{
-    background-color: $red;
-    border: none;
-    padding: 1rem;
-    border-radius: 2rem;
-    color: $white;
-    font-size: 0.7rem;
-    &:hover{
-        cursor: pointer;
-        border-radius: 1rem;
+.form__group {
+    position: relative;
+    margin-top: 15px;
+    width: 20rem;
+    padding-right: 8rem;
+  }
+  .form__field {
+    margin-left: 4rem;
+    margin-top: 0.3rem;
+    font-family:'Montserrat', sans-serif;
+    width: 16rem;
+    border: 0;
+    border-bottom: 2px solid $gray;
+    outline: 0;
+    font-size: 1.1rem;
+    color:$white;
+    padding: 1rem 0.3rem 0 ;
+    background: transparent;
+    transition: border-color 0.2s;   
+  &::-moz-placeholder ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+    &::placeholder {
+      color: transparent;
     }
+  }
+  .form__label {
+      margin-left: 4rem;
+      font-family:'Montserrat', sans-serif;
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: $gray;
+  }
+  .form__field:focus {
+    ~ .form__label {
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: $white;
+      font-weight:700;    
+    }
+    padding-bottom: 6px;  
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, $red, #ffb200	);
+    border-image-slice: 1;
+  }
+
+.button {
+    cursor: pointer;
+    font-weight: bold;
+    border: transparent;
+    display: flex;
+    width: fit-content;
+    min-width: 20%;
+    min-height: 30%;
+    height: fit-content;
+    padding: 2%;
+    align-content: center;
+    justify-content: center;
+      border-radius: 0.5rem;
+      color:$dark;;
+      font-size: 0.8rem;
+      margin-top: 2%;
+      margin-left: 2%;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $red;
+          border-radius: 0.5rem;
+          z-index: -2;
+      }
+      &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0%;
+          height: 100%;
+          background-color: darken($red, 15%);
+          transition: all .3s;
+          border-radius: 0.5rem;
+          z-index: -1;
+      }
+      &:hover {
+          color: #fff;
+          &:before {
+              width: 100%;
+          }
+      }
+  }
+
+.details {
+	position: relative;
+	width: 100%;
+	margin-right: 2%;
 }
 
-.separateList {
-    padding-right: 1rem;
+.details[open] {
+	z-index: 1;
+}
+
+.OrderSelect {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 7%;
+    padding-bottom:2%;
+    padding-left: 2%;
+}
+
+.SelectCreate{
+    display: flex;
+    width: fit-content;
+    min-width: 25%;
+    min-height:3rem;
+    height: fit-content;
+    align-self: flex-start;
+    background-color: $white;
+    color: $dark;
+    cursor: pointer;
+    border:transparent;
+    border-radius: .5rem;
+    font-family:'Montserrat', sans-serif;
+    font-size: 90%;
+    font-weight: bold; 
+    box-shadow: 10px 10px 15px 15px rgba(0,0,0,0.22);
+
+  }
+.SelectCreate:focus{
+    transition:linear;
+    width: fit-content;
+    height: fit-content;
 
 }
 
-.listProducts {
+.OrderCreateCat{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 1.4rem;
-    height: fit-content;
-    width: fit-content;
-    border: solid 1px gray;
-    background-color:$grey;
-    border-radius: 0.5rem;
+    margin-right: 3%;
+    justify-self: flex-start;
 }
+
+.OrderButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3%;
+}
+
+.CatButtons {
+    margin: 5%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: fit-content;
+    height: fit-content;
+    align-self: flex-start;
+    background-color: $white;
+    color: $dark;
+    cursor: pointer;
+    border:transparent;
+    border-radius: .5rem;
+    font-family:'Montserrat', sans-serif;
+    font-weight: bold; 
+    box-shadow: 10px 10px 15px 15px rgba(0,0,0,0.22);
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    &:after {
+        content: '';
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $red;
+        border-radius: 0.5rem;
+        z-index: -2;
+    }
+    &:before {
+        content: '';
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: darken($red, 15%);
+        transition: all .3s;
+        border-radius: 0.5rem;
+        z-index: -1;
+    }
+    &:hover {
+        color:$red;
+        &:before {
+            width: 100%;
+        }
+    }
+} 
+
+.listProducts { 
+    border: solid $white 0.3rem;
+    border-radius: .5rem;
+    background-color: $grey;
+    padding: 5%;
+    margin-left: 5%;
+}
+
 .TitleList {
-    font-size: 1.3rem;
+    font-weight: bold;
+    font-size: 120%;
     font-family: 'Montserrat', sans-serif;
     color: whitesmoke;
-    margin-bottom: 0.2rem;
+    margin-bottom: 3%;
 }
 
 .hrList {
-    margin:1rem 0rem;
+    margin: 3%;
     color:#f05454;//f05454;
     border:solid 3px #f05454;//f05454;
     width: 4rem;
@@ -93,9 +301,50 @@ $red:#f05454;//f05454
 }
 
 .pList {
-    margin: 0.3rem;
-    justify-content:space-around;
-    font-size: 0.7rem;
-    font-family: 'Montserrat', sans-serif;
-    color: whitesmoke;
-}
+    margin-top: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    align-self: flex-start;
+    background-color: $white;
+    color: $dark;
+    cursor: pointer;
+    border:transparent;
+    border-radius: .5rem;
+    font-family:'Montserrat', sans-serif;
+    font-weight: bold; 
+    box-shadow: 10px 10px 15px 15px rgba(0,0,0,0.22);
+    overflow: hidden;
+    z-index: 1;
+    &:after {
+        content: '';
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $red;
+        border-radius: 0.5rem;
+        z-index: -2;
+    }
+    &:before {
+        content: '';
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: darken($white, 15%);
+        transition: all .3s;
+        border-radius: 0.5rem;
+        z-index: -1;
+    }
+    &:hover {
+        color:$red;
+        &:before {
+            width: 100%;
+        }
+    }
+} 
