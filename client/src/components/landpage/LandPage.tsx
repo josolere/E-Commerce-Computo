@@ -56,7 +56,7 @@ const LandPage = () => {
     let discount: string = '0%'
 
     if (dayoftheweek === 'Lunes') {
-        imagesoftheweek = [13, 14, 15, 12, 10, 16, 11]
+        imagesoftheweek = [1, 2, 3, 4, 5, 6, 7]
         discount = discountoftheweek[0]
     }
     else if (dayoftheweek === 'Martes') {

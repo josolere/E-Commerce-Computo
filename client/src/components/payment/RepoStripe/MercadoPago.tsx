@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import styles from './Payment.module.scss';
-import {CREATE_ORDER, EDIT_ORDER } from '../../gql/orders'
-import { useMutation, useQuery } from '@apollo/client';
-import { ACTUAL_USER } from '../../gql/login';
+/* import { CREATE_ORDER, EDIT_ORDER } from '../../gql/orders'
+ */import { useMutation, useQuery } from '@apollo/client';
+/* import { ACTUAL_USER } from '../../gql/login';
+ */import Logo from '../images/MercadoPago.png';
 
-/* interface databuy {
+
+/*  interface databuy {
   name: string,
   address: {
     id: number | null,
@@ -17,7 +19,7 @@ import { ACTUAL_USER } from '../../gql/login';
   street: "",
   premise: "",
   isDefault: boolean | null
-} */
+}  */
 
 interface datastripe {
   name: string,
@@ -30,21 +32,22 @@ interface datastripe {
   }
 }
 
-const StripePay = (): JSX.Element => {
+interface user {
+  currentUser: {
+      name: string,
+      password: string,
+      email: string,
+      privilege: string
+  }
+}
 
-  /*   const [databuy, setdatabuy] = useState<databuy>({
-      name: "",
-      address: {
-        id: null,
-        postalcode: "",
-        administrativeArea: ""
-      },
-      subAdministrativeArea: "",
-      locality: "",
-      street: "",
-      premise: "",
-      isDefault: null
-    }) */
+const Mercado = (): JSX.Element => {
+/* 
+  let user:any = {}
+
+  const { loading, error, data } = useQuery(ACTUAL_USER)
+
+  user = data?.currentUser */
 
   const [datastripe, setDatastripe] = useState<datastripe>({
     name: '',
@@ -103,52 +106,51 @@ const StripePay = (): JSX.Element => {
     })
   }
 
-  const {loading , error , data} = useQuery(ACTUAL_USER)
-  console.log(data)
-  useEffect(()=>{
+/*   useEffect(() => {
     console.log(data)
     console.log("hola")
-},[data])
-
+  }, [data]) */
+/* 
   const [createOrder, results] = useMutation(CREATE_ORDER)
-  const [editOrder, resuult] = useMutation(EDIT_ORDER)
+  const [editOrder, resuult] = useMutation(EDIT_ORDER) */
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault()
 
-    createOrder({variables:{status:"pendiente",idUser:data?.currentUser?.id}})
-    .then(({data}) => editOrder({variables:{id:data?.createOrder?.id, status:'creada'}}))
+/*     createOrder({ variables: { status: "pendiente", idUser: data?.currentUser?.id } })
+      .then(({ data }) => editOrder({ variables: { id: data?.createOrder?.id, status: 'creada' } })) */
 
-    // if (!stripe || !elements) {
-    //   return;
-    // } else {
-    //   cardElement = elements?.getElement(CardElement);
-    // }
-    // const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //   type: 'card',
-    //   card: cardElement,
-    //   billing_details: datastripe
-    // });
+     if (!stripe || !elements) {
+      return;
+    } else {
+       cardElement = elements?.getElement(CardElement);
+     }
+     const { error, paymentMethod } = await stripe.createPaymentMethod({
+       type: 'card',
+       card: cardElement,
+      billing_details: datastripe
+     });
 
-    // if (error) {
-    //   console.log('[error]', error);
-    // } else {
-    //   console.log('[PaymentMethod]', paymentMethod);
-    // }
+     if (error) {
+       console.log('[error]', error);
+     } else {
+       console.log('[PaymentMethod]', paymentMethod);
+     }
 
 
   };
-
-  console.log(datastripe)
 
   return (
     <React.Fragment>
       <div className={styles.back} >
         <div className={styles.organizar} >
           <div className={styles.caja} >
+            <div className={styles.sortUp} >
+            <img className={styles.LogoMP} src={Logo} alt='' />
             <h4>Precio</h4>
             <h4>Detalles de la compra</h4>
-            <form onSubmit={handleSubmit}>
+            </div>
+            <form onSubmit={handleSubmit} className={styles.form} >
               <div className={styles.form__group}>
                 <label htmlFor='name' className={styles.form__label} >Nombre</label>
                 <input
@@ -156,8 +158,9 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='name'
                   type='text'
-/*                   required={true}
- */                  placeholder='Nombre completo'
+/*                   value={user?.name + " " + user?.surname}
+ */                  required={true}
+                  placeholder='Nombre completo'
                   minLength={5}
                   maxLength={20}
                 />
@@ -169,8 +172,9 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='email'
                   type='email'
-/*                   required={true}
- */                  placeholder='E-Mail'
+/*                   value={user?.email}
+ */                  required={true}
+                  placeholder='E-Mail'
                   minLength={10}
                   maxLength={30}
                 />
@@ -182,8 +186,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='line1'
                   type='text'
-/*                   required={true}
- */                  placeholder='Direccion'
+                  required={true}
+                  placeholder='Direccion'
                   minLength={5}
                   maxLength={40}
                 />
@@ -195,8 +199,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='city'
                   type='text'
-/*                   required={true}
- */                  placeholder='Ciudad'
+                  required={true}
+                  placeholder='Ciudad'
                   maxLength={20}
                 />
               </div>
@@ -207,8 +211,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='state'
                   type='text'
-/*                   required={true}
- */                  placeholder='Estado / Provincia'
+                  required={true}
+                  placeholder='Estado / Provincia'
                   maxLength={20}
                 />
               </div>
@@ -219,8 +223,8 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='postal_code'
                   type='text'
-/*                   required={true}
- */                  placeholder='Codigo Postal / ZIP'
+                  required={true}
+                  placeholder='Codigo Postal / ZIP'
                   minLength={3}
                   maxLength={5}
                 />
@@ -237,4 +241,4 @@ const StripePay = (): JSX.Element => {
   )
 }
 
-export default StripePay
+export default Mercado

@@ -21,6 +21,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-router": "^5.1.13",
     "graphql": "^15.5.0",
+    "mercadopago": "^1.5.7",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-card-payment": "^0.1.2",
