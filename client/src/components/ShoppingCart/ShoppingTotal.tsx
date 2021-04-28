@@ -53,6 +53,7 @@ const ShoppingTotal = (): JSX.Element => {
             setOrder(productLocal)
             localStorage.clear()
             dispatch(deleteCart())
+            localStorage.setItem('productsLocal', JSON.stringify([]))
             createOrder({ variables: { status: 'pending', idUser: 1 } })
                 .then((resolve) => { console.log(data) })
                 .catch((err) => { console.log('Salio Mal') })
@@ -74,7 +75,7 @@ const ShoppingTotal = (): JSX.Element => {
                 <div className={total.containerValue}>
                     <div className={total.containerSubTotal}>
                         <h2>SubTotal</h2>
-                        <p>${idsProducts}</p>
+                        <p>${new Intl.NumberFormat().format(idsProducts )}</p>
                     </div>
                     <div className={total.containerSent}>
                         <h2>Gastos De Envio</h2>
@@ -83,10 +84,12 @@ const ShoppingTotal = (): JSX.Element => {
 
                     <div className={total.containerTotal}>
                         <h2>Total</h2>
-                        <p>${priceTotal}</p>
+                        <p>${new Intl.NumberFormat().format(priceTotal)}</p>
+                        
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             {user?.privilege === 'user' ?
                 <div className={total.containerButton}>
                     <Link to='/Mercado'>
@@ -104,6 +107,22 @@ const ShoppingTotal = (): JSX.Element => {
                         >Login</button>
                     </Link>
                 </div>}
+=======
+            {user?.privilege ==='user' ?
+            <div className={total.containerButton}>
+                <Link to='/pago' onClick={() => { handleOrder() }}
+                    className={total.buttonFinal}>Finalizar Compra</Link>
+            </div>
+            :
+            <div className={total.containerButton}>
+                <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
+                <Link to='/Login'>
+                    <button
+                    className={total.buttonFinal}
+                    >Login</button>
+                </Link>
+            </div>}
+>>>>>>> ef65ed89e29a95ed99f48d86b4cc19a37740d9c8
         </>
     )
 }
