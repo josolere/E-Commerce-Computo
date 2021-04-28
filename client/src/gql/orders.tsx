@@ -39,8 +39,7 @@ export const EDIT_ORDER = gql `
 mutation($id:ID!,$status:String){
   editOrder(id:$id,input:{status:$status}){
     id
-    status
-    
+    status    
   }
 }
 `
@@ -60,4 +59,20 @@ query($idUser:ID!){
     }
   }
 }
+`
+
+export const GET_ORDER_BY_StATUS = gql`
+query($status:String!) {
+  getOrderByStatus (status:$status) {
+      id,
+      details{
+        id
+        OrderId
+        quantity
+        price
+        productName
+        ProductId        
+      }        
+      }
+  }
 `

@@ -71,15 +71,15 @@ function App() {
     if (actualuser.data && idOrder.data) {
       let login = gotCookies
       if (actualuser.data.currentUser !== null) {
-        let idUsers = actualuser.data.currentUser.id
+        let idUsers = actualuser?.data?.currentUser.id
         setIdUser(idUsers)
         dispatch(logeo({ idUsers, login }))
 
         if (actualuser.data && idOrder.data.getOrdersByIdUser.length > 0) {
           console.log(idOrder.data)
-          let arrayOrders = idOrder.data.getOrdersByIdUser
+          let arrayOrders = idOrder?.data?.getOrdersByIdUser
           let newArrayOrders = arrayOrders.filter((filt: any) => filt.status === 'pendiente')
-          let idsOrder = newArrayOrders[0].id
+          let idsOrder = newArrayOrders[0]?.id
           dispatch(orderId(idsOrder))
         }
       }
@@ -138,9 +138,10 @@ function App() {
         </Route>
         <Route path='/Ordenes/Usuario' component={OrdersUser} />
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails} />
-        <Route exact path='Pago'>
+        {/* <Route exact path='Pago'>
           {gotCookies ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route>
+        </Route> */}
+        <Route exact path='/Pago' component={Payment} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>

@@ -12,12 +12,17 @@ import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux'
 import { logeo } from '../../redux/actions'
 import { NEW_ORDER, NEW_ORDER_DETAIL, GET_ORDER } from "../../gql/shopingCart"
+import {GET_ORDER_BY_StATUS } from "../../gql/orders"
+
 
 
 const Login = () => {
 
+    const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
+        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente"}}]
+    })
     //-----------------------------------------------
-    const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL)
+    // const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL)
     const [createOrder] = useMutation(NEW_ORDER)
 
     const [idUser, setIdUser] = useState("")
@@ -146,21 +151,22 @@ const Login = () => {
                     if (localStorage.getItem('productsLocal')) {
                         console.log('entra')
                         const newArrayUSer: any = orderCount.filter((filt: any) => filt.status === 'pendiente')
-                        newArrayUSer.length > 0 &&
+                        if (newArrayUSer.length > 0) {
                             console.log('idOrder')
-                        let idOrder = (newArrayUSer[0].id)
-                        let productLocals: any = []
-                        productLocals = (localStorage.getItem('productsLocal'))
-                        productLocals = (JSON.parse(productLocals))
-                        productLocals.map((mapeo: any) => {
-                            createOrderDetail({ variables: { idOrder: idOrder, idProduct: mapeo.id, quantity: mapeo.count } })
-                                .then((resolve) => {
-                                    console.log(resolve)
-                                })
-                                .catch((error) => {
-                                    console.log('no responde')
-                                })
-                        })
+                            let idOrder = (newArrayUSer[0].id)
+                            let productLocals: any = []
+                            productLocals = (localStorage.getItem('productsLocal'))
+                            productLocals = (JSON.parse(productLocals))
+                            productLocals.map((mapeo: any) => {
+                                createOrderDetail({ variables: { idOrder: idOrder, idProduct: mapeo.id, quantity: mapeo.count } })
+                                    .then((resolve) => {
+                                        console.log(resolve)
+                                    })
+                                    .catch((error) => {
+                                        console.log('no responde')
+                                    })
+                            })
+                        }
                     }
                 }
             }

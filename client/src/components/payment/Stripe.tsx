@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import styles from './Payment.module.scss';
+import { useMutation, useQuery } from '@apollo/client';
+import { EDIT_ORDER, GET_ORDER_BY_StATUS } from '../../gql/orders'
+import { useDispatch } from 'react-redux';
+import { deleteCart } from '../../redux/actions';
 
 /* interface databuy {
   name: string,
@@ -28,6 +32,8 @@ interface datastripe {
 }
 
 const StripePay = (): JSX.Element => {
+  const dispatch = useDispatch()
+
 
   /*   const [databuy, setdatabuy] = useState<databuy>({
       name: "",
@@ -99,26 +105,40 @@ const StripePay = (): JSX.Element => {
       address: { postal_code: addressdata.postal_code, city: addressdata.city, state: addressdata.state, line1: addressdata.line1 }
     })
   }
+  const { loading, error, data } = useQuery(GET_ORDER_BY_StATUS, { variables: { status: "pendiente" } })
+  const [edditOrder] = useMutation(EDIT_ORDER)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault()
 
-    if (!stripe || !elements) {
-      return;
-    } else {
-      cardElement = elements?.getElement(CardElement);
-    }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: datastripe
-    });
+    console.log(data)
+    let id = data?.getOrderByStatus[0]?.id
 
-    if (error) {
-      console.log('[error]', error);
-    } else {
-      console.log('[PaymentMethod]', paymentMethod);
-    }
+    edditOrder({ variables: { id: id, status: "creada" } })
+      .then((resolve) => {
+        localStorage.clear()
+        dispatch(deleteCart())
+      })
+
+
+    // if (!stripe || !elements) {
+    //   return;
+    // } else {
+    //   cardElement = elements?.getElement(CardElement);
+    // }
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: 'card',
+    //   card: cardElement,
+    //   billing_details: datastripe
+    // });
+
+    // if (error) {
+    //   console.log('[error]', error);
+    // } else {
+    //   console.log('[PaymentMethod]', paymentMethod);
+    // }
+
+
 
   };
 
@@ -139,7 +159,7 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='name'
                   type='text'
-                  required={true}
+                  // required={true}
                   placeholder='Nombre completo'
                   minLength={5}
                   maxLength={20}
@@ -152,7 +172,7 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='email'
                   type='email'
-                  required={true}
+                  // required={true}
                   placeholder='E-Mail'
                   minLength={10}
                   maxLength={30}
@@ -165,7 +185,7 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='line1'
                   type='text'
-                  required={true}
+                  // required={true}
                   placeholder='Direccion'
                   minLength={5}
                   maxLength={40}
@@ -178,7 +198,7 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='city'
                   type='text'
-                  required={true}
+                  // required={true}
                   placeholder='Ciudad'
                   maxLength={20}
                 />
@@ -190,7 +210,7 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='state'
                   type='text'
-                  required={true}
+                  // required={true}
                   placeholder='Estado / Provincia'
                   maxLength={20}
                 />
@@ -202,7 +222,7 @@ const StripePay = (): JSX.Element => {
                   className={styles.form__field}
                   name='postal_code'
                   type='text'
-                  required={true}
+                  // required={true}
                   placeholder='Codigo Postal / ZIP'
                   minLength={3}
                   maxLength={5}

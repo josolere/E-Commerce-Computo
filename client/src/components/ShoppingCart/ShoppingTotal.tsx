@@ -13,7 +13,7 @@ const ShoppingTotal = (): JSX.Element => {
 
     const [createOrder, { data }] = useMutation(NEW_ORDER)
     const dispatch = useDispatch()
-    const idsProducts: number = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
+    const {priceSubTotal, idUsers} = useSelector((store: AppState) => store.shoppingCartReducer)
     const [priceTotal, setPriceTotal] = useState(0)
     const [send, setSend] = useState(500)
     const [order, setOrder] = useState([])
@@ -25,19 +25,21 @@ const ShoppingTotal = (): JSX.Element => {
     }, [cookie])
 
     useEffect(() => {
-        setPriceTotal(idsProducts + send)
-    }, [idsProducts])
+        setPriceTotal(priceSubTotal + send)
+    }, [priceSubTotal])
 
     const handleOrder = () => {
         if (localStorage.getItem('productsLocal') && gotcookie === true) {
-            let productLocal: any = []
-            productLocal = (localStorage.getItem('productsLocal'))
-            productLocal = (JSON.parse(productLocal))
-            setOrder(productLocal)
-            localStorage.clear()
-            dispatch(deleteCart())
-            createOrder({ variables: { status: 'pending', idUser: 1 } })
-                .then((resolve) => { console.log(data) })
+            // let productLocal: any = []
+            // productLocal = (localStorage.getItem('productsLocal'))
+            // productLocal = (JSON.parse(productLocal))
+            // setOrder(productLocal)
+            // localStorage.clear()
+            // dispatch(deleteCart())
+            createOrder({ variables: { status: 'pendiente', idUser: idUsers } })
+                .then((resolve) => { 
+                    localStorage.setItem('productsLocal', JSON.stringify([]))
+                    console.log(data) })
                 .catch((err) => { console.log('Salio Mal') })
             window.location.href = 'http://localhost:3000/Pago'
         }
@@ -48,20 +50,6 @@ const ShoppingTotal = (): JSX.Element => {
 
     
 
-    // const handleOrder = () => {
-    //     if (localStorage.getItem('productsLocal')) {
-    //         let productLocal: any = []
-    //         productLocal = (localStorage.getItem('productsLocal'))
-    //         productLocal = (JSON.parse(productLocal))
-    //         setOrder(productLocal)
-    //         localStorage.clear()
-    //         dispatch(deleteCart())
-    //         localStorage.setItem('productsLocal', JSON.stringify([]))
-    //         createOrder({ variables: { status: 'pending', idUser: 1 } })
-    //             .then((resolve) => { console.log(data) })
-    //             .catch((err) => { console.log('Salio Mal') })
-    //     }
-    // }
    
     return (
         <>
@@ -72,7 +60,7 @@ const ShoppingTotal = (): JSX.Element => {
                 <div className={total.containerValue}>
                     <div className={total.containerSubTotal}>
                         <h2>SubTotal</h2>
-                        <p>${new Intl.NumberFormat().format(idsProducts )}</p>
+                        <p>${new Intl.NumberFormat().format(priceSubTotal )}</p>
                     </div>
                     <div className={total.containerSent}>
                         <h2>Gastos De Envio</h2>
@@ -88,7 +76,8 @@ const ShoppingTotal = (): JSX.Element => {
             </div>
             <div className={total.containerButton}>
 
-                <button onClick={handleOrder}
+                <button 
+                onClick={handleOrder}
                     className={total.buttonFinal}>Finalizar Compra
                     </button>
             </div>

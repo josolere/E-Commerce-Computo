@@ -10,6 +10,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import { NEW_ORDER_DETAIL } from "../../gql/shopingCart"
+import {GET_ORDER_BY_StATUS } from "../../gql/orders"
+
 
 
 interface props {
@@ -26,7 +28,11 @@ export default function Card({ name, image, price, id, count }: props) {
     const { quantity, priceSubTotal, productTotal, idDetails,
         priceDetails, countDetails, logeo, idOrder, addHome, addCart }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
-    const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL)
+    const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
+        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente"}}]
+    })
+
+  
 
 
     const [stateHome, setStateHome] = useState(true)

@@ -7,7 +7,10 @@ import { PRODUCTS } from "../../gql/shopingCart"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { EDIT_ORDER_DETAIL, GET_ORDER_LIST, DELETE_ORDER_DETAIL } from "../../gql/order"
+import {GET_ORDER_BY_StATUS } from "../../gql/orders"
+
 import { AppState } from '../../redux/reducers';
+import { graphql } from 'graphql';
 
 
 
@@ -67,6 +70,16 @@ const ShoppingCard = (props: props): JSX.Element => {
         variables: { idUser: idUsers }
     })
 
+    const productsCart: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
+        variables: { status: "pendiente" }
+      })
+      
+
+      let details = productsCart?.data?.getOrderByStatus[0]?.details
+      useEffect(() => {
+         console.log(productsCart?.data?.getOrderByStatus[0]?.details)
+      }, [productsCart])
+
 
     const deletePro = () => toast.error("Producto Eliminado");
 
@@ -85,36 +98,42 @@ const ShoppingCard = (props: props): JSX.Element => {
     }, [product])
 
 
-    useEffect(() => {
-        console.log(idProductOrder)
-        if (idProductOrder.data && logeo === true) {
-            console.log(idProductOrder)
-            let arrayOrders: any = idProductOrder.data.getOrdersByIdUser.filter((filt) => filt.status === 'pendiente')
-            console.log(arrayOrders)
-            if (arrayOrders.length > 0) {
-                if (arrayOrders[0].details.length > 0 && data) {
-                    let newArrayOrder = arrayOrders[0].details.filter((filtt: any) => filtt.id !== product.id)
-                    let newArrayodOrder = newArrayOrder.filter((filt: any) => filt.ProductId === idsProducts)
-                    console.log(newArrayodOrder)
-                    if (newArrayodOrder.length > 0) {
-                        let re: any = newArrayodOrder[0].id
-                        setIdEdit(re)
-                        // setIdProOrder(newArrayodOrder)
-                    }
-                }
-            }
-        }
-    }, [idProductOrder])
+    // useEffect(() => {
+    //     console.log(idProductOrder)
+    //     if (idProductOrder.data && logeo === true) {
+    //         console.log(idProductOrder)
+    //         let arrayOrders: any = idProductOrder.data.getOrdersByIdUser.filter((filt) => filt.status === 'pendiente')
+    //         console.log(arrayOrders)
+    //         if (arrayOrders.length > 0) {
+    //             if (arrayOrders[0].details.length > 0 && data) {
+    //                 let newArrayOrder = arrayOrders[0].details.filter((filtt: any) => filtt.id !== product.id)
+    //                 let newArrayodOrder = newArrayOrder.filter((filt: any) => filt.ProductId === idsProducts)
+    //                 console.log(newArrayodOrder)
+    //                 if (newArrayodOrder.length > 0) {
+    //                     let re: any = newArrayodOrder[0].id
+    //                     setIdEdit(re)
+    //                     // setIdProOrder(newArrayodOrder)
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }, [idProductOrder])
+
+    
 
 
-    const accounrMoreBases = () => {
+    const accounrMoreBases = (id:any) => {
         let productId = product.id
         let count = props.count + 1
         let productPrice = product.price
         setPrice(price + product.price)
         dispatch(morePrice({ productPrice, count, productId }))
         if (logeo === true) {
-            editOrderDetail({ variables: { id: idEdit, price: productPrice * count, quantity: count } })
+            
+            console.log('entra if logeo')
+            console.log(productId)
+
+            editOrderDetail({ variables: { id: id, price: productPrice * count, quantity: count } })
                 .then((resolve) => {
                     console.log(resolve)
                 })
@@ -125,10 +144,14 @@ const ShoppingCard = (props: props): JSX.Element => {
     }
 
     const accountantMore = async () => {
-        console.log(idEdit)
+       let resultId = details.find((finds:any)=> finds.ProductId === product.id
+       )
+    //    console.log(details)
+       console.log(productsCart?.data?.getOrderByStatus[0]?.details)
 
-        if (idProductOrder.data !== undefined) {
-            accounrMoreBases()
+
+        if (idProductOrder.data !== undefined && productsCart !==undefined) {
+            accounrMoreBases(resultId.id)
         }
     }
 
@@ -162,7 +185,7 @@ const ShoppingCard = (props: props): JSX.Element => {
     }
 
 
-    const accountantLessBases = () => {
+    const accountantLessBases = (id:any) => {
         if (props.count !== 1) {
             let productPrice = product.price
             let productId = product.id
@@ -171,7 +194,7 @@ const ShoppingCard = (props: props): JSX.Element => {
             dispatch(lessPrice({ productPrice, productId, count }))
             if (logeo === true) {
 
-                editOrderDetail({ variables: { id: idEdit, price: productPrice * count, quantity: count } })
+                editOrderDetail({ variables: { id: id, price: productPrice * count, quantity: count } })
                     .then((resolve) => {
                         console.log(resolve)
                     })
@@ -186,10 +209,10 @@ const ShoppingCard = (props: props): JSX.Element => {
 
 
     const accountantLess = async () => {
-        console.log(idEdit)
+        let resultId = details.find((finds:any)=> finds.ProductId === product.id)
 
         if (idProductOrder.data !== undefined) {
-            accountantLessBases()
+            accountantLessBases(resultId.id)
         }
     }
 
@@ -223,7 +246,7 @@ const ShoppingCard = (props: props): JSX.Element => {
         }
     }
 
-    const eliminateProductBases = () => {
+    const eliminateProductBases = (id:any) => {
         console.log(idEdit)
 
         let prductId = product.id
@@ -234,7 +257,7 @@ const ShoppingCard = (props: props): JSX.Element => {
         // setDeleteItme(true)
         if (logeo === true) {
 
-            deleteOrderDetail({ variables: { id: idEdit } })
+            deleteOrderDetail({ variables: { id: id } })
                 .then((resolve) => {
                     console.log('resolve')
                 })
@@ -246,7 +269,9 @@ const ShoppingCard = (props: props): JSX.Element => {
 
     const eliminateProduct = async () => {
         if (idProductOrder.data !== undefined) {
-            eliminateProductBases()
+        let resultId = details.find((finds:any)=> finds.ProductId === product.id)
+
+            eliminateProductBases(resultId.id)
         }
     }
 

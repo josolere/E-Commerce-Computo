@@ -11,7 +11,7 @@ import { Cookies } from "react-cookie";
 import NavBarItem from "./NavBarItem";
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ORDER_LIST } from "../../gql/order"
-import { GET_ORDER_DETAILS } from '../../gql/orders'
+import { GET_ORDER_DETAILS, GET_ORDER_BY_StATUS } from '../../gql/orders'
 import { addBaseDeDatos } from '../../redux/actions'
 
 
@@ -50,8 +50,8 @@ const NavBar = (): JSX.Element => {
     variables: { idUser: idUsers }
   })
 
-  const { data, loading, error }: any = useQuery<detailOrderid>(GET_ORDER_DETAILS, {
-    variables: { id: 3 }
+  const { data, loading, error }: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
+    variables: { status: "pendiente" }
   })
 
 
@@ -59,16 +59,30 @@ const NavBar = (): JSX.Element => {
   useEffect(() => {
     console.log(data)
     if (logeo === true && data) {
-      let productBas = [...data.getOrderById.details]
-      console.log(productBas)
-
-      productBas?.map((mapeo:any)=>{
-        mapeo.id = mapeo.ProductId
+      let arrayProducts =[]
+      if(data?.getOrderByStatus[0]?.details.length !== 0){
+        console.log(data?.getOrderByStatus[0]?.details)
+        arrayProducts = data?.getOrderByStatus[0]?.details 
+      }else{
+        console.log(data?.getOrderByStatus)
+        arrayProducts = data?.getOrderByStatus
+      }
+      let productBas: any = []
+      let conte = 0
+      let priceBase = 0
+      console.log(arrayProducts)
+      arrayProducts !== undefined &&
+      arrayProducts.map((mapeo: any) => {
+        productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity })
+        conte = conte + mapeo.quantity
+        priceBase = priceBase + mapeo.price * conte
       })
-      dispatch(addBaseDeDatos({ productBas }))
-
+      dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
+      localStorage.setItem('productsLocal', JSON.stringify(productBas))
+      localStorage.setItem('quantity', JSON.stringify(conte))
+      localStorage.setItem('priceSubTotal', JSON.stringify(priceBase))
     }
-  }, [idProductOrder])
+  }, [data])
 
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
 
