@@ -53,6 +53,12 @@ Product.hasMany(Review, { as: "reviews" });
 Review.belongsTo(User, { as: "users" });
 User.hasMany(Review, { as: "reviews" });
 
+// compatibilidad entre productos
+Product.belongsToMany(Product, {
+  as: "productCompatibility",
+  through: "productTree",
+});
+
 const db: DB = {
   sequelize,
   Product,

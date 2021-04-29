@@ -28,7 +28,7 @@ export interface ProductAttributesI {
   price: number;
   details: string;
   categoriesId: number;
-  stock:number;
+  stock: number;
 }
 
 interface ProductCreationAttributesI
@@ -68,6 +68,7 @@ export class Product
   public static associations: {
     categories: Association<Product, Category>;
     orders: Association<Product, Order>;
+    products: Association<Product, Product>;
   };
 }
 
@@ -100,8 +101,8 @@ export function ProductFactory(sequelize: Sequelize) {
       },
       stock: {
         type: DataTypes.INTEGER,
-        defaultValue: 0
-      }
+        defaultValue: 0,
+      },
     },
     {
       tableName: "products",
