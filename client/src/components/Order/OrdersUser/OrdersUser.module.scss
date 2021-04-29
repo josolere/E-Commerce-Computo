@@ -1,0 +1,55 @@
+.container{
+    min-height: 100vh;
+    font-family:'Montserrat', sans-serif;
+    padding: 2rem;
+    background-color: #222831;
+    color: whitesmoke;
+}
+select{
+    font-family:'Montserrat', sans-serif;
+    margin-left: 1rem;
+    background-color: transparent;
+    outline: none;
+    color: whitesmoke;
+    border: none;
+    option{
+        color:black
+    }
+}
+.products{
+    margin-top: 2rem;
+    border: 1px solid gray;
+    border-radius: 0.2rem;
+    nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-bottom: 1px solid gray;
+        background-color: #30475e;
+        div{
+            width: 45%;
+            // border: 1px solid gray;
+            padding: 1rem;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding-left: 2rem;
+        }
+        a{
+            color: whitesmoke;
+            padding:1rem 0rem;
+            width: 10%;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            svg{
+                margin: 0rem 0rem 0rem 0.5rem;
+            }
+            &:hover{
+                background-color: #222831;
+                color: whitesmoke;
+            }
+        }
+    }
+}
