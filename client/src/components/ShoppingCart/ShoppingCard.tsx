@@ -8,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { EDIT_ORDER_DETAIL, GET_ORDER_LIST, DELETE_ORDER_DETAIL } from "../../gql/order"
 import {GET_ORDER_BY_StATUS } from "../../gql/orders"
-
 import { AppState } from '../../redux/reducers';
 
 
@@ -210,10 +209,10 @@ const ShoppingCard = (props: props): JSX.Element => {
 
 
     const accountantLess = async () => {
-        let resultId = details.find((finds:any)=> finds.ProductId === product.id)
+        let resultId = details?.find((finds:any)=> finds?.ProductId === product?.id)
 
         if (idProductOrder.data !== undefined) {
-            accountantLessBases(resultId.id)
+            accountantLessBases(resultId?.id)
         }
     }
 
@@ -270,9 +269,9 @@ const ShoppingCard = (props: props): JSX.Element => {
 
     const eliminateProduct = async () => {
         if (idProductOrder.data !== undefined) {
-        let resultId = details.find((finds:any)=> finds.ProductId === product.id)
+        let resultId = details?.find((finds:any)=> finds?.ProductId === product?.id)
 
-            eliminateProductBases(resultId.id)
+            eliminateProductBases(resultId?.id)
         }
     }
 
