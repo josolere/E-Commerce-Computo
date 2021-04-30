@@ -14,6 +14,7 @@ export interface ReviewAttributesI {
     text:string;
     rating:number;
     userId: string;
+    title: string;
 }
 
 export interface ReviewCreationAttributesI extends Optional<ReviewAttributesI, 'id'> {}
@@ -24,6 +25,7 @@ export class Review extends Model<ReviewAttributesI, ReviewCreationAttributesI>
         public text!: string;
         public rating!: number;
         public userId!: string;
+        public title!: string;
         public readonly createdAt!:Date;
         public readonly updatedAt!:Date;
 
@@ -57,6 +59,9 @@ export class Review extends Model<ReviewAttributesI, ReviewCreationAttributesI>
             },
             rating:{
                 type: DataTypes.INTEGER,
+            },
+            title:{
+                type: DataTypes.STRING,
             }
 
         },{

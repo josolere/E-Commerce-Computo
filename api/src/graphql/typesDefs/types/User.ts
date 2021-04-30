@@ -64,6 +64,7 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    previousPassword: String
   }
 
   input SignUpInput {

@@ -72,6 +72,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         variables: { id }
     });
 
+
+    
+    
+
+
     const [controReview, setControlReview] = useState('');
 
     const [addreview, results] = useMutation(REVIEW_MUTATION);
@@ -81,7 +86,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const [hover, setHover] = useState(0);
 
     const [reviewuser, setReviewuser] = useState({
-        review: ''
+        review: '',
+        title: ''
     });
 
     const [hideRating, setHideRating] = useState(true);
@@ -112,8 +118,13 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const changereview = () => {
         setControlReview(user?.id)
-        addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review, userId: user?.id, product: 1 } })
-            .then(review => { console.log('review up') })
+        addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review,title: reviewuser.title, userId: user?.id} })
+            .then(review => {
+                console.log('review up');
+                reviewsArray.push(review.data.addReview)
+                console.log(review.data.addReview)
+                console.log(reviewsArray[0])
+            })
             .catch((err) => { console.log('review mal') })
         setHideReview(false)
     }
@@ -129,9 +140,15 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
     }, [filtred])
 
+    let reviewsArray:any = filtred?.reviews
+
     useEffect(() => {
-        filtred?.reviews?.map(item => setControlReview(item?.name))
-    }, [filtred])
+        reviewsArray = filtred?.reviews
+
+    }, [filtred?.reviews, filtred])
+
+
+
 
     console.log(user?.id)
     console.log(filtred?.reviews)
@@ -204,6 +221,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         dispatch(addProductDetails(state));
     }
 
+    
+
     return (
         <React.Fragment>
             <div className={styles.contenedorAll}>
@@ -264,7 +283,19 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                     <button onClick={changereview} className={styles.buttonCompra} >Enviar comentario</button>
                                     <div className={styles.review}>
                                         <textarea
-                                            style={{ height: '5rem', width: '20rem' }}
+                                            style={{ height: '2rem', width: '10rem'}}
+                                            placeholder={'Título de su review'}
+                                            name='review_title'
+                                            value={reviewuser.title}
+                                            onChange={(event) =>
+                                                setReviewuser({
+                                                    ...reviewuser,
+                                                    title: event.target.value
+                                                })}
+                                        />
+                                        <hr></hr>
+                                        <textarea
+                                            style={{ height: '5rem', width: '30rem' }}
                                             placeholder={'Escriba aquí una review del producto'}
                                             className={styles.textarea}
                                             name='review'
@@ -318,9 +349,13 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 {/*                   {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
                         : false} */}
                 <div className={styles.box}>
-                    {filtred?.reviews.map(review =>
+                    {reviewsArray?.map((review:any) =>
                         <div className={styles.content}>
+                            <div className={styles.reviewContainer}>
+                            <p className={styles.pReviewTitle}>{review.title}</p>
                             <p className={styles.pReview} >{review.text}</p>
+                            </div>
+                            
                             <p className={styles.pRanking}>{review.rating}<FaStar size={20} className='star' color={rating ? '#ffc107' : '#e4e5e9'} /></p>
                         </div>)}
                 </div>

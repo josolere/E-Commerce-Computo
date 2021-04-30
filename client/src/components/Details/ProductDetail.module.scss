@@ -283,6 +283,13 @@ $yellow: #ffb200;
     font-size: 100%;
 }
 
+.pReviewTitle{
+    max-width: 30%;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 120%;
+}
+
 
 
 .pRanking{
@@ -292,4 +299,10 @@ $yellow: #ffb200;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif ;
     font-size: 100%;
+}
+
+
+.reviewContainer{
+    display:flex;
+    flex-direction: column;
 }

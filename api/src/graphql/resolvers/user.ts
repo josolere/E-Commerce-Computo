@@ -76,6 +76,16 @@ export default {
 
         if(input.password){
 
+        const passMatch = await bcrypt.compare(input.password, UserToEdit.password);
+        console.log('matcheaONoMatchea',passMatch)
+        const emailMatch = input.email === UserToEdit.email
+
+        if(!emailMatch){
+          throw new Error('Email does not match')
+        }
+  
+        if(passMatch && emailMatch) {
+          
           bcrypt.hash(input.password, saltRounds, function(err, hash){
             models.User.update({password: hash},{ 
               where:{ 
@@ -83,7 +93,12 @@ export default {
               }
              })
           })
+          
+          return updatedUser;
 
+          }else{
+            throw new Error("Passwords doesn't match")
+          }
         }
 
         return updatedUser;

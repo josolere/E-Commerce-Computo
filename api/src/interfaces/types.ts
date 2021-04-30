@@ -32,4 +32,5 @@ export type Review = {
   text: string;
   rating: number;
   userId: string;
+  title: string;
 };

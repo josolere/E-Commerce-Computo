@@ -18,7 +18,9 @@ export interface iUserFacebook {
 
 export interface iCreateUserInput extends User {}
 export interface iSignUpInput extends User {}
-export interface iEditUserInput extends User {}
+export interface iEditUserInput extends User {
+  previousPassword: string;
+}
 
 //Product
 export interface iProduct extends Product {
