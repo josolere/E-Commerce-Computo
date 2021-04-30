@@ -6,7 +6,7 @@ import styles2 from './Edit.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { EDIT_USER_MUTATION, ACTUAL_USER } from "../../gql/login";
+import { CHANGE_PASSWORD, ACTUAL_USER } from "../../gql/login";
 import styles3 from './CreateAdmin.module.scss';
 import { toast } from 'react-toastify';
 
@@ -26,7 +26,7 @@ interface user {
 
 const ResetPassword = () => {
 
-    const [editUser, user] = useMutation(EDIT_USER_MUTATION)
+    const [editUser, user] = useMutation(CHANGE_PASSWORD)
 
     let currentuser: any = {}
 
@@ -40,6 +40,7 @@ const ResetPassword = () => {
         setControl({ ...control, [event?.currentTarget.name]: event?.currentTarget.value })
     }
 
+
     console.log(control)
 
     const handleclickevent = () => {
@@ -51,8 +52,7 @@ const ResetPassword = () => {
         if (currentuser?.email === control.email) {
             editUser({
                 variables: {
-                    id: currentuser?.id, email: currentuser?.email, name: currentuser?.name, surname: currentuser?.surname,
-                    password: control.newpassword, username: currentuser?.username, address: currentuser?.address, active: true, privilege: currentuser?.privilege
+                    password: control.newpassword, id: currentuser?.id
                 }
             })
                 .then((resolve) => { toast.success('Tienes una nueva contraseña 🥳') 

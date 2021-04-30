@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import styles from './CreateCategory.module.scss'
-import { NEW_CATEGORY } from "../../gql/categories"
+import React, { useState, useEffect } from 'react';
+import styles from './CreateCategory.module.scss';
+import { NEW_CATEGORY } from "../../gql/categories";
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_CATEGORIES } from "../../gql/categories";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -56,31 +56,31 @@ const LandPage = () => {
     let discount: string = '0%'
 
     if (dayoftheweek === 'Lunes') {
-        imagesoftheweek = [1, 2, 3, 4, 5, 6, 7]
+        imagesoftheweek = [11, 9, 8, 12, 5]
         discount = discountoftheweek[0]
     }
     else if (dayoftheweek === 'Martes') {
-        imagesoftheweek = [0, 3, 4, 7, 9, 11, 10]
+        imagesoftheweek = [2, 11, 6, 7, 9]
         discount = discountoftheweek[1]
     }
     else if (dayoftheweek === 'Miercoles') {
-        imagesoftheweek = [10, 3, 4, 7, 9, 11, 2]
+        imagesoftheweek = [10, 3, 4, 7, 9]
         discount = discountoftheweek[2]
     }
     else if (dayoftheweek === 'Jueves') {
-        imagesoftheweek = [3, 2, 4, 7, 1, 11, 10]
+        imagesoftheweek = [3, 2, 4, 7, 1]
         discount = discountoftheweek[3]
     }
     else if (dayoftheweek === 'Viernes') {
-        imagesoftheweek = [1, 4, 2, 5, 6, 0, 11]
+        imagesoftheweek = [10, 8, 10, 11, 13]
         discount = discountoftheweek[4]
     }
     else if (dayoftheweek === 'Sabado') {
-        imagesoftheweek = [0, 3, 4, 2, 9, 11, 10]
+        imagesoftheweek = [1, 3, 4, 2, 9]
         discount = discountoftheweek[5]
     }
     else if (dayoftheweek === 'Domingo') {
-        imagesoftheweek = [2, 3, 4, 7, 5, 7, 10]
+        imagesoftheweek = [2, 3, 4, 7, 5]
         discount = discountoftheweek[6]
     }
 
@@ -97,11 +97,11 @@ const LandPage = () => {
     if (products) {
         image1 = products[imagesoftheweek[0]].image
         image2 = products[imagesoftheweek[1]].image
-        image3 = products[imagesoftheweek[3]].image
-        image4 = products[imagesoftheweek[4]].image
-        image5 = products[imagesoftheweek[5]].image
-/*         image6 = products[imagesoftheweek[5]].image
- */
+        image3 = products[imagesoftheweek[2]].image
+        image4 = products[imagesoftheweek[3]].image
+        image5 = products[imagesoftheweek[4]].image
+        /*         image6 = products[imagesoftheweek[5]].image
+         */
     }
 
     const linkland = () => {
@@ -122,8 +122,12 @@ const LandPage = () => {
             <div className={styles.BackLand} >
                 <div className="containerLand">
                     <div className='ControlLand'>
-                        <h1 className={styles.TitleLand}>CompuHenry</h1>
-{/*                         <p className={styles.DiscountLand}>Hoy {dayoftheweek} tenemos un descuento de {discount}!</p>
+                        <div className={styles.wrapper}>
+                            <div className={styles.container}>
+                                <h1 className={styles.t1} >CompuHenry</h1>
+                            </div>
+                        </div>
+                        {/*                         <p className={styles.DiscountLand}>Hoy {dayoftheweek} tenemos un descuento de {discount}!</p>
  */}                        <div className='pic-order'>
                             <div className="pic-ctn">
                                 <img src={image1} alt="" className="pic" onClick={linkland} />
@@ -134,7 +138,7 @@ const LandPage = () => {
                             </div>
                         </div>
                     </div>
-{/*                     <div className={styles.OrderSub}>
+                    {/*                     <div className={styles.OrderSub}>
                         <h1 className={styles.TitleConcat} >Contacta con nosotros</h1>
                     </div>
                     <div className={styles.LandPageInfo}>

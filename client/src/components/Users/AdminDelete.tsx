@@ -6,7 +6,7 @@ import styles2 from './Edit.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CREATE_ADMIN, GET_USERS } from "../../gql/login";
+import { GET_USERS, DELETE_USER } from "../../gql/login";
 import styles3 from './CreateAdmin.module.scss';
 import { toast } from 'react-toastify';
 
@@ -25,9 +25,9 @@ interface datauser {
 }
 
 
-const CreateAdmin = () => {
+const AdminDelete = () => {
 
-    const [editUser, user] = useMutation(CREATE_ADMIN)
+    const [deleteUser, user] = useMutation(DELETE_USER)
 
     const resultsUsers = useQuery(GET_USERS)
 
@@ -71,13 +71,13 @@ const CreateAdmin = () => {
     }
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
-        editUser({
+        deleteUser({
             variables: {
-                id: logform.id, privilege: 'admin'
+                id: logform.id
             }
         })
-            .then((resolve) => { toast.success('Se ha creado un nuevo administrador 🥳'); SetAdmin(true) })
-            .catch((error) => (console.log('Admin Mal')))
+            .then((resolve) => { toast.success('Se ha eliminado el usuario 🥳'); SetAdmin(true) })
+            .catch((error) => (console.log('Delete Mal')))
         event.preventDefault()
     }
 
@@ -86,13 +86,13 @@ const CreateAdmin = () => {
             <div className={styles2.organizar2}>
                 <div className={styles.caja}>
                     <div className={styles.container}>
-                        ASIGNA
+                        Borra
                             <div className={styles.flip}>
-                            <div><div>NUEVO</div></div>
-                            <div><div>NUEVO</div></div>
-                            <div><div>NUEVO</div></div>
+                            <div><div>un</div></div>
+                            <div><div>a</div></div>
+                            <div><div>un</div></div>
                         </div>
-                            ADMINISTRADOR
+                            Usuario
                             </div>
                     <form className={styles3.form} onSubmit={handlesubmitchange}>
                         <div className={styles3.form__group}>
@@ -132,7 +132,7 @@ const CreateAdmin = () => {
                                 ))}
                             </div>}
                         <div className={styles.organizarbotones}>
-                            <button className={styles.boton} type='submit' >Crear Administrador</button>
+                            <button className={styles.boton} type='submit' >Borrar Usuario</button>
                             <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
                         </div>
                     </form>
@@ -142,4 +142,4 @@ const CreateAdmin = () => {
     )
 }
 
-export default CreateAdmin;
+export default AdminDelete;

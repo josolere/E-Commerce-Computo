@@ -51,20 +51,18 @@ const ShoppingTotal = (): JSX.Element => {
             productLocal = (localStorage.getItem('productsLocal'))
             productLocal = (JSON.parse(productLocal))
             setOrder(productLocal)
-            localStorage.clear()
-            dispatch(deleteCart())
+            /*  localStorage.clear()
+             dispatch(deleteCart()) */
             localStorage.setItem('productsLocal', JSON.stringify([]))
-            createOrder({ variables: { status: 'pending', idUser: 1 } })
-                .then((resolve) => { console.log(data) })
-                .catch((err) => { console.log('Salio Mal') })
+            /*             createOrder({ variables: { status: 'pending', idUser: 1 } })
+                            .then((resolve) => { console.log(data) })
+                            .catch((err) => { console.log('Salio Mal') }) */
             window.location.href = 'http://localhost:3000/Mercado'
         }
         else {
             toast.error("Debes iniciar sesión para realizar una compra")
         }
     }
-
-
 
     return (
         <>
@@ -75,7 +73,7 @@ const ShoppingTotal = (): JSX.Element => {
                 <div className={total.containerValue}>
                     <div className={total.containerSubTotal}>
                         <h2>SubTotal</h2>
-                        <p>${new Intl.NumberFormat().format(idsProducts )}</p>
+                        <p>${new Intl.NumberFormat().format(idsProducts)}</p>
                     </div>
                     <div className={total.containerSent}>
                         <h2>Gastos De Envio</h2>
@@ -85,18 +83,14 @@ const ShoppingTotal = (): JSX.Element => {
                     <div className={total.containerTotal}>
                         <h2>Total</h2>
                         <p>${new Intl.NumberFormat().format(priceTotal)}</p>
-                        
+
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
             {user?.privilege === 'user' ?
                 <div className={total.containerButton}>
-                    <Link to='/Mercado'>
-                        <button onClick={handleOrder}
-                            className={total.buttonFinal}>Finalizar Compra
-                    </button>
-                    </Link>
+                    <button onClick={() => { handleOrder() }}
+                        className={total.buttonFinal}>Finalizar Compra</button>
                 </div>
                 :
                 <div className={total.containerButton}>
@@ -107,22 +101,6 @@ const ShoppingTotal = (): JSX.Element => {
                         >Login</button>
                     </Link>
                 </div>}
-=======
-            {user?.privilege ==='user' ?
-            <div className={total.containerButton}>
-                <Link to='/pago' onClick={() => { handleOrder() }}
-                    className={total.buttonFinal}>Finalizar Compra</Link>
-            </div>
-            :
-            <div className={total.containerButton}>
-                <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
-                <Link to='/Login'>
-                    <button
-                    className={total.buttonFinal}
-                    >Login</button>
-                </Link>
-            </div>}
->>>>>>> ef65ed89e29a95ed99f48d86b4cc19a37740d9c8
         </>
     )
 }

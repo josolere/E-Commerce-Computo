@@ -1,9 +1,9 @@
 /* import SubMenu from "./SubMenu"; */
-import styles from './Categories.module.scss'
+import styles from './Categories.module.scss';
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from "react-redux";
 import { setCategory } from "../../redux/actions";
-import {GET_CATEGORIES} from "../../gql/categories"
+import {GET_CATEGORIES} from "../../gql/categories";
 import Cards from '../Cards/CardsHome';
 
 export interface model {

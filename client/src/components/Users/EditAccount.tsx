@@ -2,18 +2,18 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation,  gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { EDIT_USER_MUTATION } from "../../gql/login"
-import styles2 from './Edit.module.scss';
+/* import { EDIT_USER_MUTATION } from "../../gql/login"
+ */import styles2 from './Edit.module.scss';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom"
-import { DELETE_USER } from "../../gql/login"
+import { Link } from "react-router-dom";
+import { DELETE_USER } from "../../gql/login";
 import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import { Cookies } from "react-cookie";
-import "./Edit.module.scss"
-import Swal from 'sweetalert2'
+import "./Edit.module.scss";
+import Swal from 'sweetalert2';
 
 
 
@@ -33,8 +33,8 @@ interface datauser {
 
 const EditAccount = () => {
 
-    const [editUser, data] = useMutation(EDIT_USER_MUTATION)
-
+/*     const [editUser, data] = useMutation(EDIT_USER_MUTATION)
+ */
     const [showMore, setShowMore] = useState(false)
 
    const [deleteUser, info] = useMutation(DELETE_USER)
@@ -64,7 +64,7 @@ const EditAccount = () => {
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        editUser({
+/*         editUser({
             variables: {
                 name: logform.firstname, email: logform.email, password: logform.password,
                 surname: logform.lastname, username: logform.username, address: logform.address,
@@ -72,7 +72,7 @@ const EditAccount = () => {
             }
         })
             .then((resolve) => console.log(data))
-            .catch((error) => { console.log('Edit Mal') })
+            .catch((error) => { console.log('Edit Mal') }) */
     }
 
 

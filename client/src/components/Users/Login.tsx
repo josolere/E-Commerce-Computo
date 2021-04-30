@@ -2,12 +2,12 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/login"
+import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/login";
 import { useCookies } from "react-cookie";
-import { toast, ToastContainer } from "react-toastify"
+import { toast, ToastContainer } from "react-toastify";
 import {faEnvelopeSquare, faUnlock,faFileSignature, faMapMarker, faShareAlt} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FacebookLogin from "react-facebook-login"
+import FacebookLogin from "react-facebook-login";
 import GoogleLogin from 'react-google-login';
 
 const Login = () => {
