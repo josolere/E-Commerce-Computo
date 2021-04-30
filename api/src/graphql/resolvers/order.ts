@@ -26,11 +26,23 @@ export default {
             model: db.Product,
             through: "productsxorder",
             attributes: ["id", "name"],
+            include: [
+              {
+                model: db.DiscountCampaign,
+                through: "discountCampaignxproduct",
+              },
+            ],
           },
         ],
       };
 
       let data = await models.Order.findByPk(id, options);
+      //console.log("data completa",data);
+      // console.log("array de productos", data.Products);
+      // console.log(
+      //   "descuentos del primer elemento",
+      //   data.Products[0].DiscountCampaigns[0].name
+      // );
       data.details = [];
       data.Products.map((det: any) => {
         const detail = {
@@ -40,6 +52,13 @@ export default {
           OrderId: det.Productsxorder.OrderId,
           ProductId: det.Productsxorder.ProductId,
           productName: det.Productsxorder.productName,
+          //descuentos
+          // podria analizar la fecha actual aqui mismo para saber si debo poner o no el descuento
+          discountName: det.DiscountCampaigns[0].name,
+          discountType: det.DiscountCampaigns[0].type,
+          discount: det.DiscountCampaigns[0].discount,
+          discountStart: det.DiscountCampaigns[0].start,
+          discountEnd: det.DiscountCampaigns[0].end,
         };
         data.details.push(detail);
       });
@@ -148,10 +167,9 @@ export default {
     ): Promise<any> => {
       const OrderToEdit = await models.Order.findByPk(id);
       if (OrderToEdit) {
-
         let confirmAt = null;
         if (input.status === "creada") {
-          confirmAt = Date.now()
+          confirmAt = Date.now();
         }
         const updatedOrder = await OrderToEdit.update(
           { ...input, confirmAt },
@@ -159,7 +177,6 @@ export default {
         );
 
         //si el estado fue cambiado enviar un email informando ese cambio
-        console.log("+++++++++", updatedOrder)
         const user = await models.User.findByPk(updatedOrder.UserId);
 
         switch (input.status) {
@@ -180,7 +197,6 @@ export default {
                 quantity: p.dataValues.quantity,
               };
             });
-            console.log("el array generado es: ", auxproducts);
             orderCreatedMail(
               user.email,
               updatedOrder.id,
