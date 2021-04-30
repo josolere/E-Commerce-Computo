@@ -1,6 +1,10 @@
 // Types
-import { User, Product, Order, OrderDetail, Review } from "./types";
+import { User, Product, Order, OrderDetail, Review, PaymentData,PaymentResult } from "./types";
 
+
+//mp
+export interface iPaymentData extends PaymentData { }
+export interface iPaymentResult extends PaymentResult { }
 // User
 export interface iUser extends User {
   id: string;
