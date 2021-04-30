@@ -33,3 +33,9 @@ export type Review = {
   rating: number;
   userId: string;
 };
+export type DiscountCampaign = {
+  name: string;
+  type: string;
+  discount: number;
+  end: string;
+};

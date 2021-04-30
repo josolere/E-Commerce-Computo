@@ -1,5 +1,12 @@
 // Types
-import { User, Product, Order, OrderDetail, Review } from "./types";
+import {
+  User,
+  Product,
+  Order,
+  OrderDetail,
+  Review,
+  DiscountCampaign,
+} from "./types";
 
 // User
 export interface iUser extends User {
@@ -64,13 +71,23 @@ export interface iReview extends Review {
 }
 export interface iAddReviewInput extends Review {}
 
+//DiscountCampaign
+export interface iDiscountCampaign extends DiscountCampaign {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface iCreateDiscountCampaignInput extends Order {}
+export interface iEditDiscountCampaignInput extends Order {}
+
 //Models
 export interface iModels {
   Product: any;
   Category: any;
   User: any;
   Order: any;
-  OrderDetail:any;
+  OrderDetail: any;
   Productsxorder: any;
+  DiscountCampaign: any;
   sequelize: any;
 }
