@@ -44,7 +44,8 @@ export default {
       //   data.Products[0].DiscountCampaigns[0].name
       // );
       data.details = [];
-      data.Products.map((det: any) => {
+      const today = new Date(); //fecha actual
+      data.Products.forEach((det: any) => {
         const detail = {
           id: det.Productsxorder.id,
           price: det.Productsxorder.price,
@@ -54,12 +55,29 @@ export default {
           productName: det.Productsxorder.productName,
           //descuentos
           // podria analizar la fecha actual aqui mismo para saber si debo poner o no el descuento
-          discountName: det.DiscountCampaigns[0].name,
-          discountType: det.DiscountCampaigns[0].type,
-          discount: det.DiscountCampaigns[0].discount,
-          discountStart: det.DiscountCampaigns[0].start,
-          discountEnd: det.DiscountCampaigns[0].end,
+
+          discount: 0,
+          discountName: "",
+          discountType: "",
         };
+        det.DiscountCampaigns.forEach((d: any) => {
+          //parseo de fechas
+          let fStart = new Date();
+          fStart.setTime(Date.parse(d.start));
+          let fEnd = new Date();
+          fEnd.setTime(Date.parse(d.end));
+
+          //analizo si corresponde un descuento
+          if (fStart <= today && fEnd >= today) {
+            //guardamos el mayor descuento existente
+            if (d.type == "porcentaje" && detail.discount < d.discount) {
+              detail.discount = d.discount;
+              detail.discountName = d.name;
+              detail.discountType = d.type;
+            }
+          }
+          //analizo si es del tipo unidades y revisar % quantity
+        });
         data.details.push(detail);
       });
       return data;
