@@ -7,7 +7,7 @@ export interface DiscountCampaignAttributesI {
   id: number;
   name: string;
   type: string;
-  discount: number;
+  discount: string;
   start: string;
   end: string;
 }
@@ -24,7 +24,7 @@ export class DiscountCampaign
   public id!: number;
   public name!: string;
   public type!: string;
-  public discount!: number;
+  public discount!: string;
   public start!: string;
   public end!: string;
   public readonly createdAt!: Date;
@@ -53,7 +53,7 @@ export function DiscountCampaignFactory(sequelize: Sequelize) {
         type: DataTypes.TEXT,
       },
       discount: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
       },
       start: {
         type: DataTypes.TEXT,

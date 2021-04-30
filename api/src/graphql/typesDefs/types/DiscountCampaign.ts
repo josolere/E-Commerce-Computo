@@ -19,7 +19,7 @@ export const typeDefs = gql`
     id: Int
     name: String
     type: String
-    discount: Int
+    discount: String
     start: String
     end: String
     createdAt: String
@@ -47,7 +47,7 @@ export const typeDefs = gql`
     id: Int
     name: String
     type: String
-    discount: Int
+    discount: String
     start: String
     end: String
   }
@@ -56,7 +56,7 @@ export const typeDefs = gql`
     id: Int
     name: String
     type: String
-    discount: Int
+    discount: String
     start: String
     end: String
   }

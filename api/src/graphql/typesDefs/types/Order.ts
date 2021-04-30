@@ -11,7 +11,8 @@ export const typeDefs = gql`
     productName: String
     discountName: String
     discountType: String
-    discount: Int
+    discount: String
+    discountMoney: Float
     discountStart: String
     discountEnd: String
     createdAt: String

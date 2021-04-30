@@ -12,6 +12,7 @@ import {
   orderCreatedMail,
   orderShippedMail,
 } from "../../mailer/functions";
+import { any } from "sequelize/types/lib/operators";
 
 export default {
   Query: {
@@ -56,9 +57,10 @@ export default {
           //descuentos
           // podria analizar la fecha actual aqui mismo para saber si debo poner o no el descuento
 
-          discount: 0,
+          discount: "",
           discountName: "",
           discountType: "",
+          discountMoney: 0,
         };
         det.DiscountCampaigns.forEach((d: any) => {
           //parseo de fechas
@@ -70,11 +72,37 @@ export default {
           //analizo si corresponde un descuento
           if (fStart <= today && fEnd >= today) {
             //guardamos el mayor descuento existente
-            if (d.type == "porcentaje" && detail.discount < d.discount) {
+            if (
+              d.type == "porcentaje" &&
+              0 + detail.discount < 0 + d.discount
+            ) {
               detail.discount = d.discount;
+              const auxPorcentaje = (d.discount * detail.price) / 100;
+              detail.discountMoney = auxPorcentaje * detail.quantity;
+              console.log(
+                "envio detalle descuento",
+                detail.discountMoney,
+                typeof detail.discountMoney
+              );
+
               detail.discountName = d.name;
               detail.discountType = d.type;
             }
+            if (d.type == "cantidad") {
+              //parseo el tipo de descuento
+              const auxDisc = d.discount.split("x");
+              const llevas = 0 + auxDisc[0];
+              const pagas = 0 + auxDisc[1];
+              const uniDiscount =
+                Math.floor(detail.quantity / llevas) * (llevas - pagas);
+              detail.discount = d.discount;
+
+              detail.discountMoney = uniDiscount * detail.price;
+
+              detail.discountName = d.name;
+              detail.discountType = d.type;
+            }
+            //podría guardar el discMoney en unavariable aux y comparar para quedarme con el mayor...
           }
           //analizo si es del tipo unidades y revisar % quantity
         });
