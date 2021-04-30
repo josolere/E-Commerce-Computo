@@ -40,13 +40,24 @@ const NavBar = (): JSX.Element => {
     setCookies(cookie.get('User'))
   }, [])
 
+
+  const handleRedirCart = () => {
+    window.location.href = "http://localhost:3000/Carrodecompras"
+  }
+
+  const handleRedirProducts= () => {
+    dispatch(setFilter(""))
+    window.location.href = "http://localhost:3000/Home"
+  }
+
+
   return (
     <>
       <div className={navBar.container}>
-        <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
+        <Link to='/'> <h1 className={navBar.titleNav} >CH</h1> </Link>
         <SearchBar />
 
-        <Link className={navBar.linkCart} to="/Carrodecompras">
+        <Link className={navBar.linkCart} to="/Carrodecompras" onClick={handleRedirCart}>
         <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
           <p>{quantity}</p>
          {/*  <span>${new Intl.NumberFormat().format(idsProducts)}</span> */}
@@ -55,7 +66,7 @@ const NavBar = (): JSX.Element => {
         
         <div className={navBar.containerLinks}>
         
-        {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}><p>Productos</p></Link> : false}
+        {true ? <a onClick={ handleRedirProducts }  className={navBar.linksNav}><p>Productos</p></a> : false}
         <div>
 
           {user?.name ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}

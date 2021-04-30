@@ -54,13 +54,13 @@ a {
     overflow: hidden;
     z-index: 1;
     right: 1rem;
-    p {
+    a, p{
         color: white;
         font-size: 0.9rem;
-        padding: 0 1rem 1rem 1rem;
+        padding: 0 1rem 1rem 0.5rem;
         position: relative;
-       
         width: 100%;
+        margin-top: 1rem;
         &:hover {
             cursor: pointer;
             transition-duration: 650ms;
