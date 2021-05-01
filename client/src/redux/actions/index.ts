@@ -15,8 +15,7 @@ export const setFilter = (filter: string) => ({
     type: SET_FILTER, filter
 });
 
-export const setCategory = (categories:number[])  => (
-    {
+export const setCategory = (categories:number[])  => ({
     type: SET_CATEGORIES , categories
 });
 
@@ -55,10 +54,9 @@ export const addLocalStorage = (arrayProducts:any) =>({
 
 export const deleteCart = () => ({
     type:DELETE_CART,
-
 })
 
-export const addProductDetails = (state:boolean) =>({
+export const addProductDetails = (state:{}) =>({
     type:ADD_PRODUCT_DETAILS,
     state
 })

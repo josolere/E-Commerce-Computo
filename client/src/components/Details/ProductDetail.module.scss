@@ -109,8 +109,6 @@ $yellow: #ffb200;
             cursor: pointer;
             background-color: $dark;
             color: $red;
-            padding: 1.5rem;
-            transition: 1s;
         }
     }
 }
@@ -124,13 +122,6 @@ $yellow: #ffb200;
         outline: none;
         svg{
             font-size: 1.2rem;
-        }
-        &:hover{
-            cursor: pointer;
-            background-color: $dark;
-            color: $red;
-            padding: 1.5rem;
-            transition: 1s;
         }
     }
 

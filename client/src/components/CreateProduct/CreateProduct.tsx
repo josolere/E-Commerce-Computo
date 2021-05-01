@@ -1,7 +1,8 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { GET_CATEGORIES } from "../../gql/categories";
-import styles from './CreateProduct.module.scss';
+import styles from '../Users/loguin.module.scss';
+import styles2 from '../Users/Edit.module.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faCommentAlt, faImage, faMoneyBill, faCopyright, faFileSignature } from '@fortawesome/free-solid-svg-icons';
@@ -145,7 +146,119 @@ export default function CreateProduct():JSX.Element {
         })
     }
 
+
+
+
     return (
+        <div className={styles.back}>
+            <div className={styles2.organizar2}>
+                <div className={styles.caja}>
+                    <div className={styles.container}>
+                        Añadir Producto
+                    </div>
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <div className={styles.form__group}>
+                        <label htmlFor='Nombre' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Nombre
+                        </label>
+                        <input
+                                className={styles.form__field}
+                                placeholder='Nombre'
+                                minLength={5}
+                                maxLength={30}
+                                value={state.name}
+                                type='text'
+                                name='name'
+                                onChange={handleChange}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.form__group}>
+                            <label htmlFor='Nombre' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faMoneyBill} aria-hidden={true} /> Precio
+                        </label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Precio'
+                                minLength={3}
+                                maxLength={30}
+                                value={state.price}
+                                type='text'
+                                name='price'
+                                onChange={handlePrice}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.form__group}>
+                            <label htmlFor='Nombre' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faCopyright} aria-hidden={true} /> Marca
+                        </label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Marca'
+                                minLength={1}
+                                maxLength={30}
+                                value={state.brand}
+                                type='text'
+                                name='brand'
+                                onChange={handleChange}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.form__group}>
+                            <label htmlFor='Nombre' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faImage} aria-hidden={true} /> Imagen
+                        </label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Imagen'
+                                minLength={5}
+                                maxLength={30}
+                                value={state.image}
+                                type='text'
+                                name='image'
+                                onChange={handleChange}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.form__group}>
+                            <label htmlFor='Nombre' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} /> Detalles
+                        </label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Detalles'
+                                minLength={10}
+                                maxLength={30}
+                                value={state.details}
+                                type='text'
+                                name='details'
+                                onChange={handleChange}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.OrderSelect}>
+                            <select className={styles.SelectCreate} onChange={handleCategories}>
+                                {categories?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} onClick={handleCategories}
+                             </select>
+                            <div className={styles.OrderCreateCat} >
+                                {categors.map(cate => <button
+                                    className={styles.CatButtons}
+                                    onClick={handleDeleteCategory} value={cate.id} key={cate.name}>
+                                    {cate.name}
+                                </button>)}
+                            </div>
+                        </div>                    
+                        <div className={styles.organizarbotones}>
+                        <button type='submit' className={styles.boton}> Añadir </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    )
+}
+    /* return (
         <div className={styles.container}>
             <h4 className={styles.TitleCreate} >Crear Producto</h4>
             <div className={styles.OrderCreate} >
@@ -233,8 +346,8 @@ export default function CreateProduct():JSX.Element {
                         </div>
                         <div className={styles.OrderSelect}>
                             <select className={styles.SelectCreate} onChange={handleCategories}>
-                                {categories?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/}
-                            </select>
+                                {categories?.map((cat) => <option key={cat.name} value={cat.id} >{cat.name}</option>)} {/*onClick={handleCategories}*/
+                            /* </select>
                             <div className={styles.OrderCreateCat} >
                                 {categors.map(cate => <button
                                     className={styles.CatButtons}
@@ -276,5 +389,4 @@ export default function CreateProduct():JSX.Element {
                 </div>
             </div>
         </div>
-    )
-}
+    ) */

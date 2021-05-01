@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux'
 import { deleteProduct, morePrice, lessPrice } from '../../redux/actions'
 import { PRODUCTS } from "../../gql/shopingCart"
+import { isOptionDisabled } from 'react-select/src/builtins';
 
 interface DetailsProduct {
     id: number,
@@ -161,9 +162,9 @@ const ShoppingCard = (props: props): JSX.Element => {
                        
                             <h2 className={cart.price}>${price}</h2> 
                         <div className={cart.containerButtons}>
-                            <button
+                            <button disabled ={props.count === 1}
                                 id={props.count > 1 ? cart.buttonLess : undefined}
-                                onClick={() => {
+                                onClick={() => {  
                                     accountantLess();
                                     addLocaStorageLess()
                                 }}

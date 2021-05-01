@@ -2,12 +2,10 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/login"
-import { useCookies } from "react-cookie";
+import { LOGIN_MUTATION, SIGNUP_MUTATION} from "../../gql/login"
 import { toast, ToastContainer } from "react-toastify"
 import {faEnvelopeSquare, faUnlock,faFileSignature, faMapMarker, faShareAlt} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FacebookLogin from "react-facebook-login"
 import GoogleLogin from 'react-google-login';
 
 const Login = () => {
@@ -42,7 +40,7 @@ const Login = () => {
                 .then((resolve) => {  const visitante = resolve.data.login.user;
                     toast.success("Bienvenido " + visitante.name + ' ' +  '🥳');
                     setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
-                .catch((error) => { toast.error('Tu no eres de aquí 🤔')})
+                .catch((error) => { console.log(error);toast.error('Tu no eres de aquí 🤔')})
                 ;
         }
         else {
@@ -63,14 +61,6 @@ const Login = () => {
     
     const handleResetPassword = () => {
         window.location.href = 'http://localhost:3000/ResetContraseña'
-    }
-
-    const responseFacebook = (res:any) => {
-        console.log(res)
-    }
-
-    const componentClicked = () => {
-        window.location.href = 'http://localhost:5000/auth/facebook'
     }
 
     const responseGoogle = () => {

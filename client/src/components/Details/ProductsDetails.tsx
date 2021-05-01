@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa'
 import '../rating/rating.css'
@@ -9,9 +9,10 @@ import styles from "./ProductDetail.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"
-import { addProductDetails } from '../../redux/actions'
-import { toast } from 'react-toastify';
+import { addProductDetails, addShopping, local } from '../../redux/actions'
 import { ACTUAL_USER, GET_USERS } from "../../gql/login";
+import { AppState } from '../../redux/reducers';
+import { toast } from 'react-toastify';
 
 interface user {
     currentUser: {
@@ -44,6 +45,7 @@ interface Categories {
 }
 
 interface PropsDetails {
+
     history: {
         location: {
             state: {
@@ -54,6 +56,7 @@ interface PropsDetails {
     }
 }
 
+
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     let user: any = {}
@@ -62,11 +65,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     user = currentU?.data?.currentUser
 
-    console.log(user)
 
     const dispatch = useDispatch()
 
-    const id = props.history.location.state.id
+    const id = props.history?.location.state.id
 
     const { data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
@@ -92,11 +94,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     const [hideRating, setHideRating] = useState(true);
 
+    const [revActual, setReviewAct]:any = useState([])
+
     const [hideReview, setHideReview] = useState(true);
 
     const filtred = data?.getProductById
-
-    console.log(filtred)
 
     let totalrating: number = 0;
 
@@ -106,6 +108,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     let count = 1;
 
+    var arr:any= []
     if (rating.length > 0) {
         while (count <= 5) {
             summulti.push(count * rating.filter(item => item === count).length);
@@ -115,45 +118,31 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         totalrating = summulti.reduce((a, b) => a + b) / sumlength.reduce((a, b) => a + b)
         totalrating = parseFloat(totalrating.toFixed(2))
     }
-
     const changereview = () => {
-        setControlReview(user?.id)
+        setControlReview(user.id)
         addreview({ variables: { id: filtred?.id, rating: totalrating, text: reviewuser.review,title: reviewuser.title, userId: user?.id} })
-            .then(review => {
-                console.log('review up');
-                reviewsArray.push(review.data.addReview)
-                console.log(review.data.addReview)
-                console.log(reviewsArray[0])
-            })
-            .catch((err) => { console.log('review mal') })
+        .then(review => setReviewAct([...revActual, review.data.addReview]))
+        .catch(err => toast.error("Solo puedes enviar una reseña por producto"))
         setHideReview(false)
     }
 
     const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
-
+    
     useEffect(() => {
-        console.log(results?.data)
     }, [results])
 
     useEffect(() => {
-        console.log(results.data)
         setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
     }, [filtred])
 
     let reviewsArray:any = filtred?.reviews
 
     useEffect(() => {
-        reviewsArray = filtred?.reviews
+        filtred?.reviews?.map(item => setControlReview(item?.name))
+    }, [filtred, arr])
 
-    }, [filtred?.reviews, filtred])
-
-
-
-
-    console.log(user?.id)
-    console.log(filtred?.reviews)
-    console.log(controReview !== user?.id)
     const [editMode, setEditMode] = useState(false)
+   
 
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -215,14 +204,56 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     const categoriesQ = useQuery<Categories>(GET_CATEGORIES)
     const categoriesQuery = categoriesQ.data?.getCategory
 
+    const [cant, setCant] = useState(1)
+    
+    var { quantity, priceSubTotal }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
-    const handleAddProduct = () => {
-        const state = true
-        dispatch(addProductDetails(state));
+    if (quantity !== 0) {
+        localStorage.setItem('quantity', JSON.stringify(quantity))
+        localStorage.setItem('priceSubTotal', JSON.stringify(priceSubTotal))
+
     }
 
-    
+    const addLocaStorage = () => {
+        const idProduct: {} = {
+            id: id,
+            price: details.price,
+            count: cant,
+            image: details.image,
+            name: details.name,
+        }
 
+
+        if (localStorage.getItem('productsLocal')) {
+            let productLocal: any = (localStorage.getItem('productsLocal'))
+            productLocal = JSON.parse(productLocal)
+            const valor:{count:number}= productLocal.find((el:{id:number})=> el.id === id)
+            let newLocal = [];
+            if(valor){
+                valor.count = valor.count + 1
+                newLocal = productLocal.filter((filt: any) => filt.id !== id).concat(valor)
+            } else {
+               newLocal = productLocal.filter((filt: any) => filt.id !== id)
+                newLocal.push(idProduct)
+            }
+            localStorage.setItem('productsLocal', JSON.stringify(newLocal))
+        } else {
+            dispatch(local(idProduct))
+        }
+    }
+
+    const handleAddProduct = () => {
+        if(details){
+           const id=details.id
+           const price=details.price
+           const count=cant
+        dispatch(addShopping({ id, price, count }));
+        addLocaStorage();
+        }
+       
+        
+    }
+   
     return (
         <React.Fragment>
             <div className={styles.contenedorAll}>
@@ -259,12 +290,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                 <p className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</p>
                             }
                             <hr style={{ height: '1rem', backgroundColor: 'white' }} />
-                            <Link to='/Home' >
-                                <button onClick={() => {
-                                    handleAddProduct();
-                                }} className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
-                            </Link>
-                        </div>
+                                <button onClick={ handleAddProduct } className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
+                            </div>
                         <div className={stylesEdit.bot}>
 
                             {editMode && <select onChange={handleAddCategories}>
@@ -335,7 +362,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                                             />
                                         </label>
                                     })}
-                                    {/* <p className={styles.raiting}>Rating {totalrating}</p> */}
                                 </div>
                                 :
                                 <div className={styles.sortthanks}>
@@ -346,10 +372,17 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         </div>
                     </div>
                     : false}
-                {/*                   {results.called ? <div><div>{results?.data?.addReview?.text}</div><div>{results?.data?.addReview?.rating}</div></div>
-                        : false} */}
+                                 
                 <div className={styles.box}>
-                    {reviewsArray?.map((review:any) =>
+                    {filtred?.reviews.length ? filtred?.reviews.map(review =>
+                        <div className={styles.content}>
+                            <div className={styles.reviewContainer}>
+                            <p className={styles.pReviewTitle}>{review.title}</p>
+                            <p className={styles.pReview} >{review.text}</p>
+                            </div>
+                            <p className={styles.pRanking}>{review.rating}<FaStar size={20} className='star' color={rating ? '#ffc107' : '#e4e5e9'} /></p>
+                        </div>) : 
+                        revActual.length ? revActual.map((review:any) =>
                         <div className={styles.content}>
                             <div className={styles.reviewContainer}>
                             <p className={styles.pReviewTitle}>{review.title}</p>
@@ -357,7 +390,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                             </div>
                             
                             <p className={styles.pRanking}>{review.rating}<FaStar size={20} className='star' color={rating ? '#ffc107' : '#e4e5e9'} /></p>
-                        </div>)}
+                        </div>):  false}
                 </div>
             </div>
         </React.Fragment>

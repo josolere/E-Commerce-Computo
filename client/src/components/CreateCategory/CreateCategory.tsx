@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import styles from './CreateCategory.module.scss'
+import styles from '../Users/loguin.module.scss'
+import styles1 from "./CreateCategory.module.scss"
 import { NEW_CATEGORY } from "../../gql/categories"
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_CATEGORIES } from "../../gql/categories";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import styles2 from '../Users/Edit.module.scss';
+import { toast } from 'react-toastify';
+
 
 
 interface Categorie {
@@ -29,9 +33,9 @@ export default function CreateProduct():JSX.Element {
 
     const [categorie, setCategorie] = useState("")
 
-    const [createCategory, { data }] = useMutation(NEW_CATEGORY)
+    const [createCategory ] = useMutation(NEW_CATEGORY)
 
-    const [listCategory, setListCategory] = useState<Array<any>>([])
+    const [listCategory, setListCategory] = useState<Array<string>>([])
 
     let newCategory = ''
 
@@ -48,24 +52,22 @@ export default function CreateProduct():JSX.Element {
         e.preventDefault()
 
         createCategory({ variables: { name: categorie } })
-            .then((resolve) => { console.log(resolve) })
-            .catch((err) => { console.log('Salio Mal') })
-        if (data) {
-            newCategory = data?.createCategory
-            setListCategory([...listCategory, newCategory])
-        }
+            .then((resolve) => {  setListCategory([...listCategory, resolve.data.createCategory]);
+                 toast.success("Categoría añadida con éxito")})
+            .catch((err) => { console.log(err) })
     }
-
-    console.log(data)
-
+/* console.log(cat)
+console.log(listCategory) */
     return (
-        <div className={styles.container}>
-            <h4 className={styles.TitleCreate} >Crear Categoría</h4>
-            <div className={styles.OrderCreate} >
-                <div className={styles.OrderForm} >
+        <div className={styles.back}>
+            <div className={styles2.organizar2}>
+                <div className={styles.caja}>
+                    <div className={styles.container}>
+                        Añadir Categoría
+                    </div>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.form__group}>
-                            <label htmlFor='Nombre' className={styles.form__label} >
+                        <label htmlFor='Nombre' className={styles.form__label} >
                                 <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Nombre
                         </label>
                             <input
@@ -80,26 +82,27 @@ export default function CreateProduct():JSX.Element {
                                 required={true}
                             />
                         </div>
-                        <div className={styles.OrderButton} >
-                            <button type='submit' className={styles.button}> Crear </button>
+                    
+                        <div className={styles.organizarbotones}>
+                        <button type='submit' className={styles.boton}> Añadir </button>
                         </div>
                     </form>
                 </div>
-
-                <div className={styles.separateList}>
-                    <div className={styles.listProducts}>
-                        <h4 className={styles.TitleList} >Categorías creadas</h4>
-                        <hr className={styles.hrList} />
+                
+                <div className={styles1.separateList}>
+                    <div className={styles1.listProducts}>
+                        {/* <h4 className={styles1.TitleList} >Categorías creadas</h4>  */}
+                        <hr className={styles1.hrList} />
                         {cat && cat.map((item: any, index: number) => (
-                            <button key={index} className={styles.pList}>{item?.id}: {item?.name}</button>
+                            <button key={index} className={styles1.pList}> {item?.name} {/* <span>x</span> */}</button>
                         ))}
                         {listCategory && listCategory.map((item: any, index: number) => (
-                            <button key={index} className={styles.pList} >{item?.id}: {item.name}</button>
-                        ))}
+                            <button key={index} className={styles1.pList} >{item.name} </button>
+                        )) }
                     </div>
                 </div>
-
             </div>
         </div>
     )
 }
+    

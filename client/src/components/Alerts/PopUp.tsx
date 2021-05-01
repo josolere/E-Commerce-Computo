@@ -19,7 +19,7 @@ interface DetailsProduct {
 
 const PopUp = () => {
 
-    let id = 19
+    /* let id = 19
 
     const { data } = useQuery<DetailsProduct>(GET, {
         variables: { id }
@@ -51,7 +51,7 @@ const PopUp = () => {
                 </div>
             </div>
         </div>
-    )
+    ) */
 }
 
 export default PopUp
