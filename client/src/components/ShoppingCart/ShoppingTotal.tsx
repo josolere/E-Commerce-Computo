@@ -89,25 +89,6 @@ const ShoppingTotal = (): JSX.Element => {
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-            {user?.privilege === 'user' ?
-                <div className={total.containerButton}>
-                    <Link to='/Mercado'>
-                        <button onClick={handleOrder}
-                            className={total.buttonFinal}>Finalizar Compra
-                    </button>
-                    </Link>
-                </div>
-                :
-                <div className={total.containerButton}>
-                    <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
-                    <Link to='/Login'>
-                        <button
-                            className={total.buttonFinal}
-                        >Login</button>
-                    </Link>
-                </div>}
-=======
             {user?.privilege ==='user' ?
             <div className={total.containerButton}>
                 <Link to='/pago' onClick={() => { handleOrder() }}
@@ -122,7 +103,6 @@ const ShoppingTotal = (): JSX.Element => {
                     >Login</button>
                 </Link>
             </div>}
->>>>>>> ef65ed89e29a95ed99f48d86b4cc19a37740d9c8
         </>
     )
 }

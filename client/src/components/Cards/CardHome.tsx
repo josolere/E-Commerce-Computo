@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IoCloseCircleSharp } from 'react-icons/io5'
+import { FiHeart } from 'react-icons/fi'
 
 
 interface props {
@@ -16,9 +18,10 @@ interface props {
     image: string
     price: number
     count: number
+    stock:number
 }
 
-export default function Card({ name, image, price, id, count }: props) {
+export default function Card({ name, image, price, id, count, stock }: props) {
 
     const dispatch = useDispatch()
     const { quantity, priceSubTotal, productTotal, idDetails, priceDetails, countDetails }: any = useSelector((store: AppState) => store.shoppingCartReducer)
@@ -133,7 +136,7 @@ export default function Card({ name, image, price, id, count }: props) {
     return (
         <div className={styles.card}>
             <ToastContainer />
-
+            {/* <button className={styles.fav}><FiHeart size={20}/></button> */}
             <Link
                 onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{
@@ -149,12 +152,23 @@ export default function Card({ name, image, price, id, count }: props) {
             {/* <div className={styles.buy}>${new Intl.NumberFormat().format(price)}</div> */}
             <div className={styles.buttons}>
                 <button className={styles.buy}>${new Intl.NumberFormat().format(price)}</button>
-                <button
+
+                {stock ? <button
                     onClick={() => {
                         handleAddProduct();
                     }}
                     className={styles.addCart}>
                     <FontAwesomeIcon icon={faCartPlus} /></button>
+                :
+                
+                <button className={styles.noAddCart}><Link to={{
+                    pathname: '/Detalles',
+                    state: {
+                        id: id,
+                        newprice: 0
+                    }
+                }}><IoCloseCircleSharp color='whitesmoke' style={{margin:"0rem 1rem"}} /></Link></button>    
+                }
             </div>
         </div>
 

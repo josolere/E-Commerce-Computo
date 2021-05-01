@@ -18,6 +18,7 @@ interface DetailsProduct {
     name: string,
     price: number,
     details: string,
+    stock:number
 }
 
 interface DetailsData {
@@ -64,7 +65,7 @@ export default function Cards({ reset }: IProps) {
     const displayProducts = product?.slice(pageVisited, pageVisited + productsPerPage)
         .map(el => {
             return (
-                <Card id={el.id} name={el.name} image={el.image} price={el.price} count={count} />
+                <Card id={el.id} name={el.name} image={el.image} price={el.price} count={count} stock={el.stock} />
             );
         })
 
