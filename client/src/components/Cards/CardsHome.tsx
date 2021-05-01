@@ -4,7 +4,7 @@ import { FILTER } from "../../gql/card"
 import styles from './CardsHome.module.scss'
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ReactPaginate from "react-paginate"
 import { AppState } from '../../redux/reducers';
 import PopUp from '../Alerts/PopUp';
@@ -55,7 +55,6 @@ export default function Cards({ reset }: IProps) {
     }, [data, reset])
 
     const pageCount = Math.ceil(product ? product.length / productsPerPage : 0)
-
 
     const changePage = ({ selected }: any) => {
         setPageNumber(selected)

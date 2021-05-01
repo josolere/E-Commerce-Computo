@@ -144,7 +144,7 @@ export default function CreateProduct():JSX.Element {
             categories: state.categories.filter(id => id !== parseInt(e.currentTarget.value))
         })
     }
-
+// console.log(ta)
     return (
         <div className={styles.container}>
             <h4 className={styles.TitleCreate} >Crear Producto</h4>

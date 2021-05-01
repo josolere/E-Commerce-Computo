@@ -19,6 +19,8 @@ interface user {
     }
 }
 
+  
+  
 
 const ShoppingTotal = (): JSX.Element => {
 
@@ -30,7 +32,7 @@ const ShoppingTotal = (): JSX.Element => {
 
     const [createOrder, { data }] = useMutation(NEW_ORDER)
     const dispatch = useDispatch()
-    const idsProducts: number = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
+    const {priceSubTotal, idUsers} = useSelector((store: AppState) => store.shoppingCartReducer)
     const [priceTotal, setPriceTotal] = useState(0)
     const [send, setSend] = useState(500)
     const [order, setOrder] = useState([])
@@ -42,28 +44,41 @@ const ShoppingTotal = (): JSX.Element => {
     }, [cookie])
 
     useEffect(() => {
-        setPriceTotal(idsProducts + send)
-    }, [idsProducts])
+        setPriceTotal(priceSubTotal + send)
+    }, [priceSubTotal])
+
+    // useEffect(() => {
+    //     if (logeo === true) {
+    //         // createOrder({ variables: { status: status, idUser: idUser } })
+    //         //     .then((resolve) => { console.log(data) })
+    //         //     .catch((err) => { console.log('no resuelto') })
+    //     }
+
+    // }, [])
 
     const handleOrder = () => {
-        if (localStorage.getItem('productsLocal') && gotcookie === true) {
-            let productLocal: any = []
-            productLocal = (localStorage.getItem('productsLocal'))
-            productLocal = (JSON.parse(productLocal))
-            setOrder(productLocal)
-            /*  localStorage.clear()
-             dispatch(deleteCart()) */
-            localStorage.setItem('productsLocal', JSON.stringify([]))
-            /*             createOrder({ variables: { status: 'pending', idUser: 1 } })
-                            .then((resolve) => { console.log(data) })
-                            .catch((err) => { console.log('Salio Mal') }) */
-            window.location.href = 'http://localhost:3000/Mercado'
+        if (user) {
+            // let productLocal: any = []
+            // productLocal = (localStorage.getItem('productsLocal'))
+            // productLocal = (JSON.parse(productLocal))
+            // setOrder(productLocal)
+            // localStorage.clear()
+            // dispatch(deleteCart())
+            // createOrder({ variables: { status: 'pendiente', idUser: idUsers } })
+            //     .then((resolve) => { 
+            //         localStorage.setItem('productsLocal', JSON.stringify([]))
+            //         console.log(data) })
+            //     .catch((err) => { console.log('Salio Mal') })
+            window.location.href = 'http://localhost:3000/Pago'
         }
         else {
             toast.error("Debes iniciar sesión para realizar una compra")
         }
     }
 
+    
+
+   
     return (
         <>
             <div className={total.containerOrden}>
@@ -73,7 +88,7 @@ const ShoppingTotal = (): JSX.Element => {
                 <div className={total.containerValue}>
                     <div className={total.containerSubTotal}>
                         <h2>SubTotal</h2>
-                        <p>${new Intl.NumberFormat().format(idsProducts)}</p>
+                        <p>${new Intl.NumberFormat().format(priceSubTotal )}</p>
                     </div>
                     <div className={total.containerSent}>
                         <h2>Gastos De Envio</h2>

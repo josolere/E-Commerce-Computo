@@ -92,23 +92,36 @@ export default {
 
     getOrderByStatus: async (
       _parent: object,
-      { status }: { status: string },
+      { status, idUser }: { status: string; idUser: any },
       { models }: { models: iModels }
     ): Promise<iOrder> => {
-      const orders = await models.Order.findAll({ where: { status: status } });
-      return orders;
-    },
-
-    getAllOrders: async (
-      _parent: object,
-      { status }: { status: string },
-      { models }: { models: iModels }
-    ): Promise<iOrder> => {
-      let orders: any;
-      status
-        ? (orders = await models.Order.findAll({ where: { status: status } }))
-        : (orders = await models.Order.findAll());
-      return orders;
+      const data = await models.Order.findAll({
+        where: { status: status, UserId: idUser },
+        include: [
+          {
+            model: db.Product,
+            through: "productsxorder",
+            // attributes: ["id", "name"],
+          },
+        ],
+      });
+      let i: number = 0;
+      data.map((item: any) => {
+        data[i].details = [];
+        item.Products.map((det: any) => {
+          const detail = {
+            id: det.Productsxorder.id,
+            price: det.Productsxorder.price,
+            quantity: det.Productsxorder.quantity,
+            OrderId: det.Productsxorder.OrderId,
+            ProductId: det.Productsxorder.ProductId,
+            productName: det.Productsxorder.productName,
+          };
+          data[i].details.push(detail);
+        });
+        i++;
+      });
+      return data;
     },
   },
 

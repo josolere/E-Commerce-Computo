@@ -1,6 +1,14 @@
 import ordersStyle from './Orders.module.scss'
+import {Link} from 'react-router-dom'
 
-const Orders = () => {
+interface props {
+    id: number
+    status: string
+    fecha:number
+    // quantity:number
+}
+
+const Orders = ({ id, status,  fecha }: props) => {
     return (
         <>
             <div className={ordersStyle.bodyOrders}>
@@ -8,18 +16,28 @@ const Orders = () => {
                 <div className={ordersStyle.contenedorCard}>
                     <div className={ordersStyle.contenedorHeaderCard}>
                         <div className={ordersStyle.numberOrder}>
-                            <h2>Numero De Orden:</h2>
-                            <p>1111111</p>
+                            <h4>Numero De Orden:</h4>
+                            <p>{id}</p>
                         </div>
                         <div className={ordersStyle.date}>
-                            <h2>Fecha Orden:</h2>
-                            <p>2121212</p>
+                            <h4>Fecha Orden:</h4>
+                            <p>{fecha}</p>
+                        </div>
+                        <div className={ordersStyle.date}>
+                            <h4>Estado: </h4>
+                            <p>{status}</p>
+                        </div>
+                        <div className={ordersStyle.date}>
+                            <h4>Cantidad de Productos:</h4>
+                            <p>21</p>
+                        </div>
+                        <div  className={ordersStyle.containerLink}>
+                            <Link className={ordersStyle.link} to='/detalleordenes'>
+                                Detalles
+                            </Link>
                         </div>
                     </div>
-                    <div className={ordersStyle.contenedorBodyCard}>
-                    </div>
-                    <div className={ordersStyle.contenedorFooterCard}>
-                    </div>
+
                 </div>
             </div>
         </>

@@ -13,7 +13,7 @@ export const typeDefs = gql`
 
   type Query {
     getOrderById(id: ID!): Order
-    getOrderByStatus(status: String): [Order]
+    getOrderByStatus(status: String, idUser: ID): [Order]
     getOrdersByIdUser(idUser: ID!): [Order]
     getAllOrders(status: String): [Order]
   }
