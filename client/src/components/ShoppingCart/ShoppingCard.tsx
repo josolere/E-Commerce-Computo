@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { EDIT_ORDER_DETAIL, GET_ORDER_LIST, DELETE_ORDER_DETAIL } from "../../gql/order"
 import {GET_ORDER_BY_StATUS } from "../../gql/orders"
+
 import { AppState } from '../../redux/reducers';
 
 
@@ -87,39 +88,16 @@ const ShoppingCard = (props: props): JSX.Element => {
     const [idEdit, setIdEdit] = useState(0)
     const dispatch = useDispatch()
 
-    const [editOrderDetail] = useMutation(EDIT_ORDER_DETAIL)
     const [deleteOrderDetail] = useMutation(DELETE_ORDER_DETAIL)
-
+    const [editOrderDetail] = useMutation(EDIT_ORDER_DETAIL,{
+        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUsers}}]
+    })
 
     useEffect(() => {
         if (!loading) {
             setPrice(product.price * props.count)
         }
     }, [product])
-
-
-    // useEffect(() => {
-    //     console.log(idProductOrder)
-    //     if (idProductOrder.data && logeo === true) {
-    //         console.log(idProductOrder)
-    //         let arrayOrders: any = idProductOrder.data.getOrdersByIdUser.filter((filt) => filt.status === 'pendiente')
-    //         console.log(arrayOrders)
-    //         if (arrayOrders.length > 0) {
-    //             if (arrayOrders[0].details.length > 0 && data) {
-    //                 let newArrayOrder = arrayOrders[0].details.filter((filtt: any) => filtt.id !== product.id)
-    //                 let newArrayodOrder = newArrayOrder.filter((filt: any) => filt.ProductId === idsProducts)
-    //                 console.log(newArrayodOrder)
-    //                 if (newArrayodOrder.length > 0) {
-    //                     let re: any = newArrayodOrder[0].id
-    //                     setIdEdit(re)
-    //                     // setIdProOrder(newArrayodOrder)
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }, [idProductOrder])
-
-    
 
 
     const accounrMoreBases = (id:any) => {
@@ -146,9 +124,6 @@ const ShoppingCard = (props: props): JSX.Element => {
     const accountantMore = async () => {
        let resultId = details?.find((finds:any)=> finds?.ProductId === product?.id
        )
-    //    console.log(details)
-       console.log(productsCart?.data?.getOrderByStatus[0]?.details)
-
 
         if (idProductOrder?.data !== undefined && productsCart !==undefined) {
             accounrMoreBases(resultId?.id)
@@ -209,7 +184,7 @@ const ShoppingCard = (props: props): JSX.Element => {
 
 
     const accountantLess = async () => {
-        let resultId = details?.find((finds:any)=> finds?.ProductId === product?.id)
+        let resultId = details?.find((finds:any)=> finds.ProductId === product?.id)
 
         if (idProductOrder.data !== undefined) {
             accountantLessBases(resultId?.id)
@@ -269,7 +244,7 @@ const ShoppingCard = (props: props): JSX.Element => {
 
     const eliminateProduct = async () => {
         if (idProductOrder.data !== undefined) {
-        let resultId = details?.find((finds:any)=> finds?.ProductId === product?.id)
+        let resultId = details?.find((finds:any)=> finds.ProductId === product.id)
 
             eliminateProductBases(resultId?.id)
         }
@@ -280,19 +255,19 @@ const ShoppingCard = (props: props): JSX.Element => {
         if (localStorage.getItem('productsLocal')) {
             let productLocal: any = (localStorage.getItem('productsLocal'))
             productLocal = JSON.parse(productLocal)
-            const newLocal = productLocal.filter((filt: any) => filt.id !== product.id)
+            const newLocal = productLocal?.filter((filt: any) => filt.id !== product?.id)
             localStorage.setItem('productsLocal', JSON.stringify(newLocal))
 
-            const newquantity = productLocal.filter((filt: any) => filt.id === product.id)
+            const newquantity = productLocal?.filter((filt: any) => filt.id === product?.id)
             let quantity: any = localStorage.getItem('quantity')
 
-            let quantityDelete = quantity - newquantity[0].count
+            let quantityDelete = quantity - newquantity[0]?.count
             localStorage.setItem('quantity', JSON.stringify(quantityDelete))
 
-            const newSubTotal = productLocal.filter((filt: any) => filt.id === product.id)
+            const newSubTotal = productLocal.filter((filt: any) => filt.id === product?.id)
             let SubTotal: any = localStorage.getItem('priceSubTotal')
 
-            let priceSubTotal = SubTotal - (newquantity[0].price * newquantity[0].count)
+            let priceSubTotal = SubTotal - (newquantity[0]?.price * newquantity[0]?.count)
             localStorage.setItem('priceSubTotal', JSON.stringify(priceSubTotal))
         }
     }

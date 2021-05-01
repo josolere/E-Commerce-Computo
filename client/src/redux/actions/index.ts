@@ -14,6 +14,7 @@ export const LOGEO = 'LOGEO'
 export const ADD_BASE_DE_DATOS = 'ADD_BASE_DE_DATOS'
 export const ORDER_ID = 'ORDER_ID'
 export const ORDER_PENDING = 'ORDER_PENDING'
+export const COUNT_BASE = 'COUNT_BASE'
 
 export const setFilter = (filter: string) => ({
     type: SET_FILTER, filter
@@ -92,5 +93,10 @@ export const orderId = (data:any) =>({
 
 export const orderPending = (data:[]) => ({
     type:ORDER_PENDING,
+    data
+})
+
+export const countAddBase = (data:number) => ({
+    type:COUNT_BASE,
     data
 })

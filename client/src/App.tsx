@@ -27,14 +27,15 @@ import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/login";
 import ResetPassword from './components/Users/ResetPassword';
 import { GET_ORDER } from "./gql/shopingCart";
+import FormCheckout from './components/CheckOut/FormCheckout';
 
 interface user {
   currentUser: {
-      name: string,
-      password: string,
-      email: string,
-      privilege: string
-      id:string
+    name: string,
+    password: string,
+    email: string,
+    privilege: string
+    id: string
   }
 }
 
@@ -57,23 +58,21 @@ interface detailsorder {
 function App() {
   const firsstRender = useRef(true)
 
-  let user:any = {}
+  let user: any = {}
 
   const [idUser, setIdUser] = useState('')
-  
+
   const actualuser = useQuery<user>(ACTUAL_USER)
   const idOrder = useQuery<detailOrderid>(GET_ORDER, ({ variables: { idUser: idUser } }))
   const dispatch = useDispatch()
 
-  // const [gotCookies, setGotCookies] = useState(false)
-
-  const cookie = new Cookies 
+  const cookie = new Cookies
 
   const resultsUsers = useQuery(GET_USERS)
 
   let test = resultsUsers?.data?.getUsers
   console.log(test)
-  user = actualuser.data?.currentUser  
+  user = actualuser.data?.currentUser
   console.log(user)
 
   useEffect(() => {
@@ -83,7 +82,7 @@ function App() {
       if (actualuser.data.currentUser !== null) {
         let idUsers = actualuser?.data?.currentUser.id
         setIdUser(idUsers)
-        dispatch(logeo({ idUsers, login}))
+        dispatch(logeo({ idUsers, login }))
 
         if (actualuser.data && idOrder.data.getOrdersByIdUser.length > 0) {
           console.log(idOrder.data)
@@ -96,13 +95,6 @@ function App() {
     }
 
   }, [actualuser, idOrder])
-
-  // useEffect(() => {
-  //   if (cookie.get('User')) {
-  //     setGotCookies(true)
-  //   }
-  // }, [cookie])
-
 
   useEffect(() => {
     if (localStorage.getItem('productsLocal')) {
@@ -146,12 +138,12 @@ function App() {
         <Route exact path='/CrearCategoria'>
           {user?.privilege === 'admin' ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
-        <Route path='/Ordenes/Usuario' component={OrdersUser}/>
-        <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
+        <Route path='/Ordenes/Usuario' component={OrdersUser} />
+        <Route path='/Orden/Usuario/:id' component={OrderUserDetails} />
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-        <Route exact path='/Pago' component={Payment}/>
+        <Route exact path='/Pago' component={Payment} />
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
@@ -161,6 +153,7 @@ function App() {
             <NavCategories />
           </div>
         </Route>
+        <Route exact path='/checkout' component={FormCheckout}/>
         <Route exact path='/' component={LandPage} />
         <Route component={PageNotFound} />
       </Switch>

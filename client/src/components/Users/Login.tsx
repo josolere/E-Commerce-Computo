@@ -1,3 +1,4 @@
+  
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useMutation, gql, useQuery } from '@apollo/client';
@@ -18,17 +19,11 @@ import {GET_ORDER_BY_StATUS } from "../../gql/orders"
 
 const Login = () => {
 
-    // const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
-    //     refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente"}}]
-    // })
-    //-----------------------------------------------
-    // const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL)
     const [createOrder] = useMutation(NEW_ORDER)
 
     const [idUser, setIdUser] = useState("")
     const [orderCount, setOrderCount] = useState([])
     const [log, setLog] = useState(false)
-    // const [idOrder, setIdOrder] = useState(0)
 
     const firsstRender = useRef(true)
 
@@ -49,7 +44,6 @@ const Login = () => {
 
     const dispatch = useDispatch()
 
-    //------------------------------------------------
 
     const [logform, setLogform] = useState({
         email: '',
@@ -77,9 +71,6 @@ const Login = () => {
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
     }
-
-
-
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (!showlogin) {
@@ -112,8 +103,6 @@ const Login = () => {
         event.preventDefault()
     }
 
-
-    //-----------------------------------------------------------------------------------------------
 
     useEffect(() => {
         if (firsstRender.current) {
@@ -174,8 +163,6 @@ const Login = () => {
 
     }, [orderCount])
 
-
-    //-----------------------------------------------------------------------------------------------
 
     const handleResetPassword = () => {
         window.location.href = 'http://localhost:3000/ResetContraseña'

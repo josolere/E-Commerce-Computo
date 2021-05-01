@@ -38,9 +38,18 @@ export const GET_ORDER = gql`
         getOrdersByIdUser (idUser:$idUser) {
             id
             status
+            createdAt
+            details{
+                    id
+                    ProductId
+                    productName
+                    OrderId
+                    price
+                    quantity
            
         }
     }
+}
 `;
 
 

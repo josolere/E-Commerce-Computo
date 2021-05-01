@@ -3,7 +3,7 @@ import { gql } from "@apollo/client"
 
 export const GET_ORDER_LIST = gql`
 
-query ($idUser: ID!){
+query($idUser: ID!){
   getOrdersByIdUser (idUser:$idUser) {
       id
       status  
@@ -14,7 +14,7 @@ query ($idUser: ID!){
         quantity
         price
         productName
-        
+        OrderId        
       }
 
   }

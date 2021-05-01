@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import SearchBar from "../SearchBar/SearchBar";
 import navBar from './NavBar.module.scss';
@@ -51,6 +51,7 @@ interface orderdetails {
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
+  const firsstRender = useRef(true)
 
   const { logeo, idUsers }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
@@ -67,6 +68,9 @@ const NavBar = (): JSX.Element => {
 
   useEffect(() => {
     console.log(data)
+    if (firsstRender.current) {
+      firsstRender.current = false;
+  } else {
     if (logeo === true && dataOrderSatus.data) {
       let arrayProducts = []
       if (dataOrderSatus.data?.getOrderByStatus[0]?.details.length !== 0) {
@@ -87,11 +91,13 @@ const NavBar = (): JSX.Element => {
           priceBase = priceBase + mapeo.price * conte
         })
       dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
-      localStorage.setItem('productsLocal', JSON.stringify(productBas))
-      localStorage.setItem('quantity', JSON.stringify(conte))
-      localStorage.setItem('priceSubTotal', JSON.stringify(priceBase))
+            localStorage.clear()
+      // localStorage.setItem('productsLocal', JSON.stringify(productBas))
+      // localStorage.setItem('quantity', JSON.stringify(conte))
+      // localStorage.setItem('priceSubTotal', JSON.stringify(priceBase))
     }
-  }, [dataOrderSatus.data])
+  }
+  }, [dataOrderSatus.data?.getOrderByStatus[0]?.details])
 
   let user:any = {}
 

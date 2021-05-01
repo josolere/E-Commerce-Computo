@@ -26,10 +26,10 @@ export default function Card({ name, image, price, id, count }: props) {
 
     const dispatch = useDispatch()
     const { quantity, priceSubTotal, productTotal, idDetails,
-        priceDetails, countDetails, logeo, idOrder, addHome, addCart }: any = useSelector((store: AppState) => store.shoppingCartReducer)
+        priceDetails, countDetails, logeo, idOrder, addHome, addCart, idUsers }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
     const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
-        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente"}}]
+        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser:idUsers}}]
     })
 
   
