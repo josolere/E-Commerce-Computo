@@ -1,0 +1,150 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+$background: #fefefe;
+$text: #4b507a;
+$cyan: #60daaa;
+$yellow: #fbca67;
+$orange: #ff8a30;
+$red: #f45e61;
+$purple: #6477b9;
+$blue: #0eb7da;
+$dash-size: 8px;
+$theme-color: mediumseagreen;
+$fill-color: beige;
+$gray:#30475e;//dddddd
+$primary: #11998e;
+$secondary: #38ef7d;
+$Lblue:#6495ED;
+$avatar-size: 32px;
+$body-background: #353535;
+$Lblue:#6495ED;
+$DBlue:#002D62;
+
+@font-face {
+  font-family: "ubuntu";
+  font-style: italic;
+  font-weight: 300;
+  src: local("Lato Light Italic"), local("Lato-LightItalic"),
+    url(https://fonts.gstatic.com/s/ubuntucondensed/v8/u-4k0rCzjgs5J7oXnJcM_0kACGMtT-Dfqw.woff2)
+      format("woff2");
+}
+
+.LogoMP {
+  width: 35%;
+  max-width: 35%;
+  min-width: 30%;
+  margin: 4%;
+}
+  
+.back {
+    background-color:$dark;
+    width: 100%;
+    height: 90vh;
+}
+
+.caja{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  width: 60%;
+  background-color: $white;
+  margin-top: 3%;
+  box-shadow: 20px 20px 25px 25px rgba(0, 0, 0, 0.815);
+  padding: 2%;
+  margin-bottom: 3%;
+}
+
+.organizar {
+    font-family:'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.ThanksSort{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Thanks{
+    color: #fff;
+    font-size: 7vh;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(to right,$Lblue 30%, $DBlue 40% );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 1.5s linear infinite;
+    display: inline-block;
+  }
+
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+  
+.boton{
+  font-weight: bold;
+  color: $dark;
+  padding: 10%;
+  font-family: 'Montserrat', sans-serif;
+  border: transparent;
+  display: flex;
+  min-width: 4rem;
+  min-height: 2rem;
+  width: 10rem;
+  padding:5%;
+  height: 5rem;
+  justify-content: center;
+  align-self: center;
+  cursor: pointer;
+  font-size: 3.5vh;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.3rem;
+  z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $Lblue;
+        color: $white;
+		border-radius: 0.2rem;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: $DBlue;
+		transition: all .3s;
+		border-radius: 0.2rem;
+		z-index: -1;
+	}
+	&:hover {
+		color:$white;
+		&:before {
+			width: 100%;
+		}
+	}
+}

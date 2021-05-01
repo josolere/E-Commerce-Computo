@@ -48,6 +48,7 @@ function DropdownMenu(props: any) {
                 : false}
             {user.privilege === "admin" ?
                 <div className={styles.orderdiv}>
+                    <p><Link to='/AdminBorrar'><FontAwesomeIcon icon={faUserMinus} className={styles.icon} /> Borrar Usuario</Link></p>
                     <p><Link to="/CrearAdministrador"><FontAwesomeIcon className={styles.icon} icon={faUserPlus}></FontAwesomeIcon> Asignar Administrador</Link></p>
                     <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faCashRegister}></FontAwesomeIcon>Añadir Producto</Link></p>
                     <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faList}></FontAwesomeIcon>Añadir Categoría</Link></p>

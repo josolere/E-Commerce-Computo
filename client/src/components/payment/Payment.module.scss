@@ -17,6 +17,7 @@ $gray:#30475e;//dddddd
 $primary: #11998e;
 $secondary: #38ef7d;
 $Lblue:#6495ED;
+$DBlue:#002D62;
 
 .back {
     background-color:$dark;
@@ -51,31 +52,10 @@ $Lblue:#6495ED;
 }
 
 .LogoMP {
-  width: 35%;
-  max-width: 35%;
-  min-width: 30%;
-}
-
-.Details{
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-  font-family:'Montserrat', sans-serif;
-  display: flex;
-  flex-direction: column;
+  width: 55%;
+  max-width: 55%;
+  min-width: 50%;
   margin: 5%;
-  border: solid .2rem $dark;
-  border-radius: .2rem;
-}
-
-.Price {
-  font-family:'Montserrat', sans-serif;
-  display: flex;
-  flex-direction: column;
-  margin: 5%;
-  border: solid .2rem $dark;
-  border-radius: .2rem;
 }
 
 .form {
@@ -95,7 +75,7 @@ $Lblue:#6495ED;
     margin-top: 2%;
     margin-left: 15%;
     font-family:'Montserrat', sans-serif;
-    width: 70%;
+    width: 60%;
     border: 0;
     border-bottom: 2px solid $Lblue;
     outline: 0;
@@ -144,21 +124,23 @@ $Lblue:#6495ED;
 
 .organizarbotones {
   display: flex;
-  margin-left: 20%;
+  margin-top: 5%;
   justify-content: center;
   align-items: center;
 }
 
 .boton{
-  color: $white;
+  font-weight: bold;
+  color: $dark;
   padding: 10%;
   font-family: 'Montserrat', sans-serif;
   border: transparent;
 	display: flex;
   min-width: 4rem;
   min-height: 2rem;
-  width: 7rem;
-  height: 5rem;
+  width: 10rem;
+  padding:5%;
+  height: 3.5rem;
   justify-content: center;
   align-self: center;
   cursor: pointer;
@@ -187,13 +169,13 @@ $Lblue:#6495ED;
 		left: 0;
 		width: 0%;
 		height: 100%;
-		background-color: #87cefa;
+		background-color: $DBlue;
 		transition: all .3s;
 		border-radius: 0.2rem;
 		z-index: -1;
 	}
 	&:hover {
-		color:$dark;
+		color:$white;
 		&:before {
 			width: 100%;
 		}
@@ -273,14 +255,11 @@ $Lblue:#6495ED;
   color: $white;
 }
 
-.SortEnd{
-  position: relative;
-  left: 4.5rem;
+.sortEnd{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  justify-content: space-between;
 }
 
 .sortBoxCuot{
@@ -297,94 +276,4 @@ $Lblue:#6495ED;
   justify-content: center;
   flex-direction: column;
   justify-content: center;
-}
-
-.boxCuot {
-  font-family: 'Montserrat', sans-serif;
-  transform: translate(-50%, -50%);
-
-}
-
-.boxCuot select {
-  font-family: 'Montserrat', sans-serif;
-  background-color:#002366;
-  color: $white;
-  margin-top: 2.5rem;
-  margin-left: 2rem;
-
-  height: 2rem;
-  width: 100%;
-  border: none;
-  font-size: 2.5vh;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  -webkit-appearance: button;
-  appearance: button;
-  outline: none;
-}
-.boxCuot::before {
-  position: relative;
-  margin-left: 2rem;
-
-  left:2rem;
-  width: 20%;
-  height: 100%;
-  text-align: center;
-  font-size: 2.5vh;
-  color: $white;
-  background-color: rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-}
-.boxCuot:hover::before {
-  color: $white;
-  margin-left: 2rem;
-
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.labelSelectBank{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-}
-
-.labelSelectCuot{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold; 
-}
-
-
-
-.boxBank {
-  font-family: 'Montserrat', sans-serif;
-  transform: translate(-50%, -50%);
-
-}
-
-.boxBank select {
-  position: relative;
-  left:2rem;
-  font-family: 'Montserrat', sans-serif;
-  background-color:#002366;
-  color: $white;
-  margin-top: 2.5rem;
-  height: 2rem;
-  width: 100%;
-  border: none;
-  font-size: 2.5vh;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  -webkit-appearance: button;
-  appearance: button;
-  outline: none;
-}
-.boxBank::before {
-  width: 20%;
-  height: 100%;
-  text-align: center;
-  font-size: 2.5vh;
-  color: $white;
-  background-color: rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-}
-.boxBank:hover::before {
-  color: $white;
-  background-color: rgba(255, 255, 255, 0.2);
 }

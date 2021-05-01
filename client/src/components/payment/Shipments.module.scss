@@ -1,0 +1,103 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+$background: #fefefe;
+$text: #4b507a;
+$cyan: #60daaa;
+$yellow: #fbca67;
+$orange: #ff8a30;
+$red: #f45e61;
+$purple: #6477b9;
+$blue: #0eb7da;
+$dash-size: 8px;
+$theme-color: mediumseagreen;
+$fill-color: beige;
+$gray:#30475e;//dddddd
+$primary: #11998e;
+$secondary: #38ef7d;
+$Lblue:#6495ED;
+$DBlue:#002D62;
+
+.boton{
+    font-weight: bold;
+    color: $white;
+    padding: 10%;
+    font-family: 'Montserrat', sans-serif;
+    border: transparent;
+    display: flex;
+    min-width: 4rem;
+    min-height: 2rem;
+    width: 8.5rem;
+    padding:2%;
+    height: 4rem;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+      font-size: 3vh;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    border-radius: 0.3rem;
+      z-index: 1;
+      &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $DBlue;
+      color: $white;
+          border-radius: 0.2rem;
+          z-index: -2;
+      }
+      &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0%;
+          height: 100%;
+          background-color: $Lblue;
+          transition: all .3s;
+          border-radius: 0.2rem;
+          z-index: -1;
+      }
+      &:hover {
+          color:$dark;
+          &:before {
+              width: 100%;
+          }
+      }
+  }
+
+  .sortTotal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid .2rem $Lblue;
+    margin: 3%;
+    margin-top: 7%;
+    padding: 1.5%;
+    border-radius: .5rem;
+    width: 100%;
+}
+
+.SortMapShip{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+.PMaped{
+    display: flex;
+    font-weight: bold;
+    width: 100%;
+    font-size: 2vh;
+    font-family: 'Montserrat', sans-serif;
+    color: $DBlue;
+}

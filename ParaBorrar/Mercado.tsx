@@ -3,8 +3,8 @@ import styles from './Payment.module.scss';
 import { useMutation, useQuery } from '@apollo/client';
 import Logo from '../images/MercadoPago.png';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../redux/reducers';
-/* import {
+/* import { AppState } from '../../../redux/reducers';
+ *//* import {
     isValidNumberOrEmpty,
     formatCreditCardNumber,
     isCardNumberComplete,
@@ -25,7 +25,7 @@ import {
     from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MERCADO_PAGO } from "../../gql/Payment";
+import { MERCADO_PAGO } from "../../../Gql/Payment";
 
 var mercadopago = require('mercadopago');
 
@@ -39,8 +39,8 @@ type SelectEvent = React.FormEvent<HTMLSelectElement>;
 
 const Mercado = () => {
 
-    const priceTotal = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
-
+/*     const priceTotal = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
+ */
     const [MercadoMutation, data] = useMutation(MERCADO_PAGO)
 
     const [personalData, setPersonalData] = useState({
