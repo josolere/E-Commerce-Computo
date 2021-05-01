@@ -1,5 +1,5 @@
 /* import SubMenu from "./SubMenu"; */
-import styles from './Categories.module.scss'
+import styles from './Categories.module.scss';
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from "react-redux";
 import { setCategory, setFilter} from "../../redux/actions";

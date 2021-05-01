@@ -54,7 +54,8 @@ const ShoppingCard = (props: props): JSX.Element => {
             price: product.price,
             count: props.count + 1,
             image: product.image,
-            details: product.details
+            details: product.details,
+            name: product.name
         }
         if (localStorage.getItem('productsLocal')) {
             let productLocal: any = await (localStorage.getItem('productsLocal'))

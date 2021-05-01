@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import Login from './components/Users/Login'
-import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
-import Details from './components/Details/ProductsDetails'
-import LandPage from './components/landpage/LandPage'
-import Payment from './components/payment/Stripe'
-import Home from './components/Home/Home'
-import PageNotFound from './components/PageNotFound/PageNotFound'
-import ShoppingCart from './components/ShoppingCart/ShoppingCart'
+import Login from './components/Users/Login';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import Details from './components/Details/ProductsDetails';
+import LandPage from './components/landpage/LandPage';
+import Home from './components/Home/Home';
+import PageNotFound from './components/PageNotFound/PageNotFound';
+import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import NavCategories from './components/categories/Categories';
-import CrearProducto from "./components/CreateProduct/CreateProduct"
-import CrearCategoria from "./components/CreateCategory/CreateCategory"
+import CrearProducto from "./components/CreateProduct/CreateProduct";
+import CrearCategoria from "./components/CreateCategory/CreateCategory";
 import styles from './App.module.scss';
-import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
-import { addLocalStorage } from './redux/actions/index'
-import { useDispatch } from 'react-redux'
-import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
-import OrdersUser from './components/Order/OrdersUser/OrdersUser'
-import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
+import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin';
+import { addLocalStorage } from './redux/actions/index';
+import { useDispatch } from 'react-redux';
+import OrderDetails from './components/Order/OrdersAdmin/OrderDetail';
+import OrdersUser from './components/Order/OrdersUser/OrdersUser';
+import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail';
 import Orders from './components/Order/Orders';
 import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from "react-cookie";
@@ -26,7 +25,11 @@ import { ToastContainer } from 'react-toastify';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/login";
 import ResetPassword from './components/Users/ResetPassword';
-  
+import PostPayment from './components/payment/Shipments';
+import Mercado from './components/payment/MercadoV2';
+import AdminDelete from './components/Users/AdminDelete';
+import PayCompleted from './components/payment/PayCompleted';
+import Shipments from './components/payment/Shipments'
 
 interface user {
   currentUser: {
@@ -49,13 +52,7 @@ function App() {
 
   const resultsUsers = useQuery(GET_USERS)
 
-  let test = resultsUsers?.data?.getUsers
-
-  console.log(test)
-
   user = data?.currentUser
-  
-  console.log(user)
 
   const dispatch = useDispatch()
 
@@ -70,7 +67,6 @@ function App() {
       localStorage.setItem('productsLocal', JSON.stringify([]))
     }
   }, [])
-
 
   return (
     <Router>
@@ -106,7 +102,10 @@ function App() {
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-        <Route exact path='/Pago' component={Payment}/>
+        <Route exact path= '/Envios' component={Shipments} />
+        <Route exact path= '/PostPago' component={PayCompleted} />
+        <Route exact path= '/AdminBorrar' component={AdminDelete} />
+        <Route exact path = '/Mercado' component={Mercado} />
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />

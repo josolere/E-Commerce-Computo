@@ -6,7 +6,7 @@ import styles2 from './Edit.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { EDIT_USER_MUTATION, GET_USERS } from "../../gql/login";
+import { CREATE_ADMIN, GET_USERS } from "../../gql/login";
 import styles3 from './CreateAdmin.module.scss';
 import { toast } from 'react-toastify';
 
@@ -27,7 +27,7 @@ interface datauser {
 
 const CreateAdmin = () => {
 
-    const [editUser, user] = useMutation(EDIT_USER_MUTATION)
+    const [editUser, user] = useMutation(CREATE_ADMIN)
 
     const resultsUsers = useQuery(GET_USERS)
 
@@ -73,8 +73,7 @@ const CreateAdmin = () => {
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         editUser({
             variables: {
-                id: logform.id, email: logform.email, name: logform.firstname, surname: logform.surname,
-                username: logform.username, address: logform.address, active: true, privilege: 'admin'
+                id: logform.id, privilege: 'admin'
             }
         })
             .then((resolve) => { toast.success('Se ha creado un nuevo administrador 🥳'); SetAdmin(true) })

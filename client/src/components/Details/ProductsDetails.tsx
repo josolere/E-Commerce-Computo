@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { FaStar } from 'react-icons/fa'
-import '../rating/rating.css'
-import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails"
-import styles from "./ProductDetail.module.scss"
+import { FaStar } from 'react-icons/fa';
+import './rating.css';
+import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetails";
+import styles from "./ProductDetail.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss"

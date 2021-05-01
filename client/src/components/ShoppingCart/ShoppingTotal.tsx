@@ -8,7 +8,7 @@ import { Cookies } from "react-cookie";
 import { toast } from "react-toastify"
 import { ACTUAL_USER, GET_USERS } from "../../gql/login";
 import { useMutation, useQuery, gql } from '@apollo/client';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface user {
     currentUser: {
@@ -17,12 +17,12 @@ interface user {
         email: string,
         privilege: string
     }
-  }
-  
+}
+
 
 const ShoppingTotal = (): JSX.Element => {
 
-    let user:any = {}
+    let user: any = {}
 
     const currentU = useQuery<user>(ACTUAL_USER)
 
@@ -51,19 +51,18 @@ const ShoppingTotal = (): JSX.Element => {
             productLocal = (localStorage.getItem('productsLocal'))
             productLocal = (JSON.parse(productLocal))
             setOrder(productLocal)
-            localStorage.clear()
-            dispatch(deleteCart())
-            createOrder({ variables: { status: 'pending', idUser: 1 } })
-                .then((resolve) => { console.log(data) })
-                .catch((err) => { console.log('Salio Mal') })
-            window.location.href = 'http://localhost:3000/Pago'
+            /*  localStorage.clear()
+             dispatch(deleteCart()) */
+            localStorage.setItem('productsLocal', JSON.stringify([]))
+            /*             createOrder({ variables: { status: 'pending', idUser: 1 } })
+                            .then((resolve) => { console.log(data) })
+                            .catch((err) => { console.log('Salio Mal') }) */
+            window.location.href = 'http://localhost:3000/Mercado'
         }
         else {
             toast.error("Debes iniciar sesión para realizar una compra")
         }
     }
-
-    
 
     return (
         <>
@@ -74,7 +73,7 @@ const ShoppingTotal = (): JSX.Element => {
                 <div className={total.containerValue}>
                     <div className={total.containerSubTotal}>
                         <h2>SubTotal</h2>
-                        <p>${idsProducts}</p>
+                        <p>${new Intl.NumberFormat().format(idsProducts)}</p>
                     </div>
                     <div className={total.containerSent}>
                         <h2>Gastos De Envio</h2>
@@ -83,25 +82,25 @@ const ShoppingTotal = (): JSX.Element => {
 
                     <div className={total.containerTotal}>
                         <h2>Total</h2>
-                        <p>${priceTotal}</p>
+                        <p>${new Intl.NumberFormat().format(priceTotal)}</p>
+
                     </div>
                 </div>
             </div>
-            {user?.privilege ==='user' ?
-            <div className={total.containerButton}>
-                <button onClick={handleOrder}
-                    className={total.buttonFinal}>Finalizar Compra
-                    </button>
-            </div>
-            :
-            <div className={total.containerButton}>
-                <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
-                <Link to='/Login'>
-                    <button
-                    className={total.buttonFinal}
-                    >Login</button>
-                </Link>
-            </div>}
+            {user?.privilege === 'user' ?
+                <div className={total.containerButton}>
+                    <button onClick={() => { handleOrder() }}
+                        className={total.buttonFinal}>Finalizar Compra</button>
+                </div>
+                :
+                <div className={total.containerButton}>
+                    <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
+                    <Link to='/Login'>
+                        <button
+                            className={total.buttonFinal}
+                        >Login</button>
+                    </Link>
+                </div>}
         </>
     )
 }

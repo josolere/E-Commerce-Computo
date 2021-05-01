@@ -26,110 +26,44 @@ interface user {
 }
 
 function DropdownMenu(props: any) {
-  const [out, nothing] = useMutation(LOGOUT);
+  
 
-  let user: any = {};
+    const [out, nothing] = useMutation(LOGOUT);
 
-  const { data } = useQuery<user>(ACTUAL_USER);
+    let user: any = {}
 
-  user = data?.currentUser;
+    const { data } = useQuery<user>(ACTUAL_USER)
 
-  const [cookies, setCookie, removeCookie] = useCookies(["User"]);
+    user = data?.currentUser
 
-  const logoutchange = () => {
-    out();
-    //Nos desuscribimos del localStorage
-    localStorage.setItem("productsLocal", "");
-    localStorage.setItem("priceSubTotal", "");
-    localStorage.setItem("quantity", "");
+    const [cookies, setCookie, removeCookie] = useCookies(["User"]);
 
-    window.location.href = "http://localhost:3000/Home";
-  };
+    const logoutchange = () => {
+        out()
+        window.location.href = 'http://localhost:3000/Home'
+    }
 
-  return (
-    <div className={styles.dropdown} onMouseLeave={props.data}>
-      <Link className={styles.profile} to="/EditarCuenta">
-        <BiUserCircle className={styles.iconButton}></BiUserCircle>
-        {user?.name}
-      </Link>
-      {user?.privilege === "user" ? (
-        <div className={styles.orderdiv}>
-          <p>
-            <Link to={`/Ordenes/Usuario`}>
-              <FaShippingFast className={styles.icon}></FaShippingFast>Mis
-              Pedidos
-            </Link>
-          </p>
-          <p>
-            <Link to="/ResetContraseña">
-              <FontAwesomeIcon icon={faUnlock} className={styles.icon} />{" "}
-              Cambiar contraseña
-            </Link>{" "}
-          </p>
-          <p>
-            <Link to="/BorrarUsuario">
-              <FontAwesomeIcon icon={faUserMinus} className={styles.icon} />{" "}
-              Eliminar mi cuenta
-            </Link>
-          </p>
-          {/*  <p >
-            <RiQuestionnaireFill className={styles.icon}></RiQuestionnaireFill>
-            Preguntas
-          </p> */}
-
-          <p style ={{marginLeft:"1.4rem"}} onClick={logoutchange}>
-            <FontAwesomeIcon
-              className={styles.icon}
-              icon={faSignOutAlt}
-            ></FontAwesomeIcon>
-            Cerrar Sesión
-          </p>
+    return (
+        <div className={styles.dropdown} onMouseLeave={props.data}>
+            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle className={styles.iconButton}></BiUserCircle>{user?.name}</Link>
+            {user?.privilege === 'user' ?
+                <div className={styles.orderdiv}>
+                    <p><Link to={`/Ordenes/Usuario`}><FaShippingFast className={styles.icon} ></FaShippingFast>Mis Pedidos</Link></p>
+                    <p><Link to='/ResetContraseña'><FontAwesomeIcon icon={faUnlock} className={styles.icon} /> Cambiar contraseña</Link> </p>
+                    <p><Link to='/BorrarUsuario'><FontAwesomeIcon icon={faUserMinus} className={styles.icon} /> Borrar Usuario</Link></p>
+                    <p><RiQuestionnaireFill className={styles.icon}></RiQuestionnaireFill>Preguntas</p>
+                    <p onClick={logoutchange} ><FontAwesomeIcon className={styles.icon} icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
+                </div>
+                : false}
+            {user.privilege === "admin" ?
+                <div className={styles.orderdiv}>
+                    <p><Link to='/AdminBorrar'><FontAwesomeIcon icon={faUserMinus} className={styles.icon} /> Borrar Usuario</Link></p>
+                    <p><Link to="/CrearAdministrador"><FontAwesomeIcon className={styles.icon} icon={faUserPlus}></FontAwesomeIcon> Asignar Administrador</Link></p>
+                    <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faCashRegister}></FontAwesomeIcon>Añadir Producto</Link></p>
+                    <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faList}></FontAwesomeIcon>Añadir Categoría</Link></p>
+                    <p><Link to="/Ordenes"><FaShippingFast className={styles.icon}></FaShippingFast>Ordenes</Link></p>
+                    <p onClick={logoutchange} ><FontAwesomeIcon className={styles.icon} icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
+                </div> : false}
         </div>
-      ) : (
-        false
-      )}
-      {user.privilege === "admin" ? (
-        <div className={styles.orderdiv}>
-          <Link to="/CrearAdministrador">
-            <FontAwesomeIcon
-              className={styles.icon}
-              icon={faUserPlus}
-            ></FontAwesomeIcon>{" "}
-            Asignar Administrador
-          </Link>
-
-          <Link to="/CrearProducto">
-            <FontAwesomeIcon
-              className={styles.icon}
-              icon={faCashRegister}
-            ></FontAwesomeIcon>
-            Añadir Producto
-          </Link>
-
-          <Link to="/CrearCategoria">
-            <FontAwesomeIcon
-              className={styles.icon}
-              icon={faList}
-            ></FontAwesomeIcon>
-            Añadir Categoría
-          </Link>
-
-          <Link to="/Ordenes">
-            <FaShippingFast className={styles.icon}></FaShippingFast>Ordenes
-          </Link>
-
-          <p style ={{marginLeft:"0.5rem"}} onClick={logoutchange}>
-            <FontAwesomeIcon
-              className={styles.icon}
-              icon={faSignOutAlt}
-            ></FontAwesomeIcon>
-            Cerrar Sesión
-          </p>
-        </div>
-      ) : (
-        false
-      )}
-    </div>
-  );
-}
+      ) }
 export default DropdownMenu;

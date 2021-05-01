@@ -34,3 +34,27 @@ export type Review = {
   userId: string;
   title: string;
 };
+
+export type PaymentData = {
+  transaction_amount: number;
+  token: string
+  description:string;
+  installments:number;
+  payment_method_id:string;
+  issuer_id:string;
+  payer:Payer;
+}
+
+export type PaymentResult = {
+  status:string
+}
+
+export type Payer = {
+  email:string
+  identification: Identification;
+}
+
+export type Identification = {
+  type:string;
+  number:string;
+}
