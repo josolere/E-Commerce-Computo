@@ -55,18 +55,18 @@ const ShoppingTotal = (): JSX.Element => {
     // }, [])
 
     const handleOrder = () => {
-        if (localStorage.getItem('productsLocal') && gotcookie === true) {
+        if (user) {
             // let productLocal: any = []
             // productLocal = (localStorage.getItem('productsLocal'))
             // productLocal = (JSON.parse(productLocal))
             // setOrder(productLocal)
             // localStorage.clear()
             // dispatch(deleteCart())
-            createOrder({ variables: { status: 'pendiente', idUser: idUsers } })
-                .then((resolve) => { 
-                    localStorage.setItem('productsLocal', JSON.stringify([]))
-                    console.log(data) })
-                .catch((err) => { console.log('Salio Mal') })
+            // createOrder({ variables: { status: 'pendiente', idUser: idUsers } })
+            //     .then((resolve) => { 
+            //         localStorage.setItem('productsLocal', JSON.stringify([]))
+            //         console.log(data) })
+            //     .catch((err) => { console.log('Salio Mal') })
             window.location.href = 'http://localhost:3000/Pago'
         }
         else {
