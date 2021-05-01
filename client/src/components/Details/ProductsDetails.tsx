@@ -378,7 +378,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         <div className={styles.content}>
                             <div className={styles.reviewContainer}>
                             <p className={styles.pReviewTitle}>{review.title}</p>
-                            <p className={styles.pReview} >{review.text}</p>
+                            <p className={styles.pReview} >"{review.text}"</p>
                             </div>
                             <p className={styles.pRanking}>{review.rating}<FaStar size={20} className='star' color={rating ? '#ffc107' : '#e4e5e9'} /></p>
                         </div>) : 
@@ -386,7 +386,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         <div className={styles.content}>
                             <div className={styles.reviewContainer}>
                             <p className={styles.pReviewTitle}>{review.title}</p>
-                            <p className={styles.pReview} >{review.text}</p>
+                            <p className={styles.pReview} >"{review.text}"</p>
                             </div>
                             
                             <p className={styles.pRanking}>{review.rating}<FaStar size={20} className='star' color={rating ? '#ffc107' : '#e4e5e9'} /></p>
