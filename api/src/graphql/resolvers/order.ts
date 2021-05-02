@@ -161,10 +161,9 @@ export default {
     ): Promise<any> => {
       const OrderToEdit = await models.Order.findByPk(id);
       if (OrderToEdit) {
-
         let confirmAt = null;
         if (input.status === "creada") {
-          confirmAt = Date.now()
+          confirmAt = Date.now();
         }
         const updatedOrder = await OrderToEdit.update(
           { ...input, confirmAt },
@@ -172,7 +171,7 @@ export default {
         );
 
         //si el estado fue cambiado enviar un email informando ese cambio
-        console.log("+++++++++", updatedOrder)
+        console.log("+++++++++", updatedOrder);
         const user = await models.User.findByPk(updatedOrder.UserId);
 
         switch (input.status) {
