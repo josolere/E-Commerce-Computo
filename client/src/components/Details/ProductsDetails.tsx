@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import { ACTUAL_USER, GET_USERS } from "../../gql/login";
 import { HiBadgeCheck } from "react-icons/hi";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import { FiHeart } from 'react-icons/fi';
 
 interface user {
     currentUser: {
@@ -210,12 +211,22 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         dispatch(addProductDetails(state));
     }
 
+    const [wishe, setWish] =  useState(false)
+
+    const handleFav = (e: React.FormEvent<HTMLButtonElement>) =>{
+        e.preventDefault()
+        setWish(!wishe)
+        console.log(wishe)
+        console.log('falta crear la wishlist en base de datos y conectar')
+    }
+
     return (
         <React.Fragment>
             <div className={styles.contenedorAll}>
                 <div className={styles.contenedorDetail}>
                     <img src={filtred?.image} alt='' />
                     <form onSubmit={handleSubmit} className={editMode ? stylesEdit.containerEdit : styles.formm} >
+                    <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20}/></button>
                         {user?.privilege === 'admin' ? <button className={styles.Edit} onClick={handleEdit}>Edit</button> : false}
 
                         {editMode ?

@@ -23,9 +23,10 @@ interface props {
     price: number
     count: number
     stock:number
+    wish?:boolean
 }
 
-export default function Card({ name, image, price, id, count, stock }: props) {
+export default function Card({ name, image, price, id, count, stock, wish }: props) {
 
     const dispatch = useDispatch()
     const { quantity, priceSubTotal, productTotal, idDetails,
@@ -115,11 +116,20 @@ export default function Card({ name, image, price, id, count, stock }: props) {
 
     }
 
+    const [wishe, setWish] =  useState(false)
+
+    const handleFav = (e: React.FormEvent<HTMLButtonElement>) =>{
+        e.preventDefault()
+        setWish(!wishe)
+        console.log('falta crear la wishlist en base de datos y conectar')
+    }
+
+
 
     return (
         <div className={styles.card}>
             {/* <ToastContainer /> */}
-{/* <button className={styles.fav}><FiHeart size={20}/></button> */}
+<button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20}/></button>
             <Link
                 onClick={() => dispatch(addProductHome({ stateHome, id, price, count }))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{

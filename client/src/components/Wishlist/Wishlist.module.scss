@@ -1,0 +1,10 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.container{
+    display: flex;
+    min-height: 100vh;
+    background-color: $dark;
+}
