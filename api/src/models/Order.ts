@@ -8,7 +8,7 @@ import {
   BelongsToManyGetAssociationsMixin,
 } from "sequelize";
 
-import { OrderDetail } from "./OrderDetail";
+import { Productsxorder } from "./Productsxorder";
 
 export interface OrderAttributesI {
   id: number;
@@ -39,12 +39,12 @@ export class Order
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  public getOrderDetails!: BelongsToManyGetAssociationsMixin<OrderDetail>;
+  public getOrderDetails!: BelongsToManyGetAssociationsMixin<Productsxorder>;
 
-  public readonly orderDetail?: OrderDetail[];
+  public readonly orderDetail?: Productsxorder[];
 
   public static associations: {
-    orderDetail: Association<Order, OrderDetail>;
+    orderDetail: Association<Order, Productsxorder>;
   };
 }
 

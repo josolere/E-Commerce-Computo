@@ -11,6 +11,7 @@ export const typeDefs = gql`
     city: String
     state: String
     zip: String
+    phone: String
     createdAt: String
     updatedAt: String
   }
@@ -35,6 +36,7 @@ export const typeDefs = gql`
     city: String
     state: String
     zip: String
+    phone: String
   }
 
   input EditOrderInput {
@@ -44,5 +46,6 @@ export const typeDefs = gql`
     city: String
     state: String
     zip: String
+    phone: String
   }
 `;
