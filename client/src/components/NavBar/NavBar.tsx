@@ -117,7 +117,6 @@ const NavBar = (): JSX.Element => {
   }, [])
 
   return (
-<<<<<<< HEAD
     <div className={navBar.sortThisNav}>
       <nav>
         <div className={navBar.CH} >
@@ -141,30 +140,6 @@ const NavBar = (): JSX.Element => {
             <Link  to="/login"><p>Iniciar Sesion</p></Link>}
           <p>{user?.name &&
             <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
-=======
-    <>
-      <div className={navBar.container}>
-        <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
-        <SearchBar />
-
-        <Link className={navBar.linkCart} to="/Carrodecompras">
-          <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
-          <p>{quantity}</p>
-          {/*  <span>${new Intl.NumberFormat().format(idsProducts)}</span> */}
-
-        </Link>
-
-        <div className={navBar.containerLinks}>
-
-          {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}><p>Productos</p></Link> : false}
-          <div>
-            {user?.name ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
-
-          </div>
-
-          <p>{user?.name && <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
-
->>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
         </div>
       </nav>
     </div>

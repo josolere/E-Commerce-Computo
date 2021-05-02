@@ -122,21 +122,6 @@ export default {
         i++;
       });
       return data;
-<<<<<<< HEAD
-    },
-
-    getAllOrders: async (
-      _parent: object,
-      { status }: { status: string },
-      { models }: { models: iModels }
-    ): Promise<iOrder> => {
-      let orders: any;
-      status
-        ? (orders = await models.Order.findAll({ where: { status: status } }))
-        : (orders = await models.Order.findAll());
-      return orders;
-=======
->>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
     },
   },
 

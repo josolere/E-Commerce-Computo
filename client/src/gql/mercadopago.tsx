@@ -49,3 +49,12 @@ export const CURRENT_ORDER = gql `
         }
     }
 `;
+
+export const EDIT_ORDER = gql `
+mutation($id:ID!,$status:String){
+  editOrder(id:$id,input:{status:$status}){
+    id
+    status    
+  }
+}
+`;

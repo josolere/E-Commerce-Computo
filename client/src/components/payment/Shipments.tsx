@@ -3,25 +3,25 @@ import styles2 from './Shipments.module.scss';
 import { useMutation, useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../redux/reducers';
-import {
-    faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt, faPassport,
-    faAddressBook, faSignature, faCalendar, faCreditCard, faPiggyBank, faUniversity, faMoneyCheck, faCity, faMapMarkedAlt, faList
-}
-    from '@fortawesome/free-solid-svg-icons';
+import { faMapMarker, faCity, faMapMarkedAlt, faList} from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from './Payment.module.scss';
 import Truck from '../images/Truck.png';
 import styles3 from './MercadoV2.module.scss';
 import { Link } from 'react-router-dom';
+import {EDIT_ORDER} from '../../gql/mercadopago';
+import styles4 from './Responsive.module.scss';
 
 const PostPayment = () => {
 
     const productos = useSelector((store: AppState) => store.shoppingCartReducer.productTotal)
 
-    console.log(productos)
-
     let priceTotal = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal).toString()
+
+    const [editOrder, dataOrder] = useMutation(EDIT_ORDER)
+
+    const [goToPay, setGoToPay] = useState(true)
 
     const [shipments, setShipments] = useState({
         state: '',
@@ -34,15 +34,17 @@ const PostPayment = () => {
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        setGoToPay(false)
         event.preventDefault()
     }
+
     return (
-        <div className={styles.back} >
-            <div className={styles.organizar} >
-                <div className={styles.caja} >
+        <div className={styles4.back} >
+            <div className={styles4.organizar} >
+                <div className={styles4.caja} >
                     <div className={styles.sortUp} >
                         <img className={styles.LogoMP} src={Truck} alt='' />
-                        <form className={styles.form} >
+                        <form className={styles.form} onSubmit={handleSubmit} >
                             {/*                             <div className={styles.form__group}>
                                 <label className={styles.form__label} htmlFor="email">
                                     <FontAwesomeIcon icon={faEnvelopeSquare} /> E-mail</label>
@@ -54,11 +56,11 @@ const PostPayment = () => {
                                     required={true}
                                 />
                             </div> */}
-                            <div className={styles.form__group}>
-                                <label className={styles.form__label} htmlFor="email">
+                            <div className={styles4.form__group}>
+                                <label className={styles4.form__label} htmlFor="email">
                                     <FontAwesomeIcon icon={faMapMarkedAlt} /> Provincia</label>
                                 <input
-                                    className={styles.form__field}
+                                    className={styles4.form__field}
                                     onChange={handleChange}
                                     id="email"
                                     name="State"
@@ -66,11 +68,11 @@ const PostPayment = () => {
                                     required={true}
                                 />
                             </div>
-                            <div className={styles.form__group}>
-                                <label className={styles.form__label} htmlFor="email">
-                                    <FontAwesomeIcon icon={faCity} /> Ciudad</label>
+                            <div className={styles4.form__group}>
+                                <label className={styles4.form__label} htmlFor="email">
+                                    <FontAwesomeIcon icon={faCity} /> Localidad</label>
                                 <input
-                                    className={styles.form__field}
+                                    className={styles4.form__field}
                                     onChange={handleChange}
                                     id="email"
                                     name="city"
@@ -78,11 +80,11 @@ const PostPayment = () => {
                                     required={true}
                                 />
                             </div>
-                            <div className={styles.form__group}>
-                                <label className={styles.form__label} htmlFor="email">
+                            <div className={styles4.form__group}>
+                                <label className={styles4.form__label} htmlFor="email">
                                     <FontAwesomeIcon icon={faMapMarker} /> Dirección</label>
                                 <input
-                                    className={styles.form__field}
+                                    className={styles4.form__field}
                                     onChange={handleChange}
                                     id="email"
                                     name="address"
@@ -95,24 +97,32 @@ const PostPayment = () => {
                                 <div>
                                     {productos && productos.map((item: any, index: number) => (
                                         <div className={styles2.SortMapShip} >
-                                            <p className={styles2.PMaped} >
+                                            <p key={index} className={styles2.PMaped} >
                                                 <FontAwesomeIcon icon={faList} style={{ marginRight: '2%' }} /> {item.name} X {item.count}</p>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                            <div className={styles.organizarbotones} >
-                                <Link to={{
-                                    pathname: '/Mercado',
-                                    state: {
-                                        price: priceTotal,
-                                    }
-                                }}>
+                            {goToPay ?
+                            <div className={styles4.organizarbotones} >
                                     <button
+                                        type='submit'
                                         className={styles2.boton}
                                     >Confirmar Envió</button>
-                                </Link>
                             </div>
+                            :
+                            <div className={styles4.organizarbotones} >
+                            <Link to={{
+                                pathname: '/Mercado',
+                                state: {
+                                    price: priceTotal,
+                                }
+                            }}>
+                                <button
+                                    className={styles2.boton}
+                                >Continuar</button>
+                            </Link>
+                        </div>}
                         </form>
                     </div>
                 </div>

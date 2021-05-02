@@ -41,8 +41,6 @@ function DropdownMenu(props: any) {
             dispatch(deleteCart())
     }
 
-    console.log('DROPDOWN', user)
-
     return (
         <div className={styles.dropdown} onMouseLeave={props.data}>
             <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle style={{marginRight:'3%'}}></BiUserCircle>{user?.name}</Link>

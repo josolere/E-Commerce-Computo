@@ -1,4 +1,10 @@
-
+$blue:#30475e;//dddddd
+$bluedark: #222831;//222831
+$ligthblue: #dddddd;//30475e
+$red:#f05454;//f05454
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
 
 ul {
     list-style: none;
@@ -46,7 +52,7 @@ a {
     border-radius: 0.2rem;
     position: absolute;
     border:2px solid #30475e;
-    top:1%;
+    top:10%;
     width: 25%;
     right: 2%;
     flex-direction: column;
@@ -54,6 +60,17 @@ a {
     padding-top: 0.5%;
     overflow: hidden;
     z-index: 1;
+}
+
+@media (max-width: 648px) {
+    .dropdown{
+        top:90%;
+        right: 0;
+        left: 2%;
+        width: 95%;
+        border: solid .2rem $white;
+        border-radius: .5rem;
+    }
 }
 
 .pDrop{
@@ -86,7 +103,6 @@ a {
     }
 }
  */
-
  .orderdiv{
      display: flex;
      flex-direction: column;

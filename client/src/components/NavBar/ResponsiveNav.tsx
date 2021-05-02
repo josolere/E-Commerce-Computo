@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { ReactComponent as CloseMenu } from "../assets/x.svg";
 import { ReactComponent as MenuIcon } from "../assets/menu.svg";
 import { ReactComponent as Logo } from "../assets/logo.svg";
-import "./header.css";
 import { useSelector, useDispatch } from 'react-redux'
 import SearchBar from "../SearchBar/SearchBar";
 import navBar from './NavBar.module.scss';
+import './header.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListAlt, faShoppingCart, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -16,7 +16,6 @@ import NavBarItem from "./NavBarItem";
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER } from "../../gql/login";
 import styles from './ResponsiveNav.module.scss'
-import { classNames } from "react-select/src/utils";
 
 interface user {
   currentUser: {
@@ -35,8 +34,6 @@ const NavBarResponsive = () => {
   const { data } = useQuery<user>(ACTUAL_USER)
 
   user = data?.currentUser
-
-  console.log('NAVBAR', user)
 
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
 

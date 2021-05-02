@@ -42,6 +42,7 @@ $DBlue:#002D62;
     background-color:$dark;
     width: 100%;
     height: 90vh;
+    min-height: 80vh;
 }
 
 .caja{
@@ -163,4 +164,27 @@ $DBlue:#002D62;
 			width: 100%;
 		}
 	}
+}
+
+@media (max-width: 648px) {
+  .organizar{
+    height: fit-content;
+  }
+
+  .Thanks{
+    font-size: 4vh;
+  }
+  .caja{
+    padding: 0%;
+    margin: 0%;
+    width: 100%;
+    min-height: 100vh;
+  }
+  .form__field{
+    width: 60%;
+  }
+  .boton{
+    width: 90%;
+  }
+
 }

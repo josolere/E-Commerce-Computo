@@ -4,6 +4,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import Logo from '../images/MercadoPago.png';
 import styles2 from './PayCompleted.module.scss'
 import { Link } from 'react-router-dom'
+import styles4 from './Responsive.module.scss';
 
 interface props {
     location: {

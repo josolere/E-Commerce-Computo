@@ -104,7 +104,7 @@ const ShoppingTotal = (): JSX.Element => {
             </div>
             {user?.privilege ==='user' ?
             <div className={total.containerButton}>
-                <Link to='/pago' onClick={() => { handleOrder() }}
+                <Link to='/Envios' onClick={() => { handleOrder() }}
                     className={total.buttonFinal}>Finalizar Compra</Link>
             </div>
             :

@@ -138,7 +138,6 @@ $Lblue:#6495ED;
     }
 
 
-
 .OrderSub{
     display: flex;
     flex-direction: column;
@@ -169,6 +168,22 @@ $Lblue:#6495ED;
     border-radius: 10px;
     padding: 1rem;
 } */
+
+@media (max-width: 648px) {
+    .t1 {
+        font-size: 6vh;
+    }
+    .BackLand{
+ 
+        background-image: url(../images/SMALLCUBE.gif);
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        background-position: center center;
+        background-attachment: fixed;
+
+    }
+}
 
 .LandPageInfo {
     display: flex;

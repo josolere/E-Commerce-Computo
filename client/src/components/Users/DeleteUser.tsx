@@ -1,14 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import styles from './loguin.module.scss';
-import styles2 from './Edit.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelopeSquare, faUnlock, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeSquare, faUnlock, faShareAlt, faAt } from '@fortawesome/free-solid-svg-icons';
 import { DELETE_USER } from "../../gql/login";
 import { toast } from 'react-toastify';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER, LOGOUT } from "../../gql/login";
 import Swal from 'sweetalert2';
+import styles2 from './SmallForm.module.scss';
 
 interface user {
     currentUser: {
@@ -77,9 +77,9 @@ const DeleteUser = () => {
     }
 
     return (
-        <div className={styles.back}>
-            <div className={styles2.organizar2}>
-                <div className={styles.caja}>
+        <div className={styles2.back}>
+            <div className={styles2.organizar}>
+                <div className={styles2.caja}>
                     <div className={styles.container}>
                         Deseas 
                             <div className={styles.flip}>
@@ -92,7 +92,7 @@ const DeleteUser = () => {
                     <form className={styles.form} >
                         <div className={styles.form__group}>
                             <label htmlFor='email' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail</label>
+                                <FontAwesomeIcon icon={faAt} /> E-Mail</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='E-mail'
@@ -121,7 +121,7 @@ const DeleteUser = () => {
                         </div>
                         <div className={styles.organizarbotones}>
                             <button onClick={handlesubmitchange} className={styles.boton} type='submit' >Eliminar Usuario</button>
-                            <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
+                            <button className={styles.boton} onClick={handleclickevent}>Volver Atrás</button>
                         </div>
                     </form>
                 </div>

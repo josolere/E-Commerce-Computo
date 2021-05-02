@@ -13,7 +13,6 @@ import {
     from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MERCADO_PAGO } from "../../gql/Payment";
 import { Cookies } from 'react-cookie'
 import styles2 from './MercadoV2.module.scss'
 
@@ -29,7 +28,6 @@ const Mercado = () => {
 
     let priceTotal = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
 
-    const [processPayment, results] = useMutation(MERCADO_PAGO);
 
     priceTotal = priceTotal.toString()
 
@@ -111,21 +109,7 @@ const Mercado = () => {
               console.log("identificationNumber",identificationNumber)
               console.log("identificationType",identificationType)
               */
-              processPayment({ variables: { 
-                                            token,
-                                            issuer_id,
-                                            payment_method_id,
-                                            transaction_amount : Number(amount), 
-                                            installments: Number(installments),
-                                            email,
-                                            type:identificationType,
-                                            number:identificationNumber,
-                                            description:"algun texto" 
-                                            } 
-                                     })
-                                    .then(result => console.log(result?.data))
-                                     .catch(error => console.log(error)) // este error entra si el error es del lado del cliente
-                                     .finally(() => console.log('termine'))
+  
             
 /*
 

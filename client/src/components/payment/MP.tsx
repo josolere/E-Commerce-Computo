@@ -17,6 +17,7 @@ import styles from './Payment.module.scss';
 import styles2 from './MercadoV2.module.scss';
 import Logo from '../images/MercadoPago.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles4 from './Responsive.module.scss';
 
 
 declare global {
@@ -219,9 +220,9 @@ const MP: FC<PropsMercado> = (props) => {
 
 
   return (
-    <div className={styles.back} >
-            <div className={styles.organizar} >
-                <div className={styles.caja} >
+    <div className={styles4.back} >
+            <div className={styles4.organizar} >
+                <div className={styles4.caja} >
                     <div className={styles.sortUp} >
                         <img className={styles.LogoMP} src={Logo} alt='' />
                         <form id="form-checkout" className={styles.form} >

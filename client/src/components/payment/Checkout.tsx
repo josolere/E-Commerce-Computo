@@ -15,7 +15,6 @@ import {
     from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MERCADO_PAGO } from "../../gql/Payment";
 import styles2 from './Checkout.module.scss'
 
 

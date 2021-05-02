@@ -12,23 +12,38 @@ query {
         username
         address
         password
+
     }
   }`;
 
+/*   street
+  city
+  state
+  phone
+  zip */
 
+/* 
+  $street: String  $city: String $state:String $zip: String
+  $phone: String */
+
+/*   street: $street city:$city state:$state zip:$zip
+  phone:$phone */
 
 export const SIGNUP_MUTATION = gql`
-    mutation  ($firstName: String! $password: String! $email: String!  $lastName:String! $username:String! $address:String! ) {
-        signup (firstName:$firstName lastName:$lastName password:$password email: $email username:$username address:$address ) 
-                            {    
-                                user {
-                                    name
-                                    id
-                                }
-                                    
-                            
-                            }
-                        
+    mutation  ($firstName: String! $password: String! $email: String!  
+                $lastName:String! $username:String $address:String
+
+                ) {
+        signup (firstName:$firstName lastName:$lastName password:$password
+                 email: $email username:$username address:$address 
+
+                 ) 
+                    {    
+                        user {
+                            name
+                            id
+                        }
+                    }
     }`;
     
     export const GET_USERS = gql`
