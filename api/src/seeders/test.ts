@@ -171,7 +171,7 @@ let products = [
         details: 'Al implementar un nuevo y novedoso diseño de carcasa de nido de abeja que es a la vez ligero y duradero, hemos recortado el peso total de nuestro ratón a menos de 53 g. No más peleas contra el ratón y no más francotiradores perdidos debido a un rango de movimiento de peso limitado. El dolor de muñeca después de las batallas de maratón y la fatiga después de pasar la noche es cosa del pasado. Apunte mejor, rinda mejor, durante más tiempo.',
         price: 4890,
         categoriesId: [5],
-        stock:7
+        stock:0
     }, 
     {
         name:'Mousepad Medium Rgb Steelseries Qck Gaming Surface',

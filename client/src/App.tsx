@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Login from './components/Users/Login';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Details from './components/Details/ProductsDetails';
@@ -10,15 +10,15 @@ import NavCategories from './components/categories/Categories';
 import CrearProducto from "./components/CreateProduct/CreateProduct";
 import CrearCategoria from "./components/CreateCategory/CreateCategory";
 import styles from './App.module.scss';
-import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin';
-import { addLocalStorage } from './redux/actions/index';
-import { useDispatch } from 'react-redux';
-import OrderDetails from './components/Order/OrdersAdmin/OrderDetail';
-import OrdersUser from './components/Order/OrdersUser/OrdersUser';
-import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail';
+import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
+import { addLocalStorage, logeo, orderId } from './redux/actions/index'
+import { useDispatch } from 'react-redux'
+import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
+import OrdersUser from './components/Order/OrdersUser/OrdersUser'
+import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
 import Orders from './components/Order/Orders';
 import EditAccount from './components/Users/EditAccount';
-import { Cookies, CookiesProvider, useCookies } from "react-cookie";
+import { Cookies, CookiesProvider, useCookies } from 'react-cookie';
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify';
@@ -30,8 +30,13 @@ import Mercado from './components/payment/MercadoV2';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
+<<<<<<< HEAD
 import MP from './components/payment/MP';
 import ResponsiveNav from './components/NavBar/ResponsiveNav'
+=======
+import { GET_ORDER } from "./gql/shopingCart";
+import FormCheckout from './components/CheckOut/FormCheckout';
+>>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
 
 interface user {
   currentUser: {
@@ -39,6 +44,10 @@ interface user {
     password: string,
     email: string,
     privilege: string
+<<<<<<< HEAD
+=======
+    id: string
+>>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
   }
 }
 
@@ -46,17 +55,64 @@ interface datauser {
   actualUser: user[]
 }
 
+interface detailOrderid {
+  getOrdersByIdUser: detailsorder[]
+
+}
+
+interface detailsorder {
+  id: number,
+  status: string
+}
+
+
+
 function App() {
+  const firsstRender = useRef(true)
 
   let user: any = {}
 
+<<<<<<< HEAD
+  let user: any = {}
+
   const { data } = useQuery<user>(ACTUAL_USER)
+=======
+  const [idUser, setIdUser] = useState('')
+
+  const actualuser = useQuery<user>(ACTUAL_USER)
+  const idOrder = useQuery<detailOrderid>(GET_ORDER, ({ variables: { idUser: idUser } }))
+  const dispatch = useDispatch()
+
+  const cookie = new Cookies
+>>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
 
   const resultsUsers = useQuery(GET_USERS)
 
-  user = data?.currentUser
+  let test = resultsUsers?.data?.getUsers
+  console.log(test)
+  user = actualuser.data?.currentUser
+  console.log(user)
 
-  const dispatch = useDispatch()
+  useEffect(() => {
+
+    if (actualuser.data && idOrder.data) {
+      let login = true
+      if (actualuser.data.currentUser !== null) {
+        let idUsers = actualuser?.data?.currentUser.id
+        setIdUser(idUsers)
+        dispatch(logeo({ idUsers, login }))
+
+        if (actualuser.data && idOrder.data.getOrdersByIdUser.length > 0) {
+          console.log(idOrder.data)
+          let arrayOrders = idOrder?.data?.getOrdersByIdUser
+          let newArrayOrders = arrayOrders.filter((filt: any) => filt.status === 'pendiente')
+          let idsOrder = newArrayOrders[0]?.id
+          dispatch(orderId(idsOrder))
+        }
+      }
+    }
+
+  }, [actualuser, idOrder])
 
   useEffect(() => {
     if (localStorage.getItem('productsLocal')) {
@@ -104,12 +160,20 @@ function App() {
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
+<<<<<<< HEAD
               <Route exact path='/Mercado' component={MP} />
 
         <Route exact path='/TestNav' component={ResponsiveNav} />
         <Route exact path='/Envios' component={Shipments} />
         <Route exact path='/PostPago' component={PayCompleted} />
         <Route exact path='/AdminBorrar' component={AdminDelete} />
+=======
+        <Route exact path= '/Envios' component={Shipments} />
+        <Route exact path= '/PostPago' component={PayCompleted} />
+        <Route exact path= '/AdminBorrar' component={AdminDelete} />
+        <Route exact path = '/Mercado' component={Mercado} />
+        {/* <Route exact path='/Pago' component={Payment} /> */}
+>>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
@@ -119,6 +183,7 @@ function App() {
             <NavCategories />
           </div>
         </Route>
+        <Route exact path='/checkout' component={FormCheckout}/>
         <Route exact path='/' component={LandPage} />
         <Route component={PageNotFound} />
       </Switch>

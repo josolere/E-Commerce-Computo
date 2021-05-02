@@ -12,6 +12,8 @@ import stylesEdit from "./ProductEdit.module.scss";
 import { addProductDetails } from '../../redux/actions';
 import { toast } from 'react-toastify';
 import { ACTUAL_USER, GET_USERS } from "../../gql/login";
+import { HiBadgeCheck } from "react-icons/hi";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 interface user {
     currentUser: {
@@ -34,6 +36,7 @@ interface DetailsProduct {
         name: string
         price: number
         details: string
+        stock:number
         categories: any[]
         reviews: any[]
     }
@@ -118,7 +121,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         setHideReview(false)
     }
 
-    const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "", categories: [{ id: "1", name: "default" }] })
+    const [details, setDetails] = useState({ id: "", name: "", price: 0, brand: "", image: "", details: "",stock:0, categories: [{ id: "1", name: "default" }] })
 
     useEffect(() => {
         console.log(results?.data)
@@ -126,7 +129,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
     useEffect(() => {
         console.log(results.data)
-        setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", categories: filtred?.categories || [{}] })
+        setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "",stock: filtred?.stock || 0, categories: filtred?.categories || [{}] })
     }, [filtred])
 
     useEffect(() => {
@@ -154,7 +157,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     function handlePrice(e: React.FormEvent<HTMLInputElement>) {
         details ? setDetails({
             ...details,
-            price: +e.currentTarget.value
+            [e.currentTarget.name]: +e.currentTarget.value
         })
             : console.log('no se puede')
     }
@@ -167,10 +170,13 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             : console.log('no se puede')
     }
 
-    const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT)
+    const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT,{
+        refetchQueries:[{query:GET, variables: { id }}]
+    })
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        console.log(details)
         editProduct({
             variables: {                                        //WARNING CUIDADO CON ESTO
                 ...details,
@@ -216,7 +222,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                             <input className={stylesEdit.input} name='name' type='text' onChange={handleChange} defaultValue={details?.name} />
                             :
                             <h1 className={styles.nameDetail}>{filtred?.name}</h1>}
-                        <div className={stylesEdit.cats}>
+                            {filtred?.stock ? <div color='red'><HiBadgeCheck size={30}/> Hay Stock </div> : <div style={{color:'red'}}><IoCloseCircleSharp color='red'/> No hay Stock </div>}
+                            {editMode && <input min={0} style={{width:'2rem'}} type='number' name='stock' defaultValue={filtred?.stock} onChange={handlePrice}></input>}
+                          <div className={stylesEdit.cats}>
                             {editMode ?
                                 details?.categories?.map(category => <button className={stylesEdit.input} onClick={handleCategory} value={category.id} >Categoría: {category.name}</button>)
                                 :
@@ -235,16 +243,21 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         <div className={styles.botonPrecio}>
 
                             {editMode ?
-                                <p className={styles.precioDetail}>$<input className={stylesEdit.input} onChange={handlePrice} defaultValue={details?.price} /></p>
+                                <p className={styles.precioDetail}>$<input className={stylesEdit.input} onChange={handlePrice} name='price' defaultValue={details?.price} /></p>
                                 :
                                 <p className={styles.precioDetail}>${new Intl.NumberFormat().format(filtred?.price || 0)}</p>
                             }
                             <hr style={{ height: '1rem', backgroundColor: 'white' }} />
-                            <Link to='/Home' >
+                            {filtred?.stock ? <Link to='/Home' >
                                 <button onClick={() => {
                                     handleAddProduct();
                                 }} className={styles.buttonCompra}><FontAwesomeIcon icon={faCartPlus} /></button>
                             </Link>
+                        :
+                        <div>
+                            <IoCloseCircleSharp color='whitesmoke' style={{margin:"0rem 1rem"}} />
+                        </div>    
+                        }
                         </div>
                         <div className={stylesEdit.bot}>
 

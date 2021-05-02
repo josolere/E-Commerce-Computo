@@ -13,7 +13,7 @@ export const REVIEW_MUTATION = gql`
 `;
 
 export const EDIT_PRODUCT = gql `
-mutation editProduct ($id:String,$name: String, $price: Float, $brand: String, $image: String, $details: String,$categories:[ID!]) {
+mutation editProduct ($id:String,$name: String, $price: Float, $brand: String, $image: String, $details: String, $stock: Int ,$categories:[ID!]) {
     editProduct ( 
       id:$id,
       input: {
@@ -23,6 +23,7 @@ mutation editProduct ($id:String,$name: String, $price: Float, $brand: String, $
         image:$image, 
         details:$details
         categories:$categories
+        stock:$stock
 
       })
         {
@@ -42,6 +43,7 @@ export const GET = gql`
             brand
             details
             image
+            stock
             categories{
                 id
                 name

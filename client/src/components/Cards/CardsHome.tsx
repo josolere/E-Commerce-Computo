@@ -4,7 +4,7 @@ import { FILTER } from "../../gql/card"
 import styles from './CardsHome.module.scss'
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ReactPaginate from "react-paginate"
 import { AppState } from '../../redux/reducers';
 import PopUp from '../Alerts/PopUp';
@@ -18,6 +18,7 @@ interface DetailsProduct {
     name: string,
     price: number,
     details: string,
+    stock:number
 }
 
 interface DetailsData {
@@ -55,7 +56,6 @@ export default function Cards({ reset }: IProps) {
 
     const pageCount = Math.ceil(product ? product.length / productsPerPage : 0)
 
-
     const changePage = ({ selected }: any) => {
         setPageNumber(selected)
     }
@@ -64,7 +64,7 @@ export default function Cards({ reset }: IProps) {
     const displayProducts = product?.slice(pageVisited, pageVisited + productsPerPage)
         .map(el => {
             return (
-                <Card id={el.id} name={el.name} image={el.image} price={el.price} count={count} />
+                <Card id={el.id} name={el.name} image={el.image} price={el.price} count={count} stock={el.stock} />
             );
         })
 

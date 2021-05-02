@@ -8,6 +8,9 @@ import { RiQuestionnaireFill } from "react-icons/ri"
 import { FaCashRegister, FaShippingFast, FaUserPlus } from "react-icons/fa"
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER, LOGOUT } from "../../gql/login";
+import {useDispatch} from 'react-redux'
+import { deleteCart } from '../../redux/actions'
+
 
 interface user {
     currentUser: {
@@ -18,6 +21,8 @@ interface user {
 }
 
 function DropdownMenu(props: any) {
+
+    const dispatch = useDispatch()
 
     const [out, nothing] = useMutation(LOGOUT);
 
@@ -32,6 +37,8 @@ function DropdownMenu(props: any) {
     const logoutchange = () => {
         out()
         window.location.href = 'http://localhost:3000/Home'
+         localStorage.clear()
+            dispatch(deleteCart())
     }
 
     console.log('DROPDOWN', user)
