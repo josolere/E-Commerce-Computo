@@ -30,13 +30,8 @@ import Mercado from './components/payment/MercadoV2';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
-<<<<<<< HEAD
-import MP from './components/payment/MP';
-import ResponsiveNav from './components/NavBar/ResponsiveNav'
-=======
 import { GET_ORDER } from "./gql/shopingCart";
 import FormCheckout from './components/CheckOut/FormCheckout';
->>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
 
 interface user {
   currentUser: {
@@ -44,10 +39,7 @@ interface user {
     password: string,
     email: string,
     privilege: string
-<<<<<<< HEAD
-=======
     id: string
->>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
   }
 }
 
@@ -72,11 +64,6 @@ function App() {
 
   let user: any = {}
 
-<<<<<<< HEAD
-  let user: any = {}
-
-  const { data } = useQuery<user>(ACTUAL_USER)
-=======
   const [idUser, setIdUser] = useState('')
 
   const actualuser = useQuery<user>(ACTUAL_USER)
@@ -84,7 +71,6 @@ function App() {
   const dispatch = useDispatch()
 
   const cookie = new Cookies
->>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
 
   const resultsUsers = useQuery(GET_USERS)
 
@@ -160,20 +146,11 @@ function App() {
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-<<<<<<< HEAD
-              <Route exact path='/Mercado' component={MP} />
-
-        <Route exact path='/TestNav' component={ResponsiveNav} />
-        <Route exact path='/Envios' component={Shipments} />
-        <Route exact path='/PostPago' component={PayCompleted} />
-        <Route exact path='/AdminBorrar' component={AdminDelete} />
-=======
         <Route exact path= '/Envios' component={Shipments} />
         <Route exact path= '/PostPago' component={PayCompleted} />
         <Route exact path= '/AdminBorrar' component={AdminDelete} />
         <Route exact path = '/Mercado' component={Mercado} />
         {/* <Route exact path='/Pago' component={Payment} /> */}
->>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
