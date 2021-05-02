@@ -7,6 +7,10 @@ export const typeDefs = gql`
     status: String
     details: [OrderDetail]
     confirmAt: String
+    street: String
+    city: String
+    state: String
+    zip: String
     createdAt: String
     updatedAt: String
   }
@@ -27,10 +31,18 @@ export const typeDefs = gql`
   input CreateOrderInput {
     id: Int
     status: String
+    street: String
+    city: String
+    state: String
+    zip: String
   }
 
   input EditOrderInput {
     status: String
     confirmAt: String
+    street: String
+    city: String
+    state: String
+    zip: String
   }
 `;

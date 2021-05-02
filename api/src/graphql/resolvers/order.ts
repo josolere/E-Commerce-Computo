@@ -122,21 +122,6 @@ export default {
         i++;
       });
       return data;
-<<<<<<< HEAD
-    },
-
-    getAllOrders: async (
-      _parent: object,
-      { status }: { status: string },
-      { models }: { models: iModels }
-    ): Promise<iOrder> => {
-      let orders: any;
-      status
-        ? (orders = await models.Order.findAll({ where: { status: status } }))
-        : (orders = await models.Order.findAll());
-      return orders;
-=======
->>>>>>> 304f3d7bb78d8792793a8768bf2ef4ddc0dee6a6
     },
   },
 
@@ -176,10 +161,9 @@ export default {
     ): Promise<any> => {
       const OrderToEdit = await models.Order.findByPk(id);
       if (OrderToEdit) {
-
         let confirmAt = null;
         if (input.status === "creada") {
-          confirmAt = Date.now()
+          confirmAt = Date.now();
         }
         const updatedOrder = await OrderToEdit.update(
           { ...input, confirmAt },
@@ -187,7 +171,7 @@ export default {
         );
 
         //si el estado fue cambiado enviar un email informando ese cambio
-        console.log("+++++++++", updatedOrder)
+        console.log("+++++++++", updatedOrder);
         const user = await models.User.findByPk(updatedOrder.UserId);
 
         switch (input.status) {
