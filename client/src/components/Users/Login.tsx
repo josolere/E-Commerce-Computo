@@ -75,7 +75,7 @@ const Login = () => {
     const handleclickevent = () => {
         showlogin ? setshowLogin(false) : setshowLogin(true)
     }
-    console.log(showlogin)
+    console.log(logform)
 
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
@@ -97,7 +97,8 @@ const Login = () => {
             signup({
                 variables: {
                     firstName: logform.firstname, email: logform.email, password: logform.password, 
-                    lastName: logform.lastname, username: logform.username, address: logform.address
+                    lastName: logform.lastname, username: logform.username,  street: logform.street,
+                    city: logform.city, zip: logform.ZIPcode, state: logform.state, phone: logform.phone
                 }
             })
                 .then((resolve) => { 
@@ -364,7 +365,7 @@ const Login = () => {
                                         minLength={5}
                                         maxLength={30}
                                         placeholder='Dirección'
-                                        name='address'
+                                        name='street'
                                         onChange={handleinputchange}
                                     />
                                 </div>
