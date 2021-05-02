@@ -112,7 +112,7 @@ export default {
 
     signup: async (
       _parent: object,
-      { firstName, lastName, email, password, address, username }: any,
+      { firstName, lastName, email, password, address, username, street, city, state, zip, phone }: any,
       context: any
     ): Promise<any> => {
       const existingUsers = await context.models.User.findAll();
@@ -137,6 +137,11 @@ export default {
         password: null,
         address: address,
         username: username,
+        street, 
+        city,
+        state, 
+        zip, 
+        phone
       };
 
       // console.log(newUserInput);
