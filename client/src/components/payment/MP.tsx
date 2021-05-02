@@ -154,8 +154,8 @@ const MP: FC<PropsMercado> = (props) => {
               email,
               type: identificationType,
               number: identificationNumber,
-              description: "algun texto",
-              id: 2
+              description: "Insumos Computación",
+              id: idOrder
             }
           })
             .then((result) => window.location.href = `http://localhost:3000/PostPago?id=${result?.data?.processPayment?.payment?.id}`)

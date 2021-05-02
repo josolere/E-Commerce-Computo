@@ -15,6 +15,7 @@ query {
         state
         zip
         phone
+        privilege
     }
   }`;
 

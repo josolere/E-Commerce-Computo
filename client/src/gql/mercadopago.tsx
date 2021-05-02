@@ -51,10 +51,13 @@ export const CURRENT_ORDER = gql `
 `;
 
 export const EDIT_ORDER = gql `
-mutation($id:ID!,$status:String){
-  editOrder(id:$id,input:{status:$status}){
+mutation($id:ID!,$status:String $city:String $street:String $state:String){
+  editOrder(id:$id,input:{status:$status city:$city street:$street state:$state})
+  {
     id
     status    
+    street
+    city
   }
 }
 `;
