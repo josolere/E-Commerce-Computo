@@ -34,26 +34,39 @@ function DropdownMenu(props: any) {
         window.location.href = 'http://localhost:3000/Home'
     }
 
+    console.log('DROPDOWN', user)
+
     return (
         <div className={styles.dropdown} onMouseLeave={props.data}>
-            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle className={styles.iconButton}></BiUserCircle>{user?.name}</Link>
+            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle style={{marginRight:'3%'}}></BiUserCircle>{user?.name}</Link>
             {user?.privilege === 'user' ?
                 <div className={styles.orderdiv}>
-                    <p><Link to={`/Ordenes/Usuario`}><FaShippingFast className={styles.icon} ></FaShippingFast>Mis Pedidos</Link></p>
-                    <p><Link to='/ResetContraseña'><FontAwesomeIcon icon={faUnlock} className={styles.icon} /> Cambiar contraseña</Link> </p>
-                    <p><Link to='/BorrarUsuario'><FontAwesomeIcon icon={faUserMinus} className={styles.icon} /> Borrar Usuario</Link></p>
-                    <p><RiQuestionnaireFill className={styles.icon}></RiQuestionnaireFill>Preguntas</p>
-                    <p onClick={logoutchange} ><FontAwesomeIcon className={styles.icon} icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
+                    <p className={styles.pDrop} >
+                        <Link to={`/Ordenes/Usuario`}><FaShippingFast style={{marginRight:'3%'}}  ></FaShippingFast>Mis Pedidos</Link></p>
+                    <p className={styles.pDrop} >
+                        <Link to='/ResetContraseña'><FontAwesomeIcon style={{marginRight:'3%'}}  icon={faUnlock}  /> Cambiar contraseña</Link> </p>
+                    <p className={styles.pDrop} >
+                        <Link to='/BorrarUsuario'><FontAwesomeIcon style={{marginRight:'3%'}}  icon={faUserMinus}  /> Borrar Usuario</Link></p>
+                    <p className={styles.pDrop} >
+                        <RiQuestionnaireFill style={{marginRight:'3%'}}  ></RiQuestionnaireFill>Preguntas</p>
+                    <p className={styles.pDrop} onClick={logoutchange} >
+                        <FontAwesomeIcon style={{marginRight:'3%'}}  icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
                 </div>
                 : false}
             {user.privilege === "admin" ?
                 <div className={styles.orderdiv}>
-                    <p><Link to='/AdminBorrar'><FontAwesomeIcon icon={faUserMinus} className={styles.icon} /> Borrar Usuario</Link></p>
-                    <p><Link to="/CrearAdministrador"><FontAwesomeIcon className={styles.icon} icon={faUserPlus}></FontAwesomeIcon> Asignar Administrador</Link></p>
-                    <p><Link to="/CrearProducto"><FontAwesomeIcon className={styles.icon} icon={faCashRegister}></FontAwesomeIcon>Añadir Producto</Link></p>
-                    <p><Link to="/CrearCategoria"><FontAwesomeIcon className={styles.icon} icon={faList}></FontAwesomeIcon>Añadir Categoría</Link></p>
-                    <p><Link to="/Ordenes"><FaShippingFast className={styles.icon}></FaShippingFast>Ordenes</Link></p>
-                    <p onClick={logoutchange} ><FontAwesomeIcon className={styles.icon} icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
+                    <p className={styles.pDrop} >
+                        <Link to='/AdminBorrar'><FontAwesomeIcon style={{marginRight:'3%'}}  icon={faUserMinus} /> Borrar Usuario</Link></p>
+                    <p className={styles.pDrop} >
+                        <Link to="/CrearAdministrador"><FontAwesomeIcon style={{marginRight:'3%'}}   icon={faUserPlus}></FontAwesomeIcon> Asignar Administrador</Link></p>
+                    <p className={styles.pDrop} >
+                        <Link to="/CrearProducto"><FontAwesomeIcon style={{marginRight:'3%'}}   icon={faCashRegister}></FontAwesomeIcon>Añadir Producto</Link></p>
+                    <p className={styles.pDrop} >
+                        <Link to="/CrearCategoria"><FontAwesomeIcon style={{marginRight:'3%'}}   icon={faList}></FontAwesomeIcon>Añadir Categoría</Link></p>
+                    <p className={styles.pDrop} >
+                        <Link to="/Ordenes"><FaShippingFast style={{marginRight:'3%'}}  ></FaShippingFast>Ordenes</Link></p>
+                    <p className={styles.pDrop} onClick={logoutchange} >
+                        <FontAwesomeIcon style={{marginRight:'3%'}}   icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
                 </div> : false}
         </div>
     )

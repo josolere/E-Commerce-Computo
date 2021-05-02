@@ -14,6 +14,8 @@ const NavBarItem = (props:any) => {
     const handleOpen = () => {
         setOpen(!open)
     }
+
+    console.log(props.info)
     
     return (  
         <div className={styles.menuItem} >

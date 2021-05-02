@@ -30,13 +30,15 @@ import Mercado from './components/payment/MercadoV2';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
+import MP from './components/payment/MP';
+import ResponsiveNav from './components/NavBar/ResponsiveNav'
 
 interface user {
   currentUser: {
-      name: string,
-      password: string,
-      email: string,
-      privilege: string
+    name: string,
+    password: string,
+    email: string,
+    privilege: string
   }
 }
 
@@ -46,9 +48,9 @@ interface datauser {
 
 function App() {
 
-  let user:any = {}
+  let user: any = {}
 
-  const {data} = useQuery<user>(ACTUAL_USER)
+  const { data } = useQuery<user>(ACTUAL_USER)
 
   const resultsUsers = useQuery(GET_USERS)
 
@@ -70,17 +72,17 @@ function App() {
 
   return (
     <Router>
-       <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar
-              newestOnTop
-              closeOnClick
-              rtl={false}
-              pauseOnHover
-              pauseOnFocusLoss
-              draggable
-            />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnHover
+        pauseOnFocusLoss
+        draggable
+      />
       <Route path="/">
         <Home />
       </Route>
@@ -89,7 +91,7 @@ function App() {
         <Route exact path='/EditarCuenta' component={EditAccount} />
         <Route exact path='/Orden/Detalle/:id' component={OrderDetails} />
         <Route exact path='/Ordenes' component={OrdersAdmin} />
-       {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
+        {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/CrearProducto'>
           {user?.privilege === 'admin' ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
@@ -97,15 +99,17 @@ function App() {
         <Route exact path='/CrearCategoria'>
           {user?.privilege === 'admin' ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
-        <Route path='/Ordenes/Usuario' component={OrdersUser}/>
-        <Route path='/Orden/Usuario/:id' component={OrderUserDetails}/>
+        <Route path='/Ordenes/Usuario' component={OrdersUser} />
+        <Route path='/Orden/Usuario/:id' component={OrderUserDetails} />
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-        <Route exact path= '/Envios' component={Shipments} />
-        <Route exact path= '/PostPago' component={PayCompleted} />
-        <Route exact path= '/AdminBorrar' component={AdminDelete} />
-        <Route exact path = '/Mercado' component={Mercado} />
+              <Route exact path='/Mercado' component={MP} />
+
+        <Route exact path='/TestNav' component={ResponsiveNav} />
+        <Route exact path='/Envios' component={Shipments} />
+        <Route exact path='/PostPago' component={PayCompleted} />
+        <Route exact path='/AdminBorrar' component={AdminDelete} />
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />

@@ -26,7 +26,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    processPayment(input:CreatePaymentDataInput):ResultPayment
+    processPayment( id:ID!, input:CreatePaymentDataInput):ResultPayment
   }
 
 

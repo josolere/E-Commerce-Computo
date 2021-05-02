@@ -14,25 +14,25 @@ import { ACTUAL_USER } from "../../gql/login";
 
 interface user {
   currentUser: {
-      name: string,
-      password: string,
-      email: string
+    name: string,
+    password: string,
+    email: string
   }
 }
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
 
-  let user:any = {}
+  let user: any = {}
 
-  const {data} = useQuery<user>(ACTUAL_USER)
+  const { data } = useQuery<user>(ACTUAL_USER)
 
   user = data?.currentUser
 
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
 
-  const [cookiess, setCookies ] = useState<any>()
- 
+  const [cookiess, setCookies] = useState<any>()
+
   const cookie = new Cookies
 
 
@@ -41,32 +41,32 @@ const NavBar = (): JSX.Element => {
   }, [])
 
   return (
-    <>
-      <div className={navBar.container}>
-        <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
-        <SearchBar />
-
-        <Link className={navBar.linkCart} to="/Carrodecompras">
-        <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
-          <p>{quantity}</p>
-         {/*  <span>${new Intl.NumberFormat().format(idsProducts)}</span> */}
-
-        </Link>
-        
-        <div className={navBar.containerLinks}>
-        
-        {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}><p>Productos</p></Link> : false}
-        <div>
-
-          {user?.name ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
-         
+    <div className={navBar.sortThisNav}>
+      <nav>
+        <div className={navBar.CH} >
+          <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
         </div>
-        
-          <p>{user?.name && <NavBarItem info= "Mi Cuenta"></NavBarItem>  }</p>
-        
+        <div className={navBar.ElementBar} >
+          <SearchBar />
         </div>
-      </div>
-    </>
+        <div className={navBar.ElementBar} >
+          <Link className={navBar.linkCart} to="/Carrodecompras">
+            <FontAwesomeIcon icon={faShoppingCart} />
+            <p>{quantity}</p>
+          </Link>
+        </div>
+        <div className={navBar.ElementBar} >
+          {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home"
+          ><p>Productos</p></Link> : false}
+        </div>
+        <div className={navBar.ElementBar} >
+          {user?.name ? false :
+            <Link  to="/login"><p>Iniciar Sesion</p></Link>}
+          <p>{user?.name &&
+            <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
+        </div>
+      </nav>
+    </div>
   );
 };
 

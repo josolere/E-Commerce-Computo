@@ -208,14 +208,15 @@ $DBlue:#002D62;
     font-size: 3vh;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    background: linear-gradient(to right,$Lblue 50%, #002D62 50%);
+    color: $DBlue;
+/*     background: linear-gradient(to right,$Lblue 50%, #002D62 50%);
     background-size: auto auto;
     background-clip: border-box;
     background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: textclip 1.5s linear infinite;
+    animation: textclip 1.5s linear infinite; */
     display: inline-block;
   }
 

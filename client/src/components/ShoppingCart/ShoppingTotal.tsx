@@ -57,7 +57,7 @@ const ShoppingTotal = (): JSX.Element => {
             /*             createOrder({ variables: { status: 'pending', idUser: 1 } })
                             .then((resolve) => { console.log(data) })
                             .catch((err) => { console.log('Salio Mal') }) */
-            window.location.href = 'http://localhost:3000/Mercado'
+            window.location.href = 'http://localhost:3000/Envios'
         }
         else {
             toast.error("Debes iniciar sesión para realizar una compra")

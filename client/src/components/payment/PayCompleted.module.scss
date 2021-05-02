@@ -89,6 +89,22 @@ $DBlue:#002D62;
     display: inline-block;
   }
 
+  .Code{
+    color: #fff;
+    font-size: 3vh;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(to right,$Lblue 30%, $DBlue 40% );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 1.5s linear infinite;
+    display: inline-block;
+  }
 
 @keyframes textclip {
   to {

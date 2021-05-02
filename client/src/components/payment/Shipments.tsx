@@ -12,7 +12,8 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from './Payment.module.scss';
 import Truck from '../images/Truck.png';
-import styles3 from './MercadoV2.module.scss'
+import styles3 from './MercadoV2.module.scss';
+import { Link } from 'react-router-dom';
 
 const PostPayment = () => {
 
@@ -20,17 +21,19 @@ const PostPayment = () => {
 
     console.log(productos)
 
+    let priceTotal = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal).toString()
+
     const [shipments, setShipments] = useState({
-        state:'',
-        city:'',
-        address:''
+        state: '',
+        city: '',
+        address: ''
     })
 
     const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         setShipments({ ...shipments, [event.currentTarget.name]: event.currentTarget.value })
     }
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>)  => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
     }
     return (
@@ -40,7 +43,7 @@ const PostPayment = () => {
                     <div className={styles.sortUp} >
                         <img className={styles.LogoMP} src={Truck} alt='' />
                         <form className={styles.form} >
-{/*                             <div className={styles.form__group}>
+                            {/*                             <div className={styles.form__group}>
                                 <label className={styles.form__label} htmlFor="email">
                                     <FontAwesomeIcon icon={faEnvelopeSquare} /> E-mail</label>
                                 <input
@@ -93,15 +96,22 @@ const PostPayment = () => {
                                     {productos && productos.map((item: any, index: number) => (
                                         <div className={styles2.SortMapShip} >
                                             <p className={styles2.PMaped} >
-                                            <FontAwesomeIcon icon={faList} style={{marginRight:'2%'}} /> {item.name} X {item.count}</p>
+                                                <FontAwesomeIcon icon={faList} style={{ marginRight: '2%' }} /> {item.name} X {item.count}</p>
                                         </div>
                                     ))}
                                 </div>
                             </div>
                             <div className={styles.organizarbotones} >
-                                <button
-                                    className={styles2.boton}
-                                >Confirmar Envió</button>
+                                <Link to={{
+                                    pathname: '/Mercado',
+                                    state: {
+                                        price: priceTotal,
+                                    }
+                                }}>
+                                    <button
+                                        className={styles2.boton}
+                                    >Confirmar Envió</button>
+                                </Link>
                             </div>
                         </form>
                     </div>

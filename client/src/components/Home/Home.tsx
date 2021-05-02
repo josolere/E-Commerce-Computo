@@ -1,11 +1,12 @@
 import NavBar from '../NavBar/NavBar'
+import ResponsiveNav from '../NavBar/ResponsiveNav'
 
 
 const Home = () => {
     return (
         <>
-            <NavBar />
-        </>
+             <ResponsiveNav />
+       </>
     )
 }
 export default Home
