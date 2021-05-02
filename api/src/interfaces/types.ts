@@ -11,6 +11,11 @@ export type User = {
   address: string;
   id: string;
   facebookId: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string
 };
 export type Product = {
   image: string;
