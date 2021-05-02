@@ -176,9 +176,16 @@ const Login = () => {
         window.location.href = 'http://localhost:5000/auth/facebook'
     }
 
-    const responseGoogle = () => {
-        window.location.href = 'http://localhost:5000/auth/google';
+    const responseGoogle = (response:any) => {
+       
+        setTimeout(function(){ window.location.href = 'http://localhost:5000/auth/google';}, 9000) 
+
+        console.log(response. googleId)
+        console.log(response)
+
     }
+
+    // ex {Aa: "101561488459515443137", qc: {…}, gt: gx, googleId: "101561488459515443137", tokenObj: {…}, …}
 
     return (
         <div>
