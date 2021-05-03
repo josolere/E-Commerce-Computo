@@ -73,27 +73,21 @@ export default {
 
     const user = await models.User.findByPk(userId,options);
 
-    let insert = 1;
-    for(let x = 0; x< user.dataValues.Products.length; x++){
-      console.log(user.dataValues.Products[x].id,productId)
-      if(Number(user.dataValues.Products[x].id)===Number(productId)){
-        await user.removeProduct(productId);
-        insert = 0;
+      let insert = 1;
+      for(let x = 0; x< user.dataValues.Products.length; x++){
+        if(Number(user.dataValues.Products[x].id)===Number(productId)){
+          await user.removeProduct(productId);
+          insert = 0;
+        }
       }
-    }
 
-    if(insert>0) {
-      await user.addProduct(productId);
-    }
+      if(insert>0) {
+        await user.addProduct(productId);
+      }
 
-    const userOut = await models.User.findByPk(userId,options);
-
-
-
-     return userOut.dataValues.Products
-
+      const userOut = await models.User.findByPk(userId,options);
+      return userOut.dataValues.Products
     },
-
 
     deleteUser: async (
       _parent: object,
