@@ -2,12 +2,13 @@ import { gql } from "@apollo/client"
 
 
 export const REVIEW_MUTATION = gql`
-    mutation ReviewMutation ($id:Int! $rating:Int! $text: String! $product:Int!) {
-        addReview (id:$id, input: {rating: $rating text:$text product:$product} )
+    mutation ReviewMutation ($id:Int $userId:String $rating:Int $text:String $title:String) {
+        addReview (id:$id, input: {userId:$userId rating: $rating text:$text title:$title } )
         {
             rating
             text
             id
+            title
         }
     }
 `;
@@ -45,14 +46,14 @@ export const GET = gql`
             image
             stock
             categories{
-                id
-                name
-
+                 id
+                 name
             }
             reviews{
                 id
                 text
                 rating
+                title
                 
             }
         }

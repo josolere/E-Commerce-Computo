@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './AllOrders.module.scss'
-import {GET_ALL_ORDERS} from '../../../gql/orders'
+import { GET_ALL_ORDERS } from '../../../gql/ordersGql'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt, faSearch, faCircle, faPlus } from '@fortawesome/free-solid-svg-icons';

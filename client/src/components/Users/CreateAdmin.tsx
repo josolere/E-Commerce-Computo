@@ -5,7 +5,7 @@ import styles from './loguin.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CREATE_ADMIN, GET_USERS } from "../../gql/login";
+import { CREATE_ADMIN, GET_USERS } from "../../gql/loginGql";
 import styles3 from './CreateAdmin.module.scss';
 import { toast } from 'react-toastify';
 import styles2 from './AdminAuto.module.scss'
@@ -125,7 +125,7 @@ const CreateAdmin = () => {
                                     <div className={styles3.sortUser} >
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faFileSignature} /> Nombre: {item.name}</p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faAt} /> E-Mail: {item.email}</p>
-                                        <p className={styles3.UserP} ><FontAwesomeIcon icon={faMapMarker} />Direccion: {item.address}</p>
+                                        <p className={styles3.UserP} ><FontAwesomeIcon icon={faMapMarker} />Direccion: {item.street}</p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faShareAlt} />Nombre de Usuario: {item.username} </p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faCrown} /> Nivel: {item.privilege}</p>
                                     </div>

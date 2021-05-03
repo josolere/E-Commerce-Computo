@@ -1,9 +1,22 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
 .containerCarts{
     /* background-color: royalblue; */
-     background-color: #222831;
+    background-color:$dark;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: fit-content;
     width: 100%;
+    min-height: 100vh;
+
+}
+
+@media (max-width: 648px) {
+    .containerCarts{
+      min-height: 100vh;
+      height: fit-content;
+    }
 }

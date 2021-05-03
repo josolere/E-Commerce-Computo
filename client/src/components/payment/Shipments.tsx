@@ -12,7 +12,7 @@ import styles3 from './MercadoV2.module.scss';
 import { Link } from 'react-router-dom';
 import { EDIT_ORDER, CURRENT_ORDER } from '../../gql/mercadopago';
 import styles4 from './Responsive.module.scss';
-import { ACTUAL_USER } from '../../gql/login';
+import { ACTUAL_USER } from '../../gql/loginGql';
 
 const PostPayment = () => {
 
