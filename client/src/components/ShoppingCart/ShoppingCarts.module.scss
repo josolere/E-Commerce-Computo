@@ -10,10 +10,13 @@ $red:#f05454;//f05454
     flex-direction: column;
     align-items: center;
     width: 100%;
+    min-height: 100vh;
+
 }
 
 @media (max-width: 648px) {
     .containerCarts{
+      min-height: 100vh;
       height: fit-content;
     }
 }

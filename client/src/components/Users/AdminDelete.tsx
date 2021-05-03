@@ -125,7 +125,7 @@ const AdminDelete = () => {
                                     <div className={styles3.sortUser} >
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faFileSignature} /> Nombre: {item.name}</p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail: {item.email}</p>
-                                        <p className={styles3.UserP} ><FontAwesomeIcon icon={faMapMarker} />Direccion: {item.address}</p>
+                                        <p className={styles3.UserP} ><FontAwesomeIcon icon={faMapMarker} />Direccion: {item.street}</p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faShareAlt} />Nombre de Usuario: {item.username} </p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faCrown} /> Nivel: {item.privilege}</p>
                                     </div>
