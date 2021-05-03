@@ -129,34 +129,6 @@ const NavBar = (): JSX.Element => {
   return (
 
     <div className={navBar.sortThisNav}>
-<<<<<<< HEAD
-    <nav>
-      <div className={navBar.CH} >
-        <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
-      </div>
-      <div className={navBar.ElementBar} >
-        <SearchBar />
-      </div>
-      <div className={navBar.ElementBar} >
-        <Link className={navBar.linkCart} to="/Carrodecompras">
-          <FontAwesomeIcon icon={faShoppingCart} />
-          <p>{quantity}</p>
-        </Link>
-      </div>
-      <div className={navBar.ElementBar} >
-        {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home"
-        ><p>Productos</p></Link> : false}
-      </div>
-      <div className={navBar.ElementBar} >
-        {user?.name ? false :
-          <Link  to="/login"><p>Iniciar Sesion</p></Link>}
-        <p>{user?.name &&
-          <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
-      </div>
-    </nav>
-  </div>
-);
-=======
       <nav>
         <div className={navBar.CH} >
           <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
@@ -185,7 +157,6 @@ const NavBar = (): JSX.Element => {
       </nav>
     </div>
   );
->>>>>>> d1564d3efd5c100e437a693fc275fa081465e46e
 };
 
 //Redes en el footer

@@ -15,13 +15,8 @@ import FacebookLogin from "react-facebook-login";
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux'
 import { logeo } from '../../redux/actions'
-<<<<<<< HEAD
-import { NEW_ORDER, NEW_ORDER_DETAIL, GET_ORDER } from "../../gql/shopingCart"
-import {GET_ORDER_BY_StATUS, GET_ALL_ORDERS } from "../../gql/orders"
-=======
 import { NEW_ORDER, NEW_ORDER_DETAIL, GET_ORDER } from "../../gql/shopingCartGql"
 import {GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
->>>>>>> d1564d3efd5c100e437a693fc275fa081465e46e
 
 
 
@@ -41,7 +36,7 @@ const Login = () => {
     });
 
     const [login, logindata] = useMutation(LOGIN_MUTATION,{
-        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUser}}]
+        refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUser}}]
     })
 
     const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{

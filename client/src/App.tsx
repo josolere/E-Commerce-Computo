@@ -30,18 +30,14 @@ import Mercado from './components/payment/MercadoV2';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
-<<<<<<< HEAD
-import { GET_ORDER } from "./gql/shopingCart";
-=======
 import MP from './components/payment/MP';
 import ResponsiveNav from './components/NavBar/ResponsiveNav'
 import { GET_ORDER } from "./gql/shopingCartGql";
 import BuildPcUser from './components/buildPc/buildPcUser';
 import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
->>>>>>> d1564d3efd5c100e437a693fc275fa081465e46e
 import FormCheckout from './components/CheckOut/FormCheckout';
-import { GET_ORDER_BY_StATUS } from "./gql/orders"
+import { GET_ORDER_BY_STATUS } from "./gql/ordersGql"
 
 
 interface user {
