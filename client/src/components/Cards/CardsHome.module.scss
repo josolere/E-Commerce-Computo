@@ -1,0 +1,128 @@
+/* .container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: flex-start;
+    width: 100%;
+    margin: 2rem 0rem 0rem 2rem;
+    height: fit-content;  
+    position: relative;
+
+    // background-color: #191921;
+    z-index:0;
+} */
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 3rem 3rem 2rem 0rem;
+    position: relative;
+    padding-bottom: 4rem;
+    ul {
+        display: flex;
+        position: absolute;
+        height: 100%;
+        bottom:0;
+        width: fit-content;
+        background-color: #30475e;
+        font-family: 'Montserrat', sans-serif;
+        color: white;
+        height: 2rem;
+        list-style: none;
+        align-items: center;
+        outline: none;
+        li {
+            padding-left: 1rem;
+            padding-right: 2rem;
+            border-color: transparent;
+            outline: none;
+            a{
+                outline: none;
+                font-size: large;
+                &:hover {
+                    cursor: pointer;
+                    background:#f05454 ;
+                    box-shadow: 0 0 5px #f05454;
+                }
+            }
+        }
+    }
+}
+
+.footerCat {
+    width: 115%;
+    margin-left: -10rem;
+    height: 8rem;
+    background-color: #30475e;
+}
+
+.PopBox {
+    position: fixed;
+    top: 15%;
+    left: 10%;
+}
+
+.Pop {
+    position: relative;
+    width: 60%;
+    margin: auto auto;
+    height:fit-content;
+    max-height:fit-content;
+    background:$dark;
+    border-radius: 0.5rem;
+    padding: 2% ;
+    border: solid  darken($white, 15% ) 0.3rem;
+    overflow: auto;
+}
+
+.PopButton {
+    margin-top: 3%;
+    margin-left: 20%;
+    position: fixed;
+    padding: 0.75% 1.25%;
+	border-radius: 45%;
+	border:transparent;
+	font-size: 100%;
+    cursor: pointer;
+	letter-spacing: .15rem;
+	transition: all .3s;
+	overflow: hidden;
+	z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $red;
+        border-radius: 45%;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: darken($red, 15%);
+		transition: all .3s;
+        border-radius: 45%;
+		z-index: -1;
+	}
+	&:hover {
+		color: #fff;
+		&:before {
+			width: 100%;
+		}
+	}
+}

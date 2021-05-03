@@ -1,0 +1,13 @@
+$white:#dddddd;
+
+.catalog{
+    display: flex;
+    flex-direction: row;
+    background-color: #222831;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar{
+    position: sticky;
+    top: 0; 
+}
