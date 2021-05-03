@@ -62,24 +62,26 @@ export class User
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  /* 
-  public getUsers!: BelongsToManyGetAssociationsMixin<User>;
-  public addUser!: BelongsToManyAddAssociationMixin<User, number>;
-  public addUsers!: BelongsToManyAddAssociationsMixin<User, number>;
-  public hasUser!: BelongsToManyHasAssociationMixin<User, number>;
-  public hasUsers!: BelongsToManyHasAssociationsMixin<User[], number>;
-  public countUsers!: BelongsToManyCountAssociationsMixin;
-  public removeUser!: BelongsToManyRemoveAssociationMixin<User, number>;
-  public removeUsers!: BelongsToManyRemoveAssociationsMixin<User[], number>;
-  public setUsers!: BelongsToManySetAssociationsMixin<User[], number>;
-  public createUser!: BelongsToManyCreateAssociationMixin<User>; 
+  
+  public getProducts!: BelongsToManyGetAssociationsMixin<Product>;
+  public addProduct!: BelongsToManyAddAssociationMixin<Product, number>;
+  public addProducts!: BelongsToManyAddAssociationsMixin<Product, number>;
+  public hasProduct!: BelongsToManyHasAssociationMixin<Product, number>;
+  public hasProducts!: BelongsToManyHasAssociationsMixin<Product[], number>;
+  public countProducts!: BelongsToManyCountAssociationsMixin;
+  public removeProduct!: BelongsToManyRemoveAssociationMixin<Product, number>;
+  public removeProducts!: BelongsToManyRemoveAssociationsMixin<Product[],number>;
+  public setProducts!: BelongsToManySetAssociationsMixin<Product[], number>;
+  public createProduct!: BelongsToManyCreateAssociationMixin<Product>;
+
   
   public readonly products?: Product[];
-  
+
   public static associations: {
-    products: Association<User, Product>;
-  };
-  */
+      products: Association<User,Product>
+  }
+  
+
 }
 
 export function UserFactory(sequelize: Sequelize) {

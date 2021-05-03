@@ -1,10 +1,12 @@
 // Types
-import { User, Product, Order, OrderDetail, Review, PaymentData,PaymentResult } from "./types";
+import { User, Product, Order, OrderDetail, Review, PaymentData,PaymentResult, Wishlist } from "./types";
 
 
 //mp
 export interface iPaymentData extends PaymentData { }
 export interface iPaymentResult extends PaymentResult { }
+export interface iWishlist extends Wishlist { }
+
 // User
 export interface iUser extends User {
   id: string;
@@ -76,5 +78,6 @@ export interface iModels {
   Order: any;
   OrderDetail:any;
   Productsxorder: any;
+  Wishlist: any;
   sequelize: any;
 }

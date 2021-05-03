@@ -48,6 +48,10 @@ Product.belongsToMany(Order, { through: Productsxorder });
 Order.belongsTo(User, { targetKey: "id" });
 User.hasMany(Order, { sourceKey: "id" });
 
+//los productos tienen muchas categorias y las categorias tienen muchos productos
+Product.belongsToMany(User, { through: "wishlist" });
+User.belongsToMany(Product, { through: "wishlist" });
+
 Review.belongsTo(Product, { as: "product" });
 Product.hasMany(Review, { as: "reviews" });
 Review.belongsTo(User, { as: "users" });

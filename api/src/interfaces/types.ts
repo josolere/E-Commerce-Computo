@@ -67,3 +67,8 @@ export type Identification = {
   type: string;
   number: string;
 };
+
+export type Wishlist  = {
+  userId:String
+  product: Product
+}
