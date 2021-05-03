@@ -13,11 +13,12 @@ import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux'
 import { logeo } from '../../redux/actions'
 import { NEW_ORDER, NEW_ORDER_DETAIL, GET_ORDER } from "../../gql/shopingCart"
-import {GET_ORDER_BY_StATUS } from "../../gql/orders"
+import {GET_ORDER_BY_StATUS, GET_ALL_ORDERS } from "../../gql/orders"
 
 
 
 const Login = () => {
+    const dispatch = useDispatch()
 
     const [createOrder] = useMutation(NEW_ORDER)
 
@@ -35,28 +36,15 @@ const Login = () => {
         refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUser}}]
     })
 
-
-    const actualUser  = useQuery(ACTUAL_USER);
-
-
     const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
         refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUser}}]
     })
-    //--
 
     useEffect(() => {
         if (data) {
             setOrderCount(data.getOrdersByIdUser)
         }
     }, [data])
-
-    useEffect(() => {
-        console.log('++++++++++++++ ',actualUser?.data?.id)
-      localStorage.setItem('usuario', JSON.stringify(actualUser?.data?.id))
-       
-    }, [actualUser])
-
-    const dispatch = useDispatch()
 
 
     const [logform, setLogform] = useState({
@@ -67,7 +55,6 @@ const Login = () => {
         username: '',
         address: ''
     });
-
 
     const [showlogin, setshowLogin] = useState(false)
 
@@ -190,18 +177,13 @@ const Login = () => {
     }
 
     const responseGoogle = async(response:any) => {
-    //    if(actualUser.data){
 
         window.location.href = await'http://localhost:5000/auth/google';
-        login()
-        console.log(response. googleId)
-        console.log(response)
-
-    //    }
+        console.log(response.googleId)
+       setIdUser(response.googleId)
        
     }
 
-    // ex {Aa: "101561488459515443137", qc: {…}, gt: gx, googleId: "101561488459515443137", tokenObj: {…}, …}
 
     return (
         <div>

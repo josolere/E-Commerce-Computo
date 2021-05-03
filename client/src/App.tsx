@@ -75,15 +75,7 @@ function App() {
   const resultsUsers = useQuery(GET_USERS)
 
   let test = resultsUsers?.data?.getUsers
-  // console.log(test)
   user = actualuser.data?.currentUser
-  console.log(user?.id)
-  const dataOrderSatus: any = useQuery(GET_ORDER_BY_StATUS, {
-    variables: { status: "pendiente", idUser: user?.id }
-})
-console.log(dataOrderSatus)
-
-
 
   useEffect(() => {
 

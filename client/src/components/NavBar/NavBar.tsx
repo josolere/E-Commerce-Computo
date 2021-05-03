@@ -55,7 +55,6 @@ const NavBar = (): JSX.Element => {
 
   const { logeo, idUsers }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
-
   const idProductOrder = useQuery<detailOrderid>(GET_ORDER_LIST, {
     variables: { idUser: idUsers }
   })
@@ -73,7 +72,7 @@ const NavBar = (): JSX.Element => {
   } else {
     if (logeo === true && dataOrderSatus.data) {
       let arrayProducts = []
-      if (dataOrderSatus.data?.getOrderByStatus[0]?.details.length !== 0) {
+      if (dataOrderSatus.data?.getOrderByStatus[0]?.details?.length !== 0) {
         console.log(dataOrderSatus.data?.getOrderByStatus[0]?.details)
         arrayProducts = dataOrderSatus.data?.getOrderByStatus[0]?.details
       } else {
@@ -91,7 +90,7 @@ const NavBar = (): JSX.Element => {
           priceBase = priceBase + mapeo.price * conte
         })
       dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
-            localStorage.clear()
+            // localStorage.clear()
       // localStorage.setItem('productsLocal', JSON.stringify(productBas))
       // localStorage.setItem('quantity', JSON.stringify(conte))
       // localStorage.setItem('priceSubTotal', JSON.stringify(priceBase))
