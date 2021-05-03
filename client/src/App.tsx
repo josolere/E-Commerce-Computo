@@ -30,6 +30,7 @@ import Mercado from './components/payment/MercadoV2';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
+import BuildPcUser  from './components/buildPc/buildPcUser'
 
 interface user {
   currentUser: {
@@ -110,6 +111,7 @@ function App() {
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
+        <Route exact path= '/ArmaTuPc' component={BuildPcUser} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>
             <NavCategories />

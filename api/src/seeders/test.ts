@@ -230,6 +230,19 @@ let categories = [
 ]
 
 
+
+export const productRelations = [
+    {   id:10,
+        products:[3,4]
+    },
+
+    {   id:9,
+        products:[5,6]
+    }
+]
+
+
+
 const users = [
     {
       name: 'Maurice',
@@ -272,6 +285,8 @@ export function usersSeeder(){
     
 }
 
+
+
 export function categoriesSeeder() {
     categories.forEach((item: any) => {
         Category.create({
@@ -297,3 +312,28 @@ export async function getUsers(){
 
     return users;
 }
+
+
+export async function productRelationsSeeder(){
+    productRelations.forEach(async (item: any) => {
+        let product:any =  await Product.findByPk(item.id);
+        console.log('-----------',product)
+
+        item.products.forEach(async (item:any) => {
+            let currentProduct = await Product.findByPk(item.products)
+            console.log('++++++++',product)
+
+        await product.addProductCompatibility(currentProduct)
+    })
+
+
+
+    })
+}
+
+
+
+
+
+
+

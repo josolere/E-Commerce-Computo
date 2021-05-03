@@ -18,6 +18,7 @@ export const typeDefs = gql`
 
   type Query {
     getProducts(filter: FilterProducts): [Product!]
+    getProductsBuild: [Product]
     getProductById(id: ID!): Product
     getProductByName(name: String): [Product]
   }
