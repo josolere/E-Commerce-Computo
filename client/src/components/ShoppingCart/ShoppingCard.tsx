@@ -7,7 +7,7 @@ import { PRODUCTS } from "../../gql/shopingCart"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { EDIT_ORDER_DETAIL, GET_ORDER_LIST, DELETE_ORDER_DETAIL } from "../../gql/order"
-import {GET_ORDER_BY_StATUS } from "../../gql/orders"
+import { GET_ORDER_BY_StATUS } from "../../gql/orders"
 
 import { AppState } from '../../redux/reducers';
 
@@ -70,16 +70,16 @@ const ShoppingCard = (props: props): JSX.Element => {
     })
 
     const productsCart: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
-        variables: { status: "pendiente", idUser: idUsers  }
-      })
-      
+        variables: { status: "pendiente", idUser: idUsers }
+    })
 
-      let details = productsCart?.data?.getOrderByStatus[0]?.details
-      useEffect(() => {
-          console.log(idUsers)
-         console.log(productsCart)
-         console.log(productsCart?.data?.getOrderByStatus[0]?.details)
-      }, [productsCart])
+
+    let details = productsCart?.data?.getOrderByStatus[0]?.details
+    useEffect(() => {
+        console.log(idUsers)
+        console.log(productsCart)
+        console.log(productsCart?.data?.getOrderByStatus[0]?.details)
+    }, [productsCart])
 
 
     const deletePro = () => toast.error("Producto Eliminado");
@@ -89,8 +89,8 @@ const ShoppingCard = (props: props): JSX.Element => {
     const dispatch = useDispatch()
 
     const [deleteOrderDetail] = useMutation(DELETE_ORDER_DETAIL)
-    const [editOrderDetail] = useMutation(EDIT_ORDER_DETAIL,{
-        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUsers}}]
+    const [editOrderDetail] = useMutation(EDIT_ORDER_DETAIL, {
+        refetchQueries: [{ query: GET_ORDER_BY_StATUS, variables: { status: "pendiente", idUser: idUsers } }]
     })
 
     useEffect(() => {
@@ -100,14 +100,14 @@ const ShoppingCard = (props: props): JSX.Element => {
     }, [product])
 
 
-    const accounrMoreBases = (id:any) => {
+    const accounrMoreBases = (id: any) => {
         let productId = product.id
         let count = props.count + 1
         let productPrice = product.price
         setPrice(price + product.price)
         dispatch(morePrice({ productPrice, count, productId }))
         if (logeo === true) {
-            
+
             console.log('entra if logeo')
             console.log(productId)
 
@@ -122,10 +122,10 @@ const ShoppingCard = (props: props): JSX.Element => {
     }
 
     const accountantMore = async () => {
-       let resultId = details?.find((finds:any)=> finds?.ProductId === product?.id
-       )
+        let resultId = details?.find((finds: any) => finds?.ProductId === product?.id
+        )
 
-        if (idProductOrder?.data !== undefined && productsCart !==undefined) {
+        if (idProductOrder?.data !== undefined && productsCart !== undefined) {
             accounrMoreBases(resultId?.id)
         }
     }
@@ -161,7 +161,7 @@ const ShoppingCard = (props: props): JSX.Element => {
     }
 
 
-    const accountantLessBases = (id:any) => {
+    const accountantLessBases = (id: any) => {
         if (props.count !== 1) {
             let productPrice = product.price
             let productId = product.id
@@ -185,7 +185,7 @@ const ShoppingCard = (props: props): JSX.Element => {
 
 
     const accountantLess = async () => {
-        let resultId = details?.find((finds:any)=> finds.ProductId === product?.id)
+        let resultId = details?.find((finds: any) => finds.ProductId === product?.id)
 
         if (idProductOrder.data !== undefined) {
             accountantLessBases(resultId?.id)
@@ -222,7 +222,7 @@ const ShoppingCard = (props: props): JSX.Element => {
         }
     }
 
-    const eliminateProductBases = (id:any) => {
+    const eliminateProductBases = (id: any) => {
         console.log(idEdit)
 
         let prductId = product.id
@@ -245,7 +245,7 @@ const ShoppingCard = (props: props): JSX.Element => {
 
     const eliminateProduct = async () => {
         if (idProductOrder.data !== undefined) {
-        let resultId = details?.find((finds:any)=> finds.ProductId === product.id)
+            let resultId = details?.find((finds: any) => finds.ProductId === product.id)
 
             eliminateProductBases(resultId?.id)
         }
@@ -274,44 +274,46 @@ const ShoppingCard = (props: props): JSX.Element => {
     }
 
     return (
-        <>
-            {
-                <div className={cart.containerCard}>
-                    {/* <ToastContainer /> */}
-                    <div className={cart.containerImg}>
-                        <img style={{ maxWidth: '100%', maxHeight: '100%' }} src={product?.image} alt="producto" />
-                    </div>
-                    <div className={cart.containerOthers}>
-                        <h1>{product?.name}</h1>
-                        <h2 className={cart.price}>${price}</h2>
-                        <div className={cart.containerButtons}>
-                            <button
-                                id={props.count > 1 ? cart.buttonLess : undefined}
-                                onClick={() => {
-                                    accountantLess();
-                                    addLocaStorageLess()
-                                }}
-                            >-</button>
-
-                            <button style={{ borderColor: "transparent", backgroundColor: "transparent" }}>{props.count}</button>
-                            <button
-                                onClick={() => {
-                                    addLocaStorageMore()
-                                    accountantMore();
-                                }}
-                            >+</button>
-                            <button className={cart.delete}
-                                onClick={() => {
-                                    eliminateProduct();
-                                    deleteLocaStorageLess();
-                                    deletePro();
-                                }}
-                            >Eliminar</button>
-                        </div>
-                    </div>
+        <div className={cart.containerCard}>
+            <div className={cart.containerImg}>
+                <img
+                    className={cart.imageCart} src={product?.image} alt="producto" />
+            </div>
+            <div className={cart.containerOthers}>
+                <h1 className={cart.titleCart} >{product?.name}</h1>
+                <h2 className={cart.price}>${new Intl.NumberFormat().format(price)}</h2>
+                <div className={cart.containerButtons}>
+                    <button
+                        className={cart.buttonMoreLess}
+                        id={props.count > 1 ? cart.buttonLess : undefined}
+                        onClick={() => {
+                            accountantLess();
+                            addLocaStorageLess()
+                        }}
+                    >-</button>
+                    <button
+                        className={cart.cartQuantity}
+                    >{props.count}</button>
+                    <button
+                        className={cart.buttonMoreLess}
+                        onClick={() => {
+                            addLocaStorageMore()
+                            accountantMore();
+                        }}
+                    >+</button>
+                    <button
+                        className={cart.buttonDelete}
+                        onClick={() => {
+                            eliminateProduct();
+                            deleteLocaStorageLess();
+                            deletePro();
+                        }}
+                    >Eliminar</button>
                 </div>
-            }
-        </>
+            </div>
+        </div>
+
+
     )
 }
 

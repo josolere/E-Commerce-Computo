@@ -40,6 +40,21 @@ $Lblue:#6495ED;
       format("woff2");
 }
 
+::-webkit-scrollbar {
+	width: 0.9rem;               /* width of the entire scrollbar */
+  }
+  
+::-webkit-scrollbar-track {
+	background: $grey;        /* color of the tracking area */
+	border-radius: 0.2rem;
+  }
+  
+::-webkit-scrollbar-thumb {
+	background-color: $dark;    /* color of the scroll thumb */
+	border-radius: 0.5rem;       /* roundness of the scroll thumb */
+	border: 3px solid $red;  /* creates padding around scroll thumb */
+  }
+
 .wrapper {
     margin-left: auto;
     margin-right: auto;
@@ -83,6 +98,8 @@ $Lblue:#6495ED;
     width: 100%;
     height: 110vh;
     background-position:center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .TitleLand {
