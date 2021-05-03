@@ -119,33 +119,32 @@ const NavBar = (): JSX.Element => {
   return (
 
     <div className={navBar.sortThisNav}>
-      <nav>
-        <div className={navBar.container}>
-          <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
-          <SearchBar />
-
-          <Link className={navBar.linkCart} to="/Carrodecompras">
-            <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
-            <p>{quantity}</p>
-            {/*  <span>${new Intl.NumberFormat().format(idsProducts)}</span> */}
-
-          </Link>
-
-          <div className={navBar.containerLinks}>
-
-            {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}><p>Productos</p></Link> : false}
-            <div>
-              {user?.name ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
-
-            </div>
-
-            <p>{user?.name && <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
-
-          </div>
-        </div>
-      </nav>
-    </div>
-  );
+    <nav>
+      <div className={navBar.CH} >
+        <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
+      </div>
+      <div className={navBar.ElementBar} >
+        <SearchBar />
+      </div>
+      <div className={navBar.ElementBar} >
+        <Link className={navBar.linkCart} to="/Carrodecompras">
+          <FontAwesomeIcon icon={faShoppingCart} />
+          <p>{quantity}</p>
+        </Link>
+      </div>
+      <div className={navBar.ElementBar} >
+        {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home"
+        ><p>Productos</p></Link> : false}
+      </div>
+      <div className={navBar.ElementBar} >
+        {user?.name ? false :
+          <Link  to="/login"><p>Iniciar Sesion</p></Link>}
+        <p>{user?.name &&
+          <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
+      </div>
+    </nav>
+  </div>
+);
 };
 
 //Redes en el footer
