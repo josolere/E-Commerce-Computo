@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './OrderUserDetail.module.scss'
-import { GET_ORDER_DETAILS, EDIT_ORDER } from '../../../gql/orders'
+import { GET_ORDER_DETAILS, EDIT_ORDER } from '../../../gql/ordersGql'
 import { useMutation, useQuery } from '@apollo/client'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'

@@ -6,7 +6,7 @@ import styles2 from './Edit.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { EDIT_USER_MUTATION, GET_USERS } from "../../gql/login";
+import { EDIT_USER_MUTATION, GET_USERS } from "../../gql/loginGql";
 import styles3 from './CreateAdmin.module.scss';
 import { toast } from 'react-toastify';
 

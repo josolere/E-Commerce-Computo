@@ -4,10 +4,10 @@ import styles from './loguin.module.scss';
 import styles2 from './Edit.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelopeSquare, faUnlock, faShareAlt } from '@fortawesome/free-solid-svg-icons';
-import { DELETE_USER } from "../../gql/login"
+import { DELETE_USER } from "../../gql/loginGql"
 import { toast } from 'react-toastify';
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER, LOGOUT } from "../../gql/login";
+import { ACTUAL_USER, LOGOUT } from "../../gql/loginGql";
 import Swal from 'sweetalert2'
 
 interface user {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Card from './CardHome'
-import { FILTER } from "../../gql/card"
+import { FILTER } from "../../gql/cardGql"
 import styles from './CardsHome.module.scss'
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router';
@@ -92,4 +92,3 @@ export default function Cards({ reset }: IProps) {
         </React.Fragment>
     )
 }
-

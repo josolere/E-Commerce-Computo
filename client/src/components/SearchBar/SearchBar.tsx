@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from 'react-redux';
 import { setCategory, setFilter } from '../../redux/actions';
-import { GET } from "../../gql/searchbar"
+import { GET } from "../../gql/searchbarGql"
 import styles from "./searchbar.module.scss";
 import { Link, Redirect} from 'react-router-dom'
 

@@ -24,8 +24,11 @@ import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify';
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER, GET_USERS } from "./gql/login";
+import { ACTUAL_USER, GET_USERS } from "./gql/loginGql";
 import ResetPassword from './components/Users/ResetPassword';
+import BuildPcUser from './components/buildPc/buildPcUser';
+import BuildPc from './components/buildPc/buildPc';
+import BuildPcFilter from './components/buildPc/buildPcFilter';
   
 
 interface user {
@@ -117,6 +120,9 @@ function App() {
           </div>
         </Route>
         <Route exact path='/' component={LandPage} />
+        <Route exact path ="/armatupc" component = { BuildPcFilter } />
+        <Route exact path ="/armatupc/tipo/:tipo" component = { BuildPc } />
+        <Route exact path ="/armatupc/:marca" component = { BuildPcUser } />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

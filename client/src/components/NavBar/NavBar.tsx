@@ -10,7 +10,7 @@ import { setFilter } from '../../redux/actions';
 import { Cookies } from "react-cookie";
 import NavBarItem from "./NavBarItem";
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER } from "../../gql/login";
+import { ACTUAL_USER } from "../../gql/loginGql";
 
 interface user {
   currentUser: {

@@ -15,7 +15,7 @@ import { BiUserCircle } from "react-icons/bi";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { FaCashRegister, FaShippingFast, FaUserPlus } from "react-icons/fa";
 import { useMutation, useQuery, gql } from "@apollo/client";
-import { ACTUAL_USER, LOGOUT } from "../../gql/login";
+import { ACTUAL_USER, LOGOUT } from "../../gql/loginGql";
 
 interface user {
   currentUser: {

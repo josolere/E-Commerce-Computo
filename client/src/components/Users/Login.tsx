@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGIN_MUTATION, SIGNUP_MUTATION} from "../../gql/login"
+import { LOGIN_MUTATION, SIGNUP_MUTATION} from "../../gql/loginGql"
 import { toast, ToastContainer } from "react-toastify"
 import {faEnvelopeSquare, faUnlock,faFileSignature, faMapMarker, faShareAlt} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

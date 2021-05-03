@@ -3,7 +3,7 @@ import styles from './Categories.module.scss'
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from "react-redux";
 import { setCategory, setFilter} from "../../redux/actions";
-import {GET_CATEGORIES} from "../../gql/categories"
+import {GET_CATEGORIES} from "../../gql/categoriesGql"
 import Cards from '../Cards/CardsHome';
 import { useEffect } from 'react';
 

@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation,  gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { EDIT_USER_MUTATION } from "../../gql/login"
+import { EDIT_USER_MUTATION } from "../../gql/loginGql"
 import styles2 from './Edit.module.scss';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom"
-import { DELETE_USER } from "../../gql/login"
+import { DELETE_USER } from "../../gql/loginGql"
 import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import { Cookies } from "react-cookie";

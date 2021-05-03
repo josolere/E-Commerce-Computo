@@ -3,7 +3,7 @@ import cart from './ShoppingCard.module.scss'
 import { useQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux'
 import { deleteProduct, morePrice, lessPrice } from '../../redux/actions'
-import { PRODUCTS } from "../../gql/shopingCart"
+import { PRODUCTS } from "../../gql/shopingCartGql"
 import { isOptionDisabled } from 'react-select/src/builtins';
 
 interface DetailsProduct {

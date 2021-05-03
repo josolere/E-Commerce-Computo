@@ -59,6 +59,7 @@ export interface iEditOrderDetailInput extends Order {}
 //Review
 export interface iReview extends Review {
   id: number;
+  
   createdAt: Date;
   updatedAt: Date;
 }
