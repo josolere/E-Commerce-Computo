@@ -70,33 +70,33 @@ const NavBar = (): JSX.Element => {
     console.log(data)
     if (firsstRender.current) {
       firsstRender.current = false;
-  } else {
-    if (logeo === true && dataOrderSatus.data) {
-      let arrayProducts = []
-      if (dataOrderSatus.data?.getOrderByStatus[0]?.details.length !== 0) {
-        console.log(dataOrderSatus.data?.getOrderByStatus[0]?.details)
-        arrayProducts = dataOrderSatus.data?.getOrderByStatus[0]?.details
-      } else {
-        console.log(dataOrderSatus.data?.getOrderByStatus)
-        arrayProducts = dataOrderSatus.data?.getOrderByStatus
+    } else {
+      if (logeo === true && dataOrderSatus.data) {
+        let arrayProducts = []
+        if (dataOrderSatus.data?.getOrderByStatus[0]?.details.length !== 0) {
+          console.log(dataOrderSatus.data?.getOrderByStatus[0]?.details)
+          arrayProducts = dataOrderSatus.data?.getOrderByStatus[0]?.details
+        } else {
+          console.log(dataOrderSatus.data?.getOrderByStatus)
+          arrayProducts = dataOrderSatus.data?.getOrderByStatus
+        }
+        let productBas: any = []
+        let conte = 0
+        let priceBase = 0
+        console.log(arrayProducts)
+        arrayProducts !== undefined &&
+          arrayProducts.map((mapeo: any) => {
+            productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity })
+            conte = conte + mapeo.quantity
+            priceBase = priceBase + mapeo.price * conte
+          })
+        dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
+        localStorage.clear()
+        // localStorage.setItem('productsLocal', JSON.stringify(productBas))
+        // localStorage.setItem('quantity', JSON.stringify(conte))
+        // localStorage.setItem('priceSubTotal', JSON.stringify(priceBase))
       }
-      let productBas: any = []
-      let conte = 0
-      let priceBase = 0
-      console.log(arrayProducts)
-      arrayProducts !== undefined &&
-        arrayProducts.map((mapeo: any) => {
-          productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity })
-          conte = conte + mapeo.quantity
-          priceBase = priceBase + mapeo.price * conte
-        })
-      dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
-            localStorage.clear()
-      // localStorage.setItem('productsLocal', JSON.stringify(productBas))
-      // localStorage.setItem('quantity', JSON.stringify(conte))
-      // localStorage.setItem('priceSubTotal', JSON.stringify(priceBase))
     }
-  }
   }, [dataOrderSatus.data?.getOrderByStatus[0]?.details])
 
   let user: any = {}
@@ -117,33 +117,34 @@ const NavBar = (): JSX.Element => {
   }, [])
 
   return (
+
     <div className={navBar.sortThisNav}>
-      <nav>
-        <div className={navBar.CH} >
-          <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
-        </div>
-        <div className={navBar.ElementBar} >
-          <SearchBar />
-        </div>
-        <div className={navBar.ElementBar} >
-          <Link className={navBar.linkCart} to="/Carrodecompras">
-            <FontAwesomeIcon icon={faShoppingCart} />
-            <p>{quantity}</p>
-          </Link>
-        </div>
-        <div className={navBar.ElementBar} >
-          {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home"
-          ><p>Productos</p></Link> : false}
-        </div>
-        <div className={navBar.ElementBar} >
-          {user?.name ? false :
-            <Link  to="/login"><p>Iniciar Sesion</p></Link>}
-          <p>{user?.name &&
-            <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
-        </div>
-      </nav>
-    </div>
-  );
+    <nav>
+      <div className={navBar.CH} >
+        <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
+      </div>
+      <div className={navBar.ElementBar} >
+        <SearchBar />
+      </div>
+      <div className={navBar.ElementBar} >
+        <Link className={navBar.linkCart} to="/Carrodecompras">
+          <FontAwesomeIcon icon={faShoppingCart} />
+          <p>{quantity}</p>
+        </Link>
+      </div>
+      <div className={navBar.ElementBar} >
+        {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home"
+        ><p>Productos</p></Link> : false}
+      </div>
+      <div className={navBar.ElementBar} >
+        {user?.name ? false :
+          <Link  to="/login"><p>Iniciar Sesion</p></Link>}
+        <p>{user?.name &&
+          <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
+      </div>
+    </nav>
+  </div>
+);
 };
 
 //Redes en el footer
