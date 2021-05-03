@@ -18,8 +18,8 @@ export default {
         where: { id: idProduct },
         include: [{ model: models.Product, as: "productCompatibility" }],
       });
-      // console.log(data);
-      // console.log(data[0].productCompatibility);
+//      console.log(data);
+      console.log(data[0].productCompatibility);
       return data[0].productCompatibility;
     },
   },
