@@ -3,10 +3,9 @@ import { useState } from 'react';
 import styles from './loguin.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelopeSquare, faUnlock, faShareAlt, faAt } from '@fortawesome/free-solid-svg-icons';
-import { DELETE_USER } from "../../gql/login";
 import { toast } from 'react-toastify';
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER, LOGOUT } from "../../gql/login";
+import { ACTUAL_USER, LOGOUT, DELETE_USER} from "../../gql/loginGql";
 import Swal from 'sweetalert2';
 import styles2 from './SmallForm.module.scss';
 

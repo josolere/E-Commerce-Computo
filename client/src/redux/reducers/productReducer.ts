@@ -6,7 +6,6 @@ const initialState = {
     id: 1
 }
 
-
 function productReducer(state = initialState, action: any): any {
   switch (action.type) {
     case SET_FILTER:
@@ -19,6 +18,7 @@ function productReducer(state = initialState, action: any): any {
         ...state,
         categories: action.categories,
       };
+      
     default:
       return state;
   }

@@ -14,7 +14,7 @@ import { setFilter } from '../../redux/actions';
 import { Cookies } from "react-cookie";
 import NavBarItem from "./NavBarItem";
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER } from "../../gql/login";
+import { ACTUAL_USER } from "../../gql/loginGql";
 import styles from './ResponsiveNav.module.scss'
 
 interface user {
@@ -47,6 +47,15 @@ const NavBarResponsive = () => {
 
   const closeMobileMenu = () => setClick(false);
 
+  const handleRedirCart = () => {
+    window.location.href = "http://localhost:3000/Carrodecompras"
+  }
+
+  const handleRedirProducts= () => {
+    dispatch(setFilter(""))
+    window.location.href = "http://localhost:3000/Home"
+  }
+
   return (
     <div className={styles.header}>
         <div className={styles.logo_container}>
@@ -57,14 +66,21 @@ const NavBarResponsive = () => {
         </div>
         <ul className={click ? styles.nav_options_active : styles.nav_options}>
           <li className={styles.optionCart} onClick={closeMobileMenu}>
-            <Link className={styles.optionCartLink} to="/Carrodecompras">
+            <Link className={styles.optionCartLink} onClick={handleRedirCart} to="/Carrodecompras">
               <p className={styles.optionCartLink}> <FontAwesomeIcon icon={faShoppingCart} style={{marginRight:'25%'}} /> {quantity}</p>
             </Link>
           </li>
           <li className={styles.optionProducts} onClick={closeMobileMenu}>
-            {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home"
+            {true ? <Link onClick={handleRedirProducts} to="/Home"
             >
               <p className={styles.optionProductsLink} ><FontAwesomeIcon icon={faListAlt} style={{marginRight:'5%'}} />Productos</p>
+              </Link> : false}          
+              </li>
+             
+              <li className={styles.optionProducts} onClick={closeMobileMenu}>
+            {true ? <Link  to="/armatupc"
+            >
+              <p className={styles.optionProductsLink} ><FontAwesomeIcon icon={faListAlt} style={{marginRight:'5%'}} />Arma tu PC</p>
               </Link> : false}          
               </li>
 

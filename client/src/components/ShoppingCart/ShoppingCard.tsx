@@ -3,11 +3,12 @@ import cart from './ShoppingCard.module.scss'
 import { useQuery, useMutation } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteProduct, morePrice, lessPrice } from '../../redux/actions'
-import { PRODUCTS } from "../../gql/shopingCart"
+import { PRODUCTS } from "../../gql/shopingCartGql"
+import { isOptionDisabled } from 'react-select/src/builtins';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { EDIT_ORDER_DETAIL, GET_ORDER_LIST, DELETE_ORDER_DETAIL } from "../../gql/order"
-import {GET_ORDER_BY_StATUS } from "../../gql/orders"
+import {GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
 
 import { AppState } from '../../redux/reducers';
 
@@ -69,7 +70,7 @@ const ShoppingCard = (props: props): JSX.Element => {
         variables: { idUser: idUsers }
     })
 
-    const productsCart: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
+    const productsCart: any = useQuery<detailOrderid>(GET_ORDER_BY_STATUS, {
         variables: { status: "pendiente", idUser: idUsers  }
       })
       
@@ -90,7 +91,7 @@ const ShoppingCard = (props: props): JSX.Element => {
 
     const [deleteOrderDetail] = useMutation(DELETE_ORDER_DETAIL)
     const [editOrderDetail] = useMutation(EDIT_ORDER_DETAIL,{
-        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUsers}}]
+        refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUsers}}]
     })
 
     useEffect(() => {
@@ -285,9 +286,9 @@ const ShoppingCard = (props: props): JSX.Element => {
                         <h1>{product?.name}</h1>
                         <h2 className={cart.price}>${price}</h2>
                         <div className={cart.containerButtons}>
-                            <button
+                            <button disabled ={props.count === 1}
                                 id={props.count > 1 ? cart.buttonLess : undefined}
-                                onClick={() => {
+                                onClick={() => {  
                                     accountantLess();
                                     addLocaStorageLess()
                                 }}

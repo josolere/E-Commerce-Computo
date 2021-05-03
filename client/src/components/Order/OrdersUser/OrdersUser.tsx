@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './OrdersUser.module.scss'
-import {GET_ALL_ORDERS, GET_ORDERS_USER} from '../../../gql/orders'
+import {GET_ALL_ORDERS, GET_ORDERS_USER} from '../../../gql/ordersGql'
 import { gql, useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
