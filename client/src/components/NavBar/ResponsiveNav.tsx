@@ -37,10 +37,6 @@ const NavBarResponsive = () => {
 
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
 
-  const [cookiess, setCookies] = useState<any>()
-
-  const cookie = new Cookies
-
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
@@ -68,7 +64,7 @@ const NavBarResponsive = () => {
               </Link> : false}          
               </li>
 
-          <div className={styles.optionLogin} onClick={closeMobileMenu}>
+          <div className={styles.optionLogin} >
             {user?.name ? false :
               <Link to="/login">
                 <p className={styles.optionLoginLink} > <FontAwesomeIcon icon={faUserAlt} style={{marginRight:'5%'}} />Iniciar sesión</p>

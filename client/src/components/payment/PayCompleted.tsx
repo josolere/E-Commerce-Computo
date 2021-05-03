@@ -5,6 +5,8 @@ import Logo from '../images/MercadoPago.png';
 import styles2 from './PayCompleted.module.scss'
 import { Link } from 'react-router-dom'
 import styles4 from './Responsive.module.scss';
+import {useDispatch} from 'react-redux'
+import { deleteCart } from '../../redux/actions'
 
 interface props {
     location: {
@@ -17,6 +19,14 @@ const PayCompleted = (props: props) => {
     const search = props.location.search; 
     const params = new URLSearchParams(search);
     const IdFromURL = params.get('id');
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        localStorage.clear()
+        dispatch(deleteCart())
+    })
+
 
     return (
         <div className={styles2.back} >
