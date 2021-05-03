@@ -65,8 +65,11 @@ const NavBar = (): JSX.Element => {
         </Link>
         
         <div className={navBar.containerLinks}>
-        
-        {true ? <a onClick={ handleRedirProducts }  className={navBar.linksNav}><p>Productos</p></a> : false}
+
+        <Link to='/armatupc'> <p className={navBar.linksNav} >Armá tu PC</p> </Link>
+
+        {true ? <a onClick={ handleRedirProducts }><p className={navBar.linksNav}>Productos</p></a> : false}
+
         <div>
 
           {user?.name ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
