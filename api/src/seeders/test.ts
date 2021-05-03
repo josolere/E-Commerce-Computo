@@ -2,6 +2,8 @@ import { Category } from "../models/Category";
 import { Product } from "../models/Product";
 import { User } from "../models/User";
 import { v4 as uuid } from "uuid";
+import bcrypt from 'bcrypt'
+const saltRounds = 10;
 
 let categorie = [
   { name: "Placas de Video AMD" },
@@ -266,27 +268,21 @@ let categories = [
   },
 ];
 
+
+bcrypt.hash("123456", saltRounds, function(err, hash){
+  console.log(hash)
+})
+
 const users = [
   {
-    name: "Maurice",
-    surname: "Moss",
+    name: "admin",
+    surname: "admin",
     email: "maurice@moss.com",
-    password: "abcdefg",
-    username: "elmauricapo",
+    password: "$2b$10$bJCrnuOepASZYkICVhF21eUTJMh.ICoxyuDAGzC2h5qgF6lhB9ZEa",
+    username: "admin",
     privilege: "admin",
     active: true,
     address: "123 Main",
-    id: uuid(),
-  },
-  {
-    name: "Roy",
-    surname: "Trenneman",
-    email: "roy@trenneman.com",
-    password: "imroy",
-    username: "elroycapo",
-    privilege: "admin",
-    active: true,
-    address: "calle popo de perro 700",
     id: uuid(),
   },
 ];
@@ -332,6 +328,5 @@ export function productsSeeder() {
 
 export async function getUsers() {
   let users = await User.findAll();
-
   return users;
 }
