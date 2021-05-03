@@ -388,7 +388,7 @@ const Login = () => {
                                     <input
                                         className={styles.form__field}
                                         type='text'
-                                        minLength={5}
+                                        minLength={4}
                                         maxLength={15}
                                         placeholder='Nombre de Usuario'
                                         name='username'
