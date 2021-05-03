@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useQuery, useMutation } from "@apollo/client";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
-import "../rating/rating.css";
-import {
-  REVIEW_MUTATION,
-  EDIT_PRODUCT,
-  GET,
-  GET_CATEGORIES,
-} from "../../gql/productDetailsGql";
+import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
+import { FaStar } from 'react-icons/fa';
+import './rating.css';
+import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetailsGql";
 import styles from "./ProductDetail.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss";
-import { addProductDetails, addShopping, local } from "../../redux/actions";
+import { addProductDetails, addShopping, local } from '../../redux/actions';
+import { toast } from 'react-toastify';
 import { ACTUAL_USER, GET_USERS } from "../../gql/loginGql";
-import { AppState } from "../../redux/reducers";
-import { toast } from "react-toastify";
+import { HiBadgeCheck } from "react-icons/hi";
+import { IoCloseCircleSharp } from "react-icons/io5";
+import { AppState } from '../../redux/reducers';
 
 interface user {
   currentUser: {
@@ -33,16 +30,17 @@ interface Icategories {
 }
 
 interface DetailsProduct {
-  getProductById: {
-    id: number;
-    brand: string;
-    image: string;
-    name: string;
-    price: number;
-    details: string;
-    categories: any[];
-    reviews: any[];
-  };
+    getProductById: {
+        id: number
+        brand: string
+        image: string
+        name: string
+        price: number
+        details: string
+        stock:number
+        categories: any[]
+        reviews: any[]
+    }
 }
 
 interface Categories {
@@ -140,6 +138,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     brand: "",
     image: "",
     details: "",
+    stock:0,
     categories: [{ id: "1", name: "default" }],
   });
 
@@ -154,12 +153,23 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
       image: filtred?.image || "",
       details: filtred?.details || "",
       categories: filtred?.categories || [{}],
+      stock: filtred?.stock || 0
     });
   }, [filtred]);
 
-  useEffect(() => {
-    filtred?.reviews?.map((item) => setControlReview(item?.name));
-  }, [filtred, arr]);
+
+    useEffect(() => {
+        console.log(results?.data)
+    }, [results])
+
+    useEffect(() => {
+        console.log(results.data)
+        setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "",stock: filtred?.stock || 0, categories: filtred?.categories || [{}] })
+    }, [filtred])
+
+    useEffect(() => {
+        filtred?.reviews?.map(item => setControlReview(item?.name))
+    }, [filtred])
 
   const [editMode, setEditMode] = useState(false);
 

@@ -14,6 +14,11 @@ export const typeDefs = gql`
     createdAt: String
     updatedAt: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 
   type AuthPayload {
@@ -40,6 +45,11 @@ export const typeDefs = gql`
       password: String!
       username: String
       address: String
+      street: String
+      city: String
+      state: String
+      zip: String
+      phone: String
     ): AuthPayload
   }
 
@@ -53,6 +63,11 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 
   input EditUserInput {
@@ -64,6 +79,11 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 
   input SignUpInput {
@@ -75,5 +95,10 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 `;

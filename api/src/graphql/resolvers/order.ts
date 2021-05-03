@@ -92,11 +92,36 @@ export default {
 
     getOrderByStatus: async (
       _parent: object,
-      { status }: { status: string },
+      { status, idUser }: { status: string; idUser: any },
       { models }: { models: iModels }
     ): Promise<iOrder> => {
-      const orders = await models.Order.findAll({ where: { status: status } });
-      return orders;
+      const data = await models.Order.findAll({
+        where: { status: status, UserId: idUser },
+        include: [
+          {
+            model: db.Product,
+            through: "productsxorder",
+            // attributes: ["id", "name"],
+          },
+        ],
+      });
+      let i: number = 0;
+      data.map((item: any) => {
+        data[i].details = [];
+        item.Products.map((det: any) => {
+          const detail = {
+            id: det.Productsxorder.id,
+            price: det.Productsxorder.price,
+            quantity: det.Productsxorder.quantity,
+            OrderId: det.Productsxorder.OrderId,
+            ProductId: det.Productsxorder.ProductId,
+            productName: det.Productsxorder.productName,
+          };
+          data[i].details.push(detail);
+        });
+        i++;
+      });
+      return data;
     },
 
     getAllOrders: async (
@@ -110,6 +135,7 @@ export default {
         : (orders = await models.Order.findAll());
       return orders;
     },
+    
   },
 
   Mutation: {
@@ -148,10 +174,9 @@ export default {
     ): Promise<any> => {
       const OrderToEdit = await models.Order.findByPk(id);
       if (OrderToEdit) {
-
         let confirmAt = null;
         if (input.status === "creada") {
-          confirmAt = Date.now()
+          confirmAt = Date.now();
         }
         const updatedOrder = await OrderToEdit.update(
           { ...input, confirmAt },
@@ -159,7 +184,7 @@ export default {
         );
 
         //si el estado fue cambiado enviar un email informando ese cambio
-        console.log("+++++++++", updatedOrder)
+        console.log("+++++++++", updatedOrder);
         const user = await models.User.findByPk(updatedOrder.UserId);
 
         switch (input.status) {

@@ -2,12 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import styles2 from './Edit.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faUnlock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faUnlock, faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { EDIT_USER_MUTATION, ACTUAL_USER } from "../../gql/loginGql";
-import styles3 from './CreateAdmin.module.scss';
+import { CHANGE_PASSWORD, ACTUAL_USER } from "../../gql/loginGql";
+import styles2 from './SmallForm.module.scss';
 import { toast } from 'react-toastify';
 
 interface user {
@@ -26,7 +25,7 @@ interface user {
 
 const ResetPassword = () => {
 
-    const [editUser, user] = useMutation(EDIT_USER_MUTATION)
+    const [editUser, user] = useMutation(CHANGE_PASSWORD)
 
     let currentuser: any = {}
 
@@ -40,6 +39,7 @@ const ResetPassword = () => {
         setControl({ ...control, [event?.currentTarget.name]: event?.currentTarget.value })
     }
 
+
     console.log(control)
 
     const handleclickevent = () => {
@@ -51,8 +51,7 @@ const ResetPassword = () => {
         if (currentuser?.email === control.email) {
             editUser({
                 variables: {
-                    id: currentuser?.id, email: currentuser?.email, name: currentuser?.name, surname: currentuser?.surname,
-                    password: control.newpassword, username: currentuser?.username, address: currentuser?.address, active: true, privilege: currentuser?.privilege
+                    password: control.newpassword, id: currentuser?.id
                 }
             })
                 .then((resolve) => { toast.success('Tienes una nueva contraseña 🥳') 
@@ -65,9 +64,9 @@ const ResetPassword = () => {
     }
 
     return (
-        <div className={styles.back}>
-            <div className={styles2.organizar2}>
-                <div className={styles.caja}>
+        <div className={styles2.back}>
+            <div className={styles2.organizar}>
+                <div className={styles2.caja}>
                     <div className={styles.container}>
                         ASIGNA
                             <div className={styles.flip}>
@@ -79,8 +78,8 @@ const ResetPassword = () => {
                             </div>
                     <form className={styles.form} onSubmit={handlesubmitchange}>
                         <div className={styles.form__group}>
-                            <label className={styles3.form__label} >
-                                <FontAwesomeIcon icon={faEnvelopeSquare} /> E-mail</label>
+                            <label className={styles.form__label} >
+                                <FontAwesomeIcon icon={faAt} /> E-mail</label>
                             <input
                                 className={styles.form__field}
                                 type='text'
@@ -90,7 +89,7 @@ const ResetPassword = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles3.form__label} >
+                            <label htmlFor='password' className={styles.form__label} >
                                 <FontAwesomeIcon icon={faUnlock} /> Contraseña Anterior</label>
                             <input
                                 className={styles.form__field}
@@ -104,7 +103,7 @@ const ResetPassword = () => {
                             />
                         </div>
                         <div className={styles.form__group}>
-                            <label htmlFor='password' className={styles3.form__label} >
+                            <label htmlFor='password' className={styles.form__label} >
                                 <FontAwesomeIcon icon={faUnlock} /> Nueva Contraseña</label>
                             <input
                                 className={styles.form__field}
@@ -119,7 +118,7 @@ const ResetPassword = () => {
                         </div>
                         <div className={styles.organizarbotones}>
                             <button className={styles.boton} type='submit' >Resetear Contraseña</button>
-                            <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
+                            <button className={styles.boton} onClick={handleclickevent}>Volver Atrás</button>
                         </div>
                     </form>
                 </div>

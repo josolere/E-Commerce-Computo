@@ -1,5 +1,7 @@
-import { act } from 'react-dom/test-utils';
-import { ADD_SHOPPING, DELETE_PRODUCT, MORE_PRICE, LESS_PRICE, LOCAL, ADD_LOCALSTORAGE, DELETE_CART, ADD_PRODUCT_DETAILS, ADD_PRODUCT_HOME } from '../actions'
+import {
+    ADD_SHOPPING, DELETE_PRODUCT, MORE_PRICE, LESS_PRICE, LOCAL, ADD_LOCALSTORAGE,
+    DELETE_CART, ADD_PRODUCT_DETAILS, ADD_PRODUCT_HOME, LOGEO, ADD_BASE_DE_DATOS, ORDER_ID, ORDER_PENDING, COUNT_BASE
+} from '../actions'
 
 const initialState = {
     productTotal: [],
@@ -8,9 +10,14 @@ const initialState = {
     local: [],
     addCart: false,
     addHome: false,
-    idDetails:0,
-    priceDetails:0,
-    countDetails:0
+    idDetails: 0,
+    priceDetails: 0,
+    countDetails: 0,
+    logeo: false,
+    idUsers: "",
+    idOrder: 0,
+    orderPending: [],
+    contador:0
 };
 
 export default (state = initialState, action: any): any => {
@@ -108,10 +115,44 @@ export default (state = initialState, action: any): any => {
             return {
                 ...state,
                 addHome: action.state.stateHome,
-                idDetails:action.state.id,
-                priceDetails:action.state.price,
-                countDetails:action.state.count
+                idDetails: action.state.id,
+                priceDetails: action.state.price,
+                countDetails: action.state.count
             }
+
+        case LOGEO:
+            return {
+                ...state,
+                logeo: action.state.login,
+                idUsers: action.state.idUsers
+            }
+
+        case ADD_BASE_DE_DATOS:
+            return {
+                ...state,
+                productTotal: action.arrayProducts.productBas,
+                priceSubTotal: action.arrayProducts.priceBase * 1,
+                quantity: action.arrayProducts.conte * 1
+            }
+
+        case ORDER_ID:
+            return {
+                ...state,
+                idOrder: action.data
+            }
+
+        case ORDER_PENDING:
+            return {
+                ...state,
+                orderPending: action.data
+            }
+
+            case COUNT_BASE:
+                return {
+                    ...state,
+                    contador:action.data
+                }
+
         default: return state
     }
 }

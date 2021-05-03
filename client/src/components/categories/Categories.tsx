@@ -1,5 +1,5 @@
 /* import SubMenu from "./SubMenu"; */
-import styles from './Categories.module.scss'
+import styles from './Categories.module.scss';
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from "react-redux";
 import { setCategory, setFilter} from "../../redux/actions";
@@ -19,6 +19,26 @@ interface DetailsData {
 const NavCategories = (): JSX.Element => {
 
   const { loading, error, data } = useQuery<DetailsData>(GET_CATEGORIES)
+
+  // const { logeo, idUsers }: any = useSelector((store: AppState) => store.shoppingCartReducer)
+
+
+    //  const idProductOrder = useQuery(GET_ORDER_LIST, {
+    //     variables: { idUser: idUsers }
+    //   });
+    
+
+      // useEffect(() => {
+      
+      //   if (idProductOrder.data !== undefined) {
+      //     console.log(idProductOrder)
+      //     let arrayOrders = idProductOrder.data?.getOrdersByIdUser.filter((filt: any) => filt.status === 'pendiente')
+      //     let arrayOrder = arrayOrders[0].details
+      //     dispatch(orderPending(arrayOrder))    
+      //   }
+    
+      // }, [idProductOrder])
+
 
   const categories = data?.getCategory
 

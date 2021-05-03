@@ -1,0 +1,140 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+$verdesito: 	#E0FFFF;
+$blanquito: #F0F0F0;
+$grey:#30475e;
+$dark: #222831;
+$white: #dddddd;
+$red:#f05454;
+$Lblue:#6495ED;
+$DBlue:#002D62;
+
+.back {
+    color:$dark;
+    background-color:	$dark;
+}
+
+.organizar {
+    font-family:'Montserrat', sans-serif;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.caja{
+  background-color: $blanquito;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 55vh;
+  box-shadow: 20px 20px 25px 25px rgba(0,0,0,0.22);
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .form__group {
+      position: relative;
+      padding: 5%;
+      margin-top: 1%;
+      margin: 3%;
+      width: 100%;
+    }
+    
+    .form__field {
+      margin-left: 15%;
+      margin-top: 1%;
+      font-family:'Montserrat', sans-serif;
+      width: 60%;
+      border: 0;
+      border-bottom: 2px solid $gray;
+      outline: 0;
+      font-size: 1.1rem;
+      color: black;
+      padding: 1rem 0.3rem 0 ;
+      background: transparent;
+      transition: border-color 0.2s;
+    
+        
+    &::-moz-placeholder ~ .form__label {
+      font-size: 1.3rem;
+      cursor: text;
+      top: 5%;
+    }
+  
+      &::placeholder {
+        color: transparent;
+      }
+    }
+    
+    .form__label {
+        margin-left: 15%;
+        font-family:'Montserrat', sans-serif;
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-weight: bold;
+        font-size: 2.5vh;
+        color: $gray;
+    }
+    
+    .form__field:focus {
+      ~ .form__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 2vh;
+        color: $primary;
+        font-weight:bold;    
+      }
+      padding-bottom: 2%;  
+      font-weight: bold;
+      border-width: 3px;
+      border-image: linear-gradient(to right, $Lblue, $DBlue);
+      border-image-slice: 1;
+    }
+
+    .organizarbotones {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 2%;
+        margin: 2%;
+    }  
+
+@media (max-width: 648px) {
+    .organizar{
+      height: fit-content;
+    }
+    .caja{
+      padding: 0%;
+      margin: 0%;
+      width: 100%;
+    }
+    .form__field{
+      width: 60%;
+    }
+    .boton{
+      width: 80%;
+    }
+    .buttonGoogle{
+      width: 80%;
+    }
+  }

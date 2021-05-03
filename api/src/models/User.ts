@@ -31,6 +31,11 @@ export interface UserAttributesI {
   address?: string | null; //puede ser otra tabla
   facebookId?: string | null;
   googleId?: string | null;
+  street?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  phone?: string
 }
 
 interface UserCreationAttributesI extends Optional<UserAttributesI, "id" | "address" | "username" | "password" | "facebookId"> {}
@@ -49,6 +54,11 @@ export class User
   public address!: string | null;
   public facebookId!:string | null;
   public googleId!: string | null;
+  public street!: string;
+  public city!: string;
+  public state!: string;
+  public zip!: string;
+  public phone!: string
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -118,6 +128,27 @@ export function UserFactory(sequelize: Sequelize) {
         allowNull: false,
       },
       address: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      // datos del domicilio
+      street: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      state: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      zip: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      phone: {
         type: DataTypes.STRING,
         allowNull: true,
       },

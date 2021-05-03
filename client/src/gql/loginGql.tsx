@@ -6,28 +6,40 @@ query {
     currentUser {
         id
         name
-        email
         surname
-        privilege
-        username
         address
+        email
         password
+        street
+        city
+        state
+        zip
+        phone
+        privilege
     }
   }`;
 
 
 
+
+
+
+
 export const SIGNUP_MUTATION = gql`
-    mutation  ($firstName: String! $password: String! $email: String!  $lastName:String! $username:String! $address:String! ) {
-        signup (firstName:$firstName lastName:$lastName password:$password email: $email username:$username address:$address ) 
-                            {    
-                                user {
-                                    name
-                                }
-                                    
-                            
-                            }
-                        
+    mutation  ($firstName: String! $password: String! $email: String!  
+                $lastName:String! $username:String $street: String  $city: 
+                String $state:String $zip: String $phone: String 
+                ) {
+        signup (firstName:$firstName lastName:$lastName password:$password
+                 email: $email username:$username street: $street 
+                 city:$city state:$state zip:$zip phone:$phone 
+                 ) 
+                    {    
+                        user {
+                            name
+                            id
+                        }
+                    }
     }`;
     
     export const GET_USERS = gql`
@@ -68,12 +80,19 @@ mutation ($id:ID! ){
   }
 }`;
 
-export const EDIT_USER_MUTATION = gql`
-mutation( $id:ID! $name:String! $email:String! $surname:String! $username:String! 
-    $privilege:String! $active:Boolean! $address:String! ) 
+export const CREATE_ADMIN = gql`
+mutation(  $privilege:String! $id:ID!) 
     {
-    editUser (id:$id  input: {name:$name surname:$surname email:$email 
-        username:$username privilege:$privilege active:$active address:$address}) 
+    editUser (id:$id  input: { privilege:$privilege }) 
+                        { 
+                            id
+                        }             
+}`;  
+
+export const CHANGE_PASSWORD = gql`
+mutation(  $password:String! $id:ID!) 
+    {
+    editUser (id:$id  input: { password:$password }) 
                         { 
                             name
                             privilege

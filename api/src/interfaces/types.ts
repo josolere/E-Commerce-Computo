@@ -11,6 +11,11 @@ export type User = {
   address: string;
   id: string;
   facebookId: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string
 };
 export type Product = {
   image: string;
@@ -22,6 +27,11 @@ export type Product = {
 export type Order = {
   status: string;
   confirmAt: Date;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string;
 };
 export type OrderDetail = {
   quantity: number;
@@ -33,4 +43,28 @@ export type Review = {
   rating: number;
   title:string;
   userId: string;
+};
+
+export type PaymentData = {
+  transaction_amount: number;
+  token: string;
+  description: string;
+  installments: number;
+  payment_method_id: string;
+  issuer_id: string;
+  payer: Payer;
+};
+
+export type PaymentResult = {
+  status: string;
+};
+
+export type Payer = {
+  email: string;
+  identification: Identification;
+};
+
+export type Identification = {
+  type: string;
+  number: string;
 };
