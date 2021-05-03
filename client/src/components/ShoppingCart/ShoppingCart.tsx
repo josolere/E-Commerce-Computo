@@ -8,13 +8,9 @@ import { useEffect } from 'react';
 
 const ShoppingCart = (): JSX.Element => {
 
-    const idsProducts: any[] = useSelector((store: AppState) => store.shoppingCartReducer.productTotal)
+    let idsProducts: any[] = useSelector((store: AppState) => store.shoppingCartReducer.productTotal)
 
-    // useEffect(() => {
-    //     location.reload()
-    // }, [])
-
-
+    
     if (idsProducts.length === 0) {
         if (localStorage.getItem('productsLocal')) {
             let productLocal: any = []

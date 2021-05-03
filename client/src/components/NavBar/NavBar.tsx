@@ -11,9 +11,9 @@ import { Cookies } from "react-cookie";
 import NavBarItem from "./NavBarItem";
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ORDER_LIST } from "../../gql/order"
-import { GET_ORDER_DETAILS, GET_ORDER_BY_StATUS } from '../../gql/orders'
+import { GET_ORDER_DETAILS, GET_ORDER_BY_STATUS } from '../../gql/ordersGql'
 import { addBaseDeDatos } from '../../redux/actions'
-import { ACTUAL_USER } from "../../gql/login"
+import { ACTUAL_USER } from "../../gql/loginGql"
 
 
 interface user {
@@ -59,7 +59,7 @@ const NavBar = (): JSX.Element => {
     variables: { idUser: idUsers }
   })
 
-  const dataOrderSatus: any = useQuery<detailOrderid>(GET_ORDER_BY_StATUS, {
+  const dataOrderSatus: any = useQuery<detailOrderid>(GET_ORDER_BY_STATUS, {
     variables: { status: "pendiente", idUser: idUsers }
   })
 
@@ -115,9 +115,21 @@ const NavBar = (): JSX.Element => {
     setCookies(cookie.get('User'))
   }, [])
 
+
+  const handleRedirCart = () => {
+    window.location.href = "http://localhost:3000/Carrodecompras"
+  }
+
+  const handleRedirProducts= () => {
+    dispatch(setFilter(""))
+    window.location.href = "http://localhost:3000/Home"
+  }
+
+
   return (
 
     <div className={navBar.sortThisNav}>
+<<<<<<< HEAD
     <nav>
       <div className={navBar.CH} >
         <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
@@ -144,6 +156,36 @@ const NavBar = (): JSX.Element => {
     </nav>
   </div>
 );
+=======
+      <nav>
+        <div className={navBar.CH} >
+          <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
+        </div>
+        <div className={navBar.ElementBar} >
+          <SearchBar />
+        </div>
+        <Link to='/armatupc'> <p className={navBar.linksNav} >Armá tu PC</p> </Link>
+
+        <div className={navBar.ElementBar} >
+          <Link className={navBar.linkCart} to="/Carrodecompras" onClick={handleRedirCart}>
+            <FontAwesomeIcon icon={faShoppingCart} />
+            <p>{quantity}</p>
+          </Link>
+        </div>
+        <div className={navBar.ElementBar} >
+          {true ? <Link onClick={handleRedirProducts} to="/Home"
+          ><p>Productos</p></Link> : false}
+        </div>
+        <div className={navBar.ElementBar} >
+          {user?.name ? false :
+            <Link  to="/login"><p>Iniciar Sesion</p></Link>}
+          <p>{user?.name &&
+            <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
+        </div>
+      </nav>
+    </div>
+  );
+>>>>>>> d1564d3efd5c100e437a693fc275fa081465e46e
 };
 
 //Redes en el footer

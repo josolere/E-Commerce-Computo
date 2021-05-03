@@ -96,7 +96,7 @@ mutation($idOrder:ID,$idProduct:ID,$quantity:Int){
 }
 `
 
-export const GET_ORDER_BY_StATUS = gql`
+export const GET_ORDER_BY_STATUS = gql`
 query($status:String!, $idUser:ID) {
   getOrderByStatus (status:$status, idUser:$idUser) {
       id,

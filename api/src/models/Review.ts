@@ -13,6 +13,7 @@ export interface ReviewAttributesI {
     id:number;
     text:string;
     rating:number;
+    title:string;
     userId: string;
 }
 
@@ -22,6 +23,7 @@ export class Review extends Model<ReviewAttributesI, ReviewCreationAttributesI>
     implements ReviewAttributesI{
         public id!: number;
         public text!: string;
+        public title!: string;
         public rating!: number;
         public userId!: string;
         public readonly createdAt!:Date;
@@ -57,7 +59,11 @@ export class Review extends Model<ReviewAttributesI, ReviewCreationAttributesI>
             },
             rating:{
                 type: DataTypes.INTEGER,
+            },
+            title:{
+                type: DataTypes.TEXT,
             }
+
 
         },{
             tableName: 'reviews',

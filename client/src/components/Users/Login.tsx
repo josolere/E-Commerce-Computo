@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useMutation, gql, useQuery } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/login";
+import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/loginGql";
 import { useCookies } from "react-cookie";
 import { toast, ToastContainer } from "react-toastify"
 import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt, faAt,
@@ -15,8 +15,13 @@ import FacebookLogin from "react-facebook-login";
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux'
 import { logeo } from '../../redux/actions'
+<<<<<<< HEAD
 import { NEW_ORDER, NEW_ORDER_DETAIL, GET_ORDER } from "../../gql/shopingCart"
 import {GET_ORDER_BY_StATUS, GET_ALL_ORDERS } from "../../gql/orders"
+=======
+import { NEW_ORDER, NEW_ORDER_DETAIL, GET_ORDER } from "../../gql/shopingCartGql"
+import {GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
+>>>>>>> d1564d3efd5c100e437a693fc275fa081465e46e
 
 
 
@@ -40,7 +45,7 @@ const Login = () => {
     })
 
     const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
-        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUser}}]
+        refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUser}}]
     })
 
     useEffect(() => {
@@ -89,7 +94,7 @@ const Login = () => {
                     setLog(true)
                     toast.success("Bienvenido " + visitante.name + ' ' +  '🥳');
                     setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
-                .catch((error) => { toast.error('Tu no eres de aquí 🤔')})
+                .catch((error) => { console.log(error);toast.error('Tu no eres de aquí 🤔')})
                 ;
         }
         else {

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState} from 'react';
 import NavBar from '../NavBar/NavBar'
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_ORDER_BY_StATUS, GET_ALL_ORDERS } from "../../gql/orders"
-import { ACTUAL_USER } from "../../gql/login"
-import { NEW_ORDER, NEW_ORDER_DETAIL } from "../../gql/shopingCart"
+import { GET_ORDER_BY_STATUS, GET_ALL_ORDERS } from "../../gql/ordersGql"
+import { ACTUAL_USER } from "../../gql/loginGql"
+import { NEW_ORDER, NEW_ORDER_DETAIL } from "../../gql/shopingCartGql"
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '../../redux/reducers';
 import {  orderId } from '../../redux/actions'
@@ -23,14 +23,14 @@ const Home = () => {
     const actualUser = useQuery(ACTUAL_USER)
     const [user, setUser] = useState('')
     const [createOrder] = useMutation(NEW_ORDER, {
-        refetchQueries: [{ query: GET_ORDER_BY_StATUS, variables: { status: "pendiente", idUser: user } }, { query: ACTUAL_USER }]
+        refetchQueries: [{ query: GET_ORDER_BY_STATUS, variables: { status: "pendiente", idUser: user } }, { query: ACTUAL_USER }]
     })
 
     const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL, {
-        refetchQueries: [{ query: GET_ORDER_BY_StATUS, variables: { status: "pendiente", idUser: user } }, { query: ACTUAL_USER }]
+        refetchQueries: [{ query: GET_ORDER_BY_STATUS, variables: { status: "pendiente", idUser: user } }, { query: ACTUAL_USER }]
     })
 
-    const dataOrderSatus: any = useQuery(GET_ORDER_BY_StATUS, {
+    const dataOrderSatus: any = useQuery(GET_ORDER_BY_STATUS, {
         variables: { status: "pendiente", idUser: user }
     })
 

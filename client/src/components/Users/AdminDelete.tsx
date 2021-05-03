@@ -5,7 +5,7 @@ import styles from './loguin.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { GET_USERS, DELETE_USER } from "../../gql/login";
+import { GET_USERS, DELETE_USER } from "../../gql/loginGql";
 import styles3 from './CreateAdmin.module.scss';
 import { toast } from 'react-toastify';
 import styles2 from './AdminAuto.module.scss'

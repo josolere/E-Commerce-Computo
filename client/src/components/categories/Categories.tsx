@@ -1,15 +1,11 @@
 /* import SubMenu from "./SubMenu"; */
 import styles from './Categories.module.scss';
 import { useQuery, gql } from '@apollo/client';
-import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "../../redux/actions";
-import {GET_CATEGORIES} from "../../gql/categories";
+import { useDispatch } from "react-redux";
+import { setCategory, setFilter} from "../../redux/actions";
+import {GET_CATEGORIES} from "../../gql/categoriesGql"
 import Cards from '../Cards/CardsHome';
-// import {orderPending} from '../../redux/actions'
-// import { useEffect } from 'react';
-// import { AppState } from '../../redux/reducers';
-// import { GET_ORDER_LIST } from "../../gql/order"
-
+import { useEffect } from 'react';
 
 export interface model {
   id: number;
@@ -50,14 +46,18 @@ const NavCategories = (): JSX.Element => {
   const dispatch = useDispatch()
   
   const filterCategories = (e:any) => {
-    dispatch(setCategory([e.target.value]))
-}
-  
+    if(e.target.value) {
+    dispatch(setCategory([e.target.value]))}
+    else {
+      dispatch(setCategory([])) 
+    }
+    dispatch(setFilter(""))
+    }
 
   return (
     <>
     <div className={styles.container} >
-      <button className={styles.containerCategories} onClick={(e) =>dispatch(setCategory([]))}>Todos</button>
+      <button className={styles.containerCategories} onClick={e => filterCategories(e)}>Todos</button>
       {categories?.map((item: model, i: number) => {
         return <button onClick ={e => filterCategories(e)} value={item.id}
         className={styles.containerCategories}>{item.name}</button>;

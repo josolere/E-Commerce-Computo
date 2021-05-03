@@ -54,8 +54,8 @@ passport.use(
       //... fetch user from a db etc.
   
       const match = await bcrypt.compare(password, matchingUser.password);
-      console.log('matcheaONoMatchea',match)
-  
+     
+    
       if(match) {
         let error = null
         done(error, matchingUser);
@@ -64,13 +64,8 @@ passport.use(
         const error = new Error("Passwords doesn't match")
         done(error, matchingUser)
       }
-  
   }
-
   await decrypt(password)
-
-    
-    
     
   })
 );
@@ -95,7 +90,7 @@ const facebookCallback = async (
   done: any
 ) => {
   const users: any = await db.User.findAll();
-  // console.log(users)
+  
   const matchingUser = users?.find(
     (user: any) => user.dataValues.facebookId === profile.id
   );
@@ -127,8 +122,6 @@ const facebookCallback = async (
 
 const googleCallback = async (accessToken:any, refreshToken:any, email:any ,profile:any,  cb:any) => {
   
-    console.log('+++++++++++++++++++++',profile)
-    console.log('---------------------',email)
 
     let input: any = {
       id: uuid(),
@@ -169,7 +162,6 @@ passport.serializeUser((user: any, done) => {
 passport.deserializeUser(async (id: any, done) => {
   const users: any = await db.User.findAll();
   const matchingUser = users.find((user: any) => user.dataValues.id === id.id);
-  //console.log("++++++++++++++++++++++++++++++++++++", matchingUser);
   if( matchingUser !== undefined){
     done(null, matchingUser);
   }else{

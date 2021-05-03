@@ -1,259 +1,37 @@
-/* .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color:#191921 ;
-} */
-$white: #fff;
-$gray: #9b9b9b;
-$verdesito: 	#E0FFFF;
-$blanquito: #F0F0F0;
-$grey:#30475e;//dddddd
-$dark: #222831;//222831
-$white: #dddddd;//30475e
-$red:#f05454;//f054544
-
-
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-items: center;
-    background-color: $dark;
-    width: 200vh;
-    height: 110vh;
+.separateList {
+  display: flex;
+  justify-content: center;
+  width: 55%;
+  background-color:  #F0F0F0;
+  margin-top: 5%;
 }
 
-.OrderCreate {
-    display: flex;
-    flex-direction: row;
-}
-
-.TitleCreate {
-    padding-top: 0;
-    margin-top: 0rem;
-    background: 50% 100% / 50% 50% no-repeat
-    radial-gradient(ellipse at bottom,$white, $white, $white);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: 		#FFE4E1;
-    font-size: 3.5rem;
-    font-family: 'Montserrat', sans-serif;
-    animation: reveal 3000ms ease-in-out forwards 200ms,
-             glow 2500ms linear infinite 2000ms;
-    @keyframes reveal {
-        80%{
-        letter-spacing: 1px;
-        }
-        100% {
-        background-size: 300% 300%;
-        }
-        }
-    @keyframes glow {
-        40% {
-        text-shadow: 0 0 8px$white;
-            }
-        }
-    }
-
-.OrderForm {
-    border: solid $white 0.3rem;
-    border-radius: 1rem;
-    background-color: $grey;
-    margin-right: 1rem;
-    padding-top: 1rem;
-    height: fit-content;
-}
-
-.form__group {
+.listProducts {
+  padding-bottom: 3%;
+button {
+  margin: 1rem 1rem 0rem 1rem ;
+  outline: none;
+  border-color: transparent;
+  font-family: 'Montserrat', sans-serif;
+	font-size: 0.9rem;
+	overflow: hidden;
+  background-color: #30475e;
+  border-radius: 0.2rem;
+  color: #dddddd;
+  span {
+    color:#dddddd;
     position: relative;
-    margin-top: 15px;
-    width: 20rem;
-    padding-right: 8rem;
+    bottom: 0.5rem;
+    left: 0.4rem;
+    background-color: #f05454;
+    font-size: 1rem;
+    font-weight: 200;
   }
-  .form__field {
-    margin-left: 4rem;
-    margin-top: 0.3rem;
-    font-family:'Montserrat', sans-serif;
-    width: 16rem;
-    border: 0;
-    border-bottom: 2px solid $gray;
-    outline: 0;
-    font-size: 1.1rem;
-    color:$white;
-    padding: 1rem 0.3rem 0 ;
-    background: transparent;
-    transition: border-color 0.2s;   
-  &::-moz-placeholder ~ .form__label {
-    font-size: 1.3rem;
-    cursor: text;
-    top: 20px;
-  }
-    &::placeholder {
-      color: transparent;
-    }
-  }
-  .form__label {
-      margin-left: 4rem;
-      font-family:'Montserrat', sans-serif;
-      position: absolute;
-      top: 0;
-      display: block;
-      transition: 0.2s;
-      font-size: 1rem;
-      color: $gray;
-  }
-  .form__field:focus {
-    ~ .form__label {
-      position: absolute;
-      top: 0;
-      display: block;
-      transition: 0.2s;
-      font-size: 1rem;
-      color: $white;
-      font-weight:700;    
-    }
-    padding-bottom: 6px;  
-    font-weight: 700;
-    border-width: 3px;
-    border-image: linear-gradient(to right, $red, #ffb200	);
-    border-image-slice: 1;
-  }
-
-  .OrderButton {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3rem;
-    padding-right: 5rem;
 }
-
-.button {
-    cursor: pointer;
-    font-weight: bold;
-    border: transparent;
-    display: flex;
-    width: 5rem;
-    height: 3rem;
-    padding: 1.25rem;
-    align-content: center;
-    justify-content: center;
-      border-radius: 0.5rem;
-      color:$dark;;
-      font-size: 0.8rem;
-      margin-top: 1rem;
-      margin-left: 2rem;
-      transition: all .3s;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      &:after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: $red;
-          border-radius: 0.5rem;
-          z-index: -2;
-      }
-      &:before {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0%;
-          height: 100%;
-          background-color: darken($red, 15%);
-          transition: all .3s;
-          border-radius: 0.5rem;
-          z-index: -1;
-      }
-      &:hover {
-          color: #fff;
-          &:before {
-              width: 100%;
-          }
-      }
-  }
-
-  .listProducts {
-    
-    margin-left: 2rem;
-    border: solid $white 0.3rem;
-    border-radius: 1rem;
-    background-color: $grey;
-    padding-left: 2rem;
-    padding-top: 0rem;
-    padding-bottom: 2rem;
-    padding-right: 2rem;
-}
-
-.TitleList {
-    font-weight: bold;
-    font-size: 1.4rem;
-    font-family: 'Montserrat', sans-serif;
-    color: whitesmoke;
-    margin-bottom: 0.2rem;
 }
 
 .hrList {
-    
-    margin:1rem 0rem;
-    color:#f05454;//f05454;
-    border:solid 5px #f05454;//f05454;
-    width: 4rem;
-    height: 0rem;
-    border-radius: 1rem;
+  width: 80%;
+  height: 0.1rem;
+  background-color: #f05454;
 }
-
-.pList {
-    margin-top: 0.4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-    width: fit-content;
-    height: 1.5rem;
-    align-self: flex-start;
-    background-color: $white;
-    color: $dark;
-    cursor: pointer;
-    border:transparent;
-    border-radius: .5rem;
-    font-family:'Montserrat', sans-serif;
-    font-weight: bold; 
-    box-shadow: 10px 10px 15px 15px rgba(0,0,0,0.22);
-    overflow: hidden;
-    z-index: 1;
-    &:after {
-        content: '';
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: $red;
-        border-radius: 0.5rem;
-        z-index: -2;
-    }
-    &:before {
-        content: '';
-        bottom: 0;
-        left: 0;
-        width: 0%;
-        height: 100%;
-        background-color: darken($white, 15%);
-        transition: all .3s;
-        border-radius: 0.5rem;
-        z-index: -1;
-    }
-    &:hover {
-        color:$red;
-        &:before {
-            width: 100%;
-        }
-    }
-} 

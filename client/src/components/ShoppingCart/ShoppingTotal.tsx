@@ -3,10 +3,10 @@ import total from './ShoppingTotal.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../redux/reducers';
 import { deleteCart } from '../../redux/actions'
-import { NEW_ORDER } from "../../gql/shopingCart"
+import { NEW_ORDER } from "../../gql/shopingCartGql"
 import { Cookies } from "react-cookie";
 import { toast } from "react-toastify"
-import { ACTUAL_USER, GET_USERS } from "../../gql/login";
+import { ACTUAL_USER, GET_USERS } from "../../gql/loginGql";
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
