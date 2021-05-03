@@ -31,6 +31,14 @@ const Login = () => {
         variables: { idUser: idUser }
     });
 
+    const [login, logindata] = useMutation(LOGIN_MUTATION,{
+        refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUser}}]
+    })
+
+
+    const actualUser  = useQuery(ACTUAL_USER);
+
+
     const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
         refetchQueries:[{query:GET_ORDER_BY_StATUS,variables:{ status: "pendiente", idUser: idUser}}]
     })
@@ -41,6 +49,12 @@ const Login = () => {
             setOrderCount(data.getOrdersByIdUser)
         }
     }, [data])
+
+    useEffect(() => {
+        console.log('++++++++++++++ ',actualUser?.data?.id)
+      localStorage.setItem('usuario', JSON.stringify(actualUser?.data?.id))
+       
+    }, [actualUser])
 
     const dispatch = useDispatch()
 
@@ -57,8 +71,7 @@ const Login = () => {
 
     const [showlogin, setshowLogin] = useState(false)
 
-    const [login, logindata] = useMutation(LOGIN_MUTATION)
-
+    
     const [signup, signupdata] = useMutation(SIGNUP_MUTATION)
 
     const [createOrders, setCreateOrders] = useState(false)
@@ -176,13 +189,16 @@ const Login = () => {
         window.location.href = 'http://localhost:5000/auth/facebook'
     }
 
-    const responseGoogle = (response:any) => {
-       
-        setTimeout(function(){ window.location.href = 'http://localhost:5000/auth/google';}, 9000) 
+    const responseGoogle = async(response:any) => {
+    //    if(actualUser.data){
 
+        window.location.href = await'http://localhost:5000/auth/google';
+        login()
         console.log(response. googleId)
         console.log(response)
 
+    //    }
+       
     }
 
     // ex {Aa: "101561488459515443137", qc: {…}, gt: gx, googleId: "101561488459515443137", tokenObj: {…}, …}

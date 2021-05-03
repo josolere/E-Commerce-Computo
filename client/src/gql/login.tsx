@@ -12,6 +12,7 @@ query {
         username
         address
         password
+        googleId
     }
   }`;
 

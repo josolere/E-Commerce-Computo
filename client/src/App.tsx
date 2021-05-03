@@ -28,6 +28,8 @@ import { ACTUAL_USER, GET_USERS } from "./gql/login";
 import ResetPassword from './components/Users/ResetPassword';
 import { GET_ORDER } from "./gql/shopingCart";
 import FormCheckout from './components/CheckOut/FormCheckout';
+import { GET_ORDER_BY_StATUS } from "./gql/orders"
+
 
 interface user {
   currentUser: {
@@ -58,6 +60,8 @@ interface detailsorder {
 function App() {
   const firsstRender = useRef(true)
 
+
+
   let user: any = {}
 
   const [idUser, setIdUser] = useState('')
@@ -71,9 +75,15 @@ function App() {
   const resultsUsers = useQuery(GET_USERS)
 
   let test = resultsUsers?.data?.getUsers
-  console.log(test)
+  // console.log(test)
   user = actualuser.data?.currentUser
-  console.log(user)
+  console.log(user?.id)
+  const dataOrderSatus: any = useQuery(GET_ORDER_BY_StATUS, {
+    variables: { status: "pendiente", idUser: user?.id }
+})
+console.log(dataOrderSatus)
+
+
 
   useEffect(() => {
 
