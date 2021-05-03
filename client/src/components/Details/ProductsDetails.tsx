@@ -233,7 +233,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                             <input className={stylesEdit.input} name='name' type='text' onChange={handleChange} defaultValue={details?.name} />
                             :
                             <h1 className={styles.nameDetail}>{filtred?.name}</h1>}
-                            {filtred?.stock ? <div color='red'><HiBadgeCheck size={30}/> Hay Stock </div> : <div style={{color:'red'}}><IoCloseCircleSharp color='red'/> No hay Stock </div>}
+                            {filtred?.stock ? <div className={styles.stock}><HiBadgeCheck size={20}/> Hay Stock </div> : <div style={{color:'red'}}><IoCloseCircleSharp color='red'/> No hay Stock </div>}
                             {editMode && <input min={0} style={{width:'2rem'}} type='number' name='stock' defaultValue={filtred?.stock} onChange={handlePrice}></input>}
                           <div className={stylesEdit.cats}>
                             {editMode ?

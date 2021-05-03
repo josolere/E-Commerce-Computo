@@ -295,6 +295,8 @@ $yellow: #ffb200;
 }
 
 .fav{
+    position: absolute;
+    right: 5rem;
     background-color: transparent;
     width: fit-content;
     height: 2rem;
@@ -312,6 +314,8 @@ $yellow: #ffb200;
   }
   
   .faving{
+    position: absolute;
+    right: 5rem;
     width: fit-content;
     height: 2rem;
     border: none;
@@ -327,4 +331,12 @@ $yellow: #ffb200;
       background-color: transparent;
       color: black;
     }
+  }
+
+  .stock{
+      font-size: 0.8rem;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }

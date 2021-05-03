@@ -129,6 +129,7 @@ export default function Card({ name, image, price, id, count, stock, wish }: pro
     return (
         <div className={styles.card}>
             {/* <ToastContainer /> */}
+            <div className={styles.name}>{name}</div>
 <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20}/></button>
             <Link
                 onClick={() => dispatch(addProductHome({ stateHome, id, price, count }))}
