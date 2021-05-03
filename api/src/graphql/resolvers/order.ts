@@ -123,6 +123,19 @@ export default {
       });
       return data;
     },
+
+    getAllOrders: async (
+      _parent: object,
+      { status }: { status: string },
+      { models }: { models: iModels }
+    ): Promise<iOrder> => {
+      let orders: any;
+      status
+        ? (orders = await models.Order.findAll({ where: { status: status } }))
+        : (orders = await models.Order.findAll());
+      return orders;
+    },
+    
   },
 
   Mutation: {
