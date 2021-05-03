@@ -30,6 +30,8 @@ import Mercado from './components/payment/MercadoV2';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
+import MP from './components/payment/MP';
+import ResponsiveNav from './components/NavBar/ResponsiveNav'
 import { GET_ORDER } from "./gql/shopingCart";
 import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
@@ -147,11 +149,12 @@ function App() {
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-        <Route exact path= '/Envios' component={Shipments} />
-        <Route exact path= '/PostPago' component={PayCompleted} />
-        <Route exact path= '/AdminBorrar' component={AdminDelete} />
-        <Route exact path = '/Mercado' component={Mercado} />
-        {/* <Route exact path='/Pago' component={Payment} /> */}
+              <Route exact path='/Mercado' component={MP} />
+
+        <Route exact path='/TestNav' component={ResponsiveNav} />
+        <Route exact path='/Envios' component={Shipments} />
+        <Route exact path='/PostPago' component={PayCompleted} />
+        <Route exact path='/AdminBorrar' component={AdminDelete} />
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />

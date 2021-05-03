@@ -14,8 +14,11 @@
     align-content: center;
     align-items: center;
     justify-content: center;
-    padding: 4rem;
+    padding: 5%;
 }
+
+
+
 
   @keyframes display {
     0% {
@@ -54,7 +57,12 @@
     left: calc(50% - 100px);
     opacity: 0;
     animation: display 10s infinite;
+  }
 
+  @media (max-width: 648px) {
+    .pic-ctn > img{
+      width: 250px;
+    }
   }
   
   img:nth-child(2) {

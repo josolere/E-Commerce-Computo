@@ -1,0 +1,52 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+$verdesito: 	#E0FFFF;
+$blanquito: #F0F0F0;
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.back {
+    color: $dark;
+    background-color: $dark;
+}
+
+.organizar {
+    font-family:'Montserrat', sans-serif;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.caja{
+  background-color: $blanquito;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 70vh;
+  box-shadow: 20px 20px 25px 25px rgba(0,0,0,0.22);
+  height: fit-content;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+  @media (max-width: 648px) {
+    .organizar{
+      height: fit-content;
+    }
+    .caja{
+      padding: 0%;
+      margin: 0%;
+      width: 100%;
+      min-height: 110vh;
+      height: fit-content;
+    }
+}

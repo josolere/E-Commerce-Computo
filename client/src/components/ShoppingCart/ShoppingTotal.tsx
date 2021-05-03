@@ -69,7 +69,7 @@ const ShoppingTotal = (): JSX.Element => {
             //         localStorage.setItem('productsLocal', JSON.stringify([]))
             //         console.log(data) })
             //     .catch((err) => { console.log('Salio Mal') })
-            window.location.href = 'http://localhost:3000/Pago'
+            window.location.href = 'http://localhost:3000/Envios'
         }
         else {
             toast.error("Debes iniciar sesión para realizar una compra")
@@ -104,7 +104,7 @@ const ShoppingTotal = (): JSX.Element => {
             </div>
             {user?.privilege ==='user' ?
             <div className={total.containerButton}>
-                <Link to='/pago' onClick={() => { handleOrder() }}
+                <Link to='/Envios' onClick={() => { handleOrder() }}
                     className={total.buttonFinal}>Finalizar Compra</Link>
             </div>
             :

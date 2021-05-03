@@ -2,13 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
-import styles2 from './Edit.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CREATE_ADMIN, GET_USERS } from "../../gql/login";
 import styles3 from './CreateAdmin.module.scss';
 import { toast } from 'react-toastify';
+import styles2 from './AdminAuto.module.scss'
 
 interface user {
     firstname: string,
@@ -82,9 +82,9 @@ const CreateAdmin = () => {
     }
 
     return (
-        <div className={styles.back}>
-            <div className={styles2.organizar2}>
-                <div className={styles.caja}>
+        <div className={styles2.back}>
+            <div className={styles2.organizar}>
+                <div className={styles2.caja}>
                     <div className={styles.container}>
                         ASIGNA
                             <div className={styles.flip}>
@@ -94,20 +94,20 @@ const CreateAdmin = () => {
                         </div>
                             ADMINISTRADOR
                             </div>
-                    <form className={styles3.form} onSubmit={handlesubmitchange}>
-                        <div className={styles3.form__group}>
-                            <label className={styles3.form__label} >Buscar Usuario</label>
+                    <form className={styles.form} onSubmit={handlesubmitchange}>
+                        <div className={styles.form__group}>
+                            <label className={styles.form__label} >
+                            <FontAwesomeIcon icon={faSearch} /> Buscar Usuario</label>
                             <input
-                                className={styles3.form__field}
+                                className={styles.form__field}
                                 type='text'
                                 placeholder='Buscar usuario'
                                 onChange={handleChange}
                                 value={searchInput}
                             />
-                            <button type="submit" className={styles3.searchAdmin} ><FontAwesomeIcon icon={faSearch} /></button>
                         </div>
-                        <div>
-                            {searchInput.length > 1 ? <div>
+                        <div >
+                            {searchInput.length > 1 ? <div className={styles3.OnlyOne} >
                                 {auto.slice(0, 5).map(search => <button className={styles3.buttonSearch} onClick={() => {
                                     setAuto([])
                                     setUserToShow([])
@@ -124,7 +124,7 @@ const CreateAdmin = () => {
                                 {userToshow && userToshow.map((item: any) => (
                                     <div className={styles3.sortUser} >
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faFileSignature} /> Nombre: {item.name}</p>
-                                        <p className={styles3.UserP} ><FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail: {item.email}</p>
+                                        <p className={styles3.UserP} ><FontAwesomeIcon icon={faAt} /> E-Mail: {item.email}</p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faMapMarker} />Direccion: {item.address}</p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faShareAlt} />Nombre de Usuario: {item.username} </p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faCrown} /> Nivel: {item.privilege}</p>
@@ -132,7 +132,7 @@ const CreateAdmin = () => {
                                 ))}
                             </div>}
                         <div className={styles.organizarbotones}>
-                            <button className={styles.boton} type='submit' >Crear Administrador</button>
+                            <button className={styles3.buttonCreate} type='submit' >Crear Administrador</button>
                             <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
                         </div>
                     </form>

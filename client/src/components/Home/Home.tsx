@@ -1,16 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import NavBar from '../NavBar/NavBar'
-import { useMutation, gql, useQuery } from '@apollo/client';
-import { GET_ORDER_BY_StATUS } from "../../gql/orders"
-import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/login"
-import { NEW_ORDER, NEW_ORDER_DETAIL, GET_ORDER } from "../../gql/shopingCart"
-import { useDispatch, useSelector } from 'react-redux'
-import { AppState} from '../../redux/reducers';
-import { addLocalStorage, logeo, orderId, addBaseDeDatos } from '../../redux/actions/index'
-import { FILTER } from "../../gql/card"
-
-
-
+import ResponsiveNav from '../NavBar/ResponsiveNav'
 
 
 const Home = () => {
@@ -123,9 +113,8 @@ const Home = () => {
 
     return (
         <>
-            <NavBar />
-
-        </>
+             <ResponsiveNav />
+       </>
     )
 }
 export default Home

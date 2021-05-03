@@ -1,11 +1,6 @@
 import { useState } from "react";
 import DropdownMenu from "./Dropdown";
 import styles from "./Dropdown.module.scss"
-
-
-
-
-
  
 const NavBarItem = (props:any) => {
 
@@ -18,7 +13,7 @@ const NavBarItem = (props:any) => {
     return (  
         <div className={styles.menuItem} >
             <li className = {styles.navItem} >
-        <a className={styles.link} onMouseEnter={handleOpen} >
+        <a className={styles.link} onClick={handleOpen} >
             {props.info}
         </a>
         {open && <DropdownMenu data ={handleOpen}></DropdownMenu>}
