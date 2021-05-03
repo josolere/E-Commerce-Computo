@@ -5,6 +5,7 @@ query($status:String){
   getAllOrders(status:$status){
     id
     status
+    UserId
     details{
       id
       quantity

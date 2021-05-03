@@ -32,6 +32,8 @@ import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
 import { GET_ORDER } from "./gql/shopingCart";
 import FormCheckout from './components/CheckOut/FormCheckout';
+import { GET_ORDER_BY_StATUS } from "./gql/orders"
+
 
 interface user {
   currentUser: {
@@ -62,6 +64,8 @@ interface detailsorder {
 function App() {
   const firsstRender = useRef(true)
 
+
+
   let user: any = {}
 
   const [idUser, setIdUser] = useState('')
@@ -75,9 +79,7 @@ function App() {
   const resultsUsers = useQuery(GET_USERS)
 
   let test = resultsUsers?.data?.getUsers
-  console.log(test)
   user = actualuser.data?.currentUser
-  console.log(user)
 
   useEffect(() => {
 

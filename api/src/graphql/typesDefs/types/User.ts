@@ -11,19 +11,15 @@ export const typeDefs = gql`
     active: Boolean
     name: String
     surname: String
-    address: String
     googleId: String
     createdAt: String
     updatedAt: String
-<<<<<<< HEAD
     address: String
     street: String
     city: String
     state: String
     zip: String
     phone: String
-=======
->>>>>>> jose
   }
 
   type AuthPayload {

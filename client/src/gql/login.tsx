@@ -10,6 +10,7 @@ query {
         address
         email
         password
+        googleId
         street
         city
         state
@@ -41,8 +42,8 @@ export const SIGNUP_MUTATION = gql`
                         }
                     }
     }`;
-    
-    export const GET_USERS = gql`
+
+export const GET_USERS = gql`
     query {
         getUsers{
             id
@@ -55,7 +56,7 @@ export const SIGNUP_MUTATION = gql`
             username
         }
     }`;
-    
+
 
 export const LOGIN_MUTATION = gql`
     mutation ($email: String!,  $password: String!) {
@@ -70,7 +71,7 @@ export const LOGIN_MUTATION = gql`
                 } 
     }`;
 
-    
+
 export const DELETE_USER = gql`
 mutation ($id:ID! ){
     deleteUser (id:$id)
@@ -87,7 +88,7 @@ mutation(  $privilege:String! $id:ID!)
                         { 
                             id
                         }             
-}`;  
+}`;
 
 export const CHANGE_PASSWORD = gql`
 mutation(  $password:String! $id:ID!) 
@@ -97,9 +98,9 @@ mutation(  $password:String! $id:ID!)
                             name
                             privilege
                         }             
-}`;  
+}`;
 
-export const LOGOUT = gql `
+export const LOGOUT = gql`
   mutation {
       logout
           }`;
