@@ -17,9 +17,11 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 import { FiHeart } from 'react-icons/fi';
 import { AppState } from '../../redux/reducers';
 import Rstyles from './ResponsiveDetails.module.scss'
+import { TOGGLE_WISHLIST, WISHLIST } from '../../gql/wishlist';
 
 interface user {
   currentUser: {
+    id:string;
     name: string;
     password: string;
     email: string;
@@ -61,11 +63,11 @@ interface PropsDetails {
 }
 
 const DetailsComponent = (props: PropsDetails): JSX.Element => {
-  let user: any = {};
+  // let user: any = {};
 
-  const currentU = useQuery<user>(ACTUAL_USER);
+  const currentU = useQuery(ACTUAL_USER);
 
-  user = currentU?.data?.currentUser;
+  const user = currentU?.data?.currentUser;
 
   const dispatch = useDispatch();
 
@@ -116,11 +118,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     totalrating = parseFloat(totalrating.toFixed(2));
   }
   const changereview = () => {
-    setControlReview(user.id);
+    setControlReview(user?.id);
     addreview({
       variables: {
         id: filtred?.id,
-        userId: user.id,
+        userId: user?.id,
         rating: totalrating,
         text: reviewuser.review,
         title: reviewuser.title,
@@ -193,7 +195,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     details
       ? setDetails({
         ...details,
-        price: +e.currentTarget.value,
+        [e.currentTarget.name]: +e.currentTarget.value,
       })
       : console.log("no se puede");
   }
@@ -207,7 +209,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
       : console.log("no se puede");
   }
 
-  const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT);
+  const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT,{
+    refetchQueries:[{query:GET,variables:{id:id}}]
+  });
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -306,12 +310,24 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
   const [wishe, setWish] = useState(false)
 
-  const handleFav = (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    setWish(!wishe)
-    console.log(wishe)
-    console.log('falta crear la wishlist en base de datos y conectar')
+
+  const [wish,reswish] = useMutation(TOGGLE_WISHLIST,{
+    refetchQueries:[{query:WISHLIST,variables:{userId:user?.id}}]
+  })
+
+  const wishes = useQuery(WISHLIST,{variables:{userId:user?.id}})
+  const list = wishes?.data?.getWishList
+
+  const handleFav = (e: React.FormEvent<HTMLButtonElement>) =>{
+     e.preventDefault()
+     console.log(user)
+     wish({variables:{userId:currentU?.data?.currentUser?.id,productId: id}})
   }
+
+  useEffect(()=>{
+      setWish(list?.some((product : any) => product.id === id))
+      console.log()
+  },[wishes,reswish])
   
   return (
     <React.Fragment>
@@ -355,8 +371,15 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                   <h1 className={Rstyles.DName}>{filtred?.name}</h1>
                   )}
             </div>
-                <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
-               {filtred?.stock ? <div className={styles.stock}><HiBadgeCheck size={20} /> Hay Stock </div> : <div style={{ color: 'red' }}><IoCloseCircleSharp color='red' /> No hay Stock </div>}
+               {user ? <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
+                :
+                <button className={styles.fav}><Link to="/Login"><FiHeart size={20}/></Link></button>
+                }
+                {editMode ?
+                <input type='number' onChange={handlePrice} name='stock' className={styles.editStock} defaultValue={filtred?.stock}/>
+                :
+                (filtred?.stock ? <div className={styles.stock}><HiBadgeCheck size={20} /> Hay Stock </div> : <div style={{ color: 'red' }}><IoCloseCircleSharp color='red' /> No hay Stock </div>)
+              }
             <div className={Rstyles.SortCenter}>
               {editMode
                 ? details?.categories?.map((category) => (
@@ -434,6 +457,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     <input
                       className={Rstyles.form__field}
                       type='text'
+                      name='price'
                       defaultValue={details?.price}
                       onChange={handlePrice}
                     />

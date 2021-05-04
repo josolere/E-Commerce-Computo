@@ -152,7 +152,8 @@ export default function Card({ name, image, price, id, count, stock }: props) {
                     }}
                     className={styles.addCart}>
                     <FontAwesomeIcon icon={faCartPlus} /></button>
-                :<button className={styles.noAddCart}> 
+                :
+                <button className={styles.noAddCart}> 
                 <Link to={{
                     pathname: '/Detalles',
                     state: {
@@ -161,7 +162,8 @@ export default function Card({ name, image, price, id, count, stock }: props) {
                     }
                 }}>
                 <AiFillCloseSquare/>   
-                </Link></button> 
+                </Link>
+                </button> 
                 }
             </div>
         </div>

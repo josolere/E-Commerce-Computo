@@ -356,7 +356,7 @@ $yellow: #ffb200;
 */
 .fav{
     position: absolute;
-    right: 10rem;
+    right: 5rem;
     background-color: transparent;
     width: fit-content;
     height: 2rem;
@@ -401,3 +401,8 @@ $yellow: #ffb200;
       justify-content: center;
       align-items: center;
   }
+
+  .editStock{
+    font-size: 0.8rem;
+    width: fit-content;
+}

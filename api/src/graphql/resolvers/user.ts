@@ -48,7 +48,7 @@ export default {
     const options = {
         include: [{model: db.Product,
         through: "wishlist",
-        attributes: ["id", "name","image","price"]}]
+        attributes: ["id", "name","image","price","stock"]}]
     };
      const user = await models.User.findByPk(userId,options);
 
