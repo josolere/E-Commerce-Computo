@@ -11,6 +11,7 @@ export const typeDefs = gql`
     active: Boolean
     name: String
     surname: String
+    googleId: String
     createdAt: String
     updatedAt: String
     address: String
