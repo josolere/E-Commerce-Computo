@@ -233,6 +233,7 @@ const MP: FC<PropsMercado> = (props) => {
                                     className={styles.form__field}
                                     type="text"
                                     name="cardNumber"
+                                    required={true}
                                     minLength={16}
                                     maxLength={16}
                                     id="form-checkout__cardNumber"
@@ -246,6 +247,7 @@ const MP: FC<PropsMercado> = (props) => {
                                         type="text"
                                         minLength={2}
                                         maxLength={2}
+                                        required={true}
                                         name="cardExpirationMonth"
                                         id="form-checkout__cardExpirationMonth"
                                     />
@@ -256,6 +258,7 @@ const MP: FC<PropsMercado> = (props) => {
                                         type="text"
                                         minLength={2}
                                         maxLength={2}
+                                        required={true}
                                         name="cardExpirationYear"
                                         id="form-checkout__cardExpirationYear"
                                     />
@@ -288,6 +291,7 @@ const MP: FC<PropsMercado> = (props) => {
                                     type="text"
                                     minLength={3}
                                     maxLength={3}
+                                    required={true}
                                     name="securityCode"
                                     id="form-checkout__securityCode"
                                 />
@@ -323,6 +327,7 @@ const MP: FC<PropsMercado> = (props) => {
                                     className={styles.form__field}
                                     type="text"
                                     minLength={8}
+                                    required={true}
                                     maxLength={8}
                                     name="identificationNumber"
                                     id="form-checkout__identificationNumber"

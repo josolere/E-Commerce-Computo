@@ -31,7 +31,9 @@ export default function OrderDetails(props:PropsDetails) {
     const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id:+id } })
     const order = data?.getOrderById
 
-    const [editOrderStatus, editResults] = useMutation(EDIT_ORDER)
+    const [editOrderStatus, editResults] = useMutation(EDIT_ORDER, {
+        refetchQueries:[{query: GET_ORDER_DETAILS,  variables: { id:+id  }}]
+    })
 
 
     const handleStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
