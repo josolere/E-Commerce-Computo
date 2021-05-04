@@ -40,6 +40,7 @@ import FormCheckout from './components/CheckOut/FormCheckout';
 import { GET_ORDER_BY_STATUS } from "./gql/ordersGql"
 
 
+
 interface user {
   currentUser: {
     name: string,
