@@ -269,10 +269,6 @@ let categories = [
 ];
 
 
-bcrypt.hash("123456", saltRounds, function(err, hash){
-  console.log(hash)
-})
-
 const users = [
   {
     name: "admin",

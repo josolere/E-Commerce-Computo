@@ -99,7 +99,6 @@ const NavBar = (): JSX.Element => {
           dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
 
         }
-        // localStorage.clear()
 
       }
     }
