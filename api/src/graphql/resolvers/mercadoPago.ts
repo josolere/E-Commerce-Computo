@@ -26,6 +26,7 @@ Mutation: {
           const res = {status:400, error: {status:400, cause : { code: 0, description: "no se encuentra la orden" }}}
           return res;
         }
+        console.log(input)
         try{
           const data = await mercadopago.payment.save(input)
           const res = {status:0,payment:{id:0,status:"",status_detail:""}}

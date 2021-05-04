@@ -7,6 +7,8 @@ export const FILTER =  gql`
             name
             price
             image
+            stock
+            
         }
     }
 `;

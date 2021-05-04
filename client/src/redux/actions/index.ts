@@ -10,6 +10,11 @@ export const DELETE_CART = 'DELETE_CART'
 export const PASS_ID = 'PASS_ID' //Pasar id
 export const ADD_PRODUCT_DETAILS = 'ADD_PRODUCT_DETAILS'
 export const ADD_PRODUCT_HOME = 'ADD_PRODUCT_HOME'
+export const LOGEO = 'LOGEO'
+export const ADD_BASE_DE_DATOS = 'ADD_BASE_DE_DATOS'
+export const ORDER_ID = 'ORDER_ID'
+export const ORDER_PENDING = 'ORDER_PENDING'
+export const COUNT_BASE = 'COUNT_BASE'
 
 export const setFilter = (filter: string) => ({
     type: SET_FILTER, filter
@@ -64,4 +69,32 @@ export const addProductDetails = (state:{}) =>({
 export const addProductHome = (state:any) =>({
     type:ADD_PRODUCT_HOME,
     state
+})
+
+
+export const logeo = (state:any) =>({
+    type:LOGEO,
+    state
+})
+
+
+export const addBaseDeDatos = (arrayProducts:any) =>({
+    type:ADD_BASE_DE_DATOS,
+    arrayProducts
+})
+
+
+export const orderId = (data:any) =>({
+    type:ORDER_ID,
+    data
+})
+
+export const orderPending = (data:[]) => ({
+    type:ORDER_PENDING,
+    data
+})
+
+export const countAddBase = (data:number) => ({
+    type:COUNT_BASE,
+    data
 })

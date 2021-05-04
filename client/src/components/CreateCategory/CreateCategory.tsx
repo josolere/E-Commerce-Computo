@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../Users/loguin.module.scss'
 import styles1 from "./CreateCategory.module.scss"
-import { NEW_CATEGORY } from "../../gql/categories"
+import { NEW_CATEGORY } from "../../gql/categoriesGql"
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_CATEGORIES } from "../../gql/categories";
+import { GET_CATEGORIES } from "../../gql/categoriesGql";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons';
 import styles2 from '../Users/Edit.module.scss';

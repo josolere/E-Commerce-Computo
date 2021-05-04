@@ -7,13 +7,18 @@ export const typeDefs = gql`
     status: String
     details: [OrderDetail]
     confirmAt: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
     createdAt: String
     updatedAt: String
   }
 
   type Query {
     getOrderById(id: ID!): Order
-    getOrderByStatus(status: String): [Order]
+    getOrderByStatus(status: String, idUser: ID): [Order]
     getOrdersByIdUser(idUser: ID!): [Order]
     getAllOrders(status: String): [Order]
   }
@@ -27,10 +32,20 @@ export const typeDefs = gql`
   input CreateOrderInput {
     id: Int
     status: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 
   input EditOrderInput {
     status: String
     confirmAt: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 `;

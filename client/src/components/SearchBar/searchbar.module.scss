@@ -1,17 +1,11 @@
-$widthSearchbar: 10rem;
-$paddingSB: 1rem;
 $blue:#30475e;//dddddd
 $bluedark: #222831;//222831
 $ligthblue: #dddddd;//30475e
-$white:#f05454;//f05454
+$red:#f05454;//f05454
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
 
-/* .alineSearch {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
- */
 .searchBar{
     position: relative;
     height: fit-content;
@@ -23,10 +17,12 @@ $white:#f05454;//f05454
     justify-content: space-between;
     background-color: $ligthblue;
     border-radius: 0.3rem;
-    padding:0.5rem $paddingSB;
-    width: 100%;
-    margin-left: 5rem;
+    padding: 7%;
+    width: 80%;
     input{
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2vh;
         color: $blue;
         padding-left: 0;
         outline: none;
@@ -46,38 +42,40 @@ $white:#f05454;//f05454
     }
 }
 
-
+@media (max-width: 648px) {
+    .bar{
+        width: 50%;
+    }
+}
 
 .linksearch {
-    color: gray;
+    color: $blue;
     display: flex;
     flex-direction: column;
-/*     width: $widthSearchbar;
- */    align-items: center;
-    font-size: 0.8rem;
+    align-items: center;
+    font-size: 2vh;
     background-color: whitesmoke;
     border-radius: 0.2rem;
     text-decoration: none;    
     position: absolute;
-    top: 2rem;
-    margin-left: 5rem;
-     z-index:100;
-    padding:0rem$paddingSB;
+    font-family: 'Montserrat', sans-serif;
+    z-index: 1;
+
     span{
+        font-family: 'Montserrat', sans-serif;
+        color: $blue;
         text-decoration: none;
-        margin: 0rem;
-        padding: 0.5rem 0rem;
         border-radius: 0.2rem;
         width: 100%;
-        font-size: 0.8rem;
+        font-size: 2vh;
         &:hover{
-            background-color: $white;
-            color: whitesmoke;
+            font-family: 'Montserrat', sans-serif;
+            background-color: $red;
             cursor: pointer;
-            padding: 0.7rem 1rem;
         }
     }
 }
+
 .linksearch:link, .linksearch:visited, .linksearch:active {
     text-decoration:none;
 }

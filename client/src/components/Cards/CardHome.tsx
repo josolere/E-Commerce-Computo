@@ -16,9 +16,10 @@ interface props {
     image: string
     price: number
     count: number
+    stock:number
 }
 
-export default function Card({ name, image, price, id, count }: props) {
+export default function Card({ name, image, price, id, count, stock }: props) {
 
     const dispatch = useDispatch()
     var { quantity, priceSubTotal, productTotal, idDetails, priceDetails, countDetails, addHome, addCart }: any = useSelector((store: AppState) => store.shoppingCartReducer)
@@ -98,7 +99,6 @@ export default function Card({ name, image, price, id, count }: props) {
     return (
         <div className={styles.card}>
             <div className={styles.name}>{name}</div>
-
             <Link
                 onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{
@@ -123,6 +123,7 @@ export default function Card({ name, image, price, id, count }: props) {
         </div>
 
     );
+
 
 
 }

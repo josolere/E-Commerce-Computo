@@ -1,8 +1,4 @@
-import { Link } from 'react-router-dom';
-import styles from './PopUp.module.scss';
-import { GET } from '../../gql/details';
-import { useQuery } from '@apollo/client';
-import South from '../images/South2.gif';
+
 
 interface DetailsProduct {
     getProductById: {

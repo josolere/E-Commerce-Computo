@@ -13,6 +13,7 @@ type Review{
     title: String
     text: String
     rating: Int
+    title: String
     userId: String
 }
 ##Estos datos entran

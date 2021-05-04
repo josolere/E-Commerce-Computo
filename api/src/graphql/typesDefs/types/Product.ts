@@ -47,6 +47,7 @@ export const typeDefs = gql`
     price: Float
     details: String
     categories: [ID!]
+    stock:Int
   }
 
   input FilterProducts {

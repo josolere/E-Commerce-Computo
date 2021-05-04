@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import styles from './Payment.module.scss';
-import { CREATE_ORDER, EDIT_ORDER } from '../../gql/orders'
+import { CREATE_ORDER, EDIT_ORDER } from '../../gql/ordersGql'
 import { useMutation, useQuery } from '@apollo/client';
-import { ACTUAL_USER } from '../../gql/login';
+import { ACTUAL_USER } from '../../gql/loginGql';
 import Logo from '../images/MercadoPago.png';
 import {
   isValidNumberOrEmpty,

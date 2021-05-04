@@ -7,9 +7,10 @@ import {
 } from "../../interfaces";
 // import Sequelize, { Op } from "sequelize";
 // import User from "../../models";
-// import db from "../../models";
+import db from "../../models";
 import { v4 as uuid } from "uuid";
 import bcrypt from 'bcrypt'
+import { forEachTrailingCommentRange } from "typescript";
 const saltRounds = 10;
 
 export default {
@@ -30,8 +31,6 @@ export default {
     return user
     },
 
-   
-
     getUsers: async (
       _parent: object,
       _args: object,
@@ -39,14 +38,57 @@ export default {
     ): Promise<any> => {
       const users = await models.User.findAll();
       return users;
-    }, 
+    },
+    getWishList: async (
+      _parent: object,
+      { userId }: { userId:string },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+
+    const options = {
+        include: [{model: db.Product,
+        through: "wishlist",
+        attributes: ["id", "name"]}]
+    };
+     const user = await models.User.findByPk(userId,options);
+
+     return user.dataValues.Products
+    },  
   },
   Mutation: {
-    /* createUser: (
-      _: any,
-      { input }: { input: any },
-      { models }: { models: any }
-    ): any => models.User.create({ ...input }), */
+    toggleWishlist: async (
+      _parent: object,
+      { productId, userId }: { productId: number, userId:string },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      // busco si este usuario tiene ese producto entre sus favoritos
+      // si existe lo elimino y devuelvo el array 
+      // si no existo agrego el producto y devuelvo el array
+
+      const options = {
+        include: [{model: db.Product,
+          through: "wishlist",
+          attributes: ["id", "name"]}]
+    };
+
+    const user = await models.User.findByPk(userId,options);
+
+      let insert = 1;
+      for(let x = 0; x< user.dataValues.Products.length; x++){
+        if(Number(user.dataValues.Products[x].id)===Number(productId)){
+          await user.removeProduct(productId);
+          insert = 0;
+        }
+      }
+
+      if(insert>0) {
+        await user.addProduct(productId);
+      }
+
+      const userOut = await models.User.findByPk(userId,options);
+      return userOut.dataValues.Products
+    },
+
     deleteUser: async (
       _parent: object,
       { id }: { id: string },
@@ -127,7 +169,7 @@ export default {
 
     signup: async (
       _parent: object,
-      { firstName, lastName, email, password, address, username }: any,
+      { firstName, lastName, email, password, address, username, street, city, state, zip, phone }: any,
       context: any
     ): Promise<any> => {
       const existingUsers = await context.models.User.findAll();
@@ -152,6 +194,11 @@ export default {
         password: null,
         address: address,
         username: username,
+        street, 
+        city,
+        state, 
+        zip, 
+        phone
       };
 
       // console.log(newUserInput);

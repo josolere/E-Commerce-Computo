@@ -25,7 +25,6 @@ import {
     from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MERCADO_PAGO } from "../../gql/Payment";
 
 var mercadopago = require('mercadopago');
 
@@ -41,7 +40,6 @@ const Mercado = () => {
 
     const priceTotal = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
 
-    const [MercadoMutation, data] = useMutation(MERCADO_PAGO)
 
     const [personalData, setPersonalData] = useState({
         email: '',
@@ -185,13 +183,7 @@ const Mercado = () => {
     function setCardTokenAndPay(status: any, response: any) {
         setTokenId(response.id)
         console.log('Response', response)        
-         MercadoMutation({
-            variables: {
-                token: tokenId, issuer_id: otherCreditCardData.issuer_id, payment_method_id: paymentMethodId,
-                transaction_amount: parseFloat(priceTotal), installments: parseInt(otherCreditCardData.installments),
-                description: 'Insumos de Computación', email: personalData.email, type: docType, number: personalData.docNumber
-            }
-        }) 
+
     };
 
     const handlesubmit = (event: React.FormEvent<HTMLFormElement>) => {

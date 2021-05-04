@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import total from './ShoppingTotal.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../redux/reducers';
 import { deleteCart } from '../../redux/actions'
-import { NEW_ORDER } from "../../gql/shopingCart"
+import { NEW_ORDER } from "../../gql/shopingCartGql"
 import { Cookies } from "react-cookie";
 import { toast } from "react-toastify"
-import { ACTUAL_USER, GET_USERS } from "../../gql/login";
+import { ACTUAL_USER, GET_USERS } from "../../gql/loginGql";
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
@@ -20,6 +20,8 @@ interface user {
 }
 
 
+
+
 const ShoppingTotal = (): JSX.Element => {
 
     let user: any = {}
@@ -30,7 +32,7 @@ const ShoppingTotal = (): JSX.Element => {
 
     const [createOrder, { data }] = useMutation(NEW_ORDER)
     const dispatch = useDispatch()
-    const idsProducts: number = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal)
+    const { priceSubTotal, idUsers } = useSelector((store: AppState) => store.shoppingCartReducer)
     const [priceTotal, setPriceTotal] = useState(0)
     const [send, setSend] = useState(500)
     const [order, setOrder] = useState([])
@@ -42,66 +44,75 @@ const ShoppingTotal = (): JSX.Element => {
     }, [cookie])
 
     useEffect(() => {
-        setPriceTotal(idsProducts + send)
-    }, [idsProducts])
+        setPriceTotal(priceSubTotal + send)
+    }, [priceSubTotal])
+
+    // useEffect(() => {
+    //     if (logeo === true) {
+    //         // createOrder({ variables: { status: status, idUser: idUser } })
+    //         //     .then((resolve) => { console.log(data) })
+    //         //     .catch((err) => { console.log('no resuelto') })
+    //     }
+
+    // }, [])
 
     const handleOrder = () => {
-        if (localStorage.getItem('productsLocal') && gotcookie === true) {
-            let productLocal: any = []
-            productLocal = (localStorage.getItem('productsLocal'))
-            productLocal = (JSON.parse(productLocal))
-            setOrder(productLocal)
-            /*  localStorage.clear()
-             dispatch(deleteCart()) */
-            localStorage.setItem('productsLocal', JSON.stringify([]))
-            /*             createOrder({ variables: { status: 'pending', idUser: 1 } })
-                            .then((resolve) => { console.log(data) })
-                            .catch((err) => { console.log('Salio Mal') }) */
-            window.location.href = 'http://localhost:3000/Mercado'
+        if (user) {
+            // let productLocal: any = []
+            // productLocal = (localStorage.getItem('productsLocal'))
+            // productLocal = (JSON.parse(productLocal))
+            // setOrder(productLocal)
+            // localStorage.clear()
+            // dispatch(deleteCart())
+            // createOrder({ variables: { status: 'pendiente', idUser: idUsers } })
+            //     .then((resolve) => { 
+            //         localStorage.setItem('productsLocal', JSON.stringify([]))
+            //         console.log(data) })
+            //     .catch((err) => { console.log('Salio Mal') })
+            window.location.href = 'http://localhost:3000/Envios'
         }
         else {
             toast.error("Debes iniciar sesión para realizar una compra")
         }
     }
 
+
+
+
     return (
-        <>
-            <div className={total.containerOrden}>
-                <div className={total.containerTitle}>
-                    <h1>Mi Compra</h1>
+        <div className={total.disaster} >
+                <div className={total.containerTitle} >
+                    <h2 className={total.specialTitle} >Su Compra</h2>
+                    {user?.privilege === 'user' ?
+                        <Link to='/Envios' onClick={() => { handleOrder() }}
+                            className={total.buttonEnd}>Finalizar Compra</Link>
+                    :
+                        <Link to='/Login'>
+                            <button
+                                className={total.buttonEnd}
+                            >Login</button>
+                        </Link>
+                    }
                 </div>
                 <div className={total.containerValue}>
                     <div className={total.containerSubTotal}>
-                        <h2>SubTotal</h2>
-                        <p>${new Intl.NumberFormat().format(idsProducts)}</p>
+
+                        <h1 className={total.titles} >SubTotal</h1>
+                        <p className={total.amounts} >${new Intl.NumberFormat().format(priceSubTotal)}</p>
                     </div>
-                    <div className={total.containerSent}>
-                        <h2>Gastos De Envio</h2>
-                        <p>${send}</p>
+                    <div className={total.containerSubTotal}>
+                        <h1 className={total.titles}  >Gastos De Envío</h1>
+                        <p className={total.amounts}>${new Intl.NumberFormat().format(send)}</p>
                     </div>
 
                     <div className={total.containerTotal}>
-                        <h2>Total</h2>
-                        <p>${new Intl.NumberFormat().format(priceTotal)}</p>
+                        <h1 className={total.titles}  >Total</h1>
+                        <p className={total.amounts}>${new Intl.NumberFormat().format(priceTotal)}</p>
 
                     </div>
                 </div>
-            </div>
-            {user?.privilege === 'user' ?
-                <div className={total.containerButton}>
-                    <button onClick={() => { handleOrder() }}
-                        className={total.buttonFinal}>Finalizar Compra</button>
-                </div>
-                :
-                <div className={total.containerButton}>
-                    <h1 className={total.titlefinish} > Debe estar Logueado para finalizar la compra</h1>
-                    <Link to='/Login'>
-                        <button
-                            className={total.buttonFinal}
-                        >Login</button>
-                    </Link>
-                </div>}
-        </>
+
+        </div>
     )
 }
 
