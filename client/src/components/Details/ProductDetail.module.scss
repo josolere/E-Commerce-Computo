@@ -356,7 +356,7 @@ $yellow: #ffb200;
 */
 .fav{
     position: absolute;
-    right: 5rem;
+    right: 10rem;
     background-color: transparent;
     width: fit-content;
     height: 2rem;
@@ -394,6 +394,7 @@ $yellow: #ffb200;
   }
 
   .stock{
+      color: whitesmoke;
       font-size: 0.8rem;
       width: fit-content;
       display: flex;

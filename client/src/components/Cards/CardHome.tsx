@@ -9,6 +9,10 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FiHeart } from 'react-icons/fi'
+import { useMutation, useQuery } from '@apollo/client'
+import { TOGGLE_WISHLIST, WISHLIST } from '../../gql/wishlist'
+import { ACTUAL_USER } from '../../gql/loginGql'
+import { AiFillCloseSquare } from "react-icons/ai";
 
 
 interface props {
@@ -18,10 +22,9 @@ interface props {
     price: number
     count: number
     stock:number
-    wish?:boolean
 }
 
-export default function Card({ name, image, price, id, count, stock, wish }: props) {
+export default function Card({ name, image, price, id, count, stock }: props) {
 
     const dispatch = useDispatch()
     var { quantity, priceSubTotal, productTotal, idDetails, priceDetails, countDetails, addHome, addCart }: any = useSelector((store: AppState) => store.shoppingCartReducer)
@@ -86,7 +89,6 @@ export default function Card({ name, image, price, id, count, stock, wish }: pro
        
         dispatch(addShopping({ id, price, count }));
         addLocaStorage();
-        
     }
 
       if (addCart === true && addHome === true) {
@@ -100,19 +102,36 @@ export default function Card({ name, image, price, id, count, stock, wish }: pro
 
     const [wishe, setWish] =  useState(false)
 
+    const { data , loading , error} = useQuery(ACTUAL_USER)
+    const user = data?.currentUser
+
+    const [wish,reswish] = useMutation(TOGGLE_WISHLIST,{
+        refetchQueries:[{query:WISHLIST,variables:{userId:user?.id}}]
+    })
+
+    const wishes = useQuery(WISHLIST,{variables:{userId:user?.id}})
+    const list = wishes?.data?.getWishList
+
     const handleFav = (e: React.FormEvent<HTMLButtonElement>) =>{
         e.preventDefault()
-        setWish(!wishe)
-        console.log('falta crear la wishlist en base de datos y conectar')
+        wish({variables:{userId:user?.id,productId: id}})
     }
 
-
+    useEffect(()=>{
+        setWish(list?.some((product : any) => product.id === id))
+        console.log()
+    },[wishes,reswish])
 
     return (
         <div className={styles.card}>
-            {/* <ToastContainer /> */}
+
             <div className={styles.name}>{name}</div>
-<button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20}/></button>
+
+        {user?
+        <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20}/></button>
+        :
+        <button className={styles.fav}><Link to="/Login"><FiHeart size={20}/></Link></button>
+        }
             <Link
                 onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
                 className={styles.link} style={{ textDecoration: 'none' }} to={{
@@ -127,12 +146,23 @@ export default function Card({ name, image, price, id, count, stock, wish }: pro
 
             <div className={styles.buttons}>
                 <button className={styles.buy}>${new Intl.NumberFormat().format(price)}</button>
-                <button
+                {stock > 0 ? <button
                     onClick={() => {
                         handleAddProduct();
                     }}
                     className={styles.addCart}>
                     <FontAwesomeIcon icon={faCartPlus} /></button>
+                :<button className={styles.noAddCart}> 
+                <Link to={{
+                    pathname: '/Detalles',
+                    state: {
+                        id: id,
+                        newprice: 0
+                    }
+                }}>
+                <AiFillCloseSquare/>   
+                </Link></button> 
+                }
             </div>
         </div>
 

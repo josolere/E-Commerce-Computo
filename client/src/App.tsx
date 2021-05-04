@@ -37,12 +37,9 @@ import BuildPcUser from './components/buildPc/buildPcUser';
 import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
-<<<<<<< HEAD
 import Wishlist from './components/Wishlist/Wishlist';
-=======
 import { GET_ORDER_BY_STATUS } from "./gql/ordersGql"
 
->>>>>>> cbc508d391e99046afd35485348b349e91462da8
 
 interface user {
   currentUser: {

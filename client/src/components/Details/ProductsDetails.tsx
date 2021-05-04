@@ -312,8 +312,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     console.log(wishe)
     console.log('falta crear la wishlist en base de datos y conectar')
   }
-  // {filtred?.stock ? <div className={styles.stock}><HiBadgeCheck size={20} /> Hay Stock </div> : <div style={{ color: 'red' }}><IoCloseCircleSharp color='red' /> No hay Stock </div>}
-  // <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
   
   return (
     <React.Fragment>
@@ -325,14 +323,14 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
           <form
             onSubmit={handleSubmit}
             className={editMode ? stylesEdit.containerEdit : Rstyles.FormDetails}
-          >
+            >
             {user?.privilege === "admin" ? (
               <button className={Rstyles.EditButton} onClick={handleEdit}>
                 Editar
               </button>
             ) : (
               false
-            )}
+              )}
             <div className={Rstyles.SortCenter} >
               {editMode ? (
                 <div className={Rstyles.form__groupEdit}>
@@ -344,19 +342,21 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     defaultValue={details?.name}
                     name="name"
                     onChange={handleChange}
-                  />
+                    />
                 </div>
                 /*                 <input
-                                  className={stylesEdit.input}
-                                  name="name"
-                                  type="text"
-                                  onChange={handleChange}
-                                  defaultValue={details?.name}
-                                /> */
-              ) : (
-                <h1 className={Rstyles.DName}>{filtred?.name}</h1>
-              )}
+                className={stylesEdit.input}
+                name="name"
+                type="text"
+                onChange={handleChange}
+                defaultValue={details?.name}
+                /> */
+                ) : (
+                  <h1 className={Rstyles.DName}>{filtred?.name}</h1>
+                  )}
             </div>
+                <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
+               {filtred?.stock ? <div className={styles.stock}><HiBadgeCheck size={20} /> Hay Stock </div> : <div style={{ color: 'red' }}><IoCloseCircleSharp color='red' /> No hay Stock </div>}
             <div className={Rstyles.SortCenter}>
               {editMode
                 ? details?.categories?.map((category) => (
