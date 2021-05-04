@@ -12,11 +12,13 @@ type Review{
     id: Int
     text: String
     rating: Int
+    title: String
     userId: String
 }
 ##Estos datos entran
 input AddReviewInput{
     rating: Int
+    title: String
     text: String
     userId: String
     product: Int

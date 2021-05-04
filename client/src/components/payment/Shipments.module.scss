@@ -26,18 +26,18 @@ $DBlue:#002D62;
     font-family: 'Montserrat', sans-serif;
     border: transparent;
     display: flex;
-    min-width: 4rem;
-    min-height: 2rem;
-    width: 8.5rem;
+    min-width: 9rem;
+    width: fit-content;
     padding:2%;
-    height: 4rem;
+    min-height: 3rem;
+    height: fit-content;
     justify-content: center;
     align-self: center;
     cursor: pointer;
-      font-size: 3vh;
-      transition: all .3s;
-      position: relative;
-      overflow: hidden;
+    font-size: 3vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
     border-radius: 0.3rem;
       z-index: 1;
       &:after {
@@ -82,7 +82,7 @@ $DBlue:#002D62;
     margin-top: 7%;
     padding: 1.5%;
     border-radius: .5rem;
-    width: 100%;
+    width: 90%;
 }
 
 .SortMapShip{
@@ -90,7 +90,8 @@ $DBlue:#002D62;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 90%;
+    width: 100%;
+    
 }
 
 .PMaped{

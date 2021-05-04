@@ -11,25 +11,34 @@ export const typeDefs = gql`
     active: Boolean
     name: String
     surname: String
+    googleId: String
     createdAt: String
     updatedAt: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 
   type AuthPayload {
     user: User
   }
 
+
   type Query {
     getUserById(id: ID!): User
     currentUser: User
     getUsers: [User]
+    getWishList(userId:String): [Product]
   }
 
   type Mutation {
     createUser(input: CreateUserInput): User
     deleteUser(id: ID!): User!
     editUser(id: ID, input: EditUserInput): User!
+    toggleWishlist(productId:ID,userId:String): [Product]
 
     logout: Boolean
     login(email: String!, password: String!): AuthPayload
@@ -40,6 +49,11 @@ export const typeDefs = gql`
       password: String!
       username: String
       address: String
+      street: String
+      city: String
+      state: String
+      zip: String
+      phone: String
     ): AuthPayload
   }
 
@@ -53,6 +67,11 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 
   input EditUserInput {
@@ -64,6 +83,11 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 
   input SignUpInput {
@@ -75,5 +99,10 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 `;

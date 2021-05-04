@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Card from './CardHome'
-import { FILTER } from "../../gql/card"
+import { FILTER } from "../../gql/cardGql"
 import styles from './CardsHome.module.scss'
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router';
@@ -32,26 +32,24 @@ interface IProps {
 export default function Cards({ reset }: IProps) {
 
     const name = useSelector((store: AppState) => store.productReducer.filter)
+
     const categoriesId = useSelector((store: AppState) => Number(store.productReducer.categories) || [])
 
-    const { loading, error, data } = useQuery<DetailsData>(FILTER, { variables: { name: name, categoriesId: categoriesId } })
+    const { data } = useQuery<DetailsData>(FILTER, { variables: { name: name, categoriesId: categoriesId } })
     
     const [count, setCount] = useState(1)
 
     const [isOpen, setIsOpen] = useState(true);
 
-     /* const togglePopup = () => {
-        setIsOpen(!isOpen);
-    }  */
-
     const product = data?.getProducts
+
     const [pageNumber, setPageNumber] = useState(0)
 
     const productsPerPage = 8
     const pageVisited = pageNumber * productsPerPage
 
     useEffect(() => {
-        setPageNumber(reset)
+        // setPageNumber(reset) // Rulo: comente esto porque rompia el boton de deseados
     }, [data, reset])
 
     const pageCount = Math.ceil(product ? product.length / productsPerPage : 0)
@@ -68,14 +66,12 @@ export default function Cards({ reset }: IProps) {
             );
         })
 
-    const closePopup = () => {
-        setIsOpen(false)
-    }
+    
 
     return (
         <React.Fragment>
             <div className={styles.container}>{displayProducts}
-{/*                { isOpen ?
+              {/*  { isOpen ?
                     <div className={styles.PopBox}>
                         <button onClick={closePopup} className={styles.PopButton} >
                         <FontAwesomeIcon icon={faTimes} aria-hidden={true} /></button>
@@ -83,16 +79,16 @@ export default function Cards({ reset }: IProps) {
                             <PopUp />
                         </div>
                     </div> : false} */}
-                <ReactPaginate
-                    previousLabel={"Previous"}
-                    nextLabel={"Next"}
+                    {Object.keys(product ?product:false).length > 8 ?
+                <ReactPaginate 
+                    previousLabel={""}
+                    nextLabel={""}
                     pageCount={pageCount}
                     onPageChange={changePage}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
-                />
+                />: false}
             </div>
         </React.Fragment>
     )
 }
-

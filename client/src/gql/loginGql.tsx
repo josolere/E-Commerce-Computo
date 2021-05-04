@@ -6,32 +6,44 @@ query {
     currentUser {
         id
         name
-        email
         surname
-        privilege
-        username
         address
+        email
         password
+        googleId
+        street
+        city
+        state
+        zip
+        phone
+        privilege
     }
   }`;
 
 
 
+
+
+
+
 export const SIGNUP_MUTATION = gql`
-    mutation  ($firstName: String! $password: String! $email: String!  $lastName:String! $username:String! $address:String! ) {
-        signup (firstName:$firstName lastName:$lastName password:$password email: $email username:$username address:$address ) 
-                            {    
-                                user {
-                                    name
-                                    id
-                                }
-                                    
-                            
-                            }
-                        
+    mutation  ($firstName: String! $password: String! $email: String!  
+                $lastName:String! $username:String $street: String  $city: 
+                String $state:String $zip: String $phone: String 
+                ) {
+        signup (firstName:$firstName lastName:$lastName password:$password
+                 email: $email username:$username street: $street 
+                 city:$city state:$state zip:$zip phone:$phone 
+                 ) 
+                    {    
+                        user {
+                            name
+                            id
+                        }
+                    }
     }`;
-    
-    export const GET_USERS = gql`
+
+export const GET_USERS = gql`
     query {
         getUsers{
             id
@@ -44,7 +56,7 @@ export const SIGNUP_MUTATION = gql`
             username
         }
     }`;
-    
+
 
 export const LOGIN_MUTATION = gql`
     mutation ($email: String!,  $password: String!) {
@@ -59,7 +71,7 @@ export const LOGIN_MUTATION = gql`
                 } 
     }`;
 
-    
+
 export const DELETE_USER = gql`
 mutation ($id:ID! ){
     deleteUser (id:$id)
@@ -76,7 +88,7 @@ mutation(  $privilege:String! $id:ID!)
                         { 
                             id
                         }             
-}`;  
+}`;
 
 export const CHANGE_PASSWORD = gql`
 mutation(  $password:String! $id:ID!) 
@@ -86,9 +98,9 @@ mutation(  $password:String! $id:ID!)
                             name
                             privilege
                         }             
-}`;  
+}`;
 
-export const LOGOUT = gql `
+export const LOGOUT = gql`
   mutation {
       logout
           }`;

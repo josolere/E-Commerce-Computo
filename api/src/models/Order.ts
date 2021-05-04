@@ -5,16 +5,21 @@ import {
   Model,
   Optional,
   Sequelize,
-  BelongsToManyGetAssociationsMixin
+  BelongsToManyGetAssociationsMixin,
 } from "sequelize";
 
-import { OrderDetail } from "./OrderDetail";
+import { Productsxorder } from "./Productsxorder";
 
 export interface OrderAttributesI {
   id: number;
   status: string;
   confirmAt: Date;
   // status: EnumDataType<string>;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string;
 }
 
 interface OrderCreationAttributesI extends Optional<OrderAttributesI, "id"> {}
@@ -26,15 +31,20 @@ export class Order
   public status!: string;
   public confirmAt!: Date;
   // public status!: EnumDataType<string>;
+  public street!: string;
+  public city!: string;
+  public state!: string;
+  public zip!: string;
+  public phone!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  public getOrderDetails!: BelongsToManyGetAssociationsMixin<OrderDetail>;
+  public getOrderDetails!: BelongsToManyGetAssociationsMixin<Productsxorder>;
 
-  public readonly orderDetail?: OrderDetail[];
+  public readonly orderDetail?: Productsxorder[];
 
   public static associations: {
-    orderDetail: Association<Order, OrderDetail>;
+    orderDetail: Association<Order, Productsxorder>;
   };
 }
 
@@ -54,6 +64,21 @@ export function OrderFactory(sequelize: Sequelize) {
       confirmAt: {
         type: DataTypes.DATE,
         allowNull: true,
+      },
+      street: {
+        type: DataTypes.STRING,
+      },
+      city: {
+        type: DataTypes.STRING,
+      },
+      state: {
+        type: DataTypes.STRING,
+      },
+      zip: {
+        type: DataTypes.STRING,
+      },
+      phone: {
+        type: DataTypes.STRING,
       },
     },
     {

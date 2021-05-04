@@ -16,10 +16,16 @@ export default {
     ): Promise<any> => {
       const data = await models.Product.findAll({
         where: { id: idProduct },
-        include: [{ model: models.Product, as: "productCompatibility" }],
+        include: [
+          {
+            model: models.Product,
+            as: "productCompatibility",
+            include: [models.Category],
+          },
+        ],
       });
-      // console.log(data);
-      // console.log(data[0].productCompatibility);
+      //console.log(data);
+      // console.log(data[0].productCompatibility[0].Categories);
       return data[0].productCompatibility;
     },
   },
