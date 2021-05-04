@@ -7,7 +7,7 @@ import './rating.css';
 import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetailsGql";
 import styles from "./ProductDetail.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss";
 import { addProductDetails, addShopping, local } from '../../redux/actions';
 import { toast } from 'react-toastify';
@@ -15,6 +15,7 @@ import { ACTUAL_USER, GET_USERS } from "../../gql/loginGql";
 import { HiBadgeCheck } from "react-icons/hi";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { AppState } from '../../redux/reducers';
+import Rstyles from './ResponsiveDetails.module.scss'
 
 interface user {
   currentUser: {
@@ -30,17 +31,17 @@ interface Icategories {
 }
 
 interface DetailsProduct {
-    getProductById: {
-        id: number
-        brand: string
-        image: string
-        name: string
-        price: number
-        details: string
-        stock:number
-        categories: any[]
-        reviews: any[]
-    }
+  getProductById: {
+    id: number
+    brand: string
+    image: string
+    name: string
+    price: number
+    details: string
+    stock: number
+    categories: any[]
+    reviews: any[]
+  }
 }
 
 interface Categories {
@@ -138,11 +139,11 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     brand: "",
     image: "",
     details: "",
-    stock:0,
+    stock: 0,
     categories: [{ id: "1", name: "default" }],
   });
 
-  useEffect(() => {}, [results]);
+  useEffect(() => { }, [results]);
 
   useEffect(() => {
     setDetails({
@@ -158,18 +159,18 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
   }, [filtred]);
 
 
-    useEffect(() => {
-        console.log(results?.data)
-    }, [results])
+  useEffect(() => {
+    console.log(results?.data)
+  }, [results])
 
-    useEffect(() => {
-        console.log(results.data)
-        setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "",stock: filtred?.stock || 0, categories: filtred?.categories || [{}] })
-    }, [filtred])
+  useEffect(() => {
+    console.log(results.data)
+    setDetails({ id: filtred?.id.toString() || "", name: filtred?.name || "", price: filtred?.price || 0, brand: filtred?.brand || "", image: filtred?.image || "", details: filtred?.details || "", stock: filtred?.stock || 0, categories: filtred?.categories || [{}] })
+  }, [filtred])
 
-    useEffect(() => {
-        filtred?.reviews?.map(item => setControlReview(item?.name))
-    }, [filtred])
+  useEffect(() => {
+    filtred?.reviews?.map(item => setControlReview(item?.name))
+  }, [filtred])
 
   const [editMode, setEditMode] = useState(false);
 
@@ -181,27 +182,27 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     details
       ? setDetails({
-          ...details,
-          [e.currentTarget.name]: e.currentTarget.value,
-        })
+        ...details,
+        [e.currentTarget.name]: e.currentTarget.value,
+      })
       : console.log("no se puede");
   }
 
   function handlePrice(e: React.FormEvent<HTMLInputElement>) {
     details
       ? setDetails({
-          ...details,
-          price: +e.currentTarget.value,
-        })
+        ...details,
+        price: +e.currentTarget.value,
+      })
       : console.log("no se puede");
   }
 
   function handleDetails(e: React.ChangeEvent<HTMLTextAreaElement>) {
     details
       ? setDetails({
-          ...details,
-          details: e.currentTarget.value,
-        })
+        ...details,
+        details: e.currentTarget.value,
+      })
       : console.log("no se puede");
   }
 
@@ -236,12 +237,12 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         )
           ? details.categories
           : [
-              ...details?.categories,
-              {
-                name: e.currentTarget.selectedOptions[0].innerHTML,
-                id: e.currentTarget.value,
-              },
-            ],
+            ...details?.categories,
+            {
+              name: e.currentTarget.selectedOptions[0].innerHTML,
+              id: e.currentTarget.value,
+            },
+          ],
       });
   };
 
@@ -304,141 +305,207 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
   return (
     <React.Fragment>
-      <div className={styles.contenedorAll}>
-        <div className={styles.contenedorDetail}>
-          <img src={filtred?.image} alt="" />
+      <div className={Rstyles.SortAll}>
+        <div className={Rstyles.SortDetails}>
+          <div className={Rstyles.SortCenter} >
+            <img className={Rstyles.PImage} src={filtred?.image} alt="" />
+          </div>
           <form
             onSubmit={handleSubmit}
-            className={editMode ? stylesEdit.containerEdit : styles.formm}
+            className={editMode ? stylesEdit.containerEdit : Rstyles.FormDetails}
           >
             {user?.privilege === "admin" ? (
-              <button className={styles.Edit} onClick={handleEdit}>
-                Edit
+              <button className={Rstyles.EditButton} onClick={handleEdit}>
+                Editar
               </button>
             ) : (
               false
             )}
-
-            {editMode ? (
-              <input
-                className={stylesEdit.input}
-                name="name"
-                type="text"
-                onChange={handleChange}
-                defaultValue={details?.name}
-              />
-            ) : (
-              <h1 className={styles.nameDetail}>{filtred?.name}</h1>
-            )}
-            <div className={stylesEdit.cats}>
+            <div className={Rstyles.SortCenter} >
+              {editMode ? (
+                <div className={Rstyles.form__groupEdit}>
+                  <label htmlFor='username' className={Rstyles.form__label} >
+                    <FontAwesomeIcon icon={faPencilAlt} aria-hidden={true} /> Nombre</label>
+                  <input
+                    className={Rstyles.form__field}
+                    type='text'
+                    defaultValue={details?.name}
+                    name="name"
+                    onChange={handleChange}
+                  />
+                </div>
+                /*                 <input
+                                  className={stylesEdit.input}
+                                  name="name"
+                                  type="text"
+                                  onChange={handleChange}
+                                  defaultValue={details?.name}
+                                /> */
+              ) : (
+                <h1 className={Rstyles.DName}>{filtred?.name}</h1>
+              )}
+            </div>
+            <div className={Rstyles.SortCenter}>
               {editMode
                 ? details?.categories?.map((category) => (
-                    <button
-                      className={stylesEdit.input}
-                      onClick={handleCategory}
-                      value={category.id}
-                    >
-                      Categoría: {category.name}
-                    </button>
-                  ))
+                  <button
+                  className={Rstyles.EditButtonEnd}                 
+                  onClick={handleCategory}
+                    value={category.id}
+                  >
+                    Categoría: {category.name}
+                  </button>
+                ))
                 : details?.categories?.map((category) => (
-                    <p className={styles.PDetails}>
-                      Categoría: {category.name}
-                    </p>
-                  ))}
+                  <p className={Rstyles.PDetails} >
+                    Categoría: {category.name}
+                  </p>
+                ))}
             </div>
-            {editMode ? (
-              <p>
-                {" "}
-                Marca:{" "}
-                <input
-                  className={stylesEdit.input}
-                  name="brand"
-                  defaultValue={details?.brand}
-                  onChange={handleChange}
-                />{" "}
-              </p>
-            ) : (
-              <p> Marca: {filtred?.brand} </p>
-            )}
-            {editMode ? (
-              <p>
-                <textarea
-                  onChange={handleDetails}
-                  defaultValue={details?.details}
-                />
-              </p>
-            ) : (
-              <p className={styles.PDetails}>{filtred?.details}</p>
-            )}
-
-            <div className={styles.botonPrecio}>
+            <div className={Rstyles.SortCenter}>
               {editMode ? (
-                <p className={styles.precioDetail}>
-                  $
+                <div className={Rstyles.form__groupEdit}>
+                  <label htmlFor='username' className={Rstyles.form__label} >
+                    <FontAwesomeIcon icon={faPencilAlt} aria-hidden={true} /> Marca</label>
                   <input
-                    className={stylesEdit.input}
-                    onChange={handlePrice}
-                    defaultValue={details?.price}
+                    className={Rstyles.form__field}
+                    type='text'
+                    defaultValue={details?.brand}
+                    name="brand"
+                    onChange={handleChange}
+
                   />
-                </p>
+                </div>
+                /*            <p>
+                             {" "}
+                           Marca:{" "}
+                             <input
+                               className={stylesEdit.input}
+                               name="brand"
+                               defaultValue={details?.brand}
+                               onChange={handleChange}
+                             />{" "}
+                           </p> */
               ) : (
-                <p className={styles.precioDetail}>
-                  ${new Intl.NumberFormat().format(filtred?.price || 0)}
-                </p>
+                <p className={Rstyles.PDetails} > Marca: {filtred?.brand} </p>
               )}
-              <hr style={{ height: "1rem", backgroundColor: "white" }} />
-              <button
-                onClick={handleAddProduct}
-                className={styles.buttonCompra}
-              >
-                <FontAwesomeIcon icon={faCartPlus} />
-              </button>
+            </div>
+            <div className={Rstyles.SortCenter}>
+              {editMode ? (
+                <div className={Rstyles.form__groupEdit}>
+                  <label htmlFor='username' className={Rstyles.form__label} >
+                    <FontAwesomeIcon icon={faPencilAlt} aria-hidden={true} /> Detalles</label>
+                  <textarea
+                    className={Rstyles.TextAreaEdit}
+                    name="review"
+                    onChange={handleDetails}
+                    defaultValue={details?.details}
+                  />
+                </div>
+                /*    <p>
+                     <textarea
+                       onChange={handleDetails}
+                       defaultValue={details?.details}
+                     />
+                   </p> */
+              ) : (
+                <p className={Rstyles.PDetails}>{filtred?.details}</p>
+              )}
+            </div>
+            <div className={Rstyles.ButtonPrice}>
+              <hr className={Rstyles.HRDetails} />
+              <div className={Rstyles.SortCenter}>
+                {editMode ? (
+                  <div className={Rstyles.form__groupEdit}>
+                    <label htmlFor='username' className={Rstyles.form__label} >
+                      <FontAwesomeIcon icon={faPencilAlt} aria-hidden={true} />Precio</label>
+                    <input
+                      className={Rstyles.form__field}
+                      type='text'
+                      defaultValue={details?.price}
+                      onChange={handlePrice}
+                    />
+                  </div>
+                ) : (
+                  <p className={Rstyles.PriceDetails}>
+                    ${new Intl.NumberFormat().format(filtred?.price || 0)}
+                  </p>
+                )}
+              </div>
+              {editMode ? false:
+              <div className={Rstyles.SortCenter}>
+                <button
+                  onClick={handleAddProduct}
+                  className={Rstyles.ButtonBuy}
+                >
+                  <FontAwesomeIcon icon={faCartPlus} />
+                </button>
+              </div>
+              }
             </div>
             <div className={stylesEdit.bot}>
-              {editMode && (
-                <select onChange={handleAddCategories}>
+              {editMode && (                          
+              <div className={Rstyles.SelectEdit} >
+                <select
+                className={Rstyles.SelectStyles}
+                onChange={handleAddCategories}>
                   {categoriesQuery?.map((cat) => (
-                    <option key={cat.name} value={cat.id}>
+                    <option key={cat.name} value={cat.id}
+                    className={Rstyles.SelectStyles}
+                    >
                       {cat.name}
                     </option>
                   ))}{" "}
                   {/*onClick={handleCategories}*/}
                 </select>
+                </div>
               )}
 
               {editMode && (
-                <input
-                  className={stylesEdit.acept}
-                  type="submit"
-                  value="Aceptar Cambios"
-                />
+                <button
+                className={Rstyles.EditButtonEnd}                 
+                type="submit"
+                >
+                  Confirmar
+                </button>
               )}
             </div>
           </form>
         </div>
-        {user?.privilege === "user" ? (
-          <div className={styles.containerBot}>
-            <div>
+
+
+
+
+        <div className={Rstyles.SortEnd} >
+          <div className={Rstyles.SorTitle} >
+            <h3 className={Rstyles.TiReview} >Valoramos tu opinión</h3>
+          </div>
+          {user?.privilege === "user" ? (
+            <div >
               {hideReview ? (
-                <div>
-                  <div className={styles.review}>
-                    <h3>Valoramos tu opinión</h3>
-                    <div className={styles.inputTitle}>
-                      <input
-                        placeholder={"Titulo de tu review"}
-                        name="review_title"
-                        value={reviewuser.title}
-                        onChange={(e) =>
-                          setReviewuser({
-                            ...reviewuser,
-                            title: e.target.value,
-                          })
-                        }
-                      ></input>
-                    </div>
+                <div className={Rstyles.SortReview}>
+                  <div className={Rstyles.form__group}>
+                    <label htmlFor='username' className={Rstyles.form__label} >
+                      <FontAwesomeIcon icon={faPencilAlt} aria-hidden={true} /> Titulo de tu review</label>
+                    <input
+                      className={Rstyles.form__field}
+                      type='text'
+                      minLength={4}
+                      maxLength={15}
+                      value={reviewuser.title}
+                      placeholder={"Titulo de tu review"}
+                      name="review_title"
+                      onChange={(e) =>
+                        setReviewuser({
+                          ...reviewuser,
+                          title: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className={Rstyles.SortTexArea}>
                     <textarea
-                      className={styles.textarea}
+                      className={Rstyles.TextArea}
                       name="review"
                       placeholder={"¿Qué te pareció el producto?"}
                       value={reviewuser.review}
@@ -452,113 +519,132 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                   </div>
                 </div>
               ) : (
-                <div className={styles.gracias}>
-                  <h1 className={styles.Hrating}>
-                    <span className={styles.hspan}>
-                      Gracias por dejar su comentario
-                    </span>
-                  </h1>
+                <div className={Rstyles.SorTitle} >
+                  <h3 className={Rstyles.DThanks}>
+                    Gracias por dejar su comentario
+                    </h3>
                 </div>
               )}
-              {revActual.length === 0 ? (
-                <button onClick={changereview} className={styles.buttonSend}>
-                  Enviar comentario
-                </button>
-              ) : (
-                false
-              )}
-              {console.log(revActual)}
-            </div>
-            <div>
-              {hideRating && revActual.length === 0? (
-                <div className={styles.estrellas}>
-                  {[...Array(5)].map((star, index) => {
-                    const ratingvalue = index + 1;
-                    return (
-                      <label>
-                        <input
-                          type="radio"
-                          name="Rating"
-                          value={ratingvalue}
-                          onClick={function pushrating() {
-                            setRating([...rating, ratingvalue]);
-                            setHideRating(false);
-                          }}
-                        />
-                        <FaStar
-                          size={30}
-                          className="star"
-                          color={ratingvalue <= hover ? "#ffc107" : "#e4e5e9"}
-                          onMouseEnter={() => setHover(ratingvalue)}
-                          onMouseLeave={() => setHover(0)}
-                        />
-                      </label>
-                    );
-                  })}
-                </div>
-              ) : (
-                <>
-                </>
-              )}
-            </div>
-          </div>
-        ) : (
-          false
-        )}
+              <div className={Rstyles.SortReview} >
 
-        <div className={styles.box}>
-          {filtred?.reviews.length && revActual[0] ? (
-            filtred?.reviews.concat(revActual).map((review) => (
-              <div className={styles.content}>
-                <p className={styles.pRanking}>
-                  <p className={styles.pReviewTitle}>{review.title}</p>
-                  <p className={styles.pReview}>{review.text}</p>
-                  <FaStar
-                    size={20}
-                    className="star"
-                    color={rating ? "#ffc107" : "#e4e5e9"}
-                  />
-                </p>
+                {hideRating && revActual.length === 0 ? (
+                  <div className={styles.estrellas}>
+                    {[...Array(5)].map((star, index) => {
+                      const ratingvalue = index + 1;
+                      return (
+                        <label>
+                          <input
+                            type="radio"
+                            name="Rating"
+                            value={ratingvalue}
+                            onClick={function pushrating() {
+                              setRating([...rating, ratingvalue]);
+                              setHideRating(false);
+                            }}
+                          />
+                          <FaStar
+                            size={30}
+                            className="star"
+                            color={ratingvalue <= hover ? "#ffc107" : "#e4e5e9"}
+                            onClick={() => setHover(ratingvalue)}
+                            onMouseLeave={() => setHover(0)}
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <>
+                  </>
+                )}
               </div>
-            ))
-          ) : filtred?.reviews.length ? (
-            filtred?.reviews.map((review) => (
-              
-              <div className={styles.content}>
-                <p className={styles.pRanking}>
-                  {[...Array(review.rating  )].map((star, index) => {
-                    return (
-                      <FaStar
-                        size={20}
-                        className="star"
-                        color={rating ? "#ffc107" : "#e4e5e9"}
-                      />
-                    );
-                  })}
-                  <p className={styles.pReviewTitle}>{review.title}</p>
-                  <p className={styles.pReview}>{review.text}</p>
-                </p>
+              <div className={Rstyles.SortReview} >
+                {revActual.length === 0 && hideReview ? (
+                  <button onClick={changereview} className={Rstyles.ButtonSend}>
+                    Enviar
+                  </button>
+                ) : (
+                  false
+                )}
               </div>
-            ))
-          ) : revActual[0] ? (
-            <div className={styles.content}>
-               <p className={styles.pRanking}>
-              {[...Array(revActual[0].rating  )].map((star, index) => {
-                    return (
-                      <FaStar
-                        size={20}
-                        className="star"
-                        color={rating ? "#ffc107" : "#e4e5e9"}
-                      />
-                    );
-                  })}
-              <p className={styles.pReviewTitle}>{revActual[0].title}</p>
-              <p className={styles.pReview}>{revActual[0].text}</p>
-              </p>
+              {console.log(revActual)}
+
             </div>
           ) : (
             false
           )}
+          <div className={Rstyles.SorComments} >
+            <hr className={Rstyles.BigHr} ></hr>
+            {filtred?.reviews.length && revActual[0] ? (
+              filtred?.reviews.concat(revActual).map((review) => (
+                <div className={Rstyles.SortIndiComments}>
+                  <div className={Rstyles.sortStarsComments} >
+                    {[...Array(review.rating)].map((star, index) => {
+                      return (
+                        <FaStar
+                          color={rating ? "#ffc107" : "#e4e5e9"}
+                        />
+
+                      );
+                    })}
+                  </div>
+                  <hr className={Rstyles.HoriHr}></hr>
+                  <div className={Rstyles.SortEachComments} >
+                    <p className={Rstyles.ContentReviewTitle}>{review.title}</p>
+                  </div>
+                  <hr className={Rstyles.HoriHr}></hr>
+                  <div className={Rstyles.SortEachComments} >
+                    <p className={Rstyles.ContentReview}>{review.text}</p>
+                  </div>
+                </div>
+              ))
+            ) : filtred?.reviews.length ? (
+              filtred?.reviews.map((review) => (
+                <div className={Rstyles.SortIndiComments}>
+                  <div className={Rstyles.sortStarsComments} >
+                    {[...Array(review.rating)].map((star, index) => {
+                      return (
+                        <FaStar
+                          color={rating ? "#ffc107" : "#e4e5e9"}
+                        />
+
+                      );
+                    })}
+                  </div>
+                  <hr className={Rstyles.HoriHr}></hr>
+                  <div className={Rstyles.SortEachComments} >
+                    <p className={Rstyles.ContentReviewTitle}>{review.title}</p>
+                  </div>
+                  <hr className={Rstyles.HoriHr}></hr>
+                  <div className={Rstyles.SortEachComments} >
+                    <p className={Rstyles.ContentReview}>{review.text}</p>
+                  </div>
+                </div>
+              ))
+            ) : revActual[0] ? (
+              <div className={Rstyles.SortIndiComments}>
+                <div className={Rstyles.sortStarsComments} >
+                  {[...Array(revActual[0].rating)].map((star, index) => {
+                    return (
+                      <FaStar
+                        color={rating ? "#ffc107" : "#e4e5e9"}
+                      />
+                    );
+                  })}
+                </div>
+                <hr className={Rstyles.HoriHr}></hr>
+                <div className={Rstyles.SortEachComments} >
+                  <p className={Rstyles.ContentReviewTitle}>{revActual[0].title}</p>
+                </div>
+                <hr className={Rstyles.HoriHr}></hr>
+                <div className={Rstyles.SortEachComments} >
+                  <p className={Rstyles.ContentReview} >{revActual[0].text}</p>
+                </div>
+              </div>
+            ) : (
+              false
+            )}
+          </div>
         </div>
       </div>
     </React.Fragment>
