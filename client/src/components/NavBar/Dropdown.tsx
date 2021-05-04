@@ -1,23 +1,31 @@
-import { Link } from "react-router-dom"
-import styles from "./Dropdown.module.scss"
+import { Link } from "react-router-dom";
+import styles from "./Dropdown.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt, faFolderPlus, faUserMinus, faUnlock, faUserPlus, faList, faCashRegister } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSignOutAlt,
+  faFolderPlus,
+  faUserMinus,
+  faUnlock,
+  faUserPlus,
+  faList,
+  faCashRegister,
+} from "@fortawesome/free-solid-svg-icons";
 import { useCookies } from "react-cookie";
 import { BiUserCircle } from "react-icons/bi"
 import { RiQuestionnaireFill } from "react-icons/ri"
 import { FaCashRegister, FaShippingFast, FaUserPlus } from "react-icons/fa"
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER, LOGOUT } from "../../gql/login";
+import { ACTUAL_USER, LOGOUT } from "../../gql/loginGql";
 import {useDispatch} from 'react-redux'
 import { deleteCart } from '../../redux/actions'
 
 
 interface user {
-    currentUser: {
-        name: string,
-        password: string,
-        email: string
-    }
+  currentUser: {
+    name: string;
+    password: string;
+    email: string;
+  };
 }
 
 function DropdownMenu(props: any) {
@@ -74,8 +82,6 @@ function DropdownMenu(props: any) {
                         <FontAwesomeIcon style={{marginRight:'3%'}}   icon={faSignOutAlt}></FontAwesomeIcon>Cerrar Sesión</p>
                 </div> : false}
         </div>
-    )
-
-
+  );
 }
 export default DropdownMenu;

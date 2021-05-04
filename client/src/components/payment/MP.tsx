@@ -5,7 +5,7 @@ import { MERCADO_PAGO, CURRENT_ORDER } from "../../gql/mercadopago";
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../redux/reducers';
-import { ACTUAL_USER } from '../../gql/login'
+import { ACTUAL_USER } from '../../gql/loginGql'
 import {
   faEnvelopeSquare, faPassport, faLock,
   faAddressBook, faSignature, faCalendar,

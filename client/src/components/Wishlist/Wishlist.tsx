@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
-import { FILTER } from '../../gql/card'
+import { FILTER } from '../../gql/cardGql'
 import Card from '../Cards/CardHome'
 import Cards from '../Cards/CardsHome'
 import styles from './Wishlist.module.scss'

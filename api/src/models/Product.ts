@@ -27,7 +27,7 @@ export interface ProductAttributesI {
   brand: string;
   price: number;
   details: string;
-  categoriesId: number;
+  // categoriesId: number;
   stock: number;
 }
 
@@ -43,7 +43,7 @@ export class Product
   public brand!: string;
   public price!: number;
   public details!: string;
-  public categoriesId!: number;
+  // public categoriesId!: number;
   public stock!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -96,9 +96,9 @@ export function ProductFactory(sequelize: Sequelize) {
       details: {
         type: DataTypes.TEXT,
       },
-      categoriesId: {
-        type: DataTypes.INTEGER,
-      },
+      // categoriesId: {
+      //   type: DataTypes.INTEGER,
+      // },
       stock: {
         type: DataTypes.INTEGER,
         defaultValue: 0,

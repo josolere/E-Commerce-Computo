@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import React, { Fragment, useEffect, useState } from 'react';
-import { ACTUAL_USER } from '../../gql/login';
-import { CREATE_ORDER } from '../../gql/orders';
+import { ACTUAL_USER } from '../../gql/loginGql';
+import { CREATE_ORDER } from '../../gql/ordersGql';
 import './Payment.scss';
 
 interface PropsDetails {

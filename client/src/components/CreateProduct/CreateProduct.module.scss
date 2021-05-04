@@ -12,7 +12,7 @@ $red:#f05454;//f05454
     flex-direction: column;
     align-items: center;
     background-color: $dark;
-    width: 201.5vh;
+    width: 100%;
     height: fit-content;
 }
 
@@ -189,35 +189,28 @@ $red:#f05454;//f05454
 }
 
 .SelectCreate{
+   
     display: flex;
     width: fit-content;
     min-width: 25%;
     min-height:3rem;
     height: fit-content;
-    align-self: flex-start;
-    background-color: $white;
     color: $dark;
     cursor: pointer;
     border:transparent;
     border-radius: .5rem;
     font-family:'Montserrat', sans-serif;
     font-size: 90%;
-    font-weight: bold; 
-    box-shadow: 10px 10px 15px 15px rgba(0,0,0,0.22);
-
+    justify-content: end;
+    margin: -1.8rem 0 0 55%;
   }
-.SelectCreate:focus{
-    transition:linear;
-    width: fit-content;
-    height: fit-content;
-
-}
 
 .OrderCreateCat{
     display: flex;
-    flex-direction: column;
-    margin-right: 3%;
-    justify-self: flex-start;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: -1rem 0 0 16%;
 }
 
 .OrderButton {
@@ -229,51 +222,18 @@ $red:#f05454;//f05454
 
 .CatButtons {
     margin: 5%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
     width: fit-content;
     height: fit-content;
-    align-self: flex-start;
-    background-color: $white;
-    color: $dark;
+    color: #dddddd;
     cursor: pointer;
     border:transparent;
-    border-radius: .5rem;
+    border-radius: .2rem;
     font-family:'Montserrat', sans-serif;
-    font-weight: bold; 
-    box-shadow: 10px 10px 15px 15px rgba(0,0,0,0.22);
     transition: all .3s;
     position: relative;
     overflow: hidden;
     z-index: 1;
-    &:after {
-        content: '';
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: $red;
-        border-radius: 0.5rem;
-        z-index: -2;
-    }
-    &:before {
-        content: '';
-        bottom: 0;
-        left: 0;
-        width: 0%;
-        height: 100%;
-        background-color: darken($red, 15%);
-        transition: all .3s;
-        border-radius: 0.5rem;
-        z-index: -1;
-    }
-    &:hover {
-        color:$red;
-        &:before {
-            width: 100%;
-        }
-    }
+    background-color: #30475e;
 } 
 
 .listProducts { 
@@ -348,3 +308,13 @@ $red:#f05454;//f05454
         }
     }
 } 
+
+
+.checkbox {
+    display: flex;
+    width: 100%;
+    margin: 1rem 0 0 2rem;
+    label {
+        margin: 1rem;
+    }
+}

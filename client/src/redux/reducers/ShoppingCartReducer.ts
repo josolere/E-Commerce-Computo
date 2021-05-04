@@ -24,7 +24,6 @@ export default (state = initialState, action: any): any => {
     switch (action.type) {
 
         case ADD_SHOPPING:
-
             return {
                 ...state,
                 productTotal: state.productTotal.concat(action.idProduct),
@@ -69,10 +68,23 @@ export default (state = initialState, action: any): any => {
             })
 
         case LOCAL:
-            return {
-                ...state,
-                local: state.local.concat(action.nameProduct)
+            if(state.local.find((el:{id:string}) => el.id === action.nameProduct.id)){
+                var valor : any= state.local.find((el:{id:string})=> el.id === action.nameProduct.id)
+                if(valor){
+                    valor.count = valor.count + 1
+                    action.nameProduct = valor
+                }
+                return {
+                    ...state,
+                    local: state.local.slice().filter((el:{id:string}) => el.id !== action.nameProduct.id).concat(action.nameProduct)
+                }
+            }else {
+                return {
+                    ...state,
+                    local: state.local.concat(action.nameProduct)
+                }
             }
+            
 
         case ADD_LOCALSTORAGE:
             return {

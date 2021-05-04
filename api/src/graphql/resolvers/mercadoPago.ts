@@ -20,7 +20,7 @@ Mutation: {
         { models }: { models: iModels }
       ): Promise<any> => {
 
-        const OrderToCreate = await models.Order.findByPk(1);
+        const OrderToCreate = await models.Order.findByPk(id);
        
         if(!OrderToCreate) {
           const res = {status:400, error: {status:400, cause : { code: 0, description: "no se encuentra la orden" }}}
