@@ -26,13 +26,21 @@ export default {
             model: db.Product,
             through: "productsxorder",
             attributes: ["id", "name"],
+            include: [
+              {
+                model: db.DiscountCampaign,
+                through: "discountCampaignxproduct",
+              },
+            ],
           },
         ],
       };
 
       let data = await models.Order.findByPk(id, options);
       data.details = [];
-      data.Products.map((det: any) => {
+      const today = new Date(); //fecha actual
+      let auxDiscMoney = 0; //variable para comparar y encontrar el mayor descuento
+      data.Products.forEach((det: any) => {
         const detail = {
           id: det.Productsxorder.id,
           price: det.Productsxorder.price,
@@ -40,9 +48,61 @@ export default {
           OrderId: det.Productsxorder.OrderId,
           ProductId: det.Productsxorder.ProductId,
           productName: det.Productsxorder.productName,
+
+          //descuentos solo se aplicará uno (el mayor)
+          discount: "",
+          discountName: "",
+          discountType: "",
+          discountMoney: 0,
         };
+
+        //analizo campañas de descuento
+        det.DiscountCampaigns.forEach((d: any) => {
+          //parseo de fechas
+          let fStart = new Date();
+          fStart.setTime(Date.parse(d.start));
+          let fEnd = new Date();
+          fEnd.setTime(Date.parse(d.end));
+
+          //analizo si hay un descuento activo
+          if (fStart <= today && fEnd >= today) {
+            //guardamos el mayor descuento existente
+            if (d.type == "porcentaje") {
+              const auxPorcentaje = (parseInt(d.discount) * detail.price) / 100;
+              auxDiscMoney = auxPorcentaje * detail.quantity;
+              console.log(
+                "descuento por porcentaje",
+                detail.productName,
+                typeof auxDiscMoney,
+                auxDiscMoney,
+                detail.discountMoney
+              );
+            }
+            if (d.type == "cantidad") {
+              //parseo el tipo de descuento
+              const auxDisc = d.discount.split("x");
+              const llevas = 0 + auxDisc[0];
+              const pagas = 0 + auxDisc[1];
+              const uniDiscount =
+                Math.floor(detail.quantity / llevas) * (llevas - pagas);
+
+              auxDiscMoney = uniDiscount * detail.price;
+            }
+            //comparo cuál descuento es mayor y guardo los datos correspondientes
+            if (auxDiscMoney > detail.discountMoney) {
+              detail.discount = d.discount;
+              detail.discountName = d.name;
+              detail.discountType = d.type;
+              detail.discountMoney = auxDiscMoney;
+            }
+          }
+        });
+
         data.details.push(detail);
       });
+
+      //analizo campañas de descuento
+
       return data;
     },
 
@@ -135,7 +195,6 @@ export default {
         : (orders = await models.Order.findAll());
       return orders;
     },
-    
   },
 
   Mutation: {

@@ -11,6 +11,7 @@ export const typeDefs = gql`
     active: Boolean
     name: String
     surname: String
+    googleId: String
     createdAt: String
     updatedAt: String
     address: String
@@ -25,16 +26,19 @@ export const typeDefs = gql`
     user: User
   }
 
+
   type Query {
     getUserById(id: ID!): User
     currentUser: User
     getUsers: [User]
+    getWishList(userId:String): [Product]
   }
 
   type Mutation {
     createUser(input: CreateUserInput): User
     deleteUser(id: ID!): User!
     editUser(id: ID, input: EditUserInput): User!
+    toggleWishlist(productId:ID,userId:String): [Product]
 
     logout: Boolean
     login(email: String!, password: String!): AuthPayload

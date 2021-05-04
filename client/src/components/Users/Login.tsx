@@ -1,4 +1,3 @@
-  
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useMutation, gql, useQuery } from '@apollo/client';
@@ -22,6 +21,7 @@ import {GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
 
 
 const Login = () => {
+    const dispatch = useDispatch()
 
     const [createOrder] = useMutation(NEW_ORDER)
 
@@ -35,18 +35,19 @@ const Login = () => {
         variables: { idUser: idUser }
     });
 
+    const [login, logindata] = useMutation(LOGIN_MUTATION,{
+        refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUser}}]
+    })
+
     const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
         refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUser}}]
     })
-    //--
 
     useEffect(() => {
         if (data) {
             setOrderCount(data.getOrdersByIdUser)
         }
     }, [data])
-
-    const dispatch = useDispatch()
 
 
     const [logform, setLogform] = useState({
@@ -63,11 +64,9 @@ const Login = () => {
         street:''
     });
 
-
     const [showlogin, setshowLogin] = useState(false)
 
-    const [login, logindata] = useMutation(LOGIN_MUTATION)
-
+    
     const [signup, signupdata] = useMutation(SIGNUP_MUTATION)
 
     const [createOrders, setCreateOrders] = useState(false)
@@ -184,9 +183,14 @@ const Login = () => {
         window.location.href = 'http://localhost:5000/auth/facebook'
     }
 
-    const responseGoogle = () => {
-        window.location.href = 'http://localhost:5000/auth/google';
+    const responseGoogle = async(response:any) => {
+
+        window.location.href = await'http://localhost:5000/auth/google';
+        console.log(response.googleId)
+       setIdUser(response.googleId)
+       
     }
+
 
     return (
         <div>

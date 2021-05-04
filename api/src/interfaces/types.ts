@@ -15,7 +15,7 @@ export type User = {
   city: string;
   state: string;
   zip: string;
-  phone: string
+  phone: string;
 };
 export type Product = {
   image: string;
@@ -41,7 +41,7 @@ export type OrderDetail = {
 export type Review = {
   text: string;
   rating: number;
-  title:string;
+  title: string;
   userId: string;
 };
 
@@ -67,4 +67,16 @@ export type Payer = {
 export type Identification = {
   type: string;
   number: string;
+};
+
+export type Wishlist = {
+  userId: String;
+  product: Product;
+};
+
+export type DiscountCampaign = {
+  name: string;
+  type: string;
+  discount: number;
+  end: string;
 };
