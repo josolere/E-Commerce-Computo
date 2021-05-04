@@ -36,6 +36,7 @@ import BuildPcUser from './components/buildPc/buildPcUser';
 import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
+import Wishlist from './components/Wishlist/Wishlist';
 import { GET_ORDER_BY_STATUS } from "./gql/ordersGql"
 
 
@@ -164,7 +165,8 @@ function App() {
             <NavCategories />
           </div>
         </Route>
-        <Route exact path='/checkout' component={FormCheckout} />
+        <Route exact path='/checkout' component={FormCheckout}/>
+        <Route exact path='/wishlist' component={Wishlist}/>
         <Route exact path='/' component={LandPage} />
         <Route exact path="/armatupc" component={BuildPcFilter} />
         <Route exact path="/armatupc/tipo/:tipo" component={BuildPc} />

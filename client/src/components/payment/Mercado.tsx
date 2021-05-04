@@ -85,7 +85,7 @@ const Mercado = () => {
     }
 
     useEffect(() => {
-        window.Mercadopago.setPublishableKey('TEST-f76736fb-f8c7-4bb1-a19e-ab2ab45eb887');
+        window.Mercadopago.setPublishableKey('TEST-87ab35ee-8f0f-46ec-a9c2-c7bbd03e98d4');
         window.Mercadopago.getIdentificationTypes()
     }, [])
 
