@@ -7,6 +7,7 @@ import { NEW_ORDER, NEW_ORDER_DETAIL } from "../../gql/shopingCartGql"
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '../../redux/reducers';
 import {  orderId } from '../../redux/actions'
+import NavBarResponsive from '../NavBar/ResponsiveNav';
 
 
 const Home = () => {
@@ -117,7 +118,8 @@ const Home = () => {
 
     return (
         <>
-            <NavBar />
+        <NavBarResponsive/>
+        <NavBar/>
         </>
     )
 }
