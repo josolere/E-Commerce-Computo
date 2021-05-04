@@ -10,6 +10,7 @@ import { AppState } from '../../redux/reducers';
 import PopUp from '../Alerts/PopUp';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Rstyles from './ResponsiveCard.module.scss';
 
 interface DetailsProduct {
     id: number,
@@ -45,7 +46,7 @@ export default function Cards({ reset }: IProps) {
 
     const [pageNumber, setPageNumber] = useState(0)
 
-    const productsPerPage = 8
+    const productsPerPage = 9
     const pageVisited = pageNumber * productsPerPage
 
     useEffect(() => {
@@ -66,11 +67,9 @@ export default function Cards({ reset }: IProps) {
             );
         })
 
-    
-
     return (
         <React.Fragment>
-            <div className={styles.container}>{displayProducts}
+            <div className={Rstyles.ContainerAll}>{displayProducts}
               {/*  { isOpen ?
                     <div className={styles.PopBox}>
                         <button onClick={closePopup} className={styles.PopButton} >
@@ -81,6 +80,7 @@ export default function Cards({ reset }: IProps) {
                     </div> : false} */}
                     {Object.keys(product ?product:false).length > 8 ?
                 <ReactPaginate 
+                    
                     previousLabel={""}
                     nextLabel={""}
                     pageCount={pageCount}

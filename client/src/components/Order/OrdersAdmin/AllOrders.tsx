@@ -17,7 +17,7 @@ export default function AllOrders() {
     const [status, setStatus] = useState("")
 
     const {loading, error, data} = useQuery(GET_ALL_ORDERS,{variables:{status:status}})
-    const orders = data?.getAllOrders
+    const orders = data?.getAllOrders?.filter((order:any) =>  order?.status != "pendiente")
 
     useEffect(()=>{
         console.log(data)
@@ -34,7 +34,7 @@ export default function AllOrders() {
             <label >Filtrar por:</label>
             <select onChange={handleStatus}>
                 <option value=''>Todas</option>
-                <option value='creado'>Creada</option>
+                <option value='creada'>Creada</option>
                 <option value='procesando'>Procesando</option>
                 <option value='completa'>Completa</option>
                 <option value='cancelada'>Cancelada</option>

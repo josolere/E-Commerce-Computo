@@ -26,7 +26,6 @@ import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/loginGql";
 import ResetPassword from './components/Users/ResetPassword';
 import PostPayment from './components/payment/Shipments';
-import Mercado from './components/payment/MercadoV2';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
@@ -142,9 +141,7 @@ function App() {
         <Route exact path='/Ordenes' component={OrdersAdmin} />
         {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
-        <Route exact path='/CrearProducto'>
-          {user?.privilege === 'admin' ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route>
+        <Route exact path='/CrearProducto' component={CrearProducto} />
         <Route exact path='/CrearCategoria'>
           {user?.privilege === 'admin' ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route>
@@ -153,10 +150,10 @@ function App() {
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-        <Route exact path= '/Envios' component={Shipments} />
-        <Route exact path= '/PostPago' component={PayCompleted} />
-        <Route exact path= '/AdminBorrar' component={AdminDelete} />
-        <Route exact path = '/Mercado' component={Mercado} />
+        <Route exact path='/Envios' component={Shipments} />
+        <Route exact path='/PostPago' component={PayCompleted} />
+        <Route exact path='/AdminBorrar' component={AdminDelete} />
+        <Route exact path='/Mercado' component={MP} />
         {/* <Route exact path='/Pago' component={Payment} /> */}
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
@@ -167,11 +164,11 @@ function App() {
             <NavCategories />
           </div>
         </Route>
-        <Route exact path='/checkout' component={FormCheckout}/>
+        <Route exact path='/checkout' component={FormCheckout} />
         <Route exact path='/' component={LandPage} />
-        <Route exact path ="/armatupc" component = { BuildPcFilter } />
-        <Route exact path ="/armatupc/tipo/:tipo" component = { BuildPc } />
-        <Route exact path ="/armatupc/:marca" component = { BuildPcUser } />
+        <Route exact path="/armatupc" component={BuildPcFilter} />
+        <Route exact path="/armatupc/tipo/:tipo" component={BuildPc} />
+        <Route exact path="/armatupc/:marca" component={BuildPcUser} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>
