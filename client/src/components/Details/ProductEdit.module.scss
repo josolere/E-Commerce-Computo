@@ -10,8 +10,7 @@ $red:#f05454;//f05454
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
-    width: 30rem;
-    min-width: 1rem;
+    width: 100%;
     font-family:'Montserrat', sans-serif;
     
     p{
@@ -32,15 +31,13 @@ $red:#f05454;//f05454
         font-family:'Montserrat', sans-serif;
 
     }
-    select{
-        width: 10rem;
-        font-family:'Montserrat', sans-serif;
-    }
+
 }
 
 .bot{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5%;
 }
 
 .cats{
