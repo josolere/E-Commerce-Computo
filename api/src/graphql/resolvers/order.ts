@@ -135,7 +135,6 @@ export default {
         : (orders = await models.Order.findAll());
       return orders;
     },
-    
   },
 
   Mutation: {

@@ -37,6 +37,8 @@ import BuildPcUser from './components/buildPc/buildPcUser';
 import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
+import { GET_ORDER_BY_STATUS } from "./gql/ordersGql"
+
 
 interface user {
   currentUser: {
@@ -67,6 +69,8 @@ interface detailsorder {
 function App() {
   const firsstRender = useRef(true)
 
+
+
   let user: any = {}
 
   const [idUser, setIdUser] = useState('')
@@ -80,9 +84,7 @@ function App() {
   const resultsUsers = useQuery(GET_USERS)
 
   let test = resultsUsers?.data?.getUsers
-  console.log(test)
   user = actualuser.data?.currentUser
-  console.log(user)
 
   useEffect(() => {
 
@@ -151,12 +153,11 @@ function App() {
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-              <Route exact path='/Mercado' component={MP} />
-
-        <Route exact path='/TestNav' component={ResponsiveNav} />
-        <Route exact path='/Envios' component={Shipments} />
-        <Route exact path='/PostPago' component={PayCompleted} />
-        <Route exact path='/AdminBorrar' component={AdminDelete} />
+        <Route exact path= '/Envios' component={Shipments} />
+        <Route exact path= '/PostPago' component={PayCompleted} />
+        <Route exact path= '/AdminBorrar' component={AdminDelete} />
+        <Route exact path = '/Mercado' component={Mercado} />
+        {/* <Route exact path='/Pago' component={Payment} /> */}
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />

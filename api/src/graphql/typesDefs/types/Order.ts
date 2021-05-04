@@ -12,10 +12,11 @@ export const typeDefs = gql`
     state: String
     zip: String
     phone: String
+    UserId: String
     createdAt: String
     updatedAt: String
   }
-
+  
   type Query {
     getOrderById(id: ID!): Order
     getOrderByStatus(status: String, idUser: ID): [Order]
