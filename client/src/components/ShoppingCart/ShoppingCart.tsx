@@ -26,7 +26,7 @@ const ShoppingCart = (): JSX.Element => {
                         return <ShoppingCard key={index} priceProps={mapeo.price} id={mapeo.ProductId || mapeo.id} count={mapeo.count || mapeo.quantity} />
                     }
                 })}
-            <ShoppingTotal />
+            <ShoppingTotal products={idsProducts} />
         </div>
 
     )

@@ -5,7 +5,11 @@ $red:#f05454;//f05454
 
 .container{
     display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: flex-start;
     flex-wrap: wrap;
-    min-height: 100vh;
+    min-height: fit-content;
+    height: fit-content;
     background-color: $dark;
 }
