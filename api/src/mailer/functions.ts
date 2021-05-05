@@ -85,3 +85,22 @@ export async function orderShippedMail(
     console.error(error);
   }
 }
+
+// olvido de password, envio código de reseteo
+import { resetPass } from "./templates/resetPass";
+export async function resetPassMail(
+  userEmail: string,
+  name: string,
+  pass: string
+) {
+  try {
+    await transporter.sendMail({
+      from: '"Compu Henry" <proyectohenry5@gmail.com>',
+      to: userEmail,
+      subject: "Tu pedido está en camino",
+      html: resetPass(name, pass),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
