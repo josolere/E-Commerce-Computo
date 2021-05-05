@@ -20,25 +20,26 @@ export const typeDefs = gql`
     state: String
     zip: String
     phone: String
+    resetPass: String
   }
 
   type AuthPayload {
     user: User
   }
 
-
   type Query {
     getUserById(id: ID!): User
+    getUserByEmail(email: String): User
     currentUser: User
     getUsers: [User]
-    getWishList(userId:String): [Product]
+    getWishList(userId: String): [Product]
   }
 
   type Mutation {
     createUser(input: CreateUserInput): User
     deleteUser(id: ID!): User!
     editUser(id: ID, input: EditUserInput): User!
-    toggleWishlist(productId:ID,userId:String): [Product]
+    toggleWishlist(productId: ID, userId: String): [Product]
 
     logout: Boolean
     login(email: String!, password: String!): AuthPayload
@@ -88,6 +89,7 @@ export const typeDefs = gql`
     state: String
     zip: String
     phone: String
+    resetPass: String
   }
 
   input SignUpInput {

@@ -47,10 +47,10 @@ $DBlue:#002D62;
 }
 
 .CardImage{
-    min-height: 15rem;
-    max-width: 15rem;
     min-height: 12rem;
-    max-height: 12rem;
+    max-width: 12rem;
+    min-height: 11rem;
+    max-height: 11rem;
     padding: 2%;
 }
 
@@ -76,6 +76,8 @@ $DBlue:#002D62;
     justify-content: center;
     padding-top: 2%;
     padding-bottom: 2%;
+    min-height: 12rem;
+
     border-top: solid .2rem $dark;
     border-bottom: solid .2rem $dark;
 }
@@ -83,22 +85,25 @@ $DBlue:#002D62;
 .ContainerTitle{
     width: 100%;
     border-radius: 0.2rem;
-
     background-color: $dark;
     display: flex;
+    min-height: 11vh;
     text-align: center;
 }
 
 .Name{
     font-size: 2vh;
     color: $white;
-    padding: 2%;
+    padding: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .EndContainer{
     width: 100%;
     align-items: center;
     display: flex;
+    min-height: 8vh;
     justify-content: space-between;
 }
 
@@ -107,7 +112,7 @@ $DBlue:#002D62;
     color: $white;
     width: 50%;
     padding-top: 3.5%;
-    padding-bottom: 4%;
+    padding-bottom: 3.5%;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     display: flex;
@@ -155,7 +160,7 @@ $DBlue:#002D62;
     color: $dark;
     width: 50%;
     padding-top: 3.5%;
-    padding-bottom: 4%;
+    padding-bottom: 3.5%;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     display: flex;

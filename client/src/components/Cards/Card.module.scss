@@ -98,8 +98,8 @@ $red:#f05454;//f05454
 } 
 .fav{
   position: absolute;
-  right: 0.5rem;
-  top: 4.5rem;
+  right: 4%;
+  top: 22%;
   width: fit-content;
   height: 2rem;
   border: none;
@@ -111,14 +111,14 @@ $red:#f05454;//f05454
   &:hover{
     cursor:pointer;
     background-color: $red;
-    color: white;
+    color: $white;
   }
 }
 
 .faving{
   position: absolute;
-  right: 0.5rem;
-  top: 4.5rem;
+  right: 4%;
+  top: 22%;
   width: fit-content;
   height: 2rem;
   border: none;
@@ -132,7 +132,7 @@ $red:#f05454;//f05454
   &:hover{
     cursor: pointer;
     background-color: transparent;
-    color: black;
+    color: $dark;
   }
 }
 
