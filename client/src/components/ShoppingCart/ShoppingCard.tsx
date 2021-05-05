@@ -216,7 +216,7 @@ const ShoppingCard = (props: props): JSX.Element => {
             localStorage.setItem('quantity', JSON.stringify(addlessQuantity))
         }
         if (localStorage.getItem('priceSubTotal')) {
-            let priceSubTotal: any = await (localStorage.getItem('priceSubTotal'))
+            let priceSubTotal: any = (localStorage.getItem('priceSubTotal'))
             priceSubTotal = JSON.parse(priceSubTotal)
             const lessMoreSubTotal = priceSubTotal - product.price
             localStorage.setItem('priceSubTotal', JSON.stringify(lessMoreSubTotal))

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Component } from 'react';
 import Login from './components/Users/Login';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Details from './components/Details/ProductsDetails';
@@ -38,6 +38,8 @@ import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
 import { GET_ORDER_BY_STATUS } from "./gql/ordersGql"
+import OlvideContraseña from './components/Users/OlvideContraseña';
+import NuevaContraseña from './components/Users/NuevaContraseña';
 
 
 
@@ -173,6 +175,8 @@ function App() {
         <Route exact path ="/armatupc" component = { BuildPcFilter } />
         <Route exact path ="/armatupc/tipo/:tipo" component = { BuildPc } />
         <Route exact path ="/armatupc/:marca" component = { BuildPcUser } />
+        <Route exact path ="/recuperarcontrasena" component={OlvideContraseña}/>
+        <Route exact path ="NuevaContrasena" component={NuevaContraseña}/>
         <Route component={PageNotFound} />
       </Switch>
     </Router>
