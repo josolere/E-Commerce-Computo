@@ -99,7 +99,6 @@ const NavBar = (): JSX.Element => {
           dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
 
         }
-
       }
     }
   }, [dataOrderSatus.data?.getOrderByStatus[0]?.details])
@@ -156,7 +155,7 @@ const NavBar = (): JSX.Element => {
         </div>
         <div className={navBar.ElementBar} >
           {user?.name ? false :
-            <Link  to="/login"><p>Iniciar Sesion</p></Link>}
+            <Link to="/login"><p>Iniciar Sesion</p></Link>}
           <p>{user?.name &&
             <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
         </div>
