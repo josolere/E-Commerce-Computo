@@ -143,9 +143,7 @@ function App() {
         {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/CrearProducto' component={CrearProducto} />
-        <Route exact path='/CrearCategoria'>
-          {user?.privilege === 'admin' ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route>
+        <Route exact path='/CrearCategoria' component={CrearCategoria} />
         <Route path='/Ordenes/Usuario' component={OrdersUser} />
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails} />
         {/* <Route exact path='Pago'>
@@ -165,8 +163,8 @@ function App() {
             <NavCategories />
           </div>
         </Route>
-        <Route exact path='/checkout' component={FormCheckout}/>
-        <Route exact path='/wishlist' component={Wishlist}/>
+        <Route exact path='/checkout' component={FormCheckout} />
+        <Route exact path='/wishlist' component={Wishlist} />
         <Route exact path='/' component={LandPage} />
         <Route exact path="/armatupc" component={BuildPcFilter} />
         <Route exact path="/armatupc/tipo/:tipo" component={BuildPc} />

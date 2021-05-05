@@ -12,6 +12,7 @@ import {
   faMoneyBill,
   faCopyright,
   faFileSignature,
+  faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 
@@ -36,6 +37,8 @@ interface IState {
   image: string;
   details: string;
   categories: number[];
+  stock: number | undefined;
+
 }
 
 interface DetailsProduct {
@@ -45,6 +48,8 @@ interface DetailsProduct {
   name: string | undefined;
   price: number | undefined;
   details: string | undefined;
+  stock: number | undefined;
+
 }
 
 interface DetailsData {
@@ -81,6 +86,7 @@ export default function CreateProduct(): JSX.Element {
     image: "",
     details: "",
     categories: [],
+    stock: 0
   });
 
   const products = useQuery<DetailsData>(GET, {
@@ -117,7 +123,7 @@ export default function CreateProduct(): JSX.Element {
   function handlePrice(e: InputEvent) {
     return setState({
       ...state,
-      price: +e.currentTarget.value,
+      [e.currentTarget.name]: +e.currentTarget.value,
     });
   }
 
@@ -151,6 +157,7 @@ export default function CreateProduct(): JSX.Element {
       image: "",
       details: "",
       categories: [],
+      stock:0
     })
     setCategors([])
     createProduct({ variables: state })
@@ -171,6 +178,8 @@ export default function CreateProduct(): JSX.Element {
     setnewpr([...newpro, results?.data?.createProduct]);
   }
 
+
+  console.log(state)
   const [categors, setCategors] = useState<Array<any>>([]);
 
   const handleCategories = (e: SelectEvent) => {
@@ -287,6 +296,21 @@ export default function CreateProduct(): JSX.Element {
                 type="text"
                 name="details"
                 onChange={handleChange}
+                required={true}
+              />
+            </div>
+            <div className={styles.form__group}>
+              <label htmlFor="Nombre" className={styles.form__label}>
+                <FontAwesomeIcon icon={faPencilAlt} aria-hidden={true} /> Stock
+              </label>
+              <input
+                className={styles.form__field}
+                placeholder="stock"
+                maxLength={30}
+                value={state.stock}
+                type="text"
+                name="stock"
+                onChange={handlePrice}
                 required={true}
               />
             </div>

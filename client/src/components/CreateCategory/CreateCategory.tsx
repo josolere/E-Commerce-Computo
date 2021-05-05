@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styles from '../Users/loguin.module.scss'
+import styles from './loguin.module.scss'
 import styles1 from "./CreateCategory.module.scss"
 import { NEW_CATEGORY } from "../../gql/categoriesGql"
 import { useMutation, useQuery } from '@apollo/client';
@@ -23,7 +23,7 @@ interface Categories {
 type FormEvent = React.FormEvent<HTMLFormElement>
 type InputEvent = React.FormEvent<HTMLInputElement>
 
-export default function CreateProduct():JSX.Element {
+export default function CreateProduct(): JSX.Element {
 
     const results = useQuery<Categories>(GET_CATEGORIES)
 
@@ -33,7 +33,7 @@ export default function CreateProduct():JSX.Element {
 
     const [categorie, setCategorie] = useState("")
 
-    const [createCategory ] = useMutation(NEW_CATEGORY)
+    const [createCategory] = useMutation(NEW_CATEGORY)
 
     const [listCategory, setListCategory] = useState<Array<string>>([])
 
@@ -52,22 +52,26 @@ export default function CreateProduct():JSX.Element {
         e.preventDefault()
 
         createCategory({ variables: { name: categorie } })
-            .then((resolve) => {  setListCategory([...listCategory, resolve.data.createCategory]);
-                 toast.success("Categoría añadida con éxito")})
+            .then((resolve) => {
+                setListCategory([...listCategory, resolve.data.createCategory]);
+                toast.success("Categoría añadida con éxito")
+            })
             .catch((err) => { console.log(err) })
     }
-/* console.log(cat)
-console.log(listCategory) */
+    /* console.log(cat)
+    console.log(listCategory) */
     return (
         <div className={styles.back}>
-            <div className={styles2.organizar2}>
+            <div className={styles.organizar}>
                 <div className={styles.caja}>
                     <div className={styles.container}>
-                        Añadir Categoría
+                        <div className={styles.containeTitle}>
+                            <h1 className={styles.titleCreate} >Añadir Categoría</h1>
+                        </div>
                     </div>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.form__group}>
-                        <label htmlFor='Nombre' className={styles.form__label} >
+                            <label htmlFor='Nombre' className={styles.form__label} >
                                 <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Nombre
                         </label>
                             <input
@@ -82,27 +86,23 @@ console.log(listCategory) */
                                 required={true}
                             />
                         </div>
-                    
+
                         <div className={styles.organizarbotones}>
-                        <button type='submit' className={styles.boton}> Añadir </button>
+                            <button type='submit' className={styles.boton}> Añadir </button>
                         </div>
                     </form>
-                </div>
-                
-                <div className={styles1.separateList}>
-                    <div className={styles1.listProducts}>
+                    <div className={styles.listProducts}>
                         {/* <h4 className={styles1.TitleList} >Categorías creadas</h4>  */}
                         <hr className={styles1.hrList} />
                         {cat && cat.map((item: any, index: number) => (
-                            <button key={index} className={styles1.pList}> {item?.name} {/* <span>x</span> */}</button>
+                            <button key={index} className={styles.pList}> {item?.name} {/* <span>x</span> */}</button>
                         ))}
                         {listCategory && listCategory.map((item: any, index: number) => (
-                            <button key={index} className={styles1.pList} >{item.name} </button>
-                        )) }
+                            <button key={index} className={styles.pList} >{item.name} </button>
+                        ))}
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-    

@@ -7,7 +7,7 @@ import './rating.css';
 import { REVIEW_MUTATION, EDIT_PRODUCT, GET, GET_CATEGORIES } from "../../gql/productDetailsGql";
 import styles from "./ProductDetail.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faPencilAlt, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import stylesEdit from "./ProductEdit.module.scss";
 import { addProductDetails, addShopping, local } from '../../redux/actions';
 import { toast } from 'react-toastify';
@@ -21,7 +21,7 @@ import { TOGGLE_WISHLIST, WISHLIST } from '../../gql/wishlist';
 
 interface user {
   currentUser: {
-    id:string;
+    id: string;
     name: string;
     password: string;
     email: string;
@@ -209,8 +209,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
       : console.log("no se puede");
   }
 
-  const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT,{
-    refetchQueries:[{query:GET,variables:{id:id}}]
+  const [editProduct, resultsEdit] = useMutation(EDIT_PRODUCT, {
+    refetchQueries: [{ query: GET, variables: { id: id } }]
   });
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -311,24 +311,24 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
   const [wishe, setWish] = useState(false)
 
 
-  const [wish,reswish] = useMutation(TOGGLE_WISHLIST,{
-    refetchQueries:[{query:WISHLIST,variables:{userId:user?.id}}]
+  const [wish, reswish] = useMutation(TOGGLE_WISHLIST, {
+    refetchQueries: [{ query: WISHLIST, variables: { userId: user?.id } }]
   })
 
-  const wishes = useQuery(WISHLIST,{variables:{userId:user?.id}})
+  const wishes = useQuery(WISHLIST, { variables: { userId: user?.id } })
   const list = wishes?.data?.getWishList
 
-  const handleFav = (e: React.FormEvent<HTMLButtonElement>) =>{
-     e.preventDefault()
-     console.log(user)
-     wish({variables:{userId:currentU?.data?.currentUser?.id,productId: id}})
+  const handleFav = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    console.log(user)
+    wish({ variables: { userId: currentU?.data?.currentUser?.id, productId: id } })
   }
 
-  useEffect(()=>{
-      setWish(list?.some((product : any) => product.id === id))
-      console.log()
-  },[wishes,reswish])
-  
+  useEffect(() => {
+    setWish(list?.some((product: any) => product.id === id))
+    console.log()
+  }, [wishes, reswish])
+
   return (
     <React.Fragment>
       <div className={Rstyles.SortAll}>
@@ -339,14 +339,14 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
           <form
             onSubmit={handleSubmit}
             className={editMode ? stylesEdit.containerEdit : Rstyles.FormDetails}
-            >
+          >
             {user?.privilege === "admin" ? (
               <button className={Rstyles.EditButton} onClick={handleEdit}>
                 Editar
               </button>
             ) : (
               false
-              )}
+            )}
             <div className={Rstyles.SortCenter} >
               {editMode ? (
                 <div className={Rstyles.form__groupEdit}>
@@ -358,7 +358,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     defaultValue={details?.name}
                     name="name"
                     onChange={handleChange}
-                    />
+                  />
                 </div>
                 /*                 <input
                 className={stylesEdit.input}
@@ -367,28 +367,59 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 onChange={handleChange}
                 defaultValue={details?.name}
                 /> */
-                ) : (
-                  <h1 className={Rstyles.DName}>{filtred?.name}</h1>
-                  )}
+              ) : (
+                <h1 className={Rstyles.DName}>{filtred?.name}</h1>
+              )}
             </div>
-               {user ? <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
+            <div className={Rstyles.SortCenter}>
+
+              {user ? <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
                 :
-                <button className={styles.fav}><Link to="/Login"><FiHeart size={20}/></Link></button>
-                }
-                {editMode ?
-                <input type='number' onChange={handlePrice} name='stock' className={styles.editStock} defaultValue={filtred?.stock}/>
+                <button className={Rstyles.fav}><Link to="/Login"><FiHeart size={20} /></Link></button>
+              }
+              {editMode ?
+                <div className={Rstyles.form__groupEdit}>
+                  <label htmlFor='username' className={Rstyles.form__label} >
+                    <FontAwesomeIcon icon={faPencilAlt} aria-hidden={true} /> Stock</label>
+                  <input
+                    className={Rstyles.form__field}
+                    type='number'
+                    defaultValue={filtred?.stock}
+                    name='stock'
+                    onChange={handleChange}
+                  />
+                </div>
                 :
                 (filtred?.stock ? <div className={styles.stock}><HiBadgeCheck size={20} /> Hay Stock </div> : <div style={{ color: 'red' }}><IoCloseCircleSharp color='red' /> No hay Stock </div>)
               }
-            <div className={Rstyles.SortCenter}>
+            </div>
+
+            <div className={Rstyles.SortDisaster}>
+              {editMode && (
+                <div className={Rstyles.SelectEdit} >
+                  <select
+                    className={Rstyles.SelectStyles}
+                    onChange={handleAddCategories}>
+                    {categoriesQuery?.map((cat) => (
+                      <option key={cat.name} value={cat.id}
+                        className={Rstyles.SelectStyles}
+                      >
+                        {cat.name}
+                      </option>
+                    ))}{" "}
+                    {/*onClick={handleCategories}*/}
+                  </select>
+                </div>
+              )}
               {editMode
                 ? details?.categories?.map((category) => (
+
                   <button
-                  className={Rstyles.EditButtonEnd}                 
-                  onClick={handleCategory}
+                    className={Rstyles.CatButton}
+                    onClick={handleCategory}
                     value={category.id}
                   >
-                    Categoría: {category.name}
+                    {category.name} <FontAwesomeIcon icon={faWindowClose} style={{ marginLeft: '5%' }} aria-hidden={true} />
                   </button>
                 ))
                 : details?.categories?.map((category) => (
@@ -396,6 +427,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     Categoría: {category.name}
                   </p>
                 ))}
+
             </div>
             <div className={Rstyles.SortCenter}>
               {editMode ? (
@@ -408,7 +440,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     defaultValue={details?.brand}
                     name="brand"
                     onChange={handleChange}
-
                   />
                 </div>
                 /*            <p>
@@ -468,39 +499,22 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                   </p>
                 )}
               </div>
-              {editMode ? false:
-              <div className={Rstyles.SortCenter}>
-                <button
-                  onClick={handleAddProduct}
-                  className={Rstyles.ButtonBuy}
-                >
-                  <FontAwesomeIcon icon={faCartPlus} />
-                </button>
-              </div>
+              {editMode ? false :
+                <div className={Rstyles.SortCenter}>
+                  <button
+                    onClick={handleAddProduct}
+                    className={Rstyles.ButtonBuy}
+                  >
+                    <FontAwesomeIcon icon={faCartPlus} />
+                  </button>
+                </div>
               }
             </div>
             <div className={stylesEdit.bot}>
-              {editMode && (                          
-              <div className={Rstyles.SelectEdit} >
-                <select
-                className={Rstyles.SelectStyles}
-                onChange={handleAddCategories}>
-                  {categoriesQuery?.map((cat) => (
-                    <option key={cat.name} value={cat.id}
-                    className={Rstyles.SelectStyles}
-                    >
-                      {cat.name}
-                    </option>
-                  ))}{" "}
-                  {/*onClick={handleCategories}*/}
-                </select>
-                </div>
-              )}
-
               {editMode && (
                 <button
-                className={Rstyles.EditButtonEnd}                 
-                type="submit"
+                  className={Rstyles.EditButtonEnd}
+                  type="submit"
                 >
                   Confirmar
                 </button>
@@ -595,7 +609,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 )}
               </div>
               <div className={Rstyles.SortReview} >
-                {revActual.length === 0 && hideReview ? (
+                {revActual.length === 0 && hideReview || reviewuser.review !== '' && reviewuser.title !== '' ? (
                   <button onClick={changereview} className={Rstyles.ButtonSend}>
                     Enviar
                   </button>
