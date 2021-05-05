@@ -37,6 +37,7 @@ export default {
         },
       });
 
+      /*
       const stock = product.stock - quantity;
       if (product) {
         const updatedProduct = await product.update(
@@ -44,7 +45,7 @@ export default {
           { where: { idProduct } }
         );
       }
-
+*/
       return detail[0];
     },
 

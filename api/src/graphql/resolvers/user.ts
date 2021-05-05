@@ -29,7 +29,7 @@ export default {
     currentUser: (_parent: object, _args: any, context: any) => {
       let user = context.getUser();
 
-      console.log(user);
+     // console.log(user);
       return user;
     },
 
