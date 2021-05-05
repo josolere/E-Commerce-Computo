@@ -33,14 +33,18 @@ const ResetPassword = () => {
 
     currentuser = data?.currentUser
 
-    const [control, setControl] = useState({ email: '', password: '', newpassword: '' })
+    const [control, setControl] = useState({ 
+        email: '', 
+        password: '', 
+        newpassword1: '',
+        newpassword2:''
+        
+    })
 
     const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         setControl({ ...control, [event?.currentTarget.name]: event?.currentTarget.value })
     }
 
-
-    console.log(control)
 
     const handleclickevent = () => {
         window.location.href = 'http://localhost:3000/Login'
@@ -48,10 +52,10 @@ const ResetPassword = () => {
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        if (currentuser?.email === control.email) {
+        if (currentuser?.email === control.email && control.newpassword1 === control.newpassword2) {
             editUser({
                 variables: {
-                    password: control.newpassword, id: currentuser?.id
+                    password: control.newpassword1, id: currentuser?.id
                 }
             })
                 .then((resolve) => { toast.success('Tienes una nueva contraseña 🥳') 
@@ -111,7 +115,21 @@ const ResetPassword = () => {
                                 minLength={4}
                                 maxLength={15}
                                 type="password"
-                                name='newpassword'
+                                name='newpassword1'
+                                onChange={handleChange}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.form__group}>
+                            <label htmlFor='password' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faUnlock} /> Control de Contraseña</label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Nueva Contraseña'
+                                minLength={4}
+                                maxLength={15}
+                                type="password"
+                                name='newpassword2'
                                 onChange={handleChange}
                                 required={true}
                             />

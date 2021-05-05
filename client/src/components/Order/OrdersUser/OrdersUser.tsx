@@ -40,6 +40,9 @@ export default function OrdersUser() {
                 <div className={styles.caja}>
                     <div className={styles.containeTitle}>
                         <h1 className={styles.titleCreate} >Todas sus órdenes</h1>
+                        <Link to='/home'>
+                            <button className={styles.ComeHomeButton} >Volver a home</button>
+                        </Link>
                     </div>
                     <div className={styles.sortDisaster} >
                         {!loading && orders?.map((order: IOrder) =>
