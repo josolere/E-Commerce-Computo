@@ -119,7 +119,6 @@ const Home = () => {
     return (
         <>
         <NavBarResponsive/>
-        <NavBar/>
         </>
     )
 }

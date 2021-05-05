@@ -1,9 +1,7 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { GET_CATEGORIES } from "../../gql/categoriesGql";
-import styles from "../Users/loguin.module.scss";
-import styles2 from "../Users/Edit.module.scss";
-import styles3 from "./CreateProduct.module.scss";
+import styles from "./loguin.module.scss";
 import { NEW_PRODUCT } from "../../gql/createProductGql";
 import { amdComp, intelComp } from "./arrCompatibilities"
 import { ADD_COMPATIBILITIES } from "../../gql/buildPcgql";
@@ -14,7 +12,9 @@ import {
   faMoneyBill,
   faCopyright,
   faFileSignature,
+  faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 interface Categorie {
   id: number | undefined;
@@ -37,6 +37,8 @@ interface IState {
   image: string;
   details: string;
   categories: number[];
+  stock: number | undefined;
+
 }
 
 interface DetailsProduct {
@@ -46,6 +48,8 @@ interface DetailsProduct {
   name: string | undefined;
   price: number | undefined;
   details: string | undefined;
+  stock: number | undefined;
+
 }
 
 interface DetailsData {
@@ -82,6 +86,7 @@ export default function CreateProduct(): JSX.Element {
     image: "",
     details: "",
     categories: [],
+    stock: 0
   });
 
   const products = useQuery<DetailsData>(GET, {
@@ -118,40 +123,53 @@ export default function CreateProduct(): JSX.Element {
   function handlePrice(e: InputEvent) {
     return setState({
       ...state,
-      price: +e.currentTarget.value,
+      [e.currentTarget.name]: +e.currentTarget.value,
     });
   }
 
 
 
-  const [select, setSelect]:any = useState({value:""})
- 
-  const changeSelect = (e:any) => {
-    setSelect({value : e.target.value})
+  const [select, setSelect]: any = useState({ value: "" })
 
-    if(select.value === "amd"){
-        setCompatibilities({ productsId : amdComp})
+  const changeSelect = (e: any) => {
+    setSelect({ value: e.target.value })
+
+    if (select.value === "amd") {
+      setCompatibilities({ productsId: amdComp })
     }
-    if(select.value === "intel"){
-        setCompatibilities({ productsId : intelComp})
+    if (select.value === "intel") {
+      setCompatibilities({ productsId: intelComp })
     }
-    if(select.value === "ambos"){
-        const amb = amdComp.concat(intelComp)
-        setCompatibilities({ productsId : amb})
+    if (select.value === "ambos") {
+      const amb = amdComp.concat(intelComp)
+      setCompatibilities({ productsId: amb })
     }
   }
 
-console.log(compatibilities)
+  console.log(compatibilities)
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setState({
+      name: "",
+      price: 0,
+      brand: "",
+      image: "",
+      details: "",
+      categories: [],
+      stock:0
+    })
+    setCategors([])
     createProduct({ variables: state })
       .then((resolve) => {
+        toast.success('Se ha creado el producto 😁')
         addCompatibility({
           variables: {
             HeadIdProduct: resolve.data.createProduct.id,
             idsProducts: compatibilities.productsId,
           },
+          
+          
         });
       })
       .catch((err) => {
@@ -160,11 +178,13 @@ console.log(compatibilities)
     setnewpr([...newpro, results?.data?.createProduct]);
   }
 
+
+  console.log(state)
   const [categors, setCategors] = useState<Array<any>>([]);
 
   const handleCategories = (e: SelectEvent) => {
     e.preventDefault();
-    setCategors([
+    setCategors([...categors,
       {
         id: parseInt(e.currentTarget.value),
         name: e.currentTarget.selectedOptions[0].innerHTML,
@@ -189,17 +209,12 @@ console.log(compatibilities)
     });
   };
 
-
-
-  
-
-
   return (
     <div className={styles.back}>
-      <div className={styles2.organizar2}>
+      <div className={styles.organizar}>
         <div className={styles.caja}>
-          <div className={styles.container} style={{ marginTop:"-4rem", marginLeft: "20%" }}>
-            Añadir Producto
+          <div className={styles.containeTitle}>
+            <h1 className={styles.titleCreate} >Añadir Producto</h1>
           </div>
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.form__group}>
@@ -286,24 +301,42 @@ console.log(compatibilities)
             </div>
             <div className={styles.form__group}>
               <label htmlFor="Nombre" className={styles.form__label}>
+                <FontAwesomeIcon icon={faPencilAlt} aria-hidden={true} /> Stock
+              </label>
+              <input
+                className={styles.form__field}
+                placeholder="stock"
+                maxLength={30}
+                value={state.stock}
+                type="text"
+                name="stock"
+                onChange={handlePrice}
+                required={true}
+              />
+            </div>
+            <div className={styles.form__group}>
+              <label htmlFor="Nombre" className={styles.form__label}>
                 <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} />{" "}
                 Categoria
               </label>
-              <select
-                className={styles3.SelectCreate}
-                onChange={handleCategories}
-              >
-                {categories?.map((cat) => (
-                  <option key={cat.name} value={cat.id}>
-                    {cat.name}
-                  </option>
-                ))}{" "}
+              <div className={styles.SelectDiv} >
+                <select
+                  className={styles.SelectCreate}
+                  onChange={handleCategories}
+                >
+                  {categories?.map((cat) => (
+                    <option className={styles.SelectCreate}
+                      key={cat.name} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}{" "}
                 onClick={handleCategories}
-              </select>
-              <div className={styles3.OrderCreateCat}>
+                </select>
+              </div>
+              <div className={styles.OrderCreateCat}>
                 {categors.map((cate) => (
                   <button
-                    className={styles3.CatButtons}
+                    className={styles.CatButtons}
                     onClick={handleDeleteCategory}
                     value={cate.id}
                     key={cate.name}
@@ -320,40 +353,39 @@ console.log(compatibilities)
                   <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} /> El
                   producto es compatible con
                 </label>
-                <div className={styles3.checkbox}>
-                <label>
+                <div className={styles.checkbox}>
+                  <label>
                     Amd
                   <input
-                    type="checkbox"
-                    name={"amd"}
-                    onChange={changeSelect}
-                    checked={select.value === "amd" ? true : false}
-                    value={"amd"}
-                  />
-                </label>
+                      type="checkbox"
+                      name={"amd"}
+                      onChange={changeSelect}
+                      checked={select.value === "amd" ? true : false}
+                      value={"amd"}
+                    />
+                  </label>
 
-                <label>
+                  <label>
                     Intel
                   <input
-                    type="checkbox"
-                    name={"intel"}  
-                    onChange={changeSelect}
-                    checked={select.value === "intel" ? true : false}
-                    value={"intel"}
-                  />
-                </label>
+                      type="checkbox"
+                      name={"intel"}
+                      onChange={changeSelect}
+                      checked={select.value === "intel" ? true : false}
+                      value={"intel"}
+                    />
+                  </label>
 
-                <label>
-                  Ambos
+                  <label>
+                    Ambos
                   <input
-                  
-                    type="checkbox"
-                    name={"ambos" } 
-                    onChange={changeSelect}
-                    checked={select.value === "ambos" ? true : false}
-                    value={"ambos"}
-                  />
-                </label>
+                      type="checkbox"
+                      name={"ambos"}
+                      onChange={changeSelect}
+                      checked={select.value === "ambos" ? true : false}
+                      value={"ambos"}
+                    />
+                  </label>
                 </div>
               </div>
             ) : (
@@ -363,7 +395,6 @@ console.log(compatibilities)
               <button
                 type="submit"
                 className={styles.boton}
-                style={{ marginTop: "2rem" }}
               >
                 Añadir
               </button>

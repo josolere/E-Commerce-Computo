@@ -77,8 +77,6 @@ const ShoppingTotal = (): JSX.Element => {
     }
 
 
-
-
     return (
         <div className={total.disaster} >
                 <div className={total.containerTitle} >

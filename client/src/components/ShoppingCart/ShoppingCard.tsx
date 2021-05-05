@@ -8,7 +8,7 @@ import { isOptionDisabled } from 'react-select/src/builtins';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { EDIT_ORDER_DETAIL, GET_ORDER_LIST, DELETE_ORDER_DETAIL } from "../../gql/order"
-import {GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
+import { GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
 
 import { AppState } from '../../redux/reducers';
 
@@ -71,9 +71,9 @@ const ShoppingCard = (props: props): JSX.Element => {
     })
 
     const productsCart: any = useQuery<detailOrderid>(GET_ORDER_BY_STATUS, {
-        variables: { status: "pendiente", idUser: idUsers  }
-      })
-      
+        variables: { status: "pendiente", idUser: idUsers }
+    })
+
 
     let details = productsCart?.data?.getOrderByStatus[0]?.details
     useEffect(() => {
@@ -90,8 +90,8 @@ const ShoppingCard = (props: props): JSX.Element => {
     const dispatch = useDispatch()
 
     const [deleteOrderDetail] = useMutation(DELETE_ORDER_DETAIL)
-    const [editOrderDetail] = useMutation(EDIT_ORDER_DETAIL,{
-        refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUsers}}]
+    const [editOrderDetail] = useMutation(EDIT_ORDER_DETAIL, {
+        refetchQueries: [{ query: GET_ORDER_BY_STATUS, variables: { status: "pendiente", idUser: idUsers } }]
     })
 
     useEffect(() => {
@@ -185,11 +185,15 @@ const ShoppingCard = (props: props): JSX.Element => {
     }
 
 
-    const accountantLess = async () => {
-        let resultId = details?.find((finds: any) => finds.ProductId === product?.id)
-
-        if (idProductOrder.data !== undefined) {
-            accountantLessBases(resultId?.id)
+    const accountantLess = () => {
+        if (props.count !== 1) {
+            let productPrice = product.price
+            let productId = product.id
+            let count = props.count - 1
+            setPrice(price - product.price)
+            dispatch(lessPrice({ productPrice, productId, count }))
+        } else {
+            return props.count
         }
     }
 
@@ -288,6 +292,7 @@ const ShoppingCard = (props: props): JSX.Element => {
                         className={cart.buttonMoreLess}
                         id={props.count > 1 ? cart.buttonLess : undefined}
                         onClick={() => {
+
                             accountantLess();
                             addLocaStorageLess()
                         }}

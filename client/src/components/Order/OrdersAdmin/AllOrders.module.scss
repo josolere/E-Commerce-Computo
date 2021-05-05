@@ -1,55 +1,75 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white2: #fff;
+$gray: #9b9b9b;
+$verdesito: 	#E0FFFF;
+$blanquito: #F0F0F0;
+$grey:#30475e;
+$dark: #222831;
+$white: #dddddd;
+$red:#f05454;
+
 .container{
-    min-height: 100vh;
     font-family:'Montserrat', sans-serif;
-    padding: 2rem;
-    background-color: #222831;
-    color: whitesmoke;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: $white;
+    color: $dark;
+    border-top: solid .2rem $red;
+    border-bottom: solid .2rem $red;
 }
 select{
     font-family:'Montserrat', sans-serif;
-    margin-left: 1rem;
-    background-color: transparent;
+    margin-left:1%;
+    font-size: 2.5vh;
+    background-color: $white2;
     outline: none;
-    color: whitesmoke;
-    border: none;
+    color: $dark;
+    border-radius: .2rem;
+    border: solid .2rem $dark;
     option{
-        color:black
+        color:$dark
     }
 }
 .products{
     margin-top: 2rem;
-    border: 1px solid gray;
+    border-top: .2rem solid $dark;
+    border-bottom: .2rem solid $dark;
     border-radius: 0.2rem;
     nav{
         display: flex;
         justify-content: space-around;
         align-items: center;
-        border-bottom: 1px solid gray;
-        background-color: #30475e;
+        border-bottom: .2rem solid $dark;
+        background-color: $white;
         div{
             width: 45%;
-            // border: 1px solid gray;
-            padding: 1rem;
             display: flex;
             justify-content: start;
             align-items: center;
-            padding-left: 2rem;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            padding-left: 1%;
+            
         }
         a{
-            color: whitesmoke;
-            padding:1rem 0rem;
+            color: $dark;
             width: 10%;
+            padding-right: 3%;
             text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
-            svg{
-                margin: 0rem 0rem 0rem 0.5rem;
-            }
             &:hover{
-                background-color: #222831;
+                background-color: $red;
                 color: whitesmoke;
             }
         }
+    }
+}
+
+@media (max-width: 648px) {
+    .products{
+        width: 100%;
     }
 }

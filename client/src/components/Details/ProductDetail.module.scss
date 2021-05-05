@@ -234,8 +234,7 @@ $yellow: #ffb200;
 
   .PDetails{
     font-family: 'Montserrat', sans-serif ;
-    font-size: 1.3rem;
-    
+    font-size: 1rem;
     color: whitesmoke;
 
 }
@@ -353,4 +352,57 @@ $yellow: #ffb200;
     font-family: 'Montserrat', sans-serif ;
     font-size: 100%;
 }
- */
+
+*/
+.fav{
+    position: absolute;
+    right: 5rem;
+    background-color: transparent;
+    width: fit-content;
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+      cursor:pointer;
+      background-color: $red;
+      color: white;
+    }
+  }
+  
+  .faving{
+    position: absolute;
+    right: 5rem;
+    width: fit-content;
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $red;
+    color: whitesmoke;
+    &:hover{
+      cursor: pointer;
+      background-color: transparent;
+      color: black;
+    }
+  }
+
+  .stock{
+      color: whitesmoke;
+      font-size: 0.8rem;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .editStock{
+    font-size: 0.8rem;
+    width: fit-content;
+}

@@ -21,11 +21,6 @@ query {
   }`;
 
 
-
-
-
-
-
 export const SIGNUP_MUTATION = gql`
     mutation  ($firstName: String! $password: String! $email: String!  
                 $lastName:String! $username:String $street: String  $city: 
@@ -104,3 +99,20 @@ export const LOGOUT = gql`
   mutation {
       logout
           }`;
+
+
+export const RETRIEVE_PASSWORD = gql`
+    mutation ($id: ID!,  $resetPass: String!) {
+        editUser (id: $id, input:{resetPass:$resetPass})
+                    {
+                        id
+                        resetPass
+                    }  
+    }`;
+
+    export const GET_USERS_BY_ID_RETRIEVE = gql`
+    query ($id:ID!){
+        getUserById (id:$id){
+            resetPass
+        }
+    }`;

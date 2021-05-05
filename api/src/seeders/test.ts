@@ -22,7 +22,7 @@ let products = [
       "Un auricular con un sonido brillante y claro, con una estructura liviana y cómoda, el Themis es un auricular pensado para jugar cómodamente. -Sonido:Este auricular, posee un claro sonido estéreo con ficha Jack 3.5 mm, garantizan la mejor calidad de sonido en nuestros diafragmas de 50mm con imanes de neodimio, ideales en la construcción de periféricos de sonido. -Micrófono: Integrado en la estructura de las copas, construido sobre un brazo rebatible y captación omnidireccional.",
     price: 2099,
     categoriesId: [7],
-    stock: 7,
+    stock: 0,
   },
   {
     name: "Headset Logitech G Series G432",

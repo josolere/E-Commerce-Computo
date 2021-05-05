@@ -5,7 +5,7 @@ import styles from './loguin.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faUnlock, faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CHANGE_PASSWORD, ACTUAL_USER } from "../../gql/loginGql";
+import { CHANGE_PASSWORD, ACTUAL_USER, RETRIEVE_PASSWORD, GET_USERS_BY_ID_RETRIEVE } from "../../gql/loginGql";
 import styles2 from './SmallForm.module.scss';
 import { toast } from 'react-toastify';
 
@@ -16,6 +16,8 @@ const OlvideContraseña = () => {
     const [editUser, user] = useMutation(CHANGE_PASSWORD)
 
     let currentuser: any = {}
+
+    const [editPassword] = useMutation(RETRIEVE_PASSWORD)
 
 
 
@@ -63,6 +65,13 @@ const OlvideContraseña = () => {
         let code = Math.floor(Math.random() * (999999 - 10000) + 999999)
         setCodeVerify(code)
         setVerify(false)
+        editPassword({ variables: { id: 1, resetPass:code } })
+        .then((resolve) => {
+            console.log(resolve)
+        })
+        .catch((error) => {
+            console.log('no responde')
+        })
         console.log(code)
     }
 

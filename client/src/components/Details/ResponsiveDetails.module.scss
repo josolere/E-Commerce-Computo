@@ -1,0 +1,620 @@
+$blue:#30475e;
+$bluedark: #222831;
+$ligthblue: #dddddd;
+$red:#f05454;
+$grey:#30475e;
+$dark: #222831;
+$white: #dddddd;
+$Lblue:#6495ED;
+$DBlue:#002D62;
+$grey:#30475e;
+$gray: #9b9b9b;
+$primary: #11998e;
+$secondary: #38ef7d;
+
+.SortAll {
+    background-color:$dark;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.SortDetails{
+    width: 80%;
+    height: fit-content;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-right: 2%;
+    border: solid .1rem $white;
+    border-radius: 0.4rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background-color:$grey;
+    font-family:'Montserrat', sans-serif;
+}
+
+.SortEnd{
+    width: 82%;
+    height: fit-content;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border: solid .1rem $white;
+    border-radius: 0.4rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    background-color:$grey;
+    font-family:'Montserrat', sans-serif;
+}
+
+.SorTitle{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+.TiReview{
+    margin: 0;
+    padding: 0;
+    background-color: $red;
+    font-family:'Montserrat', sans-serif;
+    font-size: 4vh;
+    width: 100%;
+    color: $white;
+}
+
+.SortReview{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SortTexArea{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TextArea{
+    font-family:'Montserrat', sans-serif;
+    font-size: 2.5vh;
+    background-color: $white;
+    color: black;
+    width: 30rem;
+    height: 7rem;
+    resize: none;
+    margin-bottom: 5%;
+    border-left: .4rem solid $red;
+}
+
+.TextAreaEdit{
+    font-family:'Montserrat', sans-serif;
+    font-size: 2.5vh;
+    background-color: $white;
+    color: black;
+    width: 30rem;
+    height: 7rem;
+    resize: none;
+    margin-bottom: 5%;
+    border-left: .4rem solid $red;
+}
+
+.form__groupEdit{
+    position: relative;
+    padding: 5%;
+    margin-top: 1%;
+    margin: 3%;
+    width: 100%;
+}
+
+.DThanks{
+    color: #fff;
+    font-size: 4vh;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(to right,$red 30%, $white 40% );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 1.5s linear infinite;
+}
+
+@keyframes textclip {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+.form__group {
+    position: relative;
+    padding: 5%;
+    margin-top: 1%;
+    margin: 3%;
+    width: 50%;
+  }
+  
+  .form__field {
+    margin-top: 1%;
+    font-family:'Montserrat', sans-serif;
+    width: 70%;
+    border: 0;
+    border-bottom: 2px solid $gray;
+    outline: 0;
+    font-size: 1.1rem;
+    color: black;
+    padding: 1rem 0.3rem 0 ;
+    background: transparent;
+    transition: border-color 0.2s;    
+  &::-moz-placeholder ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 5%;
+  }
+    &::placeholder {
+      color: transparent;
+    }
+  }
+  .form__label {
+      font-family:'Montserrat', sans-serif;
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-weight: bold;
+      font-size: 2.5vh;
+      color: $white;
+  }
+  .form__field:focus {
+    ~ .form__label {
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 2.5vh;
+      color: $primary;
+      font-weight:bold;    
+    }
+    padding-bottom: 2%;  
+    font-weight: bold;
+    border-width: 3px;
+    border-image: linear-gradient(to right, $red, $dark	);
+    border-image-slice: 1;
+  }
+
+.SortCenter{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.PImage{
+    max-width: 30rem;
+    margin: 0;
+    padding: 0;
+}
+
+.DName{
+    background-color: $red;
+    width: 100%;
+    font-family:'Montserrat', sans-serif;
+    font-size: 4vh;
+    color: $white;
+}
+
+.PDetails{
+    font-family:'Montserrat', sans-serif;
+    font-size: 2.5vh;
+    color: $white;
+}
+
+.PriceDetails{
+    font-weight: bold;
+    font-family:'Montserrat', sans-serif;
+    font-size: 5vh;
+    color: $white;
+}
+
+.HRDetails{
+    background-color: $dark;
+    height: .5rem;
+}
+
+.ButtonSend{
+    font-weight: bold;
+    color: $white;
+    width: 15rem;
+    height: 3rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 2%;
+    font-family: 'Montserrat', sans-serif;
+    border: solid .1rem $dark;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    font-size: 3vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    z-index: 1;
+     &:after {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: $red;
+         color: $white;
+         border-radius: 0.2rem;
+         z-index: -2;
+     }
+     &:before {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 0%;
+         height: 100%;
+         background-color: darken($color: $red, $amount: 25%);
+         transition: all .3s;
+         border-radius: 0.2rem;
+         z-index: -1;
+     }
+     &:hover {
+         color:$white;
+         &:before {
+             width: 100%;
+         }
+     }
+ }
+
+ .SortDisaster{
+     display: flex;
+     flex-wrap: wrap;
+ }
+
+.ButtonBuy{
+    font-weight: bold;
+    color: $white;
+    width: 7rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 2%;
+    font-family: 'Montserrat', sans-serif;
+    border: solid .1rem $dark;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    font-size: 6vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    z-index: 1;
+     &:after {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: $red;
+         color: $white;
+         border-radius: 0.2rem;
+         z-index: -2;
+     }
+     &:before {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 0%;
+         height: 100%;
+         background-color: darken($color: $red, $amount: 25%);
+         transition: all .3s;
+         border-radius: 0.2rem;
+         z-index: -1;
+     }
+     &:hover {
+         color:$white;
+         &:before {
+             width: 100%;
+         }
+     }
+ }
+
+ .EditButtonEnd {
+    font-weight: bold;
+    color: $white;
+    width: 9rem;
+    margin-top: 2%;
+    font-family: 'Montserrat', sans-serif;
+    border: solid .1rem $white;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    font-size: 3vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    z-index: 1;
+     &:after {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: $red;
+         color: $white;
+         border-radius: 0.2rem;
+         z-index: -2;
+     }
+     &:before {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 0%;
+         height: 100%;
+         background-color: $dark;
+         transition: all .3s;
+         border-radius: 0.2rem;
+         z-index: -1;
+     }
+     &:hover {
+         color:$white;
+         &:before {
+             width: 100%;
+         }
+     }
+ }
+
+
+.EditButton{
+    font-weight: bold;
+    color: $white;
+    width: 7rem;
+    margin-top: 2%;
+    font-family: 'Montserrat', sans-serif;
+    border: solid .1rem $white;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    font-size: 3vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    z-index: 1;
+     &:after {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: $red;
+         color: $white;
+         border-radius: 0.2rem;
+         z-index: -2;
+     }
+     &:before {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 0%;
+         height: 100%;
+         background-color: $dark;
+         transition: all .3s;
+         border-radius: 0.2rem;
+         z-index: -1;
+     }
+     &:hover {
+         color:$white;
+         &:before {
+             width: 100%;
+         }
+     }
+ }
+
+ .BigHr{
+     height: .4rem;
+     background-color: $dark;
+ }
+
+ .SorComments{
+    width: 100%;
+}
+
+ .SortIndiComments{
+    display: flex;
+    padding-left: 2%;
+    flex-direction: row;
+    justify-content:flex-end;
+    width: 100%;
+    height: 100%;
+
+ }
+
+ .SelectEdit{
+    border: solid .2rem $white;
+    border-radius: .4rem;
+    background-color: $dark;
+    padding: 1%;    
+ }
+
+ .HoriHr{
+     width: .3rem;
+     background-color: $dark;
+ }
+ .sortStarsComments{
+    display: flex;
+    letter-spacing:0;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1%;
+
+ }
+
+ .SortEachComments{
+    width: 30%;
+    height: 200%;
+
+}
+
+ .ContentReviewTitle{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5vh;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color:$white;
+
+ }
+
+ .ContentReview{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5vh;
+    height: 100%;
+    color:$white;
+ }
+
+.SelectStyles{
+    font-size: 2vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: $dark;
+    color: $white;
+}
+
+.CatButton{
+    font-weight: bold;
+    color: $dark;
+   width: 15rem;
+   margin-left: 2%;
+   margin-top: 2%;
+   margin-right: 2%;
+    padding: 2%;
+   font-family: 'Montserrat', sans-serif;
+   border: solid .1rem $dark;
+   height: 2.5rem;
+   display: flex;
+   justify-content: center;
+   align-self: center;
+   cursor: pointer;
+   font-size: 2vh;
+   transition: all .3s;
+   position: relative;
+   overflow: hidden;
+   border-radius: 0.3rem;
+   z-index: 1;
+     &:after {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: $white;
+         color: $white;
+         border-radius: 0.2rem;
+         z-index: -2;
+     }
+     &:before {
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 0%;
+         height: 100%;
+         background-color: $dark;
+         transition: all .3s;
+         border-radius: 0.2rem;
+         z-index: -1;
+     }
+     &:hover {
+         color:$white;
+         &:before {
+             width: 100%;
+         }
+     }
+ }
+
+@media (max-width: 648px) {
+.SortAll{
+    min-height: 100vh;
+    height: fit-content;
+  }
+
+.SortDetails{
+    flex-direction: column;
+    width: 100%;
+    padding:0;
+    border: solid .1rem $white;
+    margin-top: 0;
+    border-radius: 0%;
+    margin-bottom: 0;
+}
+.SortEnd{
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.PImage{
+    max-width: 15rem;
+    max-height: 10rem;
+}
+.form__group{
+    width: 40%;
+}
+.ButtonSend{
+    font-size: 3vh;
+    width: 8rem;
+}
+.EditButtonEnd {
+    width: 6rem;
+    font-size: 2.5vh;
+    margin-right: 2%;
+}
+.TextArea{
+    width: 15rem;
+}
+.form__label{
+    font-size: 2vh;
+}
+.ContentReview{
+    font-size: 2vh;
+    padding-right: 10%;
+}
+.SelectEdit{
+    margin-left: 2%;
+}
+.ContentReviewTitle{
+    font-size: 2vh;
+}
+
+}

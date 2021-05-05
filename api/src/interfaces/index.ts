@@ -1,11 +1,20 @@
 // Types
-import { User, Product, Order, OrderDetail, Review, PaymentData,PaymentResult, Wishlist } from "./types";
-
+import {
+  User,
+  Product,
+  Order,
+  OrderDetail,
+  Review,
+  PaymentData,
+  PaymentResult,
+  Wishlist,
+  DiscountCampaign,
+} from "./types";
 
 //mp
-export interface iPaymentData extends PaymentData { }
-export interface iPaymentResult extends PaymentResult { }
-export interface iWishlist extends Wishlist { }
+export interface iPaymentData extends PaymentData {}
+export interface iPaymentResult extends PaymentResult {}
+export interface iWishlist extends Wishlist {}
 
 // User
 export interface iUser extends User {
@@ -65,11 +74,20 @@ export interface iEditOrderDetailInput extends Order {}
 //Review
 export interface iReview extends Review {
   id: number;
-  
+
   createdAt: Date;
   updatedAt: Date;
 }
 export interface iAddReviewInput extends Review {}
+
+//DiscountCampaign
+export interface iDiscountCampaign extends DiscountCampaign {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface iCreateDiscountCampaignInput extends Order {}
+export interface iEditDiscountCampaignInput extends Order {}
 
 //Models
 export interface iModels {
@@ -77,8 +95,9 @@ export interface iModels {
   Category: any;
   User: any;
   Order: any;
-  OrderDetail:any;
+  OrderDetail: any;
   Productsxorder: any;
   Wishlist: any;
   sequelize: any;
+  DiscountCampaign: any;
 }
