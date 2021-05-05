@@ -176,7 +176,7 @@ function App() {
         <Route exact path ="/armatupc/tipo/:tipo" component = { BuildPc } />
         <Route exact path ="/armatupc/:marca" component = { BuildPcUser } />
         <Route exact path ="/recuperarcontrasena" component={OlvideContraseña}/>
-        <Route exact path ="NuevaContrasena" component={NuevaContraseña}/>
+        <Route exact path ="/NuevaContrasena" component={NuevaContraseña}/>
         <Route component={PageNotFound} />
       </Switch>
     </Router>

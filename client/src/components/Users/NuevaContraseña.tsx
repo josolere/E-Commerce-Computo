@@ -24,6 +24,7 @@ interface user {
 
 
 const NuevaContraseña = () => {
+    
     const [editUser, user] = useMutation(CHANGE_PASSWORD)
 
     let currentuser: any = {}
@@ -103,7 +104,7 @@ const NuevaContraseña = () => {
                         </div>
                         <div className={styles.form__group}>
                             <label htmlFor='password' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faUnlock} /> Nueva Contraseña</label>
+                                <FontAwesomeIcon icon={faUnlock} /> Repetir Contraseña</label>
                             <input
                                 className={styles.form__field}
                                 placeholder='Repetir Contraseña'

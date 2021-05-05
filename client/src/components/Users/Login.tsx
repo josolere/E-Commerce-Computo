@@ -172,7 +172,7 @@ const Login = () => {
     }, [orderCount])
 
     const handleResetPassword = () => {
-        window.location.href = 'http://localhost:3000/ResetContraseña'
+        window.location.href = 'http://localhost:3000/recuperarcontrasena'
     }
 
     const responseFacebook = (res: any) => {
