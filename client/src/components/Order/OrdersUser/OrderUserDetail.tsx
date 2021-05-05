@@ -41,6 +41,9 @@ export default function OrderUserDetails() {
             <div className={styles2.organizar}>
                 <div className={styles2.caja}>
                     <div className={styles2.containeTitle}>
+                        <Link to='/Ordenes/Usuario'>
+                            <button className={styles2.ComeHomeButton} >Volver atrás</button>
+                        </Link>
                         <h1 className={styles2.titleLitte} >Orden Nro: {order?.id}</h1>
                         <h1 className={styles2.titleLitte} >Fecha de realización: {new Date(+order?.confirmAt).toLocaleDateString("en-GB")}</h1>
                         <h1 className={styles2.titleLitte} >Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={
@@ -60,7 +63,7 @@ export default function OrderUserDetails() {
                         {order?.details?.map((obj: any) => <nav key={obj.id}>
                             <div className={styles2.styleColumn}>
                                 <Link
-                                    
+
                                     className={styles2.styleColumn2} style={{ textDecoration: 'none' }} to={{
                                         pathname: '/Detalles',
                                         state: {
