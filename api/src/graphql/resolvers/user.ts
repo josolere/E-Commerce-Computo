@@ -59,6 +59,14 @@ export default {
 
       return user.dataValues.Products;
     },
+    getUserByEmail: async (
+      _parent: object,
+      { email }: { email: string },
+      { models }: { models: iModels }
+    ): Promise<iUser> => {
+      const data = await models.User.findAll({ where: { email: email } });
+      return data[0];
+    },
   },
   Mutation: {
     toggleWishlist: async (
