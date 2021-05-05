@@ -87,6 +87,7 @@ export default function Card({ name, image, price, id, count, stock }: props) {
             price = priceDetails
             count = countDetails
         }
+        toast.success('Se ha agregado a su carrito de compras')
 
         dispatch(addShopping({ id, price, count }));
         addLocaStorage();
@@ -98,7 +99,6 @@ export default function Card({ name, image, price, id, count, stock }: props) {
         setStateHome(false)
         dispatch(addProductDetails(state));
         dispatch(addProductHome(state))
-
     }
 
     const [wishe, setWish] = useState(false)
@@ -115,6 +115,7 @@ export default function Card({ name, image, price, id, count, stock }: props) {
 
     const handleFav = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
+        toast.success('Se ha agregado a favoritos ❤')
         wish({ variables: { userId: user?.id, productId: id } })
     }
 
