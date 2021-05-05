@@ -62,6 +62,9 @@ export default function OrderDetails(props: PropsDetails) {
             <div className={stylesR.organizar}>
                 <div className={stylesR.caja}>
                     <div className={stylesR.containeTitle}>
+                    <Link to='/Ordenes'>
+                            <button className={stylesR.CombeBackButton} >Volver atrás</button>
+                        </Link>
                         <h1 className={stylesR.titleLitte} >Orden Nro: {order?.id} </h1>
                         <h1 className={stylesR.titleLitte} >Fecha de realización: {new Date(+order?.confirmAt).toLocaleDateString("en-GB")}</h1>
                         <h1 className={stylesR.titleLitte} > Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={

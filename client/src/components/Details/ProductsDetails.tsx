@@ -522,10 +522,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             </div>
           </form>
         </div>
-
-
-
-
         <div className={Rstyles.SortEnd} >
           <div className={Rstyles.SorTitle} >
             <h3 className={Rstyles.TiReview} >Valoramos tu opinión</h3>
@@ -576,7 +572,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 </div>
               )}
               <div className={Rstyles.SortReview} >
-
                 {hideRating && revActual.length === 0 ? (
                   <div className={styles.estrellas}>
                     {[...Array(5)].map((star, index) => {
@@ -609,7 +604,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 )}
               </div>
               <div className={Rstyles.SortReview} >
-                {revActual.length === 0 && hideReview || reviewuser.review !== '' && reviewuser.title !== '' ? (
+                {reviewuser.review !== '' && reviewuser.title !== '' &&  rating.length !== 0  && hideReview ? (
                   <button onClick={changereview} className={Rstyles.ButtonSend}>
                     Enviar
                   </button>
@@ -617,8 +612,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                   false
                 )}
               </div>
-              {console.log(revActual)}
-
             </div>
           ) : (
             false
@@ -634,7 +627,6 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                         <FaStar
                           color={rating ? "#ffc107" : "#e4e5e9"}
                         />
-
                       );
                     })}
                   </div>

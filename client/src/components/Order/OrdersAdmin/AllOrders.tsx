@@ -34,6 +34,9 @@ export default function AllOrders() {
                 <div className={stylesR.caja}>
                     <div className={stylesR.containeTitle}>
                         <h1 className={stylesR.titleCreate} >Todas las órdenes</h1>
+                        <Link to='/home'>
+                            <button className={stylesR.CombeBackButton} >Volver a home</button>
+                        </Link>
                     </div>
                     <div className={styles.container}>
                         <form>
