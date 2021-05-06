@@ -161,7 +161,6 @@ function App() {
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
-        <Route exact path= '/ArmaTuPc' component={BuildPcUser} />
         <Route exact path='/Home'>
           <div className={styles.catalog}>
             <NavCategories />

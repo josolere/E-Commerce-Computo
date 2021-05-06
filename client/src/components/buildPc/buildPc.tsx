@@ -4,6 +4,7 @@ import Card from '../Cards/CardHome'
 
 export const BuildPc = (props:any): JSX.Element =>{
     
+  console.log(props)
     console.log(props.products?.getProductsCompatibilities)
       
         return (

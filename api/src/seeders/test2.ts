@@ -345,7 +345,7 @@ let products = [
     details: 
       "Ventana de cristal templado y diseño exterior anguloso. El diseño asimétrico aporta un aspecto atrevido.Anclajes y abrazaderas para cables. Oculte los cables detrás de la bandeja de la placa base para conseguir un aspecto organizado y apartado del flujo de aire para mejorar la refrigeración. Espacio para cinco ventiladores de 120 mm. Potencial de refrigeración excelente con un ventilador frontal de 120 mm preinstalado. Amplio almacenamiento. Bastidores para tres unidades HDD y dos SSD de instalación sencilla para conseguir un aspecto organizado del sistema y los cables. Panel lateral de E/S limpio. Con un puerto USB 3.0 de alta velocidad y puertos adicionales para todo tipo de conexiones modernas.",
     price: 12816,
-    categoriesId: [8],
+    categoriesId: [9],
     stock: 10
   },
   { 
@@ -355,7 +355,7 @@ let products = [
     details: 
       "Thermaltake Core V21 SPCC Micro ATX, chasis de caja de computadora para juegos Mini ITX Cube, construcción de factor de forma pequeño, ventilador frontal de 200 mm preinstalado",
     price: 29899,
-    categoriesId: [8],
+    categoriesId: [9],
     stock: 10
   },
   { 
@@ -365,7 +365,7 @@ let products = [
     details: 
       "DISEÑO INCREÍBLE: Panel frontal transparente y de malla Ventiladores ARGB dobles de 200 mm Sistema de iluminación ARGB. Panel lateral de vidrio templado. EL RENDIMIENTO VIENE EN PARES: Dos paneles frontales, dos ventiladores ARGB de 200 mm y un asa para agarrarse cuando la adrenalina entra en juego . El MasterCase H500 se establece como el chasis de referencia para un flujo de aire de alto rendimiento. Ahora, con ventiladores ARGB de 200 mm, su legado se actualiza con iluminación premium. PANELES TRANSPARENTES Y DE MALLA INCLUIDOS: Cada elección de paneles frontales decide si la construcción sobresaldrá en un rendimiento de flujo de aire despiadado o una estética llamativa. Por supuesto, la malla es la opción ideal para proporcionar a los ventiladores preinstalados grandes volúmenes de aire fresco. El panel transparente, por otro lado, desfila a esos fanáticos en una vista cristalina.",
     price: 16999,
-    categoriesId: [8],
+    categoriesId: [9],
     stock: 10
   },
   { 
@@ -373,7 +373,7 @@ let products = [
     image: "https://www.scan.co.uk/images/infopages/be_quiet_cooler/silentloop2/360top.png",
     details: "Muy alto rendimiento de refrigeración. Con Pure Loop, incluso las aplicaciones más exigentes se pueden utilizar de forma fiable. Una inmensa potencia de refrigeración proporciona bajas temperaturas, incluso durante períodos de máximo rendimiento de la CPU. Fans de Pure Wings 2: El ventilador Pure Wings 2 de 4.724 in proporciona un funcionamiento muy silencioso y un alto rendimiento de refrigeración. Sus nueve aspas de ventilador optimizadas para flujo de aire hacen de Pure Wings 2 el ventilador ideal para el radiador de aluminio de Pure Loop.",
     price: 41999,
-    categoriesId: [9],
+    categoriesId: [10],
     stock: 9
   },
   { 
@@ -381,7 +381,7 @@ let products = [
     image: "https://cdn-reichelt.de/bilder/web/xxl_ws/E200/BEQUIET_BK023-01.png",
     details: "Potencia de enfriamiento inmensa: No hay limitaciones en silencio y rendimiento para sistemas overclocked y aplicaciones gráficas exigentes. Dark Rock Pro 4 proporciona una impresionante calificación de TDP de 250W y alcanza bajas temperaturas incluso durante períodos de máximo rendimiento de la CPU. Diseño altamente avanzado. Dark Rock Pro 4 está equipado con siete tubos de calor de cobre de 0.236 in de tecnología avanzada que maximizan la conductancia del calor. Las aletas de enfriamiento optimizadas por el flujo de aire con pequeños puntos en sus superficies aumentan la circulación del aire. El revestimiento negro especial con partículas de cerámica hace posible una transferencia perfecta del calor.",
     price: 37999,
-    categoriesId: [9],
+    categoriesId: [10],
     stock: 9
   },
   { 
@@ -389,7 +389,7 @@ let products = [
     image: "https://www.pngfind.com/pngs/m/313-3137219_zoom-cooler-master-hyper-212-led-turbo-cpu.png",
     details: "Cooler Master ha revivido el legendario Hyper 212 EVO con importantes mejoras. Actualizado con un diseño de tubo de calor asimétrico, ahora proporciona un 100% de espacio de RAM para garantizar la compatibilidad entre las placas base. La estatura más fría también se ha acortado, lo que hace que la compatibilidad de la carcasa sea aún mejor. La exclusiva tecnología de contacto directo de Cooler Master, combinada con el nuevo ventilador SickleFlow 120, ofrece el mejor equilibrio entre rendimiento de refrigeración y funcionamiento silencioso. Además, se han mejorado los soportes universales",
     price: 37999,
-    categoriesId: [9],
+    categoriesId: [10],
     stock: 9
   },
   { 
@@ -397,7 +397,7 @@ let products = [
     image: 'https://www.thermaltake.com/pub/media/wysiwyg/key3/db/products/psu/litepower_rgb/main_450_230V.png',
     details: 'La fuente cuenta con las suiguientes protecciones: OVP (Over Voltage Protection) o Protección contra Sobretensión, OPP (Over Power Protection) o Protección contra Sobrecarga, SCP (Short Circuit Protection) o Protección contra Cortocircuito.',
     price: 5000,
-    categoriesId: [10],
+    categoriesId: [11],
     stock:9
   },
   { 
@@ -405,140 +405,16 @@ let products = [
     image: 'https://c0.klipartz.com/pngpicture/471/194/sticker-png-pc-power-supply-unit-thermaltake-toughpower-grand-atx-80-plus-power-converters-psu-electronic-device-power-converters-power-supply-power-supply-unit-psu.png',
     details: 'La fuente de alimentación ToughPower de Thermaltake te va a brindar 650W de potencia, avalados además por su certificación de eficiencia 80 Plus Bronze. Vas a poder alimentar todos tus componentes y prácticamente en total silencio gracias a su sistema de ventilación de bajo ruido. Sumado a esto, vas a tener el diseño gamer que querés en tu pc gracias a su sistema de RGB.',
     price: 6000,
-    categoriesId: [10]
+    categoriesId: [11]
   },
   { 
     name: 'EVGA 850GQ 850w 80 Plus Gold ',
     image:'https://images.evga.com/products/gallery/png/210-GQ-0850-V1_LG_1.png',
     details: 'MUY SILENCIOSO: La función de modo de EVGA ECO asegura que la fuente de alimentación se mantenga en completo silencio durante cargas bajas a medianas. El ventilador no gira hasta que sea necesario, permitiendo un funcionamiento totalmente silencioso!. RENDIMIENTO INCOMPARABLE: 90% de eficiencia o superior con cargas típicas y condensadores de la más alta calidad de marca japonesa aseguran la fiabilidad a largo plazo. DISEÑO MODULAR: Diseño semi-modular permite sólo utilizar los cables que necesitas, ayudando a mejorar el flujo de aire dentro de la fuente, eliminar los cables innecesarios, y lo mejor de todo, a reducir el desorden de cables.',
     price: 65000,
-    categoriesId: [10]
-  },
-  {
-    name: 'Intel i3-8100 4-Cores 3.6Ghz',
-    image: 'https://pim-media.intel.com/pub-api/v1/imageservice/customize?url=https://www.intel.com/content/dam/products/hero/foreground/processor-box-8th-gen-core-i3-unlocked-1x1.png&height=486&width=864',
-    details: '• Cantidad de núcleos 4 • Cantidad de subprocesos 4, • Frecuencia básica del procesador 3,60 GHz,  • Caché 6 MB ,• Velocidad del bus 8 GT/s,  • TDP 65 W',
-    categoriesId:[2]
-  },
-  {
-    name: 'Intel i7-8700k 6-cores 3.7GHz Base',
-    image: 'https://www.intel.com/content/dam/products/hero/foreground/processor-box-8th-gen-core-i7-unlocked-1x1.png',
-    details: '* 6 cores * Socket LGA1151, * Overcloking Capable, *Intel Hyper-Threading Technology for 12 Way Multitasking, *Intel Turbo Boost Technology 2.0 ,* Intel Smart Cache Technology',
-    price: 62.399,
-    categoriesId:[2]
-  },
-  {
-    name: 'Intel i3-9100F 4-Cores 4,20Ghz',
-    image: 'https://compratecno.cl/19458-medium_default/inteli3core32c6ghz44socket-lga1151gen84-hilos6mb-cachecpu36.jpg',
-    details: 'Modelo: i3 9100F, Video : No Incluye (necesita placa de video), Estado: Launched, Litografía: 14 nm, Cantidad de núcleos: 4, Cantidad de subprocesos: 4 ,Frecuencia básica del procesador: 3,60GHz, Frecuencia turbo máxima: 4,20 GHz, Caché: 6MB',
-    price: 15399,
-    categoriesId:[2]
-  },
-  {
-    name: 'Intel i7-9700K 8-Cores 4,9Ghz',
-    image: 'https://drakemall-files-new.s3.eu-central-1.amazonaws.com/_intel-i-cjqwcyi5b001q01u6xnaumsok.png',
-    details: 'Modelo: i7-9700K, -Generación: 9° Gen, -Caché: 12 MB, -Cantidad de núcleos de CPU: 8, -Hilos: 8, -Tipos de memoria RAM soportadas: DDR4-2666, -Cantidad de RAM soportada: 128 GB, -Socket: LGA 1151',
-    price: 48399,
-    categoriesId:[2]
-  },
-  {
-    name: 'Intel i5-10400f 6-Cores 4,30Ghz',
-    image: 'https://storage-asset.msi.com/event/2020/mb/intel-z490-promotion/images/intel-core-i7.png',
-    details: '- Cantidad de núcleos de CPU : 6, - Hilos : 12, - Tipos de memoria RAM soportadas : DDR4, - Cantidad de RAM soportada : 128 GB, - Socket : LGA 1200, - Frecuencia mínima de reloj : 2,90 GHz, - Frecuencia máxima de reloj : 4,30 GHz, - Desbloqueado para OC : No, - TDP : 65 W',
-    price: 20.999,
-    categoriesId:[2]
-  },
-  {
-    name: 'Intel i3-10100f 4-Cores 4.3Ghz',
-    image: 'https://vision-techno.com/assets/images/products/279/productLogo.png',
-    details: '- Cantidad de núcleos de CPU : 4, - Hilos : 8, - Tipos de memoria RAM soportadas : DDR4, - Cantidad de RAM soportada : 128GB, - Socket : LGA1200, - Frecuencia mínima de reloj : 3,6 GHz, - Frecuencia máxima de reloj : 4,3 GHz, - Desbloqueado para OC : No, - Accesorios incluidos : Air cooler, - TDP : 65 W',
-    price: 12.099,
-    categoriesId:[2]
-  },
-  { 
-    name: 'AMD Ryzen 7 1700x 8-Cores 3.8Ghz',
-    image: 'https://www.amd.com/system/files/2020-09/616656-amd-ryzen-7-5000-series-PIB-1260x709_0.png',
-    details: 'Especificaciones técnicas: Socket de procesador: AMD AM4, Familia de procesador: AMD Ryzen Processors, Socket Type: AM4, Cache 4 MB/16 MB (L2/L3), Frequency 3.8 GHz Precision Boost ',
-    price: 59000,
-    categoriesId:[2]
-  },
-  { 
-    name: 'AMD Ryzen 3 1300x 4-Cores 3.7Ghz ',
-    image: 'https://www.seekpng.com/png/full/773-7730645_budget-general-purpose-amd-ryzen-3-box.png',
-    details: 'AMD Ryzen™ 3 1300X, Specifications: # de núcleos de CPU 4, # de hilos 4, Reloj base 3.5GHz, Reloj de aumento máx. Hasta 3.7GHz, Caché L1 total 384KB, Caché L2 total 2MB, Caché L3 total 8MB, Desbloqueados: Sí',
-    price: 13099,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 3 2200G 4-Cores 3.7Ghz',
-    image: 'https://www.seekpng.com/png/full/773-7730645_budget-general-purpose-amd-ryzen-3-box.png',
-    details: 'Jugá sin necesidad de una placa de vide externa! Corre todo, incluso los juegos AAA(en 720p 30fps), solo asegurate de que tengas RAM en dual channel(y si es rapida mejor!)',
-    price: 24.099,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 5 2600x 6-Cores 4.2Ghz',
-    image: 'https://www.amd.com/system/files/11157-ryzen-5-pib-left-facing-1260x709.png',
-    details: 'AMD Ryzen™ 3 1300X: Specifications: # de núcleos de CPU 4, # de hilos 4, Reloj base 3.5GHz, Reloj de aumento máx. Hasta 3.7GHz, Caché L1 total 384KB, Caché L2 total 2MB, Caché L3 total 8MB, Desbloqueados Sí',
-    price: 26000,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 7 2700x 8-Cores 4.3Ghz ',
-    image: 'https://www.amd.com/system/files/2020-09/616656-amd-ryzen-7-5000-series-PIB-1260x709_0.png',
-    details: ' // 8 Cores/16 Threads UNLOCKED // Frequency: 4.3 GHz Max Boost // Compatibility : Windows 10 64 Bit Edition , RHEL x86 64 Bit , Ubuntu x86 64 Bit // 20MB of Combined Cache // Socket AM4 Motherboard Required //',
-    price: 51999,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 3 3100 4-Cores 3.9Ghz',
-    image: 'https://www.seekpng.com/png/full/773-7730645_budget-general-purpose-amd-ryzen-3-box.png',
-    details: 'Specifications: # de núcleos de CPU 4, # de hilos 4, Reloj base 3.5GHz, Reloj de aumento máx. Hasta 3.9GHz, Caché L1 total 384KB, Caché L2 total 2MB, Caché L3 total 8MB, Desbloqueados No',
-    price: 24999,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 5 3600x 6-Cores 4.4Ghz',
-    image: 'https://www.amd.com/system/files/11157-ryzen-5-pib-left-facing-1260x709.png',
-    details: 'Specifications: # de núcleos de CPU 6, # de hilos 6, Reloj base 3.5GHz, Reloj de aumento máx. Hasta 4.4 GHz, Caché L1 total 384KB, Caché L2 total 2MB, Caché L3 total 8MB, Desbloqueados No',
-    price: 37399,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 7 3700x 8-Cores 4.4Ghz',
-    image: 'https://www.amd.com/system/files/2020-09/616656-amd-ryzen-7-5000-series-PIB-1260x709_0.png',
-    details: '// 8 Cores/16 Threads UNLOCKED // Frequency: 4.4 GHz Max Boost // Compatibility : Windows 10 64 Bit Edition , RHEL x86 64 Bit , Ubuntu x86 64 Bit // 20MB of Combined Cache // Socket AM4 Motherboard Required //',
-    price: 43999,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 9 3900x 12-Core 4.6Ghz',
-    image: 'https://www.amd.com/system/files/2020-09/616656-amd-ryzen-9-5000-series-PIB-1260x709_0.png',
-    details: '// 8 Cores/16 Threads UNLOCKED // Frequency: 4.6 GHz Max Boost // Compatibility : Windows 10 64 Bit Edition , RHEL x86 64 Bit , Ubuntu x86 64 Bit // 20MB of Combined Cache // Socket AM4 Motherboard Required //',
-    price: 77999,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 9 3950x 16-Core @4.7Ghz',
-    image: 'https://www.amd.com/system/files/2020-09/616656-amd-ryzen-9-5000-series-PIB-1260x709_0.png',
-    details: '// 12 Cores/32 Threads UNLOCKED // Frequency: 4.7 GHz Max Boost // Compatibility : Windows 10 64 Bit Edition , RHEL x86 64 Bit , Ubuntu x86 64 Bit // 20MB of Combined Cache // Socket AM4 Motherboard Required //',
-    price: 106999,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD Ryzen 5 5600x 6-Core @4.6Ghz',
-    image: 'https://www.amd.com/system/files/11157-ryzen-5-pib-left-facing-1260x709.png',
-    details:'// 6 Cores/12 Threads UNLOCKED // Frequency: 4.6 GHz Max Boost // Compatibility : Windows 10 64 Bit Edition , RHEL x86 64 Bit , Ubuntu x86 64 Bit // 20MB of Combined Cache // Socket AM4 Motherboard Required //',
-    price: 41999,
-    categoriesId:[2]
-  },
-  {
-    name: 'AMD APU A-6 7480 2-Cores 3.5 GHz',
-    details: '// 2 Cores/2 Threads LOCKED // Frequency: 3.5 GHz Max Boost // Compatibility : Windows 10 64 Bit Edition , RHEL x86 64 Bit , Ubuntu x86 64 Bit // 20MB of Combined Cache // Socket FM2 Motherboard Required //',
-    image: 'https://images-na.ssl-images-amazon.com/images/I/81-NpR0VO1L._AC_SL1500_.jpg',
-    price: 5500,
-    categoriesId:[2]
+    categoriesId: [11]
   }
+  
 ];
 
 
@@ -562,7 +438,7 @@ let categories = [
     name: "Monitores",
   },
   {
-    name: "Perifericos",
+    name: "Periferos",
   },
   {
     name: "Gabinetes",

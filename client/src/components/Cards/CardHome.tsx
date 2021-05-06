@@ -15,8 +15,8 @@ interface props {
     name: string
     image: string
     price: number
-    count: number
-    stock:number
+    count?: number
+    stock?:number
 }
 
 export default function Card({ name, image, price, id, count, stock }: props) {

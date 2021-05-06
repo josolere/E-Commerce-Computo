@@ -12,9 +12,9 @@ const force = true;
 const logging = true;
 sequelize.sync({ alter, force, logging }).then(() => {
   if (force) {
-    categoriesSeeder();
-    productsSeeder()
-    usersSeeder()
+   categoriesSeeder();
+    usersSeeder(); 
+    productsSeeder();
     setTimeout(() => productRelationsSeeder(), 5000);
     
   }
