@@ -233,22 +233,19 @@ export default {
     ): Promise<any> => {
       const OrderToEdit = await models.Order.findByPk(id);
       if (OrderToEdit) {
-        let confirmAt = null;
-        if (input.status === "creada") {
-          confirmAt = Date.now();
-        }
+
         const updatedOrder = await OrderToEdit.update(
-          { ...input, confirmAt },
+          { ...input },
           { where: { id } }
         );
 
         //si el estado fue cambiado enviar un email informando ese cambio
-        console.log("+++++++++", updatedOrder);
         const user = await models.User.findByPk(updatedOrder.UserId);
 
         switch (input.status) {
           //orden finalizada por el usuario
-          case "procesando":
+          
+          case "creada":
             let auxproducts: any = [];
             const idOrder: any = updatedOrder.id;
 
@@ -264,7 +261,7 @@ export default {
                 quantity: p.dataValues.quantity,
               };
             });
-            console.log("el array generado es: ", auxproducts);
+     /*       console.log("el array generado es: ", auxproducts);
             orderCreatedMail(
               user.email,
               updatedOrder.id,
@@ -272,10 +269,13 @@ export default {
               user.address,
               user.name
             );
+            */
             break;
 
           //pedido despachado
           case "completa":
+            console.log('****************************************************************')
+            console.log(user.email);
             orderShippedMail(user.email, user.name, updatedOrder.updatedAt);
         }
 
