@@ -197,6 +197,25 @@ $red:#f05454;
      }
  }
 
+ 
+ .sortSad{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.pSad{
+  font-size: 3vh;
+  font-family: 'Montserrat', sans-serif;
+  color: $dark;
+}
+
+.ImageHeart{
+  max-width: 10rem;
+}
+
   @media (max-width: 648px) {
     .titleCreate{
         padding: 0;

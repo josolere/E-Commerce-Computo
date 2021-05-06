@@ -213,6 +213,7 @@ let products = [
     name: "Mousepad Medium Rgb Steelseries Qck Gaming Surface",
     image:
       "https://cdn.idntimes.com/content-images/community/2017/10/stel-e8111faa795a43916354266643ffeaf4.png",
+    brand:"SteelSeries",
     details:
       "El software SteelSeries Engine desbloquea un impresionante arsenal de aplicaciones de motor que hacen que la personalización sea fácil e intuitiva.",
     price: 16969,
@@ -220,9 +221,10 @@ let products = [
     stock: 7,
   },
   {
-    name: 'Monitor curvo MSI Optix G27C led 27 " negro 100V/240V',
+    name: "Monitor curvo MSI Optix G27C led 27  negro 100V/240V",
     image:
       "https://asset.msi.com/global/picture/images/monitor/Gaming_monitor.png",
+    brand: "MSI",
     details:
       "Disfrutá de todas las cualidades que el monitor MSI G27C tiene para ofrecerte. Percibí las imágenes de una manera completamente diferente y complementá cualquier espacio ya sea en tu casa u oficina.",
     price: 58900,
@@ -233,6 +235,7 @@ let products = [
     name: "Memoria RAM Vengeance LPX 16GB 2x8GB Corsair",
     image:
       "https://www.arjansac.com/image/cache/catalog/CORSAIR/Memorias%20RAM/Memoria%20RAM%20DDR4%202666Mhz%20PC4-21300/COR%2016GB%202666MHZ%20VENG%20DDR4/COR%2016GB%202666MHZ%20VENG%20DDR42-1000x1000.png",
+    brand: "Vengeance",
     details:
       "Su capacidad de 16 GB distribuida en módulos de 2 x 8 GB hace de esta memoria un soporte ideal para trabajos con aplicaciones de diseño o edición, juegos exigentes, contenidos multimedia, entre otros. A su vez, la distribución de la capacidad total en dos módulos iguales te permitirá maximizar tus posibilidades de uso.",
     price: 13490,

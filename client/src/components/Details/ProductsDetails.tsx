@@ -374,9 +374,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             </div>
             <div className={Rstyles.SortCenter}>
 
-              {user ? <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
+              {user ? <button onClick={handleFav} className={wishe ? styles.fav : styles.fav}><FiHeart size={20} /></button>
                 :
-                <button className={Rstyles.fav}><Link to="/Login"><FiHeart size={20} /></Link></button>
+                <button className={styles.fav}><Link to="/Login"><FiHeart size={20} /></Link></button>
               }
               {editMode ?
                 <div className={Rstyles.form__groupEdit}>
