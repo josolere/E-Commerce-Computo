@@ -322,6 +322,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     e.preventDefault()
     console.log(user)
     wish({ variables: { userId: currentU?.data?.currentUser?.id, productId: id } })
+    toast.success('Se ha agregado a favoritos ❤')
   }
 
   useEffect(() => {

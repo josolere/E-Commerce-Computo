@@ -12,7 +12,7 @@ import {
   faCreditCard, faUniversity, faMoneyCheck,
   faMoneyBill, faCalculator, faCashRegister
 }
-from '@fortawesome/free-solid-svg-icons';
+  from '@fortawesome/free-solid-svg-icons';
 import styles from './Payment.module.scss';
 import styles2 from './MercadoV2.module.scss';
 import Logo from '../images/MercadoPago.png';
@@ -29,12 +29,15 @@ declare global {
 interface Props { }
 
 interface PropsMercado {
+  location: {
+    search: string
+  }
   history: {
-      location: {
-          state: {
-              price: string
-          }
+    location: {
+      state: {
+        price: string
       }
+    }
   }
 }
 
@@ -45,6 +48,14 @@ interface PropsMercado {
 
 const MP: FC<PropsMercado> = (props) => {
 
+  /*   const search = props.location.search; 
+  
+    const params = new URLSearchParams(search);
+  
+    const PriceFromURL = params.get('price');
+  
+    console.log(PriceFromURL) */
+
   const user = useQuery(ACTUAL_USER)
 
   const price = props.history.location.state.price
@@ -53,23 +64,26 @@ const MP: FC<PropsMercado> = (props) => {
 
   let idUser = user?.data?.currentUser?.id
 
-  let order = useQuery(CURRENT_ORDER, {variables:{idUser:idUser, status:'pendiente'}})
+  let order = useQuery(CURRENT_ORDER, { variables: { idUser: idUser, status: 'pendiente' } })
 
   let idOrder = order?.data?.getOrderByStatus[0]?.id
-
-  console.log(idOrder)
 
   const [processPayment, results] = useMutation(MERCADO_PAGO);
 
   let priceTotal = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal).toString()
 
-  priceTotal= priceTotal.toString()
+  priceTotal = priceTotal.toString()
+
+  const [timer, setTimer] = useState(false)
+
+
 
 
   useEffect(() => {
+    setTimeout(() => setTimer(true), 10000)
 
     const cardForm = mp.cardForm({
-      
+
       amount: price,
       autoMount: true,
       form: {
@@ -161,11 +175,11 @@ const MP: FC<PropsMercado> = (props) => {
             .then((result) => window.location.href = `http://localhost:3000/PostPago?id=${result?.data?.processPayment?.payment?.id}`)
             .catch(error => console.log(error)) // este error entra si el error es del lado del cliente
             .finally(() => console.log('termine'))
-/*             const progressBar = document.querySelector(".progress-bar");
-            progressBar?.removeAttribute("value");
-            return () => {
-              progressBar?.setAttribute("value", "0");
-            };    */ 
+          /*             const progressBar = document.querySelector(".progress-bar");
+                      progressBar?.removeAttribute("value");
+                      return () => {
+                        progressBar?.setAttribute("value", "0");
+                      };    */
           /*   
                       console.log(payment_method_id)
                       console.log("issuerId", issuer_id)
@@ -221,154 +235,157 @@ const MP: FC<PropsMercado> = (props) => {
 
   return (
     <div className={styles4.back} >
-            <div className={styles4.organizar} >
-                <div className={styles4.caja} >
-                    <div className={styles.sortUp} >
-                        <img className={styles.LogoMP} src={Logo} alt='' />
-                        <form id="form-checkout" className={styles.form} >
-                            <div className={styles.form__group} >
-                                <label className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faCreditCard} /> Numero de Tarjeta</label>
-                                <input
-                                    className={styles.form__field}
-                                    type="text"
-                                    name="cardNumber"
-                                    required={true}
-                                    minLength={16}
-                                    maxLength={16}
-                                    id="form-checkout__cardNumber"
-                                />
-                            </div>
-                            <div className={styles2.MoYe} >
-                                    <label className={styles2.form__labelM} >
-                                        <FontAwesomeIcon icon={faCalendar} /> Mes</label>
-                                    <input
-                                        className={styles2.form__field__Month}
-                                        type="text"
-                                        minLength={2}
-                                        maxLength={2}
-                                        required={true}
-                                        name="cardExpirationMonth"
-                                        id="form-checkout__cardExpirationMonth"
-                                    />
-                                    <label className={styles2.form__labelY} >
-                                        <FontAwesomeIcon icon={faCalendar} /> Año</label>
-                                    <input
-                                        className={styles2.form__field__Month}
-                                        type="text"
-                                        minLength={2}
-                                        maxLength={2}
-                                        required={true}
-                                        name="cardExpirationYear"
-                                        id="form-checkout__cardExpirationYear"
-                                    />
-                            </div>
-                            <div className={styles.form__group} >
-                                <label className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faSignature} /> Nombre del Titular</label>
-                                <input
-                                    className={styles.form__field}
-                                    type="text"
-                                    name="cardholderName"
-                                    id="form-checkout__cardholderName"
-                                />
-                            </div>
-                            <div className={styles.form__group} >
-                                <label className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail del Titular</label>
-                                <input
-                                    className={styles.form__field}
-                                    type="email"
-                                    name="cardholderEmail"
-                                    id="form-checkout__cardholderEmail"
-                                />
-                            </div>
-                            <div className={styles.form__group}>
-                                <label className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faLock} /> Codigo de Seguridad</label>
-                                <input
-                                    className={styles.form__field}
-                                    type="text"
-                                    minLength={3}
-                                    maxLength={3}
-                                    required={true}
-                                    name="securityCode"
-                                    id="form-checkout__securityCode"
-                                />
-                            </div>
-                            <div className={styles.sortBox} >
-                                <label htmlFor="docType"
-                                    className={styles.labelSelect}
-                                >
-                                    <FontAwesomeIcon icon={faUniversity} /> Banco Emisor</label>
-                                <div className={styles.box} >
-                                    <select
-                                        name="issuer"
-                                        id="form-checkout__issuer">
-                                    </select>
-                                </div>
-                            </div>
-                            <div className={styles2.sortBoxBE} >
-                                <label htmlFor="docType"
-                                    className={styles.labelSelect}
-                                >
-                                    <FontAwesomeIcon icon={faPassport} /> Tipo de documento</label>
-                                <div className={styles.box} >
-                                    <select
-                                        name="identificationType"
-                                        id="form-checkout__identificationType">
-                                    </select>
-                                </div>
-                            </div>
-                            <div className={styles.form__group}>
-                                <label className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faAddressBook} /> Número de Documento</label>
-                                <input
-                                    className={styles.form__field}
-                                    type="text"
-                                    minLength={8}
-                                    required={true}
-                                    maxLength={8}
-                                    name="identificationNumber"
-                                    id="form-checkout__identificationNumber"
-                                />
-                            </div>
-                            <div className={styles.sortBox} >
-                                <label htmlFor="docType"
-                                    className={styles.labelSelect}
-                                >
-                                    <FontAwesomeIcon icon={faMoneyCheck} /> Cuotas</label>
-                                <div className={styles.box}>
-                                    <select
-                                        name="installments"
-                                        id="form-checkout__installments">
-                                    </select>
-                                </div>
-                            </div>
-                            <div className={styles2.sortTotal} >
-                                <h1 className={styles2.HTotal} >Total</h1>
-                                <h1 className={styles2.PTotal} >
-                                    <FontAwesomeIcon icon={faMoneyBill} style={{color:'#002D62'}} /> ${new Intl.NumberFormat().format(priceTotal)}
-                                </h1>
-                            </div>
-                            <div className={styles.organizarbotones} >
-                                <button
-                                    className={styles.boton}
-                                    type="submit"
-                                    id="form-checkout__submit">
-                                    Pagar
-                             </button>
-                            </div>
-                            <progress
-                                value="0"
-                                className="progress-bar">
-                                Cargando...
-                </progress>
-                        </form>
-                    </div>
+      <div className={styles4.organizar} >
+        <div className={styles4.caja} >
+          <div className={styles.sortUp} >
+            <img className={styles.LogoMP} src={Logo} alt='' />
+            <form id="form-checkout" className={styles.form} >
+              <div className={styles.form__group} >
+                <label className={styles.form__label} >
+                  <FontAwesomeIcon icon={faCreditCard} /> Numero de Tarjeta</label>
+                <input
+                  className={styles.form__field}
+                  type="text"
+                  name="cardNumber"
+                  required={true}
+                  minLength={16}
+                  maxLength={16}
+                  id="form-checkout__cardNumber"
+                />
+              </div>
+              <div className={styles2.MoYe} >
+                <label className={styles2.form__labelM} >
+                  <FontAwesomeIcon icon={faCalendar} /> Mes</label>
+                <input
+                  className={styles2.form__field__Month}
+                  type="text"
+                  minLength={2}
+                  maxLength={2}
+                  required={true}
+                  name="cardExpirationMonth"
+                  id="form-checkout__cardExpirationMonth"
+                />
+                <label className={styles2.form__labelY} >
+                  <FontAwesomeIcon icon={faCalendar} /> Año</label>
+                <input
+                  className={styles2.form__field__Month}
+                  type="text"
+                  minLength={2}
+                  maxLength={2}
+                  required={true}
+                  name="cardExpirationYear"
+                  id="form-checkout__cardExpirationYear"
+                />
+              </div>
+              <div className={styles.form__group} >
+                <label className={styles.form__label} >
+                  <FontAwesomeIcon icon={faSignature} /> Nombre del Titular</label>
+                <input
+                  className={styles.form__field}
+                  type="text"
+                  name="cardholderName"
+                  id="form-checkout__cardholderName"
+                />
+              </div>
+              <div className={styles.form__group} >
+                <label className={styles.form__label} >
+                  <FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail del Titular</label>
+                <input
+                  className={styles.form__field}
+                  type="email"
+                  name="cardholderEmail"
+                  id="form-checkout__cardholderEmail"
+                />
+              </div>
+              <div className={styles.form__group}>
+                <label className={styles.form__label} >
+                  <FontAwesomeIcon icon={faLock} /> Codigo de Seguridad</label>
+                <input
+                  className={styles.form__field}
+                  type="text"
+                  minLength={3}
+                  maxLength={3}
+                  required={true}
+                  name="securityCode"
+                  id="form-checkout__securityCode"
+                />
+              </div>
+              <div className={styles.sortBox} >
+                <label htmlFor="docType"
+                  className={styles.labelSelect}
+                >
+                  <FontAwesomeIcon icon={faUniversity} /> Banco Emisor</label>
+                <div className={styles.box} >
+                  <select
+                    name="issuer"
+                    id="form-checkout__issuer">
+                  </select>
                 </div>
-            </div>
+              </div>
+              <div className={styles2.sortBoxBE} >
+                <label htmlFor="docType"
+                  className={styles.labelSelect}
+                >
+                  <FontAwesomeIcon icon={faPassport} /> Tipo de documento</label>
+                <div className={styles.box} >
+                  <select
+                    name="identificationType"
+                    id="form-checkout__identificationType">
+                  </select>
+                </div>
+              </div>
+              <div className={styles.form__group}>
+                <label className={styles.form__label} >
+                  <FontAwesomeIcon icon={faAddressBook} /> Número de Documento</label>
+                <input
+                  className={styles.form__field}
+                  type="text"
+                  minLength={8}
+                  required={true}
+                  maxLength={8}
+                  name="identificationNumber"
+                  id="form-checkout__identificationNumber"
+                />
+              </div>
+              <div className={styles.sortBox} >
+                <label htmlFor="docType"
+                  className={styles.labelSelect}
+                >
+                  <FontAwesomeIcon icon={faMoneyCheck} /> Cuotas</label>
+                <div className={styles.box}>
+                  <select
+                    name="installments"
+                    id="form-checkout__installments">
+                  </select>
+                </div>
+              </div>
+              <div className={styles2.sortTotal} >
+                <h1 className={styles2.HTotal} >Total</h1>
+                <h1 className={styles2.PTotal} >
+                  <FontAwesomeIcon icon={faMoneyBill} style={{ color: '#002D62' }} /> ${new Intl.NumberFormat().format(priceTotal)}
+                </h1>
+              </div>
+              {timer ?
+                <div className={styles.organizarbotones} >
+                  <button
+                    className={styles.boton}
+                    type="submit"
+                    id="form-checkout__submit">
+                    Pagar
+                             </button>
+                </div>
+                :
+                false}
+              <progress
+                value="0"
+                className="progress-bar">
+                Cargando...
+                </progress>
+            </form>
+          </div>
         </div>
+      </div>
+    </div>
   )
 }
 

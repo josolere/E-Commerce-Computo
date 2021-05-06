@@ -68,7 +68,6 @@ const PostPayment = () => {
                     <div className={styles.sortUp} >
                         <img className={styles.LogoMP} src={Truck} alt='' />
                         <form className={styles.form} onSubmit={handleSubmit} >
-
                             <div className={styles4.form__group}>
                                 <label className={styles4.form__label} htmlFor="email">
                                     <FontAwesomeIcon icon={faMapMarkedAlt} /> Provincia</label>

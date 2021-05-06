@@ -27,7 +27,7 @@ let products = [
   {
     name: "Headset Logitech G Series G432",
     image:
-      "https://www.hardware-journal.de/images/Bilder/2019/News/Logitech-G/G935-lightsync-wireless-G635-G432-7-1-surround-G332-Stereo/logitech-g432-gaming-headset-7-1.png",
+      "https://zock-around-the-clock.com/wp-content/uploads/2019/02/high-resolution-png-g935wireless7.1rgbgamingheadset3-4frontcord-353624-1-e1549902249853.png",
     brand: "Logitech",
     details:
       "¡Experimentá la adrenalina de sumergirte en la escena de otra manera! Tener auriculares específicos para jugar cambia completamente tu experiencia en cada partida. Con los Logitech G432 no te perdés ningún detalle y escuchás el audio tal y como fue diseñado por los creadores.",
@@ -135,7 +135,7 @@ let products = [
   },
   {
     name: 'MONITOR 22" LG 22MK600M FHD IPS 75HZ 5MS        ',
-    image: "https://www.venex.com.ar/products_images/1608298268_large01.png",
+    image: "https://www.cclink.cl/wp-content/uploads/2017/09/20MP38HQ-1-600x600.png",
     brand: "LG",
     details:
       "La tecnología IPS mejora el rendimiento de las pantallas de cristal líquido. Reducción del tiempo de respuesta, mejora de la reproducción del color, y el usuario puede ver la pantalla desde prácticamente cualquier ángulo.",
@@ -146,7 +146,7 @@ let products = [
   {
     name: "DISCO SOLIDO SSD 240 GB KINGSTON SATA III A400        ",
     image:
-      "https://www.venex.com.ar/products_images/1585751676_ssd_240gb_kingston_a400.jpg",
+      "https://speedlogic.com.co/wp-content/uploads/2020/12/13102.1-600x600.png",
     brand: "GIGABYTE",
     details:
       "La unidad de estado sólido A400 de Kingston mejora drásticamente la capacidad de respuesta de su sistema existente con increíbles tiempos de arranque, carga y transferencia en comparación con los discos duros mecánicos.",
@@ -168,7 +168,7 @@ let products = [
   {
     name: "MEMORIA RAM DDR4 4GB 2666MHZ HYPERX FURY",
     image:
-      "https://www.venex.com.ar/products_images/1585850472_ddr4_4gb_2666mhz_hyperxfury.png",
+      "https://tienda.itarrow.cl/wp-content/uploads/2020/09/hyperx-fury-rgb-16gb-2.png",
     brand: "HYPERX",
     details:
       "HyperX® FURY DDR4 reconoce automáticamente la plataforma a la que se conecta y realiza el overclock a la máxima frecuencia publicada, hasta 2666 MHz, para una funcionalidad plug-and-play perfecta. Ofrece un rendimiento de máximo nivel automático para placas base incluyendo los chiptsets X99 y de la serie 200 de Intel, y es un complemento a los procesadores de 2, 4, 6, 8 y 10 núcleos de Intel para acelerar la edición de vídeo, el renderizado 3D, las prestaciones de juego y el procesamiento de IA. HyperX FURY DDR4 da como resultado velocidades más rápidas, mayor rendimiento y fiabilidad mejorada. ",
@@ -190,7 +190,7 @@ let products = [
   {
     name: "TECLADO HYPERX ALLOY FPS PRO MECANICO ENG SWITCH RED        ",
     image:
-      "https://www.venex.com.ar/products_images/1616076589_740617268782.png",
+      "https://www.siliconweek.com/wp-content/uploads/2017/01/dartfrogrgb.png",
     brand: "HYPERX",
     details:
       "Los teclados HyperXTM Alloy FPS están diseñados para una gran durabilidad, confiabilidad y juego de alto nivel. Si lo que necesitas es un teclado completo, el Alloy FPS es el equipo ideal para ti. Si estás buscando un teclado tenkeyless (TKL, sin teclado numérico) que sólo te brinde las teclas más esenciales, el Alloy FPS Pro es el teclado que necesitas1. Todos los teclados cuentan con las características que todo shooter de primera persona (FPS) exigente querría en su teclado: teclas mecánicas CHERRY® MX, una sólida estructura de acero, cable desmontable, Modo Juego, 100% Anti-Ghosting, y N-key rollover. Ya sea que seas un shooter de primera persona (FPS) o que juegues como ellos, HyperX Alloy FPS es el teclado correcto para ti.",
@@ -201,7 +201,7 @@ let products = [
   {
     name: "MOUSE COOLER MASTER MM710 BLACK MATTE        ",
     image:
-      "https://www.venex.com.ar/products_images/1601583482_iil193015636750.png",
+      "https://img.gigatron.rs/img/products/large/image5d9ae89be632e.png",
     brand: "MASTER",
     details:
       "Al implementar un nuevo y novedoso diseño de carcasa de nido de abeja que es a la vez ligero y duradero, hemos recortado el peso total de nuestro ratón a menos de 53 g. No más peleas contra el ratón y no más francotiradores perdidos debido a un rango de movimiento de peso limitado. El dolor de muñeca después de las batallas de maratón y la fatiga después de pasar la noche es cosa del pasado. Apunte mejor, rinda mejor, durante más tiempo.",

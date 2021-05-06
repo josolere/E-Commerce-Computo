@@ -17,7 +17,6 @@ import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
 import OrdersUser from './components/Order/OrdersUser/OrdersUser'
 import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
 import Orders from './components/Order/Orders';
-import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from 'react-cookie';
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
@@ -137,7 +136,6 @@ function App() {
       </Route>
       <Switch>
         <Route exact path='/CrearAdministrador' component={CreateAdmin} />
-        <Route exact path='/EditarCuenta' component={EditAccount} />
         <Route exact path='/Orden/Detalle/:id' component={OrderDetails} />
         <Route exact path='/Ordenes' component={OrdersAdmin} />
         {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}

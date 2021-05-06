@@ -27,7 +27,7 @@ interface datauser {
 
 const CreateAdmin = () => {
 
-    const [editUser, user] = useMutation(CREATE_ADMIN)
+    const [editUser, user] = useMutation(CREATE_ADMIN, {refetchQueries:[{query:GET_USERS}]})
 
     const resultsUsers = useQuery(GET_USERS)
 

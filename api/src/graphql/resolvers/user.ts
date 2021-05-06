@@ -51,7 +51,7 @@ export default {
           {
             model: db.Product,
             through: "wishlist",
-            attributes: ["id", "name", "image", "price", "stock"],
+            attributes: ["id", "name", "image", "price", "stock", "brand"],
           },
         ],
       };

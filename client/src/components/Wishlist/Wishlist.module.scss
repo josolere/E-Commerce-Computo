@@ -67,7 +67,9 @@ $red:#f05454;
 }
 .sortCardsWish{
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 @keyframes textclip {
