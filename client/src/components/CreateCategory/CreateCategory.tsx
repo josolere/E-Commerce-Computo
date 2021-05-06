@@ -56,6 +56,7 @@ export default function CreateProduct(): JSX.Element {
                 setListCategory([...listCategory, resolve.data.createCategory]);
                 toast.success("Categoría añadida con éxito")
             })
+            .then((res) =>{setCategorie("")})
             .catch((err) => { console.log(err) })
     }
     /* console.log(cat)
