@@ -58,7 +58,7 @@ const MP: FC<PropsMercado> = (props) => {
 
   const price = props.history.location.state.price
 
-  const mp = new window.MercadoPago('TEST-87ab35ee-8f0f-46ec-a9c2-c7bbd03e98d4', { locale: 'es-AR' })
+  const mp = new window.MercadoPago('TEST-f76736fb-f8c7-4bb1-a19e-ab2ab45eb887', { locale: 'es-AR' })
 
   let idUser = user?.data?.currentUser?.id
 
@@ -82,7 +82,6 @@ const MP: FC<PropsMercado> = (props) => {
 })
 
   useEffect(() => {
-    setTimeout(() => setTimer(true), 10000)
 
     const cardForm = mp.cardForm({
 
@@ -339,7 +338,6 @@ const MP: FC<PropsMercado> = (props) => {
                   <FontAwesomeIcon icon={faMoneyBill} style={{ color: '#002D62' }} /> ${new Intl.NumberFormat().format(priceTotal)}
                 </h1>
               </div>
-              {timer ?
                 <div className={styles.organizarbotones} >
                   <button
                     className={styles.boton}
@@ -349,8 +347,7 @@ const MP: FC<PropsMercado> = (props) => {
                     Pagar
                              </button>
                 </div>
-                :
-                false}
+           
               <progress
                 value="0"
                 hidden={hidden}

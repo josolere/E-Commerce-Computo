@@ -54,7 +54,7 @@ const PayCompleted = (props: props) => {
                         <h1 className={styles2.Code} >Codigo de Compra es {IdFromURL}</h1>
                     </div>
                     <div className={styles.organizarbotones} >
-                        <Link to={testLink}>
+                        <Link to='/Ordenes/Usuario'>
                             <button
                                 className={styles2.boton}
                             >Ver tus órdenes
