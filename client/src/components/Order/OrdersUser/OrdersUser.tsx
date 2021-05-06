@@ -5,6 +5,7 @@ import { gql, useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretSquareLeft, faCaretSquareRight, faCircle, faList, faPlus } from '@fortawesome/free-solid-svg-icons'
+import SadBag from '../../images/EmptyBag.png';
 
 interface IOrder {
     id: number
@@ -44,26 +45,33 @@ export default function OrdersUser() {
                             <button className={styles.ComeHomeButton} >Volver a home</button>
                         </Link>
                     </div>
-                    <div className={styles.sortDisaster} >
-                        {!loading && orders?.map((order: IOrder) =>
-                            <div className={styles.sortRow}
-                                key={order.id}>
-                                <p className={styles.OrderNum} >
-                                    <FontAwesomeIcon icon={faList} style={{ marginRight: '5%' }} />Orden:{order.id}</p>
-                                <p className={styles.OrderNum} >
-                                    Estado:<FontAwesomeIcon icon={faCircle} className={styles.SeparateIcon} style={
-                                        (order.status === 'cancelada' && { color: '#FF3434' }) ||
-                                        (order.status === 'procesando' && { color: '#FCFF2F' }) ||
-                                        (order.status === 'completa' && { color: '#6DFF2F' }) ||
-                                        { color: '#FF7400' }
-                                    } />{order.status}</p>
-                                <a
-                                    className={styles.OrderPlus}
-                                    href={'/Orden/Usuario/' + order.id}>
-                                    <FontAwesomeIcon icon={faPlus} style={{ marginRight: '10%' }} />Ver
+                    {orders && orders.length === 0 ?
+                        <div className={styles.sortSad} >
+                            <h1 className={styles.titleCreate}   >Sus pedidos están vacios</h1>
+                            <p className={styles.pSad} >¡Empieza a descubrir productos increibles!</p>
+                            <img className={styles.ImageHeart} src={SadBag} alt='' />
+                        </div>
+                        :
+                        <div className={styles.sortDisaster} >
+                            {!loading && orders?.map((order: IOrder) =>
+                                <div className={styles.sortRow}
+                                    key={order.id}>
+                                    <p className={styles.OrderNum} >
+                                        <FontAwesomeIcon icon={faList} style={{ marginRight: '5%' }} />Orden:{order.id}</p>
+                                    <p className={styles.OrderNum} >
+                                        Estado:<FontAwesomeIcon icon={faCircle} className={styles.SeparateIcon} style={
+                                            (order.status === 'cancelada' && { color: '#FF3434' }) ||
+                                            (order.status === 'procesando' && { color: '#FCFF2F' }) ||
+                                            (order.status === 'completa' && { color: '#6DFF2F' }) ||
+                                            { color: '#FF7400' }
+                                        } />{order.status}</p>
+                                    <a
+                                        className={styles.OrderPlus}
+                                        href={'/Orden/Usuario/' + order.id}>
+                                        <FontAwesomeIcon icon={faPlus} style={{ marginRight: '10%' }} />Ver
                                     </a>
-                            </div>)}
-                    </div>
+                                </div>)}
+                        </div>}
                 </div>
             </div>
         </div>

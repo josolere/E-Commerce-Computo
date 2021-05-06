@@ -151,7 +151,7 @@ const PostPayment = () => {
                                     <button
                                         type='submit'
                                         className={styles2.boton}
-                                    >Confirmar Envió</button>
+                                    >Confirmar Envío</button>
                                 </div>
                                 :
                                 <div className={styles4.organizarbotones} >

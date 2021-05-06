@@ -2,9 +2,11 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { GET_CATEGORIES } from "../../gql/categoriesGql";
 import styles from "./loguin.module.scss";
+import styles2 from "./CreateProduct.module.scss";
+import { CREATE_FATHER_COMPATIBILITY } from "../../gql/createProductGql"
 import { NEW_PRODUCT } from "../../gql/createProductGql";
 import { amdComp, intelComp } from "./arrCompatibilities"
-import { ADD_COMPATIBILITIES } from "../../gql/buildPcgql";
+import { ADD_COMPATIBILITIES, GET_PRODUCT_COMPATIBILITIES } from "../../gql/buildPcgql";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentAlt,
@@ -70,12 +72,43 @@ const GET = gql`
   }
 `;
 
-export default function CreateProduct(): JSX.Element {
+export default function CreateProduct() {
+ 
+  const [select, setSelect]: any = useState({ value: "" })
+
+  const [selectProcesador, setSelectProcesador]: any = useState({ value: 0 })
+
+
+  const [selectAdvanced, setSelectAdvanced]: any = useState({ value: 0 })
+ 
+  const [prod, setProd] = useState<any>();
+
+  const [selectCompatibility, setSelectCompatibility ] = useState(0)
+
+  const [newpro, setnewpr] = useState<any>([]);
+
+  const [compatibilities, setCompatibilities]: any = useState({
+    headId: 0,
+    productsId: [],
+  });
+
   const [createProduct, results] = useMutation(NEW_PRODUCT); // para utiilizar usar results.data
 
   const [addCompatibility, resultsCompatibilities] = useMutation(
     ADD_COMPATIBILITIES
-  ); // para utiilizar usar results.data
+  ); 
+
+  const [addFatherCompatibility, resultsFatherCompatibility] = useMutation(
+    CREATE_FATHER_COMPATIBILITY
+  ); 
+
+  const { data: dataR } = useQuery(GET_PRODUCT_COMPATIBILITIES, {
+    variables: { idProduct: selectAdvanced.value },
+  });
+
+  
+
+
 
   const { data } = useQuery<Categories>(GET_CATEGORIES);
   const categories = data?.getCategory;
@@ -94,14 +127,6 @@ export default function CreateProduct(): JSX.Element {
     variables: { name: "", categoriesId: [] },
   });
 
-  const [prod, setProd] = useState<any>();
-
-  const [newpro, setnewpr] = useState<any>([]);
-
-  const [compatibilities, setCompatibilities]: any = useState({
-    headId: 0,
-    productsId: [],
-  });
 
   useEffect(() => {
     setProd(products?.data?.getProducts);
@@ -129,8 +154,9 @@ export default function CreateProduct(): JSX.Element {
   }
 
 
+  const changeSelectAdvanced = (e: any) => {
+    setSelectAdvanced({ value: e.target.value })}
 
-  const [select, setSelect]: any = useState({ value: "" })
 
   const changeSelect = (e: any) => {
     setSelect({ value: e.target.value })
@@ -147,9 +173,10 @@ export default function CreateProduct(): JSX.Element {
     }
   }
 
-  console.log(compatibilities)
 
   async function handleSubmit(e: FormEvent) {
+    if(dataR){
+      const valores = dataR.getProductsCompatibilities.map((el:{id:number}) => el.id)
     e.preventDefault();
     setState({
       name: "",
@@ -160,27 +187,49 @@ export default function CreateProduct(): JSX.Element {
       categories: [],
       stock:0
     })
-    setCategors([])
-    createProduct({ variables: state })
-      .then((resolve) => {
-        toast.success('Se ha creado el producto 😁')
-        addCompatibility({
-          variables: {
-            HeadIdProduct: resolve.data.createProduct.id,
-            idsProducts: compatibilities.productsId,
-          },
-          
-          
+    if(state.categories[0] === 2 ){
+      setCategors([])
+      createProduct({ variables: state })
+        .then((resolve) => {
+          toast.success('Se ha creado el producto 😁')
+          addFatherCompatibility({
+            variables: {
+              HeadIdProduct: selectAdvanced.value,
+              idsProducts:resolve.data.createProduct.id, 
+            },
+            
+            
+          });
+        })
+        .catch((err) => {
+          console.log("Salio Mal");
         });
-      })
-      .catch((err) => {
-        console.log("Salio Mal");
-      });
+    }
+    else {
+      setCategors([])
+      createProduct({ variables: state })
+        .then((resolve) => {
+          toast.success('Se ha creado el producto 😁')
+          addCompatibility({
+            variables: {
+              HeadIdProduct: resolve.data.createProduct.id,
+              idsProducts: valores,
+            },
+            
+            
+          });
+        })
+        .catch((err) => {
+          console.log("Salio Mal");
+        });
+    }
+   
     setnewpr([...newpro, results?.data?.createProduct]);
+    }
   }
 
 
-  console.log(state)
+  
   const [categors, setCategors] = useState<Array<any>>([]);
 
   const handleCategories = (e: SelectEvent) => {
@@ -297,17 +346,8 @@ export default function CreateProduct(): JSX.Element {
               <img src={state.image}/>
               <input type='file' accept='image/png' onChange={imageHandler}/>
               </div>
-              {/* <input
-                className={styles.form__field}
-                placeholder="Imagen"
-                minLength={5}
-                maxLength={30}
-                value={state.image}
-                type="text"
-                name="image"
-                onChange={handleChange}
-                required={true}
-              /> */}
+
+              
             </div>
             <div className={styles.form__group}>
               <label htmlFor="Nombre" className={styles.form__label}>
@@ -373,14 +413,122 @@ export default function CreateProduct(): JSX.Element {
                 ))}
               </div>
             </div>
+            { categors[0]?.name === "Procesadores" ? (
+              <div className={styles.form__group}>
+                <label htmlFor="Nombre" className={styles.form__label}>
+                  <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} /> El
+                  procesador es compatible con
+                </label>
+                <div className={styles2.checkbox}>
+                  <label>
+                    AMD Motherboards
+                  <input
+                      type="checkbox"
+                      name={"amd"}
+                      onChange={changeSelect}
+                      checked={select.value === "amd" ? true : false}
+                      value={"amd"}
+                    />
+                  </label>
 
-            {categors[0]?.name === "Procesadores" || categors[0]?.name === "Motherboards" ? (
+                  <label>
+                    Intel Motherboards
+                  <input
+                      type="checkbox"
+                      name={"intel"}
+                      onChange={changeSelect}
+                      checked={select.value === "intel" ? true : false}
+                      value={"intel"}
+                    />
+                  </label>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+            
+            { selectProcesador.value === "amd" ? 
+             <div className={styles.form__group}>
+             <label htmlFor="Nombre" className={styles.form__label}>
+               <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} /> 
+                Con que generacion de Procesadores es compatible
+             </label>
+             <div className={styles2.checkbox}>
+               <label>
+                 Anterior a 1ra GEN
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={14}
+                 />
+               </label>
+
+               <label>
+               1ra y 2da Gen
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={15}
+                 />
+
+               </label>
+                    3ra en adelante
+               <label>
+                
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={17}
+                 />
+               </label>
+             </div>
+           </div> : false
+          }
+          { selectProcesador.value === "intel" ? 
+             <div className={styles.form__group}>
+             <label htmlFor="Nombre" className={styles.form__label}>
+               <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} /> 
+                Con que generacion de Procesadores es compatible
+             </label>
+             <div className={styles2.checkbox}>
+               <label>
+               8VA Generacion
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={29}
+                 />
+               </label>
+
+               <label>
+               9NA Generacion
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={30}
+                 />
+
+               </label>
+                  10MA Generacion
+               <label>
+                
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={16}
+                 />
+               </label>
+             </div>
+           </div> : false
+          }
+
+            { categors[0]?.name === "Motherboards" ? (
               <div className={styles.form__group}>
                 <label htmlFor="Nombre" className={styles.form__label}>
                   <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} /> El
                   producto es compatible con
                 </label>
-                <div className={styles.checkbox}>
+                <div className={styles2.checkbox}>
                   <label>
                     Amd
                   <input
@@ -418,6 +566,81 @@ export default function CreateProduct(): JSX.Element {
             ) : (
               <></>
             )}
+            { select.value === "amd" ? 
+             <div className={styles.form__group}>
+             <label htmlFor="Nombre" className={styles.form__label}>
+               <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} /> 
+                Con que generacion de Procesadores es compatible
+             </label>
+             <div className={styles2.checkbox}>
+               <label>
+                 Anterior a 1ra GEN
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={14}
+                 />
+               </label>
+
+               <label>
+               1ra y 2da Gen
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={30}
+                 />
+
+               </label>
+                    3ra en adelante
+               <label>
+                
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={15}
+                 />
+               </label>
+             </div>
+           </div> : false
+          }
+
+          { select.value === "intel" ? 
+             <div className={styles.form__group}>
+             <label htmlFor="Nombre" className={styles.form__label}>
+               <FontAwesomeIcon icon={faCommentAlt} aria-hidden={true} /> 
+                Con que generacion de Procesadores es compatible
+             </label>
+             <div className={styles2.checkbox}>
+               <label>
+                 8VA Generacion
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={29}
+                 />
+               </label>
+
+               <label>
+               9NA Generacion
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={30}
+                 />
+
+               </label>
+                   10MA Generacion
+               <label>
+                
+               <input
+                   type="checkbox"
+                   onChange={changeSelectAdvanced}
+                   value={16}
+                 />
+               </label>
+             </div>
+           </div> : false
+          }
             <div className={styles.organizarbotones}>
               <button
                 type="submit"

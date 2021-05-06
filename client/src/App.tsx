@@ -30,7 +30,6 @@ import Shipments from './components/payment/Shipments'
 import MP from './components/payment/MP';
 import { GET_ORDER } from "./gql/shopingCartGql";
 import BuildPcUser from './components/buildPc/buildPcUser';
-import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
@@ -163,9 +162,8 @@ function App() {
         <Route exact path='/checkout' component={FormCheckout} />
         <Route exact path='/wishlist' component={Wishlist} />
         <Route exact path='/' component={LandPage} />
-        <Route exact path="/armatupc" component={BuildPcFilter} />
-        <Route exact path="/armatupc/tipo/:tipo" component={BuildPc} />
-        <Route exact path="/armatupc/:marca" component={BuildPcUser} />
+{/*         <Route exact path="/armatupc" component={BuildPcFilter} />
+ */}        <Route exact path="/armatupc" component={BuildPcUser} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

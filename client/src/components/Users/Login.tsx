@@ -386,7 +386,7 @@ const Login = () => {
                                         onChange={handleinputchange}
                                     />
                                 </div>
-                                <div className={styles.form__group}>
+                               {/*  <div className={styles.form__group}>
                                     <label htmlFor='username' className={styles.form__label} >
                                         <FontAwesomeIcon icon={faShareAlt} aria-hidden={true} /> Nombre de Usuario</label>
                                     <input
@@ -398,7 +398,7 @@ const Login = () => {
                                         name='username'
                                         onChange={handleinputchange}
                                     />
-                                </div>
+                                </div> */}
                                 <div className={styles.organizarbotones}>
                                     <button style={{ paddingTop: "1rem" }} className={styles.boton} type='submit' >Crea tu cuenta</button>
                                     <button className={styles.boton} onClick={handleclickevent}>Ya tienes una  cuenta?</button>

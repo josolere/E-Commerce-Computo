@@ -22,6 +22,6 @@ export const typeDefs = gql`
 
   type Mutation {
     createCompatibility(HeadIdProduct: ID, idsProducts: [ID]): Product
-    deleteCompatibilities(idCompatibility: ID): Boolean
+    createFatherCompatibilities(HeadIdProduct: [ID], idsProducts: ID): Product
   }
 `;

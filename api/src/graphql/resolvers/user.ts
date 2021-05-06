@@ -147,13 +147,13 @@ export default {
         }
 
         //en caso de reestablecer contraseña por olvido:
-        if (input.resetPass)
+       /*  if (input.resetPass)
           resetPassMail(
             updatedUser.email,
             updatedUser.name,
             updatedUser.resetPass
           );
-
+ */
         return updatedUser;
       }
 
