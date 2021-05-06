@@ -1,0 +1,30 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: $dark;
+    h6{
+        color: $white;
+        font-family:'Montserrat', sans-serif;
+        font-size: 1rem;
+        margin: 1%;
+    }
+}
+
+.containerImgs{
+    display: flex;
+    justify-content: center;
+    padding: 2% 0%;
+    background-color: $white ;
+    width: 100%;
+    a{
+        margin:0% 2%;
+    }
+}

@@ -34,6 +34,7 @@ import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
+import Featured from './components/Featured/Featured';
 
 
 interface user {
@@ -154,6 +155,7 @@ function App() {
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>
+            <Featured/>
           <div className={styles.catalog}>
             <NavCategories />
           </div>
