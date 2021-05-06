@@ -102,7 +102,7 @@ export const LOGOUT = gql`
 
 
 export const RETRIEVE_PASSWORD = gql`
-    mutation ($id: ID!,  $resetPass: String!) {
+    mutation ($id: ID!,  $resetPass: String) {
         editUser (id: $id, input:{resetPass:$resetPass})
                     {
                         id
@@ -114,5 +114,12 @@ export const RETRIEVE_PASSWORD = gql`
     query ($id:ID!){
         getUserById (id:$id){
             resetPass
+        }
+    }`;
+
+    export const GET_USERS_BY_EMAIL = gql`
+    query ($email:String){
+        getUserByEmail (email:$email){
+            id
         }
     }`;

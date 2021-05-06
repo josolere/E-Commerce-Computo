@@ -1,34 +1,73 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faUnlock, faAt } from '@fortawesome/free-solid-svg-icons';
+import { faUnlock, faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CHANGE_PASSWORD, ACTUAL_USER, RETRIEVE_PASSWORD, GET_USERS_BY_ID_RETRIEVE } from "../../gql/loginGql";
+import { RETRIEVE_PASSWORD, GET_USERS_BY_ID_RETRIEVE, GET_USERS_BY_EMAIL } from "../../gql/loginGql";
 import styles2 from './SmallForm.module.scss';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux'
+import { countAddBase } from '../../redux/actions'
 
 
 
 
 const OlvideContraseña = () => {
-    const [editUser, user] = useMutation(CHANGE_PASSWORD)
+    const firsstRender = useRef(true)
+    const dispatch = useDispatch()
 
-    let currentuser: any = {}
+    const [control, setControl] = useState({ email: '' })
+    const [idEmail, setIdEmail] = useState('')
+    const [codeReset, setCodeReset] = useState('')
+    const [codeVerify, setCodeVerify] = useState({ code: '' })
+    const [render, setRender] = useState(false)
 
-    const [editPassword] = useMutation(RETRIEVE_PASSWORD)
+
+    const reset = useQuery(GET_USERS_BY_ID_RETRIEVE, {
+        variables: { id: idEmail }
+    });
+
+    const [editPassword] = useMutation(RETRIEVE_PASSWORD, {
+        refetchQueries: [{ query: GET_USERS_BY_ID_RETRIEVE, variables: { id: idEmail } }]
+    })
+
+    const { data } = useQuery(GET_USERS_BY_EMAIL, {
+        variables: { email: control.email }
+    });
 
 
+    useEffect(() => {
+        if (firsstRender.current) {
+            firsstRender.current = false;
+        } else {
+            if (data) {
+                let id = data?.getUserByEmail?.id
+                setIdEmail(id)
+            }
+        }
 
-    const [control, setControl] = useState({ email: '', password: '', newpassword: '' })
+    }, [data])
+
+    useEffect(() => {
+        if (firsstRender.current) {
+            firsstRender.current = false;
+        } else {
+            if (reset) {
+                let resetPass = reset?.data?.getUserById?.resetPass
+                setCodeReset(resetPass)
+            }
+        }
+
+    }, [codeVerify])
+
 
     const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         setControl({ ...control, [event?.currentTarget.name]: event?.currentTarget.value })
     }
-
-
-    console.log(control)
+    const handleChangeVerify = (event: React.FormEvent<HTMLInputElement>) => {
+        setCodeVerify({ ...codeVerify, [event?.currentTarget.name]: event?.currentTarget.value })
+    }
 
     const handleclickevent = () => {
         window.location.href = 'http://localhost:3000/Login'
@@ -40,49 +79,37 @@ const OlvideContraseña = () => {
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        if (currentuser?.email === control.email) {
-            editUser({
-                variables: {
-                    password: control.newpassword, id: currentuser?.id
-                }
-            })
-                .then((resolve) => {
-                    toast.success('Tienes una nueva contraseña 🥳')
-                    setTimeout(function () { window.location.href = 'http://localhost:3000/Home'; }, 2000)
-                })
-                .catch((error) => (console.log('Reset Mal')))
-        }
-        else {
-            toast.error('Los datos proporcionados no son correctos 🤔')
-        }
     }
 
-    const [codeVerify, setCodeVerify] = useState(0)
     const [countError, setCountError] = useState(2)
     const [verify, setVerify] = useState(true)
 
     const handleRequestCode = () => {
-        let code = Math.floor(Math.random() * (999999 - 10000) + 999999)
+        let code: any = Math.floor(Math.random() * (999999 - 10000) + 999999)
+        code = code.toString()
         setCodeVerify(code)
-        setVerify(false)
-        editPassword({ variables: { id: 1, resetPass:code } })
-        .then((resolve) => {
-            console.log(resolve)
-        })
-        .catch((error) => {
-            console.log('no responde')
-        })
-        console.log(code)
+        editPassword({ variables: { id: idEmail, resetPass: code } })
+            .then((resolve) => {
+                setVerify(false)
+                setCodeVerify({ code: '' })
+            })
+            .catch((error) => {
+                console.log('no responde')
+            })
     }
 
     const handleVerifyCode = () => {
-        let codeVer = 1498163
-        if (codeVerify === codeVer) {
+
+        if (codeReset === codeVerify.code) {
             window.location.href = 'http://localhost:3000/NuevaContrasena';
+            // setRender(true)
+            // dispatch(countAddBase(true))
         } else {
             setCountError(countError - 1)
-            countError > 0 && console.log('te quedan:', countError, 'intentos')
+            countError > 0 && toast.error('te quedan ' + countError + ' intentos')
             if (countError === 0) {
+                countError > 0 && toast.error('solicitar nuevo codigo')
+                setVerify(true)
                 console.log('solicitar nuevo codigo')
             }
         }
@@ -110,6 +137,7 @@ const OlvideContraseña = () => {
                                     type='text'
                                     placeholder='E-Mail'
                                     name='email'
+                                    value={control.email}
                                     onChange={handleChange}
                                 />
                                 <div className={styles.form__group}>
@@ -126,12 +154,13 @@ const OlvideContraseña = () => {
                                 <input
                                     className={styles.form__field}
                                     placeholder='Contraseña'
-                                    minLength={5}
-                                    maxLength={5}
+                                    minLength={4}
+                                    maxLength={8}
                                     type="text"
                                     name='code'
                                     required={true}
-                                    onChange={handleChange}
+                                    onChange={handleChangeVerify}
+                                    value={codeVerify.code}
                                 />
                                 <div className={styles.form__group}>
                                     <button className={styles.boton} type='submit' onClick={handleVerifyCode} >Verificar Codigo</button>
@@ -140,15 +169,12 @@ const OlvideContraseña = () => {
                                     <button className={styles.boton} onClick={handleclickeventVerify}>Volver Atrás</button>
                                 </div>
                             </div>
-
                         }
-
-
-
                     </form>
                 </div>
             </div>
         </div>
+
     )
 }
 

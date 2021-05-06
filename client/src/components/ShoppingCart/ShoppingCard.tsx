@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { EDIT_ORDER_DETAIL, GET_ORDER_LIST, DELETE_ORDER_DETAIL } from "../../gql/order"
 import { GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
+import { GET } from '../../gql/productDetailsGql'
 
 import { AppState } from '../../redux/reducers';
 
@@ -59,7 +60,7 @@ interface orderdetails {
 
 const ShoppingCard = (props: props): JSX.Element => {
 
-    const { logeo, idUsers }: any = useSelector((store: AppState) => store.shoppingCartReducer)
+    const { logeo, idUsers, productTotal }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
     const idsProducts = props.id
 
@@ -70,17 +71,32 @@ const ShoppingCard = (props: props): JSX.Element => {
         variables: { idUser: idUsers }
     })
 
+    const [idProduct, setIdProduct] = useState(0)
+
+    const productsId = useQuery(GET, {
+        variables: { id: idsProducts },
+    });
+    const [idStock, setIdStock]: any = useState()
+    // console.log(productsId?.data?.getProductById)
+
+    useEffect(() => {
+        setIdStock(productsId?.data?.getProductById?.stock)
+    }, [productsId])
+
+    useEffect(() => {
+        console.log(idStock)
+
+    }, [idStock])
+
+
+
     const productsCart: any = useQuery<detailOrderid>(GET_ORDER_BY_STATUS, {
         variables: { status: "pendiente", idUser: idUsers }
     })
 
 
+
     let details = productsCart?.data?.getOrderByStatus[0]?.details
-    useEffect(() => {
-        console.log(idUsers)
-        console.log(productsCart)
-        console.log(productsCart?.data?.getOrderByStatus[0]?.details)
-    }, [productsCart])
 
 
     const deletePro = () => toast.error("Producto Eliminado");
@@ -126,38 +142,40 @@ const ShoppingCard = (props: props): JSX.Element => {
         let resultId = details?.find((finds: any) => finds?.ProductId === product?.id
         )
 
-        if (idProductOrder?.data !== undefined && productsCart !== undefined) {
+        if (idProductOrder?.data !== undefined && productsCart !== undefined && props.count < idStock) {
             accounrMoreBases(resultId?.id)
         }
     }
 
     const addLocaStorageMore = async () => {
-        const idProduct: any = {
-            id: product.id,
-            price: product.price,
-            count: props.count + 1,
-            image: product.image,
-            details: product.details,
-            name: product.name
-        }
-        if (localStorage.getItem('productsLocal')) {
-            let productLocal: any = await (localStorage.getItem('productsLocal'))
-            productLocal = JSON.parse(productLocal)
-            const newLocal = productLocal.filter((filt: any) => filt.id !== product.id)
-            newLocal.push(idProduct)
-            localStorage.setItem('productsLocal', JSON.stringify(newLocal))
-        }
-        if (localStorage.getItem('quantity')) {
-            let quantity: any = await (localStorage.getItem('quantity'))
-            quantity = JSON.parse(quantity)
-            const addMoreQuantity = quantity + 1
-            localStorage.setItem('quantity', JSON.stringify(addMoreQuantity))
-        }
-        if (localStorage.getItem('priceSubTotal')) {
-            let priceSubTotal: any = await (localStorage.getItem('priceSubTotal'))
-            priceSubTotal = JSON.parse(priceSubTotal)
-            const addMoreSubTotal = priceSubTotal + product.price
-            localStorage.setItem('priceSubTotal', JSON.stringify(addMoreSubTotal))
+        if (props.count < idStock) {
+            const idProduct: any = {
+                id: product.id,
+                price: product.price,
+                count: props.count + 1,
+                image: product.image,
+                details: product.details,
+                name: product.name
+            }
+            if (localStorage.getItem('productsLocal')) {
+                let productLocal: any = await (localStorage.getItem('productsLocal'))
+                productLocal = JSON.parse(productLocal)
+                const newLocal = productLocal.filter((filt: any) => filt.id !== product.id)
+                newLocal.push(idProduct)
+                localStorage.setItem('productsLocal', JSON.stringify(newLocal))
+            }
+            if (localStorage.getItem('quantity')) {
+                let quantity: any = await (localStorage.getItem('quantity'))
+                quantity = JSON.parse(quantity)
+                const addMoreQuantity = quantity + 1
+                localStorage.setItem('quantity', JSON.stringify(addMoreQuantity))
+            }
+            if (localStorage.getItem('priceSubTotal')) {
+                let priceSubTotal: any = await (localStorage.getItem('priceSubTotal'))
+                priceSubTotal = JSON.parse(priceSubTotal)
+                const addMoreSubTotal = priceSubTotal + product.price
+                localStorage.setItem('priceSubTotal', JSON.stringify(addMoreSubTotal))
+            }
         }
     }
 
@@ -199,31 +217,34 @@ const ShoppingCard = (props: props): JSX.Element => {
 
 
     const addLocaStorageLess = async () => {
-        const idProduct: any = {
-            id: product.id,
-            price: product.price,
-            count: props.count - 1,
-            image: product.image,
-            details: product.details
-        }
-        if (localStorage.getItem('productsLocal')) {
-            let productLocal: any = await (localStorage.getItem('productsLocal'))
-            productLocal = JSON.parse(productLocal)
-            const newLocal = productLocal.filter((filt: any) => filt.id !== product.id)
-            newLocal.push(idProduct)
-            localStorage.setItem('productsLocal', JSON.stringify(newLocal))
-        }
-        if (localStorage.getItem('quantity')) {
-            let quantity: any = await (localStorage.getItem('quantity'))
-            quantity = JSON.parse(quantity)
-            let addlessQuantity: any = quantity - 1
-            localStorage.setItem('quantity', JSON.stringify(addlessQuantity))
-        }
-        if (localStorage.getItem('priceSubTotal')) {
-            let priceSubTotal: any = (localStorage.getItem('priceSubTotal'))
-            priceSubTotal = JSON.parse(priceSubTotal)
-            const lessMoreSubTotal = priceSubTotal - product.price
-            localStorage.setItem('priceSubTotal', JSON.stringify(lessMoreSubTotal))
+        if (props.count > 1) {
+
+            const idProduct: any = {
+                id: product.id,
+                price: product.price,
+                count: props.count - 1,
+                image: product.image,
+                details: product.details
+            }
+            if (localStorage.getItem('productsLocal')) {
+                let productLocal: any = await (localStorage.getItem('productsLocal'))
+                productLocal = JSON.parse(productLocal)
+                const newLocal = productLocal.filter((filt: any) => filt.id !== product.id)
+                newLocal.push(idProduct)
+                localStorage.setItem('productsLocal', JSON.stringify(newLocal))
+            }
+            if (localStorage.getItem('quantity')) {
+                let quantity: any = await (localStorage.getItem('quantity'))
+                quantity = JSON.parse(quantity)
+                let addlessQuantity: any = quantity - 1
+                localStorage.setItem('quantity', JSON.stringify(addlessQuantity))
+            }
+            if (localStorage.getItem('priceSubTotal')) {
+                let priceSubTotal: any = (localStorage.getItem('priceSubTotal'))
+                priceSubTotal = JSON.parse(priceSubTotal)
+                const lessMoreSubTotal = priceSubTotal - product.price
+                localStorage.setItem('priceSubTotal', JSON.stringify(lessMoreSubTotal))
+            }
         }
     }
 
@@ -297,9 +318,11 @@ const ShoppingCard = (props: props): JSX.Element => {
                             addLocaStorageLess()
                         }}
                     >-</button>
-                    <button
+                    {/* <button
                         className={cart.cartQuantity}
-                    >{props.count}</button>
+                    >{props.count}</button> */}
+
+                    <input className={cart.cartQuantity} type="text" value={props.count} disabled />
                     <button
                         className={cart.buttonMoreLess}
                         onClick={() => {

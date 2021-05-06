@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faUnlock, faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CHANGE_PASSWORD, ACTUAL_USER } from "../../gql/loginGql";
+import { CHANGE_PASSWORD, ACTUAL_USER, GET_USERS_BY_EMAIL } from "../../gql/loginGql";
 import styles2 from './SmallForm.module.scss';
 import { toast } from 'react-toastify';
 
@@ -24,23 +24,32 @@ interface user {
 
 
 const NuevaContraseña = () => {
+    const firsstRender = useRef(true)
     
     const [editUser, user] = useMutation(CHANGE_PASSWORD)
 
-    let currentuser: any = {}
-
-    const { data } = useQuery<user>(ACTUAL_USER)
-
-    currentuser = data?.currentUser
-
     const [control, setControl] = useState({ email: '', password: '', newpassword: '' })
+    const [idEmail, setIdEmail] = useState('')
 
     const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         setControl({ ...control, [event?.currentTarget.name]: event?.currentTarget.value })
     }
 
+    const { data } = useQuery(GET_USERS_BY_EMAIL, {
+        variables: { email: control.email }
+    });
 
-    console.log(control)
+    useEffect(() => {
+        if (firsstRender.current) {
+            firsstRender.current = false;
+        } else {
+            if (data) {
+                let id = data?.getUserByEmail?.id
+                setIdEmail(id)
+            }
+        }
+
+    }, [data])
 
     const handleclickevent = () => {
         window.location.href = 'http://localhost:3000/Login'
@@ -48,10 +57,10 @@ const NuevaContraseña = () => {
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        if (currentuser?.email === control.email) {
+        if (control.password === control.newpassword) {
             editUser({
                 variables: {
-                    password: control.newpassword, id: currentuser?.id
+                    password: control.newpassword, id:idEmail
                 }
             })
                 .then((resolve) => { toast.success('Tienes una nueva contraseña 🥳') 
@@ -117,7 +126,7 @@ const NuevaContraseña = () => {
                             />
                         </div>
                         <div className={styles.organizarbotones}>
-                            <button className={styles.boton} type='submit' >Resetear Contraseña</button>
+                            <button className={styles.boton} type='submit' >Enviar</button>
                             <button className={styles.boton} onClick={handleclickevent}>Volver Atrás</button>
                         </div>
                     </form>
