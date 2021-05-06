@@ -52,8 +52,8 @@ function DropdownMenu(props: any) {
 
     return (
         <div className={styles.dropdown} onMouseLeave={props.data}>
-            <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle style={{ marginRight: '3%' }}></BiUserCircle>{user?.name}</Link>
-            {user?.privilege === 'user' ?
+{/*             <Link className={styles.profile} to="/EditarCuenta"><BiUserCircle style={{ marginRight: '3%' }}></BiUserCircle>{user?.name}</Link>
+ */}            {user?.privilege === 'user' ?
                 <div className={styles.orderdiv}>
                     <p className={styles.pDrop} >
                         <Link to={`/Ordenes/Usuario`}><FaShippingFast style={{ marginRight: '3%' }}  ></FaShippingFast>Mis Pedidos</Link></p>

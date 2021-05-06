@@ -155,7 +155,7 @@ $red:#f05454;
     font-size: 3vh;
    font-family: 'Montserrat', sans-serif;
    border: solid .1rem $dark;
-   height: 2.5rem;
+   height:fit-content;
    display: flex;
    justify-content: center;
    align-self: center;
@@ -196,6 +196,25 @@ $red:#f05454;
          }
      }
  }
+
+ 
+ .sortSad{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.pSad{
+  font-size: 3vh;
+  font-family: 'Montserrat', sans-serif;
+  color: $dark;
+}
+
+.ImageHeart{
+  max-width: 10rem;
+}
 
   @media (max-width: 648px) {
     .titleCreate{

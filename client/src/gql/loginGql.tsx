@@ -20,16 +20,24 @@ query {
     }
   }`;
 
-
-
-
+export const EDIT_MUTATION = gql`
+    mutation ($id:ID! $firstname:String $email:String $lastName:String $username:String
+            $street:String $city:String $zip:String $phone:String $state:String )
+    {
+        editUser (id:$id input:{firstname:$firstname email:$email lastname:$lastname username:$username
+                street:$street city:$city zip:$zip phone:$phone state:$state})
+                {
+                    id
+                }
+    }
+`
 
 
 
 export const SIGNUP_MUTATION = gql`
     mutation  ($firstName: String! $password: String! $email: String!  
-                $lastName:String! $username:String $street: String  $city: 
-                String $state:String $zip: String $phone: String 
+                $lastName:String! $username:String $street:String  
+                $city:String $state:String $zip: String $phone: String 
                 ) {
         signup (firstName:$firstName lastName:$lastName password:$password
                  email: $email username:$username street: $street 

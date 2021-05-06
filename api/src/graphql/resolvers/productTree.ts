@@ -30,6 +30,21 @@ export default {
     },
   },
   Mutation: {
+    createFatherCompatibilities: async (
+      _parent: object,
+      {
+        HeadIdProduct,
+        idsProducts,
+      }: { HeadIdProduct: [number]; idsProducts: number },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const product = await models.Product.findByPk(idsProducts);
+      for (let i = 0; i < HeadIdProduct.length; i++) {
+        const products = await models.Product.findByPk(HeadIdProduct[i]);
+        await products.addProductCompatibility(product);
+      }
+      return product;
+    },
     createCompatibility: async (
       _parent: object,
       {

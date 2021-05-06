@@ -17,27 +17,23 @@ import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
 import OrdersUser from './components/Order/OrdersUser/OrdersUser'
 import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
 import Orders from './components/Order/Orders';
-import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from 'react-cookie';
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify';
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useQuery} from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/loginGql";
 import ResetPassword from './components/Users/ResetPassword';
-import PostPayment from './components/payment/Shipments';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
 import MP from './components/payment/MP';
-import ResponsiveNav from './components/NavBar/ResponsiveNav'
 import { GET_ORDER } from "./gql/shopingCartGql";
 import BuildPcUser from './components/buildPc/buildPcUser';
-import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
-import { GET_ORDER_BY_STATUS } from "./gql/ordersGql"
+import Featured from './components/Featured/Featured';
 
 
 interface user {
@@ -137,7 +133,6 @@ function App() {
       </Route>
       <Switch>
         <Route exact path='/CrearAdministrador' component={CreateAdmin} />
-        <Route exact path='/EditarCuenta' component={EditAccount} />
         <Route exact path='/Orden/Detalle/:id' component={OrderDetails} />
         <Route exact path='/Ordenes' component={OrdersAdmin} />
         {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
@@ -159,6 +154,7 @@ function App() {
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>
+            <Featured/>
           <div className={styles.catalog}>
             <NavCategories />
           </div>
@@ -166,9 +162,8 @@ function App() {
         <Route exact path='/checkout' component={FormCheckout} />
         <Route exact path='/wishlist' component={Wishlist} />
         <Route exact path='/' component={LandPage} />
-        <Route exact path="/armatupc" component={BuildPcFilter} />
-        <Route exact path="/armatupc/tipo/:tipo" component={BuildPc} />
-        <Route exact path="/armatupc/:marca" component={BuildPcUser} />
+{/*         <Route exact path="/armatupc" component={BuildPcFilter} />
+ */}        <Route exact path="/armatupc" component={BuildPcUser} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

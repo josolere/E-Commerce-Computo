@@ -18,11 +18,14 @@ interface user {
         privilege: string
     }
 }
+interface props {
+    products:any[]
+}
 
 
 
 
-const ShoppingTotal = (): JSX.Element => {
+const ShoppingTotal = (props:props): JSX.Element => {
 
     let user: any = {}
 
@@ -76,12 +79,16 @@ const ShoppingTotal = (): JSX.Element => {
         }
     }
 
-
+    console.log(props.products)
     return (
         <div className={total.disaster} >
                 <div className={total.containerTitle} >
                     <h2 className={total.specialTitle} >Su Compra</h2>
-                    {user?.privilege === 'user' ?
+                    {!props.products.length?
+                        <Link to='/Home' 
+                            className={total.buttonEnd}>Agregar Productos</Link>
+                    :
+                    user?.privilege === 'user' ?
                         <Link to='/Envios' onClick={() => { handleOrder() }}
                             className={total.buttonEnd}>Finalizar Compra</Link>
                     :

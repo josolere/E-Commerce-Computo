@@ -67,13 +67,33 @@ $red:#f05454;
 }
 .sortCardsWish{
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 @keyframes textclip {
     to {
       background-position: 200% center;
     }
+  }
+
+  .sortSad{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pSad{
+    font-size: 3vh;
+    font-family: 'Montserrat', sans-serif;
+    color: $dark;
+  }
+
+  .ImageHeart{
+    max-width: 10rem;
   }
 
   @media (max-width: 648px) {

@@ -29,7 +29,7 @@ export default {
     currentUser: (_parent: object, _args: any, context: any) => {
       let user = context.getUser();
 
-      console.log(user);
+     // console.log(user);
       return user;
     },
 
@@ -51,7 +51,7 @@ export default {
           {
             model: db.Product,
             through: "wishlist",
-            attributes: ["id", "name", "image", "price", "stock"],
+            attributes: ["id", "name", "image", "price", "stock", "brand"],
           },
         ],
       };
@@ -147,13 +147,13 @@ export default {
         }
 
         //en caso de reestablecer contraseña por olvido:
-        if (input.resetPass)
+       /*  if (input.resetPass)
           resetPassMail(
             updatedUser.email,
             updatedUser.name,
             updatedUser.resetPass
           );
-
+ */
         return updatedUser;
       }
 

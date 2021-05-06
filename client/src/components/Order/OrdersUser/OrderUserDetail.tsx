@@ -17,7 +17,7 @@ export default function OrderUserDetails() {
     const { id } = useParams<IParams>()
     // const id = props.history.location.state.id
     //traigo la orden x su id
-    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id: 1 } })
+    const { loading, error, data } = useQuery(GET_ORDER_DETAILS, { variables: { id: id } })
 
     const order = data?.getOrderById
     let date: any = ""
@@ -63,7 +63,6 @@ export default function OrderUserDetails() {
                         {order?.details?.map((obj: any) => <nav key={obj.id}>
                             <div className={styles2.styleColumn}>
                                 <Link
-
                                     className={styles2.styleColumn2} style={{ textDecoration: 'none' }} to={{
                                         pathname: '/Detalles',
                                         state: {

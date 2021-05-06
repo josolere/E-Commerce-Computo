@@ -221,7 +221,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         ...details,
         categories: details?.categories?.map((cat) => cat.id), //esto puede llegar a romper estoy haciendo el edit mutation de las categorias
       },
-    });
+    })
+    .catch(err => console.log(err))
   }
 
   const handleCategory = (e: React.FormEvent<HTMLButtonElement>) => {
@@ -295,7 +296,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
       dispatch(local(idProduct));
     }
   };
-
+  
   const handleAddProduct = () => {
     if (details) {
       const id = details.id;
@@ -322,6 +323,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     e.preventDefault()
     console.log(user)
     wish({ variables: { userId: currentU?.data?.currentUser?.id, productId: id } })
+    toast.success('Se ha agregado a favoritos ❤')
   }
 
   useEffect(() => {
@@ -373,9 +375,9 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             </div>
             <div className={Rstyles.SortCenter}>
 
-              {user ? <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
+              {user ? <button onClick={handleFav} className={wishe ? styles.fav : styles.fav}><FiHeart size={20} /></button>
                 :
-                <button className={Rstyles.fav}><Link to="/Login"><FiHeart size={20} /></Link></button>
+                <button className={styles.fav}><Link to="/Login"><FiHeart size={20} /></Link></button>
               }
               {editMode ?
                 <div className={Rstyles.form__groupEdit}>
@@ -386,7 +388,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     type='number'
                     defaultValue={filtred?.stock}
                     name='stock'
-                    onChange={handleChange}
+                    onChange={handlePrice}
                   />
                 </div>
                 :

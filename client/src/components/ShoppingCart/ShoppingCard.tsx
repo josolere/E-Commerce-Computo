@@ -228,8 +228,7 @@ const ShoppingCard = (props: props): JSX.Element => {
     }
 
     const eliminateProductBases = (id: any) => {
-        console.log(idEdit)
-
+        
         let prductId = product.id
         let priceProduct = product.price
         let total = priceProduct * props.count
@@ -288,9 +287,9 @@ const ShoppingCard = (props: props): JSX.Element => {
                 <h1 className={cart.titleCart} >{product?.name}</h1>
                 <h2 className={cart.price}>${new Intl.NumberFormat().format(price)}</h2>
                 <div className={cart.containerButtons}>
-                    <button
-                        className={cart.buttonMoreLess}
-                        id={props.count > 1 ? cart.buttonLess : undefined}
+                <button disabled ={props.count === 1}
+                     className={cart.buttonMoreLess}
+                         id={props.count > 1 ? cart.buttonLess : undefined} 
                         onClick={() => {
 
                             accountantLess();

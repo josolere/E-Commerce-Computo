@@ -1,5 +1,6 @@
 import { gql } from "apollo-server";
-
+/*  resetPass: String */
+/*resetPass: String*/
 export const typeDefs = gql`
   # object querys mutations RECORDAR USAR MAYÚSCULAS
   type User {
@@ -20,8 +21,8 @@ export const typeDefs = gql`
     state: String
     zip: String
     phone: String
-    resetPass: String
   }
+  
 
   type AuthPayload {
     user: User
@@ -89,7 +90,7 @@ export const typeDefs = gql`
     state: String
     zip: String
     phone: String
-    resetPass: String
+    
   }
 
   input SignUpInput {

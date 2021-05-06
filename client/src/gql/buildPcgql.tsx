@@ -17,6 +17,10 @@ query ($idProduct:ID){
     image
   	price
     id
+    Categories {
+      id
+      name
+    }
      }
   }
 `
