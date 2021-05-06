@@ -1,5 +1,18 @@
-export function orderShipped(name: string, date: string) {
+export function orderShipped(name: string) {
   //sumar días a date y estructrar
+  // fecha = new Date();
+  // entrega = new Date();
+  // dia = fecha.getDate();
+  // mes = fecha.getMonth()+1;// +1 porque los meses empiezan en 0
+  // anio = fecha.getFullYear();
+  // entrega.setDate(entrega.getDate() + 3);
+
+  const today = new Date(); //fecha actual
+  let entrega = new Date();
+  entrega.setDate(entrega.getDate() + 10);
+  const dia = entrega.getDate() + 10;
+  const mes = entrega.getMonth() + 1;
+  const año = entrega.getFullYear();
   return `
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet"> 
   <!--<![endif]--> 
@@ -167,9 +180,7 @@ a[x-apple-data-detectors] {
                      <tr style="border-collapse:collapse"> 
                       <td align="left" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777;font-size:16px">Nos complace anunciarte que ya enviamos tu pedido.&nbsp;<br>Recordá que podés seguir el estado de todas tus ordenes de compra desde nuestra página web.</p></td> 
                      </tr> 
-                     <tr style="border-collapse:collapse"> 
-                      <td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-bottom:20px;padding-top:25px"><span class="es-button-border" style="border-style:solid;border-color:transparent;background:#ED8E20 none repeat scroll 0% 0%;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a href="https://viewstripo.email" class="es-button es-button-1" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#ED8E20;border-width:15px 30px;display:inline-block;background:#ED8E20 none repeat scroll 0% 0%;border-radius:5px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center"> Ver Orden </a></span></td> 
-                     </tr> 
+                     
                    </table></td> 
                  </tr> 
                </table></td> 
@@ -184,11 +195,9 @@ a[x-apple-data-detectors] {
                       <td align="center" style="padding:0;Margin:0;padding-top:20px"><h3 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#333333">Fecha de entrega estimada:</h3></td> 
                      </tr> 
                      <tr style="border-collapse:collapse"> 
-                      <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777;font-size:16px"> ${date}</p></td> 
+                      <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777;font-size:16px"> ${dia}/${mes}/${año}</p></td> 
                      </tr> 
-                     <tr style="border-collapse:collapse"> 
-                      <td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-bottom:15px;padding-top:20px"><span class="es-button-border" style="border-style:solid;border-color:transparent;background:#ED8E20 none repeat scroll 0% 0%;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a href="https://viewstripo.email" class="es-button es-button-1" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#ED8E20;border-width:15px 30px;display:inline-block;background:#ED8E20 none repeat scroll 0% 0%;border-radius:5px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center"> Seguir Envío </a></span></td> 
-                     </tr> 
+                    
                    </table></td> 
                  </tr> 
                </table></td> 
@@ -196,32 +205,7 @@ a[x-apple-data-detectors] {
            </table></td> 
          </tr> 
        </table> 
-       <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"> 
-         <tr style="border-collapse:collapse"></tr> 
-         <tr style="border-collapse:collapse"> 
-          <td align="center" style="padding:0;Margin:0"> 
-           <table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#1B9BA3;width:600px" cellspacing="0" cellpadding="0" bgcolor="#1b9ba3" align="center"> 
-             <tr style="border-collapse:collapse"> 
-              <td align="left" style="Margin:0;padding-top:35px;padding-bottom:35px;padding-left:35px;padding-right:35px"> 
-               <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"> 
-                 <tr style="border-collapse:collapse"> 
-                  <td valign="top" align="center" style="padding:0;Margin:0;width:530px"> 
-                   <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"> 
-                     <tr style="border-collapse:collapse"> 
-                      <td align="center" style="padding:0;Margin:0;padding-top:30px"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:24px;font-style:normal;font-weight:bold;color:#FFFFFF">Mientras esperás:&nbsp;¡Aprobechá&nbsp;nuestros descuentos!</h2><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:23px;color:#333333;font-size:15px"><br></p></td> 
-                     </tr> 
-                     <tr style="border-collapse:collapse"> 
-                      <td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-bottom:15px;padding-top:30px"><span class="es-button-border" style="border-style:solid;border-color:transparent;background:#66B3B7 none repeat scroll 0% 0%;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a href="https://viewstripo.email" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:18px;border-style:solid;border-color:#66B3B7;border-width:15px 30px 15px 30px;display:inline-block;background:#66B3B7 none repeat scroll 0% 0%;border-radius:5px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center">¡Increibles!</a></span></td> 
-                     </tr> 
-                   </table></td> 
-                 </tr> 
-               </table></td> 
-             </tr> 
-           </table></td> 
-         </tr> 
-       </table></td> 
-     </tr> 
-   </table> 
+       
   </div>  
  </body>
   

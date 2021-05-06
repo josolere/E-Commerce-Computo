@@ -276,7 +276,7 @@ export default {
 
           //pedido despachado
           case "completa":
-            orderShippedMail(user.email, user.name, updatedOrder.updatedAt);
+            orderShippedMail(user.email, user.name);
         }
 
         return updatedOrder;
