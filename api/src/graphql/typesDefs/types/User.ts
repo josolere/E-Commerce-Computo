@@ -29,6 +29,7 @@ export const typeDefs = gql`
 
   type Query {
     getUserById(id: ID!): User
+    getUserByEmail(email: String): User
     currentUser: User
     getUsers: [User]
     getWishList(userId: String): [Product]

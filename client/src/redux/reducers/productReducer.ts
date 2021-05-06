@@ -1,4 +1,4 @@
-import {SET_FILTER, SET_CATEGORIES, PASS_ID} from '../actions'
+import {SET_FILTER, SET_CATEGORIES} from '../actions'
 
 const initialState = {
     filter:"",

@@ -15,6 +15,7 @@ import {
   faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 interface Categorie {
   id: number | undefined;
@@ -209,6 +210,28 @@ export default function CreateProduct(): JSX.Element {
     });
   };
 
+  const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dagv8sxki/image/upload"
+  const CLOUDINARY_UPLOAD_PRESET = "m1xljxz9"
+
+  const imageHandler = async (e:any) =>{
+    const file = e?.currentTarget?.files[0];
+
+    const formData = new FormData();
+    formData.append('file', file)
+    formData.append('upload_preset',CLOUDINARY_UPLOAD_PRESET)
+    
+    const res = await axios.post(CLOUDINARY_URL, formData ,{
+      headers:{
+        'Content-Type': 'multipart/form-data'
+      },
+    })
+    setState({
+      ...state,
+      image: res.data.url,
+    });
+
+  }
+
   return (
     <div className={styles.back}>
       <div className={styles.organizar}>
@@ -266,11 +289,15 @@ export default function CreateProduct(): JSX.Element {
                 required={true}
               />
             </div>
-            <div className={styles.form__group}>
+            <div className={styles.image}>
               <label htmlFor="Nombre" className={styles.form__label}>
                 <FontAwesomeIcon icon={faImage} aria-hidden={true} /> Imagen
               </label>
-              <input
+              <div>
+              <img src={state.image}/>
+              <input type='file' accept='image/png' onChange={imageHandler}/>
+              </div>
+              {/* <input
                 className={styles.form__field}
                 placeholder="Imagen"
                 minLength={5}
@@ -280,7 +307,7 @@ export default function CreateProduct(): JSX.Element {
                 name="image"
                 onChange={handleChange}
                 required={true}
-              />
+              /> */}
             </div>
             <div className={styles.form__group}>
               <label htmlFor="Nombre" className={styles.form__label}>

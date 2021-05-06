@@ -21,22 +21,19 @@ import { Cookies, CookiesProvider, useCookies } from 'react-cookie';
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify';
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useQuery} from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/loginGql";
 import ResetPassword from './components/Users/ResetPassword';
-import PostPayment from './components/payment/Shipments';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
 import MP from './components/payment/MP';
-import ResponsiveNav from './components/NavBar/ResponsiveNav'
 import { GET_ORDER } from "./gql/shopingCartGql";
 import BuildPcUser from './components/buildPc/buildPcUser';
 import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
-import { GET_ORDER_BY_STATUS } from "./gql/ordersGql"
 
 
 interface user {

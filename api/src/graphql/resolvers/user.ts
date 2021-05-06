@@ -29,7 +29,7 @@ export default {
     currentUser: (_parent: object, _args: any, context: any) => {
       let user = context.getUser();
 
-      console.log(user);
+     // console.log(user);
       return user;
     },
 
@@ -58,6 +58,14 @@ export default {
       const user = await models.User.findByPk(userId, options);
 
       return user.dataValues.Products;
+    },
+    getUserByEmail: async (
+      _parent: object,
+      { email }: { email: string },
+      { models }: { models: iModels }
+    ): Promise<iUser> => {
+      const data = await models.User.findAll({ where: { email: email } });
+      return data[0];
     },
   },
   Mutation: {
