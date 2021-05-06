@@ -2,16 +2,33 @@ import { gql } from "apollo-server";
 
 export const typeDefs = gql`
   # object querys mutations RECORDAR USAR MAYÚSCULAS
+  type Detail {
+    id: ID
+    OrderId: Int
+    ProductId: Int
+    quantity: Int
+    price: Float
+    productName: String
+    discountName: String
+    discountType: String
+    discount: String
+    discountMoney: Float
+    discountStart: String
+    discountEnd: String
+    createdAt: String
+    updatedAt: String
+  }
   type Order {
     id: Int
     status: String
-    details: [OrderDetail]
     confirmAt: String
     street: String
     city: String
     state: String
     zip: String
     phone: String
+    UserId: String
+    details: [Detail]
     createdAt: String
     updatedAt: String
   }

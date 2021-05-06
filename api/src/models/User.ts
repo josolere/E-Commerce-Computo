@@ -35,10 +35,15 @@ export interface UserAttributesI {
   city?: string;
   state?: string;
   zip?: string;
-  phone?: string
+  phone?: string;
+  /* resetPass?: string; */
 }
 
-interface UserCreationAttributesI extends Optional<UserAttributesI, "id" | "address" | "username" | "password" | "facebookId"> {}
+interface UserCreationAttributesI
+  extends Optional<
+    UserAttributesI,
+    "id" | "address" | "username" | "password" | "facebookId"
+  > {}
 
 export class User
   extends Model<UserAttributesI, UserCreationAttributesI>
@@ -52,17 +57,17 @@ export class User
   public name!: string;
   public surname!: string;
   public address!: string | null;
-  public facebookId!:string | null;
+  public facebookId!: string | null;
   public googleId!: string | null;
   public street!: string;
   public city!: string;
   public state!: string;
   public zip!: string;
-  public phone!: string
-  public readonly createdAt!: Date;
+  public phone!: string;
+/*   public resetPass!: string;
+ */  public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  
   public getProducts!: BelongsToManyGetAssociationsMixin<Product>;
   public addProduct!: BelongsToManyAddAssociationMixin<Product, number>;
   public addProducts!: BelongsToManyAddAssociationsMixin<Product, number>;
@@ -70,18 +75,18 @@ export class User
   public hasProducts!: BelongsToManyHasAssociationsMixin<Product[], number>;
   public countProducts!: BelongsToManyCountAssociationsMixin;
   public removeProduct!: BelongsToManyRemoveAssociationMixin<Product, number>;
-  public removeProducts!: BelongsToManyRemoveAssociationsMixin<Product[],number>;
+  public removeProducts!: BelongsToManyRemoveAssociationsMixin<
+    Product[],
+    number
+  >;
   public setProducts!: BelongsToManySetAssociationsMixin<Product[], number>;
   public createProduct!: BelongsToManyCreateAssociationMixin<Product>;
 
-  
   public readonly products?: Product[];
 
   public static associations: {
-      products: Association<User,Product>
-  }
-  
-
+    products: Association<User, Product>;
+  };
 }
 
 export function UserFactory(sequelize: Sequelize) {
@@ -89,14 +94,14 @@ export function UserFactory(sequelize: Sequelize) {
     {
       id: {
         type: DataTypes.STRING,
-        allowNull:false,
+        allowNull: false,
         primaryKey: true,
       },
-      facebookId:{
+      facebookId: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      googleId:{
+      googleId: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -154,6 +159,10 @@ export function UserFactory(sequelize: Sequelize) {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      /* resetPass: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      }, */
     },
     {
       tableName: "Users",

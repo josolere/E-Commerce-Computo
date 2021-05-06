@@ -8,6 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Rstyles from './ResponsiveCard.module.scss';
+import { FiHeart } from 'react-icons/fi'
+import { useMutation, useQuery } from '@apollo/client'
+import { TOGGLE_WISHLIST, WISHLIST } from '../../gql/wishlist'
+import { ACTUAL_USER } from '../../gql/loginGql'
+import { AiFillCloseSquare } from "react-icons/ai";
 
 
 interface props {
@@ -16,7 +22,7 @@ interface props {
     image: string
     price: number
     count?: number
-    stock?:number
+    stock:number
 }
 
 export default function Card({ name, image, price, id, count, stock }: props) {
@@ -47,7 +53,7 @@ export default function Card({ name, image, price, id, count, stock }: props) {
         }, [idsProducts])
     }
 
-  const addLocaStorage = () => {
+    const addLocaStorage = () => {
         const idProduct: any = {
             id: id,
             price: price,
@@ -60,8 +66,8 @@ export default function Card({ name, image, price, id, count, stock }: props) {
         if (localStorage.getItem('productsLocal')) {
             let productLocal: any = (localStorage.getItem('productsLocal'))
             productLocal = JSON.parse(productLocal)
-            var valor:any= productLocal.find((el:any)=> el.id === id)
-            if(valor){
+            var valor: any = productLocal.find((el: any) => el.id === id)
+            if (valor) {
                 valor.count = valor.count + 1
                 var newLocal = productLocal.filter((filt: any) => filt.id !== id).concat(valor)
             } else {
@@ -76,54 +82,92 @@ export default function Card({ name, image, price, id, count, stock }: props) {
     useSendSelector()
 
     const handleAddProduct = () => {
-        if(idDetails > 0){
-            id=idDetails
-            price=priceDetails
-            count=countDetails
+        if (idDetails > 0) {
+            id = idDetails
+            price = priceDetails
+            count = countDetails
         }
-       
+        toast.success('Se ha agregado a su carrito de compras')
+
         dispatch(addShopping({ id, price, count }));
         addLocaStorage();
-        
     }
 
-      if (addCart === true && addHome === true) {
+    if (addCart === true && addHome === true) {
         handleAddProduct()
         const state = false
         setStateHome(false)
         dispatch(addProductDetails(state));
         dispatch(addProductHome(state))
+    }
 
-    }   
+    const [wishe, setWish] = useState(false)
+
+    const { data, loading, error } = useQuery(ACTUAL_USER)
+    const user = data?.currentUser
+
+    const [wish, reswish] = useMutation(TOGGLE_WISHLIST, {
+        refetchQueries: [{ query: WISHLIST, variables: { userId: user?.id } }]
+    })
+
+    const wishes = useQuery(WISHLIST, { variables: { userId: user?.id } })
+    const list = wishes?.data?.getWishList
+
+    const handleFav = (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        toast.success('Se ha agregado a favoritos ❤')
+        wish({ variables: { userId: user?.id, productId: id } })
+    }
+
+    useEffect(() => {
+        setWish(list?.some((product: any) => product.id === id))
+        console.log()
+    }, [wishes, reswish])
 
     return (
-        <div className={styles.card}>
-            <div className={styles.name}>{name}</div>
-            <Link
-                onClick={() => dispatch(addProductHome({stateHome,id, price, count}))}
-                className={styles.link} style={{ textDecoration: 'none' }} to={{
-                    pathname: '/Detalles',
-                    state: {
-                        id: id,
-                        newprice: 0
-                    }
-                }}>
-                <img style={{ width: '100%', height: 'auto' }} src={image} alt="notfoundimg"/>
-            </Link>
-
-            <div className={styles.buttons}>
-                <button className={styles.buy}>${new Intl.NumberFormat().format(price)}</button>
-                <button
+        <div className={Rstyles.cardContainer}>
+            <div className={Rstyles.ContainerTitle} >
+                <h4 className={Rstyles.Name}  >{name}</h4>
+            </div>
+            {user ?
+                <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
+                :
+                <button className={styles.fav}><Link to="/Login"><FiHeart size={20} /></Link></button>
+            }
+            <div className={Rstyles.ContainerImage} >
+                <Link
+                    onClick={() => dispatch(addProductHome({ stateHome, id, price, count }))} to={{
+                        pathname: '/Detalles',
+                        state: {
+                            id: id,
+                            newprice: 0
+                        }
+                    }}>
+                    <img className={Rstyles.CardImage} src={image} alt="notfoundimg" />
+                </Link>
+            </div>
+            <div className={Rstyles.EndContainer}>
+                <button className={Rstyles.Price}>${new Intl.NumberFormat().format(price)}</button>
+                {stock > 0 ? <button
                     onClick={() => {
                         handleAddProduct();
                     }}
-                    className={styles.addCart}>
+                    className={Rstyles.AddToCart}>
                     <FontAwesomeIcon icon={faCartPlus} /></button>
+                    :
+                    <button className={Rstyles.AddToCart}>
+                        <Link to={{
+                            pathname: '/Detalles',
+                            state: {
+                                id: id,
+                                newprice: 0
+                            }
+                        }}>
+                            <AiFillCloseSquare />
+                        </Link>
+                    </button>
+                }
             </div>
         </div>
-
     );
-
-
-
 }

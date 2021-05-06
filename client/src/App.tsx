@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Component } from 'react';
 import Login from './components/Users/Login';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Details from './components/Details/ProductsDetails';
@@ -12,31 +12,31 @@ import CrearCategoria from "./components/CreateCategory/CreateCategory";
 import styles from './App.module.scss';
 import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
 import { addLocalStorage, logeo, orderId } from './redux/actions/index'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
 import OrdersUser from './components/Order/OrdersUser/OrdersUser'
 import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
 import Orders from './components/Order/Orders';
-import EditAccount from './components/Users/EditAccount';
 import { Cookies, CookiesProvider, useCookies } from 'react-cookie';
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify';
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useQuery} from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/loginGql";
 import ResetPassword from './components/Users/ResetPassword';
-import PostPayment from './components/payment/Shipments';
-import Mercado from './components/payment/MercadoV2';
 import AdminDelete from './components/Users/AdminDelete';
 import PayCompleted from './components/payment/PayCompleted';
 import Shipments from './components/payment/Shipments'
 import MP from './components/payment/MP';
-import ResponsiveNav from './components/NavBar/ResponsiveNav'
 import { GET_ORDER } from "./gql/shopingCartGql";
 import BuildPcUser from './components/buildPc/buildPcUser';
-import BuildPc from './components/buildPc/buildPc';
 import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
+import Wishlist from './components/Wishlist/Wishlist';
+import Featured from './components/Featured/Featured';
+import OlvideContraseña from './components/Users/OlvideContraseña';
+import NuevaContraseña from './components/Users/NuevaContraseña';
+
 
 interface user {
   currentUser: {
@@ -67,6 +67,7 @@ interface detailsorder {
 function App() {
   const firsstRender = useRef(true)
 
+
   let user: any = {}
 
   const [idUser, setIdUser] = useState('')
@@ -80,9 +81,7 @@ function App() {
   const resultsUsers = useQuery(GET_USERS)
 
   let test = resultsUsers?.data?.getUsers
-  console.log(test)
   user = actualuser.data?.currentUser
-  console.log(user)
 
   useEffect(() => {
 
@@ -117,6 +116,7 @@ function App() {
     }
   }, [])
 
+
   return (
     <Router>
       <ToastContainer
@@ -135,42 +135,40 @@ function App() {
       </Route>
       <Switch>
         <Route exact path='/CrearAdministrador' component={CreateAdmin} />
-        <Route exact path='/EditarCuenta' component={EditAccount} />
         <Route exact path='/Orden/Detalle/:id' component={OrderDetails} />
         <Route exact path='/Ordenes' component={OrdersAdmin} />
         {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
-        <Route exact path='/CrearProducto'>
-          {user?.privilege === 'admin' ? <Route exact path='/CrearProducto' component={CrearProducto} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route>
-        <Route exact path='/CrearCategoria'>
-          {user?.privilege === 'admin' ? <Route exact path='/CrearCategoria' component={CrearCategoria} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route>
+        <Route exact path='/CrearProducto' component={CrearProducto} />
+        <Route exact path='/CrearCategoria' component={CrearCategoria} />
         <Route path='/Ordenes/Usuario' component={OrdersUser} />
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails} />
         {/* <Route exact path='Pago'>
           {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
         </Route> */}
-              <Route exact path='/Mercado' component={MP} />
-
-        <Route exact path='/TestNav' component={ResponsiveNav} />
         <Route exact path='/Envios' component={Shipments} />
         <Route exact path='/PostPago' component={PayCompleted} />
         <Route exact path='/AdminBorrar' component={AdminDelete} />
+        <Route exact path='/Mercado' component={MP} />
+        {/* <Route exact path='/Pago' component={Payment} /> */}
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>
+            <Featured/>
           <div className={styles.catalog}>
             <NavCategories />
           </div>
         </Route>
-        <Route exact path='/checkout' component={FormCheckout}/>
+        <Route exact path='/checkout' component={FormCheckout} />
+        <Route exact path='/wishlist' component={Wishlist} />
         <Route exact path='/' component={LandPage} />
-        <Route exact path ="/armatupc" component = { BuildPcFilter } />
-        <Route exact path ="/armatupc/tipo/:tipo" component = { BuildPc } />
-        <Route exact path ="/armatupc/:marca" component = { BuildPcUser } />
+        {/* <Route exact path="/armatupc" component={BuildPcFilter} /> */}
+        {/* <Route exact path="/armatupc/tipo/:tipo" component={BuildPcUser} /> */}
+        <Route exact path="/armatupc" component={BuildPcUser} />
+        <Route exact path="/recuperarcontrasena" component={OlvideContraseña} />
+        <Route exact path="/NuevaContrasena" component={NuevaContraseña} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

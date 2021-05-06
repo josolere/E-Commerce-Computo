@@ -7,7 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import navBar from './NavBar.module.scss';
 import './header.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListAlt, faShoppingCart, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { faLaptop, faListAlt, faShoppingCart, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { AppState } from '../../redux/reducers';
 import { setFilter } from '../../redux/actions';
@@ -16,6 +16,7 @@ import NavBarItem from "./NavBarItem";
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { ACTUAL_USER } from "../../gql/loginGql";
 import styles from './ResponsiveNav.module.scss'
+import DropCategories from './Categories'
 
 interface user {
   currentUser: {
@@ -44,51 +45,53 @@ const NavBarResponsive = () => {
   const closeMobileMenu = () => setClick(false);
 
   const handleRedirCart = () => {
-    window.location.href = "http://localhost:3000/Carrodecompras"
+    // window.location.href = "http://localhost:3000/Carrodecompras"
   }
 
-  const handleRedirProducts= () => {
+  const handleRedirProducts = () => {
     dispatch(setFilter(""))
-    window.location.href = "http://localhost:3000/Home"
+    // window.location.href = "http://localhost:3000/Home"
   }
 
   return (
     <div className={styles.header}>
-        <div className={styles.logo_container}>
-          <Link to='/' > <h1 className={styles.LogoCH} >CH</h1> </Link>
+      <div className={styles.logo_container}>
+        <Link to='/' > <h1 className={styles.LogoCH} >CH</h1> </Link>
+      </div>
+      <div className={styles.searchBar} >
+        <SearchBar />
+      </div>
+      <ul className={click ? styles.nav_options_active : styles.nav_options}>
+        <li className={styles.optionCart} onClick={closeMobileMenu}>
+          <Link className={styles.optionCartLink} onClick={handleRedirCart} to="/Carrodecompras">
+            <p className={styles.optionCartLink}> <FontAwesomeIcon icon={faShoppingCart} style={{ marginRight: '25%' }} /> {quantity}</p>
+          </Link>
+        </li>
+        <li className={styles.optionProducts} onClick={closeMobileMenu}>
+          {true ? <Link onClick={handleRedirProducts} to="/Home"
+          >
+            <p className={styles.optionProductsLink} ><FontAwesomeIcon icon={faListAlt} style={{ marginRight: '5%' }} />Productos</p>
+          </Link> : false}
+        </li>
+        <li className={styles.optionArmar} onClick={closeMobileMenu}>
+          {true ? <Link to="/armatupc"
+          >
+            <p className={styles.optionProductsLink} ><FontAwesomeIcon icon={faLaptop} style={{ marginRight: '5%' }} />Armar</p>
+          </Link> : false}
+        </li>
+        <div className={styles.optionCategories} >
+          <DropCategories info='Categorías'></DropCategories>
         </div>
-        <div className={styles.searchBar} >
-          <SearchBar />
+        <div className={styles.optionLogin} >
+          {user?.name ? false :
+            <Link to="/login">
+              <p className={styles.optionLoginLink} > <FontAwesomeIcon icon={faUserAlt} style={{ marginRight: '5%' }} />Iniciar sesión</p>
+            </Link>}
+          <p>{user?.name &&
+            <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
         </div>
-        <ul className={click ? styles.nav_options_active : styles.nav_options}>
-          <li className={styles.optionCart} onClick={closeMobileMenu}>
-            <Link className={styles.optionCartLink} onClick={handleRedirCart} to="/Carrodecompras">
-              <p className={styles.optionCartLink}> <FontAwesomeIcon icon={faShoppingCart} style={{marginRight:'25%'}} /> {quantity}</p>
-            </Link>
-          </li>
-          <li className={styles.optionProducts} onClick={closeMobileMenu}>
-            {true ? <Link onClick={handleRedirProducts} to="/Home"
-            >
-              <p className={styles.optionProductsLink} ><FontAwesomeIcon icon={faListAlt} style={{marginRight:'5%'}} />Productos</p>
-              </Link> : false}          
-              </li>
-             
-              <li className={styles.optionProducts} onClick={closeMobileMenu}>
-            {true ? <Link  to="/armatupc"
-            >
-              <p className={styles.optionProductsLink} ><FontAwesomeIcon icon={faListAlt} style={{marginRight:'5%'}} />Arma tu PC</p>
-              </Link> : false}          
-              </li>
 
-          <div className={styles.optionLogin} >
-            {user?.name ? false :
-              <Link to="/login">
-                <p className={styles.optionLoginLink} > <FontAwesomeIcon icon={faUserAlt} style={{marginRight:'5%'}} />Iniciar sesión</p>
-                </Link>}
-            <p>{user?.name &&
-              <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
-          </div>
-        </ul>
+      </ul>
       <div className={styles.mobile_menu} onClick={handleClick}>
         {click ? (
           <CloseMenu className="menu-icon" />

@@ -17,7 +17,7 @@ const initialState = {
     idUsers: "",
     idOrder: 0,
     orderPending: [],
-    contador:0
+    contador:false
 };
 
 export default (state = initialState, action: any): any => {

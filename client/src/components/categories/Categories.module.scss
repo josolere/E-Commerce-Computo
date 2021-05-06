@@ -8,14 +8,16 @@ $red:#f05454;//f05454
     height: fit-content;
     justify-content: start;
     width: 20%;
-    margin: 4rem 0rem 10% 3rem;
+    margin-top: 4%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 .todos {
     background-color: $grey;
     text-align: start;
     color: $white;
     border: transparent;
-    width: 100%;
+    width: 90%;
     outline: none;
     &:hover{
         cursor: pointer;
@@ -26,9 +28,9 @@ $red:#f05454;//f05454
     font-family:'Montserrat', sans-serif;
     border: 1px solid $grey;
     display: flex;
-    width: 99%;
+    width: 90%;
     padding: 1.4rem;
-    font-size: 0.8rem;
+    font-size: 2vh;
     transition: all .3s;
     position: relative;
     overflow: hidden;
@@ -36,7 +38,6 @@ $red:#f05454;//f05454
     color: $white;
     cursor: pointer;
     outline: none;
-    
     &:after {
           content: '';
           position: absolute;
@@ -69,10 +70,14 @@ $red:#f05454;//f05454
       }
   }
         
-    
-
 .iconT {
    display: inline-flex;
    float: right;
-   
+}
+
+@media (max-width: 648px) {
+    .container{
+        display: none;
+
+    }
 }

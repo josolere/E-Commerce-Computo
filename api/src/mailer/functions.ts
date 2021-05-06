@@ -69,17 +69,32 @@ export async function orderCreatedMail(
 }
 
 import { orderShipped } from "./templates/orderShipped";
-export async function orderShippedMail(
+export async function orderShippedMail(userEmail: string, name: string) {
+  try {
+    await transporter.sendMail({
+      from: '"Compu Henry" <proyectohenry5@gmail.com>',
+      to: userEmail,
+      subject: "Tu pedido está en camino",
+      html: orderShipped(name),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// olvido de password, envio código de reseteo
+import { resetPass } from "./templates/resetPass";
+export async function resetPassMail(
   userEmail: string,
   name: string,
-  date: string
+  pass: string
 ) {
   try {
     await transporter.sendMail({
       from: '"Compu Henry" <proyectohenry5@gmail.com>',
       to: userEmail,
       subject: "Tu pedido está en camino",
-      html: orderShipped(name, date),
+      html: resetPass(name, pass),
     });
   } catch (error) {
     console.error(error);

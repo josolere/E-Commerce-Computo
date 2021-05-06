@@ -12,3 +12,14 @@ export const FILTER =  gql`
         }
     }
 `;
+export const GET_PRODUCTS =  gql`
+    query ($categoriesId:[ID]){
+        getProducts (filter:{categoriesId:$categoriesId}) {
+            id
+            name
+            price
+            image
+            stock 
+        }
+    }
+`;

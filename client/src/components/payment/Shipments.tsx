@@ -68,7 +68,6 @@ const PostPayment = () => {
                     <div className={styles.sortUp} >
                         <img className={styles.LogoMP} src={Truck} alt='' />
                         <form className={styles.form} onSubmit={handleSubmit} >
-
                             <div className={styles4.form__group}>
                                 <label className={styles4.form__label} htmlFor="email">
                                     <FontAwesomeIcon icon={faMapMarkedAlt} /> Provincia</label>
@@ -152,7 +151,7 @@ const PostPayment = () => {
                                     <button
                                         type='submit'
                                         className={styles2.boton}
-                                    >Confirmar Envió</button>
+                                    >Confirmar Envío</button>
                                 </div>
                                 :
                                 <div className={styles4.organizarbotones} >

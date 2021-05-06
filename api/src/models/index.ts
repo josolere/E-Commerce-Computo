@@ -9,6 +9,10 @@ import {
   ProductsxorderFactory,
   Productsxorder as ProductsxorderClass,
 } from "./Productsxorder";
+import {
+  DiscountCampaignFactory,
+  DiscountCampaign as DiscountCampaignClass,
+} from "./DiscountCampaign";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -21,6 +25,7 @@ export interface DB {
   Order: typeof OrderClass;
   Review: typeof ReviewClass;
   Productsxorder: typeof ProductsxorderClass;
+  DiscountCampaign: typeof DiscountCampaignClass;
 }
 
 const { DB_NAME, DB_PORT, DB_PASSWORD, DB_URL, DB_USER } = process.env;
@@ -35,6 +40,7 @@ const User = UserFactory(sequelize);
 const Order = OrderFactory(sequelize);
 const Review = ReviewFactory(sequelize);
 const Productsxorder = ProductsxorderFactory(sequelize);
+const DiscountCampaign = DiscountCampaignFactory(sequelize);
 
 //los productos tienen muchas categorias y las categorias tienen muchos productos
 Product.belongsToMany(Category, { through: "productsxcategories" });
@@ -63,6 +69,14 @@ Product.belongsToMany(Product, {
   through: "productTree",
 });
 
+// campaña de descuento de productos
+DiscountCampaign.belongsToMany(Product, {
+  through: "discountCampaignxproduct",
+});
+Product.belongsToMany(DiscountCampaign, {
+  through: "discountCampaignxproduct",
+});
+
 const db: DB = {
   sequelize,
   Product,
@@ -71,6 +85,7 @@ const db: DB = {
   Order,
   Review,
   Productsxorder,
+  DiscountCampaign,
 };
 
 export default db;

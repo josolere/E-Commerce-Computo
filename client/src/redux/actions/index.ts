@@ -94,7 +94,7 @@ export const orderPending = (data:[]) => ({
     data
 })
 
-export const countAddBase = (data:number) => ({
+export const countAddBase = (data:boolean) => ({
     type:COUNT_BASE,
     data
 })
