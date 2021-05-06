@@ -296,7 +296,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
       dispatch(local(idProduct));
     }
   };
-
+  
   const handleAddProduct = () => {
     if (details) {
       const id = details.id;
