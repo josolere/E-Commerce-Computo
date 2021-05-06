@@ -10,7 +10,7 @@ import { GraphQLLocalStrategy } from "graphql-passport";
 import { iUserFacebook } from "./interfaces/index";
 import * as passportFacebook from "passport-facebook";
 const facebookStrategy = passportFacebook.Strategy;
-import { CLIENT_RENEG_WINDOW } from "node:tls";
+//import { CLIENT_RENEG_WINDOW } from "node:tls";
 import googleOAuth from 'passport-google-oauth20'
 import bcrypt from 'bcrypt';
 const app: express.Application = express();

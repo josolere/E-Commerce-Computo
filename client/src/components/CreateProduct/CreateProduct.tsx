@@ -102,8 +102,10 @@ export default function CreateProduct() {
     CREATE_FATHER_COMPATIBILITY
   ); 
 
+
   const { data: dataR } = useQuery(GET_PRODUCT_COMPATIBILITIES, {
     variables: { idProduct: selectAdvanced.value },
+    
   });
 
   
@@ -173,11 +175,18 @@ export default function CreateProduct() {
     }
   }
 
+  console.log(state.categories[0])
 
-  async function handleSubmit(e: FormEvent) {
-    if(dataR){
-      const valores = dataR.getProductsCompatibilities.map((el:{id:number}) => el.id)
+  async function handleSubmit(e: any) {
+      
     e.preventDefault();
+
+    
+      var valores = dataR?.getProductsCompatibilities.map((el:{id:number}) => el.id)
+ 
+
+    
+    
     setState({
       name: "",
       price: 0,
@@ -205,7 +214,7 @@ export default function CreateProduct() {
           console.log("Salio Mal");
         });
     }
-    else {
+    if (state.categories[0] === 1) {
       setCategors([])
       createProduct({ variables: state })
         .then((resolve) => {
@@ -222,10 +231,14 @@ export default function CreateProduct() {
         .catch((err) => {
           console.log("Salio Mal");
         });
-    }
-   
+    } else {
+        setCategors([])
+        createProduct({ variables: state })
+        .then((resolve) => {
+          toast.success('Se ha creado el producto 😁')}
+        )}
     setnewpr([...newpro, results?.data?.createProduct]);
-    }
+    
   }
 
 
@@ -288,7 +301,7 @@ export default function CreateProduct() {
           <div className={styles.containeTitle}>
             <h1 className={styles.titleCreate} >Añadir Producto</h1>
           </div>
-          <form className={styles.form} onSubmit={handleSubmit}>
+          <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
             <div className={styles.form__group}>
               <label htmlFor="Nombre" className={styles.form__label}>
                 <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} />{" "}

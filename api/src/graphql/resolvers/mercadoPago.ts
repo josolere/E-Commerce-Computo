@@ -60,13 +60,11 @@ Mutation: {
                 { status : "creada", confirmAt }
             );
 
-            console.log('-------------------------------------------------------------------------------------------------------')
             
             const details = OrderToCreate.dataValues.Products;
             const products = [];
             for(let i=0; i<details.length;i++){
               const prod = details[i].dataValues.Productsxorder
-              console.log(prod)
               const prodId = prod.ProductId;
               const name = prod.productName;
               const quantity = prod.quantity;
@@ -75,23 +73,19 @@ Mutation: {
               products.push({name:name, quantity:quantity, price:price})
 
               // stock
-           /*
-              console.log(prodId);
               const producto = await models.Product.findByPk(prodId)
-              console.log(producto);
 
               if (producto) {
                 const stock = producto.stock - quantity;
 
-              //  console.log(producto.stock, quantity);
-
                 const updatedProduct = await producto.update(
                     { stock },
-                    { where: { prodId } }
+                    { where: { id : prodId } }
                   );
-              }
 
-                  */
+                }
+
+                  
             }
 
             const street = OrderToCreate.dataValues.street;

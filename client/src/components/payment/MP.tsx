@@ -58,7 +58,7 @@ const MP: FC<PropsMercado> = (props) => {
 
   const price = props.history.location.state.price
 
-  const mp = new window.MercadoPago('TEST-f76736fb-f8c7-4bb1-a19e-ab2ab45eb887', { locale: 'es-AR' })
+  const mp = new window.MercadoPago('TEST-87ab35ee-8f0f-46ec-a9c2-c7bbd03e98d4', { locale: 'es-AR' })
 
   let idUser = user?.data?.currentUser?.id
 
@@ -155,6 +155,8 @@ const MP: FC<PropsMercado> = (props) => {
             identificationNumber,
             identificationType,
           } = cardForm.getCardFormData();
+
+          console.log(cardForm.getCardFormData())
 
           processPayment({
             variables: {
