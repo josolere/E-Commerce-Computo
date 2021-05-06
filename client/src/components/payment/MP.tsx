@@ -18,7 +18,10 @@ import styles2 from './MercadoV2.module.scss';
 import Logo from '../images/MercadoPago.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles4 from './Responsive.module.scss';
+import { toast, ToastContainer } from "react-toastify"
 
+import { NEW_ORDER, NEW_ORDER_DETAIL } from "../../gql/shopingCartGql"
+import {GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
 
 declare global {
   interface Window {
@@ -48,13 +51,8 @@ interface PropsMercado {
 
 const MP: FC<PropsMercado> = (props) => {
 
-  /*   const search = props.location.search; 
-  
-    const params = new URLSearchParams(search);
-  
-    const PriceFromURL = params.get('price');
-  
-    console.log(PriceFromURL) */
+  const [disabled , setDisabled ] = useState(false)
+  const [hidden , setHidden ] = useState(true)
 
   const user = useQuery(ACTUAL_USER)
 
@@ -77,7 +75,11 @@ const MP: FC<PropsMercado> = (props) => {
   const [timer, setTimer] = useState(false)
 
 
+  const [createOrder] = useMutation(NEW_ORDER)
 
+  const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
+    refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUser}}]
+})
 
   useEffect(() => {
     setTimeout(() => setTimer(true), 10000)
@@ -138,6 +140,12 @@ const MP: FC<PropsMercado> = (props) => {
         onSubmit: (event: { preventDefault: () => void; }) => {
           event.preventDefault();
 
+          setDisabled(true)
+          setHidden(false);
+
+          const progressBar = document.querySelector(".progress-bar");
+          progressBar?.setAttribute("value", "0");
+
           const {
             paymentMethodId: payment_method_id,
             issuerId: issuer_id,
@@ -148,16 +156,7 @@ const MP: FC<PropsMercado> = (props) => {
             identificationNumber,
             identificationType,
           } = cardForm.getCardFormData();
-          /*
-                        console.log(payment_method_id)
-                        console.log("issuerId", issuer_id)
-                        console.log("cardholderEmail", email)
-                        console.log("amount", amount)
-                        console.log("Token",token)
-                        console.log("installments",installments)
-                        console.log("identificationNumber",identificationNumber)
-                        console.log("identificationType",identificationType)
-                        */
+
           processPayment({
             variables: {
               token,
@@ -172,60 +171,35 @@ const MP: FC<PropsMercado> = (props) => {
               id: idOrder
             }
           })
-            .then((result) => window.location.href = `http://localhost:3000/PostPago?id=${result?.data?.processPayment?.payment?.id}`)
+            .then((result) => 
+            {
+                const procesPayment = result?.data?.processPayment;
+                if(procesPayment.status===200){
+                  // creo una orden nueva para que pueda volbver a comprar
+                  createOrder({ variables: { status: "pendiente", idUser: idUser } })
+                  .then((resolve) => {
+                      //console.log('resolve')
+                  })
+                  .catch((error) => {
+                      //console.log('no responde')
+                  })
+                  window.location.href = `http://localhost:3000/PostPago?id=${result?.data?.processPayment?.payment?.id}`
+                }else{
+                  toast.error(procesPayment.error.cause.description)
+                  progressBar?.removeAttribute("value");
+                }
+              })
             .catch(error => console.log(error)) // este error entra si el error es del lado del cliente
-            .finally(() => console.log('termine'))
-          /*             const progressBar = document.querySelector(".progress-bar");
-                      progressBar?.removeAttribute("value");
-                      return () => {
-                        progressBar?.setAttribute("value", "0");
-                      };    */
-          /*   
-                      console.log(payment_method_id)
-                      console.log("issuerId", issuer_id)
-                      console.log("cardholderEmail", email)
-                      console.log("amount", amount)
-                      console.log("Token",token)
-                      console.log("installments",installments)
-                      console.log("identificationNumber",identificationNumber)
-                      console.log("identificationType",identificationType)
-                      fetch("/process_payment", {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                          token,
-                          issuer_id,
-                          payment_method_id,
-                          transaction_amount: Number(amount),
-                          installments: Number(installments),
-                          description: "Descripción del producto",
-                          payer: {
-                            email,
-                            identification: {
-                              type: identificationType,
-                              number: identificationNumber,
-                            },
-                          },
-                        }),
-                      });
-          
-                      */
+            .finally(() => {
+              //const progressBar = document.querySelector(".progress-bar");
+              progressBar?.setAttribute("value", "0");
+              progressBar?.removeAttribute("value");
+              setDisabled(false);
+              setHidden(true);
+              })
+
         },
-        /*
-        onFetching: (resource: any) => {
-          console.log("Fetching resource: ", resource);
-    
-          // Animate progress bar
-          const progressBar = document.querySelector(".progress-bar");
-          progressBar?.removeAttribute("value");
-    
-          return () => {
-            progressBar?.setAttribute("value", "0");
-          };             
-        },
-*/
+
       },
     });
   }, [])
@@ -369,6 +343,7 @@ const MP: FC<PropsMercado> = (props) => {
                 <div className={styles.organizarbotones} >
                   <button
                     className={styles.boton}
+                    disabled={disabled}
                     type="submit"
                     id="form-checkout__submit">
                     Pagar
@@ -378,6 +353,7 @@ const MP: FC<PropsMercado> = (props) => {
                 false}
               <progress
                 value="0"
+                hidden={hidden}
                 className="progress-bar">
                 Cargando...
                 </progress>
