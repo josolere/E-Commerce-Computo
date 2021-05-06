@@ -18,6 +18,7 @@ import { FiHeart } from 'react-icons/fi';
 import { AppState } from '../../redux/reducers';
 import Rstyles from './ResponsiveDetails.module.scss'
 import { TOGGLE_WISHLIST, WISHLIST } from '../../gql/wishlist';
+import { AiFillCloseSquare } from "react-icons/ai";
 
 interface user {
   currentUser: {
@@ -501,25 +502,27 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 )}
               </div>
               {editMode ? false :
-                <div className={Rstyles.SortCenter}>
-                  <button
-                    onClick={handleAddProduct}
-                    className={Rstyles.ButtonBuy}
-                  >
-                    <FontAwesomeIcon icon={faCartPlus} />
-                  </button>
+                <div>
+                  {filtred && filtred?.stock > 0 ?
+                    <div className={Rstyles.SortCenter}>
+                      <button
+                        onClick={handleAddProduct}
+                        className={Rstyles.ButtonBuy}
+                      >
+                        <FontAwesomeIcon icon={faCartPlus} />
+                      </button>
+                    </div>
+                    :
+                    <div className={Rstyles.SortCenter}>
+                      <button
+                        className={Rstyles.ButtonBuy}
+                      >
+                        <AiFillCloseSquare />
+                      </button>
+                    </div>
+                  }
                 </div>
               }
-            </div>
-            <div className={stylesEdit.bot}>
-              {editMode && (
-                <button
-                  className={Rstyles.EditButtonEnd}
-                  type="submit"
-                >
-                  Confirmar
-                </button>
-              )}
             </div>
           </form>
         </div>
@@ -605,7 +608,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                 )}
               </div>
               <div className={Rstyles.SortReview} >
-                {reviewuser.review !== '' && reviewuser.title !== '' &&  rating.length !== 0  && hideReview ? (
+                {reviewuser.review !== '' && reviewuser.title !== '' && rating.length !== 0 && hideReview ? (
                   <button onClick={changereview} className={Rstyles.ButtonSend}>
                     Enviar
                   </button>

@@ -58,7 +58,9 @@ const MP: FC<PropsMercado> = (props) => {
 
   const price = props.history.location.state.price
 
-  const mp = new window.MercadoPago('TEST-f76736fb-f8c7-4bb1-a19e-ab2ab45eb887', { locale: 'es-AR' })
+  let claveAndres = 'TEST-f76736fb-f8c7-4bb1-a19e-ab2ab45eb887'
+
+  const mp = new window.MercadoPago(claveAndres, { locale: 'es-AR' })
 
   let idUser = user?.data?.currentUser?.id
 
@@ -346,8 +348,7 @@ const MP: FC<PropsMercado> = (props) => {
                     id="form-checkout__submit">
                     Pagar
                              </button>
-                </div>
-           
+                </div>  
               <progress
                 value="0"
                 hidden={hidden}
