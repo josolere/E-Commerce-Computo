@@ -9,7 +9,6 @@ import { AppState } from '../../redux/reducers';
 import {  orderId } from '../../redux/actions'
 import NavBarResponsive from '../NavBar/ResponsiveNav';
 
-
 const Home = () => {
     const firsstRender = useRef(true)
     const dispatch = useDispatch()
@@ -119,6 +118,7 @@ const Home = () => {
     return (
         <>
         <NavBarResponsive/>
+        <NavBar/>
         </>
     )
 }
