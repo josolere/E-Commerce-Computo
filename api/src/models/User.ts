@@ -36,7 +36,7 @@ export interface UserAttributesI {
   state?: string;
   zip?: string;
   phone?: string;
-  resetPass?: string;
+  /* resetPass?: string; */
 }
 
 interface UserCreationAttributesI
@@ -64,8 +64,8 @@ export class User
   public state!: string;
   public zip!: string;
   public phone!: string;
-  public resetPass!: string;
-  public readonly createdAt!: Date;
+/*   public resetPass!: string;
+ */  public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
   public getProducts!: BelongsToManyGetAssociationsMixin<Product>;
@@ -159,10 +159,10 @@ export function UserFactory(sequelize: Sequelize) {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      resetPass: {
+      /* resetPass: {
         type: DataTypes.STRING,
         allowNull: true,
-      },
+      }, */
     },
     {
       tableName: "Users",

@@ -31,3 +31,12 @@ query {
     }
 }
 `
+export const CREATE_FATHER_COMPATIBILITY =gql`
+mutation   createFatherCompatibilities ($HeadIdProduct:[ID], $idsProducts:ID) {
+  createFatherCompatibilities (HeadIdProduct:$HeadIdProduct, idsProducts:$idsProducts){
+    name
+    id
+  }
+       
+    }
+`;
