@@ -115,8 +115,15 @@ export default function Card({ name, image, price, id, count, stock }: props) {
 
     const handleFav = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        toast.success('Se ha agregado a favoritos ❤')
         wish({ variables: { userId: user?.id, productId: id } })
+        .then(({data}) => {
+            console.log(data.toggleWishlist)
+            if(data.toggleWishlist.some((obj:any)=> obj.id === id)){
+              toast.success('Se ha agregado a favoritos ❤')
+            }else {
+              toast.warning('Se ha quitado de favoritos :(')
+            }
+          })
     }
 
     useEffect(() => {
