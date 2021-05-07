@@ -40,7 +40,7 @@ export const typeDefs = gql`
   type Mutation {
     createUser(input: CreateUserInput): User
     deleteUser(id: ID!): User!
-    editUser(id: ID, input: EditUserInput): User!
+    editUser(id: ID, input: EditUserInput): User
     toggleWishlist(productId: ID, userId: String): [Product]
 
     logout: Boolean
@@ -92,7 +92,8 @@ export const typeDefs = gql`
     zip: String
     phone: String
     resetPass: String
-  }
+    previousPassword: String
+    }
 
   input SignUpInput {
     username: String

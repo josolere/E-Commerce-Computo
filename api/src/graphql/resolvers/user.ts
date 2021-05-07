@@ -11,7 +11,7 @@ import db from "../../models";
 import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
 import { forEachTrailingCommentRange } from "typescript";
-import { resetPassMail } from "../../mailer/functions";
+//import { resetPassMail } from "../../mailer/functions";
 
 const saltRounds = 10;
 
@@ -124,18 +124,18 @@ export default {
     editUser: async (
       _parent: object,
       { id, input }: { id: string; input: iEditUserInput },
-      { models }: { models: iModels }
+      context: any,
     ): Promise<any> => {
-      const UserToEdit = await models.User.findByPk(id);
-      if (UserToEdit) {
-        const updatedUser = await UserToEdit.update(
-          { ...input },
-          { where: { id } }
-        );
+      const UserToEdit = await context.models.User.findByPk(id);
 
-        if(input.password){
+      let currentUser = context.getUser();
+      console.log(currentUser.privilege)
 
-        const passMatch = await bcrypt.compare(input.password, UserToEdit.password);
+
+
+      if(input.password && currentUser.privilege === 'user'){
+
+        const passMatch = await bcrypt.compare(input.previousPassword, UserToEdit.password);
         console.log('matcheaONoMatchea',passMatch)
         const emailMatch = input.email === UserToEdit.email
 
@@ -146,27 +146,44 @@ export default {
         if(passMatch && emailMatch) {
           
           bcrypt.hash(input.password, saltRounds, function(err, hash){
-            models.User.update({password: hash},{ 
+            context.models.User.update({password: hash},{ 
               where:{ 
                 id: id
               }
              })
           })
           
-          return updatedUser;
+          
 
           }else{
             throw new Error("Passwords doesn't match")
           }
         }
 
+
+      if (UserToEdit) {
+        
+        const updatedUser = await UserToEdit.update(
+          { ...input },
+          { where: { id } }
+        );
+        if(currentUser.privilege === 'admin' && input.password){
+          bcrypt.hash(input.password, saltRounds, function(err, hash){
+            context.models.User.update({password: hash},{ 
+              where:{ 
+                id: id
+              }
+             })
+          })
+        }
+        
         //en caso de reestablecer contraseña por olvido:
-        if (input.resetPass)
+        /* if (input.resetPass)
           resetPassMail(
             updatedUser.email,
             updatedUser.name,
             updatedUser.resetPass
-          );
+          ); */
  
         return updatedUser;
       }
@@ -259,3 +276,19 @@ export default {
     },
   },
 };
+
+
+/* let input2 = {
+          username: input.username? input.username : null,
+          email: input.email? input.email : null,
+          privilege: input.privilege? input.privilege : null,
+          active: input.active? input.active : null,
+          name: input.name? input.name : null,
+          surname: input.surname? input.surname : null,
+          address: input.address? input.address : null,
+          street: input.street? input.street : null,
+          city: input.city? input.city : null,
+          state: input.state? input.state : null,
+          zip: input.zip? input.zip : null,
+          phone: input.phone? input.phone : null,
+        }  */
