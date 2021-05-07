@@ -63,10 +63,7 @@ const NavBarResponsive = () => {
       </div>
       <ul className={click ? styles.nav_options_active : styles.nav_options}>
         <li className={styles.optionCart} onClick={closeMobileMenu}>
-          
-          <p className={styles.optionCartLink} onClick={handleRedirCart}>
-            <p className={styles.optionCartLink}> <FontAwesomeIcon icon={faShoppingCart} style={{ marginRight: '25%' }} /> {quantity}</p>
-          </p>
+            <p className={styles.optionCartLink} onClick={handleRedirCart}> <FontAwesomeIcon icon={faShoppingCart} style={{ marginRight: '25%' }} /> {quantity}</p>
         </li>
         <li className={styles.optionProducts} onClick={closeMobileMenu}>
           {true ? <Link to="/Home"
