@@ -7,9 +7,9 @@ import { productsSeeder, categoriesSeeder, usersSeeder, productRelationsSeeder} 
 require("dotenv").config();
 const { PORT } = process.env;
 
-const alter = false;
-const force = false;
-const logging = false;
+const alter = true;
+const force = true;
+const logging = true;
 sequelize.sync({ alter, force, logging }).then(() => {
   if (force) {
     categoriesSeeder();

@@ -296,7 +296,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
       dispatch(local(idProduct));
     }
   };
-  
+
   const handleAddProduct = () => {
     if (details) {
       const id = details.id;
@@ -375,7 +375,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             </div>
             <div className={Rstyles.SortCenter}>
 
-              {user ? <button onClick={handleFav} className={wishe ? styles.fav : styles.fav}><FiHeart size={20} /></button>
+              {user ? <button onClick={handleFav} className={wishe ? styles.fav : styles.faving}><FiHeart size={20} /></button>
                 :
                 <button className={styles.fav}><Link to="/Login"><FiHeart size={20} /></Link></button>
               }
@@ -501,7 +501,17 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                   </p>
                 )}
               </div>
-              {editMode ? false :
+              {editMode ? <div className={stylesEdit.bot}>
+                {editMode && (
+                  <button
+                    onClick={() => setEditMode(false)}
+                    className={Rstyles.EditButtonEnd}
+                    type="submit"
+                  >
+                    Confirmar
+                  </button>
+                )}
+              </div> :
                 <div>
                   {filtred && filtred?.stock > 0 ?
                     <div className={Rstyles.SortCenter}>
