@@ -173,10 +173,16 @@ const BuildPcUser = (): JSX.Element => {
       setShowProducts(!showProducts);
       setFilterProducts(results);
     } else {
-      let valores = compatibilities?.slice().filter((el: { Categories: [{}] }) =>
-        el.Categories?.find((el: any) => el.name === e.currentTarget.value));
+      
+      let valor = compatibilities?.slice().filter((el: { Categories: [{}] }) =>
+      el.Categories?.find((el: any) => el.name === e.currentTarget.value));
+      let valoresfinal = valor.filter((el:any) => el.stock !== 0)
       setShowProducts(!showProducts);
-      setFilterProducts(valores);
+      setFilterProducts(valoresfinal);
+      //let valores = compatibilities?.slice().filter((el: { Categories: [{}] }) =>
+      //  el.Categories?.find((el: any) => el.name === e.currentTarget.value));
+      //setShowProducts(!showProducts);
+      //setFilterProducts(valores);
     }
 
   };
