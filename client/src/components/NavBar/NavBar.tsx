@@ -66,23 +66,19 @@ const NavBar = (): JSX.Element => {
 
 
   useEffect(() => {
-    console.log(data)
     if (firsstRender.current) {
       firsstRender.current = false;
     } else {
       if (logeo === true && dataOrderSatus.data) {
         let arrayProducts = []
         if (dataOrderSatus.data?.getOrderByStatus[0]?.details?.length !== 0) {
-          console.log(dataOrderSatus.data?.getOrderByStatus[0]?.details)
           arrayProducts = dataOrderSatus.data?.getOrderByStatus[0]?.details
         } else {
-          console.log(dataOrderSatus.data?.getOrderByStatus)
           arrayProducts = dataOrderSatus.data?.getOrderByStatus
         }
         let productBas: any = []
         let conte = 0
         let priceBase = 0
-        console.log(arrayProducts)
         arrayProducts !== undefined &&
           arrayProducts?.map((mapeo: any) => {
             productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity })
@@ -137,7 +133,5 @@ const NavBar = (): JSX.Element => {
     </div>
   );
 };
-
-//Redes en el footer
 
 export default NavBar;

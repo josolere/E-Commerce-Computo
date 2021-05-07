@@ -94,7 +94,6 @@ function App() {
         dispatch(logeo({ idUsers, login }))
 
         if (actualuser.data && idOrder.data.getOrdersByIdUser.length > 0) {
-          console.log(idOrder.data)
           let arrayOrders = idOrder?.data?.getOrdersByIdUser
           let newArrayOrders = arrayOrders.filter((filt: any) => filt.status === 'pendiente')
           let idsOrder = newArrayOrders[0]?.id
