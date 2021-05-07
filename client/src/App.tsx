@@ -12,12 +12,12 @@ import CrearCategoria from "./components/CreateCategory/CreateCategory";
 import styles from './App.module.scss';
 import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
 import { addLocalStorage, logeo, orderId } from './redux/actions/index'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
 import OrdersUser from './components/Order/OrdersUser/OrdersUser'
 import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
 import Orders from './components/Order/Orders';
-import { Cookies, CookiesProvider, useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify';

@@ -84,10 +84,10 @@ const NavBar = (): JSX.Element => {
         let priceBase = 0
         console.log(arrayProducts)
         arrayProducts !== undefined &&
-          arrayProducts.map((mapeo: any) => {
-            productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity })
+          arrayProducts?.map((mapeo: any) => {
+            productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity, name:mapeo.productName })
             conte = conte + mapeo.quantity
-            priceBase = priceBase + mapeo.price * conte
+            priceBase = priceBase + mapeo.price 
           })
         if (!conte && !priceBase) {
           productBas = []
@@ -133,33 +133,7 @@ const NavBar = (): JSX.Element => {
 
   return (
 
-    <div className={navBar.sortThisNav}>
-      {/* <nav>
-        <div className={navBar.CH} >
-          <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
-        </div>
-        <div className={navBar.ElementBar} >
-          <SearchBar />
-        </div>
-        <Link to='/armatupc'> <p className={navBar.linksNav} >Armá tu PC</p> </Link>
-
-        <div className={navBar.ElementBar} >
-          <Link className={navBar.linkCart} to="/Carrodecompras" onClick={handleRedirCart}>
-            <FontAwesomeIcon icon={faShoppingCart} />
-            <p>{quantity}</p>
-          </Link>
-        </div>
-        <div className={navBar.ElementBar} >
-          {true ? <Link onClick={handleRedirProducts} to="/Home"
-          ><p>Productos</p></Link> : false}
-        </div>
-        <div className={navBar.ElementBar} >
-          {user?.name ? false :
-            <Link to="/login"><p>Iniciar Sesion</p></Link>}
-          <p>{user?.name &&
-            <NavBarItem info="Mi Cuenta"></NavBarItem>}</p>
-        </div>
-      </nav> */}
+    <div>
     </div>
   );
 };

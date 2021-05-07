@@ -7,15 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { RETRIEVE_PASSWORD, GET_USERS_BY_ID_RETRIEVE, GET_USERS_BY_EMAIL } from "../../gql/loginGql";
 import styles2 from './SmallForm.module.scss';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux'
-import { countAddBase } from '../../redux/actions'
 
 
 
 
 const OlvideContraseña = () => {
     const firsstRender = useRef(true)
-    const dispatch = useDispatch()
 
     const [control, setControl] = useState({ email: '' })
     const [idEmail, setIdEmail] = useState('')
@@ -102,8 +99,7 @@ const OlvideContraseña = () => {
 
         if (codeReset === codeVerify.code) {
             window.location.href = 'http://localhost:3000/NuevaContrasena';
-            // setRender(true)
-            // dispatch(countAddBase(true))
+            setRender(true)
         } else {
             setCountError(countError - 1)
             countError > 0 && toast.error('te quedan ' + countError + ' intentos')
