@@ -31,7 +31,7 @@ let products = [
       "https://www.intel.com/content/dam/products/hero/foreground/processor-box-8th-gen-core-i7-unlocked-1x1.png",
     details:
       "* 6 cores * Socket LGA1151, * Overcloking Capable, *Intel Hyper-Threading Technology for 12 Way Multitasking, *Intel Turbo Boost Technology 2.0 ,* Intel Smart Cache Technology",
-    price: 62.399,
+    price: 62399,
     categoriesId: [2],
     stock: 10,
   },
@@ -449,14 +449,15 @@ let products = [
     stock: 7,
   },
   {
-    name: "MOUSE COOLER MASTER MM710 BLACK MATTE        ",
-    image: "https://img.gigatron.rs/img/products/large/image5d9ae89be632e.png",
+    name: "Mouse CoolerMaster MM710 Black        ",
+    image:
+      "https://img.gigatron.rs/img/products/large/image5d9ae89be632e.png",
     brand: "MASTER",
     details:
       "Al implementar un nuevo y novedoso diseño de carcasa de nido de abeja que es a la vez ligero y duradero, hemos recortado el peso total de nuestro ratón a menos de 53 g. No más peleas contra el ratón y no más francotiradores perdidos debido a un rango de movimiento de peso limitado. El dolor de muñeca después de las batallas de maratón y la fatiga después de pasar la noche es cosa del pasado. Apunte mejor, rinda mejor, durante más tiempo.",
     price: 4890,
     categoriesId: [7],
-    stock: 0,
+    stock: 10,
   },
   {
     name: "Mousepad Medium Rgb Steelseries Qck Gaming Surface",
@@ -531,8 +532,8 @@ let products = [
     details:
       "Muy alto rendimiento de refrigeración. Con Pure Loop, incluso las aplicaciones más exigentes se pueden utilizar de forma fiable. Una inmensa potencia de refrigeración proporciona bajas temperaturas, incluso durante períodos de máximo rendimiento de la CPU. Fans de Pure Wings 2: El ventilador Pure Wings 2 de 4.724 in proporciona un funcionamiento muy silencioso y un alto rendimiento de refrigeración. Sus nueve aspas de ventilador optimizadas para flujo de aire hacen de Pure Wings 2 el ventilador ideal para el radiador de aluminio de Pure Loop.",
     price: 41999,
-    categoriesId: [10],
-    stock: 9,
+    categoriesId: [9],
+    stock: 9
   },
   {
     name: "Cooler beQuiet! Dark Rock Pro 4",
@@ -542,8 +543,8 @@ let products = [
     details:
       "Potencia de enfriamiento inmensa: No hay limitaciones en silencio y rendimiento para sistemas overclocked y aplicaciones gráficas exigentes. Dark Rock Pro 4 proporciona una impresionante calificación de TDP de 250W y alcanza bajas temperaturas incluso durante períodos de máximo rendimiento de la CPU. Diseño altamente avanzado. Dark Rock Pro 4 está equipado con siete tubos de calor de cobre de 0.236 in de tecnología avanzada que maximizan la conductancia del calor. Las aletas de enfriamiento optimizadas por el flujo de aire con pequeños puntos en sus superficies aumentan la circulación del aire. El revestimiento negro especial con partículas de cerámica hace posible una transferencia perfecta del calor.",
     price: 37999,
-    categoriesId: [10],
-    stock: 9,
+    categoriesId: [9],
+    stock: 9
   },
   {
     name: "Cooler CoolerMaster Hyper 212 EVO LED",
@@ -640,8 +641,35 @@ let products = [
       "Este SSD, por su conectividad PCI-E llega a una velocidad máxima de lectura/escritura de 3400MB/s, todos tus juegos cargarán a maxima velocidad. Incluye disipador para lidiar por el calor que generan las altas velocidades.",
     price: 86999,
     categoriesId: [5],
-    stock: 10,
+    stock: 10
   },
+  {
+    name: 'Combo Logitech MX900 Performance Teclado + Mouse',
+    image: 'https://assets.logitech.com/assets/65540/mx900-performance.png',
+    brand: 'Logitech',
+    details: 'FACILITA TUS TAREAS CON UNA COMBINACIÓN AVANZADA: El teclado inalámbrico de tamaño normal es cómodo, con retroiluminación inteligente y teclas personalizables. El ratón MX dispone de botón rueda de velocidad adaptable, un exclusivo botón rueda para el pulgar y, gracias a su sensor láser Darkfield, ofrece seguimiento en cualquier superficie, incluso sobre cristal (de al menos 4 mm de grosor).',
+    price: 39599,
+    categoriesId: [7],
+    stock: 10
+  },
+  {
+    name: 'Teclado Razer BlackWidow Tournament Stealth',
+    image: 'https://assets.razerzone.com/eeimages/products/17563/razer-blackwidow-tournament-gallery-04.png',
+    brand: 'Razer',
+    details: 'Hablar de Razer dentro del mundo gamer es palabra mayor. Esta compañía ofrece productos de muy alta calidad a sus usuarios. Su línea de teclados es reconocida por haber recibido distintos galardones y premios internacionales por su alto desempeño. Distinción a todo color: Su retroiluminación le da un toque diferente a tu equipo y resalta su composición cuando es utilizado en espacios poco iluminados.',
+    price: 39599,
+    categoriesId: [7],
+    stock: 10
+  },
+  {
+    name: 'Razer Naga Epic Chroma RGB',
+    image: 'https://assets.razerzone.com/eeimages/products/20776/rzrnagaepicchroma_02.png',
+    brand: 'Razer',
+    details: 'Cuando se trata de ratones de computadora, hay una gran cantidad de opciones para elegir. Y, algunas de estas opciones incluyen desde un mouse óptico estándar de 3 botones hasta ratones láser de alta tecnología con múltiples botones, también podemos elegir entre una variedad de tamaños, desde pequeños a grandes; y casi todo lo demás. Si bien el 90% de los ratones que están disponibles están orientados a los juegos, debemos mirar a nuestros ratones para hacer más que solo jugar. Necesitamos considerar un mouse que pueda adaptarse a una variedad de tareas informáticas diferentes de manera rápida y sin esfuerzo, mientras que al mismo tiempo mejore nuestra precisión y destreza. ¿Qué sentido tiene tener un mouse que no puede realizar ajustes de precisión, y también tener un mouse que nos adormece o enfría las manos después de un uso prolongado?',
+    price: 12000,
+    categoriesId:[7],
+    stock: 10
+  }
 ];
 
 let categories = [
