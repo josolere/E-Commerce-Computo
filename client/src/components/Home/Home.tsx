@@ -18,7 +18,6 @@ const Home = () => {
 
 
     const { logeo, idOrder, idUsers }: any = useSelector((store: AppState) => store.shoppingCartReducer)
-    console.log(idUsers)
 
     const actualUser = useQuery(ACTUAL_USER)
     const [user, setUser] = useState('')
@@ -50,8 +49,6 @@ const Home = () => {
             firsstRender.current = false;
         } else {
             setOrders(dataOrderSatus?.data)
-            console.log(user)
-            console.log(orders)
         }
     }, [dataOrderSatus])
 
@@ -62,11 +59,8 @@ const Home = () => {
             if (allOrders?.data?.getAllOrders) {
                 let arrayOrders = allOrders?.data?.getAllOrders
                 let arrarNewOrders = arrayOrders?.filter((filt: any) => filt.UserId === user)
-                console.log(allOrders?.data?.getAllOrders)
-                console.log(arrarNewOrders)
                 let idUser = actualUser?.data?.currentUser?.googleId
                 if (arrarNewOrders.length === 0 && idUser) {
-                    console.log(actualUser?.data?.currentUser?.googleId)
                     createOrder({ variables: { status: "pendiente", idUser: user } })
                         .then((resolve) => {
                             console.log('resolve')
@@ -74,10 +68,8 @@ const Home = () => {
                             dispatch(orderId(resolveIdOrder))
                             if (localStorage.getItem('productsLocal')) {
                                 let productLocal: any = []
-                                console.log(resolveIdOrder)
                                 productLocal = (localStorage.getItem('productsLocal'))
                                 productLocal = (JSON.parse(productLocal))
-                                console.log(productLocal)
                                 productLocal.map((mapeo: any) => {
                                     createOrderDetail({ variables: { idOrder: resolveIdOrder, idProduct: mapeo.id, quantity: mapeo.count } })
                                         .then((resolve) => {
@@ -93,9 +85,7 @@ const Home = () => {
                             console.log('no responde')
                         })
                 } else {
-                    console.log('entra else')
                     if (localStorage.getItem('productsLocal')) {
-                        console.log('idOrder')
                         let productLocals: any = []
                         productLocals = (localStorage.getItem('productsLocal'))
                         productLocals = (JSON.parse(productLocals))
