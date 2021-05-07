@@ -64,7 +64,8 @@ const ResetAdmin = () => {
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        if (control.newpassword1 === control.newpassword2) {
+
+        if (control.newpassword1 === control.newpassword2 && idUser) {
             editUser({
                 variables: {
                     password: control.newpassword1, id: idUser

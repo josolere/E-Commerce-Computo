@@ -45,12 +45,12 @@ const NavBarResponsive = () => {
   const closeMobileMenu = () => setClick(false);
 
   const handleRedirCart = () => {
-    // window.location.href = "http://localhost:3000/Carrodecompras"
+     window.location.href = "http://localhost:3000/Carrodecompras"
   }
 
   const handleRedirProducts = () => {
     dispatch(setFilter(""))
-    // window.location.href = "http://localhost:3000/Home"
+    window.location.href = "http://localhost:3000/Home"
   }
 
   return (
@@ -63,9 +63,10 @@ const NavBarResponsive = () => {
       </div>
       <ul className={click ? styles.nav_options_active : styles.nav_options}>
         <li className={styles.optionCart} onClick={closeMobileMenu}>
-          <Link className={styles.optionCartLink} to="/Carrodecompras">
+          
+          <p className={styles.optionCartLink} onClick={handleRedirCart}>
             <p className={styles.optionCartLink}> <FontAwesomeIcon icon={faShoppingCart} style={{ marginRight: '25%' }} /> {quantity}</p>
-          </Link>
+          </p>
         </li>
         <li className={styles.optionProducts} onClick={closeMobileMenu}>
           {true ? <Link to="/Home"

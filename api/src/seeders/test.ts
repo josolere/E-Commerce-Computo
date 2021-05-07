@@ -441,7 +441,7 @@ let categories = [
     name: "Monitores",
   },
   {
-    name: "Periferos",
+    name: "Periféricos",
   },
   {
     name: "Gabinetes",
@@ -455,11 +455,9 @@ let categories = [
   
 ];
 
-
-
-bcrypt.hash("123456", saltRounds, function(err, hash){
-  console.log(hash)
-})
+//bcrypt.hash("123456", saltRounds, function(err, hash){
+//  console.log(hash)
+//})
 
 const users = [
   {
