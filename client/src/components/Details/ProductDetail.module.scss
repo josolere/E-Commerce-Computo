@@ -278,7 +278,7 @@ $yellow: #ffb200;
    
 }
 
-/* .box::before {
+.box::before {
 	content: '';
 	position: absolute;
 	width: 200rem;
@@ -336,10 +336,17 @@ $yellow: #ffb200;
 
 .pReview{
 
-    max-width: 10%;
-    font-weight: bold;
+    max-width: 70%;
+    font-weight: 300;
     font-family: 'Montserrat', sans-serif ;
     font-size: 100%;
+}
+
+.pReviewTitle{
+    max-width: 30%;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 120%;
 }
 
 
@@ -353,7 +360,7 @@ $yellow: #ffb200;
     font-size: 100%;
 }
 
-*/
+
 .fav{
     position: absolute;
     right: 5rem;

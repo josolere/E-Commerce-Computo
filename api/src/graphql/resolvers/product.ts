@@ -43,6 +43,23 @@ export default {
         offset,
       });
     },
+    /* getProductsBuild: async (
+      _parent:object,
+      args: any,
+      context: any
+    ): Promise<any> => {
+      let products = await context.models.Product.findAll({
+        include: Category
+      })
+
+      products.forEach((item:any) => {
+        item.categories = item.dataValues.Categories
+      })
+      console.log(products)
+
+      return products;
+    }, */
+    
     getProductById: async (
       _parent: object,
       { id }: { id: number },
