@@ -11,7 +11,7 @@ import { GET_PRODUCTS } from "../../gql/cardGql"
 let priceSubTotal = 0;
 let quantity = 0;
 
-const BuildPcUser = (): JSX.Element => {
+
 
 const BuildPcUser = (): JSX.Element => {
 

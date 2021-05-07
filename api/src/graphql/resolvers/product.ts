@@ -43,7 +43,7 @@ export default {
         offset,
       });
     },
-    getProductsBuild: async (
+    /* getProductsBuild: async (
       _parent:object,
       args: any,
       context: any
@@ -58,7 +58,7 @@ export default {
       console.log(products)
 
       return products;
-    },
+    }, */
     
     getProductById: async (
       _parent: object,
