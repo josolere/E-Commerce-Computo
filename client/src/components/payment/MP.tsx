@@ -158,6 +158,8 @@ const MP: FC<PropsMercado> = (props) => {
             identificationType,
           } = cardForm.getCardFormData();
 
+          console.log(cardForm.getCardFormData())
+
           processPayment({
             variables: {
               token,

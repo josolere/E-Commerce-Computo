@@ -45,12 +45,12 @@ const NavBarResponsive = () => {
   const closeMobileMenu = () => setClick(false);
 
   const handleRedirCart = () => {
-    window.location.href = "http://localhost:3000/Carrodecompras"
+    // window.location.href = "http://localhost:3000/Carrodecompras"
   }
 
   const handleRedirProducts = () => {
     dispatch(setFilter(""))
-    window.location.href = "http://localhost:3000/Home"
+    // window.location.href = "http://localhost:3000/Home"
   }
 
   return (

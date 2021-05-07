@@ -15,6 +15,7 @@ sequelize.sync({ alter, force, logging }).then(() => {
     categoriesSeeder();
     productsSeeder()
     usersSeeder()
+    
     setTimeout(() => productRelationsSeeder(), 5000);
   }
   apolloServer.applyMiddleware({ app, cors:false });

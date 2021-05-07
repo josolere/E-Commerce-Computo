@@ -69,17 +69,13 @@ export async function orderCreatedMail(
 }
 
 import { orderShipped } from "./templates/orderShipped";
-export async function orderShippedMail(
-  userEmail: string,
-  name: string,
-  date: string
-) {
+export async function orderShippedMail(userEmail: string, name: string) {
   try {
     await transporter.sendMail({
       from: '"Compu Henry" <proyectohenry5@gmail.com>',
       to: userEmail,
       subject: "Tu pedido está en camino",
-      html: orderShipped(name, date),
+      html: orderShipped(name),
     });
   } catch (error) {
     console.error(error);

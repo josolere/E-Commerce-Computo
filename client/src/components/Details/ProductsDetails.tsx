@@ -222,7 +222,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         ...details,
         categories: details?.categories?.map((cat) => cat.id), //esto puede llegar a romper estoy haciendo el edit mutation de las categorias
       },
-    });
+    })
+    .catch(err => console.log(err))
   }
 
   const handleCategory = (e: React.FormEvent<HTMLButtonElement>) => {
@@ -388,7 +389,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     type='number'
                     defaultValue={filtred?.stock}
                     name='stock'
-                    onChange={handleChange}
+                    onChange={handlePrice}
                   />
                 </div>
                 :

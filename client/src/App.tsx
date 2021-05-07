@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Component } from 'react';
 import Login from './components/Users/Login';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Details from './components/Details/ProductsDetails';
@@ -12,7 +12,7 @@ import CrearCategoria from "./components/CreateCategory/CreateCategory";
 import styles from './App.module.scss';
 import OrdersAdmin from './components/Order/OrdersAdmin/OrdersAdmin'
 import { addLocalStorage, logeo, orderId } from './redux/actions/index'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import OrderDetails from './components/Order/OrdersAdmin/OrderDetail'
 import OrdersUser from './components/Order/OrdersUser/OrdersUser'
 import OrderUserDetails from './components/Order/OrdersUser/OrderUserDetail'
@@ -35,6 +35,9 @@ import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
 import Featured from './components/Featured/Featured';
 import ResetAdmin from './components/Users/ResetAdmin';
+import OlvideContraseña from './components/Users/OlvideContraseña';
+import NuevaContraseña from './components/Users/NuevaContraseña';
+
 
 interface user {
   currentUser: {
@@ -64,7 +67,6 @@ interface detailsorder {
 
 function App() {
   const firsstRender = useRef(true)
-
 
 
   let user: any = {}
@@ -115,6 +117,7 @@ function App() {
     }
   }, [])
 
+
   return (
     <Router>
       <ToastContainer
@@ -163,8 +166,11 @@ function App() {
         <Route exact path='/ResetPassAdmin' component={ResetAdmin} />
         <Route exact path='/wishlist' component={Wishlist} />
         <Route exact path='/' component={LandPage} />
-{/*         <Route exact path="/armatupc" component={BuildPcFilter} />
- */}        <Route exact path="/armatupc" component={BuildPcUser} />
+        {/* <Route exact path="/armatupc" component={BuildPcFilter} /> */}
+        {/* <Route exact path="/armatupc/tipo/:tipo" component={BuildPcUser} /> */}
+        <Route exact path="/armatupc" component={BuildPcUser} />
+        <Route exact path="/recuperarcontrasena" component={OlvideContraseña} />
+        <Route exact path="/NuevaContrasena" component={NuevaContraseña} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>
