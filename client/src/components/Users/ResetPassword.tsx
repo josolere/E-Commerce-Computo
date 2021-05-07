@@ -9,6 +9,8 @@ import { CHANGE_PASSWORD, ACTUAL_USER } from "../../gql/loginGql";
 import styles2 from './SmallForm.module.scss';
 import { toast } from 'react-toastify';
 
+require('dotenv').config();
+
 interface user {
     currentUser: {
         name: string,
@@ -48,6 +50,7 @@ const ResetPassword = () => {
 
     const handleclickevent = () => {
         window.location.href = 'http://localhost:3000/Login'
+        
     }
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {

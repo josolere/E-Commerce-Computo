@@ -80,7 +80,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
 
   const [controReview, setControlReview] = useState("");
 
-  const [addreview, results] = useMutation(REVIEW_MUTATION);
+  const [addreview, results] = useMutation(REVIEW_MUTATION, {
+    refetchQueries:[{query:GET, 
+      variables: { id }}]
+  });
 
   let [rating, setRating] = useState<Array<any>>([]);
 
@@ -426,11 +429,13 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                     {category.name} <FontAwesomeIcon icon={faWindowClose} style={{ marginLeft: '5%' }} aria-hidden={true} />
                   </button>
                 ))
-                : details?.categories?.map((category) => (
+                : 
+                <div className={Rstyles.PDetails}> Categorías: {
+                  details?.categories?.map((category) => (
                   <p className={Rstyles.PDetails} >
-                    Categoría: {category.name}
+                    {category.name}
                   </p>
-                ))}
+                ))}</div>}
 
             </div>
             <div className={Rstyles.SortCenter}>
@@ -635,8 +640,8 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
           )}
           <div className={Rstyles.SorComments} >
             <hr className={Rstyles.BigHr} ></hr>
-            {filtred?.reviews.length && revActual[0] ? (
-              filtred?.reviews.concat(revActual).map((review) => (
+            {filtred?.reviews.length ? (  //&& revActual[0]
+              filtred?.reviews.map((review) => (
                 <div className={Rstyles.SortIndiComments}>
                   <div className={Rstyles.sortStarsComments} >
                     {[...Array(review.rating)].map((star, index) => {
@@ -680,7 +685,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                   </div>
                 </div>
               ))
-            ) : revActual[0] ? (
+            ) : /* revActual[0] ? (
               <div className={Rstyles.SortIndiComments}>
                 <div className={Rstyles.sortStarsComments} >
                   {[...Array(revActual[0].rating)].map((star, index) => {
@@ -700,7 +705,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
                   <p className={Rstyles.ContentReview} >{revActual[0].text}</p>
                 </div>
               </div>
-            ) : (
+            ) : */ (
               false
             )}
           </div>

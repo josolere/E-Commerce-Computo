@@ -58,10 +58,11 @@ function DropdownMenu(props: any) {
                 <div className={styles.orderdiv}>
                     <p className={styles.pDrop} >
                         <Link to={`/Ordenes/Usuario`}><FaShippingFast style={{ marginRight: '3%' }}  ></FaShippingFast>Mis Pedidos</Link></p>
-                    <p className={styles.pDrop} >
+                    
+                    {/*<p className={styles.pDrop} >
                         <Link to='/ResetContraseña'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUnlock} /> Cambiar contraseña</Link> </p>
                     <p className={styles.pDrop} >
-                        <Link to='/BorrarUsuario'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUserMinus} /> Borrar Usuario</Link></p>
+<Link to='/BorrarUsuario'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUserMinus} /> Borrar Usuario</Link></p>*/}
                     {/*               <p className={styles.pDrop} >
                         <RiQuestionnaireFill style={{ marginRight: '3%' }}  ></RiQuestionnaireFill>Preguntas</p> */}
                     <p className={styles.pDrop} >

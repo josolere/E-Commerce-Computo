@@ -58,7 +58,7 @@ const MP: FC<PropsMercado> = (props) => {
 
   const price = props.history.location.state.price
 
-  let claveAndres = 'TEST-f76736fb-f8c7-4bb1-a19e-ab2ab45eb887'
+  let claveAndres = 'TEST-87ab35ee-8f0f-46ec-a9c2-c7bbd03e98d4'
 
   const mp = new window.MercadoPago(claveAndres, { locale: 'es-AR' })
 

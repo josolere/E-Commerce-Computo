@@ -50,7 +50,7 @@ export default function Cards({ reset }: IProps) {
     const pageVisited = pageNumber * productsPerPage
 
     useEffect(() => {
-        // setPageNumber(reset) // Rulo: comente esto porque rompia el boton de deseados
+         setPageNumber(reset) // Rulo: comente esto porque rompia el boton de deseados
     }, [data, reset])
 
     const pageCount = Math.ceil(product ? product.length / productsPerPage : 0)
