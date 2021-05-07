@@ -763,6 +763,8 @@ export const productRelations = [
       56,
       57,
       58,
+      59,
+      60
     ],
   },
   {
@@ -800,6 +802,8 @@ export const productRelations = [
       56,
       57,
       58,
+      59,
+      60
     ],
   },
   {
@@ -835,6 +839,8 @@ export const productRelations = [
       56,
       57,
       58,
+      59,
+      60
     ],
   },
   {
@@ -871,6 +877,8 @@ export const productRelations = [
       56,
       57,
       58,
+      59,
+      60
     ],
   },
   {
@@ -905,6 +913,8 @@ export const productRelations = [
       56,
       57,
       58,
+      59,
+      60
     ],
   },
 ];
