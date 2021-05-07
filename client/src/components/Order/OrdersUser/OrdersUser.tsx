@@ -53,7 +53,7 @@ export default function OrdersUser() {
                         </div>
                         :
                         <div className={styles.sortDisaster} >
-                            {!loading && orders?.map((order: IOrder) =>
+                            {!loading && orders?.sort((a:any, b:any)=> b.id - a.id).map((order: IOrder) =>
                                 <div className={styles.sortRow}
                                     key={order.id}>
                                     <p className={styles.OrderNum} >

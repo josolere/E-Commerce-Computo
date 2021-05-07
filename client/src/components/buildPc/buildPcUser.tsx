@@ -172,7 +172,7 @@ const BuildPcUser = (): JSX.Element => {
       setShowProducts(!showProducts);
       setFilterProducts(results);
     } else {
-      let valores = compatibilities.slice().filter((el: { Categories: [{}] }) =>
+      let valores = compatibilities?.slice().filter((el: { Categories: [{}] }) =>
         el.Categories?.find((el: any) => el.name === e.currentTarget.value));
       setShowProducts(!showProducts);
       setFilterProducts(valores);

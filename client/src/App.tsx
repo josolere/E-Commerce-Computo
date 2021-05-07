@@ -151,7 +151,6 @@ function App() {
         <Route exact path='/PostPago' component={PayCompleted} />
         <Route exact path='/AdminBorrar' component={AdminDelete} />
         <Route exact path='/Mercado' component={MP} />
-        {/* <Route exact path='/Pago' component={Payment} /> */}
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
@@ -165,7 +164,9 @@ function App() {
         <Route exact path='/checkout' component={FormCheckout} />
         <Route exact path='/ResetPassAdmin' component={ResetAdmin} />
         <Route exact path='/wishlist' component={Wishlist} />
-        <Route exact path='/' component={LandPage} />
+        <Route exact path='/'  >
+        <Redirect to={{ pathname: '/Home', }}/>
+        </Route>
         {/* <Route exact path="/armatupc" component={BuildPcFilter} /> */}
         {/* <Route exact path="/armatupc/tipo/:tipo" component={BuildPcUser} /> */}
         <Route exact path="/armatupc" component={BuildPcUser} />

@@ -223,6 +223,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
         categories: details?.categories?.map((cat) => cat.id), //esto puede llegar a romper estoy haciendo el edit mutation de las categorias
       },
     })
+    .then((resolve) => setEditMode(false))
     .catch(err => console.log(err))
   }
 
@@ -505,9 +506,10 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
               {editMode ? <div className={stylesEdit.bot}>
                 {editMode && (
                   <button
-                    onClick={() => setEditMode(false)}
-                    className={Rstyles.EditButtonEnd}
                     type="submit"
+                     /* onClick={() => setEditMode(false)}  */
+                    className={Rstyles.EditButtonEnd}
+               
                   >
                     Confirmar
                   </button>

@@ -66,7 +66,7 @@ export default function OrderDetails(props: PropsDetails) {
                             <button className={stylesR.CombeBackButton} >Volver atrás</button>
                         </Link>
                         <h1 className={stylesR.titleLitte} >Orden Nro: {order?.id} </h1>
-                        <h1 className={stylesR.titleLitte} >Fecha de realización: {new Date(+order?.confirmAt).toLocaleDateString("en-GB")}</h1>
+                        <h1 className={stylesR.titleLitte} >Fecha de realización: {new Date(+order?.confirmAt).toLocaleString()}</h1>
                         <h1 className={stylesR.titleLitte} > Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={
                             (order?.status === 'cancelada' && { color: '#FF3434' }) ||
                             (order?.status === 'procesando' && { color: '#FCFF2F' }) ||

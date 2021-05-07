@@ -116,9 +116,9 @@ const OlvideContraseña = () => {
     }
 
     return (
-        <div className={styles2.back}>
-            <div className={styles2.organizar}>
-                <div className={styles2.caja}>
+        <div className={styles.back}>
+            <div className={styles.organizar}>
+                <div className={styles.caja}>
                     <div className={styles.container}>
                         RESTABLECER
                             <div className={styles.flip}>
@@ -140,10 +140,9 @@ const OlvideContraseña = () => {
                                     value={control.email}
                                     onChange={handleChange}
                                 />
-                                <div className={styles.form__group}>
-                                    <button className={styles.boton} onClick={handleRequestCode}>Solicitar Codigo</button>
-                                </div>
                                 <div className={styles.organizarbotones}>
+                                    <button className={styles.boton} onClick={handleRequestCode}>Solicitar Codigo</button>
+                                
                                     <button className={styles.boton} onClick={handleclickevent}>Volver Atrás</button>
                                 </div>
                             </div>
@@ -162,10 +161,8 @@ const OlvideContraseña = () => {
                                     onChange={handleChangeVerify}
                                     value={codeVerify.code}
                                 />
-                                <div className={styles.form__group}>
-                                    <button className={styles.boton} type='submit' onClick={handleVerifyCode} >Verificar Codigo</button>
-                                </div>
                                 <div className={styles.organizarbotones}>
+                                    <button className={styles.boton} type='submit' onClick={handleVerifyCode} >Verificar Codigo</button>
                                     <button className={styles.boton} onClick={handleclickeventVerify}>Volver Atrás</button>
                                 </div>
                             </div>

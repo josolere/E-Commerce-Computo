@@ -85,7 +85,8 @@ const NavBar = (): JSX.Element => {
         console.log(arrayProducts)
         arrayProducts !== undefined &&
           arrayProducts?.map((mapeo: any) => {
-            productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity })
+            productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity, name: mapeo.productName
+            })
             conte = conte + mapeo.quantity
             priceBase = priceBase + mapeo.price * conte
           })
