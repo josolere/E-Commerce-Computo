@@ -10,6 +10,7 @@ import {
     faList,
     faCashRegister,
     faHeart,
+    faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { useCookies } from "react-cookie";
 import { BiUserCircle } from "react-icons/bi"
@@ -75,6 +76,8 @@ function DropdownMenu(props: any) {
                         <Link to='/AdminBorrar'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUserMinus} /> Borrar Usuario</Link></p>
                     <p className={styles.pDrop} >
                         <Link to="/CrearAdministrador"><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUserPlus}></FontAwesomeIcon> Asignar Administrador</Link></p>
+                    <p className={styles.pDrop}>
+                        <Link to='/ResetPassAdmin'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faLock} />Reset Usuarios</Link></p>
                     <p className={styles.pDrop} >
                         <Link to="/CrearProducto"><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faCashRegister}></FontAwesomeIcon>Añadir Producto</Link></p>
                     <p className={styles.pDrop} >

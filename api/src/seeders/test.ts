@@ -400,7 +400,7 @@ let products = [
     image: 'https://www.thermaltake.com/pub/media/wysiwyg/key3/db/products/psu/litepower_rgb/main_450_230V.png',
     details: 'La fuente cuenta con las suiguientes protecciones: OVP (Over Voltage Protection) o Protección contra Sobretensión, OPP (Over Power Protection) o Protección contra Sobrecarga, SCP (Short Circuit Protection) o Protección contra Cortocircuito.',
     price: 5000,
-    categoriesId: [11],
+    categoriesId: [10],
     stock:9
   },
   { 
@@ -408,14 +408,14 @@ let products = [
     image: 'https://c0.klipartz.com/pngpicture/471/194/sticker-png-pc-power-supply-unit-thermaltake-toughpower-grand-atx-80-plus-power-converters-psu-electronic-device-power-converters-power-supply-power-supply-unit-psu.png',
     details: 'La fuente de alimentación ToughPower de Thermaltake te va a brindar 650W de potencia, avalados además por su certificación de eficiencia 80 Plus Bronze. Vas a poder alimentar todos tus componentes y prácticamente en total silencio gracias a su sistema de ventilación de bajo ruido. Sumado a esto, vas a tener el diseño gamer que querés en tu pc gracias a su sistema de RGB.',
     price: 6000,
-    categoriesId: [11]
+    categoriesId: [10]
   },
   { 
     name: 'EVGA 850GQ 850w 80 Plus Gold ',
     image:'https://images.evga.com/products/gallery/png/210-GQ-0850-V1_LG_1.png',
     details: 'MUY SILENCIOSO: La función de modo de EVGA ECO asegura que la fuente de alimentación se mantenga en completo silencio durante cargas bajas a medianas. El ventilador no gira hasta que sea necesario, permitiendo un funcionamiento totalmente silencioso!. RENDIMIENTO INCOMPARABLE: 90% de eficiencia o superior con cargas típicas y condensadores de la más alta calidad de marca japonesa aseguran la fiabilidad a largo plazo. DISEÑO MODULAR: Diseño semi-modular permite sólo utilizar los cables que necesitas, ayudando a mejorar el flujo de aire dentro de la fuente, eliminar los cables innecesarios, y lo mejor de todo, a reducir el desorden de cables.',
     price: 65000,
-    categoriesId: [11]
+    categoriesId: [10]
   }
   
 ];
@@ -509,8 +509,9 @@ export const productRelations = [
    {
     name:"placa intel  10",
     id:16,
-    products:[1, 2, 3, 4, 7, 8, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 
-      34, 35, 36, 37, 38, 39  ],
+    products:[1, 2, 3, 4, 7]
+   // products:[1, 2, 3, 4, 7, 8, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 
+   //   34, 35, 36, 37, 38, 39  ],
    },
 
  {
@@ -523,34 +524,35 @@ export const productRelations = [
   id:7,
   products:[1, 2, 3,4,7, 8 ,12, 13, 16, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30],
  },
- 
+ /*
   {
     name: "1ra a 2ra GEN amd",
     id:30,
     products:[1, 2, 3, 4, 9 ,10, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29]
-  },
+  },*/
+  /*
   {   
     name:"3ra para adelante",
     id:15,
    products:[1, 2, 3, 4, 5, 6, 9 ,10, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29]
-  },
-
+  },*/
+/*
   {
     name:"APUS 2da Gen",
     id: 14,
     products:[ 1, 2, 3, 4, 11, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29 ]
   },
-
-  {   
+*/
+ /* {   
     name:"INTEL 9NA GEN",
     id:24,
     products:[1, 2,3, 4, 12, 13 , 18, 19 ,20, 21, 22, 23, 25, 26, 27, 28, 29]
-  },
-  {   
-    name:"INTEL 10MA GEN",
-    id:16,
-    products:[1, 2, 3, 4, 7, 8, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29]
-  },
+  },*/
+  //{   
+  // name:"INTEL 10MA GEN",
+   // id:16,
+   // products:[1, 2, 3, 4, 7, 8, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29]
+  //},
 ]
 
 export function usersSeeder() {

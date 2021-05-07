@@ -34,6 +34,7 @@ import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
 import Featured from './components/Featured/Featured';
+import ResetAdmin from './components/Users/ResetAdmin';
 import OlvideContraseña from './components/Users/OlvideContraseña';
 import NuevaContraseña from './components/Users/NuevaContraseña';
 
@@ -162,6 +163,7 @@ function App() {
           </div>
         </Route>
         <Route exact path='/checkout' component={FormCheckout} />
+        <Route exact path='/ResetPassAdmin' component={ResetAdmin} />
         <Route exact path='/wishlist' component={Wishlist} />
         <Route exact path='/' component={LandPage} />
         {/* <Route exact path="/armatupc" component={BuildPcFilter} /> */}
