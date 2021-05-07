@@ -21,7 +21,7 @@ import { Cookies, CookiesProvider, useCookies } from 'react-cookie';
 import CreateAdmin from './components/Users/CreateAdmin';
 import DeleteUser from './components/Users/DeleteUser';
 import { ToastContainer } from 'react-toastify';
-import { useQuery} from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { ACTUAL_USER, GET_USERS } from "./gql/loginGql";
 import ResetPassword from './components/Users/ResetPassword';
 import AdminDelete from './components/Users/AdminDelete';
@@ -34,6 +34,7 @@ import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
 import Featured from './components/Featured/Featured';
+import ResetAdmin from './components/Users/ResetAdminV2';
 import OlvideContraseña from './components/Users/OlvideContraseña';
 import NuevaContraseña from './components/Users/NuevaContraseña';
 
@@ -93,7 +94,6 @@ function App() {
         dispatch(logeo({ idUsers, login }))
 
         if (actualuser.data && idOrder.data.getOrdersByIdUser.length > 0) {
-          console.log(idOrder.data)
           let arrayOrders = idOrder?.data?.getOrdersByIdUser
           let newArrayOrders = arrayOrders.filter((filt: any) => filt.status === 'pendiente')
           let idsOrder = newArrayOrders[0]?.id
@@ -137,33 +137,32 @@ function App() {
         <Route exact path='/CrearAdministrador' component={CreateAdmin} />
         <Route exact path='/Orden/Detalle/:id' component={OrderDetails} />
         <Route exact path='/Ordenes' component={OrdersAdmin} />
-        {/*  <Route exact path='/BorrarUsuario' component={DeleteUser } /> */}
         <Route exact path='/Carrodecompras' component={ShoppingCart} />
         <Route exact path='/CrearProducto' component={CrearProducto} />
         <Route exact path='/CrearCategoria' component={CrearCategoria} />
         <Route path='/Ordenes/Usuario' component={OrdersUser} />
         <Route path='/Orden/Usuario/:id' component={OrderUserDetails} />
-        {/* <Route exact path='Pago'>
-          {user?.privilege === 'user' ? <Route exact path='/Pago' component={Payment} /> : <Redirect to={{ pathname: '/login', }} />}
-        </Route> */}
+
         <Route exact path='/Envios' component={Shipments} />
         <Route exact path='/PostPago' component={PayCompleted} />
         <Route exact path='/AdminBorrar' component={AdminDelete} />
         <Route exact path='/Mercado' component={MP} />
-        {/* <Route exact path='/Pago' component={Payment} /> */}
         <Route exact path='/BorrarUsuario' component={DeleteUser} />
         <Route exact path='/ResetContraseña' component={ResetPassword} />
         <Route exact path='/Login' component={Login} />
         <Route exact path='/Detalles' component={Details} />
         <Route exact path='/Home'>
-            <Featured/>
+          <Featured />
           <div className={styles.catalog}>
             <NavCategories />
           </div>
         </Route>
         <Route exact path='/checkout' component={FormCheckout} />
+        <Route exact path='/ResetPassAdmin' component={ResetAdmin} />
         <Route exact path='/wishlist' component={Wishlist} />
-        <Route exact path='/' component={LandPage} />
+        <Route exact path='/'  >
+          <Redirect to={{ pathname: '/Home', }} />
+        </Route>
         {/* <Route exact path="/armatupc" component={BuildPcFilter} /> */}
         {/* <Route exact path="/armatupc/tipo/:tipo" component={BuildPcUser} /> */}
         <Route exact path="/armatupc" component={BuildPcUser} />

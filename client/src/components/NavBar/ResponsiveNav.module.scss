@@ -56,6 +56,7 @@ $white: #dddddd;//30475e
     display: flex;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
+    color: $white;
   }
   .optionCartLink:hover{
     color: $red;
@@ -91,8 +92,8 @@ $white: #dddddd;//30475e
     flex-direction: row;
     padding-left: 20%;
     padding-right: 0%;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 
   }
@@ -107,9 +108,9 @@ $white: #dddddd;//30475e
     display: flex;
     font-size: 2.5vh;
     flex-direction: row;
-    padding-top: 9%;
-    padding-left: 8%;
-    padding-right: 8%;
+ justify-content: center;
+ align-items: center;
+ color: $white;
   }
 
 

@@ -33,7 +33,7 @@ export default function CreateProduct(): JSX.Element {
 
     const [categorie, setCategorie] = useState("")
 
-    const [createCategory] = useMutation(NEW_CATEGORY)
+    const [createCategory] = useMutation(NEW_CATEGORY, {refetchQueries:[{query:GET_CATEGORIES}] } )
 
     const [listCategory, setListCategory] = useState<Array<string>>([])
 
@@ -56,6 +56,7 @@ export default function CreateProduct(): JSX.Element {
                 setListCategory([...listCategory, resolve.data.createCategory]);
                 toast.success("Categoría añadida con éxito")
             })
+            .then((res) => { setCategorie("") })
             .catch((err) => { console.log(err) })
     }
     /* console.log(cat)
@@ -97,9 +98,9 @@ export default function CreateProduct(): JSX.Element {
                         {cat && cat.map((item: any, index: number) => (
                             <button key={index} className={styles.pList}> {item?.name} {/* <span>x</span> */}</button>
                         ))}
-                        {listCategory && listCategory.map((item: any, index: number) => (
+                     {/*    {listCategory && listCategory.map((item: any, index: number) => (
                             <button key={index} className={styles.pList} >{item.name} </button>
-                        ))}
+                        ))} */}
                     </div>
                 </div>
             </div>

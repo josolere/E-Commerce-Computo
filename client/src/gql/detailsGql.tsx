@@ -12,7 +12,7 @@ export const REVIEW_MUTATION = gql`
     }`;
 
 export const EDIT_PRODUCT = gql `
-    mutation editProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categoryId: Int!){
+    mutation editProduct ($name: String!, $price: Float!, $brand: String!, $image: String!, $details: String!, $categoryId: Int! $stock: Int!){
         editProduct ( input: {
         name:$name,
         price:$price,
@@ -20,6 +20,7 @@ export const EDIT_PRODUCT = gql `
         image:$image,
         details:$details
         categoryId:$categoryId
+        stock:!stock
       })
       {
         id
@@ -29,6 +30,7 @@ export const EDIT_PRODUCT = gql `
         image
         details
         categoryId
+        stock
     }
     }
 `

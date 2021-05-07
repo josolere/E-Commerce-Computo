@@ -15,7 +15,8 @@ query ($idProduct:ID){
     getProductsCompatibilities(idProduct:$idProduct) {
     name
     image
-  	price
+    stock
+    price
     id
     Categories {
       id
@@ -25,6 +26,15 @@ query ($idProduct:ID){
   }
 `
 
+export const GET_CATEGORIES = gql`
+   query {
+         getCategory
+            {
+                id
+                name
+                    }
+        }
+`;
 /* export const getProductsBuild =  gql`
     query {
         getProductsBuild {

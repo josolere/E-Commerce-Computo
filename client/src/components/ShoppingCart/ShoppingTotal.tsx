@@ -50,28 +50,11 @@ const ShoppingTotal = (props:props): JSX.Element => {
         setPriceTotal(priceSubTotal + send)
     }, [priceSubTotal])
 
-    // useEffect(() => {
-    //     if (logeo === true) {
-    //         // createOrder({ variables: { status: status, idUser: idUser } })
-    //         //     .then((resolve) => { console.log(data) })
-    //         //     .catch((err) => { console.log('no resuelto') })
-    //     }
-
-    // }, [])
+   
 
     const handleOrder = () => {
         if (user) {
-            // let productLocal: any = []
-            // productLocal = (localStorage.getItem('productsLocal'))
-            // productLocal = (JSON.parse(productLocal))
-            // setOrder(productLocal)
-            // localStorage.clear()
-            // dispatch(deleteCart())
-            // createOrder({ variables: { status: 'pendiente', idUser: idUsers } })
-            //     .then((resolve) => { 
-            //         localStorage.setItem('productsLocal', JSON.stringify([]))
-            //         console.log(data) })
-            //     .catch((err) => { console.log('Salio Mal') })
+           
             window.location.href = 'http://localhost:3000/Envios'
         }
         else {
@@ -79,7 +62,6 @@ const ShoppingTotal = (props:props): JSX.Element => {
         }
     }
 
-    console.log(props.products)
     return (
         <div className={total.disaster} >
                 <div className={total.containerTitle} >

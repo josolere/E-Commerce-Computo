@@ -16,7 +16,7 @@ export type User = {
   state: string;
   zip: string;
   phone: string;
-  /* resetPass: string; */
+  resetPass: string; 
 };
 export type Product = {
   image: string;
@@ -44,6 +44,7 @@ export type Review = {
   rating: number;
   title: string;
   userId: string;
+  title: string;
 };
 
 export type PaymentData = {

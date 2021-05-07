@@ -57,11 +57,7 @@ export default function AllOrders() {
                                 <div>Estado</div>
                                 <a></a>
                             </nav>
-                            {!loading && orders?.map((order: IOrder) => <nav key={order.id}
-                            //  style={
-                            //     (order.status === 'procesando' && {backgroundColor:'#FCFF7F',color:'black'})||
-                            //     (order.status === 'completa' && {backgroundColor:'#B2FF7F',color:'black'})||
-                            //     {backgroundColor:'#F37E7E',color:'black'}}
+                            {!loading && orders?.sort((a:any, b:any) => b.id - a.id).map((order: IOrder) => <nav key={order.id}
                             >
                                 <div >{order.id}</div>
                                 <FontAwesomeIcon icon={faCircle} style={

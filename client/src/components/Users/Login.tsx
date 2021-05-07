@@ -74,7 +74,6 @@ const Login = () => {
     const handleclickevent = () => {
         showlogin ? setshowLogin(false) : setshowLogin(true)
     }
-    console.log(logform)
 
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
@@ -102,7 +101,6 @@ const Login = () => {
             })
                 .then((resolve) => { 
                     setLog(true)
-                    console.log(resolve?.data?.signup?.user?.id)
                     setIdUser(resolve?.data?.signup?.user?.id)
                     toast.success("Te has registrado correctamente"); 
                 setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
@@ -118,7 +116,6 @@ const Login = () => {
         } else {
             if (log === true && data) {
                 const newArray: any = orderCount.filter((filt: any) => filt.status === 'pendiente')
-                console.log(newArray.length)
                 if (newArray.length === 0) {
                     createOrder({ variables: { status: "pendiente", idUser: idUser } })
                         .then((resolve) => {
@@ -144,12 +141,9 @@ const Login = () => {
                             console.log('no responde')
                         })
                 } else {
-                    console.log('entra else')
                     if (localStorage.getItem('productsLocal')) {
-                        console.log('entra')
                         const newArrayUSer: any = orderCount.filter((filt: any) => filt.status === 'pendiente')
                         if (newArrayUSer.length > 0) {
-                            console.log('idOrder')
                             let idOrder = (newArrayUSer[0].id)
                             let productLocals: any = []
                             productLocals = (localStorage.getItem('productsLocal'))
@@ -186,7 +180,6 @@ const Login = () => {
     const responseGoogle = async(response:any) => {
 
         window.location.href = await'http://localhost:5000/auth/google';
-        console.log(response.googleId)
        setIdUser(response.googleId)
        
     }

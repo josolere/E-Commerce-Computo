@@ -21,10 +21,13 @@ export default function OrderUserDetails() {
 
     const order = data?.getOrderById
     let date: any = ""
-    console.log("aaaaa")
+
+    console.log('Fuera', new Date(+order?.confirmAt).toLocaleString())
+
     useEffect(() => {
+        console.log( new Date(+order?.confirmAt).toLocaleString())
         console.log(order?.confirmAt)
-        new Date(order?.confirmAt).toLocaleDateString("en-US")
+        new Date(order?.confirmAt).toLocaleString()
     }, [order])
 
     const totalCalc = () => {
@@ -45,7 +48,7 @@ export default function OrderUserDetails() {
                             <button className={styles2.ComeHomeButton} >Volver atrás</button>
                         </Link>
                         <h1 className={styles2.titleLitte} >Orden Nro: {order?.id}</h1>
-                        <h1 className={styles2.titleLitte} >Fecha de realización: {new Date(+order?.confirmAt).toLocaleDateString("en-GB")}</h1>
+                        <h1 className={styles2.titleLitte} >Fecha de realización: {new Date(+order?.confirmAt).toLocaleString()}</h1>
                         <h1 className={styles2.titleLitte} >Estado: {order?.status}<FontAwesomeIcon icon={faCircle} style={
                             (order?.status === 'cancelada' && { color: '#FF3434' }) ||
                             (order?.status === 'procesando' && { color: '#FCFF2F' }) ||

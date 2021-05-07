@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import styles from './loguin.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faAt, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { GET_USERS, DELETE_USER } from "../../gql/loginGql";
+import { CREATE_ADMIN, GET_USERS } from "../../gql/loginGql";
 import styles3 from './CreateAdmin.module.scss';
 import { toast } from 'react-toastify';
 import styles2 from './AdminAuto.module.scss'
+import { CHANGE_PASSWORD, ACTUAL_USER } from "../../gql/loginGql";
 
 interface user {
     firstname: string,
@@ -25,9 +26,9 @@ interface datauser {
 }
 
 
-const AdminDelete = () => {
+const CreateAdmin = () => {
 
-    const [deleteUser, user] = useMutation(DELETE_USER)
+    const [editUser, user] = useMutation(CHANGE_PASSWORD, { refetchQueries: [{ query: GET_USERS }] })
 
     const resultsUsers = useQuery(GET_USERS)
 
@@ -39,6 +40,12 @@ const AdminDelete = () => {
         ListUsers = resultsUsers?.data?.getUsers
         ListUsername = ListUsers?.map((item: any) => item.email)
     }
+
+    const [control, setControl] = useState({
+        newpassword1: '',
+        newpassword2: ''
+
+    })
 
     console.log(ListUsers)
 
@@ -66,38 +73,50 @@ const AdminDelete = () => {
         })
     }
 
+    const handleChangePass = (event: React.FormEvent<HTMLInputElement>) => {
+        setControl({ ...control, [event?.currentTarget.name]: event?.currentTarget.value })
+    }
+
     const handleclickevent = () => {
         window.location.href = 'http://localhost:3000/Login'
     }
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
-        deleteUser({
-            variables: {
-                id: logform.id
-            }
-        })
-            .then((resolve) => { toast.success('Se ha eliminado el usuario 🥳'); SetAdmin(true) })
-            .catch((error) => (console.log('Delete Mal')))
         event.preventDefault()
+        if (control.newpassword1 === control.newpassword2) {
+            editUser({
+                variables: {
+                    password: control.newpassword1, id: logform.id
+                }
+            })
+                .then((resolve) => {
+                    toast.success('Asiganste una nueva contraseña 🥳')
+                })
+                .catch((error) => (console.log('Reset Mal')))
+        }
+        else {
+            toast.error('Los datos proporcionados no son correctos 🤔')
+        }
     }
+
 
     return (
         <div className={styles2.back}>
             <div className={styles2.organizar}>
                 <div className={styles2.caja}>
-                    <div className={styles.container}>
-                        Borrar
+                <div className={styles.container}>
+                        ASIGNA
                             <div className={styles.flip}>
-                            <div><div>un</div></div>
-                            <div><div>a</div></div>
-                            <div><div>un</div></div>
+                            <div><div>NUEVA</div></div>
+                            <div><div>UNA</div></div>
+                            <div><div>NUEVA</div></div>
                         </div>
-                            Usuario
+                            CONTRASEÑA
                             </div>
                     <form className={styles.form} onSubmit={handlesubmitchange}>
                         <div className={styles.form__group}>
                             <label className={styles.form__label} >
-                            <FontAwesomeIcon icon={faSearch} /> Buscar Usuario</label>
+                                <FontAwesomeIcon icon={faSearch} /> Buscar Usuario</label>
                             <input
                                 className={styles.form__field}
                                 type='text'
@@ -106,8 +125,8 @@ const AdminDelete = () => {
                                 value={searchInput}
                             />
                         </div>
-                        <div>
-{/*                             {searchInput.length > 1 ? <div className={styles3.OnlyOne} >
+                        <div >
+                            {/*     {searchInput.length > 1 ? <div className={styles3.OnlyOne} >
                                 {auto.slice(0, 5).map(search => <button className={styles3.buttonSearch} onClick={() => {
                                     setAuto([])
                                     setUserToShow([])
@@ -117,7 +136,7 @@ const AdminDelete = () => {
                         </div>
                         {Admin ?
                             <div className={styles3.sort}>
-                                <h1 className={styles3.Hrating}><span className={styles3.hspan} > Usuario eliminado {logform.firstname}</span></h1>
+                                <h1 className={styles3.Hrating}><span className={styles3.hspan} >Nueva contraseña para {logform.firstname}</span></h1>
                             </div>
                             :
                             <div>
@@ -125,13 +144,41 @@ const AdminDelete = () => {
                                     <div className={styles3.sortUser} >
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faFileSignature} /> Nombre: {item.name}</p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faFileSignature} /> Apellido: {item.surname}</p>
-                                        <p className={styles3.UserP} ><FontAwesomeIcon icon={faEnvelopeSquare} /> E-Mail: {item.email}</p>                                    
+                                        <p className={styles3.UserP} ><FontAwesomeIcon icon={faAt} /> E-Mail: {item.email}</p>
                                         <p className={styles3.UserP} ><FontAwesomeIcon icon={faCrown} /> Nivel: {item.privilege}</p>
                                     </div>
                                 ))}
                             </div>}
+                        <div className={styles.form__group}>
+                            <label htmlFor='password' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faUnlock} /> Nueva Contraseña</label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Nueva Contraseña'
+                                minLength={4}
+                                maxLength={15}
+                                type="password"
+                                name='newpassword1'
+                                onChange={handleChangePass}
+                                required={true}
+                            />
+                        </div>
+                        <div className={styles.form__group}>
+                            <label htmlFor='password' className={styles.form__label} >
+                                <FontAwesomeIcon icon={faUnlock} /> Control de Contraseña</label>
+                            <input
+                                className={styles.form__field}
+                                placeholder='Nueva Contraseña'
+                                minLength={4}
+                                maxLength={15}
+                                type="password"
+                                name='newpassword2'
+                                onChange={handleChangePass}
+                                required={true}
+                            />
+                        </div>
                         <div className={styles.organizarbotones}>
-                            <button className={styles3.buttonCreate} type='submit' >Borrar Usuario</button>
+                            <button className={styles3.buttonCreate} type='submit' >Reset Contraseña</button>
                             <button className={styles.boton} onClick={handleclickevent}>Volver Atras</button>
                         </div>
                     </form>
@@ -141,4 +188,4 @@ const AdminDelete = () => {
     )
 }
 
-export default AdminDelete;
+export default CreateAdmin;

@@ -121,7 +121,6 @@ export default function Card({ name, image, price, id, count, stock }: props) {
 
     useEffect(() => {
         setWish(list?.some((product: any) => product.id === id))
-        console.log()
     }, [wishes, reswish])
 
     return (

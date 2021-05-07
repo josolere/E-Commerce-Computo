@@ -5,6 +5,7 @@ export const REVIEW_MUTATION = gql`
     mutation ReviewMutation ($id:Int $userId:String $rating:Int $text:String $title:String) {
         addReview (id:$id, input: {userId:$userId rating: $rating text:$text title:$title } )
         {
+            title
             rating
             text
             id
