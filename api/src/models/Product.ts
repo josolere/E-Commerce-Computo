@@ -61,6 +61,7 @@ export class Product
   >;
   public setCategories!: BelongsToManySetAssociationsMixin<Category[], number>;
   public createCategory!: BelongsToManyCreateAssociationMixin<Category>;
+  public getProducts!: BelongsToManyGetAssociationsMixin<Product[]>
 
   public readonly categories?: Category[];
   public readonly orders?: Order[];

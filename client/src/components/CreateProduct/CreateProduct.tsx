@@ -564,16 +564,7 @@ export default function CreateProduct() {
                     />
                   </label>
 
-                  <label>
-                    Ambos
-                  <input
-                      type="checkbox"
-                      name={"ambos"}
-                      onChange={changeSelect}
-                      checked={select.value === "ambos" ? true : false}
-                      value={"ambos"}
-                    />
-                  </label>
+                  
                 </div>
               </div>
             ) : (
@@ -591,7 +582,7 @@ export default function CreateProduct() {
                <input
                    type="checkbox"
                    onChange={changeSelectAdvanced}
-                   value={14}
+                   value={28}
                  />
                </label>
 
@@ -600,7 +591,7 @@ export default function CreateProduct() {
                <input
                    type="checkbox"
                    onChange={changeSelectAdvanced}
-                   value={30}
+                   value={29}
                  />
 
                </label>
@@ -610,7 +601,7 @@ export default function CreateProduct() {
                <input
                    type="checkbox"
                    onChange={changeSelectAdvanced}
-                   value={15}
+                   value={31}
                  />
                </label>
              </div>
@@ -629,7 +620,7 @@ export default function CreateProduct() {
                <input
                    type="checkbox"
                    onChange={changeSelectAdvanced}
-                   value={29}
+                   value={32}
                  />
                </label>
 
@@ -638,7 +629,7 @@ export default function CreateProduct() {
                <input
                    type="checkbox"
                    onChange={changeSelectAdvanced}
-                   value={30}
+                   value={32}
                  />
 
                </label>
@@ -648,7 +639,7 @@ export default function CreateProduct() {
                <input
                    type="checkbox"
                    onChange={changeSelectAdvanced}
-                   value={16}
+                   value={30}
                  />
                </label>
              </div>
