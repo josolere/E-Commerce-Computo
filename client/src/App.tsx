@@ -167,7 +167,7 @@ function App() {
         {/* <Route exact path="/armatupc/tipo/:tipo" component={BuildPcUser} /> */}
         <Route exact path="/armatupc" component={BuildPcUser} />
         <Route exact path="/recuperarcontrasena" component={OlvideContraseña} />
-        <Route exact path="/NuevaContrasena" component={NuevaContraseña} />
+        <Route exact path="/NuevaContrasena" component={ResetPassword} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

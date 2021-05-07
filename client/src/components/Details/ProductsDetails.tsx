@@ -328,7 +328,14 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
     e.preventDefault()
     console.log(user)
     wish({ variables: { userId: currentU?.data?.currentUser?.id, productId: id } })
-    toast.success('Se ha agregado a favoritos ❤')
+    .then(({data}) => {
+      console.log(data.toggleWishlist)
+      if(data.toggleWishlist.some((obj:any)=> obj.id === id)){
+        toast.success('Se ha agregado a favoritos ❤')
+      }else {
+        toast.warning('Se ha quitado de favoritos :(')
+      }
+    })
   }
 
   useEffect(() => {
@@ -380,7 +387,7 @@ const DetailsComponent = (props: PropsDetails): JSX.Element => {
             </div>
             <div className={Rstyles.SortCenter}>
 
-              {user ? <button onClick={handleFav} className={wishe ? styles.fav : styles.faving}><FiHeart size={20} /></button>
+              {user ? <button onClick={handleFav} className={wishe ? styles.faving : styles.fav}><FiHeart size={20} /></button>
                 :
                 <button className={styles.fav}><Link to="/Login"><FiHeart size={20} /></Link></button>
               }
