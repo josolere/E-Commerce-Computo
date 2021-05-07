@@ -39,7 +39,6 @@ const ResetAdmin = () => {
     currentuser = data?.currentUser
 
     const [control, setControl] = useState({
-        password: '',
         newpassword1: '',
         newpassword2: ''
 

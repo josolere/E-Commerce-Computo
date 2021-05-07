@@ -34,7 +34,7 @@ import BuildPcFilter from './components/buildPc/buildPcFilter'
 import FormCheckout from './components/CheckOut/FormCheckout';
 import Wishlist from './components/Wishlist/Wishlist';
 import Featured from './components/Featured/Featured';
-import ResetAdmin from './components/Users/ResetAdmin';
+import ResetAdmin from './components/Users/ResetAdminV2';
 import OlvideContraseña from './components/Users/OlvideContraseña';
 import NuevaContraseña from './components/Users/NuevaContraseña';
 
