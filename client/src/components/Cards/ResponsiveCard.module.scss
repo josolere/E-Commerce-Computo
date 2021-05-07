@@ -59,6 +59,7 @@ $DBlue:#002D62;
 .cardContainer{
     width: 25%;
     height: 22rem;
+    min-height: 22rem;
     max-height: fit-content;
     margin-top: 2%;
     border: solid .1rem darken($color: $dark, $amount: 25%);

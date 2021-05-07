@@ -58,7 +58,7 @@ query($idUser:ID!){
       OrderId
       price
       quantity
-      
+
     }
   }
 }`
