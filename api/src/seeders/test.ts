@@ -31,7 +31,7 @@ let products = [
       "https://www.intel.com/content/dam/products/hero/foreground/processor-box-8th-gen-core-i7-unlocked-1x1.png",
     details:
       "* 6 cores * Socket LGA1151, * Overcloking Capable, *Intel Hyper-Threading Technology for 12 Way Multitasking, *Intel Turbo Boost Technology 2.0 ,* Intel Smart Cache Technology",
-    price: 62.399,
+    price: 62399,
     categoriesId: [2],
     stock: 10,
   },

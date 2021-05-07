@@ -44,7 +44,6 @@ export type Review = {
   rating: number;
   title: string;
   userId: string;
-  title: string;
 };
 
 export type PaymentData = {
