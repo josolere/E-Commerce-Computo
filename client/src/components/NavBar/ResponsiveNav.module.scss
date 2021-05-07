@@ -1,0 +1,206 @@
+/*Desktop View*/
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
+// @import url('../SassVariables/variables.scss');
+$blue:#30475e;//dddddd
+$bluedark: #222831;//222831
+$ligthblue: #dddddd;//30475e
+$red:#f05454;//f05454
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+
+.header {
+	display: flex;
+	background:$blue;
+	justify-content:flex-start;
+	align-items: center;
+	height: 10vh;
+  }
+
+  .logo_container {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+  }
+
+  .LogoCH{
+	  color: $red;
+	  font-size: 4vh;
+    font-family:'Fugaz One', cursive;
+    text-decoration: none;
+    padding-left: 50%;
+  }
+
+  .searchBar{
+	  display: flex;
+	  align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .optionCategories{
+    display: none;
+  }
+
+  .optionCart{
+	  display: flex;
+    font-size: 2.5vh;
+	  align-items: center;
+    flex-direction: row;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .optionCartLink{
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+  }
+  .optionCartLink:hover{
+    color: $red;
+    cursor: pointer;
+  }
+
+  .optionProducts{
+	  display: flex;
+    font-size: 2.5vh;
+	  align-items: center;
+    flex-direction: row;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .optionProductsLink{
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 2.5vh;
+    
+  }
+
+  .optionProductsLink:hover{
+    color: $red;
+    cursor: pointer;
+  }
+
+  .optionLogin{
+    display: flex;
+    font-size: 2.5vh;
+    padding-top: 5%;
+    flex-direction: row;
+    padding-left: 20%;
+    padding-right: 0%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+  }
+
+  .optionLoginLink{
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; 
+  }
+
+  .optionArmar{
+    display: flex;
+    font-size: 2.5vh;
+    flex-direction: row;
+ justify-content: center;
+ align-items: center;
+  }
+
+
+
+  .optionLoginLink:hover{
+    color: $red;
+    cursor: pointer;
+  }
+
+  .nav_options {
+    display: flex;
+    padding-left: 2%;
+	  list-style-type: none;
+    width: fit-content;
+  }
+  
+  .mobile_option {
+	display: none;
+  }
+  
+  .mobile_menu {
+	display: none;
+  }
+
+  @media (max-width: 648px) {
+	/*Mobile View */
+	.header {
+	  padding: 0px 10px;
+	}
+  .optionCategories{
+    display: flex;
+    font-size: 2.5vh;
+    flex-direction: row;
+    text-align: center;
+  }
+	.logo {
+	  width: 45px;
+	  height: 45px;
+	}
+	.nav_options {
+    display: flex;
+    width: 100%;
+    height: 350px;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    flex-direction: column;
+    list-style-type: none;
+    grid-gap: 0px;	}
+	.nav_options_active {
+      display: flex;
+      flex-direction: column;
+	    background:$blue;
+      justify-content: center;
+      position: absolute;
+      height: fit-content;
+      border-radius: .5rem;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 10%;
+      border: solid .2rem $white;
+      align-items: center;
+      justify-content: center;
+	    transition: all 0.5s ease;
+	    z-index: 3;
+	    align-content: center;
+      padding-top: 5%;
+      padding-bottom: 5%;
+      padding-left: 40%;
+      padding-right: 40%;
+	}
+  
+	.menu_icon {
+	  width: 45px;
+	  height: 45px;
+	}
+	.option {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  height: 10vw;
+	  padding: 30px 0px;
+	}
+
+	.signin_up {
+	  display: none;
+	}
+  }
+  .mobile_menu {
+	display: block;
+  }
+  

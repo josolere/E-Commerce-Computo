@@ -1,0 +1,279 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+$background: #fefefe;
+$text: #4b507a;
+$cyan: #60daaa;
+$yellow: #fbca67;
+$orange: #ff8a30;
+$red: #f45e61;
+$purple: #6477b9;
+$blue: #0eb7da;
+$dash-size: 8px;
+$theme-color: mediumseagreen;
+$fill-color: beige;
+$gray:#30475e;//dddddd
+$primary: #11998e;
+$secondary: #38ef7d;
+$Lblue:#6495ED;
+$DBlue:#002D62;
+
+.back {
+    background-color:$dark;
+}
+
+.caja{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  width: 30%;
+  background-color: $white;
+  margin-top: 3%;
+  box-shadow: 20px 20px 25px 25px rgba(0, 0, 0, 0.815);
+  padding: 2%;
+  margin-bottom: 3%;
+}
+
+.organizar {
+    font-family:'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.sortUp{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.LogoMP {
+  width: 55%;
+  max-width: 55%;
+  min-width: 50%;
+  margin: 5%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.form__group {
+    position: relative;
+    margin-top: 5%;
+    width: 100%;
+  }
+  .form__field {
+    margin-top: 2%;
+    margin-left: 15%;
+    font-family:'Montserrat', sans-serif;
+    width: 60%;
+    border: 0;
+    border-bottom: 2px solid $Lblue;
+    outline: 0;
+    font-size: 1.1rem;
+    color: $dark;
+    padding: 1rem 0.3rem 0 ;
+    background: transparent;
+    transition: border-color 0.2s; 
+  &::-moz-placeholder ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+    &::placeholder {
+      color: transparent;
+    }
+  }
+  
+  .form__label {
+      font-family:'Montserrat', sans-serif;
+      margin-left: 15%;
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: $dark;
+  }
+  
+  .form__field:focus {
+    ~ .form__label {
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: $primary;
+      font-weight:700;    
+    }
+    padding-bottom: 6px;  
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, $Lblue, $gray	);
+    border-image-slice: 1;
+  }
+
+.organizarbotones {
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
+  align-items: center;
+}
+
+.boton{
+  font-weight: bold;
+  color: $dark;
+  padding: 10%;
+  font-family: 'Montserrat', sans-serif;
+  border: transparent;
+	display: flex;
+  min-width: 4rem;
+  min-height: 2rem;
+  width: 10rem;
+  padding:5%;
+  height: 3.5rem;
+  justify-content: center;
+  align-self: center;
+  cursor: pointer;
+	font-size: 3.5vh;
+	transition: all .3s;
+	position: relative;
+	overflow: hidden;
+  border-radius: 0.3rem;
+	z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $Lblue;
+    color: $white;
+		border-radius: 0.2rem;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: $DBlue;
+		transition: all .3s;
+		border-radius: 0.2rem;
+		z-index: -1;
+	}
+	&:hover {
+		color:$white;
+		&:before {
+			width: 100%;
+		}
+	}
+}
+
+.sortBox{
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.box {
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 10%;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.labelSelect{
+  margin-right: 2rem;
+}
+
+.options{
+  color: $white;
+}
+
+.box select {
+  font-family: 'Montserrat', sans-serif;
+  background-color:#6495ED;
+  color: $white;
+  margin-top: 10%;
+  margin-left: 50%;
+  height: 2rem;
+  width: 100%;
+  border: none;
+  font-size: 2.5vh;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+.box::before {
+  position: absolute;
+  margin-top: 10%;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 2.5vh;
+  color: $white;
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.box:hover::before {
+  color: $white;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.formYearMonth{
+  width: fit-content;
+  top:0;
+}
+.formYearMonthIn{
+  width: fit-content;
+}
+
+.options{
+  color: $white;
+}
+
+.sortEnd{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sortBoxCuot{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2%;
+
+}
+.sortBoxBank{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -1,0 +1,360 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+$Lblue:#6495ED;
+$DBlue:#002D62;
+
+.containerCard {
+    width: 60%;
+    margin-top: 2%;
+    border: solid .1rem $white;
+    border-radius: 0.4rem;
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    background-color:$grey;
+    font-family:'Montserrat', sans-serif;
+    min-height: 30vh;
+    }
+  
+
+  .containerOthers {
+    display: flex;
+    margin: 2%;
+    flex-direction: column;
+    width: 70%;
+}
+
+  .imageCart{
+    max-width: 10rem;
+  }
+
+  .titleCart{
+    font-size: 2.5vh;
+    color: $white;
+  }
+
+  .containerImg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30%;
+      margin-top: 2%;
+      margin-bottom: 2%;
+  }
+  
+   .containerButtons {
+      display: flex;
+      justify-content: flex-start;
+  } 
+  
+  .price {
+      color: #dddddd;
+      font-size: 2.5vh;
+  }
+
+  .buttonMoreLess{
+    font-weight: bold;
+    color: $dark;
+    width: 2rem;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-family: 'Montserrat', sans-serif;
+    border: solid .1rem $white;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    font-size: 3vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    z-index: 1;
+      &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $Lblue;
+          color: $white;
+          border-radius: 0.2rem;
+          z-index: -2;
+      }
+      &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0%;
+          height: 100%;
+          background-color: $DBlue;
+          transition: all .3s;
+          border-radius: 0.2rem;
+          z-index: -1;
+      }
+      &:hover {
+          color:$white;
+          &:before {
+              width: 100%;
+          }
+      }
+  }
+
+  .cartQuantity{
+    background-color: $Lblue;
+    font-weight: bold;
+    color: $dark;
+    width: 3rem;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-family: 'Montserrat', sans-serif;
+    border: solid .1rem $white;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    font-size: 3vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .buttonDelete{
+     font-weight: bold;
+     color: $dark;
+    width: 7rem;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-family: 'Montserrat', sans-serif;
+    border: solid .1rem $white;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    font-size: 3vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    z-index: 1;
+      &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $red;
+          color: $white;
+          border-radius: 0.2rem;
+          z-index: -2;
+      }
+      &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0%;
+          height: 100%;
+          background-color: $dark;
+          transition: all .3s;
+          border-radius: 0.2rem;
+          z-index: -1;
+      }
+      &:hover {
+          color:$white;
+          &:before {
+              width: 100%;
+          }
+      }
+  }
+
+  @media (max-width: 648px) {
+    .containerCard {
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: 0;
+        border: solid .1rem $white;
+        margin-top: 0;
+        border-radius: 0%;
+        margin-bottom: 0;
+    }
+    .buttonMoreLess{
+        font-size: 2vh;
+        width: 1.5rem; 
+    }
+    .cartQuantity{
+        font-size: 2vh;
+        width: 1.5rem; 
+    }
+    .buttonDelete{
+        font-size: 2vh;
+        width: 5rem;
+    }
+    .price {
+        font-size: 2.5vh;
+    }
+    .imageCart{
+        max-width: 6rem;
+      }
+    .titleCart{
+        font-size: 2.5vh;
+      }
+  }
+  /* .buy {
+    font-size: 140%;
+    font-weight: 400;
+    
+    color: #dddddd;
+    border-bottom-left-radius: 0.2rem;
+  }
+  
+  .addCart{
+    background-color:#30475e; 
+    font-size: 180%;
+    color: #dddddd;
+    border-bottom-right-radius: 0.2rem;
+      &:hover{
+              transition: 1s;
+              position: relative;
+              bottom: 0.5rem;
+              cursor: pointer;
+             
+          }
+  } 
+   */
+/* containerCard{
+    background-color: rgb(30,31,33);
+    margin: 2rem;
+    width: 40%;
+    height: 14rem;
+    display: flex;
+    box-shadow: 0 0 4px 3px rgba(0,0,0,0.2);
+    color: white;
+}
+
+.containerTitle{
+    width: 40%;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    h1{
+        font-size: 20px;
+    }
+    p{
+        height: 10rem;
+        overflow:auto;
+    }
+}
+
+
+.containerImg{
+    /* background-color: white; */
+   /*  width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.image{
+    width: 100%;
+    height: 100%;
+}
+
+.buttonCountLess,
+.buttonCountMore,
+.count p{
+    
+}
+
+.count{
+    width: 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    p{
+        background-color: white;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+    }
+}
+
+   
+
+.buttonCountLess{
+    border: none;
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonCountMore{
+   border: none;
+   background-color: rgb(177, 10, 10);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.buttonCountLess:hover,
+.buttonCountMore:hover{
+    cursor: pointer;
+}
+
+.containerPrice{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    font-size: 20px;
+}
+
+.containerClose{
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 100%;
+ 
+}
+
+.buttonClose{
+    background-color: rgb(177, 10, 10);
+    width:7rem;
+    height: 2.5rem;
+    border:none;
+    font-size: 15px;
+    font-weight: 700;
+    color:white;
+    outline: none;
+    margin:0 10px 0 0;
+    border-radius: 1.25rem;
+    box-shadow: 0 0 2px 2px rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+        
+    }
+}
+
+#buttonLess{
+    background-color: rgb(177, 10, 10);
+    border: none;
+    color: white;
+}
+ */
+ 

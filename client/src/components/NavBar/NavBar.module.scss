@@ -1,0 +1,36 @@
+// @import url('../SassVariables/variables.scss');
+$blue:#30475e;//dddddd
+$bluedark: #222831;//222831
+$ligthblue: #dddddd;//30475e
+$red:#f05454;//f05454
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
+.sortThisNav{
+    overflow: hidden;
+    background: $grey;
+}
+
+.ElementBar{
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 3vh;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.titleNav {
+    color: #f05454;
+    font-size: 4vh;
+    font-family:'Fugaz One', cursive;
+    text-decoration: none;
+}
+
+
+
+

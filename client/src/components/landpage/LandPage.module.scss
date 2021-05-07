@@ -1,0 +1,222 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+$verdesito:#E0FFFF;
+$blanquito:#F0F0F0;
+$red:#f05454;
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+$background: #fefefe;
+$text: #4b507a;
+$cyan: #60daaa;
+$yellow: #fbca67;
+$orange: #ff8a30;
+$red: #f45e61;
+$purple: #6477b9;
+$blue: #0eb7da;
+$dash-size: 8px;
+$theme-color: mediumseagreen;
+$fill-color: beige;
+$gray:#30475e;//dddddd
+$primary: #11998e;
+$secondary: #38ef7d;
+$Lblue:#6495ED;
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,700,900,400italic,700italic,900italic);
+
+
+@font-face {
+  font-family: "ubuntu";
+  font-style: italic;
+  font-weight: 300;
+  src: local("Lato Light Italic"), local("Lato-LightItalic"),
+    url(https://fonts.gstatic.com/s/ubuntucondensed/v8/u-4k0rCzjgs5J7oXnJcM_0kACGMtT-Dfqw.woff2)
+      format("woff2");
+}
+
+::-webkit-scrollbar {
+	width: 0.9rem;               /* width of the entire scrollbar */
+  }
+  
+::-webkit-scrollbar-track {
+	background: $grey;        /* color of the tracking area */
+	border-radius: 0.2rem;
+  }
+  
+::-webkit-scrollbar-thumb {
+	background-color: $dark;    /* color of the scroll thumb */
+	border-radius: 0.5rem;       /* roundness of the scroll thumb */
+	border: 3px solid $red;  /* creates padding around scroll thumb */
+  }
+
+.wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80em;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    justify-content: center;
+    width: 100%;
+}
+
+.t1 {
+  color: #fff;
+  font-size: 10vh;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  background: linear-gradient(to right,$white 10%, $gray 50%, $red 60%);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 1.5s linear infinite;
+  display: inline-block;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+  
+
+.BackLand{
+    background-image: url(../images/CubosGif.gif);
+    width: 100%;
+    height: 110vh;
+    background-position:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.TitleLand {
+    background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, black, black, black);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: 		#FFE4E1;
+    font-size: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    animation: reveal 3000ms ease-in-out forwards 200ms,
+             glow 2500ms linear infinite 2000ms;
+
+    @keyframes reveal {
+        80%{
+        letter-spacing: 1px;
+        }
+        100% {
+        background-size: 300% 300%;
+        }
+        }
+    @keyframes glow {
+        40% {
+        text-shadow: 0 0 8px black;
+            }
+        }
+    }
+
+.DiscountLand {
+    background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, white, white, white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 3vw;
+    font-family: 'Montserrat', sans-serif;
+    animation: reveal 300ms ease-in-out forwards 20ms,
+    glow 250ms linear infinite 200ms;
+
+@keyframes reveal {
+    80%{
+    letter-spacing: 8px;
+    }
+    100% {
+    background-size: 300% 300%;
+    }
+    }
+@keyframes glow {
+    40% {
+    text-shadow: 0 0 8px 	#FFE4E1;
+    }
+    }
+    }
+
+
+.OrderSub{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.TitleConcat {
+    color: 		#FFE4E1;
+    font-size: 2vw;
+    font-family: 'Montserrat', sans-serif;
+    animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2500ms linear infinite 2000ms;
+    border: solid;
+    border-color:#FFE4E1;
+    border-radius: 10px;
+    padding: 1rem;
+}
+/* 
+.WeWant {
+    color:	#FFE4E1;
+    font-size: 1.5vw;
+    font-family: 'Montserrat', sans-serif;
+    animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2500ms linear infinite 2000ms;
+    border: solid;
+    border-color:		#FFE4E1;
+    border-radius: 10px;
+    padding: 1rem;
+} */
+
+@media (max-width: 648px) {
+    .t1 {
+        font-size: 6vh;
+    }
+    .BackLand{
+ 
+        background-image: url(../images/SMALLCUBE.gif);
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        background-position: center center;
+        background-attachment: fixed;
+
+    }
+}
+
+.LandPageInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFE4E1;
+    margin: 0;
+    padding-bottom: 2rem;
+    font-size: 1vw;
+    font-family: 'Montserrat', sans-serif;
+    p{
+        margin: 0.2rem;
+    }
+} 
+
+
+
+

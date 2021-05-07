@@ -1,0 +1,75 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white2: #fff;
+$gray: #9b9b9b;
+$verdesito: 	#E0FFFF;
+$blanquito: #F0F0F0;
+$grey:#30475e;
+$dark: #222831;
+$white: #dddddd;
+$red:#f05454;
+
+.container{
+    font-family:'Montserrat', sans-serif;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: $white;
+    color: $dark;
+    border-top: solid .2rem $red;
+    border-bottom: solid .2rem $red;
+}
+select{
+    font-family:'Montserrat', sans-serif;
+    margin-left:1%;
+    font-size: 2.5vh;
+    background-color: $white2;
+    outline: none;
+    color: $dark;
+    border-radius: .2rem;
+    border: solid .2rem $dark;
+    option{
+        color:$dark
+    }
+}
+.products{
+    margin-top: 2rem;
+    border-top: .2rem solid $dark;
+    border-bottom: .2rem solid $dark;
+    border-radius: 0.2rem;
+    nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-bottom: .2rem solid $dark;
+        background-color: $white;
+        div{
+            width: 45%;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            padding-left: 1%;
+            
+        }
+        a{
+            color: $dark;
+            width: 10%;
+            padding-right: 3%;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover{
+                background-color: $red;
+                color: whitesmoke;
+            }
+        }
+    }
+}
+
+@media (max-width: 648px) {
+    .products{
+        width: 100%;
+    }
+}

@@ -1,0 +1,150 @@
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
+$red:#f05454;//f05454
+
+.card {
+  width: 14rem;
+  height: 22rem;
+  margin: 1rem 0rem 1.3rem 2rem;
+  border-radius: 0.2rem;
+  
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  //   align-items: flex-start;
+  background-color: whitesmoke;
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0,0,0,0); 
+    box-shadow:  2px 5px 10px 0px #1b1b1b, 5px 5px 10px 5px rgba(0,0,0,0);
+    font-family:'Montserrat', sans-serif;
+    &:hover{
+        transition: 2s;
+    }
+
+    a {
+      height: 70%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    div {
+      height: 16%;
+    }
+  }
+  // background-color: $dark;
+.name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+      font-size: 90%;
+      padding: 0.3rem;
+      border-top-right-radius: 0.2rem ;
+      border-top-left-radius: 0.2rem;
+      background-color: $dark;
+      color: white;
+
+}
+
+.link{
+  div {
+    height: 100%;
+  
+  }
+    img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+ .buttons {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    margin-bottom: -0.5rem;
+    background-color:#30475e;
+    border-bottom-left-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+    button{
+        width: 50%;
+        border: none;
+        font-family:'Montserrat', sans-serif;
+        outline: none;
+    }
+} 
+
+.buy {
+  font-size: 140%;
+  font-weight: 400;
+  background-color: $red; 
+  color: #dddddd;
+  border-bottom-left-radius: 0.2rem;
+}
+
+.addCart{
+  background-color:#30475e; 
+  font-size: 180%;
+  color: #dddddd;
+  border-bottom-right-radius: 0.2rem;
+    &:hover{
+            transition: 0.5s;
+            // position: relative;
+            // bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            cursor: pointer;
+            color: $red;
+        }
+} 
+.fav{
+  position: absolute;
+  right: 4%;
+  top: 22%;
+  width: fit-content;
+  height: 2rem;
+  border: none;
+  outline: none;
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover{
+    cursor:pointer;
+    background-color: $red;
+    color: $white;
+  }
+}
+
+.faving{
+  position: absolute;
+  right: 4%;
+  top: 22%;
+  width: fit-content;
+  height: 2rem;
+  border: none;
+  outline: none;
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $red;
+  color: whitesmoke;
+  &:hover{
+    cursor: pointer;
+    background-color: transparent;
+    color: $dark;
+  }
+}
+
+.noAddCart{
+  background-color:#30475e; 
+  font-size: 180%;
+  color: #dddddd;
+  border-bottom-right-radius: 0.2rem;
+    &:hover{
+            transition: 1s;
+            cursor: pointer;
+            color: $red;
+            background-color:  $red;
+        }
+} 

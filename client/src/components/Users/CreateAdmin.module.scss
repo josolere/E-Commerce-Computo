@@ -1,0 +1,253 @@
+$grey:#30475e;
+$dark: #222831;
+$white: #dddddd;
+$red:#f05454;
+$background: #fefefe;
+$text: #4b507a;
+$cyan: #60daaa;
+$yellow: #fbca67;
+$orange: #ff8a30;
+$red: #f45e61;
+$purple: #6477b9;
+$blue: #0eb7da;
+$dash-size: 8px;
+$theme-color: mediumseagreen;
+$fill-color: beige;
+$gray:#30475e;
+$primary: #11998e;
+$secondary: #38ef7d;
+
+.searchAdmin{
+	width: 2rem;
+    border: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 2rem;
+	color:$dark;;
+	text-transform: uppercase;
+	font-size: 1rem;
+    cursor: pointer;
+	letter-spacing: .15rem;
+	transition: all .3s;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $red;
+		border-radius: 10rem;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: darken($red, 15%);
+		transition: all .3s;
+		border-radius: 10rem;
+		z-index: -1;
+	}
+	&:hover {
+		color: #fff;
+		&:before {
+			width: 100%;
+		}
+	}
+}
+
+.searchbar{
+    margin-left: 4rem;
+    margin-top: 0.3rem;
+    font-family:'Montserrat', sans-serif;
+    width: 16rem;
+    border: 0;
+    border-bottom: 2px solid $gray;
+    outline: 0;
+    font-size: 1.1rem;
+    color: black;
+    padding: 1rem 0.3rem 0 ;
+    background: transparent;
+    transition: border-color 0.2s; 
+  &::-moz-placeholder ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  .OnlyOne{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	margin: 2%;
+}
+
+.buttonSearch {
+	font-family: 'Montserrat', sans-serif;
+  	border: transparent;
+	display: flex;
+  	min-width: 20rem;
+  	width: fit-content;
+  	padding: 3%;
+  	justify-content: center;
+  	color: $white;
+  	cursor: pointer;
+	font-size: 2.5vh;
+	margin: 5%;
+	padding-bottom: 3%;
+	transition: all .3s;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #30475e;
+    	color: #dddddd;
+		border-radius: 0.2rem;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: #f05454;
+		transition: all .3s;
+		border-radius: 0.2rem;
+		z-index: -1;
+	}
+	&:hover {
+		color: #fff;
+		&:before {
+			width: 100%;
+		}
+	}
+}
+
+.buttonCreate{
+	font-family: 'Montserrat', sans-serif;
+	border: transparent;
+  	display: flex;
+	min-width: 9rem;
+	width: fit-content;
+	padding: 3%;
+	justify-content: center;
+	color: $white;
+	cursor: pointer;
+  	font-size: 2.5vh;
+  	margin: 5%;
+  	padding-bottom: 3%;
+  	transition: all .3s;
+  	position: relative;
+  	overflow: hidden;
+  	z-index: 1;
+  &:after {
+	  content: '';
+	  position: absolute;
+	  bottom: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background-color: #30475e;
+	  color: #dddddd;
+	  border-radius: 0.2rem;
+	  z-index: -2;
+  }
+  &:before {
+	  content: '';
+	  position: absolute;
+	  bottom: 0;
+	  left: 0;
+	  width: 0%;
+	  height: 100%;
+	  background-color: #f05454;
+	  transition: all .3s;
+	  border-radius: 0.2rem;
+	  z-index: -1;
+  }
+  &:hover {
+	  color: #fff;
+	  &:before {
+		  width: 100%;
+	  }
+  }
+}
+
+.sortUser{
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	align-items: flex-start;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	width: 90%;
+	height: fit-content;
+	border-radius: .2rem;
+	border: 4px solid;
+	border-image: linear-gradient(to right, $red, darken( $blue, 25%));
+	border-image-slice: 1;
+	color: white;
+	margin: auto;
+	text-decoration: none;
+}
+
+.UserP{
+	font-family: 'Montserrat', sans-serif;
+	color: $dark;
+	font-weight: bold;
+	font-size: 1rem;
+	text-shadow: 0 2px $white;
+	padding-left: 1rem;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.sort{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 10%;
+}
+
+.Hrating {
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 2rem;
+    max-width: 75vw;
+    color: $grey;
+    .hspan {
+    font-family: 'Montserrat', sans-serif ;
+    background-image: linear-gradient(
+    transparent calc(65% - 5px),
+    darken($red, 0%) 5px,
+    );
+    background-size: 0;
+    background-repeat: no-repeat;
+    display: inline;
+    transition: 0.5s ease;
+    }
+    &:hover {
+      .hspan {
+        background-size: 100%;
+      }
+    }
+  }

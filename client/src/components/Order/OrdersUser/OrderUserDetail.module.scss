@@ -1,0 +1,38 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+$verdesito: 	#E0FFFF;
+$blanquito: #F0F0F0;
+$grey:#30475e;
+$dark: #222831;
+$white: #dddddd;
+$red:#f05454;
+
+.products{
+    margin-top: 2%;
+    border-top: .2rem solid $red;
+    border-bottom: .2rem solid $red;
+    border-radius: 0.2rem;
+    margin-bottom: 2%;
+    nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-bottom: 1px solid $dark;
+        background-color: $white;
+        a{
+            color: $dark;
+        }
+        div{
+            width: 25%;
+            padding: 1rem;
+        }
+    }
+}
+
+@media (max-width: 648px) {
+    .products{
+        width: 100%;
+    }
+}
