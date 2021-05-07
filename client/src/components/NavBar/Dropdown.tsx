@@ -10,6 +10,7 @@ import {
     faList,
     faCashRegister,
     faHeart,
+    faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { useCookies } from "react-cookie";
 import { BiUserCircle } from "react-icons/bi"
@@ -57,10 +58,11 @@ function DropdownMenu(props: any) {
                 <div className={styles.orderdiv}>
                     <p className={styles.pDrop} >
                         <Link to={`/Ordenes/Usuario`}><FaShippingFast style={{ marginRight: '3%' }}  ></FaShippingFast>Mis Pedidos</Link></p>
-                    <p className={styles.pDrop} >
+                    
+                    {/*<p className={styles.pDrop} >
                         <Link to='/ResetContraseña'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUnlock} /> Cambiar contraseña</Link> </p>
                     <p className={styles.pDrop} >
-                        <Link to='/BorrarUsuario'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUserMinus} /> Borrar Usuario</Link></p>
+<Link to='/BorrarUsuario'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUserMinus} /> Borrar Usuario</Link></p>*/}
                     {/*               <p className={styles.pDrop} >
                         <RiQuestionnaireFill style={{ marginRight: '3%' }}  ></RiQuestionnaireFill>Preguntas</p> */}
                     <p className={styles.pDrop} >
@@ -75,6 +77,8 @@ function DropdownMenu(props: any) {
                         <Link to='/AdminBorrar'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUserMinus} /> Borrar Usuario</Link></p>
                     <p className={styles.pDrop} >
                         <Link to="/CrearAdministrador"><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faUserPlus}></FontAwesomeIcon> Asignar Administrador</Link></p>
+                    <p className={styles.pDrop}>
+                        <Link to='/ResetPassAdmin'><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faLock} />Reset Usuarios</Link></p>
                     <p className={styles.pDrop} >
                         <Link to="/CrearProducto"><FontAwesomeIcon style={{ marginRight: '3%' }} icon={faCashRegister}></FontAwesomeIcon>Añadir Producto</Link></p>
                     <p className={styles.pDrop} >

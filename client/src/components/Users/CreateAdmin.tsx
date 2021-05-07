@@ -107,13 +107,13 @@ const CreateAdmin = () => {
                             />
                         </div>
                         <div >
-                            {searchInput.length > 1 ? <div className={styles3.OnlyOne} >
+                        {/*     {searchInput.length > 1 ? <div className={styles3.OnlyOne} >
                                 {auto.slice(0, 5).map(search => <button className={styles3.buttonSearch} onClick={() => {
                                     setAuto([])
                                     setUserToShow([])
                                 }}>{search}   <FontAwesomeIcon style={{ marginLeft: '0.2rem' }} icon={faWindowClose} /></button>)}
                             </div> :
-                                <span></span>}
+                                <span></span>} */}
                         </div>
                         {Admin ?
                             <div className={styles3.sort}>

@@ -50,8 +50,8 @@ export default function Featured() {
         }
     }
 
-    console.log("A", count)
-    console.log("B", top)
+    // console.log("A", count)
+    // console.log("B", top)
 
     if (featured?.length > 5 && width < 648) {
 

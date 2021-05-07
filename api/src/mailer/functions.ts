@@ -93,7 +93,7 @@ export async function resetPassMail(
     await transporter.sendMail({
       from: '"Compu Henry" <proyectohenry5@gmail.com>',
       to: userEmail,
-      subject: "Tu pedido está en camino",
+      subject: "Código de cambio de contraseña",
       html: resetPass(name, pass),
     });
   } catch (error) {

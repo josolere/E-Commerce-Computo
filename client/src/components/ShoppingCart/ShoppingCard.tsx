@@ -77,23 +77,15 @@ const ShoppingCard = (props: props): JSX.Element => {
         variables: { id: idsProducts },
     });
     const [idStock, setIdStock]: any = useState()
-    // console.log(productsId?.data?.getProductById)
 
     useEffect(() => {
         setIdStock(productsId?.data?.getProductById?.stock)
     }, [productsId])
 
-    useEffect(() => {
-        console.log(idStock)
-
-    }, [idStock])
-
-
 
     const productsCart: any = useQuery<detailOrderid>(GET_ORDER_BY_STATUS, {
         variables: { status: "pendiente", idUser: idUsers }
     })
-
 
 
     let details = productsCart?.data?.getOrderByStatus[0]?.details
@@ -124,10 +116,6 @@ const ShoppingCard = (props: props): JSX.Element => {
         setPrice(price + product.price)
         dispatch(morePrice({ productPrice, count, productId }))
         if (logeo === true) {
-
-            console.log('entra if logeo')
-            console.log(productId)
-
             editOrderDetail({ variables: { id: id, price: productPrice * count, quantity: count } })
                 .then((resolve) => {
                     console.log(resolve)

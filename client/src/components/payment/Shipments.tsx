@@ -16,7 +16,6 @@ import { ACTUAL_USER } from '../../gql/loginGql';
 
 const PostPayment = () => {
 
-
     const productos = useSelector((store: AppState) => store.shoppingCartReducer.productTotal)
 
     let priceTotal = useSelector((store: AppState) => store.shoppingCartReducer.priceSubTotal).toString()
@@ -40,7 +39,7 @@ const PostPayment = () => {
         ZIPcode:'',
         phone:''
     })
-
+    console.log(productos)
     console.log('USER',currentuser)
     console.log('ORDER', idOrder)
 

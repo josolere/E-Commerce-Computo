@@ -15,9 +15,9 @@ const NavBarItem = (props:any) => {
     return (  
         <div className={styles.menuItem} >
             <li className = {styles.navItem} >
-        <a className={styles.link} onClick={handleOpen} >
+        <p className={styles.link} onClick={handleOpen} >
         <FontAwesomeIcon icon={faUserAlt} style={{marginRight:'5%'}} />   {props.info}
-        </a>
+        </p>
         {open && <DropdownMenu data ={handleOpen}></DropdownMenu>}
              </li>
         </div>
