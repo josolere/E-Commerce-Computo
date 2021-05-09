@@ -41,7 +41,7 @@ const Login = () => {
             login({ variables: { email: logform.email, password: logform.password } })
                 .then((resolve) => {  const visitante = resolve.data.login.user;
                     toast.success("Bienvenido " + visitante.name + ' ' +  '🥳');
-                    setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
+                    setTimeout(function(){window.location.href = 'http://compuhenry.hopto.org:5001/Home';}, 2000) })
                 .catch((error) => { toast.error('Tu no eres de aquí 🤔')})
                 ;
         }
@@ -53,7 +53,7 @@ const Login = () => {
                 }
             })
                 .then((resolve) => { toast.success("Te has registrado correctamente"); 
-                setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
+                setTimeout(function(){window.location.href = 'http://compuhenry.hopto.org:5001/Home';}, 2000) })
                 .catch((error) => { toast.error('Error al registrarse 🤔') })
                 ;
         }
@@ -62,7 +62,7 @@ const Login = () => {
 
     
     const handleResetPassword = () => {
-        window.location.href = 'http://localhost:3000/ResetContraseña'
+        window.location.href = 'http://compuhenry.hopto.org:5001/ResetContraseña'
     }
 
     const responseFacebook = (res:any) => {
@@ -70,11 +70,11 @@ const Login = () => {
     }
 
     const componentClicked = () => {
-        window.location.href = 'http://localhost:5000/auth/facebook'
+        window.location.href = 'http://compuhenry.hopto.org:5000/auth/facebook'
     }
 
     const responseGoogle = () => {
-        window.location.href = 'http://localhost:5000/auth/google';
+        window.location.href = 'http://compuhenry.hopto.org:5000/auth/google';
     }
 
     return (

@@ -59,7 +59,7 @@ const EditAccount = () => {
     }
 
     const handleclickevent = () => {
-        window.location.href = 'http://localhost:3000/Login'
+        window.location.href = 'http://compuhenry.hopto.org:5001/Login'
     }
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
@@ -93,7 +93,7 @@ const EditAccount = () => {
                 deleteUser({
                     variables: { id: user.id }
                 })
-                    .then((resolve) => { window.location.href = 'http://localhost:3000'; cookies.remove("User")})
+                    .then((resolve) => { window.location.href = 'http://compuhenry.hopto.org:5001'; cookies.remove("User")})
                     .catch((err) => toast.error("Las credenciales no coinciden, intenta nuevamente"))
             } else {
                 return ""

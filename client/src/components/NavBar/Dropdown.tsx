@@ -31,7 +31,7 @@ function DropdownMenu(props: any) {
 
     const logoutchange = () => {
         out()
-        window.location.href = 'http://localhost:3000/Home'
+        window.location.href = 'http://compuhenry.hopto.org:5001/Home'
     }
 
     return (

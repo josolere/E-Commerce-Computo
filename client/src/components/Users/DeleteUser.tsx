@@ -43,7 +43,7 @@ const DeleteUser = () => {
     }
 
     const handleclickevent = () => {
-        window.location.href = 'http://localhost:3000/Login'
+        window.location.href = 'http://compuhenry.hopto.org:5001/Login'
     }
 
     const handlesubmitchange = (event: any) => {
@@ -66,7 +66,7 @@ const DeleteUser = () => {
                     deleteUser({
                         variables: { id: user?.id }
                     })
-                        .then((resolve) => { window.location.href = 'http://localhost:3000/home'; })
+                        .then((resolve) => { window.location.href = 'http://compuhenry.hopto.org:5001/home'; })
                         .catch((err) => toast.error("Las credenciales no coinciden, intenta nuevamente"))
                 }
 

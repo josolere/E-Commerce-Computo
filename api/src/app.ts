@@ -16,11 +16,11 @@ import bcrypt from 'bcrypt';
 const app: express.Application = express();
 
 
-const PORT = "localhost:3000" || "localhost:5000";
+const PORT = "compuhenry.hopto.org:5001" || "localhost:5000";
 
 const corsOptions = {
   credentials: true,
-  origin: 'http://localhost:3000'
+  origin: 'http://compuhenry.hopto.org:5001'
 }
 
 var googleStrategy = googleOAuth.Strategy
@@ -80,13 +80,13 @@ passport.use(
 const facebookOptions: iUserFacebook = {
   clientID: FACEBOOK_CLIENT_ID,
   clientSecret: FACEBOOK_APP_SECRET,
-  callbackURL: "http://localhost:5000/auth/facebook/callback",
+  callbackURL: "http://compuhenry.hopto.org:5000/auth/facebook/callback",
   profileFields: ["id", "email", "first_name", "last_name"],
 };
 const googleOptions: any = {
   clientID: clientID,
   clientSecret: clientSecret,
-  callbackURL: 'http://localhost:5000/auth/google/redirect',
+  callbackURL: 'http://compuhenry.hopto.org:5000/auth/google/redirect',
 }
 const facebookCallback = async (
   accessToken: any,
@@ -185,7 +185,7 @@ app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://compuhenry.hopto.org:5001"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -221,8 +221,8 @@ app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"] }
 app.get(
     "/auth/facebook/callback",
     passport.authenticate("facebook", {
-      successRedirect: "http://localhost:3000/Home",
-      failureRedirect: "http://localhost:5000/graphql",
+      successRedirect: "http://compuhenry.hopto.org:5001/Home",
+      failureRedirect: "http://compuhenry.hopto.org:5000/graphql",
     }),
     ); 
 
@@ -232,10 +232,10 @@ app.get(
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}))
 
 app.get('/auth/google/redirect', 
-  passport.authenticate('google', { failureRedirect: 'http://localhost:5000/graphql'}),
+  passport.authenticate('google', { failureRedirect: 'http://compuhenry.hopto.org:5000/graphql'}),
   function(req, res) {
     //successful authentication
-    res.redirect('http://localhost:3000/Home')
+    res.redirect('http://compuhenry.hopto.org:5001/Home')
   }
   )
 

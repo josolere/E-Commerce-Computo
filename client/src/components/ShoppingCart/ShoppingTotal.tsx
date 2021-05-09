@@ -56,7 +56,7 @@ const ShoppingTotal = (): JSX.Element => {
             createOrder({ variables: { status: 'pending', idUser: 1 } })
                 .then((resolve) => { console.log(data) })
                 .catch((err) => { console.log('Salio Mal') })
-            window.location.href = 'http://localhost:3000/Pago'
+            window.location.href = 'http://compuhenry.hopto.org:5001/Pago'
         }
         else {
             toast.error("Debes iniciar sesión para realizar una compra")

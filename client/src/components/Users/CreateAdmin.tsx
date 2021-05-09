@@ -67,7 +67,7 @@ const CreateAdmin = () => {
     }
 
     const handleclickevent = () => {
-        window.location.href = 'http://localhost:3000/Login'
+        window.location.href = 'http://compuhenry.hopto.org:5001/Login'
     }
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {

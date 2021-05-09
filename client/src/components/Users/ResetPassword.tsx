@@ -43,7 +43,7 @@ const ResetPassword = () => {
     console.log(control)
 
     const handleclickevent = () => {
-        window.location.href = 'http://localhost:3000/Login'
+        window.location.href = 'http://compuhenry.hopto.org:5001/Login'
     }
 
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
@@ -56,7 +56,7 @@ const ResetPassword = () => {
                 }
             })
                 .then((resolve) => { toast.success('Tienes una nueva contraseña 🥳') 
-                setTimeout(function(){window.location.href = 'http://localhost:3000/Home';}, 2000) })
+                setTimeout(function(){window.location.href = 'http://compuhenry.hopto.org:5001/Home';}, 2000) })
                 .catch((error) => (console.log('Reset Mal')))
         }
         else {
