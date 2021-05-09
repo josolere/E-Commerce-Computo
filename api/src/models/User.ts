@@ -31,9 +31,19 @@ export interface UserAttributesI {
   address?: string | null; //puede ser otra tabla
   facebookId?: string | null;
   googleId?: string | null;
+  street?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  phone?: string;
+  resetPass?: string; 
 }
 
-interface UserCreationAttributesI extends Optional<UserAttributesI, "id" | "address" | "username" | "password" | "facebookId"> {}
+interface UserCreationAttributesI
+  extends Optional<
+    UserAttributesI,
+    "id" | "address" | "username" | "password" | "facebookId"
+  > {}
 
 export class User
   extends Model<UserAttributesI, UserCreationAttributesI>
@@ -47,29 +57,36 @@ export class User
   public name!: string;
   public surname!: string;
   public address!: string | null;
-  public facebookId!:string | null;
+  public facebookId!: string | null;
   public googleId!: string | null;
+  public street!: string;
+  public city!: string;
+  public state!: string;
+  public zip!: string;
+  public phone!: string;
+  public resetPass!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  /* 
-  public getUsers!: BelongsToManyGetAssociationsMixin<User>;
-  public addUser!: BelongsToManyAddAssociationMixin<User, number>;
-  public addUsers!: BelongsToManyAddAssociationsMixin<User, number>;
-  public hasUser!: BelongsToManyHasAssociationMixin<User, number>;
-  public hasUsers!: BelongsToManyHasAssociationsMixin<User[], number>;
-  public countUsers!: BelongsToManyCountAssociationsMixin;
-  public removeUser!: BelongsToManyRemoveAssociationMixin<User, number>;
-  public removeUsers!: BelongsToManyRemoveAssociationsMixin<User[], number>;
-  public setUsers!: BelongsToManySetAssociationsMixin<User[], number>;
-  public createUser!: BelongsToManyCreateAssociationMixin<User>; 
-  
+  public getProducts!: BelongsToManyGetAssociationsMixin<Product>;
+  public addProduct!: BelongsToManyAddAssociationMixin<Product, number>;
+  public addProducts!: BelongsToManyAddAssociationsMixin<Product, number>;
+  public hasProduct!: BelongsToManyHasAssociationMixin<Product, number>;
+  public hasProducts!: BelongsToManyHasAssociationsMixin<Product[], number>;
+  public countProducts!: BelongsToManyCountAssociationsMixin;
+  public removeProduct!: BelongsToManyRemoveAssociationMixin<Product, number>;
+  public removeProducts!: BelongsToManyRemoveAssociationsMixin<
+    Product[],
+    number
+  >;
+  public setProducts!: BelongsToManySetAssociationsMixin<Product[], number>;
+  public createProduct!: BelongsToManyCreateAssociationMixin<Product>;
+
   public readonly products?: Product[];
-  
+
   public static associations: {
     products: Association<User, Product>;
   };
-  */
 }
 
 export function UserFactory(sequelize: Sequelize) {
@@ -77,14 +94,14 @@ export function UserFactory(sequelize: Sequelize) {
     {
       id: {
         type: DataTypes.STRING,
-        allowNull:false,
+        allowNull: false,
         primaryKey: true,
       },
-      facebookId:{
+      facebookId: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      googleId:{
+      googleId: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -121,6 +138,31 @@ export function UserFactory(sequelize: Sequelize) {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      // datos del domicilio
+      street: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      state: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      zip: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+       resetPass: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      }, 
     },
     {
       tableName: "Users",

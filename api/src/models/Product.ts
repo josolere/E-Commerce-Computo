@@ -27,8 +27,8 @@ export interface ProductAttributesI {
   brand: string;
   price: number;
   details: string;
-  categoriesId: number;
-  stock:number;
+  // categoriesId: number;
+  stock: number;
 }
 
 interface ProductCreationAttributesI
@@ -43,7 +43,7 @@ export class Product
   public brand!: string;
   public price!: number;
   public details!: string;
-  public categoriesId!: number;
+  // public categoriesId!: number;
   public stock!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -61,6 +61,7 @@ export class Product
   >;
   public setCategories!: BelongsToManySetAssociationsMixin<Category[], number>;
   public createCategory!: BelongsToManyCreateAssociationMixin<Category>;
+  public getProducts!: BelongsToManyGetAssociationsMixin<Product[]>
 
   public readonly categories?: Category[];
   public readonly orders?: Order[];
@@ -68,6 +69,7 @@ export class Product
   public static associations: {
     categories: Association<Product, Category>;
     orders: Association<Product, Order>;
+    products: Association<Product, Product>;
   };
 }
 
@@ -95,13 +97,13 @@ export function ProductFactory(sequelize: Sequelize) {
       details: {
         type: DataTypes.TEXT,
       },
-      categoriesId: {
-        type: DataTypes.INTEGER,
-      },
+      // categoriesId: {
+      //   type: DataTypes.INTEGER,
+      // },
       stock: {
         type: DataTypes.INTEGER,
-        defaultValue: 0
-      }
+        defaultValue: 0,
+      },
     },
     {
       tableName: "products",

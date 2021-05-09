@@ -11,13 +11,32 @@ export const typeDefs = gql`
     details: String
     categories: [Category!]
     reviews: [Review]
-    stock:Int
+    stock: Int
+    discount: discount
     createdAt: String
     updatedAt: String
+  }
+  #tipado para descuentos
+  type discount {
+    percentage: discountPercentage
+    quantity: [discountQuantity]
+  }
+  type discountPercentage {
+    percent: Int
+    id: Int
+    name: String
+    end: String
+  }
+  type discountQuantity {
+    id: Int
+    name: String
+    discount: String
+    end: String
   }
 
   type Query {
     getProducts(filter: FilterProducts): [Product!]
+    getProductsBuild: [Product]
     getProductById(id: ID!): Product
     getProductByName(name: String): [Product]
   }
@@ -46,6 +65,7 @@ export const typeDefs = gql`
     price: Float
     details: String
     categories: [ID!]
+    stock: Int
   }
 
   input FilterProducts {

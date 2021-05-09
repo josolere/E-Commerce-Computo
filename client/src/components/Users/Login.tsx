@@ -1,32 +1,75 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useState, useEffect, useRef } from 'react';
+import { useMutation, gql, useQuery } from '@apollo/client';
 import styles from './loguin.module.scss';
-import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/login"
+import { LOGIN_MUTATION, SIGNUP_MUTATION, ACTUAL_USER } from "../../gql/loginGql";
 import { useCookies } from "react-cookie";
 import { toast, ToastContainer } from "react-toastify"
-import {faEnvelopeSquare, faUnlock,faFileSignature, faMapMarker, faShareAlt} from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeSquare, faUnlock, faFileSignature, faMapMarker, faShareAlt, faAt,
+    faMapMarkedAlt, 
+    faCity,
+    faEnvelope,
+    faPhoneSquare} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FacebookLogin from "react-facebook-login"
+import FacebookLogin from "react-facebook-login";
 import GoogleLogin from 'react-google-login';
+import { useDispatch } from 'react-redux'
+import { logeo } from '../../redux/actions'
+import { NEW_ORDER, NEW_ORDER_DETAIL, GET_ORDER } from "../../gql/shopingCartGql"
+import {GET_ORDER_BY_STATUS } from "../../gql/ordersGql"
+
+
 
 const Login = () => {
- 
+    const dispatch = useDispatch()
+
+    const [createOrder] = useMutation(NEW_ORDER)
+
+    const [idUser, setIdUser] = useState("")
+    const [orderCount, setOrderCount] = useState([])
+    const [log, setLog] = useState(false)
+
+    const firsstRender = useRef(true)
+
+    const { data } = useQuery(GET_ORDER, {
+        variables: { idUser: idUser }
+    });
+
+    const [login, logindata] = useMutation(LOGIN_MUTATION,{
+        refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUser}}]
+    })
+
+    const [createOrderDetail] = useMutation(NEW_ORDER_DETAIL,{
+        refetchQueries:[{query:GET_ORDER_BY_STATUS,variables:{ status: "pendiente", idUser: idUser}}]
+    })
+
+    useEffect(() => {
+        if (data) {
+            setOrderCount(data.getOrdersByIdUser)
+        }
+    }, [data])
+
+
     const [logform, setLogform] = useState({
         email: '',
         password: '',
         firstname: '',
         lastname: '',
         username: '',
-        address: ''
+        address: '',
+        state:'',
+        city:'',
+        ZIPcode:'',
+        phone:'',
+        street:''
     });
-
 
     const [showlogin, setshowLogin] = useState(false)
 
-    const [login, logindata] = useMutation(LOGIN_MUTATION)
-
+    
     const [signup, signupdata] = useMutation(SIGNUP_MUTATION)
+
+    const [createOrders, setCreateOrders] = useState(false)
 
     const handleclickevent = () => {
         showlogin ? setshowLogin(false) : setshowLogin(true)
@@ -35,24 +78,31 @@ const Login = () => {
     const handleinputchange = (event: React.FormEvent<HTMLInputElement>) => {
         setLogform({ ...logform, [event.currentTarget.name]: event.currentTarget.value })
     }
-    
+
     const handlesubmitchange = (event: React.FormEvent<HTMLFormElement>) => {
         if (!showlogin) {
             login({ variables: { email: logform.email, password: logform.password } })
-                .then((resolve) => {  const visitante = resolve.data.login.user;
+                .then((resolve) => {  
+                    const visitante = resolve.data.login.user;
+                    setIdUser(resolve.data.login.user.id)
+                    setLog(true)
                     toast.success("Bienvenido " + visitante.name + ' ' +  '🥳');
                     setTimeout(function(){window.location.href = 'http://compuhenry.hopto.org:5001/Home';}, 2000) })
-                .catch((error) => { toast.error('Tu no eres de aquí 🤔')})
+                .catch((error:any) => { toast.error('Tu no eres de aquí 🤔')})
                 ;
         }
         else {
             signup({
                 variables: {
                     firstName: logform.firstname, email: logform.email, password: logform.password, 
-                    lastName: logform.lastname, username: logform.username, address: logform.address
+                    lastName: logform.lastname, username: logform.username,  street: logform.street,
+                    city: logform.city, zip: logform.ZIPcode, state: logform.state, phone: logform.phone
                 }
             })
-                .then((resolve) => { toast.success("Te has registrado correctamente"); 
+                .then((resolve) => { 
+                    setLog(true)
+                    setIdUser(resolve?.data?.signup?.user?.id)
+                    toast.success("Te has registrado correctamente"); 
                 setTimeout(function(){window.location.href = 'http://compuhenry.hopto.org:5001/Home';}, 2000) })
                 .catch((error) => { toast.error('Error al registrarse 🤔') })
                 ;
@@ -60,12 +110,66 @@ const Login = () => {
         event.preventDefault()
     }
 
-    
+    useEffect(() => {
+        if (firsstRender.current) {
+            firsstRender.current = false;
+        } else {
+            if (log === true && data) {
+                const newArray: any = orderCount.filter((filt: any) => filt.status === 'pendiente')
+                if (newArray.length === 0) {
+                    createOrder({ variables: { status: "pendiente", idUser: idUser } })
+                        .then((resolve) => {
+                            console.log('resolve')
+                            const resolveIdOrder = resolve.data.createOrder.id
+                            if (localStorage.getItem('productsLocal')) {
+                                let productLocal: any = []
+                                productLocal = (localStorage.getItem('productsLocal'))
+                                productLocal = (JSON.parse(productLocal))
+                                setCreateOrders(true)
+                                productLocal.map((mapeo: any) => {
+                                    createOrderDetail({ variables: { idOrder: resolveIdOrder, idProduct: mapeo.id, quantity: mapeo.count } })
+                                        .then((resolve) => {
+                                            console.log(resolve)
+                                        })
+                                        .catch((error) => {
+                                            console.log('no responde')
+                                        })
+                                })
+                            }
+                        })
+                        .catch((error) => {
+                            console.log('no responde')
+                        })
+                } else {
+                    if (localStorage.getItem('productsLocal')) {
+                        const newArrayUSer: any = orderCount.filter((filt: any) => filt.status === 'pendiente')
+                        if (newArrayUSer.length > 0) {
+                            let idOrder = (newArrayUSer[0].id)
+                            let productLocals: any = []
+                            productLocals = (localStorage.getItem('productsLocal'))
+                            productLocals = (JSON.parse(productLocals))
+                            productLocals.map((mapeo: any) => {
+                                createOrderDetail({ variables: { idOrder: idOrder, idProduct: mapeo.id, quantity: mapeo.count } })
+                                    .then((resolve) => {
+                                        console.log(resolve)
+                                    })
+                                    .catch((error) => {
+                                        console.log('no responde')
+                                    })
+                            })
+                        }
+                    }
+                }
+            }
+        }
+
+    }, [orderCount])
+
     const handleResetPassword = () => {
-        window.location.href = 'http://compuhenry.hopto.org:5001/ResetContraseña'
+        window.location.href = 'http://compuhenry.hopto.org:5001/recuperarcontrasena'
     }
 
-    const responseFacebook = (res:any) => {
+    const responseFacebook = (res: any) => {
         console.log(res)
     }
 
@@ -73,9 +177,13 @@ const Login = () => {
         window.location.href = 'http://compuhenry.hopto.org:5000/auth/facebook'
     }
 
-    const responseGoogle = () => {
-        window.location.href = 'http://compuhenry.hopto.org:5000/auth/google';
+    const responseGoogle = async(response:any) => {
+
+        window.location.href = await'http://compuhenry.hopto.org:5000/auth/google';
+       setIdUser(response.googleId)
+       
     }
+
 
     return (
         <div>
@@ -93,8 +201,8 @@ const Login = () => {
                             </div>
                         <form className={styles.form} onSubmit={handlesubmitchange}>
                             <div className={styles.form__group}>
-                                <label htmlFor='email' className={styles.form__label} > 
-                                <FontAwesomeIcon icon={faEnvelopeSquare} aria-hidden={true} /> E-Mail</label>
+                                <label htmlFor='email' className={styles.form__label} >
+                                    <FontAwesomeIcon icon={faAt} aria-hidden={true} /> E-Mail</label>
                                 <input
                                     className={styles.form__field}
                                     placeholder='E-mail'
@@ -108,7 +216,7 @@ const Login = () => {
                             </div>
                             <div className={styles.form__group}>
                                 <label htmlFor='password' className={styles.form__label} >
-                                <FontAwesomeIcon icon={faUnlock} aria-hidden={true} /> Contraseña</label>
+                                    <FontAwesomeIcon icon={faUnlock} aria-hidden={true} /> Contraseña</label>
                                 <input
                                     className={styles.form__field}
                                     type='password'
@@ -121,16 +229,10 @@ const Login = () => {
                                 />
                             </div>
                             <div className={styles.organizarbotones}>
-                                <button style={{paddingTop:"1rem"}} className={styles.boton} type='submit' >Login</button>
+                                <button style={{ paddingTop: "1rem" }} className={styles.boton} type='submit' >Login</button>
                                 <button className={styles.boton} onClick={handleclickevent} >No tienes cuenta?</button>
                             </div>
-                            <div className={styles.buttonFB}>
-{/*                                      <FacebookLogin
-                                        appId="x"
-                                        autoLoad={true}
-                                        onClick={componentClicked}
-                                        callback={responseFacebook} 
-                                        />  */}
+                            <div className={styles.organizarbotones}>
                                     <GoogleLogin className={styles.buttonGoogle}
                                         clientId="700487855245-ffig42s6ln7oao3itcpcg18g0mi8de8u.apps.googleusercontent.com"
                                         theme= 'dark'
@@ -158,7 +260,7 @@ const Login = () => {
                             <form className={styles.form} onSubmit={handlesubmitchange}>
                                 <div className={styles.form__group}>
                                     <label htmlFor='email' className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faEnvelopeSquare} aria-hidden={true} /> E-Mail</label>
+                                        <FontAwesomeIcon icon={faAt} aria-hidden={true} /> E-Mail</label>
                                     <input
                                         className={styles.form__field}
                                         type='email'
@@ -172,7 +274,7 @@ const Login = () => {
                                 </div>
                                 <div className={styles.form__group}>
                                     <label htmlFor='password' className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faUnlock} aria-hidden={true} /> Contraseña</label>
+                                        <FontAwesomeIcon icon={faUnlock} aria-hidden={true} /> Contraseña</label>
                                     <input
                                         className={styles.form__field}
                                         type='password'
@@ -186,7 +288,7 @@ const Login = () => {
                                 </div>
                                 <div className={styles.form__group}>
                                     <label htmlFor='name' className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Nombre</label>
+                                        <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Nombre</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
@@ -200,7 +302,7 @@ const Login = () => {
                                 </div>
                                 <div className={styles.form__group}>
                                     <label htmlFor='lastname' className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Apellido</label>
+                                        <FontAwesomeIcon icon={faFileSignature} aria-hidden={true} /> Apellido</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
@@ -214,34 +316,84 @@ const Login = () => {
                                 </div>
                                 <div className={styles.form__group}>
                                     <label htmlFor='address' className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faMapMarker} aria-hidden={true} /> Dirección</label>
-                                    <input 
+                                        <FontAwesomeIcon icon={faMapMarkedAlt} aria-hidden={true} /> Provincia</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='text'
+                                        minLength={5}
+                                        maxLength={30}
+                                        placeholder='Provincia'
+                                        name='state'
+                                        onChange={handleinputchange}
+                                    />
+                                </div>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='address' className={styles.form__label} >
+                                        <FontAwesomeIcon icon={faCity} aria-hidden={true} /> Localidad</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='text'
+                                        minLength={5}
+                                        maxLength={30}
+                                        placeholder='Localidad'
+                                        name='city'
+                                        onChange={handleinputchange}
+                                    />
+                                </div>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='address' className={styles.form__label} >
+                                        <FontAwesomeIcon icon={faEnvelope} aria-hidden={true} /> Código Postal</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='text'
+                                        minLength={4}
+                                        maxLength={5}
+                                        placeholder='Código Postal'
+                                        name='ZIPcode'
+                                        onChange={handleinputchange}
+                                    />
+                                </div>
+                                <div className={styles.form__group}>
+                                    <label htmlFor='address' className={styles.form__label} >
+                                        <FontAwesomeIcon icon={faMapMarker} aria-hidden={true} /> Dirección</label>
+                                    <input
                                         className={styles.form__field}
                                         type='text'
                                         minLength={5}
                                         maxLength={30}
                                         placeholder='Dirección'
-                                        name='address'
+                                        name='street'
                                         onChange={handleinputchange}
-                                        required={true}
                                     />
                                 </div>
                                 <div className={styles.form__group}>
-                                    <label htmlFor='username' className={styles.form__label} >
-                                    <FontAwesomeIcon icon={faShareAlt} aria-hidden={true} /> Nombre de Usuario</label>
+                                    <label htmlFor='address' className={styles.form__label} >
+                                        <FontAwesomeIcon icon={faPhoneSquare} aria-hidden={true} /> Telefono</label>
                                     <input
                                         className={styles.form__field}
                                         type='text'
                                         minLength={5}
+                                        maxLength={30}
+                                        placeholder='Telefono'
+                                        name='phone'
+                                        onChange={handleinputchange}
+                                    />
+                                </div>
+                               {/*  <div className={styles.form__group}>
+                                    <label htmlFor='username' className={styles.form__label} >
+                                        <FontAwesomeIcon icon={faShareAlt} aria-hidden={true} /> Nombre de Usuario</label>
+                                    <input
+                                        className={styles.form__field}
+                                        type='text'
+                                        minLength={4}
                                         maxLength={15}
                                         placeholder='Nombre de Usuario'
                                         name='username'
                                         onChange={handleinputchange}
-                                        required={true}
                                     />
-                                </div>
+                                </div> */}
                                 <div className={styles.organizarbotones}>
-                                    <button style={{paddingTop:"1rem"}} className={styles.boton} type='submit' >Crea tu cuenta</button>
+                                    <button style={{ paddingTop: "1rem" }} className={styles.boton} type='submit' >Crea tu cuenta</button>
                                     <button className={styles.boton} onClick={handleclickevent}>Ya tienes una  cuenta?</button>
                                 </div>
                             </form>

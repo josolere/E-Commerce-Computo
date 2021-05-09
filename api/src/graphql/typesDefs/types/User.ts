@@ -11,10 +11,19 @@ export const typeDefs = gql`
     active: Boolean
     name: String
     surname: String
+    googleId: String
     createdAt: String
     updatedAt: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
+   resetPass: String 
+
   }
+  
 
   type AuthPayload {
     user: User
@@ -22,14 +31,17 @@ export const typeDefs = gql`
 
   type Query {
     getUserById(id: ID!): User
+    getUserByEmail(email: String): User
     currentUser: User
     getUsers: [User]
+    getWishList(userId: String): [Product]
   }
 
   type Mutation {
     createUser(input: CreateUserInput): User
     deleteUser(id: ID!): User!
-    editUser(id: ID, input: EditUserInput): User!
+    editUser(id: ID, input: EditUserInput): User
+    toggleWishlist(productId: ID, userId: String): [Product]
 
     logout: Boolean
     login(email: String!, password: String!): AuthPayload
@@ -40,6 +52,11 @@ export const typeDefs = gql`
       password: String!
       username: String
       address: String
+      street: String
+      city: String
+      state: String
+      zip: String
+      phone: String
     ): AuthPayload
   }
 
@@ -53,6 +70,11 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 
   input EditUserInput {
@@ -64,7 +86,14 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
-  }
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
+    resetPass: String
+    previousPassword: String
+    }
 
   input SignUpInput {
     username: String
@@ -75,5 +104,10 @@ export const typeDefs = gql`
     name: String
     surname: String
     address: String
+    street: String
+    city: String
+    state: String
+    zip: String
+    phone: String
   }
 `;

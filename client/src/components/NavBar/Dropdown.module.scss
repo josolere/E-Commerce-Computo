@@ -1,4 +1,10 @@
-
+$blue:#30475e;//dddddd
+$bluedark: #222831;//222831
+$ligthblue: #dddddd;//30475e
+$red:#f05454;//f05454
+$grey:#30475e;//dddddd
+$dark: #222831;//222831
+$white: #dddddd;//30475e
 
 ul {
     list-style: none;
@@ -9,9 +15,8 @@ ul {
 a {
     text-decoration: none;
     color: #dddddd;
-    font-weight: 500; 
+    font-weight: bold; 
 }
-
 
 .link {
     &:hover {
@@ -25,15 +30,15 @@ a {
     font-family: 'Montserrat', sans-serif;
     color: #dddddd;
     display: flex;
-    margin-top: 0.5rem;
+    margin-top: 10%;
     font-weight: 600;
 }
 
 .iconButton {
-    font-size: 4rem;
+    font-size: 2vh;
     border-radius: 40px;
     position: relative;
-    top: 1rem;
+    top: 10%;
     margin-right: 1rem;
     &:hover {
         transition-duration: 650ms;
@@ -46,42 +51,108 @@ a {
     border-radius: 0.2rem;
     position: absolute;
     border:2px solid #30475e;
-    top:58px;
-    width: 20%;
+    top:10%;
+    width: 25%;
+    right: 12%;
     flex-direction: column;
-    font-size: 0.7rem;
-    padding-top: 0.5rem;
+    font-size: 3vh;
+    padding-top: 0.5%;
     overflow: hidden;
+    z-index: 3;
+}
+
+.menuItemCat{
+    background-color: #30475e;
+    border-radius: 0.2rem;
+    position: absolute;
+    border:2px solid #30475e;
+    top:10%;
+    width: 25%;
+    right: 2%;
+    flex-direction: column;
+    font-size: 3vh;
+    padding-top: 0.5%;
+    overflow: hidden;
+    z-index: 3;
+}
+.ButtonDrops{
+    font-weight: bold;
+    color: $dark;
+    width: 8rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-family: 'Montserrat', sans-serif;
+    border: solid .1rem $white;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    font-size: 2vh;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.3rem;
     z-index: 1;
-    right: 1rem;
-    p {
-        color: white;
-        font-size: 0.9rem;
-        padding: 0 1rem 1rem 1rem;
-        position: relative;
-       
-        width: 100%;
-        &:hover {
-            cursor: pointer;
-            transition-duration: 650ms;
-            background-color: #f05454;
-        }
-        
+      &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: $white;
+          color: $white;
+          border-radius: 0.2rem;
+          z-index: -2;
+      }
+      &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0%;
+          height: 100%;
+          background-color: $dark;
+          transition: all .3s;
+          border-radius: 0.2rem;
+          z-index: -1;
+      }
+      &:hover {
+          color:$white;
+          &:before {
+              width: 100%;
+          }
+      }
+  }
+
+@media (max-width: 648px) {
+    .dropdown{
+        top:90%;
+        right: 0;
+        left: 2%;
+        width: 95%;
+        border: solid .2rem $white;
+        border-radius: .5rem;
+    }
+
+}
+
+.pDrop{
+    padding: 2%;
+    color: white;
+    font-size: 2.5vh;
+    position: relative;
+    width: 100%;
+    &:hover {
+        cursor: pointer;
+        transition-duration: 650ms;
+        background-color: #f05454;
     }
 }
 
-.icon {
-    margin-left: 1rem;
-    padding: 0.5rem;
-    font-size: 1rem;
-    position: relative;
-    top: 0.4rem;
-    right: 0.8rem;
-}
-
 .profile {
-    font-size: 1.1rem;
-    padding-bottom:1.4rem ;
+    font-size: 3vh;
+    padding-bottom:2%;
 }
 
 /* .menuItem {
@@ -96,10 +167,11 @@ a {
     }
 }
  */
-
  .orderdiv{
      display: flex;
      flex-direction: column;
      align-items: center;
      justify-content: center;
+     padding: 3%;
+     width: 100%;
  }

@@ -15,7 +15,7 @@ $yellow: #ffb200;
     align-items: center;
     justify-content: space-around;
     height: fit-content;
-    background-color: $white;
+    background-color: #222831;
 
 }
 .contenedorDetail {
@@ -66,14 +66,32 @@ $yellow: #ffb200;
     padding: 2rem 1rem;
     border-radius: 0.3rem;
     background-color: $grey;
+    span {
+        position: relative;
+        left: 7rem;
+    }
+    
 
     div{
         div{
+          h3 {
+              color: #dddddd;
+              font-family: "Montserrat", sans-serif;
+          }
             div{
+                /* span {
+                    position: relative;
+
+                } */
+               
                 textarea{
                     resize: none;
-                    height: 0px;
-                    
+                    height: 2rem;
+                    width: 25rem; 
+                    font-family: "Montserrat", sans-serif;
+                    border-radius: 0.2rem;
+                    outline: none;
+                   
                 }
             }
         }
@@ -102,6 +120,8 @@ $yellow: #ffb200;
         border: none;
         color: whitesmoke;
         outline: none;
+        font-family:'Montserrat', sans-serif;
+        
         svg{
             font-size: 1.2rem;
         }
@@ -109,30 +129,46 @@ $yellow: #ffb200;
             cursor: pointer;
             background-color: $dark;
             color: $red;
-            padding: 1.5rem;
-            transition: 1s;
         }
     }
 }
 
 .buttonCompra{
-    
+        font-family:'Montserrat', sans-serif;
         padding: 1rem;
         background-color: transparent;
         border: none;
         color: whitesmoke;
-        outline: none;
+        outline: none;        
         svg{
             font-size: 1.2rem;
         }
+    }
+
+.buttonSend {
+        font-family:'Montserrat', sans-serif;
+        padding: 1rem;
+        background-color: transparent;
+        border: none;
+        color: whitesmoke;
+        outline: none;     
+        margin-left: 61%;
+        background-color: #f05454;
+        border-radius: 0.2rem;
+        height: 0.5rem;
+        margin-top: 1rem;
+        padding-top: 0.2rem;
+        padding-bottom: 1.2rem;
         &:hover{
             cursor: pointer;
             background-color: $dark;
-            color: $red;
-            padding: 1.5rem;
-            transition: 1s;
+            color: #dddddd;
         }
-    }
+        svg{
+            
+            font-size: 1.2rem;
+        }
+}
 
 
 .Edit{
@@ -181,11 +217,12 @@ $yellow: #ffb200;
     font-family: 'Montserrat', sans-serif ;
     background-image: linear-gradient(
     transparent calc(65% - 5px),
-    darken($red, 15%) 5px,
+    darken(#f05410, 15%) 5px,
     );
     background-size: 0;
     background-repeat: no-repeat;
     display: inline;
+    margin-left: 3rem;
     transition: 0.5s ease;
     }
     &:hover {
@@ -197,26 +234,48 @@ $yellow: #ffb200;
 
   .PDetails{
     font-family: 'Montserrat', sans-serif ;
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: whitesmoke;
+
 }
 
 .box .content {
 	height: 100%;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	
+    color: #dddddd;
+    font-family: 'Montserrat', sans-serif ; 
+    border-radius: 0.2rem;
+    /* display: flex;
+    justify-content: space-between;    */
 }
+
 
 .box {
     margin-top: 2%;
     margin-bottom: 3%;
 	width: 55%;
 	height: fit-content;
-	box-sizing: border-box;
-	padding: 2%;
+	
 	position: relative;
 	overflow: hidden;
+    outline: none;
+   
+}
+
+.inputTitle {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-end;
+    input {
+        border-radius: 0.2rem;
+        outline: none;
+        border-color: transparent;
+        height: 1rem; 
+        width: 15rem;
+        font-family: "Montserrat", sans-serif
+    }
+   
 }
 
 .box::before {
@@ -277,10 +336,17 @@ $yellow: #ffb200;
 
 .pReview{
 
-    max-width: 10%;
-    font-weight: bold;
+    max-width: 70%;
+    font-weight: 300;
     font-family: 'Montserrat', sans-serif ;
     font-size: 100%;
+}
+
+.pReviewTitle{
+    max-width: 30%;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 120%;
 }
 
 
@@ -292,4 +358,58 @@ $yellow: #ffb200;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif ;
     font-size: 100%;
+}
+
+
+.fav{
+    position: absolute;
+    right: 5rem;
+    background-color: transparent;
+    width: fit-content;
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+      cursor:pointer;
+      background-color: $red;
+      color: white;
+    }
+  }
+  
+  .faving{
+    position: absolute;
+    right: 5rem;
+    width: fit-content;
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $red;
+    color: whitesmoke;
+    &:hover{
+      cursor: pointer;
+      background-color: transparent;
+      color: black;
+    }
+  }
+
+  .stock{
+      color: whitesmoke;
+      font-size: 0.8rem;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .editStock{
+    font-size: 0.8rem;
+    width: fit-content;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import SearchBar from "../SearchBar/SearchBar";
 import navBar from './NavBar.module.scss';
@@ -9,30 +9,109 @@ import { AppState } from '../../redux/reducers';
 import { setFilter } from '../../redux/actions';
 import { Cookies } from "react-cookie";
 import NavBarItem from "./NavBarItem";
-import { useMutation, useQuery, gql } from '@apollo/client';
-import { ACTUAL_USER } from "../../gql/login";
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_ORDER_LIST } from "../../gql/order"
+import { GET_ORDER_DETAILS, GET_ORDER_BY_STATUS } from '../../gql/ordersGql'
+import { addBaseDeDatos } from '../../redux/actions'
+import { ACTUAL_USER } from "../../gql/loginGql"
+
 
 interface user {
   currentUser: {
-      name: string,
-      password: string,
-      email: string
+    name: string,
+    password: string,
+    email: string
   }
+}
+
+
+interface detailOrderid {
+  getOrdersByIdUser: detailsorder[]
+
+}
+
+interface detailsorder {
+  id: number,
+  status: string,
+  details: detail[]
+}
+
+interface detail {
+  details: orderdetails[],
+  id: number
+}
+
+interface orderdetails {
+  id: number,
+  ProductId: number,
+  quantity: number,
+  price: number,
+  productName: string
 }
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
+  const firsstRender = useRef(true)
 
-  let user:any = {}
+  const { logeo, idUsers }: any = useSelector((store: AppState) => store.shoppingCartReducer)
 
-  const {data} = useQuery<user>(ACTUAL_USER)
+  const idProductOrder = useQuery<detailOrderid>(GET_ORDER_LIST, {
+    variables: { idUser: idUsers }
+  })
+
+  const dataOrderSatus: any = useQuery<detailOrderid>(GET_ORDER_BY_STATUS, {
+    variables: { status: "pendiente", idUser: idUsers }
+  })
+
+
+
+  useEffect(() => {
+    if (firsstRender.current) {
+      firsstRender.current = false;
+    } else {
+      if (logeo === true && dataOrderSatus.data) {
+        let arrayProducts = []
+        if (dataOrderSatus.data?.getOrderByStatus[0]?.details?.length !== 0) {
+          arrayProducts = dataOrderSatus.data?.getOrderByStatus[0]?.details
+        } else {
+          arrayProducts = dataOrderSatus.data?.getOrderByStatus
+        }
+        let productBas: any = []
+        let conte = 0
+        let priceBase = 0
+        arrayProducts !== undefined &&
+          arrayProducts?.map((mapeo: any) => {
+            productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity, name: mapeo.productName
+            })
+            conte = conte + mapeo.quantity
+            let priceProduct = 0
+            priceProduct = mapeo.price * mapeo.quantity
+            priceBase = (priceBase + priceProduct)
+           })
+        if (!conte && !priceBase) {
+          productBas = []
+          conte = 0
+          priceBase = 0
+          dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
+
+        } else {
+          dispatch(addBaseDeDatos({ productBas, conte, priceBase }))
+
+        }
+      }
+    }
+  }, [dataOrderSatus.data?.getOrderByStatus[0]?.details])
+
+  let user: any = {}
+
+  const { data } = useQuery<user>(ACTUAL_USER)
 
   user = data?.currentUser
 
   const quantity: number = useSelector((store: AppState) => store.shoppingCartReducer.quantity)
 
-  const [cookiess, setCookies ] = useState<any>()
- 
+  const [cookiess, setCookies] = useState<any>()
+
   const cookie = new Cookies
 
 
@@ -40,36 +119,22 @@ const NavBar = (): JSX.Element => {
     setCookies(cookie.get('User'))
   }, [])
 
+
+  const handleRedirCart = () => {
+    window.location.href = "http://localhost:3000/Carrodecompras"
+  }
+
+  const handleRedirProducts = () => {
+    dispatch(setFilter(""))
+    window.location.href = "http://localhost:3000/Home"
+  }
+
+
   return (
-    <>
-      <div className={navBar.container}>
-        <Link to='/' > <h1 className={navBar.titleNav} >CH</h1> </Link>
-        <SearchBar />
 
-        <Link className={navBar.linkCart} to="/Carrodecompras">
-        <FontAwesomeIcon className={navBar.iconCart} icon={faShoppingCart} />
-          <p>{quantity}</p>
-         {/*  <span>${new Intl.NumberFormat().format(idsProducts)}</span> */}
-
-        </Link>
-        
-        <div className={navBar.containerLinks}>
-        
-        {true ? <Link onClick={() => { dispatch(setFilter("")) }} to="/Home" className={navBar.linksNav}><p>Productos</p></Link> : false}
-        <div>
-
-          {user?.name ? false : <Link className={navBar.linksNav} to="/login"><p>Iniciar Sesion</p></Link>}
-         
-        </div>
-        
-          <p>{user?.name && <NavBarItem info= "Mi Cuenta"></NavBarItem>  }</p>
-        
-        </div>
-      </div>
-    </>
+    <div>
+    </div>
   );
 };
-
-//Redes en el footer
 
 export default NavBar;

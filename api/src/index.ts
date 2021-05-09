@@ -1,7 +1,7 @@
 import { sequelize } from "./models/index";
 import app from "./app";
 import apolloServer from "./apollo";
-import { productsSeeder, categoriesSeeder, usersSeeder} from "./seeders/test";
+import { productsSeeder, categoriesSeeder, usersSeeder, productRelationsSeeder} from "./seeders/test";
 
 
 require("dotenv").config();
@@ -12,9 +12,11 @@ const force = true;
 const logging = true;
 sequelize.sync({ alter, force, logging }).then(() => {
   if (force) {
-    categoriesSeeder();
-    productsSeeder()
-    usersSeeder()
+   categoriesSeeder();
+    usersSeeder(); 
+    productsSeeder();
+    setTimeout(() => productRelationsSeeder(), 5000);
+    
   }
   apolloServer.applyMiddleware({ app, cors:false });
   app.listen(PORT, () => {

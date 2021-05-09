@@ -1,11 +1,10 @@
-import {SET_FILTER, SET_CATEGORIES, PASS_ID} from '../actions'
+import {SET_FILTER, SET_CATEGORIES} from '../actions'
 
 const initialState = {
     filter:"",
     categories:[],
     id: 1
 }
-
 
 function productReducer(state = initialState, action: any): any {
   switch (action.type) {
@@ -19,6 +18,7 @@ function productReducer(state = initialState, action: any): any {
         ...state,
         categories: action.categories,
       };
+      
     default:
       return state;
   }

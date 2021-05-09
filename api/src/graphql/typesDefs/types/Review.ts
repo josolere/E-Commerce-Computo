@@ -10,6 +10,7 @@ type Query{
 #Estos datos devuelve
 type Review{
     id: Int
+    title: String
     text: String
     rating: Int
     userId: String
@@ -17,6 +18,7 @@ type Review{
 ##Estos datos entran
 input AddReviewInput{
     rating: Int
+    title: String
     text: String
     userId: String
     product: Int
