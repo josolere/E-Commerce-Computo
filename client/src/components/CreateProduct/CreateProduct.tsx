@@ -214,7 +214,7 @@ export default function CreateProduct() {
           console.log("Salio Mal");
         });
     }
-    if (state.categories[0] === 1) {
+    else if (state.categories[0] === 1) {
       setCategors([])
       createProduct({ variables: state })
         .then((resolve) => {
@@ -235,8 +235,16 @@ export default function CreateProduct() {
         setCategors([])
         createProduct({ variables: state })
         .then((resolve) => {
-          toast.success('Se ha creado el producto 😁')}
-        )}
+          toast.success('Se ha creado el producto 😁')
+          addFatherCompatibility({
+            variables: {
+              HeadIdProduct:[28,29, 31, 32, 30], 
+              idsProducts:resolve.data.createProduct.id
+            }
+          })}
+        ).catch((err) => {
+          console.log("Salio Mal");
+        });}
     setnewpr([...newpro, results?.data?.createProduct]);
     
   }
@@ -371,8 +379,7 @@ export default function CreateProduct() {
                 className={styles.form__field}
                 placeholder="Detalles"
                 minLength={10}
-                maxLength={30}
-                value={state.details}
+                 value={state.details}
                 type="text"
                 name="details"
                 onChange={handleChange}

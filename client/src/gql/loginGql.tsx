@@ -113,6 +113,15 @@ export const LOGOUT = gql`
       logout
           }`;
 
+          export const CHANGE_PASSWORDUSER = gql`
+mutation(  $password:String! $id:ID! $previousPassword: String! $email:String!) 
+    {
+    editUser (id:$id  input: { password:$password previousPassword:$previousPassword email:$email }) 
+                        { 
+                            name
+                            privilege
+                        }             
+}`;
 
 export const RETRIEVE_PASSWORD = gql`
     mutation ($id: ID!,  $resetPass: String) {

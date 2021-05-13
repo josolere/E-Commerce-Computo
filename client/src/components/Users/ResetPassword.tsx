@@ -5,7 +5,7 @@ import styles from './loguin.module.scss';
 import { faCrown, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelopeSquare, faFileSignature, faSearch, faMapMarker, faShareAlt, faUnlock, faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CHANGE_PASSWORD, ACTUAL_USER } from "../../gql/loginGql";
+import { CHANGE_PASSWORDUSER, ACTUAL_USER } from "../../gql/loginGql";
 import styles2 from './SmallForm.module.scss';
 import { toast } from 'react-toastify';
 
@@ -27,7 +27,7 @@ interface user {
 
 const ResetPassword = () => {
 
-    const [editUser, user] = useMutation(CHANGE_PASSWORD)
+    const [editUser, user] = useMutation(CHANGE_PASSWORDUSER)
 
     let currentuser: any = {}
 
@@ -58,7 +58,7 @@ const ResetPassword = () => {
         if (currentuser?.email === control.email && control.newpassword1 === control.newpassword2) {
             editUser({
                 variables: {
-                    password: control.newpassword1, id: currentuser?.id
+                    password: control.newpassword1, id: currentuser?.id, previousPassword: control.password, email: control.email
                 }
             })
                 .then((resolve) => { toast.success('Tienes una nueva contraseña 🥳') 

@@ -84,8 +84,10 @@ const NavBar = (): JSX.Element => {
             productBas.push({ id: mapeo.ProductId, price: mapeo.price, count: mapeo.quantity, name: mapeo.productName
             })
             conte = conte + mapeo.quantity
-            priceBase = priceBase + mapeo.price 
-          })
+            let priceProduct = 0
+            priceProduct = mapeo.price * mapeo.quantity
+            priceBase = (priceBase + priceProduct)
+           })
         if (!conte && !priceBase) {
           productBas = []
           conte = 0
