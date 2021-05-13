@@ -1,0 +1,55 @@
+.container{
+    background-color: black;
+    height: fit-content;
+    font-family:'Montserrat', sans-serif;
+    padding: 0.1rem;
+    color: grey;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.contact{
+    width: 20%;
+    p{
+        font-size: small;
+    }
+}
+
+.devsContainer{
+    width: 20%;
+    margin-bottom: 1%;
+}
+
+.devs{
+    margin:0.5rem 0rem;
+    a{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+        span{
+            color: grey;
+            font-weight: 400;
+       font-size: 0.8rem;
+    }
+}
+}
+.iconlink{
+    font-size: 1.2rem;
+    color: grey;
+}
+.techs{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    h2{
+        margin-bottom: 0rem;
+    }
+    h5{
+        margin:0rem 0rem 0.5rem 0rem;
+    }
+    li{
+        margin: 0.3rem 0rem;
+    }
+}

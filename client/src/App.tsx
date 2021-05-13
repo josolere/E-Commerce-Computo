@@ -37,6 +37,7 @@ import Featured from './components/Featured/Featured';
 import ResetAdmin from './components/Users/ResetAdminV2';
 import OlvideContraseña from './components/Users/OlvideContraseña';
 import NuevaContraseña from './components/Users/NuevaContraseña';
+import Contact from './components/Contact/Contact'
 
 
 interface user {
@@ -170,6 +171,9 @@ function App() {
         <Route exact path="/NuevaContrasena" component={NuevaContraseña} />
         <Route component={PageNotFound} />
       </Switch>
+      <Route path="/">
+        <Contact/>
+      </Route>
     </Router>
   );
 }
